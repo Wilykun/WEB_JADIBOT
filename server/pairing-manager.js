@@ -240,6 +240,7 @@ export function classifyDisconnectCode(code) {
 export const GOOD_SNAPSHOT_FILENAME = 'session.json.good';
 const RECOVERY_WAIT_MS = 45_000;
 const RECOVERY_POLL_MS = 500;
+const RUNTIME_CHECKPOINT_MS = 60_000;
 
 function snapshotMeId(value) {
   return typeof value?.creds?.me?.id === 'string' ? value.creds.me.id : null;
@@ -288,6 +289,48 @@ export async function saveGoodSnapshot(authDir) {
   }
 }
 
+export const RUNTIME_FILENAME = 'runtime.json';
+
+function normalizeBotRuntime(value) {
+  if (!value || typeof value !== 'object') return null;
+  const totalMs = Number(value.totalMs);
+  const startedAt = value.startedAt === null || value.startedAt === undefined ? null : Number(value.startedAt);
+  if (!Number.isFinite(totalMs) || totalMs < 0) return null;
+  if (startedAt !== null && (!Number.isFinite(startedAt) || startedAt <= 0)) return null;
+  return { totalMs: Math.floor(totalMs), startedAt };
+}
+
+// Membaca akumulasi runtime bot per akun; mengembalikan null bila belum ada atau filenya rusak.
+export async function loadBotRuntime(authDir) {
+  if (!authDir) return null;
+  const parsed = await readSnapshotFile(path.join(authDir, RUNTIME_FILENAME));
+  return normalizeBotRuntime(parsed);
+}
+
+// Menyimpan akumulasi runtime bot per akun secara atomik; tidak pernah melempar.
+export async function saveBotRuntime(authDir, runtime) {
+  if (!authDir) return false;
+  const normalized = normalizeBotRuntime(runtime);
+  if (!normalized) return false;
+  try {
+    await writeFileAtomically(path.join(authDir, RUNTIME_FILENAME), JSON.stringify(normalized));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// Menghapus catatan runtime bot per akun; dipakai saat perangkat ditautkan ulang atau sesi dihapus.
+export async function deleteBotRuntime(authDir) {
+  if (!authDir) return false;
+  try {
+    await fs.rm(path.join(authDir, RUNTIME_FILENAME), { force: true });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // Mengembalikan salinan sesi sehat ke session.json, menolak bila nomor perangkatnya berbeda dari sesi yang sedang dipakai.
 export async function restoreGoodSnapshot(authDir) {
   if (!authDir) return false;
@@ -307,6 +350,8 @@ export async function restoreGoodSnapshot(authDir) {
 export function createPairingManager({ dataDir, appendLog, getAuthDir = () => null, getStorySettings = () => null, getOnline24 = () => false, getWorkerAutoStart = () => false, setWorkerAutoStart = async () => {}, ensureDefaultBot = async () => false }) {
   const sessions = new Map();
   const cooldowns = new Map();
+  const runtimeCheckpointTimer = setInterval(checkpointRuntimes, RUNTIME_CHECKPOINT_MS);
+  runtimeCheckpointTimer.unref?.();
   const authRoot = path.join(dataDir, 'whatsapp-auth');
   function accountAuthDir(userId) {
     const preferredDir = getAuthDir(userId);
@@ -557,6 +602,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     state.autoStartBeforeInvalid = getWorkerAutoStart(state.userId) === true;
     await setWorkerAutoStart(state.userId, false);
     detachBotWorker(state);
+    resetRuntime(state);
     const socket = state.socket;
     state.socket = null;
     try { socket?.end(new Error('WhatsApp session credentials were rejected.')); } catch { /* best effort */ }
@@ -567,6 +613,39 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
   function snapshotGoodSession(state) {
     if (!state?.authDir) return;
     void saveGoodSnapshot(state.authDir);
+  }
+
+  async function loadRuntimeIntoState(state) {
+    if (!state || state.runtimeLoaded) return;
+    state.runtimeLoaded = true;
+    const saved = await loadBotRuntime(state.authDir);
+    state.runtimeTotalMs = saved?.totalMs || 0;
+    state.runtimeStartedAt = null;
+  }
+
+  function saveRuntime(state) {
+    if (!state?.authDir) return;
+    void saveBotRuntime(state.authDir, {
+      totalMs: state.runtimeTotalMs || 0,
+      startedAt: state.runtimeStartedAt || null,
+    });
+  }
+
+  function resetRuntime(state) {
+    if (!state) return;
+    state.runtimeTotalMs = 0;
+    state.runtimeStartedAt = null;
+    if (state.authDir) void deleteBotRuntime(state.authDir);
+  }
+
+  function checkpointRuntimes() {
+    const now = Date.now();
+    for (const state of sessions.values()) {
+      if (state.workerStatus !== 'running' || !state.runtimeStartedAt) continue;
+      state.runtimeTotalMs = (state.runtimeTotalMs || 0) + (now - state.runtimeStartedAt);
+      state.runtimeStartedAt = now;
+      saveRuntime(state);
+    }
   }
 
   async function tryResumeAndWait(state) {
@@ -670,6 +749,11 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     state.workerHandler = null;
     state.workerHistoryHandler = null;
     state.workerStatus = nextStatus;
+    if (state.runtimeStartedAt) {
+      state.runtimeTotalMs = (state.runtimeTotalMs || 0) + (Date.now() - state.runtimeStartedAt);
+      state.runtimeStartedAt = null;
+      saveRuntime(state);
+    }
     state.workerStartedAt = null;
     state.workerGeneration = (state.workerGeneration || 0) + 1;
   }
@@ -975,7 +1059,8 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     state.workerHandler = handler;
     state.workerHistoryHandler = historyHandler;
     state.workerStatus = 'running';
-    state.workerStartedAt = Date.now();
+    state.runtimeStartedAt = Date.now();
+    state.workerStartedAt = state.runtimeStartedAt - (state.runtimeTotalMs || 0);
     state.processedStoryIds = new Set();
     socket.ev.on('messages.upsert', handler);
     socket.ev.on('messaging-history.set', historyHandler);
@@ -1105,6 +1190,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       throw error;
     }
     cooldowns.set(userId, now + USER_COOLDOWN_MS);
+    await fs.rm(path.join(authDir, RUNTIME_FILENAME), { force: true }).catch(() => {});
     const state = {
       userId,
       authDir,
@@ -1136,6 +1222,9 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       onlinePresenceTimer: null,
       resolveStart: null,
       rejectStart: null,
+      runtimeTotalMs: 0,
+      runtimeStartedAt: null,
+      runtimeLoaded: true,
     };
     sessions.set(userId, state);
     try {
@@ -1583,8 +1672,12 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       onlinePresenceTimer: null,
       resolveStart: null,
       rejectStart: null,
+      runtimeTotalMs: 0,
+      runtimeStartedAt: null,
+      runtimeLoaded: false,
     };
     state.authState = authState;
+    await loadRuntimeIntoState(state);
     state.waVersion = await resolveWaWebVersion();
     state.maskedPhone = resumedMaskedPhone;
     state.onlineDesired = getOnline24(userId) === true;
@@ -1725,6 +1818,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       }
       await removeUserAuth(userId, authDir);
       await fs.rm(path.join(authDir, GOOD_SNAPSHOT_FILENAME), { force: true }).catch(() => {});
+      resetRuntime(state);
       sessions.delete(userId);
       cooldowns.delete(userId);
       await log(userId, 'Sesi WhatsApp lokal dihapus dari panel akun.');
