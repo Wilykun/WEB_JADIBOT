@@ -124,8 +124,9 @@ export function maskedNumber(value) {
   const digits = String(value || '').replace(/\D/g, '');
   if (!digits) return '••••••';
   if (digits.length <= 4) return '•'.repeat(digits.length);
-  const suffixLength = Math.min(4, Math.max(1, digits.length - 5));
-  const prefixLength = Math.min(5, digits.length - suffixLength);
+  // Sembunyikan tepat empat digit tengah: awalan maksimal enam digit dan akhiran menyesuaikan supaya selalu ada empat digit yang tertutup.
+  const prefixLength = Math.min(6, Math.max(1, digits.length - 5));
+  const suffixLength = digits.length - 4 - prefixLength;
   const prefix = digits.slice(0, prefixLength);
   const suffix = suffixLength ? digits.slice(-suffixLength) : '';
   return `${prefix}****${suffix}`;
