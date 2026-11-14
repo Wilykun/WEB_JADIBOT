@@ -1,4 +1,5 @@
 export const BANNED_LOGIN_NOTICE = 'Akun Anda diblokir oleh admin. Silakan hubungi administrator untuk bantuan.';
+export const DELETED_LOGIN_NOTICE = 'Akun Anda telah dihapus oleh admin. Silakan hubungi administrator untuk bantuan.';
 
 export function memberAdminPolicyError(actor, target) {
   if (!actor) return { status: 401, message: 'Silakan masuk kembali.' };

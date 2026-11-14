@@ -2224,7 +2224,19 @@ html[data-theme="light"] .password-strength[data-score="4"] .password-strength-l
 #admin .member-admin-reason-label textarea{width:100%;min-height:64px;padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:rgba(0,0,0,.16);color:var(--text);font:500 11px/1.45 'Inter',system-ui,sans-serif;resize:vertical}
 #admin .member-admin-reason-label textarea:focus{outline:2px solid rgba(76,211,135,.45);outline-offset:1px}
 #admin .member-admin-reason-label textarea::placeholder{color:var(--muted)}
+#admin .member-admin-delete{display:grid;gap:8px;min-width:0;padding-top:12px;border-top:1px solid rgba(238,101,101,.28)}
+#admin .member-admin-delete .member-admin-reason-label textarea:focus{outline-color:rgba(238,101,101,.5)}
 #auth-message.is-banned{border-color:rgba(238,101,101,.36);background:rgba(238,101,101,.1);color:#ffaaaa}
+.auth-notice{display:grid;gap:10px;min-width:0;padding:16px;border:1px solid rgba(238,101,101,.36);border-radius:14px;background:rgba(238,101,101,.08);text-align:center}
+.auth-notice h3{margin:0;color:var(--text);font-size:15px;font-weight:750;line-height:1.4;overflow-wrap:anywhere}
+.auth-notice-reason{margin:0;color:#ffaaaa;font-size:11px;line-height:1.55;overflow-wrap:anywhere}
+.auth-notice-contact{margin:0;color:var(--soft);font-size:11px;line-height:1.55;overflow-wrap:anywhere}
+.auth-notice-actions{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.auth-notice-actions .button{flex:1 1 140px;min-width:0;min-height:44px;font-size:11px;white-space:normal}
+.auth-notice>#account-notice-back{width:100%;min-height:44px;font-size:11px}
+html[data-theme="light"] #admin .member-admin-delete{border-top-color:#edcaca}
+html[data-theme="light"] .auth-notice{border-color:#edcaca;background:#fff0f0}
+html[data-theme="light"] .auth-notice-reason{color:#9a3131}
 html[data-theme="light"] #admin .member-account-chip.is-danger{border-color:#edcaca;background:#fff0f0;color:#9a3131}
 html[data-theme="light"] #admin .member-admin-panel{border-color:#dfe7e1;background:#f7faf8}
 html[data-theme="light"] #admin .member-admin-status{border-color:#c6e8d0;background:#edf8f0;color:#1b7040}
@@ -2237,6 +2249,9 @@ html[data-theme="light"] #auth-message.is-banned{border-color:#edcaca;background
   #admin .member-admin-actions{display:grid;grid-template-columns:minmax(0,1fr)}
   #admin .member-admin-button{width:100%;min-height:44px}
   #admin .member-admin-reason-label textarea{font-size:16px}
+  .auth-notice{padding:14px}
+  .auth-notice-actions{display:grid;grid-template-columns:minmax(0,1fr)}
+  .auth-notice-actions .button{width:100%}
 }
 
 /* Mobile member details: use two columns to keep the open account compact without horizontal overflow. */

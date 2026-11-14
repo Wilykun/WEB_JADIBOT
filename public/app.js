@@ -5,6 +5,14 @@ const loginForm = document.querySelector('#login-form');
 const registerForm = document.querySelector('#register-form');
 const verificationForm = document.querySelector('#verification-form');
 const authMessage = document.querySelector('#auth-message');
+const accountNotice = document.querySelector('#account-notice');
+const accountNoticeTitle = document.querySelector('#account-notice-title');
+const accountNoticeReason = document.querySelector('#account-notice-reason');
+const accountNoticeContact = document.querySelector('#account-notice-contact');
+const accountNoticeWhatsapp = document.querySelector('#account-notice-whatsapp');
+const accountNoticeBack = document.querySelector('#account-notice-back');
+const ADMIN_WHATSAPP_URL = 'https://wa.me/6289688206739';
+const ADMIN_TELEGRAM_URL = 'https://t.me/Wilykun1994';
 const toast = document.querySelector('#toast');
 let currentUser = null;
 let verificationIdentifier = '';
@@ -261,6 +269,37 @@ function setAuthMessage(text, success = false) {
   authMessage.classList.toggle('is-banned', /diblokir oleh admin/i.test(text));
 }
 
+// Panel pemberitahuan untuk akun yang diblokir atau dihapus: form login disembunyikan dan diganti panel berisi alasan plus kontak admin untuk pengajuan buka blokir atau pertanyaan.
+function showAccountNotice(kind, reason) {
+  const deleted = kind === 'deleted';
+  accountNoticeTitle.textContent = deleted ? 'Maaf, akun Anda telah dihapus oleh admin.' : 'Maaf, akun Anda diblokir.';
+  const cleanReason = String(reason || '').trim();
+  accountNoticeReason.textContent = cleanReason ? `Alasan: ${cleanReason}` : '';
+  accountNoticeReason.classList.toggle('hidden', !cleanReason);
+  accountNoticeContact.textContent = deleted
+    ? 'Untuk informasi lebih lanjut, hubungi admin:'
+    : 'Untuk pengajuan buka blokir, hubungi admin:';
+  accountNoticeWhatsapp.href = `${ADMIN_WHATSAPP_URL}?text=${encodeURIComponent(deleted
+    ? 'Halo, saya ingin menanyakan akun saya yang dihapus.'
+    : 'Halo, saya ingin mengajukan buka blokir akun saya.')}`;
+  loginForm.classList.add('hidden');
+  registerForm.classList.add('hidden');
+  verificationForm.classList.add('hidden');
+  document.querySelector('#auth-switch')?.classList.add('hidden');
+  setAuthMessage('');
+  accountNotice.classList.remove('hidden');
+}
+
+function hideAccountNotice() {
+  accountNotice.classList.add('hidden');
+  document.querySelector('#auth-switch')?.classList.remove('hidden');
+}
+
+accountNoticeBack?.addEventListener('click', () => {
+  hideAccountNotice();
+  setAuthMode('login');
+});
+
 function showToast(text) {
   toast.textContent = text;
   toast.classList.add('show');
@@ -318,6 +357,7 @@ function setLogoutLoading(button, loading) {
 
 function setAuthMode(mode) {
   const registering = mode === 'register';
+  hideAccountNotice();
   clearVerificationCooldown();
   try { window.sessionStorage.setItem(AUTH_MODE_STORAGE_KEY, registering ? 'register' : 'login'); } catch { /* Mode tetap berjalan tanpa storage. */ }
   window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -345,6 +385,7 @@ function setAuthMode(mode) {
 }
 
 function showVerificationForm(payload) {
+  hideAccountNotice();
   clearVerificationCooldown();
   loginForm.classList.add('hidden');
   registerForm.classList.add('hidden');
@@ -745,10 +786,13 @@ document.querySelector('#admin-backup-restore-form')?.addEventListener('submit',
   }
 });
 const adminBanReasons = new Map();
+const adminDeleteReasons = new Map();
 adminUsersList?.addEventListener('input', (event) => {
-  const field = event.target.closest('[data-admin-ban-reason]');
+  const field = event.target.closest('[data-admin-ban-reason], [data-admin-delete-reason]');
   const userId = field?.closest('.member-account-item')?.querySelector('[data-member-toggle]')?.dataset.userId;
-  if (field && userId) adminBanReasons.set(userId, field.value);
+  if (!field || !userId) return;
+  if (field.hasAttribute('data-admin-ban-reason')) adminBanReasons.set(userId, field.value);
+  else adminDeleteReasons.set(userId, field.value);
 });
 adminUsersList?.addEventListener('click', async (event) => {
   const actionButton = event.target.closest('[data-admin-action]');
@@ -764,6 +808,33 @@ adminUsersList?.addEventListener('click', async (event) => {
       ban: `Blokir @${username}? Sesi panel dicabut, worker/Online 24 Jam dihentikan, pairing yang belum selesai dibatalkan, dan tautan WA aktif tidak dihapus.`,
       unban: `Buka blokir @${username} agar pemilik dapat login kembali?`,
     };
+    if (action === 'member-delete') {
+      if (actionButton.dataset.armed !== 'true') {
+        actionButton.dataset.armed = 'true';
+        actionButton.textContent = 'Klik lagi untuk menghapus permanen';
+        return;
+      }
+      delete actionButton.dataset.armed;
+      actionButton.textContent = 'Hapus akun permanen';
+      if (!window.confirm(`Hapus akun @${username} secara permanen? Semua data akun di DATA_AKUN, sesi panel, dan riwayat login ikut terhapus dan tidak dapat dikembalikan.`)) return;
+      const actionButtons = [...(article?.querySelectorAll('[data-admin-action]') || [])];
+      actionButtons.forEach((button) => { button.disabled = true; });
+      try {
+        const result = await api('/api/admin/users/delete', {
+          method: 'POST',
+          body: JSON.stringify({ userId, confirm: true, reason: article?.querySelector('[data-admin-delete-reason]')?.value || '' }),
+        });
+        adminDeleteReasons.delete(userId);
+        if (expandedAdminUserId === userId) expandedAdminUserId = null;
+        showToast(result.warning || `Akun @${username} dihapus permanen.`);
+        await loadAdminUsers();
+      } catch (error) {
+        if (error.status === 401) showAuth();
+        else showToast(error.message);
+        actionButtons.forEach((button) => { button.disabled = false; });
+      }
+      return;
+    }
     if (!window.confirm(confirmations[action] || 'Lanjutkan tindakan admin ini?')) return;
     const actionButtons = [...(article?.querySelectorAll('[data-admin-action]') || [])];
     actionButtons.forEach((button) => { button.disabled = true; });
@@ -1166,6 +1237,30 @@ async function loadAdminUsers() {
             accountActions.append(banButton);
             adminPanel.append(reasonLabel, accountActions);
           }
+          const deleteSection = document.createElement('div');
+          deleteSection.className = 'member-admin-delete';
+          const deleteReasonLabel = document.createElement('label');
+          deleteReasonLabel.className = 'member-admin-reason-label';
+          const deleteReasonCaption = document.createElement('span');
+          deleteReasonCaption.textContent = 'Alasan hapus akun (opsional, maksimal 240 karakter)';
+          const deleteReasonInput = document.createElement('textarea');
+          deleteReasonInput.dataset.adminDeleteReason = 'true';
+          deleteReasonInput.maxLength = 240;
+          deleteReasonInput.rows = 2;
+          deleteReasonInput.placeholder = 'Contoh: akun tidak aktif';
+          deleteReasonInput.value = adminDeleteReasons.get(userId) || '';
+          deleteReasonLabel.append(deleteReasonCaption, deleteReasonInput);
+          const deleteActions = document.createElement('div');
+          deleteActions.className = 'member-admin-actions';
+          const deleteButton = document.createElement('button');
+          deleteButton.type = 'button';
+          deleteButton.className = 'button member-admin-button button-danger';
+          deleteButton.dataset.adminAction = 'member-delete';
+          deleteButton.dataset.userId = userId;
+          deleteButton.textContent = 'Hapus akun permanen';
+          deleteActions.append(deleteButton);
+          deleteSection.append(deleteReasonLabel, deleteActions);
+          adminPanel.append(deleteSection);
           details.append(adminPanel);
         }
         article.append(toggle, details);
@@ -2330,7 +2425,9 @@ loginForm.addEventListener('submit', async (event) => {
     const result = await waitForAuthAnimation(api('/api/auth/login', { method: 'POST', body: JSON.stringify(data) }));
     await showDashboard(result.user);
   } catch (error) {
-    setAuthMessage(error.message);
+    if (error.payload?.banned === true) showAccountNotice('banned', error.payload.banReason);
+    else if (error.payload?.deleted === true) showAccountNotice('deleted', error.payload.reason);
+    else setAuthMessage(error.message);
   } finally {
     setAuthSubmitLoading(button, 'login', false);
   }

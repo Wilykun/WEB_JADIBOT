@@ -8,7 +8,7 @@ import { promisify } from 'node:util';
 import { createPairingManager, maskedEmail, normalizePairingInput, PairingError } from './pairing-manager.js';
 import { sanitizeStoryLogDetails } from './story-log.js';
 import { readAvatarUpload } from './avatar-upload.js';
-import { BANNED_LOGIN_NOTICE, isBannedAccount, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
+import { BANNED_LOGIN_NOTICE, DELETED_LOGIN_NOTICE, isBannedAccount, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
 import { BackupArchiveError, createEncryptedBackup, decryptEncryptedBackup, MAX_ARCHIVE_BYTES, MAX_PLAINTEXT_BYTES } from './admin-backup.js';
 import { acquireRestoreLock } from './session-lock.js';
 import {
@@ -466,6 +466,7 @@ async function initializeStore() {
     if (!Array.isArray(parsed.pairingLogs)) parsed.pairingLogs = [];
     if (!Array.isArray(parsed.loginHistory)) parsed.loginHistory = [];
     if (!Array.isArray(parsed.pendingRegistrations)) parsed.pendingRegistrations = [];
+    if (!Array.isArray(parsed.deletedAccounts)) parsed.deletedAccounts = [];
     store = parsed;
     await fs.chmod(STORE_FILE, 0o600).catch(() => {});
   } catch (error) {
@@ -1509,10 +1510,12 @@ async function handleApi(req, res, url) {
     if (!user) {
       const pending = (store.pendingRegistrations || []).some((item) => item.email === identifier || item.username === identifier);
       if (pending) return sendError(res, 403, 'Pendaftaran belum selesai. Kembali ke formulir daftar dengan username, email, dan kata sandi yang sama untuk melanjutkan verifikasi.');
+      const deleted = (store.deletedAccounts || []).find((item) => item.username === identifier || item.email === identifier);
+      if (deleted) return sendJson(res, 403, { error: DELETED_LOGIN_NOTICE, deleted: true, reason: deleted.reason || null });
       return sendError(res, 404, 'Akun dengan email/username itu belum terdaftar. Silakan daftar dulu.');
     }
     if (!valid) return sendError(res, 401, 'Kata sandi salah. Coba lagi.');
-    if (isBannedAccount(user)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true }, { 'Set-Cookie': cookieHeader('', 0, req) });
+    if (isBannedAccount(user)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true, banReason: user.banReason || null }, { 'Set-Cookie': cookieHeader('', 0, req) });
     if (user.verified === false) return sendError(res, 403, 'Akun belum diverifikasi. Selesaikan CAPTCHA setelah pendaftaran terlebih dahulu.');
     const token = await createSession(user.id);
     await recordLogin(user.id, req, token.split('.')[0]);
@@ -2002,6 +2005,66 @@ async function handleApi(req, res, url) {
         banReason: action === 'ban' ? reason || null : null,
         workerStatus: state?.workerStatus || 'stopped', warning,
       });
+    });
+  }
+
+  if (route === 'POST /api/admin/users/delete') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
+    const body = await readJson(req);
+    const targetId = String(body.userId || '').slice(0, 128);
+    const target = store.users.find((item) => item.id === targetId);
+    if (target && target.id === user.id) return sendError(res, 400, 'Tidak dapat menghapus akun sendiri.');
+    const permissionError = memberAdminPolicyError(user, target);
+    if (permissionError) return sendError(res, permissionError.status, permissionError.message);
+    if (body.confirm !== true) return sendError(res, 400, 'Konfirmasikan penghapusan permanen akun member.');
+    const reason = normalizeBanReason(body.reason);
+    return await withMemberLifecycleLock(targetId, async () => {
+      const freshTarget = store.users.find((item) => item.id === targetId);
+      if (freshTarget && freshTarget.id === user.id) return sendError(res, 400, 'Tidak dapat menghapus akun sendiri.');
+      const currentPermissionError = memberAdminPolicyError(user, freshTarget);
+      if (currentPermissionError) return sendError(res, currentPermissionError.status, currentPermissionError.message);
+      const now = new Date().toISOString();
+      const username = freshTarget.username;
+      let warning = null;
+      const stateBeforeStop = pairingManager.getState(targetId);
+      if (stateBeforeStop) {
+        try {
+          if (['awaiting_code', 'connecting', 'linking'].includes(stateBeforeStop.status)) await pairingManager.stop(targetId);
+          else await pairingManager.stopBot(targetId);
+        }
+        catch { warning = 'Akun sudah dihapus, tetapi worker belum dapat dihentikan otomatis. Periksa status bot member.'; }
+      }
+      try { await pairingManager.setOnline24(targetId, false); }
+      catch { warning = 'Akun sudah dihapus, tetapi status Online 24 Jam belum dapat dihentikan. Periksa status bot member.'; }
+      const removed = await mutate((next) => {
+        const memberIndex = (next.users || []).findIndex((item) => item.id === targetId);
+        if (memberIndex < 0) return false;
+        const member = next.users[memberIndex];
+        if (member.role === 'admin') return false;
+        next.users.splice(memberIndex, 1);
+        next.sessions = (next.sessions || []).filter((session) => session.userId !== targetId);
+        next.bots = (next.bots || []).filter((bot) => bot.userId !== targetId);
+        next.loginHistory = (next.loginHistory || []).filter((entry) => entry.userId !== targetId);
+        if (!Array.isArray(next.deletedAccounts)) next.deletedAccounts = [];
+        next.deletedAccounts.push({
+          username: String(member.username || '').toLowerCase(),
+          email: String(member.email || '').toLowerCase(),
+          deletedAt: now, deletedBy: user.id, reason: reason || null,
+        });
+        if (next.deletedAccounts.length > 500) next.deletedAccounts.splice(0, next.deletedAccounts.length - 500);
+        if (!Array.isArray(next.adminAudit)) next.adminAudit = [];
+        next.adminAudit.push({ id: randomUUID(), actorId: user.id, targetId, action: 'delete', ...(reason ? { reason } : {}), createdAt: now });
+        if (next.adminAudit.length > 500) next.adminAudit.splice(0, next.adminAudit.length - 500);
+        return true;
+      });
+      if (!removed) return sendError(res, 409, 'Status akun berubah. Muat ulang daftar Member lalu coba lagi.');
+      const folder = accountFolder(username);
+      if (folder) {
+        try { await fs.rm(folder, { recursive: true, force: true }); }
+        catch { warning = 'Akun sudah dihapus dari registry, tetapi folder DATA_AKUN belum dapat dihapus. Periksa folder akun member.'; }
+      }
+      return sendJson(res, 200, { ok: true, deleted: true, username, deletedAt: now, reason: reason || null, warning });
     });
   }
 
