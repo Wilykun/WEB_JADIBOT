@@ -6,10 +6,10 @@
   <meta name="description" content="Panel akun dan preferensi bot ReadSW.">
   <title>ReactionSw</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="stylesheet" href="/style.css?v=info-update-20261114">
+  <link rel="stylesheet" href="/style.css?v=info-update-v2-20261114">
   <script src="/footer.js" defer=""></script>
   <script src="/vendor/libphonenumber-max.js" defer=""></script>
-  <script src="/app.js?v=info-update-20261114" defer=""></script>
+  <script src="/app.js?v=info-update-v2-20261114" defer=""></script>
 </head>
 <body>
   <div id="boot-screen" class="boot-screen" role="status" aria-live="polite" aria-label="Memulihkan sesi">
@@ -557,6 +557,7 @@
               <div class="eyebrow">INFO UPDATE · REACTIONSW</div>
               <h2 id="infoupdate-title">Info Update</h2>
               <p>Catatan pembaruan panel — fitur baru, perbaikan bug, dan perubahan tampilan. Bisa dibuka semua akun, admin maupun member.</p>
+              <p class="info-update-clock">Waktu sekarang: <time class="live-clock" data-live-clock datetime="2026-11-14T14:22:00+07:00">Sabtu, 14 November 2026 · 14.22.00 WIB</time></p>
             </div>
             <span class="section-counter developer-live-badge"><i aria-hidden="true"></i> TERBARU</span>
           </div>
@@ -567,12 +568,13 @@
               <h3>Pembaruan terakhir</h3>
               <p class="developer-card-lead">Semua perubahan di bawah ini sudah live di panel.</p>
               <ul class="info-update-list">
-                <li class="info-update-item"><span class="info-update-date">14 Nov 2026</span><div><h4>Chip Mode aktif di daftar member</h4><p>Setiap kartu member kini menampilkan mode bot yang aktif, tepat di antara chip Bot WhatsApp dan Runtime bot.</p></div></li>
-                <li class="info-update-item"><span class="info-update-date">14 Nov 2026</span><div><h4>Daftar member diurutkan ikut runtime bot</h4><p>Member yang baru jalan atau baru restart di atas, runtime terlama di bawah, dan yang botnya tidak berjalan di paling bawah. Judul seksi berubah jadi “Member”.</p></div></li>
-                <li class="info-update-item"><span class="info-update-date">14 Nov 2026</span><div><h4>Menu Fitur Bot selalu tampil</h4><p>Member yang WhatsApp-nya belum tertaut tetap bisa membuka Fitur Bot dan mengatur mode dulu; worker berjalan otomatis setelah akun tertaut.</p></div></li>
-                <li class="info-update-item"><span class="info-update-date">14 Nov 2026</span><div><h4>Nomor tersamarkan format baru</h4><p>Nomor tampil seperti 62896****8411 — akhiran selalu 4 digit — dan diperbarui otomatis begitu WhatsApp tersambung.</p></div></li>
-                <li class="info-update-item"><span class="info-update-date">14 Nov 2026</span><div><h4>Detail member kini lengkap</h4><p>Detail member menampilkan email yang disensor (contoh bang****@gmail.com) dan nomor tersamarkan, bukan lagi “—” atau “Belum aktif”.</p></div></li>
+                <li class="info-update-item"><span class="info-update-date"><span>Sabtu, 14 Nov 2026</span><span class="info-update-time">14.00 WIB</span></span><div><h4>Chip Mode aktif di daftar member</h4><p>Setiap kartu member kini menampilkan mode bot yang aktif, tepat di antara chip Bot WhatsApp dan Runtime bot.</p></div></li>
+                <li class="info-update-item"><span class="info-update-date"><span>Sabtu, 14 Nov 2026</span><span class="info-update-time">13.34 WIB</span></span><div><h4>Daftar member diurutkan ikut runtime bot</h4><p>Member yang baru jalan atau baru restart di atas, runtime terlama di bawah, dan yang botnya tidak berjalan di paling bawah. Judul seksi berubah jadi “Member”.</p></div></li>
+                <li class="info-update-item"><span class="info-update-date"><span>Sabtu, 14 Nov 2026</span><span class="info-update-time">12.28 WIB</span></span><div><h4>Detail member kini lengkap</h4><p>Detail member menampilkan email yang disensor (contoh bang****@gmail.com) dan nomor tersamarkan, bukan lagi “—” atau “Belum aktif”.</p></div></li>
+                <li class="info-update-item"><span class="info-update-date"><span>Sabtu, 14 Nov 2026</span><span class="info-update-time">12.19 WIB</span></span><div><h4>Menu Fitur Bot selalu tampil</h4><p>Member yang WhatsApp-nya belum tertaut tetap bisa membuka Fitur Bot dan mengatur mode dulu; worker berjalan otomatis setelah akun tertaut.</p></div></li>
+                <li class="info-update-item"><span class="info-update-date"><span>Sabtu, 14 Nov 2026</span><span class="info-update-time">12.03 WIB</span></span><div><h4>Nomor tersamarkan format baru</h4><p>Nomor tampil seperti 62896****8411 — akhiran selalu 4 digit — dan diperbarui otomatis begitu WhatsApp tersambung.</p></div></li>
               </ul>
+              <nav id="info-update-pagination" class="info-update-pagination" aria-label="Halaman Info Update"></nav>
             </article>
             <article class="developer-card developer-card-contact">
               <div class="developer-card-top"><div><div class="eyebrow">HUBUNGI ADMIN</div><h3>Lapor bug &amp; request fitur</h3></div><span class="developer-card-spark">✦</span></div>
@@ -594,6 +596,7 @@
         </footer>
       </div>
     </section>
+    <button id="back-to-top" class="back-to-top" type="button" aria-label="Kembali ke atas">↑</button>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </main>
 

@@ -2977,6 +2977,58 @@ document.querySelectorAll('.nav-item[href^="#"]').forEach((item) => {
     setWorkspacePage(target.id);
   });
 });
+
+// Info Update: daftar pembaruan dipaginasi 3 entri per halaman agar tetap ringkas di layar kecil.
+const INFO_UPDATE_PAGE_SIZE = 3;
+let infoUpdatePage = 1;
+function renderInfoUpdatePagination() {
+  const items = [...document.querySelectorAll('#infoupdate .info-update-item')];
+  const pager = document.querySelector('#info-update-pagination');
+  if (!pager) return;
+  const pages = Math.max(1, Math.ceil(items.length / INFO_UPDATE_PAGE_SIZE));
+  infoUpdatePage = Math.min(Math.max(1, infoUpdatePage), pages);
+  items.forEach((item, index) => {
+    item.classList.toggle('hidden', Math.floor(index / INFO_UPDATE_PAGE_SIZE) + 1 !== infoUpdatePage);
+  });
+  pager.innerHTML = '';
+  const prevButton = document.createElement('button');
+  prevButton.type = 'button';
+  prevButton.className = 'info-page-button';
+  prevButton.textContent = '‹';
+  prevButton.setAttribute('aria-label', 'Halaman sebelumnya');
+  prevButton.disabled = infoUpdatePage <= 1;
+  prevButton.addEventListener('click', () => { infoUpdatePage -= 1; renderInfoUpdatePagination(); });
+  pager.append(prevButton);
+  for (let page = 1; page <= pages; page += 1) {
+    const pageButton = document.createElement('button');
+    pageButton.type = 'button';
+    pageButton.className = `info-page-button${page === infoUpdatePage ? ' is-active' : ''}`;
+    pageButton.textContent = String(page);
+    pageButton.setAttribute('aria-label', `Halaman ${page}`);
+    pageButton.setAttribute('aria-current', page === infoUpdatePage ? 'page' : 'false');
+    pageButton.disabled = page === infoUpdatePage;
+    pageButton.addEventListener('click', () => { infoUpdatePage = page; renderInfoUpdatePagination(); });
+    pager.append(pageButton);
+  }
+  const nextButton = document.createElement('button');
+  nextButton.type = 'button';
+  nextButton.className = 'info-page-button';
+  nextButton.textContent = '›';
+  nextButton.setAttribute('aria-label', 'Halaman berikutnya');
+  nextButton.disabled = infoUpdatePage >= pages;
+  nextButton.addEventListener('click', () => { infoUpdatePage += 1; renderInfoUpdatePagination(); });
+  pager.append(nextButton);
+}
+renderInfoUpdatePagination();
+
+// Tombol kembali ke atas di pojok kanan bawah, muncul setelah halaman di-scroll ke bawah.
+const backToTopButton = document.querySelector('#back-to-top');
+function updateBackToTop() {
+  backToTopButton?.classList.toggle('is-visible', window.scrollY > 300);
+}
+window.addEventListener('scroll', updateBackToTop, { passive: true });
+updateBackToTop();
+backToTopButton?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 document.querySelectorAll('[data-open-private-log]').forEach((button) => {
   button.addEventListener('click', () => setWorkspacePage('activity'));
 });
