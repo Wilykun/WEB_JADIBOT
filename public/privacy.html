@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07110e">
+  <meta name="description" content="Kebijakan privasi ReactionSw: data akun, sesi WhatsApp, log, dan pilihan pengguna.">
+  <title>Privacy Policy · ReactionSw</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/footer.js" defer></script>
+</head>
+<body class="policy-body">
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <main class="policy-shell">
+    <header class="policy-header">
+      <a class="brand" href="/" aria-label="ReactionSw">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>ReactionSw</span>
+      </a>
+      <a class="button button-secondary policy-back" href="/">Kembali ke panel <span>↗</span></a>
+    </header>
+    <article class="policy-card">
+      <span class="eyebrow"><i class="pulse-dot"></i> DATA &amp; PRIVASI</span>
+      <h1>Privacy Policy</h1>
+      <p class="policy-lead">Halaman ini menjelaskan data yang diproses ReactionSw untuk akun, preferensi bot, pairing WhatsApp, dan log aktivitas.</p>
+      <p class="policy-updated">Terakhir diperbarui: 8 November 2026</p>
+
+      <section class="policy-section">
+        <h2>1. Data yang diproses</h2>
+        <ul>
+          <li><strong>Data akun:</strong> nama tampilan, username, alamat email, avatar profil, waktu pembuatan akun, dan peran akun. Kata sandi disimpan sebagai hash ber-salt; kata sandi asli tidak disimpan dalam bentuk teks biasa.</li>
+          <li><strong>Avatar profil:</strong> kamu dapat memilih avatar bawaan yang disimpan di aset web atau mengunggah gambar sendiri. Gambar unggahan dipotong persegi dan dikonversi di browser menjadi WebP 512 × 512, dibatasi maksimal 1 MB, lalu disimpan di folder akun masing-masing pada <code>DATA_AKUN</code>. Avatar unggahan hanya disajikan kembali kepada akun yang sedang masuk.</li>
+          <li><strong>Sesi dan aktivitas panel:</strong> cookie autentikasi bernama <code>readsw_session</code>, masa berlaku sesi, serta heartbeat saat dashboard terbuka untuk menandai aktivitas panel terbaru. Status “aktif di panel” berarti heartbeat terlihat dalam 75 detik terakhir; ini bukan status online WhatsApp.</li>
+          <li><strong>Statistik pengunjung realtime:</strong> footer menampilkan jumlah akun yang sedang aktif di panel sebagai “Online” dan jumlah browser yang membuka halaman tanpa login sebagai “Stalker”. Pengunjung anonim memakai cookie sementara <code>readsw_visitor</code>; sistem menyimpan waktu kunjungan, jumlah hit, serta kategori/perangkat, sistem operasi, model yang terbaca, dan browser dari User-Agent. IP mentah tidak disimpan pada data stalker, dan hitungan tidak dapat memastikan identitas orang atau mendeteksi perangkat secara sempurna.</li>
+          <li><strong>Preferensi bot:</strong> mode pilihan, rentang delay, toggle reaksi, dan daftar emoji yang disimpan pada profil akun.</li>
+          <li><strong>Pairing WhatsApp:</strong> nomor yang kamu masukkan dipakai untuk meminta pairing code. Kode hanya berada di memori sementara paling lama tiga menit dan tidak dimasukkan ke log. Setelah perangkat berhasil ditautkan, file auth Baileys di penyimpanan server dapat memuat identitas WhatsApp, kredensial, serta kunci sesi yang diperlukan agar koneksi dapat dipulihkan.</li>
+          <li><strong>Log aktivitas:</strong> jenis event, waktu, mode, tipe media/story, nama profil jika tersedia, nomor yang disamarkan, ID story yang dipendekkan, hasil tanda dibaca/reaksi, dan delay. Aplikasi tidak mengunduh atau menyimpan foto, video, maupun isi story.</li>
+          <li><strong>Informasi yang terlihat oleh admin:</strong> halaman admin menampilkan username, nama tampilan, email, peran/verifikasi, waktu pendaftaran, aktivitas panel terbaru, status koneksi sesi WhatsApp dan status worker. Nomor WhatsApp—jika tersedia—hanya ditampilkan tersamarkan. Daftar diperbarui berkala; halaman admin tidak membuka pairing code, kredensial, atau log privat akun.</li>
+        </ul>
+      </section>
+
+      <section class="policy-section">
+        <h2>2. Tujuan penggunaan</h2>
+        <p>Data digunakan untuk membuat dan mengamankan akun, menyimpan preferensi, menampilkan status pairing/worker, menyediakan log privat bagi akun yang sedang masuk, serta memberikan ringkasan akun dan aktivitas panel kepada admin. Status koneksi menunjukkan keadaan koneksi teknis sesi WhatsApp; aplikasi tidak mengetahui atau menjanjikan apakah orang sedang aktif menggunakan WhatsApp. Saat Read Only berjalan, panel dapat mengirim tanda dibaca. Saat reaksi otomatis diaktifkan pada mode Read Only + ReadSW, panel dapat mengirim reaksi emoji pilihan. Tindakan tersebut dikirim melalui koneksi WhatsApp dan dapat terlihat oleh pemilik story.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>3. Penyimpanan dan keamanan</h2>
+        <p>Data aplikasi disimpan pada penyimpanan server yang dikonfigurasi operator, termasuk file akun dan log serta folder auth WhatsApp per akun. Direktori dan file diberi pembatasan izin akses di sistem berkas, tetapi penyimpanan auth saat ini <strong>tidak dienkripsi at-rest</strong>. Operator server atau pihak yang memperoleh akses ke sistem berkas mungkin dapat mengakses data tersebut. Jangan gunakan deployment yang tidak menyediakan penyimpanan persisten dan kontrol akses yang layak untuk akun utama.</p>
+        <p>Log yang terlihat di panel dibatasi hingga 100 entri terbaru per akun. Penyimpanan aplikasi tidak menjanjikan penghapusan otomatis semua log lama; pengelolaan retensi bergantung pada operator dan konfigurasi server.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>4. Pihak ketiga</h2>
+        <p>Pairing dan aktivitas bot berkomunikasi dengan layanan WhatsApp melalui library komunitas Baileys yang tidak berafiliasi atau disahkan WhatsApp. Penyedia hosting/infrastruktur yang menjalankan panel dapat memproses permintaan jaringan dan mengelola server tempat data disimpan. Penggunaan WhatsApp juga tunduk pada ketentuan dan kebijakan WhatsApp.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>5. Retensi, penghapusan, dan permintaan privasi</h2>
+        <p>Akun, preferensi, dan log disimpan pada server sampai operator menghapus atau membersihkannya. Panel saat ini belum menyediakan tombol hapus akun secara mandiri. Tombol hapus sesi WhatsApp hanya menghapus kredensial sesi WhatsApp dari server; tindakan itu tidak menghapus akun panel, preferensi, atau seluruh log.</p>
+        <p>Untuk meminta akses, koreksi, atau penghapusan data, hubungi pengelola melalui kanal <a href="https://wa.me/6289688206739" target="_blank" rel="noopener noreferrer">WhatsApp support</a> atau <a href="https://t.me/Wilykun1994" target="_blank" rel="noopener noreferrer">Telegram support</a>. Sertakan username akun dan jelaskan permintaanmu. Jangan kirim kata sandi, pairing code, atau file kredensial WhatsApp melalui chat.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>6. Pembaruan kebijakan</h2>
+        <p>Kebijakan ini dapat diperbarui ketika fitur atau cara penyimpanan berubah. Versi terbaru akan ditampilkan pada halaman ini. Jika ada pertanyaan tentang data dan privasi, gunakan kanal kontak di atas.</p>
+      </section>
+      <aside class="policy-note"><strong>Catatan keamanan</strong><span>Pairing code adalah kredensial masuk sementara. Masukkan sendiri di WhatsApp dan jangan membagikannya kepada siapa pun.</span></aside>
+    </article>
+    <footer class="policy-footer">
+      <div class="footer-meta-row"><span>© <span data-current-year>2026</span> <a class="footer-owner-link" href="https://wa.me/6289688206739" target="_blank" rel="noopener noreferrer" aria-label="Comperid Bang Wily di WhatsApp">Comperid Bang Wily</a></span><time class="live-clock" data-live-clock>Memuat waktu WIB…</time></div>
+      <div class="footer-utility-row"><nav class="footer-policy-links" aria-label="Kebijakan dan ketentuan"><a href="/privacy" aria-current="page">Privacy Policy</a><a href="/dmca">DMCA</a><a href="/terms">Ketentuan</a></nav></div>
+    </footer>
+  </main>
+</body>
+</html>

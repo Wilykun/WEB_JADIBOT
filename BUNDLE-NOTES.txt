@@ -1,0 +1,5 @@
+ReadSW Console — updated source bundle
+
+This bundle contains the latest registration-verification changes.
+Private runtime data is intentionally excluded: DATA_AKUN, DATA_STALKER, runtime-data, node_modules, config.json, and local secrets.
+Use your own private config.json or copy config.example.json and edit it locally. Do not share session or account data.

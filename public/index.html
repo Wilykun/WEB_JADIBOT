@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07110e">
+  <meta name="description" content="Panel akun dan preferensi bot ReadSW.">
+  <title>ReactionSw</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/style.css?v=private-log-console-v2-20261113">
+  <script src="/footer.js" defer=""></script>
+  <script src="/vendor/libphonenumber-max.js" defer=""></script>
+  <script src="/app.js?v=private-log-console-v2-20261113" defer=""></script>
+</head>
+<body>
+  <div id="boot-screen" class="boot-screen" role="status" aria-live="polite" aria-label="Memulihkan sesi">
+    <div class="boot-screen-content">
+      <div class="brand boot-screen-brand"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>ReactionSw</span></div>
+      <span class="boot-screen-spinner" aria-hidden="true"></span>
+      <p>Memulihkan sesi panel…</p>
+    </div>
+  </div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main id="auth-view" class="auth-shell hidden" aria-live="polite">
+    <section id="mobile-info-page" class="auth-art">
+      <a class="brand" href="/" aria-label="ReactionSw">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>ReactionSw</span>
+      </a>
+      <div class="art-copy">
+        <span class="eyebrow"><i class="pulse-dot"></i> PANEL KONTROL BOT WHATSAPP</span>
+        <h1>Auto ReadSW<br><em>+ ReactionSW</em></h1>
+        <p>Atur ReadSW untuk menandai status WhatsApp sebagai dibaca. Jika reaksi otomatis aktif, pilih emoji dan jedanya—semua dalam satu panel.</p>
+      </div>
+      <div class="auth-free-banner"><span class="free-symbol" aria-hidden="true">✓</span><span><strong>Gratis 100%</strong><small>Tanpa biaya langganan atau pembayaran di panel</small></span><span class="free-label">FREE</span></div>
+      <div class="auth-feature-grid" aria-label="Fitur bot">
+        <article class="auth-feature-card"><span class="auth-feature-icon icon-read" aria-hidden="true">◉</span><span class="auth-feature-tag">BACA SAJA</span><h2>Read Only</h2><p>Tandai story dilihat tanpa reaksi emoji.</p></article>
+        <article class="auth-feature-card auth-feature-highlight"><span class="auth-feature-icon icon-react" aria-hidden="true">✳</span><span class="auth-feature-tag">READSW</span><h2>ReadSW + Reaksi</h2><p>Pilih emoji dan atur delay 1–20 detik.</p></article>
+        <article class="auth-feature-card auth-feature-limited"><span class="auth-feature-icon icon-online" aria-hidden="true">◷</span><span class="auth-feature-tag">PERSIAPAN</span><h2>Online 24 Jam</h2><p>Runner 24/7 belum aktif; perlu host persisten.</p></article>
+      </div>
+      <details class="feature-explainer">
+        <summary>
+          <span class="feature-explainer-icon" aria-hidden="true">+</span>
+          <span class="feature-explainer-heading"><strong>Buka penjelasan lengkap</strong><small>Mode bot, koneksi, dan batas layanan</small></span>
+          <span class="feature-explainer-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="feature-explainer-content">
+          <article class="feature-explainer-item">
+            <span class="feature-explainer-label">MODE 01 · BACA SAJA</span>
+            <h3>Read Only</h3>
+            <p>Bot menandai story WhatsApp sebagai sudah dilihat tanpa mengirim emoji. Tanda dibaca dapat terlihat oleh pemilik story.</p>
+          </article>
+          <article class="feature-explainer-item is-featured">
+            <span class="feature-explainer-label">MODE 02 · BACA + REAKSI</span>
+            <h3>Auto ReadSW + ReactionSW</h3>
+            <p>Bot menandai story sebagai dibaca. Jika reaksi otomatis diaktifkan, bot mencoba mengirim emoji pilihan dengan rentang jeda yang kamu atur, 1–20 detik. Tanda dibaca dan reaksi dapat terlihat oleh pemilik story.</p>
+          </article>
+          <article class="feature-explainer-item is-limited">
+            <span class="feature-explainer-label">MODE 03 · PERSIAPAN</span>
+            <h3>Online 24 Jam</h3>
+            <p>Di versi ini, Online 24 Jam masih berupa preferensi/placeholder. Memilihnya belum membuat worker berjalan 24/7. Layanan selalu aktif memerlukan hosting persisten yang menjaga server dan worker tetap hidup.</p>
+          </article>
+          <section class="feature-explainer-connection" aria-label="Koneksi dan kondisi bot berjalan">
+            <h3>Apakah bot tetap berjalan saat aplikasi ditutup?</h3>
+            <p>Setelah akun tertaut dan worker aktif, menutup halaman panel di browser tidak otomatis menghentikannya karena worker berjalan di server. Menutup aplikasi WhatsApp di ponsel utama juga tidak otomatis memutus perangkat tertaut; ponsel tidak harus terus online. Namun, akun utama perlu digunakan setidaknya sekali setiap 14 hari agar perangkat tertaut tetap aktif. <a href="https://faq.whatsapp.com/378279804439436" target="_blank" rel="noopener noreferrer">Baca info perangkat tertaut WhatsApp</a>.</p>
+            <p>Bot tetap membutuhkan koneksi internet pada server. Jika internet server terputus, server tidur atau berhenti, atau worker dihentikan, bot tidak dapat memproses story sampai server dan worker aktif kembali. Opsi Online 24 Jam saat ini belum mencegah hal tersebut.</p>
+          </section>
+          <p class="feature-explainer-caution">ReadSW menggunakan library komunitas, bukan API resmi WhatsApp. Penautan melalui aplikasi pihak ketiga yang tidak resmi dapat berisiko bagi akun. Gunakan akun milik sendiri dan pahami <a href="https://faq.whatsapp.com/378279804439436" target="_blank" rel="noopener noreferrer">panduan keamanan WhatsApp</a>.</p>
+        </div>
+      </details>
+      <p class="auth-feature-note"><span aria-hidden="true">i</span> Tanda dibaca dan reaksi bisa terlihat oleh pemilik story. Gunakan akunmu sendiri.</p>
+      <section class="auth-motivation" aria-label="Kalimat motivasi berganti">
+        <div class="motivation-topline"><span class="eyebrow">SEDIKIT SEMANGAT</span><span class="motivation-spark" aria-hidden="true">✦</span></div>
+        <p id="motivation-quote" aria-live="off">R</p>
+        <span class="motivation-caret" aria-hidden="true"></span>
+      </section>
+      <section class="mobile-info-pages" aria-label="Informasi ReactionSw">
+        <div class="mobile-info-menu" data-mobile-info-menu-view="">
+          <span class="eyebrow">MENU INFORMASI</span>
+          <h2>Pilih halaman</h2>
+          <p>Buka informasi yang ingin kamu lihat.</p>
+          <div class="mobile-info-menu-grid">
+            <button class="mobile-info-menu-card" type="button" data-mobile-info-menu="overview"><span>◈</span><strong>Info</strong><small>Profil dan fitur ReactionSw</small></button>
+            <button class="mobile-info-menu-card" type="button" data-mobile-info-menu="developer"><span>⌘</span><strong>Developer</strong><small>Tentang pembuat panel</small></button>
+            <button class="mobile-info-menu-card" type="button" data-mobile-info-menu="server"><span>◫</span><strong>Server</strong><small>Status realtime server</small></button>
+            <button class="mobile-info-menu-card" type="button" data-mobile-info-menu="bots"><span>✳</span><strong>List Bot</strong><small>Mode dan statistik bot</small></button>
+          </div>
+        </div>
+        <nav class="mobile-info-tabs" role="tablist" aria-label="Halaman informasi" hidden="">
+          <button class="mobile-info-back" type="button" data-mobile-info-menu-back="" aria-label="Kembali ke menu halaman">‹ Menu</button>
+          <button class="mobile-info-tab is-active" type="button" role="tab" aria-selected="true" data-mobile-info-tab="overview">Info</button>
+          <button class="mobile-info-tab" type="button" role="tab" aria-selected="false" data-mobile-info-tab="developer">Developer</button>
+          <button class="mobile-info-tab" type="button" role="tab" aria-selected="false" data-mobile-info-tab="server">Server</button>
+          <button class="mobile-info-tab" type="button" role="tab" aria-selected="false" data-mobile-info-tab="bots">List Bot</button>
+        </nav>
+        <section class="mobile-info-panel" data-mobile-info-panel="developer" role="tabpanel" hidden="">
+          <span class="eyebrow">DEVELOPER</span>
+          <h2>ReactionSw</h2>
+          <p>Panel ini dibuat untuk membantu pengelolaan story WhatsApp secara lebih tertata, ringan, dan mudah dipahami dari perangkat mobile.</p>
+          <div class="mobile-info-facts"><span>UI responsif</span><span>Data per akun</span><span>Privasi diutamakan</span></div>
+          <small>Dikembangkan dan dirawat oleh Wilykun. Gunakan akun WhatsApp milik sendiri dan pahami aktivitas otomatis sebelum menautkan perangkat.</small>
+        </section>
+        <section class="mobile-info-panel mobile-server-panel" data-mobile-info-panel="server" role="tabpanel" hidden="">
+          <div class="mobile-server-heading"><span><span class="eyebrow">SERVER INDONESIA</span><h2>Status server realtime</h2></span><span class="mobile-server-live"><i></i> LIVE</span></div>
+          <div class="mobile-server-grid">
+            <div><span>Status</span><strong id="server-status-value">Memeriksa…</strong></div>
+            <div><span>Uptime panel</span><strong id="server-uptime-value">—</strong></div>
+            <div><span>RAM proses</span><strong id="server-process-memory-value">—</strong></div>
+            <div><span>RAM sistem</span><strong id="server-system-memory-value">—</strong></div>
+            <div><span>Node.js</span><strong id="server-node-value">—</strong></div>
+            <div><span>CPU / load</span><strong id="server-cpu-value">—</strong></div>
+          </div>
+          <p id="server-status-detail" class="mobile-server-detail">Mengambil data langsung dari server panel.</p>
+          <small id="server-status-updated">Belum diperbarui</small>
+        </section>
+        <section class="mobile-info-panel mobile-bot-list-panel" data-mobile-info-panel="bots" role="tabpanel" hidden="">
+          <div class="mobile-server-heading"><span><span class="eyebrow">FITUR BOT</span><h2>List Bot</h2></span><span class="mobile-server-live"><i></i> AKTIF</span></div>
+          <p class="mobile-bot-list-intro">Daftar mode yang tersedia di script ini. Status di bawah mengikuti kemampuan panel saat ini, bukan klaim layanan 24 jam.</p>
+          <div class="mobile-bot-list">
+            <article class="mobile-bot-item"><span class="mobile-bot-icon">◉</span><div><strong>Read Only</strong><small>Menandai story sebagai dilihat tanpa mengirim reaksi emoji.</small></div><b>Siap</b></article>
+            <article class="mobile-bot-item is-featured"><span class="mobile-bot-icon">✳</span><div><strong>Read Only + ReadSW</strong><small>Membaca story dan mencoba reaksi sesuai emoji serta delay akun.</small></div><b>Siap</b></article>
+            <article class="mobile-bot-item is-limited"><span class="mobile-bot-icon">◷</span><div><strong>Online 24 Jam</strong><small>Preferensi tersedia, tetapi runner 24/7 membutuhkan host persisten.</small></div><b>Persiapan</b></article>
+          </div>
+          <div class="mobile-bot-live-summary"><span>Bot online <strong id="public-bot-online-count">0</strong></span><span>Worker aktif <strong id="public-worker-count">0</strong></span></div>
+          <small id="mobile-bot-list-updated">Diperbarui 04.47.29 WIB</small>
+          <section class="public-account-stats" aria-label="Statistik akun publik">
+            <div class="public-account-stats-head"><span class="eyebrow">AKUN TERDAFTAR</span><span class="public-stats-live"><i></i> LIVE</span></div>
+            <div class="public-account-stats-grid">
+              <div class="public-account-stat"><strong id="public-stat-total">2</strong><span>Total akun</span></div>
+              <div class="public-account-stat is-active"><strong id="public-stat-active">2</strong><span>Aktif</span></div>
+              <div class="public-account-stat is-inactive"><strong id="public-stat-inactive">0</strong><span>Belum aktif</span></div>
+              <div class="public-account-stat"><strong id="public-stat-admin">1</strong><span>Admin</span></div>
+              <div class="public-account-stat"><strong id="public-stat-member">1</strong><span>Member biasa</span></div>
+              <div class="public-account-stat is-bot"><strong id="public-stat-bot">0</strong><span>Bot online</span></div>
+              <div class="public-account-stat is-whatsapp"><strong id="public-stat-whatsapp">0</strong><span>WA tersambung</span></div>
+              <div class="public-account-stat is-worker"><strong id="public-stat-worker">0</strong><span>Worker aktif</span></div>
+            </div>
+            <small id="public-stats-updated">Diperbarui 21.47.29 WIB</small>
+          </section>
+        </section>
+      </section>
+      <div class="art-orbit orbit-a"></div>
+      <div class="art-orbit orbit-b"></div>
+      <div class="art-footer"><span>READSTORYWA BY WILYKUN</span><span>* Biaya hosting atau internet pihak ketiga dapat berlaku</span></div>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-mobile-brand brand">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>ReactionSw</span>
+        <button id="mobile-info-toggle" class="mobile-info-toggle" type="button" aria-expanded="false" aria-controls="mobile-info-page" aria-label="Buka informasi ReadSW" title="Informasi ReadSW">⋮</button>
+      </div>
+      <div class="auth-form-wrap">
+        <div class="auth-heading">
+          <span class="eyebrow" id="auth-eyebrow">SELAMAT DATANG KEMBALI</span>
+          <h2 id="auth-title">Masuk ke akunmu</h2>
+          <p id="auth-subtitle">Lanjutkan mengatur dashboard bot kamu.</p>
+        </div>
+        <form id="login-form" class="form-stack" autocomplete="on">
+          <label class="field"><span>Email atau username</span><input name="identifier" autocomplete="username" required="" maxlength="254" placeholder="nama atau email@contoh.com"></label>
+          <div class="field password-field"><label class="password-label" for="login-password"><span>Kata sandi</span></label><div class="password-control"><input id="login-password" name="password" type="password" autocomplete="current-password" required="" maxlength="128" placeholder="Masukkan kata sandi"><button class="password-toggle" type="button" data-password-toggle="" data-password-label="kata sandi" aria-label="Tampilkan kata sandi" aria-controls="login-password" aria-pressed="false" title="Tampilkan kata sandi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle><path class="password-eye-slash" d="m4 4 16 16"></path></svg></button></div></div>
+          <button class="button button-primary button-wide" type="submit">Masuk <span>→</span></button>
+        </form>
+        <form id="register-form" class="form-stack hidden" autocomplete="on">
+                    <label class="field"><span>Username</span><input name="username" autocomplete="username" required="" minlength="3" maxlength="24" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,23}" placeholder="contoh: namabot"></label>
+          <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required="" maxlength="254" placeholder="kamu@contoh.com"></label>
+          <div class="register-security-note"><span class="register-security-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.7-2.9 8.1-7 10-4.1-1.9-7-5.3-7-10V6l7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg></span><span><strong>Amankan akunmu</strong><small>Buat sandi unik minimal 12 karakter.</small></span></div>
+          <div class="field password-field">
+            <label class="password-label" for="register-password"><span>Kata sandi</span><span class="password-minimum">Min. 12 karakter</span></label>
+            <div class="password-control"><input id="register-password" name="password" type="password" autocomplete="new-password" required="" minlength="12" maxlength="128" placeholder="Contoh: KopiPagi!2026Aman" aria-describedby="register-password-hint register-password-strength"><button class="password-toggle" type="button" data-password-toggle="" data-password-label="kata sandi" aria-label="Tampilkan kata sandi" aria-controls="register-password" aria-pressed="false" title="Tampilkan kata sandi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle><path class="password-eye-slash" d="m4 4 16 16"></path></svg></button></div>
+            <div class="password-strength" id="register-password-strength" aria-live="polite" aria-label="Kekuatan kata sandi"><div class="password-strength-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div><strong class="password-strength-label">Mulai ketik kata sandi</strong></div>
+            <small class="password-hint" id="register-password-hint">Gunakan kata sandi unik yang belum dipakai di akun lain.</small>
+          </div>
+          <div class="field password-field">
+            <label class="password-label" for="register-password-confirm"><span>Konfirmasi kata sandi</span></label>
+            <div class="password-control"><input id="register-password-confirm" name="confirmPassword" type="password" autocomplete="new-password" required="" minlength="12" maxlength="128" placeholder="Ulangi kata sandi" aria-describedby="register-password-match"><button class="password-toggle" type="button" data-password-toggle="" data-password-label="konfirmasi kata sandi" aria-label="Tampilkan konfirmasi kata sandi" aria-controls="register-password-confirm" aria-pressed="false" title="Tampilkan konfirmasi kata sandi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle><path class="password-eye-slash" d="m4 4 16 16"></path></svg></button></div>
+            <small class="password-hint" id="register-password-match" aria-live="polite">Masukkan ulang kata sandi yang sama.</small>
+          </div>
+          <button class="button button-primary button-wide" type="submit">Buat akun <span>→</span></button>
+        </form>
+        <form id="verification-form" class="form-stack hidden" autocomplete="off">
+          <div class="register-security-note verification-note"><span class="register-security-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 18.5v-13Z"></path><path d="M8 8h8M8 12h8M8 16h4"></path></svg></span><span><strong>Verifikasi dulu</strong><small>Akun belum bisa login sebelum CAPTCHA ini dijawab dengan benar.</small></span></div>
+          <p class="verification-prompt" id="verification-prompt">Memuat CAPTCHA…</p>
+          <small class="verification-help">Masukkan tepat 5 karakter sesuai huruf besar/kecil. Kode berisi huruf dan angka; kode baru tampil jika jawaban salah.</small>
+          <label class="field"><span>Kode verifikasi</span><input id="verification-code" name="code" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" pattern="[A-Za-z0-9]{5}" autocomplete="off" required="" minlength="5" maxlength="5" placeholder="Contoh: A7kQ3"></label>
+          <small id="verification-cooldown" class="verification-cooldown hidden" aria-live="polite"></small>
+          <button class="button button-primary button-wide" type="submit">Verifikasi akun <span>→</span></button>
+        </form>
+        <div id="auth-message" class="notice hidden" role="alert" aria-live="polite"></div>
+        <p id="auth-switch" class="auth-switch">Belum punya akun? <button type="button" data-action="show-register">Daftar</button></p>
+        <p class="auth-legal">Dengan melanjutkan, kamu setuju menggunakan panel ini secara bertanggung jawab.</p>
+      </div>
+      <div class="auth-bottom">
+        <div class="footer-meta-row"><span>© <span data-current-year="">2026</span> <a class="footer-owner-link" href="https://wa.me/6289688206739" target="_blank" rel="noopener noreferrer" aria-label="Comperid Bang Wily di WhatsApp">Comperid Bang Wily</a></span><time class="live-clock" data-live-clock="" datetime="2026-11-10T21:47:29.142Z" aria-label="Waktu Indonesia Barat: Rabu, 11 November 2026 · 04.47.29 WIB">Rabu, 11 November 2026 · 04.47.29 WIB</time></div>
+        <div class="footer-presence-row" aria-label="Pengunjung realtime"><span class="footer-presence-pill is-online"><i aria-hidden="true"></i><span>Online</span><b data-live-online>0</b></span><span class="footer-presence-pill is-stalker" title="Pengunjung yang belum login"><i aria-hidden="true"></i><span>Stalker</span><b data-live-stalker>0</b></span><span class="footer-presence-pill is-visit" title="Jumlah IP unik yang pernah berkunjung"><i aria-hidden="true"></i><span>Kunjungan</span><b data-live-visits>0</b></span></div>
+        <div class="footer-utility-row">
+          <nav class="footer-policy-links" aria-label="Kebijakan dan ketentuan"><a href="/privacy">Privacy Policy</a><a href="/dmca">DMCA</a><a href="/terms">Ketentuan</a></nav>
+          <span class="footer-utility-divider" aria-hidden="true"></span>
+          <div class="auth-support-links"><span>Butuh bantuan?</span><a href="https://wa.me/6289688206739" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://t.me/Wilykun1994" target="_blank" rel="noopener noreferrer">Telegram</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <main id="app-view" class="app-shell hidden">
+    <aside class="sidebar" id="app-sidebar">
+      <a class="brand" href="/" aria-label="ReactionSw">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>ReactionSw</span>
+      </a>
+      <div class="sidebar-account-status" aria-label="Status akun login">
+        <span class="sidebar-account-status-icon" aria-hidden="true">◎</span>
+        <span class="sidebar-account-status-copy"><small>STATUS AKUN</small><strong id="sidebar-account-role">MEMBER</strong><em id="sidebar-account-username">Akun</em></span>
+      </div>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Navigasi utama">
+        <a class="nav-item active hidden" href="#dashboard"><span class="nav-icon">◫</span>Panel</a>
+        <a class="nav-item hidden" href="#mode"><span class="nav-icon">◉</span>Fitur Bot</a>
+        <a id="private-log-nav" class="nav-item hidden" href="#activity"><span class="nav-icon">▣</span>Log privat</a>
+        <a class="nav-item" href="#profile"><span class="nav-icon">◎</span>Profil akun</a>
+        <a id="pairing-nav" class="nav-item active" href="#pairing"><span class="nav-icon">▣</span>Pairing WhatsApp</a>
+        <a id="developer-nav" class="nav-item" href="#developer"><span class="nav-icon">⌘</span>Developer</a>
+      <a id="admin-nav" class="nav-item hidden" href="#admin"><span class="nav-icon">⋮</span>Member</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note"><span class="note-icon">i</span><p>Pairing tersedia per akun. Worker fitur bot belum dijalankan.</p></div>
+        <button class="nav-item logout-button" data-action="logout"><span class="nav-icon">↪</span>Keluar</button>
+        <div class="sidebar-version">READSTORYWA BY WILYKUN <span>v0.1</span></div>
+      </div>
+    </aside>
+
+    <section class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="menu-toggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="app-sidebar" aria-label="Buka menu">☰</button>
+          <div class="breadcrumbs"><span>Workspace</span><b>/</b><strong id="page-breadcrumb">Memuat halaman…</strong></div>
+        </div>
+        <div class="topbar-right"><span class="demo-badge"><i></i> <span id="connection-badge">TAUTKAN WHATSAPP</span></span><button class="user-chip" data-action="profile"><img class="avatar avatar-image" id="avatar-initials" src="/avatars/avatar-01.webp" alt="Avatar profil"><span id="top-user-name">Akun</span><span class="chevron">⌄</span></button></div>
+      </header>
+
+      <div class="content-wrap">
+        <section id="dashboard" class="welcome-row hidden" data-linked-only="" data-page-view="dashboard">
+          <div><div class="eyebrow">PANEL KONTROL PRIBADI</div><h1>Halo, <span id="welcome-name">teman</span><span class="wave">.</span></h1><p>Atur preferensi bot kamu dengan ringkas.</p></div>
+          <div class="date-pill"><span class="date-icon">◷</span><span id="today-label">Hari ini</span></div>
+        </section>
+
+        <section class="status-grid hidden" data-linked-only="" data-page-view="dashboard" aria-label="Ringkasan akun">
+          <article class="status-card status-card-main"><div class="status-card-top"><span class="status-icon green-icon">◉</span><span class="status-label">STATUS WHATSAPP</span></div><div class="status-value" id="whatsapp-status-value">Memeriksa sesi…</div><p id="whatsapp-status-description">Status koneksi sedang diperiksa.</p><span class="status-foot"><i class="muted-dot" id="whatsapp-status-dot"></i> <span id="whatsapp-status-foot">Memeriksa koneksi</span></span></article>
+          <article class="status-card"><div class="status-card-top"><span class="status-icon purple-icon">◈</span><span class="status-label">MODE PILIHAN</span></div><div class="status-value" id="current-mode">Belum dipilih</div><p id="mode-summary">Pilih preferensi bot untuk menyimpannya.</p><span class="status-foot" id="saved-label">Belum ada perubahan</span></article>
+          <article class="status-card"><div class="status-card-top"><span class="status-icon blue-icon">◎</span><span class="status-label">AKUN</span></div><div class="status-value" id="account-role">Pengguna</div><p id="account-email">—</p><span class="status-foot"><i class="green-dot"></i> Ruang data pribadi</span></article>
+        </section>
+
+        
+        <section id="panel-session-overview" class="panel-session-grid hidden" data-linked-only="" data-page-view="dashboard" aria-label="Status dan aktivitas sesi WhatsApp">
+          <div class="pairing-card panel-session-card">
+            <div id="pairing-linked-card" class="pairing-linked-card hidden" role="status" aria-live="polite"><span class="linked-mark">✓</span><div><strong>WhatsApp Online · terhubung real-time</strong><p>Mode default Read Only + ReadSW aktif otomatis. Hentikan worker kapan saja dari Kontrol Bot.</p></div></div>
+            
+            
+          </div>
+          
+        </section>
+
+        <section id="mode" class="section-heading hidden" data-linked-only="" data-page-view="mode"><div><div class="eyebrow">AKTIVASI BOT</div><h2>Pilih mode story &amp; status online</h2><p>Pilih satu mode story. Online 24 Jam dapat dinyalakan bersamaan selama host persisten dan sesi WhatsApp aktif.</p></div><span class="section-counter">03 <i>/</i> MODE</span></section>
+        <section class="plan-grid hidden" data-linked-only="" data-page-view="mode" aria-label="Pilihan mode bot">
+          <article class="plan-card" data-plan-card="readonly">
+            <div class="plan-card-head"><span class="plan-icon icon-book">▤</span><span class="plan-tag">DASAR</span></div>
+            <h3>Read Only</h3><p class="plan-copy">Mode baca saja untuk preferensi penggunaan sederhana.</p>
+            <ul><li><span>✓</span> Tandai story sebagai dilihat</li><li><span>✓</span> Tanpa reaksi emoji</li><li><span>✓</span> Delay acak bisa diatur</li></ul>
+            <button class="button button-secondary select-plan" type="button" data-plan="readonly">Aktifkan <span>→</span></button>
+          </article>
+          <article class="plan-card plan-featured" data-plan-card="readonly_readsw">
+            <div class="featured-ribbon">PILIHAN POPULER</div>
+            <div class="plan-card-head"><span class="plan-icon icon-spark">✳</span><span class="plan-tag">READSW</span></div>
+            <h3>Read Only + ReadSW</h3><p class="plan-copy">Tandai story sebagai dilihat, lalu kirim reaksi emoji pilihan setelah delay acak.</p>
+            <ul><li><span>✓</span> Baca status dari event WhatsApp</li><li><span>✓</span> Reaksi emoji bisa diatur</li><li><span>✓</span> Delay acak 1–20 detik</li></ul>
+            <button class="button button-primary select-plan" type="button" data-plan="readonly_readsw">Aktifkan <span>→</span></button>
+          </article>
+          <article class="plan-card plan-card-addon" data-online-addon="true">
+            <div class="plan-card-head"><span class="plan-icon icon-clock">◷</span><span class="plan-tag">ALWAYS-ON</span></div>
+            <h3>Online 24 Jam</h3><p class="plan-copy">Kirim presence available berkala agar akun terlihat online selama host persisten aktif.</p>
+            <ul><li><span>✓</span> Bisa bersama ReadSW</li><li><span>✓</span> Heartbeat presence 25 detik</li><li><span>!</span> Perlu host persisten</li></ul>
+            <button class="button button-secondary online24-toggle" type="button" data-online24-toggle="">Aktifkan <span>→</span></button>
+          </article>
+        </section>
+
+        <section class="story-settings-card hidden" data-linked-only="" data-page-view="mode" aria-labelledby="story-settings-title">
+          <div class="story-settings-heading"><div><div class="eyebrow">PREFERENSI STORY</div><h2 id="story-settings-title">Delay &amp; emoji ReadSW</h2><p>Pengaturan ini tersimpan terpisah untuk akun yang sedang masuk. Tidak mengirim apa pun sampai bot dijalankan.</p></div><span class="log-lock">⏱</span></div>
+          <div class="story-settings-grid">
+            <label class="field"><span>Delay minimum <small>detik · 1–20</small></span><select id="story-delay-min" aria-label="Delay minimum dalam detik"><option value="1">1 detik</option><option value="2">2 detik</option><option value="3">3 detik</option><option value="4">4 detik</option><option value="5">5 detik</option><option value="6">6 detik</option><option value="7">7 detik</option><option value="8">8 detik</option><option value="9">9 detik</option><option value="10">10 detik</option><option value="11">11 detik</option><option value="12">12 detik</option><option value="13">13 detik</option><option value="14">14 detik</option><option value="15">15 detik</option><option value="16">16 detik</option><option value="17">17 detik</option><option value="18">18 detik</option><option value="19">19 detik</option><option value="20">20 detik</option></select></label>
+            <label class="field"><span>Delay maksimum <small>detik · 1–20</small></span><select id="story-delay-max" aria-label="Delay maksimum dalam detik"><option value="1">1 detik</option><option value="2">2 detik</option><option value="3">3 detik</option><option value="4">4 detik</option><option value="5">5 detik</option><option value="6">6 detik</option><option value="7">7 detik</option><option value="8">8 detik</option><option value="9">9 detik</option><option value="10">10 detik</option><option value="11">11 detik</option><option value="12">12 detik</option><option value="13">13 detik</option><option value="14">14 detik</option><option value="15">15 detik</option><option value="16">16 detik</option><option value="17">17 detik</option><option value="18">18 detik</option><option value="19">19 detik</option><option value="20">20 detik</option></select></label>
+          </div>
+          <label class="story-reaction-switch"><input id="story-reaction-enabled" type="checkbox"><span><strong>Reaksi emoji otomatis</strong><small>Hanya berjalan pada mode Read Only + ReadSW. Reaksi akan terlihat oleh pemilik story.</small></span></label>
+          <fieldset class="emoji-pool-field"><legend>Emoji reaksi <small>standar awal 💚 · pilih emoji yang akan dipakai</small></legend><div id="story-emoji-grid" class="emoji-pool" aria-label="Daftar emoji reaksi"><div class="emoji-item"><button type="button" class="emoji-choice selected" data-emoji="💚" aria-pressed="true" aria-label="💚 aktif">💚</button><button type="button" class="emoji-remove" data-remove-emoji="💚" aria-label="Hapus emoji 💚 dari akun ini">×</button></div></div><div class="emoji-add-row"><label class="sr-only" for="story-emoji-input">Emoji baru</label><textarea id="story-emoji-input" rows="3" maxlength="1000" autocomplete="off" placeholder="Tempel beberapa emoji; pisahkan dengan baris baru atau koma" aria-describedby="story-emoji-help"></textarea><button id="story-emoji-add" class="button button-secondary" type="button">Tambah emoji <span>＋</span></button></div><small id="story-emoji-help" class="emoji-help">Bisa tempel banyak emoji sekaligus: satu per baris atau pisahkan dengan koma. Emoji baru langsung dipilih dan disimpan ke akun ini.</small></fieldset>
+          <div class="story-settings-footer"><div id="story-settings-feedback" class="control-feedback hidden" role="status" aria-live="polite"></div><button class="button button-primary" id="save-story-settings" type="button">Simpan sekarang</button></div>
+          <p class="story-settings-note">Read Only menandai story sebagai dilihat tanpa emoji. Read Only + ReadSW bisa mengirim emoji pilihan setelah delay. Bot tidak menyimpan foto/video story.</p>
+        </section>
+
+        <section class="connection-callout hidden" data-linked-only="" data-page-view="dashboard"><div class="connection-symbol"><span></span><span></span><span></span></div><div class="connection-copy"><span class="eyebrow">STATUS RUNNER</span><h3 id="runner-title">Bot siap dimulai</h3><p id="runner-description">Untuk profil baru, mode Read Only + ReadSW mulai otomatis setelah WhatsApp tertaut; hentikan kapan saja dari Kontrol Bot.</p></div><span class="connection-state"><i></i> <span id="runner-status">WORKER BERHENTI</span></span></section>
+
+        
+
+        <section class="bot-worker-card hidden" data-linked-only="" data-page-view="dashboard" aria-labelledby="bot-worker-title">
+          <div class="bot-worker-copy"><div class="eyebrow">KONTROL BOT</div><h2 id="bot-worker-title">Worker aktivitas</h2><p id="bot-worker-description">Saat berjalan, story ditandai dilihat sesuai mode. Read Only tidak mengirim emoji; Read Only + ReadSW dapat mengirim reaksi yang terlihat oleh pemilik story.</p><div class="bot-worker-state" id="bot-worker-state"><i id="bot-worker-dot" class="muted-dot"></i><strong id="bot-worker-status">BOT BERHENTI</strong><span id="bot-worker-detail">Mulai setelah mode dipilih dan WhatsApp online.</span></div><small id="bot-worker-runtime" class="bot-worker-runtime" data-worker-runtime="">Runtime bot: —</small></div>
+          <div><div class="bot-worker-actions" role="group" aria-label="Kontrol bot dan sesi WhatsApp"><button class="button button-primary" id="bot-start" type="button">Start bot</button><button class="button button-secondary" id="bot-restart" type="button">Restart bot</button><button class="button button-secondary" id="bot-stop" type="button">Matikan bot</button>
+<div id="session-actions" class="session-actions hidden" role="group" aria-label="Kontrol sesi WhatsApp">
+                <button class="button button-secondary" type="button" id="session-resume">Sambungkan ulang</button>
+                <button class="button button-secondary" type="button" id="session-stop">Hentikan WhatsApp</button>
+                <button class="button button-danger" type="button" id="session-delete">Hapus sesi</button>
+              </div>
+</div><div id="bot-feedback" class="control-feedback hidden" role="status" aria-live="polite"></div>
+<div id="session-feedback" class="control-feedback hidden" role="status" aria-live="polite"></div></div>
+        </section>
+
+        <section class="pairing-log-card private-log-preview" data-linked-only="" data-page-view="dashboard" aria-labelledby="pairing-log-title">
+              <div class="pairing-log-heading"><div><div class="eyebrow">LOG PRIVAT</div><h3 id="pairing-log-title">Aktivitas akun ini</h3></div><button class="private-log-icon-button" type="button" data-open-private-log aria-label="Buka halaman log lengkap" title="Buka halaman log lengkap"><span aria-hidden="true">↗</span></button></div>
+              <p>Aktivitas terbaru tampil paling atas. Buka log lengkap untuk pembaruan otomatis.</p>
+              <div class="private-log-preview-body" aria-live="polite"><div class="private-log-preview-icon">◷</div><div><strong id="private-log-count">Memeriksa aktivitas…</strong><small id="private-log-latest">Log terbaru akan tampil di atas.</small></div></div>
+              <div class="private-log-preview-content"><ul id="pairing-log-list" class="pairing-log-list" aria-live="polite"><li>Memuat log…</li></ul></div>
+            </section>
+
+        <section id="activity" class="private-log-page hidden" data-linked-only="" data-page-view="activity" aria-labelledby="private-log-page-title">
+          <div class="private-log-hero">
+            <div class="private-log-hero-copy"><div class="eyebrow">LOG PRIVAT · AKTIVITAS AKUN</div><h2 id="private-log-page-title">Log Console</h2><p>Jejak aktivitas WhatsApp, bot, dan story akun ini dalam satu timeline yang mudah dipindai.</p></div>
+            <span class="private-log-private-badge"><span class="private-log-status-dot" aria-hidden="true"></span>PRIVAT · AKUN INI</span>
+          </div>
+          <div class="private-log-notice"><span class="log-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 10V7a6 6 0 0 1 12 0v3M5 10h14v11H5zM12 14v3"/></svg></span><div><strong>Log ini hanya untuk akunmu</strong><p>Nomor kontak dan ID story ditampilkan tersamarkan. Pairing code, media, isi story, dan kredensial tidak disimpan di log.</p></div></div>
+          <div class="private-log-toolbar">
+            <div class="private-log-toolbar-main"><span class="private-log-toolbar-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><div class="private-log-toolbar-copy"><small class="private-log-toolbar-label">FEED AKTIVITAS</small><strong id="private-log-page-count">Memuat aktivitas…</strong><small id="private-log-page-updated">Pembaruan otomatis setiap 15 detik saat halaman aktif.</small></div></div>
+            <button class="button button-secondary private-log-refresh" type="button" data-refresh-private-log><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M5.5 9a7 7 0 0 1 12-2l2.5 2M18.5 15a7 7 0 0 1-12 2L4 15"/></svg><span>Segarkan log</span></button>
+          </div>
+          <div class="private-log-controls">
+            <label class="private-log-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="private-log-search" type="search" placeholder="Cari event, status, reaksi…" autocomplete="off" aria-label="Cari di log aktivitas"><span class="private-log-search-hint">Cari</span></label>
+            <div class="private-log-filter-row"><span class="private-log-filter-label">Kategori</span><div class="private-log-filters" data-private-log-filters role="group" aria-label="Filter kategori aktivitas">
+              <button class="private-log-filter is-active" type="button" data-log-filter="all" aria-pressed="true"><span>Semua</span><small data-filter-count="all">0</small></button>
+              <button class="private-log-filter" type="button" data-log-filter="story" aria-pressed="false"><span>Story</span><small data-filter-count="story">0</small></button>
+              <button class="private-log-filter" type="button" data-log-filter="bot" aria-pressed="false"><span>Bot</span><small data-filter-count="bot">0</small></button>
+              <button class="private-log-filter" type="button" data-log-filter="whatsapp" aria-pressed="false"><span>WhatsApp</span><small data-filter-count="whatsapp">0</small></button>
+              <button class="private-log-filter" type="button" data-log-filter="alert" aria-pressed="false"><span>Perhatian</span><small data-filter-count="alert">0</small></button>
+              <button class="private-log-filter" type="button" data-log-filter="system" aria-pressed="false"><span>Sistem</span><small data-filter-count="system">0</small></button>
+            </div></div>
+          </div>
+          <div class="private-log-stream-heading"><div><h3>Timeline aktivitas</h3><p>Terbaru ditampilkan lebih dulu · log baru diarahkan otomatis ke atas.</p></div><span id="private-log-filter-summary" aria-live="polite">Memuat event…</span></div>
+          <div class="private-log-stream"><ul id="private-log-list" class="pairing-log-list private-log-list" aria-live="polite"><li>Memuat log…</li></ul><p id="private-log-empty" class="private-log-empty" hidden>Tidak ada aktivitas yang cocok. Ubah kata pencarian atau kategori.</p></div>
+        </section>
+
+        <section id="profile" class="profile-section" data-page-view="profile">
+          <div class="section-heading compact"><div><div class="eyebrow">PENGATURAN</div><h2>Profil akun</h2><p>Atur nama tampilan dan avatar profilmu. Avatar unggahan disimpan privat di folder akunmu.</p></div></div>
+          <div class="appearance-card" aria-labelledby="appearance-title">
+            <div class="appearance-copy"><span class="eyebrow">TAMPILAN</span><h3 id="appearance-title">Tema aplikasi</h3><p>Pilih tampilan malam atau siang. Pilihan tersimpan di browser ini.</p></div>
+            <fieldset class="theme-picker" aria-labelledby="appearance-title">
+              <legend class="sr-only">Pilih tema aplikasi</legend>
+              <label class="theme-option is-selected"><input type="radio" name="appearance-theme" value="dark" checked=""><span class="theme-option-icon" aria-hidden="true">☾</span><span>Malam</span></label>
+              <label class="theme-option"><input type="radio" name="appearance-theme" value="light"><span class="theme-option-icon" aria-hidden="true">☀</span><span>Siang</span></label>
+            </fieldset>
+          </div>
+          <div class="profile-card profile-card-rich">
+            <div class="profile-identity"><img class="profile-avatar-image" id="profile-avatar-image" src="/avatars/avatar-01.webp" alt="Avatar profil"><div><span class="eyebrow">IDENTITAS AKUN</span><h3 id="profile-display-title">Akun</h3><p>@<span id="profile-username-label">username</span></p></div></div>
+            <div class="profile-avatar-picker"><div class="avatar-picker-heading"><div><strong>Pilih avatar</strong><small>28 ilustrasi anime 2D · 14 cowok dan 14 cewek</small></div><button class="avatar-random-button" id="avatar-random" type="button">Acak avatar <span aria-hidden="true">⤨</span></button></div><div class="avatar-selection-note" id="avatar-selection-note" aria-live="polite">Avatar aktif akan tampil di profil dan menu akun.</div>
+<div class="avatar-picker-row"><div class="avatar-browser">
+<div class="avatar-tabs" role="tablist" aria-label="Kategori avatar"><button class="avatar-tab is-active" type="button" role="tab" aria-selected="true" data-avatar-filter="all"><span>Semua</span><b>28</b></button><button class="avatar-tab" type="button" role="tab" aria-selected="false" data-avatar-filter="male"><span>Cowok</span><b>14</b></button><button class="avatar-tab" type="button" role="tab" aria-selected="false" data-avatar-filter="female"><span>Cewek</span><b>14</b></button></div>
+<div class="avatar-presets" role="group" aria-label="20 pilihan avatar anime">
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-02" data-avatar-gender="male" aria-label="Pilih avatar Ryo, cowok" aria-pressed="false"><img src="/avatars/avatar-02.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Ryo</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-04" data-avatar-gender="male" aria-label="Pilih avatar Sora, cowok" aria-pressed="false"><img src="/avatars/avatar-04.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Sora</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-05" data-avatar-gender="male" aria-label="Pilih avatar Ren, cowok" aria-pressed="false"><img src="/avatars/avatar-05.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Ren</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-15" data-avatar-gender="male" aria-label="Pilih avatar Kai, cowok" aria-pressed="false"><img src="/avatars/avatar-15.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Kai</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-16" data-avatar-gender="male" aria-label="Pilih avatar Itsuki, cowok" aria-pressed="false"><img src="/avatars/avatar-16.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Itsuki</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-17" data-avatar-gender="male" aria-label="Pilih avatar Haru, cowok" aria-pressed="false"><img src="/avatars/avatar-17.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Haru</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-18" data-avatar-gender="male" aria-label="Pilih avatar Rei, cowok" aria-pressed="false"><img src="/avatars/avatar-18.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Rei</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-19" data-avatar-gender="male" aria-label="Pilih avatar Yuto, cowok" aria-pressed="false"><img src="/avatars/avatar-19.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Yuto</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-25" data-avatar-gender="male" aria-label="Pilih avatar Kaito, cowok" aria-pressed="false"><img src="/avatars/avatar-25.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Kaito</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-26" data-avatar-gender="male" aria-label="Pilih avatar Shiro, cowok" aria-pressed="false"><img src="/avatars/avatar-26.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Shiro</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-27" data-avatar-gender="male" aria-label="Pilih avatar Riku, cowok" aria-pressed="false"><img src="/avatars/avatar-27.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Riku</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-28" data-avatar-gender="male" aria-label="Pilih avatar Daichi, cowok" aria-pressed="false"><img src="/avatars/avatar-28.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Daichi</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-29" data-avatar-gender="male" aria-label="Pilih avatar Toma, cowok" aria-pressed="false"><img src="/avatars/avatar-29.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Toma</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-30" data-avatar-gender="male" aria-label="Pilih avatar Yuki, cowok" aria-pressed="false"><img src="/avatars/avatar-30.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Yuki</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-01" data-avatar-gender="female" aria-label="Pilih avatar Akari, cewek" aria-pressed="false"><img src="/avatars/avatar-01.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Akari</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-03" data-avatar-gender="female" aria-label="Pilih avatar Mika, cewek" aria-pressed="false"><img src="/avatars/avatar-03.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Mika</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-06" data-avatar-gender="female" aria-label="Pilih avatar Yuna, cewek" aria-pressed="false"><img src="/avatars/avatar-06.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Yuna</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-07" data-avatar-gender="female" aria-label="Pilih avatar Aoi, cewek" aria-pressed="false"><img src="/avatars/avatar-07.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Aoi</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-08" data-avatar-gender="female" aria-label="Pilih avatar Hina, cewek" aria-pressed="false"><img src="/avatars/avatar-08.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Hina</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-09" data-avatar-gender="female" aria-label="Pilih avatar Miu, cewek" aria-pressed="false"><img src="/avatars/avatar-09.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Miu</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-10" data-avatar-gender="female" aria-label="Pilih avatar Rin, cewek" aria-pressed="false"><img src="/avatars/avatar-10.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Rin</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-11" data-avatar-gender="female" aria-label="Pilih avatar Nana, cewek" aria-pressed="false"><img src="/avatars/avatar-11.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Nana</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-12" data-avatar-gender="female" aria-label="Pilih avatar Emi, cewek" aria-pressed="false"><img src="/avatars/avatar-12.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Emi</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-13" data-avatar-gender="female" aria-label="Pilih avatar Saki, cewek" aria-pressed="false"><img src="/avatars/avatar-13.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Saki</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-31" data-avatar-gender="female" aria-label="Pilih avatar Momo, cewek" aria-pressed="false"><img src="/avatars/avatar-31.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Momo</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-32" data-avatar-gender="female" aria-label="Pilih avatar Chihiro, cewek" aria-pressed="false"><img src="/avatars/avatar-32.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Chihiro</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-33" data-avatar-gender="female" aria-label="Pilih avatar Ayaka, cewek" aria-pressed="false"><img src="/avatars/avatar-33.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Ayaka</span></button>
+<button class="avatar-choice" type="button" data-avatar-preset="avatar-34" data-avatar-gender="female" aria-label="Pilih avatar Hana, cewek" aria-pressed="false"><img src="/avatars/avatar-34.webp" alt="" loading="lazy" width="256" height="256"><span class="avatar-choice-name">Hana</span></button>
+</div></div><label class="button button-secondary avatar-upload-button">Unggah avatar<input id="avatar-upload" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" class="sr-only"></label></div><small id="avatar-feedback" class="avatar-feedback" aria-live="polite">Pilih avatar bawaan atau unggah gambar hingga 8 MB; hasil unggahan otomatis dikompres maksimal 100 KB.</small></div>
+            <div class="profile-fields"><label class="field"><span>Nama tampilan</span><input id="profile-name" maxlength="40" autocomplete="name"></label><label class="field"><span>Username</span><input id="profile-username" disabled=""></label><label class="field"><span>Email</span><input id="profile-email" disabled=""></label></div>
+            <div class="profile-card-actions"><button class="button button-primary" id="save-profile" type="button">Simpan nama profil</button></div>
+          </div>
+        </section>
+
+        <section id="logins" class="profile-section" data-page-view="profile">
+          <div class="section-heading compact"><div><div class="eyebrow">KEAMANAN</div><h2>Perangkat &amp; riwayat login</h2><p>Login terakhir ke akun ini, diperbarui otomatis tiap 15 detik. IP dan perangkat dicatat saat login berhasil.</p></div></div>
+          <div class="login-history-card"><ul id="login-history-list" class="login-history-list" aria-live="polite"><li>Memuat riwayat login…</li></ul><nav id="login-history-pagination" class="login-history-pagination hidden" aria-label="Navigasi riwayat login"></nav></div>
+        </section>
+
+        <section id="pairing" class="profile-section pairing-section" data-page-view="pairing">
+          <div class="section-heading compact"><div><div class="eyebrow">TAUTKAN PERANGKAT</div><h2>Pairing WhatsApp</h2><p>Masukkan nomor dengan kode negara. Kode pairing hanya tampil sementara dan dimasukkan sendiri di aplikasi WhatsApp.</p></div></div>
+          <div class="pairing-layout">
+            <form id="pairing-form" class="pairing-card form-stack">
+              <div id="pairing-controls" class="form-stack">
+                <div class="pairing-form-intro"><span class="pairing-step-icon" aria-hidden="true">01</span><div><strong>Mulai dengan nomor WhatsApp</strong><p>Pastikan ponsel dengan nomor ini aktif dan tersambung ke internet.</p></div></div>
+                <label id="pairing-phone-field" class="field pairing-phone-field" for="pairing-phone"><span>Nomor WhatsApp <small>kode negara · angka saja</small></span><div class="field-input-action-row"><input id="pairing-phone" name="phoneNumber" type="text" inputmode="text" autocomplete="tel" autocapitalize="off" spellcheck="false" maxlength="15" placeholder="62812xxxxxxxx" aria-describedby="pairing-phone-hint pairing-number-feedback"></div><small id="pairing-phone-hint" class="pairing-field-hint">Contoh Indonesia: <b>62812xxxxxxxx</b> — gunakan 62, tanpa tanda +, spasi, atau tanda hubung.</small><span id="pairing-number-feedback" class="pairing-number-feedback" aria-live="polite"><span id="pairing-number-flag" class="pairing-number-flag" aria-hidden="true">🌐</span><span class="pairing-number-copy"><strong id="pairing-number-country">Negara belum terdeteksi</strong><small id="pairing-number-format">Negara dan format internasional akan muncul saat nomor diketik.</small></span><span id="pairing-number-validity" class="pairing-number-pill">Belum diperiksa</span></span><small class="pairing-whatsapp-disclaimer">Format divalidasi realtime dari metadata nomor. WhatsApp mengonfirmasi kepemilikan dan status akun saat pairing code dimasukkan di aplikasi WhatsApp.</small></label>
+                <div class="pairing-method-picker hidden" role="group" aria-label="Pilih metode tautkan perangkat">
+                  <button class="pairing-method-option" type="button" data-pairing-method="qr" aria-pressed="false"><span class="pairing-method-icon" aria-hidden="true">▦</span><span><strong>QR Code</strong><small>Scan dari HP utama</small></span></button>
+                  <button class="pairing-method-option is-selected" type="button" data-pairing-method="pairing" aria-pressed="true"><span class="pairing-method-icon" aria-hidden="true">⌁</span><span><strong>Pairing Code <em>Rekomendasi</em></strong><small>Simple Nih Ezzzz :v</small></span></button>
+                </div>
+                <p id="pairing-method-hint" class="pairing-method-hint hidden">Pairing Code direkomendasikan karena mudah dilakukan dari HP apa pun.</p>
+                <label class="pairing-consent"><input id="pairing-confirm" type="checkbox"><span><strong>Konfirmasi kepemilikan · WAJIB</strong><small>Centang jika kamu pemilik/pengendali nomor ini dan mengizinkan perangkat ditautkan ke akun WhatsApp.</small></span></label>
+                <label class="pairing-consent pairing-auto-consent"><input id="pairing-auto-confirm" type="checkbox"><span><strong>Setuju dengan mode otomatis · WAJIB</strong><small>Centang untuk menyetujui bot menandai story sebagai dilihat dan mengirim reaksi 💚 dengan jeda acak 1–20 detik. Reaksi terlihat oleh pemilik story.</small></span></label>
+                <p class="pairing-warning"><span aria-hidden="true">!</span><span><strong>Jaga keamanan akun.</strong> Pairing code adalah kredensial masuk sementara. Jangan kirim atau tunjukkan kepada siapa pun.</span></p>
+                <button class="button button-primary button-wide" type="submit" id="pairing-submit">Gasss Slurrr :V <span>→</span></button>
+                <button class="button button-secondary button-wide hidden" type="button" id="pairing-retry">Coba lagi</button>
+              </div>
+              <div id="pairing-notice" class="notice hidden" role="status" aria-live="polite"></div>
+              <div id="pairing-qr-card" class="pairing-qr-card hidden" aria-live="polite"><div class="pairing-code-heading"><span class="pairing-code-shield" aria-hidden="true">✓</span><div><span class="eyebrow">QR CODE · RAHASIA</span><strong>Scan dari WhatsApp utama</strong></div></div><div class="pairing-qr-frame"><img id="pairing-qr" alt="QR code untuk menautkan WhatsApp" width="280" height="280"></div><p id="pairing-qr-expiry" class="pairing-expiry">Buka WhatsApp → Perangkat Tertaut → Tautkan Perangkat, lalu scan QR ini.</p><details class="pairing-qr-tutorial"><summary><span aria-hidden="true">?</span><strong>Tutorial scan QR &amp; tips aman</strong><span aria-hidden="true">⌄</span></summary><div class="pairing-qr-tutorial-body"><ol><li>Buka WhatsApp di HP utama yang ingin ditautkan.</li><li>Pilih <strong>Perangkat Tertaut → Tautkan Perangkat</strong>, lalu arahkan kamera ke QR di panel.</li><li>Jika panel sedang dibuka di HP yang sama, buka link panel di HP/PC lain yang kamu miliki dan kendalikan sendiri. Jangan kirim screenshot QR lewat WhatsApp, Telegram, email, atau cloud.</li><li>Scan sebelum timer habis. QR adalah kredensial sementara; jangan tunjukkan kepada orang lain.</li><li>Kalau QR buram atau kedaluwarsa, tekan <strong>Ganti metode</strong> dan minta QR baru setelah jeda keamanan.</li></ol><p><strong>Rekomendasi:</strong> Pairing Code lebih mudah jika hanya memakai satu HP. Pilih Pairing Code, lalu masukkan kode yang tampil melalui menu Perangkat Tertaut di WhatsApp utama. Jangan bagikan kodenya.</p></div></details><button class="button button-secondary button-wide" id="pairing-qr-change-method" type="button">Ganti metode</button></div>
+              
+              
+              <div id="pairing-code-card" class="pairing-code-card hidden" aria-live="polite">
+                <div class="pairing-code-heading"><span class="pairing-code-shield" aria-hidden="true">✓</span><div><span class="eyebrow">KODE PAIRING · RAHASIA</span><strong>Kode siap dimasukkan</strong></div></div>
+                <code id="pairing-code"></code>
+                <p id="pairing-expiry" class="pairing-expiry">Masukkan kode di perangkatmu sebelum kedaluwarsa.</p>
+                <div class="pairing-code-actions">
+                  <button class="button button-secondary pairing-copy-button" id="copy-pairing-code" type="button">Salin kode</button>
+                  <button class="button button-secondary pairing-change-number-button" id="pairing-change-number" type="button">Ganti nomor</button>
+                </div>
+                <details id="pairing-instructions" class="pairing-instructions">
+                  <summary><span class="instructions-summary-icon" aria-hidden="true">?</span><span><strong>Bagaimana cara memasukkan kode?</strong><small>Satu panduan untuk Android dan iPhone</small></span><span class="instructions-chevron" aria-hidden="true">⌄</span></summary>
+                  <div class="pairing-instructions-body">
+                    <p class="instructions-lead">Buka aplikasi WhatsApp resmi di HP utama yang memakai nomor di atas, lalu ikuti satu alur ini:</p>
+                    <ol class="pairing-platform-steps">
+                      <li><strong>Langkah 1</strong><span>Kode 8 karakter muncul di panel ini.</span></li>
+                      <li><strong>Langkah 2</strong><span>Di HP utama, buka WhatsApp → <b>Perangkat Tertaut</b> → <b>Tautkan Perangkat</b> → <b>Tautkan dengan nomor telepon</b> (atau ketuk notifikasi <b>"Masukkan kode"</b> kalau muncul). Android lewat menu titik tiga, iPhone lewat tab Pengaturan.</span></li>
+                      <li><strong>Langkah 3</strong><span>Masukkan kode 8 karakter persis seperti di panel, jangan diubah formatnya.</span></li>
+                      <li><strong>Langkah 4</strong><span>Konfirmasi perangkat kalau diminta, lalu tunggu tersambung.</span></li>
+                    </ol>
+                    <div class="pairing-instructions-note"><strong>Ingat:</strong> kode kedaluwarsa sekitar 3 menit; maksimal 4 perangkat tertaut per akun; HP utama harus dibuka minimal 1x tiap 14 hari supaya perangkat tetap tertaut. Masukkan kode hanya di aplikasi WhatsApp pada ponsel milikmu.</div>
+                  </div>
+                </details>
+              </div>
+            </form>
+            <details class="pairing-side-card" data-setup-only="" open>
+              <summary class="pairing-side-summary">
+                <div class="pairing-side-orb" aria-hidden="true"></div>
+                <span class="eyebrow">SEBELUM MENYAMBUNGKAN</span>
+                <strong class="pairing-side-title">Siapkan WhatsApp-mu</strong>
+                <span class="pairing-side-toggle"><span class="pairing-side-open-label">Tampilkan panduan</span><span class="pairing-side-close-label">Sembunyikan panduan</span><span class="pairing-side-chevron" aria-hidden="true">⌄</span></span>
+              </summary>
+              <div class="pairing-side-content">
+                <p class="pairing-side-copy">Proses ini menautkan panel sebagai perangkat pendamping. Kamu tetap mengendalikan akun dari ponsel.</p>
+                <ol class="pairing-prep-list">
+                  <li><span>1</span><div><strong>Gunakan nomor aktif</strong><small>Masukkan kode negara, misalnya 62 untuk Indonesia.</small></div></li>
+                  <li><span>2</span><div><strong>Buka menu Perangkat tertaut</strong><small>Kamu perlu mengonfirmasi tautan di aplikasi WhatsApp.</small></div></li>
+                  <li><span>3</span><div><strong>Rahasiakan pairing code</strong><small>Kode hanya untuk kamu dan hanya berlaku sementara.</small></div></li>
+                  <li><span>4</span><div><strong>Centang 2 persetujuan WAJIB</strong><small>Centang kepemilikan akun dan persetujuan mode otomatis sebelum menekan Gasss Slurrr :V.</small></div></li>
+                </ol>
+                <div class="pairing-privacy-note"><span aria-hidden="true">⌑</span><p><strong>Privasi akun</strong><br>Nomor tidak ditampilkan di log. Sesi tertaut disimpan di server ini.</p></div>
+              </div>
+            </details>
+            
+          </div>
+        </section>
+
+        <section id="admin" class="profile-section hidden" data-page-view="admin" aria-labelledby="admin-title">
+          <div class="section-heading compact"><div><div class="eyebrow">ADMIN · MEMBER</div><h2 id="admin-title">Daftar member</h2><p id="admin-description">Daftar akun yang dapat dilihat setelah masuk.</p></div><span class="section-counter" id="admin-updated">Memuat…</span></div>
+          <div class="admin-card"><div id="admin-users" class="member-accordion-list" role="region" aria-label="Daftar akun admin dan member"><p class="member-list-loading">Memuat daftar akun…</p></div></div>
+          <section id="admin-backup-area" class="admin-backup-card" aria-labelledby="admin-backup-title">
+            <div class="admin-backup-heading">
+              <div><div class="eyebrow">ADMIN · DATA</div><h3 id="admin-backup-title">Backup &amp; pemulihan</h3></div>
+              <span class="admin-backup-badge">Admin saja</span>
+            </div>
+            <details class="admin-backup-spoiler">
+              <summary><span class="admin-backup-spoiler-icon" aria-hidden="true">i</span><span><strong>Isi dan keamanan backup</strong><small>Buka penjelasan sebelum mengunduh atau restore</small></span><span class="admin-backup-spoiler-chevron" aria-hidden="true">⌄</span></summary>
+              <p class="admin-backup-warning">Arsip memuat akun admin/member, hash kata sandi, sesi panel, log, dan file sesi WhatsApp. ZIP dienkripsi AES-256-GCM dengan kata sandi yang Anda tentukan. Simpan ZIP dan kata sandinya secara privat; keduanya diperlukan untuk restore.</p>
+            </details>
+            <details class="admin-backup-spoiler admin-backup-action-spoiler">
+              <summary><span class="admin-backup-spoiler-icon" aria-hidden="true">↓</span><span><strong>Unduh backup terenkripsi</strong><small>Buat salinan aman data akun dan sesi</small></span><span class="admin-backup-spoiler-chevron" aria-hidden="true">⌄</span></summary>
+              <form id="admin-backup-export-form" class="admin-backup-form">
+                <label for="admin-backup-export-passphrase">Kata sandi enkripsi backup <span>minimal 12 karakter</span></label>
+                <input id="admin-backup-export-passphrase" type="password" minlength="12" maxlength="512" autocomplete="new-password" required>
+                <button class="button button-primary" type="submit">Unduh backup ZIP terenkripsi</button>
+              </form>
+            </details>
+            <details class="admin-backup-spoiler admin-backup-action-spoiler">
+              <summary><span class="admin-backup-spoiler-icon" aria-hidden="true">↑</span><span><strong>Pulihkan dari ZIP</strong><small>Ganti data panel dengan backup yang dipilih</small></span><span class="admin-backup-spoiler-chevron" aria-hidden="true">⌄</span></summary>
+              <form id="admin-backup-restore-form" class="admin-backup-form admin-backup-restore-form">
+                <label for="admin-backup-file">File backup ZIP</label>
+                <input id="admin-backup-file" type="file" accept=".zip,application/zip" required>
+                <label for="admin-backup-restore-passphrase">Kata sandi backup</label>
+                <input id="admin-backup-restore-passphrase" type="password" minlength="12" maxlength="512" autocomplete="current-password" required>
+                <label class="admin-backup-confirm"><input id="admin-backup-confirm" type="checkbox" required><span>Saya paham restore mengganti data akun dan sesi saat ini, menghentikan koneksi WhatsApp yang sedang aktif, lalu mencoba menyambungkan sesi dari backup. Worker yang disetel auto-start dapat berjalan kembali.</span></label>
+                <button class="button button-danger" type="submit">Pulihkan data dari ZIP</button>
+              </form>
+            </details>
+            <details class="admin-backup-spoiler admin-backup-action-spoiler">
+              <summary><span class="admin-backup-spoiler-icon" aria-hidden="true">↺</span><span><strong>Restore point otomatis</strong><small>Lihat atau muat ulang salinan pemulihan</small></span><span class="admin-backup-spoiler-chevron" aria-hidden="true">⌄</span></summary>
+              <div class="admin-backup-snapshots"><div class="admin-backup-snapshot-heading"><strong>Restore point otomatis</strong><button id="admin-backup-refresh-snapshots" class="button button-secondary" type="button">Muat ulang</button></div><div id="admin-backup-snapshots" role="status">Belum ada restore point.</div></div>
+            </details>
+            <p id="admin-backup-status" class="admin-backup-status" role="status" aria-live="polite"></p>
+          </section>
+        </section>
+
+        <section id="developer" class="profile-section developer-section" data-page-view="developer" aria-labelledby="developer-title">
+          <div class="section-heading compact developer-hero-heading">
+            <div>
+              <div class="eyebrow">DEVELOPER · READSTORYWA</div>
+              <h2 id="developer-title">Ruang Developer</h2>
+              <p>Pusat informasi pengembangan panel, kanal bantuan, dan arah fitur ReadSW yang bisa diakses oleh semua akun.</p>
+            </div>
+            <span class="section-counter developer-live-badge"><i aria-hidden="true"></i> AKTIF</span>
+          </div>
+          <div class="developer-grid">
+            <article class="developer-card developer-card-intro">
+              <div class="developer-card-icon" aria-hidden="true">⌘</div>
+              <div class="eyebrow">TENTANG PEMBUAT</div>
+              <h3>Comperid Bang Wily</h3>
+              <p class="developer-card-lead">Pengembangan panel difokuskan pada pengalaman mobile yang ringkas, kontrol akun yang jelas, dan penggunaan fitur yang bertanggung jawab.</p>
+              <details class="developer-spoiler">
+                <summary><span class="developer-spoiler-icon" aria-hidden="true">i</span><span><strong>Kenali arah pengembangan</strong><small>Buka ringkasan singkat</small></span><span class="developer-spoiler-chevron" aria-hidden="true">⌄</span></summary>
+                <div class="developer-spoiler-content">
+                  <p>ReactionSw dirapikan bertahap agar pengaturan ReadSW, status WhatsApp, dan kontrol worker mudah dipahami dari layar kecil. Masukan yang aman dan relevan membantu menentukan perbaikan berikutnya.</p>
+                  <div class="developer-tags"><span>Mobile first</span><span>Kontrol jelas</span><span>Privasi</span></div>
+                </div>
+              </details>
+              <div class="developer-tags"><span>UI responsif</span><span>Privasi akun</span><span>ReadSW</span></div>
+            </article>
+            <article class="developer-card developer-card-contact">
+              <div class="developer-card-top"><div><div class="eyebrow">KANAL RESMI</div><h3>Hubungi Developer</h3></div><span class="developer-card-spark">✦</span></div>
+              <p class="developer-card-description">Pilih kanal yang paling nyaman untuk bantuan panel, saran fitur, atau laporan kendala.</p>
+              <div class="developer-contact-actions">
+                <a class="button developer-contact-button developer-contact-whatsapp" href="https://wa.me/6289688206739" target="_blank" rel="noopener noreferrer"><span class="developer-contact-mark" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M20.5 3.5A10.7 10.7 0 0 0 3.4 16.4L2 21.8l5.5-1.4A10.7 10.7 0 1 0 20.5 3.5Z"/><path d="M8.6 7.3c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.8 1.8c.1.2.1.4 0 .6l-.5.7c-.1.2-.2.3 0 .6.5.8 1.2 1.5 2 2 .3.2.4.2.6 0l.8-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.3.3.2.6-.1.7-.5 1.2-1.1 1.5-.6.3-1.3.2-2.1 0-1.4-.5-2.7-1.3-3.8-2.4-1.1-1.1-1.9-2.4-2.4-3.8-.2-.8-.3-1.5 0-2.1.3-.6.8-1 1.4-1.2Z"/></svg></span><span><strong>WhatsApp</strong><small>Chat langsung</small></span><span class="developer-arrow">↗</span></a>
+                <a class="button developer-contact-button developer-contact-telegram" href="https://t.me/Wilykun1994" target="_blank" rel="noopener noreferrer"><span class="developer-contact-mark" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="m21.5 4.6-3.2 15.1c-.2 1.1-.8 1.4-1.7.9l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-8c.4-.3-.1-.5-.6-.2L6.2 13.6 1.6 12c-1-.3-1-1 .2-1.5L19.8 3.4c.9-.3 1.9.2 1.7 1.2Z"/></svg></span><span><strong>Telegram</strong><small>Kanal &amp; pesan</small></span><span class="developer-arrow">↗</span></a>
+                <a class="button developer-contact-button developer-contact-facebook" href="https://www.facebook.com/wily.kun.1/" target="_blank" rel="noopener noreferrer"><span class="developer-contact-mark" aria-hidden="true"><svg viewBox="0 0 24 24" role="img"><path d="M14 8h3V4.5c-.5-.1-1.6-.2-3-.2-3 0-5 1.8-5 5.1V12H6v3.8h3V24h4.2v-8.2H16l.5-3.8h-3.3V9.7c0-1.1.3-1.7 1.8-1.7Z"/></svg></span><span><strong>Facebook</strong><small>Profil publik</small></span><span class="developer-arrow">↗</span></a>
+              </div>
+            </article>
+          </div>
+          <div class="developer-roadmap" aria-label="Fokus pengembangan">
+            <div class="developer-roadmap-heading"><div><div class="eyebrow">FOKUS PENGEMBANGAN</div><h3>Panel yang terus dirapikan</h3></div><span>v0.1</span></div>
+            <div class="developer-roadmap-grid">
+              <div><span class="developer-roadmap-icon">◌</span><div><strong>Mobile first</strong><small>Layout nyaman untuk layar sempit dan sentuh.</small></div></div>
+              <div><span class="developer-roadmap-icon">⌁</span><div><strong>Kontrol jelas</strong><small>Status worker dan WhatsApp mudah dipahami.</small></div></div>
+              <div><span class="developer-roadmap-icon">✓</span><div><strong>Perbaikan bertahap</strong><small>Bug dan masukan ditangani tanpa mengganggu akun.</small></div></div>
+            </div>
+          </div>
+          <div class="developer-note"><span aria-hidden="true">i</span><p>Jangan kirim kata sandi, kode pairing, atau data percakapan melalui kanal bantuan. Gunakan akun milik sendiri dan cek kembali tautan sebelum membuka.</p></div>
+        </section>
+        <footer class="page-footer">
+          <div class="footer-brand"><span>ReactionSw <b>·</b> panel akun &amp; preferensi</span><span>Data disimpan di penyimpanan server panel.</span></div>
+          <div class="footer-meta-row"><span>© <span data-current-year="">2026</span> <a class="footer-owner-link" href="https://wa.me/6289688206739" target="_blank" rel="noopener noreferrer" aria-label="Comperid Bang Wily di WhatsApp">Comperid Bang Wily</a></span><time class="live-clock" data-live-clock="" datetime="2026-11-10T21:47:29.142Z" aria-label="Waktu Indonesia Barat: Rabu, 11 November 2026 · 04.47.29 WIB">Rabu, 11 November 2026 · 04.47.29 WIB</time></div>
+          <div class="footer-presence-row" aria-label="Pengunjung realtime"><span class="footer-presence-pill is-online"><i aria-hidden="true"></i><span>Online</span><b data-live-online>0</b></span><span class="footer-presence-pill is-stalker" title="Pengunjung yang belum login"><i aria-hidden="true"></i><span>Stalker</span><b data-live-stalker>0</b></span><span class="footer-presence-pill is-visit" title="Jumlah IP unik yang pernah berkunjung"><i aria-hidden="true"></i><span>Kunjungan</span><b data-live-visits>0</b></span></div>
+          <div class="footer-utility-row"><nav class="footer-policy-links" aria-label="Kebijakan dan ketentuan"><a href="/privacy">Privacy Policy</a><a href="/dmca">DMCA</a><a href="/terms">Ketentuan</a></nav><span class="footer-utility-divider" aria-hidden="true"></span><div class="auth-support-links"><span>Butuh bantuan?</span><a href="https://wa.me/6289688206739" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://t.me/Wilykun1994" target="_blank" rel="noopener noreferrer">Telegram</a></div></div>
+        </footer>
+      </div>
+    </section>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+
+
+</body></html>

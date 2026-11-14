@@ -1,0 +1,6 @@
+ReadSW Console merged source export
+
+Included: project source, public assets, tests, docs, and package.json.
+Excluded for safety/request: node_modules, package-lock/npm-shrinkwrap, config.json, environment files, runtime-data, DATA_AKUN, DATA_STALKER, and DATA_KUNJUNGAN.
+Runtime accounts, password hashes, panel sessions, WhatsApp credentials, and visitor data are not embedded in this source ZIP. Use the admin-only encrypted backup feature to export runtime data.
+Install dependencies with npm install, then provide your own secure config.json or environment variables before starting the server.
