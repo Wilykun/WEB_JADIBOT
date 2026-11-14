@@ -1571,7 +1571,7 @@ html[data-theme="light"] #admin .member-feature-card.is-enabled .member-feature-
 html[data-theme="light"] #admin .member-story-stat{border-color:#e1e8e3;background:#f8faf8}
 @media(max-width:900px){#admin .member-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){#admin .member-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){#admin .member-account-toggle{gap:10px;padding:13px 12px}#admin .member-account-top-row{align-items:flex-start}#admin .member-account-identity strong{font-size:12px}#admin .member-account-control{gap:4px;font-size:9px;padding-top:2px}#admin .member-account-statuses{gap:5px}#admin .member-account-chip{min-height:23px;padding:4px 7px;font-size:8px}#admin .member-account-details{padding:11px 10px 12px}#admin .member-detail-grid{grid-template-columns:minmax(0,1fr);gap:7px}#admin .member-detail-item{padding:9px 10px}#admin .member-detail-item dd{font-size:10px}}
+@media(max-width:560px){#admin .member-account-toggle{gap:10px;padding:13px 12px}#admin .member-account-top-row{align-items:flex-start}#admin .member-account-identity strong{font-size:12px}#admin .member-account-control{gap:4px;font-size:9px;padding-top:2px}#admin .member-account-statuses{gap:5px}#admin .member-account-chip{min-height:23px;padding:4px 7px;font-size:8px}#admin .member-account-details{padding:11px 10px 12px}#admin .member-detail-grid{grid-template-columns:minmax(0,1fr);gap:7px}#admin .member-detail-item{padding:9px 10px}#admin .member-detail-item dd{font-size:10px}#admin .member-detail-item dt{flex-shrink:0}#admin .member-detail-item dd{margin:0;text-align:right}}
 @media(max-width:560px){#admin .member-feature-grid{grid-template-columns:minmax(0,1fr);gap:7px}#admin .member-feature-card,#admin .member-story-stat{padding:9px}#admin .member-story-stats{gap:7px}}
 @media(prefers-reduced-motion:reduce){#admin .member-account-item,#admin .member-account-chevron{transition:none}}
 
@@ -2647,7 +2647,7 @@ html[data-theme="light"] #admin .admin-backup-spoiler summary small{color:#876d4
   #admin .member-account-statuses{justify-content:flex-start}
   #admin .member-account-details{text-align:left}
   #admin .member-detail-grid{grid-template-columns:minmax(0,1fr);width:100%;max-width:none;margin:0}
-  #admin .member-detail-item{display:grid;grid-template-columns:minmax(105px,.78fr) minmax(0,1fr);align-items:start;gap:8px;padding:10px}
+  #admin .member-detail-item{display:grid;grid-template-columns:minmax(118px,.85fr) minmax(0,1fr);align-items:start;gap:8px;padding:10px}
   #admin .member-detail-item dt{text-align:left}
   #admin .member-detail-item dd{margin:0;text-align:right}
   #admin .member-detail-item dd:has(.member-detail-note){justify-items:end}

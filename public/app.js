@@ -1495,6 +1495,13 @@ function setWorkspacePage(page, updateHash = true) {
     privateLogScrollOnNextRender = false;
     stopPrivateLogAutoRefresh();
   }
+  if (page === 'infoupdate') {
+    void loadInfoUpdates();
+    stopInfoUpdateAutoRefresh();
+    infoUpdateRefreshTimer = window.setInterval(() => { void loadInfoUpdates(); }, 60000);
+  } else {
+    stopInfoUpdateAutoRefresh();
+  }
   setMenu(false);
 }
 
@@ -2977,6 +2984,47 @@ document.querySelectorAll('.nav-item[href^="#"]').forEach((item) => {
     setWorkspacePage(target.id);
   });
 });
+
+// Info Update: daftar pembaruan dibaca dari info-updates.json agar entri baru langsung tampil tanpa ubah halaman.
+let infoUpdateRefreshTimer = null;
+function stopInfoUpdateAutoRefresh() {
+  if (infoUpdateRefreshTimer) window.clearInterval(infoUpdateRefreshTimer);
+  infoUpdateRefreshTimer = null;
+}
+async function loadInfoUpdates() {
+  const list = document.querySelector('.info-update-list');
+  if (!list) return;
+  try {
+    const response = await fetch('/info-updates.json', { cache: 'no-store' });
+    if (!response.ok) return;
+    const data = await response.json();
+    const updates = Array.isArray(data?.updates) ? data.updates : [];
+    if (!updates.length) return;
+    list.innerHTML = '';
+    updates.forEach((update) => {
+      const item = document.createElement('li');
+      item.className = 'info-update-item';
+      const date = document.createElement('span');
+      date.className = 'info-update-date';
+      const day = document.createElement('span');
+      day.textContent = update.day || '';
+      const time = document.createElement('span');
+      time.className = 'info-update-time';
+      time.textContent = update.time || '';
+      date.append(day, time);
+      const body = document.createElement('div');
+      const title = document.createElement('h4');
+      title.textContent = update.title || '';
+      const description = document.createElement('p');
+      description.textContent = update.description || '';
+      body.append(title, description);
+      item.append(date, body);
+      list.append(item);
+    });
+    infoUpdatePage = 1;
+    renderInfoUpdatePagination();
+  } catch { /* Biarkan daftar statis di halaman bila file belum bisa dibaca. */ }
+}
 
 // Info Update: daftar pembaruan dipaginasi 3 entri per halaman agar tetap ringkas di layar kecil.
 const INFO_UPDATE_PAGE_SIZE = 3;

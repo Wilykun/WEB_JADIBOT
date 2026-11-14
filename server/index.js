@@ -2094,6 +2094,7 @@ const assets = new Map([
   ['/terms', ['terms.html', 'text/html; charset=utf-8']],
   ['/vendor/libphonenumber-max.js', ['vendor/libphonenumber-max.js', 'text/javascript; charset=utf-8']],
   ['/manus-routes.json', ['manus-routes.json', 'application/json; charset=utf-8']],
+  ['/info-updates.json', ['info-updates.json', 'application/json; charset=utf-8']],
   ['/avatars/avatar-01.webp', ['avatars/avatar-01.webp', 'image/webp']],
   ['/avatars/avatar-02.webp', ['avatars/avatar-02.webp', 'image/webp']],
   ['/avatars/avatar-03.webp', ['avatars/avatar-03.webp', 'image/webp']],
