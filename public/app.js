@@ -1556,6 +1556,9 @@ function renderPairingState(pairing) {
   const qrExpiryElement = document.querySelector('#pairing-qr-expiry');
   const retryButton = document.querySelector('#pairing-retry');
   const controls = document.querySelector('#pairing-controls');
+  const recoveryCard = document.querySelector('#pairing-recovery-card');
+  const recoveryCopy = document.querySelector('#pairing-recovery-copy');
+  const recoverButton = document.querySelector('#pairing-recover');
   const linkedCard = document.querySelector('#pairing-linked-card');
   const sessionActions = document.querySelector('#session-actions');
   const resumeButton = document.querySelector('#session-resume');
@@ -1569,7 +1572,8 @@ function renderPairingState(pairing) {
   const runnerStatus = document.querySelector('#runner-status');
   const pairingInstructions = document.querySelector('#pairing-instructions');
   const requiredElements = [
-    codeCard, codeElement, expiryElement, retryButton, controls, linkedCard,
+    codeCard, codeElement, expiryElement, retryButton, controls, recoveryCard,
+    recoverButton, linkedCard,
     sessionActions, resumeButton, stopButton, statusValue, statusDescription,
     statusFoot, statusDot, runnerTitle, runnerDescription, runnerStatus,
   ];
@@ -1582,6 +1586,9 @@ function renderPairingState(pairing) {
   qrCard?.classList.add('hidden');
   retryButton.classList.add('hidden');
   controls.classList.remove('hidden');
+  recoveryCard.classList.add('hidden');
+  recoverButton.disabled = false;
+  recoverButton.textContent = 'Coba pulihkan sesi';
   linkedCard.classList.add('hidden');
   sessionActions.classList.add('hidden');
   resumeButton.classList.add('hidden');
@@ -1733,12 +1740,39 @@ function renderPairingState(pairing) {
     return;
   }
   if (pairing.status === 'invalid') {
+    if (pairing.maskedPhone) {
+      controls.classList.add('hidden');
+      recoveryCard.classList.remove('hidden');
+      if (recoveryCopy) recoveryCopy.textContent = `Sesi ${pairing.maskedPhone} ditolak, tapi nomor ini masih terdaftar tertaut. Coba pulihkan dulu — nggak perlu masukkan nomor lagi.`;
+      statusValue.textContent = 'Sesi ditolak WhatsApp';
+      statusDescription.textContent = 'Perangkat masih tertaut di WhatsApp. Coba pulihkan dulu; pairing ulang hanya bila pemulihan gagal.';
+      statusFoot.textContent = 'Bisa dipulihkan';
+      statusDot.className = 'muted-dot';
+      setPairingNotice('Sesi ditolak WhatsApp. Coba pulihkan dulu — perangkatmu masih tertaut.', false, true);
+      void loadPairingLogs();
+      pairingPollTimer = setInterval(() => { void refreshPairing(); }, 5000);
+      return;
+    }
     statusValue.textContent = 'Sesi tidak valid';
     statusDescription.textContent = 'WhatsApp menolak kredensial sesi tersimpan. Pairing ulang diperlukan.';
     statusFoot.textContent = 'Perlu tautkan ulang';
     statusDot.className = 'muted-dot';
     setPairingNotice('Sesi lama tidak diterima oleh WhatsApp. Masukkan nomor yang ingin ditautkan lalu minta pairing code baru.', false, true);
     void loadPairingLogs();
+    pairingPollTimer = setInterval(() => { void refreshPairing(); }, 5000);
+    return;
+  }
+  if (pairing.status === 'recovering') {
+    controls.classList.add('hidden');
+    linkedCard.classList.remove('hidden');
+    linkedCard.querySelector('strong').textContent = 'Memulihkan sesi…';
+    linkedCard.querySelector('p').textContent = 'Sesi ditolak WhatsApp; panel mencoba sambung ulang dari sesi tersimpan dan cadangan terakhir yang sehat.';
+    statusValue.textContent = 'Memulihkan sesi';
+    statusDescription.textContent = 'Mencoba sambung ulang dari sesi tersimpan dan cadangan terakhir yang sehat.';
+    statusFoot.textContent = 'Pemulihan otomatis';
+    statusDot.className = 'muted-dot';
+    setPairingNotice('Mencoba memulihkan sesi…', false, true);
+    pairingPollTimer = setInterval(() => { void refreshPairing(); }, 3000);
     return;
   }
   if (pairing.status === 'reconnecting') {
@@ -2640,6 +2674,23 @@ async function callSessionAction(url, method, successMessage) {
 
 document.querySelector('#session-resume').addEventListener('click', () => {
   void callSessionAction('/api/pairing/resume', 'POST', 'Permintaan sambung ulang dikirim.');
+});
+document.querySelector('#pairing-recover').addEventListener('click', async () => {
+  const button = document.querySelector('#pairing-recover');
+  button.disabled = true;
+  button.textContent = 'Memulihkan…';
+  try {
+    await callSessionAction('/api/pairing/resume', 'POST', 'Permintaan pemulihan sesi dikirim.');
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Coba pulihkan sesi';
+  }
+});
+document.querySelector('#pairing-recover-dismiss').addEventListener('click', () => {
+  document.querySelector('#pairing-recovery-card')?.classList.add('hidden');
+  document.querySelector('#pairing-controls')?.classList.remove('hidden');
+  setPairingNotice('Pairing ulang dengan nomor baru. Sesi lama akan dibersihkan saat pairing baru dimulai.', false, true);
+  pairingPhoneInput.focus();
 });
 document.querySelector('#session-stop').addEventListener('click', () => {
   void callSessionAction('/api/pairing/stop', 'POST', 'Koneksi dihentikan; sesi lokal dipertahankan.');

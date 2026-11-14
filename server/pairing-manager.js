@@ -237,6 +237,73 @@ export function classifyDisconnectCode(code) {
   return 'retry';
 }
 
+export const GOOD_SNAPSHOT_FILENAME = 'session.json.good';
+const RECOVERY_WAIT_MS = 45_000;
+const RECOVERY_POLL_MS = 500;
+
+function snapshotMeId(value) {
+  return typeof value?.creds?.me?.id === 'string' ? value.creds.me.id : null;
+}
+
+function isUsableAuthSnapshot(value) {
+  return Boolean(value && typeof value.creds === 'object' && value.creds
+    && value.creds.registered === true && typeof value.keys === 'object' && value.keys);
+}
+
+async function readSnapshotFile(file) {
+  try {
+    return JSON.parse(await fs.readFile(file, 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') return null;
+    return null;
+  }
+}
+
+async function writeFileAtomically(file, payload) {
+  const tempFile = `${file}.${process.pid}.${randomBytes(6).toString('hex')}.tmp`;
+  try {
+    await fs.writeFile(tempFile, payload, { mode: 0o600, flag: 'wx' });
+    await fs.rename(tempFile, file);
+    await fs.chmod(file, 0o600).catch(() => {});
+  } catch (error) {
+    await fs.rm(tempFile, { force: true }).catch(() => {});
+    throw error;
+  }
+}
+
+// Menyimpan salinan sesi terakhir yang terbukti bisa tersambung, supaya penolakan sesi oleh WhatsApp bisa dipulihkan tanpa pairing ulang.
+export async function saveGoodSnapshot(authDir) {
+  if (!authDir) return false;
+  try {
+    const sessionFile = path.join(authDir, 'session.json');
+    const current = await readSnapshotFile(sessionFile);
+    if (!isUsableAuthSnapshot(current)) return false;
+    await writeFileAtomically(
+      path.join(authDir, GOOD_SNAPSHOT_FILENAME),
+      JSON.stringify(current),
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// Mengembalikan salinan sesi sehat ke session.json, menolak bila nomor perangkatnya berbeda dari sesi yang sedang dipakai.
+export async function restoreGoodSnapshot(authDir) {
+  if (!authDir) return false;
+  try {
+    const goodFile = path.join(authDir, GOOD_SNAPSHOT_FILENAME);
+    const good = await readSnapshotFile(goodFile);
+    if (!isUsableAuthSnapshot(good)) return false;
+    const live = await readSnapshotFile(path.join(authDir, 'session.json'));
+    if (live && snapshotMeId(live) && snapshotMeId(good) && snapshotMeId(live) !== snapshotMeId(good)) return false;
+    await writeFileAtomically(path.join(authDir, 'session.json'), JSON.stringify(good));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function createPairingManager({ dataDir, appendLog, getAuthDir = () => null, getStorySettings = () => null, getOnline24 = () => false, getWorkerAutoStart = () => false, setWorkerAutoStart = async () => {}, ensureDefaultBot = async () => false }) {
   const sessions = new Map();
   const cooldowns = new Map();
@@ -487,6 +554,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     state.expiresAt = null;
     state.phoneNumber = null;
     state.workerDesired = false;
+    state.autoStartBeforeInvalid = getWorkerAutoStart(state.userId) === true;
     await setWorkerAutoStart(state.userId, false);
     detachBotWorker(state);
     const socket = state.socket;
@@ -494,6 +562,75 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     try { socket?.end(new Error('WhatsApp session credentials were rejected.')); } catch { /* best effort */ }
     await log(state.userId, `WhatsApp menolak sesi tersimpan${code ? ` (kode ${code})` : ''}; tautkan ulang diperlukan.`);
     await releaseStateLock(state);
+  }
+
+  function snapshotGoodSession(state) {
+    if (!state?.authDir) return;
+    void saveGoodSnapshot(state.authDir);
+  }
+
+  async function tryResumeAndWait(state) {
+    try {
+      await resume(state.userId, { auto: true });
+    } catch {
+      return false;
+    }
+    const deadline = Date.now() + RECOVERY_WAIT_MS;
+    while (Date.now() < deadline) {
+      const current = sessions.get(state.userId);
+      if (!current || current !== state) return false;
+      if (current.status === 'linked') return true;
+      if (['invalid', 'disconnected', 'failed', 'stopped'].includes(current.status)) return false;
+      await new Promise((resolve) => setTimeout(resolve, RECOVERY_POLL_MS));
+    }
+    return sessions.get(state.userId)?.status === 'linked';
+  }
+
+  // Memulihkan sesi yang ditolak WhatsApp tanpa meminta nomor baru: coba dulu kredensial yang tersimpan, lalu salinan sesi terakhir yang sehat.
+  async function attemptSessionRecovery(state, code) {
+    if (!state || state.recoveryInProgress) return false;
+    state.recoveryInProgress = true;
+    const wasAutoStart = state.autoStartBeforeInvalid ?? (getWorkerAutoStart(state.userId) === true);
+    try {
+      await log(state.userId, 'Sesi WhatsApp ditolak; mencoba pulihkan otomatis dari sesi tersimpan.');
+      clearTimeout(state.readyTimer);
+      clearTimeout(state.expiryTimer);
+      clearTimeout(state.reconnectTimer);
+      clearReconnectStableTimer(state);
+      state.readyTimer = null;
+      state.expiryTimer = null;
+      state.reconnectTimer = null;
+      const deadSocket = state.socket;
+      state.socket = null;
+      try { deadSocket?.end(new Error('Session recovery: replacing rejected socket.')); } catch { /* best effort */ }
+      detachBotWorker(state, state.workerDesired ? 'waiting' : 'stopped');
+      state.status = 'recovering';
+      if (await tryResumeAndWait(state)) {
+        if (wasAutoStart) await setWorkerAutoStart(state.userId, true);
+        state.autoStartBeforeInvalid = undefined;
+        await log(state.userId, 'Sesi WhatsApp pulih otomatis tanpa pairing ulang.');
+        return true;
+      }
+      const rolledBack = await restoreGoodSnapshot(state.authDir);
+      if (!rolledBack) {
+        await log(state.userId, 'Tidak ada cadangan sesi sehat untuk dipulihkan; pairing ulang diperlukan.');
+        return false;
+      }
+      await log(state.userId, 'Cadangan sesi terakhir yang sehat dipulihkan; mencoba sambung ulang.');
+      state.authState = null;
+      state.status = 'recovering';
+      clearTimeout(state.reconnectTimer);
+      state.reconnectTimer = null;
+      if (wasAutoStart) await setWorkerAutoStart(state.userId, true);
+      if (await tryResumeAndWait(state)) {
+        state.autoStartBeforeInvalid = undefined;
+        await log(state.userId, 'Sesi WhatsApp pulih otomatis dari cadangan terakhir yang sehat.');
+        return true;
+      }
+      return false;
+    } finally {
+      state.recoveryInProgress = false;
+    }
   }
 
   function scheduleAutoReconnect(state) {
@@ -942,7 +1079,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       }
       existing = null;
     }
-    if (existing && ['connecting', 'awaiting_code', 'awaiting_qr', 'linked', 'reconnecting', 'disconnected', 'stopped'].includes(existing.status)) {
+    if (existing && ['connecting', 'awaiting_code', 'awaiting_qr', 'linked', 'reconnecting', 'recovering', 'disconnected', 'stopped'].includes(existing.status)) {
       throw new PairingError('Sesi pairing akun ini masih aktif.', 409);
     }
     const now = Date.now();
@@ -1025,6 +1162,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       if (state.authState.state.creds.registered) {
         state.status = 'linked';
         state.phoneNumber = null;
+        snapshotGoodSession(state);
         throw new PairingError('Akun ini sudah memiliki sesi WhatsApp tertaut; tidak dibuat kode baru.', 409);
       }
       state.waVersion = await resolveWaWebVersion();
@@ -1134,6 +1272,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
               state.reconnectTimer = null;
               scheduleReconnectStableReset(state, socket);
               state.status = 'linked';
+              snapshotGoodSession(state);
               const linkedDigits = String(state.authState?.state?.creds?.me?.id || socket?.user?.id || '').split('@')[0].split(':')[0].replace(/\D/g, '');
               if (linkedDigits) state.maskedPhone = maskedNumber(linkedDigits);
               state.code = null;
@@ -1184,7 +1323,12 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
               const reasonCode = disconnectStatusCode(lastDisconnect);
               clearReconnectStableTimer(state);
               if (isInvalidSessionCode(reasonCode)) {
-                await markSessionInvalid(state, reasonCode);
+                if (state.recoveryInProgress) {
+                  await markSessionInvalid(state, reasonCode);
+                  return;
+                }
+                const recovered = await attemptSessionRecovery(state, reasonCode);
+                if (!recovered) await markSessionInvalid(state, reasonCode);
                 return;
               }
               if (classifyDisconnectCode(reasonCode) === 'connection_replaced') {
@@ -1362,6 +1506,9 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
   async function resume(userId, { auto = false } = {}) {
     let state = sessions.get(userId);
     if (state?.status === 'invalid') {
+      if (state.recoveryInProgress) return publicState(state);
+      const recovered = await attemptSessionRecovery(state, null);
+      if (recovered) return publicState(state);
       throw new PairingError('Sesi WhatsApp ditolak. Masukkan nomor dan minta pairing code baru.', 409);
     }
     if (state && ['connecting', 'awaiting_code', 'linking', 'linked', 'reconnecting'].includes(state.status)
@@ -1496,6 +1643,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         state.reconnectTimer = null;
         scheduleReconnectStableReset(state, socket);
         state.status = 'linked';
+        snapshotGoodSession(state);
         const linkedDigits = String(state.authState?.state?.creds?.me?.id || socket?.user?.id || '').split('@')[0].split(':')[0].replace(/\D/g, '');
         if (linkedDigits) state.maskedPhone = maskedNumber(linkedDigits);
         if (state.onlineDesired) enableOnlinePrivacy(state.socket);
@@ -1517,7 +1665,12 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         state.readyTimer = null;
         const reasonCode = disconnectStatusCode(lastDisconnect);
         if (isInvalidSessionCode(reasonCode)) {
-          await markSessionInvalid(state, reasonCode);
+          if (state.recoveryInProgress) {
+            await markSessionInvalid(state, reasonCode);
+            return;
+          }
+          const recovered = await attemptSessionRecovery(state, reasonCode);
+          if (!recovered) await markSessionInvalid(state, reasonCode);
           return;
         }
         if (classifyDisconnectCode(reasonCode) === 'connection_replaced') {
@@ -1571,6 +1724,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         }
       }
       await removeUserAuth(userId, authDir);
+      await fs.rm(path.join(authDir, GOOD_SNAPSHOT_FILENAME), { force: true }).catch(() => {});
       sessions.delete(userId);
       cooldowns.delete(userId);
       await log(userId, 'Sesi WhatsApp lokal dihapus dari panel akun.');

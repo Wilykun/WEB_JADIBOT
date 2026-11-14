@@ -60,6 +60,10 @@
 .panel-session-grid{grid-template-columns:minmax(0,1fr);margin-bottom:12px}
 .panel-session-card{width:100%;padding:14px;gap:0}
 .pairing-linked-card{width:100%;min-width:0}
+.pairing-recovery-card{display:flex;flex-direction:column;gap:10px;padding:16px;border:1px solid rgba(65,214,135,.25);border-radius:13px;background:rgba(30,102,63,.13)}
+.pairing-recovery-card strong{font-size:14px}
+.pairing-recovery-card p{margin:4px 0 2px;color:#b4c2ba;font-size:12px;line-height:1.6}
+.pairing-recovery-card .button{margin-top:2px}
 .bot-worker-card{width:100%;min-width:0;align-items:stretch}
 .bot-worker-card>div:last-child{min-width:0;flex:0 1 480px;max-width:480px}
 .bot-worker-runtime{display:block;margin-top:9px;color:#8fb79b;font-size:11px;font-variant-numeric:tabular-nums}
