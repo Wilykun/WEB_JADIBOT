@@ -1,0 +1,42 @@
+{
+  "AC4A3612AC9A17BC0412F8A03C0B3BC2": {
+    "id": "AC4A3612AC9A17BC0412F8A03C0B3BC2",
+    "sender": "62882006750852@s.whatsapp.net",
+    "number": "62882006750852",
+    "storyJid": "62882006750852@s.whatsapp.net",
+    "resolvedPn": "62882006750852@s.whatsapp.net",
+    "name": "Lutfia Aufa",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4A3612AC9A17BC0412F8A03C0B3BC2",
+      "participant": "31031574962295@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4A3612AC9A17BC0412F8A03C0B3BC2",
+      "participant": "31031574962295@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "31031574962295@lid",
+      "62882006750852@s.whatsapp.net"
+    ],
+    "contactHash": "fecc6e20185d12367044ffd749063cdcee4f8b24598e8fc7467435efb24ddb7d",
+    "arrivedAt": "2026-11-14T08:03:56.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T08:03:56.710Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T08:04:14.644Z",
+    "readAt": "2026-11-14T08:04:14.644Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-14T08:04:14.644Z"
+  }
+}

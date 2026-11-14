@@ -1,0 +1,42 @@
+{
+  "AC085874CE56D00DAE6D0FAC7E0CB318": {
+    "id": "AC085874CE56D00DAE6D0FAC7E0CB318",
+    "sender": "6282136528983@s.whatsapp.net",
+    "number": "6282136528983",
+    "storyJid": "6282136528983@s.whatsapp.net",
+    "resolvedPn": "6282136528983@s.whatsapp.net",
+    "name": "SUZUYA HIKI",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC085874CE56D00DAE6D0FAC7E0CB318",
+      "participant": "252591556538512@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC085874CE56D00DAE6D0FAC7E0CB318",
+      "participant": "252591556538512@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "252591556538512@lid",
+      "6282136528983@s.whatsapp.net"
+    ],
+    "contactHash": "043ab781e5436e5e1191d64c5f2ee44209a48da2c753d9d4c05f3c5f52158dcb",
+    "arrivedAt": "2026-11-14T11:30:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:30:39.071Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:30:55.230Z",
+    "readAt": "2026-11-14T11:30:55.229Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:30:55.229Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "A5668409782AADB0D155C6544B586B91": {
+    "id": "A5668409782AADB0D155C6544B586B91",
+    "sender": "6282295506006@s.whatsapp.net",
+    "number": "6282295506006",
+    "storyJid": "6282295506006@s.whatsapp.net",
+    "resolvedPn": "6282295506006@s.whatsapp.net",
+    "name": "Viola Morningstar",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5668409782AADB0D155C6544B586B91",
+      "participant": "87725126500394@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5668409782AADB0D155C6544B586B91",
+      "participant": "87725126500394@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "87725126500394@lid",
+      "6282295506006@s.whatsapp.net"
+    ],
+    "contactHash": "fc650456c1b37468ced647ad86f70740d7812fc8de54650b07d3c692fd12c8e0",
+    "arrivedAt": "2026-11-14T11:39:24.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:39:25.653Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:39:40.276Z",
+    "readAt": "2026-11-14T11:39:40.275Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:39:40.275Z"
+  }
+}

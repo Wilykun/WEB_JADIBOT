@@ -1,0 +1,42 @@
+{
+  "AC5A5C27D96008CD6D147FA68D4B1A4B": {
+    "id": "AC5A5C27D96008CD6D147FA68D4B1A4B",
+    "sender": "6281936263847@s.whatsapp.net",
+    "number": "6281936263847",
+    "storyJid": "6281936263847@s.whatsapp.net",
+    "resolvedPn": "6281936263847@s.whatsapp.net",
+    "name": "BebyGith",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5A5C27D96008CD6D147FA68D4B1A4B",
+      "participant": "78739635470367@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5A5C27D96008CD6D147FA68D4B1A4B",
+      "participant": "78739635470367@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "78739635470367@lid",
+      "6281936263847@s.whatsapp.net"
+    ],
+    "contactHash": "87a0f777cb3810ee957b801a6dd4a67843dde32a371a8d512e7ec2e3a6f0d1d0",
+    "arrivedAt": "2026-11-14T13:29:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:29:36.704Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:29:42.322Z",
+    "readAt": "2026-11-14T13:29:42.322Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T13:29:42.322Z"
+  }
+}

@@ -36,5 +36,125 @@
     "lastError": null,
     "updatedAt": "2026-11-14T04:59:58.350Z",
     "readAt": "2026-11-14T04:59:58.350Z"
+  },
+  "ACDCA6752EC61A0867ED79F4A37CF211": {
+    "id": "ACDCA6752EC61A0867ED79F4A37CF211",
+    "sender": "6289649931767@s.whatsapp.net",
+    "number": "6289649931767",
+    "storyJid": "6289649931767@s.whatsapp.net",
+    "resolvedPn": "6289649931767@s.whatsapp.net",
+    "name": "Maz Ali📍 Jatim",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDCA6752EC61A0867ED79F4A37CF211",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDCA6752EC61A0867ED79F4A37CF211",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "166971232534706@lid",
+      "6289649931767@s.whatsapp.net"
+    ],
+    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
+    "arrivedAt": "2026-11-14T07:57:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T07:57:08.995Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T07:57:13.023Z",
+    "readAt": "2026-11-14T07:57:13.023Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-14T07:57:13.023Z"
+  },
+  "AC6155095B613ECC636EFA523B6A0717": {
+    "id": "AC6155095B613ECC636EFA523B6A0717",
+    "sender": "6289649931767@s.whatsapp.net",
+    "number": "6289649931767",
+    "storyJid": "6289649931767@s.whatsapp.net",
+    "resolvedPn": "6289649931767@s.whatsapp.net",
+    "name": "Maz Ali📍 Jatim",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6155095B613ECC636EFA523B6A0717",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6155095B613ECC636EFA523B6A0717",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "166971232534706@lid",
+      "6289649931767@s.whatsapp.net"
+    ],
+    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
+    "arrivedAt": "2026-11-14T07:58:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T07:58:22.516Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T07:58:32.040Z",
+    "readAt": "2026-11-14T07:58:32.040Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-14T07:58:32.040Z"
+  },
+  "AC516ECFC43D8BD9C7C7368688C6A6BE": {
+    "id": "AC516ECFC43D8BD9C7C7368688C6A6BE",
+    "sender": "6289649931767@s.whatsapp.net",
+    "number": "6289649931767",
+    "storyJid": "6289649931767@s.whatsapp.net",
+    "resolvedPn": "6289649931767@s.whatsapp.net",
+    "name": "Maz Ali📍 Jatim",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC516ECFC43D8BD9C7C7368688C6A6BE",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC516ECFC43D8BD9C7C7368688C6A6BE",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "166971232534706@lid",
+      "6289649931767@s.whatsapp.net"
+    ],
+    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
+    "arrivedAt": "2026-11-14T10:07:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T10:07:27.431Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T10:07:43.100Z",
+    "readAt": "2026-11-14T10:07:43.096Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-14T10:07:43.096Z"
   }
 }

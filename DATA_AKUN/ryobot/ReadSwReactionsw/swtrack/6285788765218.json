@@ -38,5 +38,45 @@
     "readAt": "2026-11-14T05:40:05.071Z",
     "emoji": "💚",
     "reactedAt": "2026-11-14T05:40:05.071Z"
+  },
+  "A5E26D741D11F75CCF36AC4F3F706205": {
+    "id": "A5E26D741D11F75CCF36AC4F3F706205",
+    "sender": "6285788765218@s.whatsapp.net",
+    "number": "6285788765218",
+    "storyJid": "6285788765218@s.whatsapp.net",
+    "resolvedPn": "6285788765218@s.whatsapp.net",
+    "name": "— Fabian Putra C-3",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5E26D741D11F75CCF36AC4F3F706205",
+      "participant": "137516632031317@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5E26D741D11F75CCF36AC4F3F706205",
+      "participant": "137516632031317@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137516632031317@lid",
+      "6285788765218@s.whatsapp.net"
+    ],
+    "contactHash": "e9616d13b1db3dc24ed1ced8a15286d8b9a1d6bdf83a1eb10a33251cd8f1ceea",
+    "arrivedAt": "2026-11-14T09:40:55.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T09:40:55.740Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T09:40:58.414Z",
+    "readAt": "2026-11-14T09:40:58.414Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T09:40:58.414Z"
   }
 }

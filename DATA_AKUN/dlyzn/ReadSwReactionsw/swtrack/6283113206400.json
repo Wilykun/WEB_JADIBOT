@@ -1,0 +1,42 @@
+{
+  "ACCEF55EA7564F7CB943B095DCDCBBB0": {
+    "id": "ACCEF55EA7564F7CB943B095DCDCBBB0",
+    "sender": "6283113206400@s.whatsapp.net",
+    "number": "6283113206400",
+    "storyJid": "6283113206400@s.whatsapp.net",
+    "resolvedPn": "6283113206400@s.whatsapp.net",
+    "name": "ardiana scotra",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCEF55EA7564F7CB943B095DCDCBBB0",
+      "participant": "42422046310557@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCEF55EA7564F7CB943B095DCDCBBB0",
+      "participant": "42422046310557@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "42422046310557@lid",
+      "6283113206400@s.whatsapp.net"
+    ],
+    "contactHash": "c9c839dacd7b0b2b8a62afb08a9c4ad8acc35ccf4a52430c158fd9cf924411e9",
+    "arrivedAt": "2026-11-14T09:52:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T09:52:46.552Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T09:52:49.754Z",
+    "readAt": "2026-11-14T09:52:49.748Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-14T09:52:49.748Z"
+  }
+}

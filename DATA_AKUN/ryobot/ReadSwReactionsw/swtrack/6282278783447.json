@@ -1,0 +1,122 @@
+{
+  "AC1A23E3D65B1D550B2A00E37BB17E2A": {
+    "id": "AC1A23E3D65B1D550B2A00E37BB17E2A",
+    "sender": "6282278783447@s.whatsapp.net",
+    "number": "6282278783447",
+    "storyJid": "6282278783447@s.whatsapp.net",
+    "resolvedPn": "6282278783447@s.whatsapp.net",
+    "name": "ryuuki",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1A23E3D65B1D550B2A00E37BB17E2A",
+      "participant": "260241144971303@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1A23E3D65B1D550B2A00E37BB17E2A",
+      "participant": "260241144971303@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "260241144971303@lid",
+      "6282278783447@s.whatsapp.net"
+    ],
+    "contactHash": "d9e5b808bbe8e006cae7967f149eae2c37df2906e122ec15bdb6db280fa55301",
+    "arrivedAt": "2026-11-14T09:55:00.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T09:55:01.196Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T09:55:11.048Z",
+    "readAt": "2026-11-14T09:55:11.048Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T09:55:11.048Z"
+  },
+  "ACC2A55290F55EFE54C7F8CBBC2CDED6": {
+    "id": "ACC2A55290F55EFE54C7F8CBBC2CDED6",
+    "sender": "6282278783447@s.whatsapp.net",
+    "number": "6282278783447",
+    "storyJid": "6282278783447@s.whatsapp.net",
+    "resolvedPn": "6282278783447@s.whatsapp.net",
+    "name": "ryuuki",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC2A55290F55EFE54C7F8CBBC2CDED6",
+      "participant": "260241144971303@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC2A55290F55EFE54C7F8CBBC2CDED6",
+      "participant": "260241144971303@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "260241144971303@lid",
+      "6282278783447@s.whatsapp.net"
+    ],
+    "contactHash": "d9e5b808bbe8e006cae7967f149eae2c37df2906e122ec15bdb6db280fa55301",
+    "arrivedAt": "2026-11-14T10:02:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T10:02:27.686Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T10:02:38.336Z",
+    "readAt": "2026-11-14T10:02:38.336Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T10:02:38.336Z"
+  },
+  "ACC9E025E18C702D23FCC5C59ED5E1AC": {
+    "id": "ACC9E025E18C702D23FCC5C59ED5E1AC",
+    "sender": "6282278783447@s.whatsapp.net",
+    "number": "6282278783447",
+    "storyJid": "6282278783447@s.whatsapp.net",
+    "resolvedPn": "6282278783447@s.whatsapp.net",
+    "name": "ryuuki",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC9E025E18C702D23FCC5C59ED5E1AC",
+      "participant": "260241144971303@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC9E025E18C702D23FCC5C59ED5E1AC",
+      "participant": "260241144971303@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "260241144971303@lid",
+      "6282278783447@s.whatsapp.net"
+    ],
+    "contactHash": "d9e5b808bbe8e006cae7967f149eae2c37df2906e122ec15bdb6db280fa55301",
+    "arrivedAt": "2026-11-14T10:33:30.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T10:33:30.321Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T10:33:49.683Z",
+    "readAt": "2026-11-14T10:33:49.683Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T10:33:49.683Z"
+  }
+}

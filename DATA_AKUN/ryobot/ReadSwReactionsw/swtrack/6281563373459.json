@@ -38,5 +38,45 @@
     "readAt": "2026-11-14T05:47:33.209Z",
     "emoji": "💚",
     "reactedAt": "2026-11-14T05:47:33.209Z"
+  },
+  "ACC8DEE194FBFAED7B4EEF5DD6AB1EB2": {
+    "id": "ACC8DEE194FBFAED7B4EEF5DD6AB1EB2",
+    "sender": "6281563373459@s.whatsapp.net",
+    "number": "6281563373459",
+    "storyJid": "6281563373459@s.whatsapp.net",
+    "resolvedPn": "6281563373459@s.whatsapp.net",
+    "name": "saya dapet laporan",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC8DEE194FBFAED7B4EEF5DD6AB1EB2",
+      "participant": "114851854717101@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC8DEE194FBFAED7B4EEF5DD6AB1EB2",
+      "participant": "114851854717101@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "114851854717101@lid",
+      "6281563373459@s.whatsapp.net"
+    ],
+    "contactHash": "3de6815af69757ed354ed6715017a3b8ee4515dd65bf614f0f8925c6abb147e0",
+    "arrivedAt": "2026-11-14T11:32:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:32:29.279Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:32:42.633Z",
+    "readAt": "2026-11-14T11:32:42.629Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:32:42.629Z"
   }
 }

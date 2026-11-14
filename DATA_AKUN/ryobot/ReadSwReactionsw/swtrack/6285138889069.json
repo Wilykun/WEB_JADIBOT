@@ -1,0 +1,42 @@
+{
+  "ACEEAAE27F38BE6E9E4DA8C32ACF2ABF": {
+    "id": "ACEEAAE27F38BE6E9E4DA8C32ACF2ABF",
+    "sender": "6285138889069@s.whatsapp.net",
+    "number": "6285138889069",
+    "storyJid": "6285138889069@s.whatsapp.net",
+    "resolvedPn": "6285138889069@s.whatsapp.net",
+    "name": "𝐗𝐚𝐯𝐢𝐞𝐫𝐚 𝐍𝐨𝐫 𝐅𝐢𝐚𝐧𝐧",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEEAAE27F38BE6E9E4DA8C32ACF2ABF",
+      "participant": "205063851114508@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEEAAE27F38BE6E9E4DA8C32ACF2ABF",
+      "participant": "205063851114508@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "205063851114508@lid",
+      "6285138889069@s.whatsapp.net"
+    ],
+    "contactHash": "fb81fdb1c18f0712ecd6c98fecd3923feaa24046801ca8926d6b234997623d03",
+    "arrivedAt": "2026-11-14T12:16:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T12:16:10.604Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T12:16:22.275Z",
+    "readAt": "2026-11-14T12:16:22.274Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T12:16:22.274Z"
+  }
+}

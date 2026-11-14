@@ -1,0 +1,122 @@
+{
+  "ACA69B0AFB788377D2C037C65C420E9F": {
+    "id": "ACA69B0AFB788377D2C037C65C420E9F",
+    "sender": "6285394015819@s.whatsapp.net",
+    "number": "6285394015819",
+    "storyJid": "6285394015819@s.whatsapp.net",
+    "resolvedPn": "6285394015819@s.whatsapp.net",
+    "name": "Farid",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA69B0AFB788377D2C037C65C420E9F",
+      "participant": "37817572917353@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA69B0AFB788377D2C037C65C420E9F",
+      "participant": "37817572917353@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "37817572917353@lid",
+      "6285394015819@s.whatsapp.net"
+    ],
+    "contactHash": "71bca7d70e4aa3e1511c553a036a39c668aec5a7ed2c3bc9e38d5ffe5bd08172",
+    "arrivedAt": "2026-11-14T08:40:55.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T08:40:55.395Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T08:40:59.482Z",
+    "readAt": "2026-11-14T08:40:59.482Z",
+    "emoji": "🐲",
+    "reactedAt": "2026-11-14T08:40:59.482Z"
+  },
+  "AC8D38651F9AAD625E58D1AA5BF758C9": {
+    "id": "AC8D38651F9AAD625E58D1AA5BF758C9",
+    "sender": "6285394015819@s.whatsapp.net",
+    "number": "6285394015819",
+    "storyJid": "6285394015819@s.whatsapp.net",
+    "resolvedPn": "6285394015819@s.whatsapp.net",
+    "name": "Farid",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8D38651F9AAD625E58D1AA5BF758C9",
+      "participant": "37817572917353@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8D38651F9AAD625E58D1AA5BF758C9",
+      "participant": "37817572917353@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "37817572917353@lid",
+      "6285394015819@s.whatsapp.net"
+    ],
+    "contactHash": "71bca7d70e4aa3e1511c553a036a39c668aec5a7ed2c3bc9e38d5ffe5bd08172",
+    "arrivedAt": "2026-11-14T11:50:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:50:39.848Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:50:54.682Z",
+    "readAt": "2026-11-14T11:50:54.681Z",
+    "emoji": "🐼",
+    "reactedAt": "2026-11-14T11:50:54.681Z"
+  },
+  "ACC55FDC909221A25D93C43D4CFAE36D": {
+    "id": "ACC55FDC909221A25D93C43D4CFAE36D",
+    "sender": "6285394015819@s.whatsapp.net",
+    "number": "6285394015819",
+    "storyJid": "6285394015819@s.whatsapp.net",
+    "resolvedPn": "6285394015819@s.whatsapp.net",
+    "name": "Farid",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC55FDC909221A25D93C43D4CFAE36D",
+      "participant": "37817572917353@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC55FDC909221A25D93C43D4CFAE36D",
+      "participant": "37817572917353@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "37817572917353@lid",
+      "6285394015819@s.whatsapp.net"
+    ],
+    "contactHash": "71bca7d70e4aa3e1511c553a036a39c668aec5a7ed2c3bc9e38d5ffe5bd08172",
+    "arrivedAt": "2026-11-14T13:31:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:31:10.419Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:31:18.669Z",
+    "readAt": "2026-11-14T13:31:18.669Z",
+    "emoji": "🐲",
+    "reactedAt": "2026-11-14T13:31:18.669Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "ACC9A75A676890AAADAF50DDD3E318DB": {
+    "id": "ACC9A75A676890AAADAF50DDD3E318DB",
+    "sender": "62895394953399@s.whatsapp.net",
+    "number": "62895394953399",
+    "storyJid": "62895394953399@s.whatsapp.net",
+    "resolvedPn": "62895394953399@s.whatsapp.net",
+    "name": "lalala²²",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC9A75A676890AAADAF50DDD3E318DB",
+      "participant": "73839094575200@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC9A75A676890AAADAF50DDD3E318DB",
+      "participant": "73839094575200@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "73839094575200@lid",
+      "62895394953399@s.whatsapp.net"
+    ],
+    "contactHash": "2902b4b7e821201f04e018b1349584cf9d4c36c8b5e04923b2968e49d65ee449",
+    "arrivedAt": "2026-11-14T09:13:34.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T09:13:35.119Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T09:13:39.577Z",
+    "readAt": "2026-11-14T09:13:39.576Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-14T09:13:39.576Z"
+  }
+}

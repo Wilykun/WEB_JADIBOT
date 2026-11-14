@@ -1,0 +1,42 @@
+{
+  "ACCA7D27034ED99411C84CC7E9BACCF7": {
+    "id": "ACCA7D27034ED99411C84CC7E9BACCF7",
+    "sender": "6282297989487@s.whatsapp.net",
+    "number": "6282297989487",
+    "storyJid": "6282297989487@s.whatsapp.net",
+    "resolvedPn": "6282297989487@s.whatsapp.net",
+    "name": "035_Edi Francisco m,s_PAG",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCA7D27034ED99411C84CC7E9BACCF7",
+      "participant": "170952767832313@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCA7D27034ED99411C84CC7E9BACCF7",
+      "participant": "170952767832313@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "170952767832313@lid",
+      "6282297989487@s.whatsapp.net"
+    ],
+    "contactHash": "daa80b9960fae272263a57a1d9809e99d0d578136efd65a65dd305f447e1d82e",
+    "arrivedAt": "2026-11-14T11:51:23.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:51:23.526Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:51:34.264Z",
+    "readAt": "2026-11-14T11:51:34.263Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-14T11:51:34.263Z"
+  }
+}

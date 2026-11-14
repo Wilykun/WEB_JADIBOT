@@ -1,0 +1,42 @@
+{
+  "A599B28F872D3C254BEDA91449FAEDE9__part__1d8cyfvc": {
+    "id": "A599B28F872D3C254BEDA91449FAEDE9__part__1d8cyfvc",
+    "sender": "6283826337912@s.whatsapp.net",
+    "number": "6283826337912",
+    "storyJid": "6283826337912@s.whatsapp.net",
+    "resolvedPn": "6283826337912@s.whatsapp.net",
+    "name": "Lesun Psikologi.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A599B28F872D3C254BEDA91449FAEDE9__part__1d8cyfvc",
+      "participant": "177374314381370@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A599B28F872D3C254BEDA91449FAEDE9__part__1d8cyfvc",
+      "participant": "177374314381370@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "177374314381370@lid",
+      "6283826337912@s.whatsapp.net"
+    ],
+    "contactHash": "b3e9c87185f1cacc00d99c3d73aa1a916959994d2ed26e8e52f0873612251ade",
+    "arrivedAt": "2026-11-14T11:25:37.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:25:44.108Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:26:01.934Z",
+    "readAt": "2026-11-14T11:26:01.933Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:26:01.933Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "AC6BE7A3517DADD8196008547D4FAEBF": {
+    "id": "AC6BE7A3517DADD8196008547D4FAEBF",
+    "sender": "6285624062667@s.whatsapp.net",
+    "number": "6285624062667",
+    "storyJid": "6285624062667@s.whatsapp.net",
+    "resolvedPn": "6285624062667@s.whatsapp.net",
+    "name": "Vestia",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6BE7A3517DADD8196008547D4FAEBF",
+      "participant": "61362315243733@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6BE7A3517DADD8196008547D4FAEBF",
+      "participant": "61362315243733@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "61362315243733@lid",
+      "6285624062667@s.whatsapp.net"
+    ],
+    "contactHash": "8552c0713a98c3acd29e75cc135b64d57be4513383fe8a86629019b2c75793e0",
+    "arrivedAt": "2026-11-14T09:57:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:15:31.619Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:15:45.030Z",
+    "readAt": "2026-11-14T11:15:45.030Z",
+    "emoji": "🐔",
+    "reactedAt": "2026-11-14T11:15:45.030Z"
+  }
+}

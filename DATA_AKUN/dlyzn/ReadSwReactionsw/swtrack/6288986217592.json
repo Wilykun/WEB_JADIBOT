@@ -1,0 +1,122 @@
+{
+  "ACCC3BCC01B8C0C173999F1FF1197B8F": {
+    "id": "ACCC3BCC01B8C0C173999F1FF1197B8F",
+    "sender": "6288986217592@s.whatsapp.net",
+    "number": "6288986217592",
+    "storyJid": "6288986217592@s.whatsapp.net",
+    "resolvedPn": "6288986217592@s.whatsapp.net",
+    "name": "copauque",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCC3BCC01B8C0C173999F1FF1197B8F",
+      "participant": "20770914836537@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCC3BCC01B8C0C173999F1FF1197B8F",
+      "participant": "20770914836537@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "20770914836537@lid",
+      "6288986217592@s.whatsapp.net"
+    ],
+    "contactHash": "58e216fe49f200d7109eace6fc81c02349593b6c3d81f0ade07f937ed5b76327",
+    "arrivedAt": "2026-11-14T11:24:09.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:24:09.826Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:24:16.811Z",
+    "readAt": "2026-11-14T11:24:16.799Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-14T11:24:16.799Z"
+  },
+  "AC772DA392B523A7322AD3C80DE180AA": {
+    "id": "AC772DA392B523A7322AD3C80DE180AA",
+    "sender": "6288986217592@s.whatsapp.net",
+    "number": "6288986217592",
+    "storyJid": "6288986217592@s.whatsapp.net",
+    "resolvedPn": "6288986217592@s.whatsapp.net",
+    "name": "copauque",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC772DA392B523A7322AD3C80DE180AA",
+      "participant": "20770914836537@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC772DA392B523A7322AD3C80DE180AA",
+      "participant": "20770914836537@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "20770914836537@lid",
+      "6288986217592@s.whatsapp.net"
+    ],
+    "contactHash": "58e216fe49f200d7109eace6fc81c02349593b6c3d81f0ade07f937ed5b76327",
+    "arrivedAt": "2026-11-14T11:26:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:26:28.862Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:26:34.533Z",
+    "readAt": "2026-11-14T11:26:34.529Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-14T11:26:34.529Z"
+  },
+  "ACB8658949678B1D9D12E87650946C9C": {
+    "id": "ACB8658949678B1D9D12E87650946C9C",
+    "sender": "6288986217592@s.whatsapp.net",
+    "number": "6288986217592",
+    "storyJid": "6288986217592@s.whatsapp.net",
+    "resolvedPn": "6288986217592@s.whatsapp.net",
+    "name": "org baik",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB8658949678B1D9D12E87650946C9C",
+      "participant": "20770914836537@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB8658949678B1D9D12E87650946C9C",
+      "participant": "20770914836537@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "20770914836537@lid",
+      "6288986217592@s.whatsapp.net"
+    ],
+    "contactHash": "58e216fe49f200d7109eace6fc81c02349593b6c3d81f0ade07f937ed5b76327",
+    "arrivedAt": "2026-11-14T12:38:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T12:38:21.858Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T12:38:25.372Z",
+    "readAt": "2026-11-14T12:38:25.372Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-14T12:38:25.372Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "AC63DD1A6C339F5641882480F20E954A": {
+    "id": "AC63DD1A6C339F5641882480F20E954A",
+    "sender": "8618676850823@s.whatsapp.net",
+    "number": "8618676850823",
+    "storyJid": "8618676850823@s.whatsapp.net",
+    "resolvedPn": "8618676850823@s.whatsapp.net",
+    "name": "亲爱的.MIYA-MSBY",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC63DD1A6C339F5641882480F20E954A",
+      "participant": "14770560335895@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC63DD1A6C339F5641882480F20E954A",
+      "participant": "14770560335895@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "14770560335895@lid",
+      "8618676850823@s.whatsapp.net"
+    ],
+    "contactHash": "9e4ff2033d7041ef04c97e83dacc2cd6fd32cbed4013f5fbd80c04a5aae12ce8",
+    "arrivedAt": "2026-11-14T11:40:58.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:40:58.537Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:41:11.011Z",
+    "readAt": "2026-11-14T11:41:11.011Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:41:11.011Z"
+  }
+}

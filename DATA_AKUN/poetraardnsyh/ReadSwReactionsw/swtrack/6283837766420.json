@@ -1,0 +1,42 @@
+{
+  "A52059C5BE995644AC2DF42EC5266D57": {
+    "id": "A52059C5BE995644AC2DF42EC5266D57",
+    "sender": "6283837766420@s.whatsapp.net",
+    "number": "6283837766420",
+    "storyJid": "6283837766420@s.whatsapp.net",
+    "resolvedPn": "6283837766420@s.whatsapp.net",
+    "name": "~ Dea Milea, S.Kom.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A52059C5BE995644AC2DF42EC5266D57",
+      "participant": "244456905285729@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A52059C5BE995644AC2DF42EC5266D57",
+      "participant": "244456905285729@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "244456905285729@lid",
+      "6283837766420@s.whatsapp.net"
+    ],
+    "contactHash": "3dc8c95c43f3b6a0ed0164e1c46db33e8731dc1005be67c857b6e6870c4f91ce",
+    "arrivedAt": "2026-11-14T13:32:50.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:32:50.406Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:32:56.239Z",
+    "readAt": "2026-11-14T13:32:56.237Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T13:32:56.237Z"
+  }
+}

@@ -3,8 +3,8 @@
     {
       "ip": "127.0.0.1",
       "firstSeen": 1794628246202,
-      "lastSeen": 1794642346213,
-      "hits": 62,
+      "lastSeen": 1794663046258,
+      "hits": 138,
       "device": {
         "category": "Desktop",
         "os": "Tidak diketahui",
@@ -15,8 +15,8 @@
     {
       "ip": "104.29.205.89",
       "firstSeen": 1794628264420,
-      "lastSeen": 1794633385119,
-      "hits": 374,
+      "lastSeen": 1794663342608,
+      "hits": 1015,
       "device": {
         "category": "Desktop",
         "os": "Linux",
@@ -27,8 +27,8 @@
     {
       "ip": "103.153.247.218",
       "firstSeen": 1794628342541,
-      "lastSeen": 1794642449961,
-      "hits": 733,
+      "lastSeen": 1794663304428,
+      "hits": 1104,
       "device": {
         "category": "Desktop",
         "os": "Windows 10.0",
@@ -51,8 +51,8 @@
     {
       "ip": "104.29.194.34",
       "firstSeen": 1794628719145,
-      "lastSeen": 1794629696082,
-      "hits": 2,
+      "lastSeen": 1794645874097,
+      "hits": 3,
       "device": {
         "category": "Desktop",
         "os": "Tidak diketahui",
@@ -183,8 +183,8 @@
     {
       "ip": "66.96.88.197",
       "firstSeen": 1794628962514,
-      "lastSeen": 1794641559379,
-      "hits": 25,
+      "lastSeen": 1794658650788,
+      "hits": 35,
       "device": {
         "category": "Desktop",
         "os": "Tidak diketahui",
@@ -219,8 +219,8 @@
     {
       "ip": "104.29.194.55",
       "firstSeen": 1794629139291,
-      "lastSeen": 1794629139291,
-      "hits": 1,
+      "lastSeen": 1794647468012,
+      "hits": 2,
       "device": {
         "category": "Desktop",
         "os": "Tidak diketahui",
@@ -291,8 +291,8 @@
     {
       "ip": "104.29.205.91",
       "firstSeen": 1794629805076,
-      "lastSeen": 1794642444596,
-      "hits": 1732,
+      "lastSeen": 1794651366186,
+      "hits": 2794,
       "device": {
         "category": "Desktop",
         "os": "Linux",
@@ -363,8 +363,8 @@
     {
       "ip": "104.29.196.210",
       "firstSeen": 1794630275811,
-      "lastSeen": 1794632671017,
-      "hits": 2,
+      "lastSeen": 1794646963453,
+      "hits": 7,
       "device": {
         "category": "Desktop",
         "os": "Tidak diketahui",
@@ -675,8 +675,8 @@
     {
       "ip": "104.29.200.238",
       "firstSeen": 1794630880025,
-      "lastSeen": 1794630880025,
-      "hits": 1,
+      "lastSeen": 1794643825186,
+      "hits": 2,
       "device": {
         "category": "Desktop",
         "os": "Tidak diketahui",
@@ -747,12 +747,12 @@
     {
       "ip": "104.29.192.131",
       "firstSeen": 1794632072295,
-      "lastSeen": 1794632072295,
-      "hits": 1,
+      "lastSeen": 1794643858760,
+      "hits": 2,
       "device": {
         "category": "Desktop",
-        "os": "Tidak diketahui",
-        "browser": "Tidak diketahui",
+        "os": "Linux",
+        "browser": "Chrome 156.0.8078.4",
         "model": null
       }
     },
@@ -1167,8 +1167,8 @@
     {
       "ip": "104.29.194.56",
       "firstSeen": 1794641674199,
-      "lastSeen": 1794641674199,
-      "hits": 1,
+      "lastSeen": 1794646966452,
+      "hits": 2,
       "device": {
         "category": "Desktop",
         "os": "Tidak diketahui",
@@ -1192,6 +1192,570 @@
       "ip": "104.29.194.191",
       "firstSeen": 1794642273030,
       "lastSeen": 1794642273030,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "203.190.44.106",
+      "firstSeen": 1794642753617,
+      "lastSeen": 1794659081940,
+      "hits": 26,
+      "device": {
+        "category": "HP",
+        "os": "Android 10",
+        "browser": "Chrome 156.0.0.0",
+        "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36"
+      }
+    },
+    {
+      "ip": "104.29.200.165",
+      "firstSeen": 1794642873906,
+      "lastSeen": 1794642873906,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "104.29.200.164",
+      "firstSeen": 1794643391805,
+      "lastSeen": 1794645273614,
+      "hits": 4,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "104.29.192.134",
+      "firstSeen": 1794643473657,
+      "lastSeen": 1794644072493,
+      "hits": 2,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "104.29.193.196",
+      "firstSeen": 1794643519794,
+      "lastSeen": 1794647073240,
+      "hits": 3,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "104.29.192.130",
+      "firstSeen": 1794643898378,
+      "lastSeen": 1794643898378,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Chrome 156.0.8078.4",
+        "model": null
+      }
+    },
+    {
+      "ip": "146.70.134.158",
+      "firstSeen": 1794644578924,
+      "lastSeen": 1794644578924,
+      "hits": 1,
+      "device": {
+        "category": "HP",
+        "os": "Android 6.0",
+        "browser": "Chrome 130.0.0.0",
+        "model": "Nexus 5"
+      }
+    },
+    {
+      "ip": "180.247.59.1",
+      "firstSeen": 1794646508497,
+      "lastSeen": 1794646518466,
+      "hits": 2,
+      "device": {
+        "category": "HP",
+        "os": "Android 12",
+        "browser": "Chrome 115.0.5970.168",
+        "model": "in-id"
+      }
+    },
+    {
+      "ip": "104.29.200.239",
+      "firstSeen": 1794646965373,
+      "lastSeen": 1794646965373,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "114.5.210.16",
+      "firstSeen": 1794647624470,
+      "lastSeen": 1794662499659,
+      "hits": 107,
+      "device": {
+        "category": "HP",
+        "os": "Android 10",
+        "browser": "Chrome 156.0.0.0",
+        "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36"
+      }
+    },
+    {
+      "ip": "87.81.228.79",
+      "firstSeen": 1794647673332,
+      "lastSeen": 1794647673332,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.236.14",
+      "firstSeen": 1794648268618,
+      "lastSeen": 1794648268618,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.233.20",
+      "firstSeen": 1794648269622,
+      "lastSeen": 1794648269622,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.226.72",
+      "firstSeen": 1794648872056,
+      "lastSeen": 1794648872056,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.226.9",
+      "firstSeen": 1794649474258,
+      "lastSeen": 1794649474258,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.231.122",
+      "firstSeen": 1794650069510,
+      "lastSeen": 1794650069510,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.226.103",
+      "firstSeen": 1794650669683,
+      "lastSeen": 1794650669683,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.233.54",
+      "firstSeen": 1794651270255,
+      "lastSeen": 1794651270255,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.235.69",
+      "firstSeen": 1794651869127,
+      "lastSeen": 1794651869127,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.224.116",
+      "firstSeen": 1794652470022,
+      "lastSeen": 1794652470022,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.233.13",
+      "firstSeen": 1794653071368,
+      "lastSeen": 1794653071368,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "140.213.162.113",
+      "firstSeen": 1794653601543,
+      "lastSeen": 1794654581951,
+      "hits": 36,
+      "device": {
+        "category": "HP",
+        "os": "Android 10",
+        "browser": "Chrome 151.0.0.0",
+        "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36"
+      }
+    },
+    {
+      "ip": "140.213.160.144",
+      "firstSeen": 1794653664574,
+      "lastSeen": 1794654181956,
+      "hits": 16,
+      "device": {
+        "category": "HP",
+        "os": "Android 10",
+        "browser": "Chrome 151.0.0.0",
+        "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36"
+      }
+    },
+    {
+      "ip": "87.81.236.93",
+      "firstSeen": 1794653669793,
+      "lastSeen": 1794653669793,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "182.8.249.174",
+      "firstSeen": 1794654224017,
+      "lastSeen": 1794654224017,
+      "hits": 1,
+      "device": {
+        "category": "HP",
+        "os": "Android 10",
+        "browser": "Chrome 157.0.0.0",
+        "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36"
+      }
+    },
+    {
+      "ip": "87.81.224.79",
+      "firstSeen": 1794654270080,
+      "lastSeen": 1794654270080,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.233.76",
+      "firstSeen": 1794654869816,
+      "lastSeen": 1794654869816,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "103.141.108.150",
+      "firstSeen": 1794655171925,
+      "lastSeen": 1794655183013,
+      "hits": 2,
+      "device": {
+        "category": "HP",
+        "os": "Android 10",
+        "browser": "Chrome 157.0.0.0",
+        "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36"
+      }
+    },
+    {
+      "ip": "87.81.224.82",
+      "firstSeen": 1794655473078,
+      "lastSeen": 1794655473078,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.226.89",
+      "firstSeen": 1794656069888,
+      "lastSeen": 1794656069888,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "114.10.10.21",
+      "firstSeen": 1794656383080,
+      "lastSeen": 1794656424768,
+      "hits": 4,
+      "device": {
+        "category": "HP",
+        "os": "Android 10",
+        "browser": "Chrome 156.0.0.0",
+        "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36"
+      }
+    },
+    {
+      "ip": "87.81.244.25",
+      "firstSeen": 1794656669697,
+      "lastSeen": 1794656669697,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.226.2",
+      "firstSeen": 1794657270093,
+      "lastSeen": 1794657270093,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.224.86",
+      "firstSeen": 1794657870530,
+      "lastSeen": 1794657870530,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.228.20",
+      "firstSeen": 1794658469725,
+      "lastSeen": 1794658469725,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.235.58",
+      "firstSeen": 1794658838212,
+      "lastSeen": 1794658838212,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.233.15",
+      "firstSeen": 1794659070048,
+      "lastSeen": 1794659070048,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "182.10.99.57",
+      "firstSeen": 1794659596819,
+      "lastSeen": 1794659793224,
+      "hits": 8,
+      "device": {
+        "category": "HP",
+        "os": "Android 10",
+        "browser": "Chrome 157.0.0.0",
+        "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36"
+      }
+    },
+    {
+      "ip": "87.81.226.22",
+      "firstSeen": 1794659670602,
+      "lastSeen": 1794659670602,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.235.84",
+      "firstSeen": 1794660272797,
+      "lastSeen": 1794660272797,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.224.37",
+      "firstSeen": 1794660870464,
+      "lastSeen": 1794660870464,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.224.110",
+      "firstSeen": 1794661475532,
+      "lastSeen": 1794661475532,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.226.121",
+      "firstSeen": 1794662072419,
+      "lastSeen": 1794662072419,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "140.0.226.167",
+      "firstSeen": 1794662425867,
+      "lastSeen": 1794663027526,
+      "hits": 16,
+      "device": {
+        "category": "Desktop",
+        "os": "Windows 10.0",
+        "browser": "Edge 157.0.0.0",
+        "model": null
+      }
+    },
+    {
+      "ip": "173.252.69.37",
+      "firstSeen": 1794662432376,
+      "lastSeen": 1794662432376,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.243.76",
+      "firstSeen": 1794662672656,
+      "lastSeen": 1794662672656,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "ip": "87.81.244.107",
+      "firstSeen": 1794663269736,
+      "lastSeen": 1794663269736,
       "hits": 1,
       "device": {
         "category": "Desktop",

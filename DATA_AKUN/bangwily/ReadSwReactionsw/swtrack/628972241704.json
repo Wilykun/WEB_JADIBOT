@@ -1,0 +1,42 @@
+{
+  "ACD50B99B0BD157F173A68507DF44F76": {
+    "id": "ACD50B99B0BD157F173A68507DF44F76",
+    "sender": "628972241704@s.whatsapp.net",
+    "number": "628972241704",
+    "storyJid": "628972241704@s.whatsapp.net",
+    "resolvedPn": "628972241704@s.whatsapp.net",
+    "name": "Milim Nava",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD50B99B0BD157F173A68507DF44F76",
+      "participant": "313582948481@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD50B99B0BD157F173A68507DF44F76",
+      "participant": "313582948481@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "313582948481@lid",
+      "628972241704@s.whatsapp.net"
+    ],
+    "contactHash": "7b8f4b62c5a0ac6604cbf6c13bab7e4b653245154eff8fd8cd3bb5c7a6b31b81",
+    "arrivedAt": "2026-11-14T11:12:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:15:31.619Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:15:45.535Z",
+    "readAt": "2026-11-14T11:15:45.500Z",
+    "emoji": "🦓",
+    "reactedAt": "2026-11-14T11:15:45.500Z"
+  }
+}

@@ -7,15 +7,25 @@
       "device": "HP · K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36 · Android 10 · Chrome 156.0.0.0",
       "dibuat": "2026-11-14T04:48:53.334Z",
       "dibuatWIB": "Sabtu, 14 November 2026 pukul 11.48.53 WIB",
-      "terakhirAktif": "2026-11-14T05:04:12.097Z",
-      "terakhirAktifWIB": "Sabtu, 14 November 2026 pukul 12.04.12 WIB",
+      "terakhirAktif": "2026-11-14T11:39:46.900Z",
+      "terakhirAktifWIB": "Sabtu, 14 November 2026 pukul 18.39.46 WIB",
       "berakhir": "2026-11-21T04:48:53.332Z"
+    },
+    {
+      "sid": "d28386b3",
+      "ip": "203.190.44.106",
+      "device": "HP · K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36 · Android 10 · Chrome 156.0.0.0",
+      "dibuat": "2026-11-14T12:23:39.861Z",
+      "dibuatWIB": "Sabtu, 14 November 2026 pukul 19.23.39 WIB",
+      "terakhirAktif": "2026-11-14T12:24:36.420Z",
+      "terakhirAktifWIB": "Sabtu, 14 November 2026 pukul 19.24.36 WIB",
+      "berakhir": "2026-11-21T12:23:39.815Z"
     }
   ],
   "loginTerakhir": {
-    "waktu": "2026-11-14T04:48:53.334Z",
-    "waktuWIB": "Sabtu, 14 November 2026 pukul 11.48.53 WIB",
-    "ip": "114.10.10.54",
+    "waktu": "2026-11-14T12:23:39.861Z",
+    "waktuWIB": "Sabtu, 14 November 2026 pukul 19.23.39 WIB",
+    "ip": "203.190.44.106",
     "device": "HP · K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36 · Android 10 · Chrome 156.0.0.0"
   }
 }

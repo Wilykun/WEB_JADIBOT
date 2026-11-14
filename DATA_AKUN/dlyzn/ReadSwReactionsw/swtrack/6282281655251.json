@@ -1,0 +1,122 @@
+{
+  "AC9FAB1C3787FBD450DF7FCE4481AF10": {
+    "id": "AC9FAB1C3787FBD450DF7FCE4481AF10",
+    "sender": "6282281655251@s.whatsapp.net",
+    "number": "6282281655251",
+    "storyJid": "6282281655251@s.whatsapp.net",
+    "resolvedPn": "6282281655251@s.whatsapp.net",
+    "name": "𝐃𝐚𝐫𝐤 𝐊𝐧𝐢𝐠𝐡𝐭 𝐋𝐨𝐬𝐭 𝐈𝐧 𝐃𝐚𝐫𝐤",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9FAB1C3787FBD450DF7FCE4481AF10",
+      "participant": "140999951155436@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9FAB1C3787FBD450DF7FCE4481AF10",
+      "participant": "140999951155436@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "140999951155436@lid",
+      "6282281655251@s.whatsapp.net"
+    ],
+    "contactHash": "b3d04805343797776d8e855ef95d179607d420dd87ac2fc9f4d74cbdaa559e3d",
+    "arrivedAt": "2026-11-14T11:26:37.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:26:38.066Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:26:41.193Z",
+    "readAt": "2026-11-14T11:26:41.192Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-14T11:26:41.192Z"
+  },
+  "AC0EF059F45BDE0D6326AFD081079890": {
+    "id": "AC0EF059F45BDE0D6326AFD081079890",
+    "sender": "6282281655251@s.whatsapp.net",
+    "number": "6282281655251",
+    "storyJid": "6282281655251@s.whatsapp.net",
+    "resolvedPn": "6282281655251@s.whatsapp.net",
+    "name": "𝐃𝐚𝐫𝐤 𝐊𝐧𝐢𝐠𝐡𝐭 𝐋𝐨𝐬𝐭 𝐈𝐧 𝐃𝐚𝐫𝐤",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0EF059F45BDE0D6326AFD081079890",
+      "participant": "140999951155436@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0EF059F45BDE0D6326AFD081079890",
+      "participant": "140999951155436@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "140999951155436@lid",
+      "6282281655251@s.whatsapp.net"
+    ],
+    "contactHash": "b3d04805343797776d8e855ef95d179607d420dd87ac2fc9f4d74cbdaa559e3d",
+    "arrivedAt": "2026-11-14T11:28:03.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:28:03.633Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:28:17.072Z",
+    "readAt": "2026-11-14T11:28:17.072Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-14T11:28:17.072Z"
+  },
+  "AC33A9ACE0B0FBE0510B27986B64855C": {
+    "id": "AC33A9ACE0B0FBE0510B27986B64855C",
+    "sender": "6282281655251@s.whatsapp.net",
+    "number": "6282281655251",
+    "storyJid": "6282281655251@s.whatsapp.net",
+    "resolvedPn": "6282281655251@s.whatsapp.net",
+    "name": "𝐃𝐚𝐫𝐤 𝐊𝐧𝐢𝐠𝐡𝐭 𝐋𝐨𝐬𝐭 𝐈𝐧 𝐃𝐚𝐫𝐤",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC33A9ACE0B0FBE0510B27986B64855C",
+      "participant": "140999951155436@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC33A9ACE0B0FBE0510B27986B64855C",
+      "participant": "140999951155436@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "140999951155436@lid",
+      "6282281655251@s.whatsapp.net"
+    ],
+    "contactHash": "b3d04805343797776d8e855ef95d179607d420dd87ac2fc9f4d74cbdaa559e3d",
+    "arrivedAt": "2026-11-14T11:31:46.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:31:47.086Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:31:59.352Z",
+    "readAt": "2026-11-14T11:31:59.351Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-14T11:31:59.351Z"
+  }
+}

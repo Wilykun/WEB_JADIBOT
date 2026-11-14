@@ -38,5 +38,165 @@
     "readAt": "2026-11-14T06:09:58.449Z",
     "emoji": "💚",
     "reactedAt": "2026-11-14T06:09:58.449Z"
+  },
+  "A57D22D41174297C2016391826892539": {
+    "id": "A57D22D41174297C2016391826892539",
+    "sender": "6281287953891@s.whatsapp.net",
+    "number": "6281287953891",
+    "storyJid": "6281287953891@s.whatsapp.net",
+    "resolvedPn": "6281287953891@s.whatsapp.net",
+    "name": "Urahara Shop",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A57D22D41174297C2016391826892539",
+      "participant": "180010702897239@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A57D22D41174297C2016391826892539",
+      "participant": "180010702897239@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "180010702897239@lid",
+      "6281287953891@s.whatsapp.net"
+    ],
+    "contactHash": "f9145fef8e8b8f09b0f09c80b05ca57cac8712df1a457e3efa59d70de4ca5e3b",
+    "arrivedAt": "2026-11-14T10:22:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T10:22:22.558Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T10:22:32.856Z",
+    "readAt": "2026-11-14T10:22:32.853Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T10:22:32.853Z"
+  },
+  "A52BADF058FD2BB7106441F32E9417E4": {
+    "id": "A52BADF058FD2BB7106441F32E9417E4",
+    "sender": "6281287953891@s.whatsapp.net",
+    "number": "6281287953891",
+    "storyJid": "6281287953891@s.whatsapp.net",
+    "resolvedPn": "6281287953891@s.whatsapp.net",
+    "name": "Urahara Shop",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A52BADF058FD2BB7106441F32E9417E4",
+      "participant": "180010702897239@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A52BADF058FD2BB7106441F32E9417E4",
+      "participant": "180010702897239@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "180010702897239@lid",
+      "6281287953891@s.whatsapp.net"
+    ],
+    "contactHash": "f9145fef8e8b8f09b0f09c80b05ca57cac8712df1a457e3efa59d70de4ca5e3b",
+    "arrivedAt": "2026-11-14T11:07:50.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:07:50.475Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:08:06.663Z",
+    "readAt": "2026-11-14T11:08:06.662Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:08:06.662Z"
+  },
+  "A5FA5A540751A4F0D36E79F6D709B9AA": {
+    "id": "A5FA5A540751A4F0D36E79F6D709B9AA",
+    "sender": "6281287953891@s.whatsapp.net",
+    "number": "6281287953891",
+    "storyJid": "6281287953891@s.whatsapp.net",
+    "resolvedPn": "6281287953891@s.whatsapp.net",
+    "name": "Urahara Shop",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5FA5A540751A4F0D36E79F6D709B9AA",
+      "participant": "180010702897239@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5FA5A540751A4F0D36E79F6D709B9AA",
+      "participant": "180010702897239@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "180010702897239@lid",
+      "6281287953891@s.whatsapp.net"
+    ],
+    "contactHash": "f9145fef8e8b8f09b0f09c80b05ca57cac8712df1a457e3efa59d70de4ca5e3b",
+    "arrivedAt": "2026-11-14T11:10:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:10:38.227Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:10:53.791Z",
+    "readAt": "2026-11-14T11:10:53.788Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:10:53.788Z"
+  },
+  "A5848DEF30404493CCB1E1FAD2D76304": {
+    "id": "A5848DEF30404493CCB1E1FAD2D76304",
+    "sender": "6281287953891@s.whatsapp.net",
+    "number": "6281287953891",
+    "storyJid": "6281287953891@s.whatsapp.net",
+    "resolvedPn": "6281287953891@s.whatsapp.net",
+    "name": "Urahara Shop",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5848DEF30404493CCB1E1FAD2D76304",
+      "participant": "180010702897239@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5848DEF30404493CCB1E1FAD2D76304",
+      "participant": "180010702897239@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "180010702897239@lid",
+      "6281287953891@s.whatsapp.net"
+    ],
+    "contactHash": "f9145fef8e8b8f09b0f09c80b05ca57cac8712df1a457e3efa59d70de4ca5e3b",
+    "arrivedAt": "2026-11-14T11:25:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:25:39.780Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:25:59.865Z",
+    "readAt": "2026-11-14T11:25:59.864Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:25:59.864Z"
   }
 }

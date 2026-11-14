@@ -1,0 +1,42 @@
+{
+  "AC782323BE82BE51EEEC171FF99B15D1": {
+    "id": "AC782323BE82BE51EEEC171FF99B15D1",
+    "sender": "6288223806873@s.whatsapp.net",
+    "number": "6288223806873",
+    "storyJid": "6288223806873@s.whatsapp.net",
+    "resolvedPn": "6288223806873@s.whatsapp.net",
+    "name": "- 7𝙎 | Yuu Izumi || FGTI.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC782323BE82BE51EEEC171FF99B15D1",
+      "participant": "162715523923973@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC782323BE82BE51EEEC171FF99B15D1",
+      "participant": "162715523923973@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162715523923973@lid",
+      "6288223806873@s.whatsapp.net"
+    ],
+    "contactHash": "20e537b8f500fb78ee9f6f7ff20579a4851d0ab4130ec7b62340db79c8aad700",
+    "arrivedAt": "2026-11-14T12:41:19.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T12:41:20.643Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T12:41:38.219Z",
+    "readAt": "2026-11-14T12:41:38.219Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T12:41:38.219Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "3AB27800441846E39BAF13F483481421": {
+    "id": "3AB27800441846E39BAF13F483481421",
+    "sender": "628815305513@s.whatsapp.net",
+    "number": "628815305513",
+    "storyJid": "628815305513@s.whatsapp.net",
+    "resolvedPn": "628815305513@s.whatsapp.net",
+    "name": "aldi as",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3AB27800441846E39BAF13F483481421",
+      "participant": "16415499231359@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3AB27800441846E39BAF13F483481421",
+      "participant": "16415499231359@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "16415499231359@lid",
+      "628815305513@s.whatsapp.net"
+    ],
+    "contactHash": "cee5d4c868227e3e721ba4f6e5462fffe431f445ab0506b1415ae9e8408ea04a",
+    "arrivedAt": "2026-11-14T10:49:09.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T10:49:09.411Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T10:49:28.819Z",
+    "readAt": "2026-11-14T10:49:28.819Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T10:49:28.819Z"
+  }
+}

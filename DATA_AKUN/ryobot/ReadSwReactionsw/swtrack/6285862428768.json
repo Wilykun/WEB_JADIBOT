@@ -1,0 +1,122 @@
+{
+  "ACCC2292C1A45534324C1AEC655ABCA8": {
+    "id": "ACCC2292C1A45534324C1AEC655ABCA8",
+    "sender": "6285862428768@s.whatsapp.net",
+    "number": "6285862428768",
+    "storyJid": "6285862428768@s.whatsapp.net",
+    "resolvedPn": "6285862428768@s.whatsapp.net",
+    "name": "L",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCC2292C1A45534324C1AEC655ABCA8",
+      "participant": "161783583109198@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCC2292C1A45534324C1AEC655ABCA8",
+      "participant": "161783583109198@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "161783583109198@lid",
+      "6285862428768@s.whatsapp.net"
+    ],
+    "contactHash": "9066e9b56671775ddeee43e0ecb179b867286de39c42b08e47b3c7b3387f2661",
+    "arrivedAt": "2026-11-14T07:51:03.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T07:51:03.575Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T07:51:15.579Z",
+    "readAt": "2026-11-14T07:51:15.579Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T07:51:15.579Z"
+  },
+  "ACB54E573724CA62E91CE8F32D71611E": {
+    "id": "ACB54E573724CA62E91CE8F32D71611E",
+    "sender": "6285862428768@s.whatsapp.net",
+    "number": "6285862428768",
+    "storyJid": "6285862428768@s.whatsapp.net",
+    "resolvedPn": "6285862428768@s.whatsapp.net",
+    "name": "L",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB54E573724CA62E91CE8F32D71611E",
+      "participant": "161783583109198@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB54E573724CA62E91CE8F32D71611E",
+      "participant": "161783583109198@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "161783583109198@lid",
+      "6285862428768@s.whatsapp.net"
+    ],
+    "contactHash": "9066e9b56671775ddeee43e0ecb179b867286de39c42b08e47b3c7b3387f2661",
+    "arrivedAt": "2026-11-14T08:54:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T08:54:52.804Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T08:55:05.627Z",
+    "readAt": "2026-11-14T08:55:05.626Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T08:55:05.626Z"
+  },
+  "AC57ECF6B198E0F1D608DA717BDAAD2B": {
+    "id": "AC57ECF6B198E0F1D608DA717BDAAD2B",
+    "sender": "6285862428768@s.whatsapp.net",
+    "number": "6285862428768",
+    "storyJid": "6285862428768@s.whatsapp.net",
+    "resolvedPn": "6285862428768@s.whatsapp.net",
+    "name": "L",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC57ECF6B198E0F1D608DA717BDAAD2B",
+      "participant": "161783583109198@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC57ECF6B198E0F1D608DA717BDAAD2B",
+      "participant": "161783583109198@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "161783583109198@lid",
+      "6285862428768@s.whatsapp.net"
+    ],
+    "contactHash": "9066e9b56671775ddeee43e0ecb179b867286de39c42b08e47b3c7b3387f2661",
+    "arrivedAt": "2026-11-14T10:01:03.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T10:01:03.916Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T10:01:07.605Z",
+    "readAt": "2026-11-14T10:01:07.605Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T10:01:07.605Z"
+  }
+}

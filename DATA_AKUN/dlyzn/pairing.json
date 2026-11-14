@@ -3,28 +3,28 @@
   "status": "linked",
   "nomorTertaut": "62857****1374",
   "workerStatus": "running",
-  "terakhirUpdate": "2026-11-14T07:43:44.223Z",
+  "terakhirUpdate": "2026-11-14T13:31:33.049Z",
   "logTerakhir": {
-    "event": "Story video · Dilihat ✓ · delay 4.9 dtk",
+    "event": "Story teks · Read + Reaction ✓ · 🙂‍↔️ · delay 8.1 dtk",
     "details": {
       "kind": "story",
-      "mode": "Read Only",
-      "mediaType": "Video 🎥",
-      "storyId": "AC940C1A···F14B",
-      "greeting": "Siang 🌤️",
+      "mode": "Read+Reaction ✓",
+      "mediaType": "Teks 📝",
+      "storyId": "3A7106C9···3145",
+      "greeting": "Malam 🌃",
       "dayName": "Sabtu",
       "date": "14 Nov 2026",
-      "time": "14.43",
-      "name": "cewek brengsek",
-      "number": "6282****987",
-      "storyCount": 2,
-      "emojiMode": "—",
-      "success": "Dilihat ✓",
-      "reaction": "Off ❌",
+      "time": "20.31",
+      "name": "cipuyy",
+      "number": "6288****766",
+      "storyCount": 4,
+      "emojiMode": "Custom 🟢",
+      "success": "Read + Reaction ✓",
+      "reaction": "🙂‍↔️",
       "resolve": "LID → PN ✓",
-      "delaySeconds": 4.9
+      "delaySeconds": 8.1
     },
-    "waktu": "2026-11-14T07:43:44.223Z",
-    "waktuWIB": "Sabtu, 14 November 2026 pukul 14.43.44 WIB"
+    "waktu": "2026-11-14T13:31:33.049Z",
+    "waktuWIB": "Sabtu, 14 November 2026 pukul 20.31.33 WIB"
   }
 }

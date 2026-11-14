@@ -1,0 +1,42 @@
+{
+  "ACB27DB64B8981744413D85D8FBEC050": {
+    "id": "ACB27DB64B8981744413D85D8FBEC050",
+    "sender": "6289518455732@s.whatsapp.net",
+    "number": "6289518455732",
+    "storyJid": "6289518455732@s.whatsapp.net",
+    "resolvedPn": "6289518455732@s.whatsapp.net",
+    "name": ">Teio/Rull<",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB27DB64B8981744413D85D8FBEC050",
+      "participant": "119847337861360@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB27DB64B8981744413D85D8FBEC050",
+      "participant": "119847337861360@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "119847337861360@lid",
+      "6289518455732@s.whatsapp.net"
+    ],
+    "contactHash": "61cee53f2890ddba1171e0665e22668ddeb62c9af5b5fbc77a8b17ecaf53fb9d",
+    "arrivedAt": "2026-11-14T11:33:24.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:33:24.667Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:33:43.165Z",
+    "readAt": "2026-11-14T11:33:43.149Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:33:43.149Z"
+  }
+}

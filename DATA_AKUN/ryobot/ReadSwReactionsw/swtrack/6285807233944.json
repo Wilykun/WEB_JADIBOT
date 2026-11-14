@@ -1,0 +1,42 @@
+{
+  "AC62A66A3C61554579581237F20C70C9": {
+    "id": "AC62A66A3C61554579581237F20C70C9",
+    "sender": "6285807233944@s.whatsapp.net",
+    "number": "6285807233944",
+    "storyJid": "6285807233944@s.whatsapp.net",
+    "resolvedPn": "6285807233944@s.whatsapp.net",
+    "name": "feb timpa teks",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC62A66A3C61554579581237F20C70C9",
+      "participant": "41227424649350@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC62A66A3C61554579581237F20C70C9",
+      "participant": "41227424649350@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "41227424649350@lid",
+      "6285807233944@s.whatsapp.net"
+    ],
+    "contactHash": "b5d79fac7ed090a17ac50611e99e07a10f1efdfa124ccfdb5c5fdca04b7f084d",
+    "arrivedAt": "2026-11-14T11:35:42.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:35:42.800Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:36:01.895Z",
+    "readAt": "2026-11-14T11:36:01.894Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:36:01.894Z"
+  }
+}

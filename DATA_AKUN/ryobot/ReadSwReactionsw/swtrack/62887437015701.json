@@ -1,0 +1,42 @@
+{
+  "AC58C25FFE7CFCD478731B403D7BFD41": {
+    "id": "AC58C25FFE7CFCD478731B403D7BFD41",
+    "sender": "62887437015701@s.whatsapp.net",
+    "number": "62887437015701",
+    "storyJid": "62887437015701@s.whatsapp.net",
+    "resolvedPn": "62887437015701@s.whatsapp.net",
+    "name": "Acrux",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC58C25FFE7CFCD478731B403D7BFD41",
+      "participant": "50947606757499@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC58C25FFE7CFCD478731B403D7BFD41",
+      "participant": "50947606757499@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "50947606757499@lid",
+      "62887437015701@s.whatsapp.net"
+    ],
+    "contactHash": "a73495041e8d2f76bd1646e87e83a448715c9191529b4058c9842f8013b74f28",
+    "arrivedAt": "2026-11-14T11:57:33.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:57:34.274Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:57:40.012Z",
+    "readAt": "2026-11-14T11:57:40.012Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T11:57:40.012Z"
+  }
+}

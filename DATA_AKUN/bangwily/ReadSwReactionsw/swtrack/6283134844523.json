@@ -1,0 +1,42 @@
+{
+  "A51F016878FAF3CFE3DA6FF2780A7177": {
+    "id": "A51F016878FAF3CFE3DA6FF2780A7177",
+    "sender": "6283134844523@s.whatsapp.net",
+    "number": "6283134844523",
+    "storyJid": "6283134844523@s.whatsapp.net",
+    "resolvedPn": "6283134844523@s.whatsapp.net",
+    "name": "Anda Siapa?",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A51F016878FAF3CFE3DA6FF2780A7177",
+      "participant": "239328697536578@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A51F016878FAF3CFE3DA6FF2780A7177",
+      "participant": "239328697536578@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "239328697536578@lid",
+      "6283134844523@s.whatsapp.net"
+    ],
+    "contactHash": "37f55e89eadcbfa12a1ba12856e597d1298327ed5c0c5b8a8b9a9c8d037a2ec4",
+    "arrivedAt": "2026-11-14T11:33:37.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T11:33:38.179Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T11:33:44.204Z",
+    "readAt": "2026-11-14T11:33:44.203Z",
+    "emoji": "🍔",
+    "reactedAt": "2026-11-14T11:33:44.203Z"
+  }
+}

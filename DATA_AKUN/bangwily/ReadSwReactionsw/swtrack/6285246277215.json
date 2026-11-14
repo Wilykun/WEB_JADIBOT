@@ -38,5 +38,45 @@
     "readAt": "2026-11-14T06:47:58.709Z",
     "emoji": "🌭",
     "reactedAt": "2026-11-14T06:47:58.709Z"
+  },
+  "AC1E7AAA00D350F7D62ADEF23A471082": {
+    "id": "AC1E7AAA00D350F7D62ADEF23A471082",
+    "sender": "6285246277215@s.whatsapp.net",
+    "number": "6285246277215",
+    "storyJid": "6285246277215@s.whatsapp.net",
+    "resolvedPn": "6285246277215@s.whatsapp.net",
+    "name": "정한",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1E7AAA00D350F7D62ADEF23A471082",
+      "participant": "272245645643794@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1E7AAA00D350F7D62ADEF23A471082",
+      "participant": "272245645643794@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "272245645643794@lid",
+      "6285246277215@s.whatsapp.net"
+    ],
+    "contactHash": "8f05eb8908fbddf6082624c4a4c985ce025d04cf32fb3f02637002c2f03f480b",
+    "arrivedAt": "2026-11-14T12:28:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T12:28:21.512Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T12:28:25.338Z",
+    "readAt": "2026-11-14T12:28:25.337Z",
+    "emoji": "🐲",
+    "reactedAt": "2026-11-14T12:28:25.337Z"
   }
 }
