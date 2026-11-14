@@ -515,6 +515,29 @@ function prettyDateTime(value) {
   return `${new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date(value))} WIB`;
 }
 
+function formatRelativeAgo(value) {
+  const time = typeof value === 'number' ? value : Date.parse(value);
+  if (!Number.isFinite(time) || time <= 0) return null;
+  const diff = Date.now() - time;
+  if (diff < 45 * 1000) return 'baru saja';
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 60) return `${minutes} menit yang lalu`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) {
+    const rest = minutes % 60;
+    return rest ? `${hours} jam ${rest} menit yang lalu` : `${hours} jam yang lalu`;
+  }
+  const days = Math.floor(hours / 24);
+  return `${days} hari yang lalu`;
+}
+
+function formatPanelActivityNote(user) {
+  if (user.panelActive) return 'Sedang online di web sekarang.';
+  const ago = formatRelativeAgo(user.lastSeen);
+  if (!ago) return 'Belum pernah membuka panel web.';
+  return `Terakhir online di web ${ago}.`;
+}
+
 function modeSummary(mode) {
   return modeDescriptions[mode] || 'Pilih preferensi bot untuk menyimpannya.';
 }
@@ -975,7 +998,7 @@ async function loadAdminUsers() {
         const detailsData = [
           { label: 'Email', value: user.email || '—', icon: 'mail' },
           { label: 'Status akun', value: user.role === 'admin' ? 'Administrator' : user.banned ? 'Diblokir oleh admin' : user.verified ? 'Terverifikasi' : 'Belum verifikasi', icon: 'shield' },
-          { label: 'Aktivitas panel', value: user.panelActive ? 'Online' : 'Tidak aktif', icon: 'activity', note: 'Online jika ada heartbeat sesi panel dalam 75 detik terakhir; bukan status WhatsApp.' },
+          { label: 'Aktivitas panel', value: user.panelActive ? 'Online' : 'Tidak aktif', icon: 'activity', note: formatPanelActivityNote(user) },
           { label: 'WhatsApp', value: pairingStatus, icon: 'whatsapp' },
           { label: 'Nomor tersamarkan', value: user.whatsappNumberMasked || 'Belum aktif', icon: 'phone' },
           { label: 'Bot WhatsApp', value: user.workerStatus === 'running' ? 'Berjalan' : user.workerStatus === 'waiting' ? 'Menunggu' : 'Berhenti', icon: 'bot' },
@@ -1002,6 +1025,7 @@ async function loadAdminUsers() {
           } else {
             description.textContent = detailInfo.value;
           }
+          if (detailInfo.label === 'Aktivitas panel') item.classList.add('member-activity-item');
           if (detailInfo.label === 'Runtime bot') {
             description.dataset.workerRuntime = user.workerStatus === 'running' ? String(user.workerStartedAt || '') : '';
             description.classList.add('member-worker-runtime');
