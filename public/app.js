@@ -944,6 +944,7 @@ async function loadAdminUsers() {
           { text: user.panelActive ? 'Pemilik · Online' : 'Pemilik · Tidak aktif', className: `member-account-chip ${user.panelActive ? 'is-positive' : 'is-muted'}`, title: 'Status Online memakai heartbeat sesi panel dalam 75 detik terakhir; ini bukan status presence WhatsApp.' },
           { text: `WA · ${pairingStatus}`, className: `member-account-chip ${user.whatsappStatus === 'linked' ? 'is-positive' : user.whatsappStatus === 'failed' ? 'is-warning' : 'is-muted'}` },
           { text: `Bot WhatsApp · ${user.workerStatus === 'running' ? 'Berjalan' : user.workerStatus === 'waiting' ? 'Menunggu' : 'Berhenti'}`, className: `member-account-chip ${user.workerStatus === 'running' ? 'is-positive' : user.workerStatus === 'waiting' ? 'is-warning' : 'is-muted'}` },
+          { text: `Mode · ${user.featureStats?.modeLabel || 'Mode belum dipilih'}`, className: `member-account-chip ${user.featureStats?.modeLabel && user.featureStats.modeLabel !== 'Mode belum dipilih' ? 'is-positive' : 'is-muted'}` },
           { runtime: true, className: `member-account-chip ${user.workerStatus === 'running' ? 'is-positive' : 'is-muted'}` },
         ];
         chips.forEach((chipInfo) => {
