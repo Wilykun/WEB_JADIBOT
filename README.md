@@ -23,6 +23,7 @@
   <img src="https://img.shields.io/badge/Node.js-20%2B-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node.js 20+">
   <img src="https://img.shields.io/badge/Baileys-7.0.0--rc14-25D366?style=flat-square&logo=whatsapp&logoColor=white" alt="Baileys 7.0.0-rc14">
   <img src="https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript">
+  <a href="https://github.com/Wilykun/WEB_JADIBOT/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License MIT"></a>
 </p>
 
 ---
@@ -126,6 +127,6 @@ Buka `http://localhost:3000`. `npm start` menjalankan `start-ptero.sh` — cek N
 </p>
 
 <p align="center">
-  © 2026 Bang Wily · All Rights Reserved<br>
+  © 2026 Bang Wily · <a href="https://github.com/Wilykun/WEB_JADIBOT/blob/main/LICENSE">MIT License</a><br>
   <a href="https://readsw.24h.sh/privacy">Privacy Policy</a> · <a href="https://readsw.24h.sh/terms">Terms of Service</a> · <a href="https://readsw.24h.sh/dmca">DMCA</a>
 </p>
