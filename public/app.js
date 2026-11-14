@@ -823,6 +823,21 @@ function createMemberIcon(name) {
   return svg;
 }
 
+// Urutan daftar akun mengikuti runtime bot: yang baru jalan atau baru restart (runtime tersingkat) di atas, runtime terlama di bawah, dan akun yang botnya tidak berjalan di paling bawah.
+function sortAdminUsersByRuntime(users) {
+  const startedAtOf = (user) => {
+    const timestamp = Number(user?.workerStartedAt);
+    return Number.isFinite(timestamp) && timestamp > 0 ? timestamp : null;
+  };
+  return [...users].sort((a, b) => {
+    const aRunning = a?.workerStatus === 'running' && startedAtOf(a) !== null;
+    const bRunning = b?.workerStatus === 'running' && startedAtOf(b) !== null;
+    if (aRunning !== bRunning) return aRunning ? -1 : 1;
+    if (aRunning && bRunning) return startedAtOf(b) - startedAtOf(a);
+    return 0;
+  });
+}
+
 async function loadAdminUsers() {
   const section = document.querySelector('#admin');
   try {
@@ -843,8 +858,8 @@ async function loadAdminUsers() {
       awaiting_code: 'Menunggu pairing', connecting: 'Menyiapkan pairing', linking: 'Menyelesaikan tautan', failed: 'Gagal',
     };
     const groups = [
-      { key: 'admin', title: 'Admin', users: users.filter((user) => user.role === 'admin') },
-      { key: 'member', title: 'Member biasa', users: users.filter((user) => user.role !== 'admin') },
+      { key: 'admin', title: 'Admin', users: sortAdminUsersByRuntime(users.filter((user) => user.role === 'admin')) },
+      { key: 'member', title: 'Member', users: sortAdminUsersByRuntime(users.filter((user) => user.role !== 'admin')) },
     ];
     for (const group of groups) {
       if (!group.users.length) continue;
