@@ -2058,6 +2058,7 @@ async function handleApi(req, res, url) {
       return {
         id: item.id,
         username: item.username,
+        email: item.email,
         displayName: item.displayName,
         role: item.role === 'admin' ? 'admin' : 'member',
         verified: item.verified !== false,
@@ -2068,6 +2069,7 @@ async function handleApi(req, res, url) {
         lastSeenSource: latestPanelSession?.lastSeen ? 'panel' : null,
         hasBotProfile: (store.bots || []).some((bot) => bot.userId === item.id),
         whatsappStatus: pairing?.status || 'not_connected',
+        whatsappNumberMasked: pairing?.maskedPhone || null,
         workerStatus: pairing?.workerStatus || 'stopped',
         workerStartedAt: pairing?.workerStartedAt || null,
         botAutoStart: (store.bots || []).some((bot) => bot.userId === item.id && bot.autoStart === true),
