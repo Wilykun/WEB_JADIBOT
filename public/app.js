@@ -1486,8 +1486,13 @@ function renderLinkGate(pairing) {
   const linkedSessionStates = new Set(['linked', 'disconnected', 'reconnecting', 'stopped']);
   const hasLinkedSession = linkedSessionStates.has(pairing?.status);
   document.body.dataset.whatsappLinked = String(hasLinkedSession);
-  document.querySelectorAll('[data-linked-only]').forEach((element) => {
+  // Menu dan halaman Fitur Bot selalu tampil walau WhatsApp belum tertaut agar mode dan pengaturan story bisa diatur dulu, worker bot baru jalan otomatis begitu akun tertaut.
+  document.querySelectorAll('[data-linked-only]:not([data-page-view="mode"])').forEach((element) => {
     element.classList.toggle('hidden', !hasLinkedSession);
+  });
+  document.querySelector('.side-nav .nav-item[href="#mode"]')?.classList.remove('hidden');
+  document.querySelectorAll('[data-page-view="mode"]').forEach((element) => {
+    element.classList.remove('hidden');
   });
   document.querySelectorAll('[data-setup-only]').forEach((element) => {
     element.classList.toggle('hidden', hasLinkedSession);
@@ -1496,7 +1501,6 @@ function renderLinkGate(pairing) {
   document.querySelector('#admin')?.classList.toggle('hidden', !adminVisible);
   document.querySelector('#admin-nav')?.classList.toggle('hidden', !adminVisible);
   document.querySelector('.side-nav .nav-item[href="#dashboard"]')?.classList.toggle('hidden', !hasLinkedSession);
-  document.querySelector('.side-nav .nav-item[href="#mode"]')?.classList.toggle('hidden', !hasLinkedSession);
   document.querySelector('.side-nav .nav-item[href="#activity"]')?.classList.toggle('hidden', !hasLinkedSession);
   document.querySelector('#pairing-nav')?.classList.toggle('hidden', hasLinkedSession);
   document.querySelector('#connection-badge').textContent = pairing?.status === 'linked'
