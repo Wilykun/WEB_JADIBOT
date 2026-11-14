@@ -2823,3 +2823,13 @@ html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
 #infoupdate .developer-contact-actions{margin-inline:0}
 #infoupdate .info-update-item{gap:10px}
 }
+
+/* Info Update v4: kartu Fitur Akun berdampingan (3 kolom) di mobile/touch — sebelumnya menumpuk ke bawah */
+@media (max-width:560px),(max-width:1100px) and (hover:none){
+  #admin .member-feature-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  #admin .member-feature-card{flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:10px 6px;gap:6px}
+  #admin .member-feature-icon{flex:0 0 28px;width:28px;height:28px}
+  #admin .member-feature-copy{justify-items:center;text-align:center}
+  #admin .member-feature-state{font-size:9px}
+  #admin .member-feature-note{font-size:9px;line-height:1.5;text-align:center}
+}
