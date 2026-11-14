@@ -60,9 +60,11 @@ Akun baru tanpa preferensi tersimpan langsung jalan mode **ReadSW + ReactionSW**
 
 Kredit trial habis / mau ganti akun? Tinggal klik tombol **Run on Buddy** di atas:
 
-1. Klik tombol → login Buddy (atau daftar akun baru — gratis).
-2. Pilih repo **Wilykun/WEB_JADIBOT** → project + pipeline terbentuk otomatis dari `.buddy/buddy.yml`.
+1. Klik tombol → login Buddy (atau daftar akun baru — gratis). GitHub sudah terpilih otomatis.
+2. Klik repo **Wilykun/WEB_JADIBOT** di baris paling atas (urut update terbaru) → project + pipeline terbentuk otomatis dari `.buddy/buddy.yml`. Nama project ikut nama repo secara otomatis.
 3. Buka Sandbox → jalankan `npm start` → panel live di link publik Buddy (mis. `readsw.24h.sh` — atur domain di pengaturan Sandbox).
+
+Catatan jujur: link tidak bisa memilih repo secara otomatis — Buddy tidak mendukung pra-pilih repo lewat URL (sudah dites 4 varian). Baris paling atas = satu klik, itu jalur tercepat.
 
 Tidak ada yang perlu diedit manual — pipeline, mode, dan data akun ikut dari repo.
 

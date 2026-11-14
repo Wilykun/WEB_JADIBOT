@@ -12,4 +12,4 @@
     execute_commands:
     - "npm install --no-audit --no-fund"
     - "npm run check"
-    - "node --test test/"
+    - "node --test test/*.test.js"
