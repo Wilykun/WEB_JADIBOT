@@ -2263,7 +2263,7 @@ function setMobileInfo(open) {
   authView.classList.toggle('show-mobile-info', open === true);
   mobileInfoToggle?.setAttribute('aria-expanded', String(open === true));
   if (mobileInfoToggle) {
-    mobileInfoToggle.textContent = open === true ? '×' : '⋮';
+    mobileInfoToggle.textContent = open === true ? '×' : '☰';
     mobileInfoToggle.setAttribute('aria-label', open === true ? 'Tutup informasi ReadSW' : 'Buka informasi ReadSW');
   }
   if (open === true) {
