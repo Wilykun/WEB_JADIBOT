@@ -124,8 +124,10 @@ export function maskedNumber(value) {
   const digits = String(value || '').replace(/\D/g, '');
   if (!digits) return '••••••';
   if (digits.length <= 4) return '•'.repeat(digits.length);
-  // Sembunyikan tepat empat digit tengah: awalan maksimal enam digit dan akhiran menyesuaikan supaya selalu ada empat digit yang tertutup.
-  const prefixLength = Math.min(6, Math.max(1, digits.length - 5));
+  // Sembunyikan empat digit tengah dengan akhiran selalu empat digit bila nomornya cukup panjang, supaya tampilannya konsisten seperti 62896****8411.
+  const prefixLength = digits.length >= 9
+    ? Math.min(6, Math.max(1, digits.length - 8))
+    : Math.min(6, Math.max(1, digits.length - 5));
   const suffixLength = digits.length - 4 - prefixLength;
   const prefix = digits.slice(0, prefixLength);
   const suffix = suffixLength ? digits.slice(-suffixLength) : '';
@@ -1120,6 +1122,8 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
               state.reconnectTimer = null;
               scheduleReconnectStableReset(state, socket);
               state.status = 'linked';
+              const linkedDigits = String(state.authState?.state?.creds?.me?.id || socket?.user?.id || '').split('@')[0].split(':')[0].replace(/\D/g, '');
+              if (linkedDigits) state.maskedPhone = maskedNumber(linkedDigits);
               state.code = null;
               state.expiresAt = null;
               state.phoneNumber = null;
@@ -1480,6 +1484,8 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         state.reconnectTimer = null;
         scheduleReconnectStableReset(state, socket);
         state.status = 'linked';
+        const linkedDigits = String(state.authState?.state?.creds?.me?.id || socket?.user?.id || '').split('@')[0].split(':')[0].replace(/\D/g, '');
+        if (linkedDigits) state.maskedPhone = maskedNumber(linkedDigits);
         if (state.onlineDesired) enableOnlinePrivacy(state.socket);
         scheduleOnlinePresence(state);
         if (state.workerDesired) {
