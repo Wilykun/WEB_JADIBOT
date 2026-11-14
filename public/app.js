@@ -2260,13 +2260,20 @@ function setMobileInfoView(view = 'menu') {
 }
 
 function setMobileInfo(open) {
-  authView.classList.toggle('show-mobile-info', open === true);
+  const isDesktop = window.innerWidth > 820;
+  if (isDesktop) {
+    authView.classList.toggle('hide-art', open === true);
+    authView.classList.remove('show-mobile-info');
+  } else {
+    authView.classList.toggle('show-mobile-info', open === true);
+    authView.classList.remove('hide-art');
+  }
   mobileInfoToggle?.setAttribute('aria-expanded', String(open === true));
   if (mobileInfoToggle) {
     mobileInfoToggle.textContent = open === true ? '×' : '☰';
     mobileInfoToggle.setAttribute('aria-label', open === true ? 'Tutup informasi ReadSW' : 'Buka informasi ReadSW');
   }
-  if (open === true) {
+  if (open === true && !isDesktop) {
     setMobileInfoView('menu');
     if (!mobileServerStatusTimer) mobileServerStatusTimer = setInterval(() => { void refreshMobileServerStatus(); }, 5000);
   } else {
@@ -2276,7 +2283,9 @@ function setMobileInfo(open) {
 }
 
 mobileInfoToggle?.addEventListener('click', () => {
-  setMobileInfo(!authView.classList.contains('show-mobile-info'));
+  const isDesktop = window.innerWidth > 820;
+  const isOpen = isDesktop ? authView.classList.contains('hide-art') : authView.classList.contains('show-mobile-info');
+  setMobileInfo(!isOpen);
 });
 
 document.querySelectorAll('[data-mobile-info-tab]').forEach((tab) => {
