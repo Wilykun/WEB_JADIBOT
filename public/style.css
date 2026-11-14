@@ -2833,3 +2833,13 @@ html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
   #admin .member-feature-state{font-size:9px}
   #admin .member-feature-note{font-size:9px;line-height:1.5;text-align:center}
 }
+
+/* Info Update v5: grid detail 2 kolom di mobile/touch — item berdampingan ke samping (label di atas nilai, kembali ke bentuk kartu dasar), item berketerangan membentang 2 kolom */
+@media (max-width:560px),(max-width:1100px) and (hover:none){
+  #admin .member-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  #admin .member-detail-item{display:grid;grid-template-columns:minmax(0,1fr);gap:0;padding:10px 11px}
+  #admin .member-detail-item dd{margin:5px 0 0;text-align:left}
+  #admin .member-detail-item dd:has(.member-detail-note){justify-items:start}
+  #admin .member-detail-item:has(.member-detail-note){grid-column:1/-1}
+  #admin .member-detail-note{text-align:left}
+}
