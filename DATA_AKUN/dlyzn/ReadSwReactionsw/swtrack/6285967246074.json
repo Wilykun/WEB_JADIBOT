@@ -1,0 +1,40 @@
+{
+  "AC4CF5D6F97DB435F16E6804AE580C00": {
+    "id": "AC4CF5D6F97DB435F16E6804AE580C00",
+    "sender": "6285967246074@s.whatsapp.net",
+    "number": "6285967246074",
+    "storyJid": "6285967246074@s.whatsapp.net",
+    "resolvedPn": "6285967246074@s.whatsapp.net",
+    "name": "ayaaku",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4CF5D6F97DB435F16E6804AE580C00",
+      "participant": "146836878786591@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4CF5D6F97DB435F16E6804AE580C00",
+      "participant": "146836878786591@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "146836878786591@lid",
+      "6285967246074@s.whatsapp.net"
+    ],
+    "contactHash": "8410dbbf7c2bf2abbeb8bdea59f70f9153f2c2cf9e1a10f9baa22e70aa7719c8",
+    "arrivedAt": "2026-11-14T07:26:46.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T07:26:46.441Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T07:27:04.644Z",
+    "readAt": "2026-11-14T07:27:04.644Z"
+  }
+}

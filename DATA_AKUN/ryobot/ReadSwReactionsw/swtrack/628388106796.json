@@ -1,0 +1,42 @@
+{
+  "AC874B7AB0525E31E55D4920E5189784": {
+    "id": "AC874B7AB0525E31E55D4920E5189784",
+    "sender": "628388106796@s.whatsapp.net",
+    "number": "628388106796",
+    "storyJid": "628388106796@s.whatsapp.net",
+    "resolvedPn": "628388106796@s.whatsapp.net",
+    "name": "Lee luna",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC874B7AB0525E31E55D4920E5189784",
+      "participant": "226413714125000@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC874B7AB0525E31E55D4920E5189784",
+      "participant": "226413714125000@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "226413714125000@lid",
+      "628388106796@s.whatsapp.net"
+    ],
+    "contactHash": "6507614afd1c993864d724c8f71c3aa951cf6a6d8a3994953aa8ece68c7909d8",
+    "arrivedAt": "2026-11-14T07:10:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T07:10:11.303Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T07:10:25.997Z",
+    "readAt": "2026-11-14T07:10:25.997Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T07:10:25.997Z"
+  }
+}

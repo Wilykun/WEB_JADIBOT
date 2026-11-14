@@ -1,0 +1,42 @@
+{
+  "AC1264166140E9F277F0E766AC492C15": {
+    "id": "AC1264166140E9F277F0E766AC492C15",
+    "sender": "6285325621201@s.whatsapp.net",
+    "number": "6285325621201",
+    "storyJid": "6285325621201@s.whatsapp.net",
+    "resolvedPn": "6285325621201@s.whatsapp.net",
+    "name": "Nurmila Harli",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1264166140E9F277F0E766AC492C15",
+      "participant": "41339228057676@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1264166140E9F277F0E766AC492C15",
+      "participant": "41339228057676@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "41339228057676@lid",
+      "6285325621201@s.whatsapp.net"
+    ],
+    "contactHash": "8e594f0494788c20a9de955613b03a4f80733fe147a7d63d78747416f720e793",
+    "arrivedAt": "2026-11-14T06:20:31.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T06:20:32.064Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T06:20:48.787Z",
+    "readAt": "2026-11-14T06:20:48.782Z",
+    "emoji": "🍕",
+    "reactedAt": "2026-11-14T06:20:48.782Z"
+  }
+}

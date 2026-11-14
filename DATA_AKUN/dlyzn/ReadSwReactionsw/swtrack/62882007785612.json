@@ -1,0 +1,40 @@
+{
+  "AC759B81B9CB3972D4EE3B24378A425C": {
+    "id": "AC759B81B9CB3972D4EE3B24378A425C",
+    "sender": "62882007785612@s.whatsapp.net",
+    "number": "62882007785612",
+    "storyJid": "62882007785612@s.whatsapp.net",
+    "resolvedPn": "62882007785612@s.whatsapp.net",
+    "name": "Kai Sane",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC759B81B9CB3972D4EE3B24378A425C",
+      "participant": "196580988686347@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC759B81B9CB3972D4EE3B24378A425C",
+      "participant": "196580988686347@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "196580988686347@lid",
+      "62882007785612@s.whatsapp.net"
+    ],
+    "contactHash": "0d8cb895cb7b7fc9c8d8bd771941dad66a44b7c95522c6e8782ca428591f2862",
+    "arrivedAt": "2026-11-14T06:14:08.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T06:14:09.295Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T06:14:27.298Z",
+    "readAt": "2026-11-14T06:14:27.297Z"
+  }
+}

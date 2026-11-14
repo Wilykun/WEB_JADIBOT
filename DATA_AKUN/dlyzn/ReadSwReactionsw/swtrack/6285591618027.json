@@ -1,0 +1,40 @@
+{
+  "ACFC568C9D3C743B533780CF65B433DA": {
+    "id": "ACFC568C9D3C743B533780CF65B433DA",
+    "sender": "6285591618027@s.whatsapp.net",
+    "number": "6285591618027",
+    "storyJid": "6285591618027@s.whatsapp.net",
+    "resolvedPn": "6285591618027@s.whatsapp.net",
+    "name": "✿vii♡♪",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFC568C9D3C743B533780CF65B433DA",
+      "participant": "131087552524355@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFC568C9D3C743B533780CF65B433DA",
+      "participant": "131087552524355@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "131087552524355@lid",
+      "6285591618027@s.whatsapp.net"
+    ],
+    "contactHash": "156dd969687f96792457c56d8a64abfeb039ad638011cfb8b3955d84909893da",
+    "arrivedAt": "2026-11-14T06:45:33.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T06:45:33.944Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T06:45:41.047Z",
+    "readAt": "2026-11-14T06:45:41.047Z"
+  }
+}

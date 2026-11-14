@@ -1,0 +1,40 @@
+{
+  "AC79DB6E38809A385796193AFF594DD5": {
+    "id": "AC79DB6E38809A385796193AFF594DD5",
+    "sender": "60135546796@s.whatsapp.net",
+    "number": "60135546796",
+    "storyJid": "60135546796@s.whatsapp.net",
+    "resolvedPn": "60135546796@s.whatsapp.net",
+    "name": "Affienzzy_-.XII",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC79DB6E38809A385796193AFF594DD5",
+      "participant": "88764240162963@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC79DB6E38809A385796193AFF594DD5",
+      "participant": "88764240162963@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "88764240162963@lid",
+      "60135546796@s.whatsapp.net"
+    ],
+    "contactHash": "0cfdb8ac0b0b10a0f345e811e4d5ea207d72ef368cbd4127fb10c124f3c9ff6b",
+    "arrivedAt": "2026-11-14T05:57:35.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T05:57:35.430Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T05:57:54.633Z",
+    "readAt": "2026-11-14T05:57:54.633Z"
+  }
+}

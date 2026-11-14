@@ -1,0 +1,42 @@
+{
+  "ACCB5C6A3484B7FAA165F88F590698E7": {
+    "id": "ACCB5C6A3484B7FAA165F88F590698E7",
+    "sender": "6285141357607@s.whatsapp.net",
+    "number": "6285141357607",
+    "storyJid": "6285141357607@s.whatsapp.net",
+    "resolvedPn": "6285141357607@s.whatsapp.net",
+    "name": "G2 Toii",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCB5C6A3484B7FAA165F88F590698E7",
+      "participant": "151935004991541@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCB5C6A3484B7FAA165F88F590698E7",
+      "participant": "151935004991541@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "151935004991541@lid",
+      "6285141357607@s.whatsapp.net"
+    ],
+    "contactHash": "2ed12782467cc2b64e84e8197cf69161867d3419e335dfcc4453a2aed4639c6a",
+    "arrivedAt": "2026-11-14T07:17:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T07:17:03.224Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T07:17:10.269Z",
+    "readAt": "2026-11-14T07:17:10.267Z",
+    "emoji": "🌭",
+    "reactedAt": "2026-11-14T07:17:10.267Z"
+  }
+}

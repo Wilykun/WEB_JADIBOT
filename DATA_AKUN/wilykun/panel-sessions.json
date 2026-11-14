@@ -80,11 +80,21 @@
       "terakhirAktif": "2026-11-14T05:09:48.352Z",
       "terakhirAktifWIB": "Sabtu, 14 November 2026 pukul 12.09.48 WIB",
       "berakhir": "2026-11-21T05:09:48.352Z"
+    },
+    {
+      "sid": "96a6b9c1",
+      "ip": "103.153.247.218",
+      "device": "Desktop · Windows 10.0 · Chrome 157.0.0.0",
+      "dibuat": "2026-11-14T06:00:26.181Z",
+      "dibuatWIB": "Sabtu, 14 November 2026 pukul 13.00.26 WIB",
+      "terakhirAktif": "2026-11-14T07:47:31.845Z",
+      "terakhirAktifWIB": "Sabtu, 14 November 2026 pukul 14.47.31 WIB",
+      "berakhir": "2026-11-21T06:00:26.178Z"
     }
   ],
   "loginTerakhir": {
-    "waktu": "2026-11-14T05:11:33.094Z",
-    "waktuWIB": "Sabtu, 14 November 2026 pukul 12.11.33 WIB",
+    "waktu": "2026-11-14T06:00:26.181Z",
+    "waktuWIB": "Sabtu, 14 November 2026 pukul 13.00.26 WIB",
     "ip": "103.153.247.218",
     "device": "Desktop · Windows 10.0 · Chrome 157.0.0.0"
   }

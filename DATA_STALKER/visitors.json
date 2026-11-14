@@ -2159,6 +2159,762 @@
         "browser": "Chrome 156.0.8078.47",
         "model": "2312DRAABG"
       }
+    },
+    {
+      "id": "452bee441ac0c42a9d11b43109c29713b5d4b0f41af642ea",
+      "firstSeen": 1794635746203,
+      "lastSeen": 1794635746203,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "f0febc6ba1eb9131fd6d460714cd7ff2523b90b73c35f2b7",
+      "firstSeen": 1794635871869,
+      "lastSeen": 1794635871869,
+      "hits": 1,
+      "device": {
+        "category": "HP",
+        "os": "iOS 18.5",
+        "browser": "Safari 18.5",
+        "model": "iPhone"
+      }
+    },
+    {
+      "id": "42e35b6756f6278ea7a9177dac0aa17b3f913517e198e7e3",
+      "firstSeen": 1794635871872,
+      "lastSeen": 1794635871872,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Windows 10.0",
+        "browser": "Chrome 137.0.0.0",
+        "model": null
+      }
+    },
+    {
+      "id": "e28742463a8dc9508dbc7d866854310575a11b05d1763ecf",
+      "firstSeen": 1794636046203,
+      "lastSeen": 1794636046203,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "92c55295eee334d0494d412bdb2159b38bfff43205d7af54",
+      "firstSeen": 1794636234826,
+      "lastSeen": 1794636234826,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "4dd1334ab24cc8466c42d7cf2aedabf8cac86b477185081a",
+      "firstSeen": 1794636271335,
+      "lastSeen": 1794636271335,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "23539dcfaf0befa40703e2870a917d2548ea4e7c2bf28f7a",
+      "firstSeen": 1794636346204,
+      "lastSeen": 1794636346204,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "0d5f60a6daeac0a24cf9eb4dddcb828e44a3e7ca8e72c307",
+      "firstSeen": 1794636646205,
+      "lastSeen": 1794636646205,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "6bc7d23cbc9bdfeccaf4e72d2e2a2857d37a7f71544b833a",
+      "firstSeen": 1794636871868,
+      "lastSeen": 1794636871868,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "9bef4d38e29e93be9791696ea098163512a5d5fb830324fe",
+      "firstSeen": 1794636910542,
+      "lastSeen": 1794636911339,
+      "hits": 2,
+      "device": {
+        "category": "Desktop",
+        "os": "Windows 10.0",
+        "browser": "Chrome 157.0.8103.38",
+        "model": null
+      }
+    },
+    {
+      "id": "033dc74ae9d746549688da684a1141bf6176e5a61d27a5ea",
+      "firstSeen": 1794636918536,
+      "lastSeen": 1794636919358,
+      "hits": 2,
+      "device": {
+        "category": "HP",
+        "os": "iOS 18.5",
+        "browser": "Safari 18.5",
+        "model": "iPhone"
+      }
+    },
+    {
+      "id": "e14ad7628492c3aab497541a85d365998257c6286e4e0e01",
+      "firstSeen": 1794636946206,
+      "lastSeen": 1794636946206,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "b097ff5ba2773f3c153d6de8f3f8911f3787270b68ba1fb4",
+      "firstSeen": 1794637246206,
+      "lastSeen": 1794637246206,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "c6db4f0ae228d5a69b35de8c3ae95fc2a27e296e5e748a63",
+      "firstSeen": 1794637470041,
+      "lastSeen": 1794637470041,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "b0a2a95adc2e9989fda0bf4f3e98fe8b96a382b3f9625164",
+      "firstSeen": 1794637546208,
+      "lastSeen": 1794637546208,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "3a222bdf2e220eec15d859be2f47d8fb7cca1716e84a9dfb",
+      "firstSeen": 1794637846208,
+      "lastSeen": 1794637846208,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "a80710bb7b4798796243aed707e21516bf4fdc50fce9ad16",
+      "firstSeen": 1794638004339,
+      "lastSeen": 1794638004339,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "b55af39c2c533a98b63d9b22f210bb3f534d543af8f0342d",
+      "firstSeen": 1794638011597,
+      "lastSeen": 1794638011597,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "ad76e71395dd05f4846e20cdf538ec377850800228f20ce9",
+      "firstSeen": 1794638071359,
+      "lastSeen": 1794638071359,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "5a6cab912a670e9bd6e1bae381418af953c130e21867b24b",
+      "firstSeen": 1794638079616,
+      "lastSeen": 1794638079616,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "aaea4e994c37ea62f7f5cbb26c726875738c59679ea63ca9",
+      "firstSeen": 1794638146212,
+      "lastSeen": 1794638146212,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "4f1c88fcf9de0bbb4b6155db05619e243351a956f78b124f",
+      "firstSeen": 1794638366016,
+      "lastSeen": 1794638366016,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "693dd26b9508a02589dc7d2fa099cdd7f8c35765f7ed6740",
+      "firstSeen": 1794638446210,
+      "lastSeen": 1794638446210,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "fb718a6cb7d9aa50779ab1a4ea21a9842f414274d25c6244",
+      "firstSeen": 1794638675828,
+      "lastSeen": 1794638675828,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "7b8b7feebe779c1e676acfcc35a4f158335ae5cda7126d9a",
+      "firstSeen": 1794638746211,
+      "lastSeen": 1794638746211,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "0e9bf5668ea51b787b7768139c81834b61b708f2c5dd924d",
+      "firstSeen": 1794639046212,
+      "lastSeen": 1794639046212,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "c9968392d36d4c7eaed44778fbfd2f8cf6a1eb231ff91655",
+      "firstSeen": 1794639273629,
+      "lastSeen": 1794639273629,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "407689736a58a7fbc93aa979ac3cd5853a71a50e375fbe42",
+      "firstSeen": 1794639298749,
+      "lastSeen": 1794639298749,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "17a0f6536b820bb08826c05281f3fbe83c142ddc69e5b467",
+      "firstSeen": 1794639298807,
+      "lastSeen": 1794639298807,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "fbf0ee2404f932faf53403ece9eeaca425c071c291802e7d",
+      "firstSeen": 1794639308131,
+      "lastSeen": 1794639308131,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "d249c58353d534fea8fd663eb88806783250d3f2ea810f04",
+      "firstSeen": 1794639346211,
+      "lastSeen": 1794639346211,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "729ad8991f1d931d09200443509af9da8176866dc8142fca",
+      "firstSeen": 1794639599152,
+      "lastSeen": 1794639599152,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "ef3d3dd35a947b48cc45c39793e4f27df2ca3e071709808e",
+      "firstSeen": 1794639609825,
+      "lastSeen": 1794639609825,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "cb02660f52ae9a4f71628b828199146ac2aa092d89753a0d",
+      "firstSeen": 1794639646212,
+      "lastSeen": 1794639646212,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "3d63837ac0c1b3e0d2d510c378269d891a08c50356052bcb",
+      "firstSeen": 1794639875370,
+      "lastSeen": 1794639875370,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "559d0ad54f117c2645f00bae8b21a37b10fc845f749c95a9",
+      "firstSeen": 1794639946212,
+      "lastSeen": 1794639946212,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "5a7d08c031cfe19f405bfb88c3c477d3e49c8db639adaa21",
+      "firstSeen": 1794640246214,
+      "lastSeen": 1794640246214,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "8d05f05a0a8a5079b36c17103c6b3df21de6f9f882b24e9f",
+      "firstSeen": 1794640279869,
+      "lastSeen": 1794640281515,
+      "hits": 2,
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Chrome 116.0.0.0",
+        "model": null
+      }
+    },
+    {
+      "id": "beed113ef525d6b2dc99e08eff1c85d02ffb8553455afff6",
+      "firstSeen": 1794640280011,
+      "lastSeen": 1794640280011,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Chrome 116.0.0.0",
+        "model": null
+      }
+    },
+    {
+      "id": "014c620a720c655ede5fae7da5051ee7a9eb748573881299",
+      "firstSeen": 1794640476791,
+      "lastSeen": 1794640476791,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "787e26975580c7d7add2fc552c354ee113a8895ea24f8f6c",
+      "firstSeen": 1794640546213,
+      "lastSeen": 1794640546213,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "37d9bdce227ead6f659f3c64ad00f393a08c343175016e15",
+      "firstSeen": 1794640599850,
+      "lastSeen": 1794640599850,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "607a59173635563b5530f01f3d3cbea8023d3966407c99c7",
+      "firstSeen": 1794640619745,
+      "lastSeen": 1794640619745,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "2f29ff74ee506a086701f44cf2fc0016a41042576ef4c79c",
+      "firstSeen": 1794640731274,
+      "lastSeen": 1794640731274,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "ffbb70721604506e368009ad7a4f46395a5818e7a4030d4b",
+      "firstSeen": 1794640846214,
+      "lastSeen": 1794640846214,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "e193cc0fca7ecbf484d9aeef2009ceffefddbd013712e74d",
+      "firstSeen": 1794640987991,
+      "lastSeen": 1794640987991,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "ab5d2ad38f25a5be471590cfd3795fc2057a3ba8c36d3fe9",
+      "firstSeen": 1794641077451,
+      "lastSeen": 1794641077451,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "78c3cd6782f857d0a882e7b668126bf3eec4ebb58c0e5982",
+      "firstSeen": 1794641146214,
+      "lastSeen": 1794641146214,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "bf6ba3399356117737416742fa3ac842dc8597fcb2589c7e",
+      "firstSeen": 1794641226484,
+      "lastSeen": 1794641226484,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Firefox 117.0",
+        "model": null
+      }
+    },
+    {
+      "id": "8a502b5a5765f1705cfea321c413cd1dfb2b920413e26c0a",
+      "firstSeen": 1794641226760,
+      "lastSeen": 1794641226760,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Firefox 117.0",
+        "model": null
+      }
+    },
+    {
+      "id": "e46f1445ccecb024101a34c0d23c07e426c7515e11fcb1aa",
+      "firstSeen": 1794641226777,
+      "lastSeen": 1794641226777,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Firefox 117.0",
+        "model": null
+      }
+    },
+    {
+      "id": "af4fe9dcdf5f7017d2aa2016a05e29ce1923772687fa93c2",
+      "firstSeen": 1794641226780,
+      "lastSeen": 1794641226780,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Firefox 117.0",
+        "model": null
+      }
+    },
+    {
+      "id": "dce931464c434f1b7d1dc73b6a1b3969144fa7abd686803a",
+      "firstSeen": 1794641226999,
+      "lastSeen": 1794641226999,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Firefox 117.0",
+        "model": null
+      }
+    },
+    {
+      "id": "f7462fde62a8555f1aff6f3ac49d9974fa95eee746042351",
+      "firstSeen": 1794641227011,
+      "lastSeen": 1794641227011,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Firefox 117.0",
+        "model": null
+      }
+    },
+    {
+      "id": "1fbb435cef9c57e335d36859076c52ca545e78475556c7f6",
+      "firstSeen": 1794641521000,
+      "lastSeen": 1794641521000,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "fa8e25dacc1a9c07acdf4106e56f8b1dc3f96690ff0be20c",
+      "firstSeen": 1794641559267,
+      "lastSeen": 1794641559267,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "f2e4509c5199ca05c35b5c9aa4cd247c01e6c9c19cc01e83",
+      "firstSeen": 1794641559380,
+      "lastSeen": 1794641559380,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "68ce9030b3a93d50ea88e5af9ff182b929675d6c4ceb9884",
+      "firstSeen": 1794641674200,
+      "lastSeen": 1794641674200,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "adaa0ac07145b02d4a2f2bd7d49ac30648277bcbc7f0528e",
+      "firstSeen": 1794641726836,
+      "lastSeen": 1794641726836,
+      "hits": 1,
+      "device": {
+        "category": "HP",
+        "os": "iOS 18.3.2",
+        "browser": "Safari 18.3.1",
+        "model": "iPhone"
+      }
+    },
+    {
+      "id": "76dc490b0309e2345bd1e48474de726d9c494788e5e86e57",
+      "firstSeen": 1794641746215,
+      "lastSeen": 1794641746215,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "8373308d3dbf69643950bbdd10b6ff48baf2bee20872f146",
+      "firstSeen": 1794642046215,
+      "lastSeen": 1794642046215,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "af6fc2288ab1ee2f6d750648bbdc94bf74f2e224ea0d2569",
+      "firstSeen": 1794642273032,
+      "lastSeen": 1794642273032,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
+    },
+    {
+      "id": "ddde1721a4677dafd67516398796b92bfbd9692a98e9ab04",
+      "firstSeen": 1794642346214,
+      "lastSeen": 1794642346214,
+      "hits": 1,
+      "device": {
+        "category": "Desktop",
+        "os": "Tidak diketahui",
+        "browser": "Tidak diketahui",
+        "model": null
+      }
     }
   ]
 }

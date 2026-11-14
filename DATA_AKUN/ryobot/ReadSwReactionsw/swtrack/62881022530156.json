@@ -1,0 +1,42 @@
+{
+  "ACE52A38B673C717B993089910CCBA63": {
+    "id": "ACE52A38B673C717B993089910CCBA63",
+    "sender": "62881022530156@s.whatsapp.net",
+    "number": "62881022530156",
+    "storyJid": "62881022530156@s.whatsapp.net",
+    "resolvedPn": "62881022530156@s.whatsapp.net",
+    "name": "zhang xiao mei",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE52A38B673C717B993089910CCBA63",
+      "participant": "229832994611315@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE52A38B673C717B993089910CCBA63",
+      "participant": "229832994611315@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "229832994611315@lid",
+      "62881022530156@s.whatsapp.net"
+    ],
+    "contactHash": "7ae94c2105d2aba13aa47290aea06401b237e9246d9ed57789b7446fdfca53e8",
+    "arrivedAt": "2026-11-14T07:06:44.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T07:06:44.501Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T07:06:47.346Z",
+    "readAt": "2026-11-14T07:06:47.345Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T07:06:47.345Z"
+  }
+}

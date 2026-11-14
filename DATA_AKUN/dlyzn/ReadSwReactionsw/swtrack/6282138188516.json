@@ -1,0 +1,40 @@
+{
+  "AC27424FB44B65EC78FEBB712F9D8647": {
+    "id": "AC27424FB44B65EC78FEBB712F9D8647",
+    "sender": "6282138188516@s.whatsapp.net",
+    "number": "6282138188516",
+    "storyJid": "6282138188516@s.whatsapp.net",
+    "resolvedPn": "6282138188516@s.whatsapp.net",
+    "name": "Wicaksono",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC27424FB44B65EC78FEBB712F9D8647",
+      "participant": "69445343023169@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC27424FB44B65EC78FEBB712F9D8647",
+      "participant": "69445343023169@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "69445343023169@lid",
+      "6282138188516@s.whatsapp.net"
+    ],
+    "contactHash": "822bcf6f34b99379cbaaff0c0d3b267de8643b3541c98f45c42c3e5e263285a6",
+    "arrivedAt": "2026-11-14T07:17:11.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T07:17:11.916Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T07:17:28.119Z",
+    "readAt": "2026-11-14T07:17:28.119Z"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "A57558CAFDCA213D3A76DD9C3D296CAF": {
+    "id": "A57558CAFDCA213D3A76DD9C3D296CAF",
+    "sender": "628175056777@s.whatsapp.net",
+    "number": "628175056777",
+    "storyJid": "628175056777@s.whatsapp.net",
+    "resolvedPn": "628175056777@s.whatsapp.net",
+    "name": "kirana pentol",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A57558CAFDCA213D3A76DD9C3D296CAF",
+      "participant": "96916658503723@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A57558CAFDCA213D3A76DD9C3D296CAF",
+      "participant": "96916658503723@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "96916658503723@lid",
+      "628175056777@s.whatsapp.net"
+    ],
+    "contactHash": "76c50e6c23994d6e1b0bf218dab75f24868e9b59ec96b2e42e34d176e024b310",
+    "arrivedAt": "2026-11-14T06:26:29.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T06:26:30.270Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T06:26:47.273Z",
+    "readAt": "2026-11-14T06:26:47.272Z"
+  }
+}
