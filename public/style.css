@@ -2798,3 +2798,9 @@ html[data-theme="light"] .sidebar-account-status{border-color:rgba(39,137,78,.2)
 html[data-theme="light"] .sidebar-account-status-copy strong{color:#173a26;}
 html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
 @media(max-width:560px){.sidebar-account-status{margin-bottom:12px;padding:9px 10px;}.sidebar-account-status-icon{width:29px;height:29px;font-size:18px;}.sidebar-account-status-copy strong{font-size:11px;}}
+.info-update-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.info-update-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;padding:12px 13px;border:1px solid rgba(169,222,187,.12);border-radius:13px;background:rgba(11,31,19,.5)}
+.info-update-date{margin-top:1px;padding:4px 8px;border-radius:999px;background:rgba(49,213,139,.14);color:#7fe6ab;font-size:10px;font-weight:700;white-space:nowrap}
+.info-update-item h4{margin:0 0 3px;color:#e8f4eb;font-size:13px;letter-spacing:-.2px}
+.info-update-item p{margin:0;color:#99b0a1;font-size:11px;line-height:1.6}
+@media(max-width:560px){.info-update-item{grid-template-columns:minmax(0,1fr)}.info-update-date{justify-self:start}}
