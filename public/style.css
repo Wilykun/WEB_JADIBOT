@@ -1613,16 +1613,6 @@ html[data-theme="light"] #admin .member-story-stat{border-color:#e1e8e3;backgrou
   #admin .member-detail-item dd{text-align:center}
 }
 
-/* Center the panel-activity detail text on phone-sized screens, including wide phones that still use the two-column detail grid. The note has its own explicit alignment in the final mobile blocks, so it is targeted directly. */
-@media (max-width:560px),(max-width:1100px) and (hover:none){
-  #admin .member-detail-item.member-activity-item,
-  #admin .member-detail-item.member-activity-item dt,
-  #admin .member-detail-item.member-activity-item dd{text-align:center}
-  #admin .member-detail-item.member-activity-item dt{justify-content:center}
-  #admin .member-detail-item.member-activity-item dd:has(.member-detail-note){justify-items:center}
-  #admin .member-detail-item.member-activity-item .member-detail-note{text-align:center}
-}
-
 /* Ensure the identity and disclosure control stretch/center inside the phone card. */
 @media(max-width:560px){
   #admin .member-account-top-row{align-items:center}
@@ -2865,4 +2855,13 @@ html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
   #admin .member-detail-item dd:has(.member-detail-note){justify-items:start}
   #admin .member-detail-item:has(.member-detail-note){grid-column:1/-1}
   #admin .member-detail-note{text-align:left}
+}
+
+/* Semua teks detail member rata tengah di HP (touch) — label, nilai, dan catatan di setiap kartu detail; catatan punya aturan alignment sendiri di blok mobile, jadi ditarget langsung. */
+@media (max-width:560px),(max-width:1100px) and (hover:none){
+  #admin .member-detail-grid .member-detail-item dt,
+  #admin .member-detail-grid .member-detail-item dd{text-align:center}
+  #admin .member-detail-grid .member-detail-item dt{justify-content:center}
+  #admin .member-detail-grid .member-detail-item dd:has(.member-detail-note){justify-items:center}
+  #admin .member-detail-grid .member-detail-item .member-detail-note{text-align:center}
 }

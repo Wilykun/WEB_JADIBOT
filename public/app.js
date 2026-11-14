@@ -1025,7 +1025,6 @@ async function loadAdminUsers() {
           } else {
             description.textContent = detailInfo.value;
           }
-          if (detailInfo.label === 'Aktivitas panel') item.classList.add('member-activity-item');
           if (detailInfo.label === 'Runtime bot') {
             description.dataset.workerRuntime = user.workerStatus === 'running' ? String(user.workerStartedAt || '') : '';
             description.classList.add('member-worker-runtime');
