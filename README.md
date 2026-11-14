@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://readsw.24h.sh/"><img src="https://img.shields.io/badge/Panel_Live-readsw.24h.sh-00C853?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Panel Live"></a>
-  <a href="https://app.buddy.works/ukosamasomoni9140/create-project"><img src="https://img.shields.io/badge/Run_on_Buddy-FF6B35?style=for-the-badge&logo=rocket&logoColor=white" alt="Run on Buddy"></a>
+  <a href="https://app.buddy.works/ukosamasomoni9140/-/create-project"><img src="https://img.shields.io/badge/Run_on_Buddy-FF6B35?style=for-the-badge&logo=rocket&logoColor=white" alt="Run on Buddy"></a>
 </p>
 
 <p align="center">
