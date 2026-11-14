@@ -289,6 +289,29 @@ export async function saveGoodSnapshot(authDir) {
   }
 }
 
+export const BACKUP_FILENAME = 'session.json.bak';
+export const BACKUP_MIN_INTERVAL_MS = 15 * 60 * 1000;
+const sessionBackupLastWrite = new Map();
+
+// Menyalin session.json ke cadangan otomatis secara berkala, supaya file sesi yang hilang atau rusak bisa dipulihkan tanpa pairing ulang.
+export async function saveSessionBackup(authDir, { force = false } = {}) {
+  if (!authDir) return false;
+  try {
+    const lastWrite = sessionBackupLastWrite.get(authDir) || 0;
+    if (!force && Date.now() - lastWrite < BACKUP_MIN_INTERVAL_MS) return false;
+    const current = await readSnapshotFile(path.join(authDir, 'session.json'));
+    if (!isUsableAuthSnapshot(current) || !snapshotMeId(current)) return false;
+    await writeFileAtomically(
+      path.join(authDir, BACKUP_FILENAME),
+      JSON.stringify(current),
+    );
+    sessionBackupLastWrite.set(authDir, Date.now());
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export const RUNTIME_FILENAME = 'runtime.json';
 
 function normalizeBotRuntime(value) {
@@ -331,20 +354,29 @@ export async function deleteBotRuntime(authDir) {
   }
 }
 
-// Mengembalikan salinan sesi sehat ke session.json, menolak bila nomor perangkatnya berbeda dari sesi yang sedang dipakai.
-export async function restoreGoodSnapshot(authDir) {
+// Mengembalikan satu salinan sesi ke session.json, menolak bila nomor perangkatnya berbeda dari sesi yang sedang dipakai.
+async function restoreSnapshotFile(authDir, filename) {
   if (!authDir) return false;
   try {
-    const goodFile = path.join(authDir, GOOD_SNAPSHOT_FILENAME);
-    const good = await readSnapshotFile(goodFile);
-    if (!isUsableAuthSnapshot(good)) return false;
+    const snapshot = await readSnapshotFile(path.join(authDir, filename));
+    if (!isUsableAuthSnapshot(snapshot)) return false;
     const live = await readSnapshotFile(path.join(authDir, 'session.json'));
-    if (live && snapshotMeId(live) && snapshotMeId(good) && snapshotMeId(live) !== snapshotMeId(good)) return false;
-    await writeFileAtomically(path.join(authDir, 'session.json'), JSON.stringify(good));
+    if (live && snapshotMeId(live) && snapshotMeId(snapshot) && snapshotMeId(live) !== snapshotMeId(snapshot)) return false;
+    await writeFileAtomically(path.join(authDir, 'session.json'), JSON.stringify(snapshot));
     return true;
   } catch {
     return false;
   }
+}
+
+// Mengembalikan salinan sesi sehat ke session.json, menolak bila nomor perangkatnya berbeda dari sesi yang sedang dipakai.
+export async function restoreGoodSnapshot(authDir) {
+  return restoreSnapshotFile(authDir, GOOD_SNAPSHOT_FILENAME);
+}
+
+// Mengembalikan cadangan sesi otomatis ke session.json, menolak bila nomor perangkatnya berbeda dari sesi yang sedang dipakai.
+export async function restoreSessionBackup(authDir) {
+  return restoreSnapshotFile(authDir, BACKUP_FILENAME);
 }
 
 export function createPairingManager({ dataDir, appendLog, getAuthDir = () => null, getStorySettings = () => null, getOnline24 = () => false, getWorkerAutoStart = () => false, setWorkerAutoStart = async () => {}, ensureDefaultBot = async () => false }) {
@@ -613,6 +645,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
   function snapshotGoodSession(state) {
     if (!state?.authDir) return;
     void saveGoodSnapshot(state.authDir);
+    void saveSessionBackup(state.authDir);
   }
 
   async function loadRuntimeIntoState(state) {
@@ -690,12 +723,19 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         await log(state.userId, 'Sesi WhatsApp pulih otomatis tanpa pairing ulang.');
         return true;
       }
-      const rolledBack = await restoreGoodSnapshot(state.authDir);
+      const rolledBackGood = await restoreGoodSnapshot(state.authDir);
+      let rolledBack = rolledBackGood;
       if (!rolledBack) {
-        await log(state.userId, 'Tidak ada cadangan sesi sehat untuk dipulihkan; pairing ulang diperlukan.');
+        await log(state.userId, 'Cadangan sesi terakhir yang sehat tidak dapat dipakai; mencoba cadangan sesi otomatis.');
+        rolledBack = await restoreSessionBackup(state.authDir);
+      }
+      if (!rolledBack) {
+        await log(state.userId, 'Tidak ada cadangan sesi untuk dipulihkan; pairing ulang diperlukan.');
         return false;
       }
-      await log(state.userId, 'Cadangan sesi terakhir yang sehat dipulihkan; mencoba sambung ulang.');
+      await log(state.userId, rolledBackGood
+        ? 'Cadangan sesi terakhir yang sehat dipulihkan; mencoba sambung ulang.'
+        : 'Cadangan sesi otomatis dipulihkan; mencoba sambung ulang.');
       state.authState = null;
       state.status = 'recovering';
       clearTimeout(state.reconnectTimer);
@@ -703,7 +743,9 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       if (wasAutoStart) await setWorkerAutoStart(state.userId, true);
       if (await tryResumeAndWait(state)) {
         state.autoStartBeforeInvalid = undefined;
-        await log(state.userId, 'Sesi WhatsApp pulih otomatis dari cadangan terakhir yang sehat.');
+        await log(state.userId, rolledBackGood
+          ? 'Sesi WhatsApp pulih otomatis dari cadangan terakhir yang sehat.'
+          : 'Sesi WhatsApp pulih otomatis dari cadangan sesi otomatis.');
         return true;
       }
       return false;
@@ -1272,7 +1314,9 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         state.socket = socket;
         captureEarlyHistoryStories(state, socket);
         socket.ev.on('creds.update', () => {
-          void state.authState.saveCreds().catch(() => {
+          void state.authState.saveCreds().then(() => {
+            void saveSessionBackup(state.authDir);
+          }).catch(() => {
             void log(userId, 'Peringatan: perubahan kredensial WhatsApp gagal tersimpan ke disk.');
           });
         });
@@ -1723,7 +1767,9 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     captureEarlyHistoryStories(state, socket);
     sessions.set(userId, state);
     socket.ev.on('creds.update', () => {
-      void authState.saveCreds().catch(() => {
+      void authState.saveCreds().then(() => {
+        void saveSessionBackup(state.authDir);
+      }).catch(() => {
         void log(userId, 'Peringatan: perubahan kredensial WhatsApp gagal tersimpan ke disk.');
       });
     });
@@ -1818,6 +1864,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       }
       await removeUserAuth(userId, authDir);
       await fs.rm(path.join(authDir, GOOD_SNAPSHOT_FILENAME), { force: true }).catch(() => {});
+      await fs.rm(path.join(authDir, BACKUP_FILENAME), { force: true }).catch(() => {});
       resetRuntime(state);
       sessions.delete(userId);
       cooldowns.delete(userId);
