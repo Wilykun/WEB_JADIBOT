@@ -1,0 +1,40 @@
+{
+  "AC8856D5858113B1BB1E5FA937123D8A": {
+    "id": "AC8856D5858113B1BB1E5FA937123D8A",
+    "sender": "6289649931767@s.whatsapp.net",
+    "number": "6289649931767",
+    "storyJid": "6289649931767@s.whatsapp.net",
+    "resolvedPn": "6289649931767@s.whatsapp.net",
+    "name": "Maz Ali📍 Jatim",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8856D5858113B1BB1E5FA937123D8A",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8856D5858113B1BB1E5FA937123D8A",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "166971232534706@lid",
+      "6289649931767@s.whatsapp.net"
+    ],
+    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
+    "arrivedAt": "2026-11-14T04:59:38.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T04:59:39.045Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T04:59:58.350Z",
+    "readAt": "2026-11-14T04:59:58.350Z"
+  }
+}

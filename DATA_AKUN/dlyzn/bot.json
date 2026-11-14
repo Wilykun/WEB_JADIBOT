@@ -1,0 +1,24 @@
+{
+  "id": "756444e3-0559-4198-ad48-41f3e47fbd3a",
+  "label": "dlyzn bot",
+  "mode": "readonly",
+  "storySettings": {
+    "autoReaction": false,
+    "delayMinSeconds": 1,
+    "delayMaxSeconds": 20,
+    "randomDelay": true,
+    "emojiPoolVersion": 2,
+    "emojiOptions": [
+      "💠",
+      "😹"
+    ],
+    "emojiPool": [
+      "💠",
+      "😹"
+    ]
+  },
+  "autoStart": true,
+  "runnerStatus": "not_connected",
+  "createdAt": "2026-11-14T04:54:14.983Z",
+  "updatedAt": "2026-11-14T05:04:11.972Z"
+}

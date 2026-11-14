@@ -1,0 +1,40 @@
+{
+  "3A7F84426746481FA2A9A0D214B43303": {
+    "id": "3A7F84426746481FA2A9A0D214B43303",
+    "sender": "62881010336766@s.whatsapp.net",
+    "number": "62881010336766",
+    "storyJid": "62881010336766@s.whatsapp.net",
+    "resolvedPn": "62881010336766@s.whatsapp.net",
+    "name": "cipuyy",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3A7F84426746481FA2A9A0D214B43303",
+      "participant": "75987081547926@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3A7F84426746481FA2A9A0D214B43303",
+      "participant": "75987081547926@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "75987081547926@lid",
+      "62881010336766@s.whatsapp.net"
+    ],
+    "contactHash": "70558a1a8f00940fb75fdc67128332599eeedc9a0ea11d929f8e46397dcf8efd",
+    "arrivedAt": "2026-11-14T05:22:02.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T05:22:03.153Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T05:22:13.656Z",
+    "readAt": "2026-11-14T05:22:13.655Z"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "40a98b94-c8ec-48c1-ba25-f94152adaa10",
+  "label": "bangwily bot",
+  "mode": "readonly_readsw",
+  "storySettings": {
+    "autoReaction": true,
+    "delayMinSeconds": 1,
+    "delayMaxSeconds": 20,
+    "randomDelay": true,
+    "emojiPoolVersion": 2,
+    "emojiOptions": [
+      "💚",
+      "🐼",
+      "🐸",
+      "🦓",
+      "🐴",
+      "🦄",
+      "🐔",
+      "🐲",
+      "🌭",
+      "🍟",
+      "🍔",
+      "🍕",
+      "🍤",
+      "🍣",
+      "🍃"
+    ],
+    "emojiPool": [
+      "💚",
+      "🐼",
+      "🐸",
+      "🦓",
+      "🐴",
+      "🦄",
+      "🐔",
+      "🐲",
+      "🌭",
+      "🍟",
+      "🍔",
+      "🍕",
+      "🍤",
+      "🍣",
+      "🍃"
+    ]
+  },
+  "autoStart": true,
+  "runnerStatus": "not_connected",
+  "createdAt": "2026-11-14T04:07:49.439Z",
+  "updatedAt": "2026-11-14T05:20:59.336Z"
+}

@@ -1,0 +1,30 @@
+{
+  "username": "ryobot",
+  "status": "linked",
+  "nomorTertaut": "62812****7083",
+  "workerStatus": "running",
+  "terakhirUpdate": "2026-11-14T05:54:35.148Z",
+  "logTerakhir": {
+    "event": "Story story · Read + Reaction ✓ · 💚 · delay 4.1 dtk",
+    "details": {
+      "kind": "story",
+      "mode": "Read+Reaction ✓",
+      "mediaType": "Story 📖",
+      "storyId": "ACB974DD···44EC",
+      "greeting": "Siang 🌤️",
+      "dayName": "Sabtu",
+      "date": "14 Nov 2026",
+      "time": "12.54",
+      "name": "Tidak tersedia",
+      "number": "6289****040",
+      "storyCount": 1,
+      "emojiMode": "Custom 🟢",
+      "success": "Read + Reaction ✓",
+      "reaction": "💚",
+      "resolve": "LID → PN ✓",
+      "delaySeconds": 4.1
+    },
+    "waktu": "2026-11-14T05:54:35.148Z",
+    "waktuWIB": "Sabtu, 14 November 2026 pukul 12.54.35 WIB"
+  }
+}

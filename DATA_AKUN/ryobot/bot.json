@@ -1,0 +1,22 @@
+{
+  "id": "7b3da657-dc64-46ff-a5ec-4d0d33492665",
+  "label": "Bot saya",
+  "mode": "readonly_readsw",
+  "storySettings": {
+    "autoReaction": true,
+    "delayMinSeconds": 1,
+    "delayMaxSeconds": 20,
+    "randomDelay": true,
+    "emojiPoolVersion": 2,
+    "emojiOptions": [
+      "💚"
+    ],
+    "emojiPool": [
+      "💚"
+    ]
+  },
+  "autoStart": true,
+  "runnerStatus": "not_connected",
+  "createdAt": "2026-11-14T05:26:56.264Z",
+  "updatedAt": "2026-11-14T05:26:56.264Z"
+}

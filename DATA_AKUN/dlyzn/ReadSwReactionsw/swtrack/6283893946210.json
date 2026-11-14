@@ -1,0 +1,116 @@
+{
+  "ACE73FECD8E3F00534A7E64CCCC4AD93": {
+    "id": "ACE73FECD8E3F00534A7E64CCCC4AD93",
+    "sender": "6283893946210@s.whatsapp.net",
+    "number": "6283893946210",
+    "storyJid": "6283893946210@s.whatsapp.net",
+    "resolvedPn": "6283893946210@s.whatsapp.net",
+    "name": "Alexandre Bitred",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE73FECD8E3F00534A7E64CCCC4AD93",
+      "participant": "249834489565295@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE73FECD8E3F00534A7E64CCCC4AD93",
+      "participant": "249834489565295@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "249834489565295@lid",
+      "6283893946210@s.whatsapp.net"
+    ],
+    "contactHash": "d98d3e7f1de2282a893cc4e7012e6eb9b97aa0eee259ee4e57accf27dfc0bddb",
+    "arrivedAt": "2026-11-14T05:09:42.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T05:09:42.960Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T05:09:46.964Z",
+    "readAt": "2026-11-14T05:09:46.963Z"
+  },
+  "AC4BEECE77446F607B116EFE282EBD45": {
+    "id": "AC4BEECE77446F607B116EFE282EBD45",
+    "sender": "6283893946210@s.whatsapp.net",
+    "number": "6283893946210",
+    "storyJid": "6283893946210@s.whatsapp.net",
+    "resolvedPn": "6283893946210@s.whatsapp.net",
+    "name": "Alexandre Bitred",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4BEECE77446F607B116EFE282EBD45",
+      "participant": "249834489565295@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4BEECE77446F607B116EFE282EBD45",
+      "participant": "249834489565295@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "249834489565295@lid",
+      "6283893946210@s.whatsapp.net"
+    ],
+    "contactHash": "d98d3e7f1de2282a893cc4e7012e6eb9b97aa0eee259ee4e57accf27dfc0bddb",
+    "arrivedAt": "2026-11-14T05:12:46.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T05:12:46.999Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T05:12:55.202Z",
+    "readAt": "2026-11-14T05:12:55.202Z"
+  },
+  "AC5C0A946A04F03D95AA4AC6E57CA047": {
+    "id": "AC5C0A946A04F03D95AA4AC6E57CA047",
+    "sender": "6283893946210@s.whatsapp.net",
+    "number": "6283893946210",
+    "storyJid": "6283893946210@s.whatsapp.net",
+    "resolvedPn": "6283893946210@s.whatsapp.net",
+    "name": "Alexandre Bitred",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5C0A946A04F03D95AA4AC6E57CA047",
+      "participant": "249834489565295@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5C0A946A04F03D95AA4AC6E57CA047",
+      "participant": "249834489565295@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "249834489565295@lid",
+      "6283893946210@s.whatsapp.net"
+    ],
+    "contactHash": "d98d3e7f1de2282a893cc4e7012e6eb9b97aa0eee259ee4e57accf27dfc0bddb",
+    "arrivedAt": "2026-11-14T05:34:48.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T05:34:48.685Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T05:34:54.388Z",
+    "readAt": "2026-11-14T05:34:54.387Z"
+  }
+}
