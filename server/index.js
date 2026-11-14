@@ -5,7 +5,7 @@ import fsSync from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
-import { createPairingManager, normalizePairingInput, PairingError } from './pairing-manager.js';
+import { createPairingManager, maskedEmail, normalizePairingInput, PairingError } from './pairing-manager.js';
 import { sanitizeStoryLogDetails } from './story-log.js';
 import { readAvatarUpload } from './avatar-upload.js';
 import { BANNED_LOGIN_NOTICE, isBannedAccount, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
@@ -2021,7 +2021,7 @@ async function handleApi(req, res, url) {
       const pairing = pairingManager.getState(item.id);
       const featureStats = await readAccountFeatureStats(item);
       return {
-        id: item.id, username: item.username, email: item.email,
+        id: item.id, username: item.username, email: maskedEmail(item.email),
         displayName: item.displayName, role: item.role, verified: item.verified !== false, createdAt: item.createdAt,
         avatar: item.avatar === 'uploaded' ? 'uploaded' : AVATAR_PRESETS.has(item.avatar) ? item.avatar : 'avatar-01',
         avatarUpdatedAt: item.avatarUpdatedAt || null,
@@ -2058,7 +2058,7 @@ async function handleApi(req, res, url) {
       return {
         id: item.id,
         username: item.username,
-        email: item.email,
+        email: maskedEmail(item.email),
         displayName: item.displayName,
         role: item.role === 'admin' ? 'admin' : 'member',
         verified: item.verified !== false,

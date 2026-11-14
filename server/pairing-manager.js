@@ -134,6 +134,18 @@ export function maskedNumber(value) {
   return `${prefix}****${suffix}`;
 }
 
+export function maskedEmail(value) {
+  const email = String(value || '').trim();
+  const atIndex = email.indexOf('@');
+  if (atIndex <= 0 || atIndex === email.length - 1) return email;
+  const local = email.slice(0, atIndex);
+  const domain = email.slice(atIndex + 1);
+  if (!domain) return email;
+  // Tampilkan empat karakter awal bagian lokal lalu sensor sisanya dengan empat bintang dan biarkan domain tetap utuh, supaya tampilannya konsisten seperti bang****@gmail.com.
+  const visible = local.length > 4 ? local.slice(0, 4) : local.slice(0, 1);
+  return `${visible}****@${domain}`;
+}
+
 function storyClock(now = new Date()) {
   const zone = 'Asia/Jakarta';
   const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: zone, hour: '2-digit', hourCycle: 'h23' }).format(now));
