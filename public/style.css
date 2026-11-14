@@ -2817,6 +2817,15 @@ html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
 .info-update-time{color:#a9e8c3;font-weight:600}
 .info-update-item h4{margin:0 0 3px;color:#e8f4eb;font-size:13px;letter-spacing:-.2px}
 .info-update-item p{margin:0;color:#99b0a1;font-size:11px;line-height:1.6}
+.info-update-rail{display:flex;flex-direction:column;align-items:center;gap:8px}
+.info-update-logo{flex:0 0 30px;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#3ee69a,#1d9e63);color:#062115;font-size:15px;font-weight:700;box-shadow:0 2px 8px rgba(34,189,120,.35)}
+.info-update-desc{position:relative;height:52px;overflow:hidden}
+.info-update-desc.has-scroll{-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,#000 78%,transparent 100%)}
+.info-update-desc-track{will-change:transform}
+.info-update-desc-track.is-scrolling{animation:info-update-scroll var(--scroll-duration,12s) linear infinite}
+.info-update-item:hover .info-update-desc-track.is-scrolling{animation-play-state:paused}
+@keyframes info-update-scroll{0%{transform:translateY(0)}12%{transform:translateY(0)}88%{transform:translateY(-50%)}100%{transform:translateY(-50%)}}
+@media (prefers-reduced-motion:reduce){.info-update-desc-track.is-scrolling{animation:none}}
 .info-update-clock{margin:8px 0 0!important;color:#7f9b8c;font-size:11px}
 .info-update-pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px}
 .info-page-button{min-width:34px;height:34px;padding:0 10px;border:1px solid rgba(169,222,187,.16);border-radius:10px;background:rgba(11,31,19,.55);color:#b9d6c2;font-size:12px;font-weight:700;cursor:pointer}

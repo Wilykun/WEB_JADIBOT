@@ -3074,19 +3074,47 @@ function stopInfoUpdateAutoRefresh() {
   if (infoUpdateRefreshTimer) window.clearInterval(infoUpdateRefreshTimer);
   infoUpdateRefreshTimer = null;
 }
+// Info Update: tiap entri punya kolom logo + teks deskripsi yang auto-scroll sendiri bila kepanjangan, supaya kartu tetap ringkas di HP.
+function setupInfoUpdateAutoScroll(item) {
+  const desc = item.querySelector('.info-update-desc');
+  const track = item.querySelector('.info-update-desc-track');
+  const text = track?.querySelector('p');
+  if (!desc || !track || !text) return;
+  track.querySelectorAll('p[data-clone]').forEach((node) => node.remove());
+  track.classList.remove('is-scrolling');
+  desc.classList.remove('has-scroll');
+  track.style.removeProperty('--scroll-duration');
+  const singleHeight = text.offsetHeight;
+  if (!singleHeight || singleHeight <= desc.clientHeight + 1) return;
+  const clone = text.cloneNode(true);
+  clone.setAttribute('data-clone', '');
+  clone.setAttribute('aria-hidden', 'true');
+  track.append(clone);
+  const seconds = Math.min(30, Math.max(8, singleHeight / 14));
+  track.style.setProperty('--scroll-duration', `${seconds.toFixed(1)}s`);
+  track.classList.add('is-scrolling');
+  desc.classList.add('has-scroll');
+}
+
 async function loadInfoUpdates() {
   const list = document.querySelector('.info-update-list');
   if (!list) return;
   try {
     const response = await fetch('/info-updates.json', { cache: 'no-store' });
-    if (!response.ok) return;
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     const updates = Array.isArray(data?.updates) ? data.updates : [];
-    if (!updates.length) return;
+    if (!updates.length) throw new Error('empty');
     list.innerHTML = '';
     updates.forEach((update) => {
       const item = document.createElement('li');
       item.className = 'info-update-item';
+      const rail = document.createElement('div');
+      rail.className = 'info-update-rail';
+      const logo = document.createElement('span');
+      logo.className = 'info-update-logo';
+      logo.textContent = '✦';
+      logo.setAttribute('aria-hidden', 'true');
       const date = document.createElement('span');
       date.className = 'info-update-date';
       const day = document.createElement('span');
@@ -3095,18 +3123,27 @@ async function loadInfoUpdates() {
       time.className = 'info-update-time';
       time.textContent = update.time || '';
       date.append(day, time);
+      rail.append(logo, date);
       const body = document.createElement('div');
       const title = document.createElement('h4');
       title.textContent = update.title || '';
+      const desc = document.createElement('div');
+      desc.className = 'info-update-desc';
+      const track = document.createElement('div');
+      track.className = 'info-update-desc-track';
       const description = document.createElement('p');
       description.textContent = update.description || '';
-      body.append(title, description);
-      item.append(date, body);
+      track.append(description);
+      desc.append(track);
+      body.append(title, desc);
+      item.append(rail, body);
       list.append(item);
     });
-    infoUpdatePage = 1;
-    renderInfoUpdatePagination();
   } catch { /* Biarkan daftar statis di halaman bila file belum bisa dibaca. */ }
+  // Pasang auto-scroll tiap entri SEBELUM paginasi menyembunyikan halaman lain — pengukuran butuh elemen terlihat.
+  list.querySelectorAll('.info-update-item').forEach((item) => setupInfoUpdateAutoScroll(item));
+  infoUpdatePage = 1;
+  renderInfoUpdatePagination();
 }
 
 // Info Update: daftar pembaruan dipaginasi 3 entri per halaman agar tetap ringkas di layar kecil.
