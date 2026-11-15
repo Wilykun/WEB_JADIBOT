@@ -232,6 +232,8 @@
         <a id="pairing-nav" class="nav-item active" href="#pairing"><span class="nav-icon">▣</span>Pairing WhatsApp</a>
         <a id="developer-nav" class="nav-item" href="#developer"><span class="nav-icon">⌘</span>Developer</a>
         <a class="nav-item" href="#infoupdate"><span class="nav-icon">✦</span>Info Update</a>
+        <a class="nav-item" href="#server"><span class="nav-icon">◫</span>Server</a>
+        <a class="nav-item" href="#bots"><span class="nav-icon">✳</span>List Bot</a>
       <a id="admin-nav" class="nav-item hidden" href="#admin"><span class="nav-icon">⋮</span>Member</a>
       </nav>
       <div class="sidebar-bottom">
@@ -603,6 +605,7 @@
               <h3>Pembaruan terakhir</h3>
               <p class="developer-card-lead">Semua perubahan di bawah ini sudah live di panel.</p>
               <ul class="info-update-list">
+                <li class="info-update-item" data-tag="fitur"><div class="info-update-poster"><span class="info-update-poster-mark">✦</span></div><div class="info-update-body"><h4>Server &amp; List Bot kini ada di menu dalam panel</h4><p class="info-update-meta">Minggu, 15 Nov 2026 · 13.47 WIB</p><span class="info-update-tag">Fitur</span><div class="info-update-desc"><p>Halaman Server (status realtime) dan List Bot (mode bot + statistik akun) kini ada juga di dalam panel, lewat menu garis tiga di kiri atas — isinya sama seperti di halaman masuk, dan bisa dibuka admin maupun member. Status server diperbarui tiap 5 detik selama halamannya dibuka; statistik akun ikut polling 15 detik.</p></div></div></li>
                 <li class="info-update-item" data-tag="fitur"><div class="info-update-poster"><span class="info-update-poster-mark">✦</span></div><div class="info-update-body"><h4>Tombol garis tiga desktop kini membuka halaman info</h4><p class="info-update-meta">Minggu, 15 Nov 2026 · 13.32 WIB</p><span class="info-update-tag">Fitur</span><div class="info-update-desc"><p>Tombol garis tiga di halaman masuk desktop kini membuka halaman info yang sama seperti di HP (Info, Developer, Server realtime, dan List Bot) dengan tata letak lebar yang rapi di kolom kiri, jadi kolomnya tidak lagi kosong saat diklik; tombol tetap di tempatnya dan form tidak bergeser. Ketuk × untuk kembali ke panel info awal. Di HP, tab info kini benar-benar sembunyi saat menu tampil.</p></div></div></li>
                 <li class="info-update-item" data-tag="fitur"><div class="info-update-poster"><span class="info-update-poster-mark">✦</span></div><div class="info-update-body"><h4>Avatar kini 48 pilihan: 24 cowok + 24 cewek</h4><p class="info-update-meta">Minggu, 15 Nov 2026 · 12.35 WIB</p><span class="info-update-tag">Fitur</span><div class="info-update-desc"><p>Galeri avatar bertambah dari 28 menjadi 48 ilustrasi anime 2D — 24 cowok dan 24 cewek. Enam cewek yang selama ini tersimpan tapi belum tampil (Yui, Noa, Sakura, Yukina, Aya, Runa) kini bisa dipilih, ditambah 14 gambar baru (cowok: Akira, Kazuki, Daiki, Taichi, Hikaru, Kenta, Sho, Renji, Hiro, Yuya; cewek: Kaede, Mei, Natsuki, Suzu) — semuanya di bawah 100 KB dari sumber bebas lisensi. Tab dan Acak avatar ikut menyesuaikan jumlah baru.</p></div></div></li>
                 <li class="info-update-item" data-tag="fitur"><div class="info-update-poster"><span class="info-update-poster-mark">✦</span></div><div class="info-update-body"><h4>Hapus akun permanen &amp; layar akun diblokir/dihapus</h4><p class="info-update-meta">Minggu, 15 Nov 2026 · 06.24 WIB</p><span class="info-update-tag">Fitur</span><div class="info-update-desc"><p>Admin kini bisa menghapus akun member secara permanen dari detail member (hanya admin, konfirmasi dua lapis): akun hilang dari registry, sesi panel dan bot dihentikan, folder DATA_AKUN terhapus, dan orang itu tetap mendapat penjelasan bila coba login lagi. Akun yang diblokir atau dihapus kini melihat layar khusus saat login — judul, alasan, dan tombol WhatsApp/Telegram admin untuk pengajuan buka blokir atau pertanyaan.</p></div></div></li>
@@ -634,6 +637,65 @@
               </div>
               <p class="developer-card-description">Jangan kirim kata sandi, kode pairing, atau data percakapan melalui kanal bantuan.</p>
             </article>
+          </div>
+        </section>
+
+        <section id="server" class="profile-section developer-section" data-page-view="server" aria-labelledby="server-title">
+          <div class="section-heading compact developer-hero-heading">
+            <div>
+              <div class="eyebrow">SERVER · REACTIONSW</div>
+              <h2 id="server-title">Status server realtime</h2>
+              <p>Status server panel yang sama seperti di halaman masuk — bisa dibuka semua akun, admin maupun member.</p>
+            </div>
+            <span class="section-counter developer-live-badge"><i aria-hidden="true"></i> LIVE</span>
+          </div>
+          <div class="workspace-info-panel">
+            <div class="workspace-server-heading"><span><span class="eyebrow">SERVER INDONESIA</span><h3>Status server realtime</h3></span><span class="workspace-server-live"><i></i> LIVE</span></div>
+            <div class="workspace-server-grid">
+              <div><span>Status</span><strong id="workspace-server-status-value">Memeriksa…</strong></div>
+              <div><span>Uptime panel</span><strong id="workspace-server-uptime-value">—</strong></div>
+              <div><span>RAM proses</span><strong id="workspace-server-process-memory-value">—</strong></div>
+              <div><span>RAM sistem</span><strong id="workspace-server-system-memory-value">—</strong></div>
+              <div><span>Node.js</span><strong id="workspace-server-node-value">—</strong></div>
+              <div><span>CPU / load</span><strong id="workspace-server-cpu-value">—</strong></div>
+            </div>
+            <p id="workspace-server-status-detail" class="workspace-server-detail">Mengambil data langsung dari server panel.</p>
+            <small id="workspace-server-status-updated">Belum diperbarui</small>
+          </div>
+        </section>
+
+        <section id="bots" class="profile-section developer-section" data-page-view="bots" aria-labelledby="bots-title">
+          <div class="section-heading compact developer-hero-heading">
+            <div>
+              <div class="eyebrow">FITUR BOT</div>
+              <h2 id="bots-title">List Bot</h2>
+              <p>Daftar mode yang tersedia di script ini, beserta statistik akun — bisa dibuka semua akun, admin maupun member.</p>
+            </div>
+            <span class="section-counter developer-live-badge"><i aria-hidden="true"></i> AKTIF</span>
+          </div>
+          <div class="workspace-info-panel">
+            <p class="workspace-bot-list-intro">Daftar mode yang tersedia di script ini. Status di bawah mengikuti kemampuan panel saat ini, bukan klaim layanan 24 jam.</p>
+            <div class="workspace-bot-list">
+              <article class="workspace-bot-item"><span class="workspace-bot-icon">◉</span><div><strong>Read Only</strong><small>Menandai story sebagai dilihat tanpa mengirim reaksi emoji.</small></div><b>Siap</b></article>
+              <article class="workspace-bot-item is-featured"><span class="workspace-bot-icon">✳</span><div><strong>Read Only + ReadSW</strong><small>Membaca story dan mencoba reaksi sesuai emoji serta delay akun.</small></div><b>Siap</b></article>
+              <article class="workspace-bot-item is-limited"><span class="workspace-bot-icon">◷</span><div><strong>Online 24 Jam</strong><small>Preferensi tersedia, tetapi runner 24/7 membutuhkan host persisten.</small></div><b>Persiapan</b></article>
+            </div>
+            <div class="workspace-bot-live-summary"><span>Bot online <strong id="workspace-bot-online-count">0</strong></span><span>Worker aktif <strong id="workspace-worker-count">0</strong></span></div>
+            <small id="workspace-bot-list-updated">Diperbarui —</small>
+            <section class="workspace-account-stats" aria-label="Statistik akun publik">
+              <div class="workspace-account-stats-head"><span class="eyebrow">AKUN TERDAFTAR</span><span class="workspace-stats-live"><i></i> LIVE</span></div>
+              <div class="workspace-stats-grid">
+                <div class="workspace-stat"><strong id="workspace-public-stat-total">0</strong><span>Total akun</span></div>
+                <div class="workspace-stat is-active"><strong id="workspace-public-stat-active">0</strong><span>Aktif</span></div>
+                <div class="workspace-stat is-inactive"><strong id="workspace-public-stat-inactive">0</strong><span>Belum aktif</span></div>
+                <div class="workspace-stat"><strong id="workspace-public-stat-admin">0</strong><span>Admin</span></div>
+                <div class="workspace-stat"><strong id="workspace-public-stat-member">0</strong><span>Member</span></div>
+                <div class="workspace-stat is-bot"><strong id="workspace-public-stat-bot">0</strong><span>Bot online</span></div>
+                <div class="workspace-stat is-whatsapp"><strong id="workspace-public-stat-whatsapp">0</strong><span>WA tersambung</span></div>
+                <div class="workspace-stat is-worker"><strong id="workspace-public-stat-worker">0</strong><span>Worker aktif</span></div>
+              </div>
+              <small id="workspace-public-stats-updated">Diperbarui —</small>
+            </section>
           </div>
         </section>
         <footer class="page-footer">

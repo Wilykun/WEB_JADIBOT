@@ -1554,7 +1554,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   if (running) logPollTimer = setInterval(() => { void loadPairingLogs(); }, 4000);
 }
 
-const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', admin: 'Member' };
+const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member' };
 let activeWorkspacePage = null;
 let privateLogAutoRefreshTimer = null;
 let privateLogScrollOnNextRender = false;
@@ -1619,6 +1619,13 @@ function setWorkspacePage(page, updateHash = true) {
     infoUpdateRefreshTimer = window.setInterval(() => { void loadInfoUpdates(); }, 60000);
   } else {
     stopInfoUpdateAutoRefresh();
+  }
+  if (page === 'server') {
+    void refreshWorkspaceServerStatus();
+    stopWorkspaceServerAutoRefresh();
+    workspaceServerRefreshTimer = window.setInterval(() => { void refreshWorkspaceServerStatus(); }, 5000);
+  } else {
+    stopWorkspaceServerAutoRefresh();
   }
   setMenu(false);
 }
@@ -2357,6 +2364,24 @@ async function refreshMobileServerStatus() {
     document.querySelector('#server-status-value').textContent = 'Tidak tersedia';
     document.querySelector('#server-status-detail').textContent = 'Status server belum dapat diambil. Coba buka halaman ini lagi.';
     document.querySelector('#server-status-updated').textContent = 'Gagal memperbarui';
+  }
+}
+
+async function refreshWorkspaceServerStatus() {
+  try {
+    const status = await api('/api/public/server-status');
+    document.querySelector('#workspace-server-status-value').textContent = status.status === 'online' ? 'Online' : 'Gangguan';
+    document.querySelector('#workspace-server-uptime-value').textContent = formatServerUptime(status.uptimeSeconds);
+    document.querySelector('#workspace-server-process-memory-value').textContent = formatServerBytes(status.processMemoryBytes);
+    document.querySelector('#workspace-server-system-memory-value').textContent = `${formatServerBytes(status.systemTotalMemoryBytes)} · ${status.systemUsedPercent}% terpakai`;
+    document.querySelector('#workspace-server-node-value').textContent = status.nodeVersion || '—';
+    document.querySelector('#workspace-server-cpu-value').textContent = `${status.cpuCount || '—'} core · ${status.loadAverage1m ?? '—'}`;
+    document.querySelector('#workspace-server-status-detail').textContent = `Platform ${status.platform || 'server'} · RAM proses diukur dari runtime Node.js.`;
+    document.querySelector('#workspace-server-status-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date(status.updatedAt))} WIB`;
+  } catch {
+    document.querySelector('#workspace-server-status-value').textContent = 'Tidak tersedia';
+    document.querySelector('#workspace-server-status-detail').textContent = 'Status server belum dapat diambil. Coba buka halaman ini lagi.';
+    document.querySelector('#workspace-server-status-updated').textContent = 'Gagal memperbarui';
   }
 }
 
@@ -3171,6 +3196,11 @@ function stopInfoUpdateAutoRefresh() {
   if (infoUpdateRefreshTimer) window.clearInterval(infoUpdateRefreshTimer);
   infoUpdateRefreshTimer = null;
 }
+let workspaceServerRefreshTimer = null;
+function stopWorkspaceServerAutoRefresh() {
+  if (workspaceServerRefreshTimer) window.clearInterval(workspaceServerRefreshTimer);
+  workspaceServerRefreshTimer = null;
+}
 // Info Update ala MyAnimeList: tiap entri kartu poster + judul + meta + tag, teks deskripsi di kotak scroll manual (bukan auto-scroll).
 async function loadInfoUpdates() {
   const list = document.querySelector('.info-update-list');
@@ -3323,6 +3353,30 @@ async function refreshPublicAccountStats() {
     if (workerCount) workerCount.textContent = Number(stats.workersRunning || 0).toLocaleString('id-ID');
     if (botUpdated) botUpdated.textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date(stats.updatedAt))} WIB`;
     if (updated) updated.textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(new Date(stats.updatedAt))} WIB`;
+    const workspaceTotal = document.querySelector('#workspace-public-stat-total');
+    const workspaceActive = document.querySelector('#workspace-public-stat-active');
+    const workspaceInactive = document.querySelector('#workspace-public-stat-inactive');
+    const workspaceAdmin = document.querySelector('#workspace-public-stat-admin');
+    const workspaceMember = document.querySelector('#workspace-public-stat-member');
+    const workspaceBot = document.querySelector('#workspace-public-stat-bot');
+    const workspaceWhatsapp = document.querySelector('#workspace-public-stat-whatsapp');
+    const workspaceWorker = document.querySelector('#workspace-public-stat-worker');
+    const workspaceUpdated = document.querySelector('#workspace-public-stats-updated');
+    if (workspaceTotal) workspaceTotal.textContent = Number(stats.total || 0).toLocaleString('id-ID');
+    if (workspaceActive) workspaceActive.textContent = Number(stats.active || 0).toLocaleString('id-ID');
+    if (workspaceInactive) workspaceInactive.textContent = Number(stats.inactive || 0).toLocaleString('id-ID');
+    if (workspaceAdmin) workspaceAdmin.textContent = Number(stats.admin || 0).toLocaleString('id-ID');
+    if (workspaceMember) workspaceMember.textContent = Number(stats.member || 0).toLocaleString('id-ID');
+    if (workspaceBot) workspaceBot.textContent = Number(stats.botOnline || 0).toLocaleString('id-ID');
+    if (workspaceWhatsapp) workspaceWhatsapp.textContent = Number(stats.whatsappConnected || 0).toLocaleString('id-ID');
+    if (workspaceWorker) workspaceWorker.textContent = Number(stats.workersRunning || 0).toLocaleString('id-ID');
+    const workspaceBotOnlineCount = document.querySelector('#workspace-bot-online-count');
+    const workspaceWorkerCount = document.querySelector('#workspace-worker-count');
+    const workspaceBotUpdated = document.querySelector('#workspace-bot-list-updated');
+    if (workspaceBotOnlineCount) workspaceBotOnlineCount.textContent = Number(stats.botOnline || 0).toLocaleString('id-ID');
+    if (workspaceWorkerCount) workspaceWorkerCount.textContent = Number(stats.workersRunning || 0).toLocaleString('id-ID');
+    if (workspaceBotUpdated) workspaceBotUpdated.textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date(stats.updatedAt))} WIB`;
+    if (workspaceUpdated) workspaceUpdated.textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(new Date(stats.updatedAt))} WIB`;
   } catch {
     const updated = document.querySelector('#public-stats-updated');
     if (updated) updated.textContent = 'Data realtime belum tersedia';
