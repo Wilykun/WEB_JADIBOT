@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-15T16:44:00+07:00",
+  "updatedAt": "2026-11-15T18:26:00+07:00",
   "updates": [
     {
       "day": "Minggu, 15 Nov 2026",
-      "time": "16.44 WIB",
+      "time": "18.26 WIB",
       "tag": "Tampilan",
-      "title": "Paginasi Info Update kini rapi di HP",
-      "description": "Tombol nomor halaman 1–9 yang dulu meluber ke kanan di layar HP kini hanya menampilkan jendela 5 halaman di sekitar halaman aktif, dengan \"…\" di antara halaman yang tersembunyi. Tombol dibuat lebih kecil di HP dan baris paginasi bisa membungkus, jadi tidak ada lagi overflow horizontal."
+      "title": "Paginasi Info Update kini rapi dan bisa lompat ke awal/akhir",
+      "description": "Tombol nomor halaman 1–9 yang dulu meluber ke kanan di layar HP kini hanya menampilkan jendela 5 halaman di sekitar halaman aktif, dengan penanda … di antara halaman yang tersembunyi. Tombol dibuat lebih kecil di HP dan baris paginasi bisa membungkus, jadi tidak ada lagi overflow horizontal. Kini ada juga tombol « untuk lompat ke halaman pertama dan » untuk lompat ke halaman terakhir, jadi tidak perlu klik satu-satu untuk sampai ke ujung."
     },
     {
       "day": "Minggu, 15 Nov 2026",

@@ -76,6 +76,9 @@ test('info update pagination shows a 5-page window with ellipsis and wraps on mo
   assert.ok(js.includes('INFO_UPDATE_PAGE_WINDOW = 5'), 'pagination must cap the visible page numbers to a window of 5');
   assert.ok(js.includes('info-page-ellipsis'), 'pagination must render an ellipsis between hidden pages');
   assert.ok(js.includes('firstPage = Math.max(1, Math.min(infoUpdatePage - 2, pages - INFO_UPDATE_PAGE_WINDOW + 1))'), 'pagination window must slide with the current page');
+  assert.ok(js.includes(`textContent = '«'`) && js.includes(`'Halaman pertama'`) && js.includes('infoUpdatePage = 1; renderInfoUpdatePagination()'), 'pagination must have a first-page jump button that goes straight to page 1');
+  assert.ok(js.includes(`textContent = '»'`) && js.includes(`'Halaman terakhir'`) && js.includes('infoUpdatePage = pages; renderInfoUpdatePagination()'), 'pagination must have a last-page jump button that goes straight to the last page');
+  assert.ok(js.includes('firstButton.disabled = infoUpdatePage <= 1') && js.includes('lastButton.disabled = infoUpdatePage >= pages'), 'first/last jump buttons must disable at the ends like prev/next');
   assert.match(css, /\.info-update-pagination\{[^}]*flex-wrap:\s*wrap/, 'pagination row must wrap so it can never overflow horizontally');
   assert.match(css, /\.info-page-ellipsis\{[^}]*color:#7f9b8c/, 'ellipsis must be styled like muted text');
   assert.match(css, /@media\(max-width:560px\)\{\.info-update-pagination\{gap:4px\}\.info-page-button\{min-width:30px;height:30px/, 'pagination buttons must shrink on mobile');

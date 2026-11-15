@@ -3364,6 +3364,14 @@ function renderInfoUpdatePagination() {
     item.classList.toggle('hidden', Math.floor(index / INFO_UPDATE_PAGE_SIZE) + 1 !== infoUpdatePage);
   });
   pager.innerHTML = '';
+  const firstButton = document.createElement('button');
+  firstButton.type = 'button';
+  firstButton.className = 'info-page-button';
+  firstButton.textContent = '«';
+  firstButton.setAttribute('aria-label', 'Halaman pertama');
+  firstButton.disabled = infoUpdatePage <= 1;
+  firstButton.addEventListener('click', () => { infoUpdatePage = 1; renderInfoUpdatePagination(); });
+  pager.append(firstButton);
   const prevButton = document.createElement('button');
   prevButton.type = 'button';
   prevButton.className = 'info-page-button';
@@ -3403,6 +3411,14 @@ function renderInfoUpdatePagination() {
   nextButton.disabled = infoUpdatePage >= pages;
   nextButton.addEventListener('click', () => { infoUpdatePage += 1; renderInfoUpdatePagination(); });
   pager.append(nextButton);
+  const lastButton = document.createElement('button');
+  lastButton.type = 'button';
+  lastButton.className = 'info-page-button';
+  lastButton.textContent = '»';
+  lastButton.setAttribute('aria-label', 'Halaman terakhir');
+  lastButton.disabled = infoUpdatePage >= pages;
+  lastButton.addEventListener('click', () => { infoUpdatePage = pages; renderInfoUpdatePagination(); });
+  pager.append(lastButton);
 }
 renderInfoUpdatePagination();
 
