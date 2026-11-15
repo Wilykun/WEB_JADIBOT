@@ -1,6 +1,27 @@
 {
-  "updatedAt": "2026-11-15T15:24:00+07:00",
+  "updatedAt": "2026-11-15T16:06:00+07:00",
   "updates": [
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "16.06 WIB",
+      "title": "Daftar kini bisa pilih Member atau Admin",
+      "description": "Formulir daftar kini punya pilihan Member atau Admin (dua kartu berikon, pas di HP). Member tetap cuma verifikasi; daftar Admin berbeda — setelah verifikasi wajib memasukkan kode akses, dan akun admin baru dibuat bila kodenya benar. Kode salah 5 kali membatalkan pendaftaran.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "16.06 WIB",
+      "title": "Admin Utama kini ditandai di daftar member",
+      "description": "WILYKUN — admin dari config.json — kini ditandai jelas sebagai Admin Utama di daftar member: lencana mahkota emas + bingkai kartu emas, berbeda dari admin biasa yang cuma berlabel Admin. Admin Utama juga satu-satunya yang bisa mengelola admin biasa (blokir/hapus/kelola bot); admin biasa tidak bisa menyentuh Admin Utama atau admin lain.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "16.06 WIB",
+      "title": "Folder akun Admin dan Member kini terpisah",
+      "description": "Data akun admin kini tersimpan di folder baru DATA_ADMIN, terpisah dari DATA_AKUN untuk member. Akun lama yang masih di folder lama tetap terbaca otomatis (fallback), jadi sesi dan bot tidak putus. Backup dan pemulihan ikut mencakup kedua folder.",
+      "tag": "Perubahan"
+    },
     {
       "day": "Minggu, 15 Nov 2026",
       "time": "15.24 WIB",

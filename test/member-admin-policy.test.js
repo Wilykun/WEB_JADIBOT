@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   BANNED_LOGIN_NOTICE,
   isBannedAccount,
+  isMainAdminUser,
   memberAdminPolicyError,
   normalizeBanReason,
   withMemberLifecycleLock,
@@ -17,6 +18,23 @@ test('only an authenticated admin can manage a member account', () => {
 test('admin actions reject missing accounts and admin targets', () => {
   assert.equal(memberAdminPolicyError({ role: 'admin' }, null).status, 404);
   assert.equal(memberAdminPolicyError({ role: 'admin' }, { role: 'admin' }).status, 400);
+});
+
+test('Admin Utama (config.json) bisa mengelola admin biasa; admin biasa tidak bisa menyentuh admin mana pun', () => {
+  const bootstrap = 'wilykun';
+  const mainAdmin = { role: 'admin', username: 'WILYKUN' };
+  const regularAdmin = { role: 'admin', username: 'adminbaru' };
+  const member = { role: 'member', username: 'membera' };
+  assert.equal(isMainAdminUser(mainAdmin, bootstrap), true);
+  assert.equal(isMainAdminUser(regularAdmin, bootstrap), false);
+  assert.equal(isMainAdminUser({ role: 'member', username: 'wilykun' }, bootstrap), false);
+  assert.equal(isMainAdminUser(mainAdmin, ''), false);
+  assert.equal(memberAdminPolicyError(mainAdmin, regularAdmin, bootstrap), null);
+  assert.equal(memberAdminPolicyError(mainAdmin, member, bootstrap), null);
+  assert.equal(memberAdminPolicyError(regularAdmin, member, bootstrap), null);
+  assert.equal(memberAdminPolicyError(regularAdmin, regularAdmin, bootstrap).status, 400);
+  assert.equal(memberAdminPolicyError(regularAdmin, mainAdmin, bootstrap).status, 400);
+  assert.equal(memberAdminPolicyError(mainAdmin, mainAdmin, bootstrap).status, 400);
 });
 
 test('ban reason removes control characters, collapses whitespace, and is capped', () => {

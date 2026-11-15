@@ -1,6 +1,7 @@
 {
   "port": 3000,
   "host": "0.0.0.0",
+  "adminAccessCode": "KONTIL",
   "admin": {
     "email": "wilykun@example.com",
     "username": "WILYKUN",

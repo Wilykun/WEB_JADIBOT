@@ -3009,3 +3009,20 @@ html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
   .workspace-info-panel { padding: 16px; }
   .workspace-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* Pilihan peran daftar + lencana Admin Utama */
+.register-role-picker{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.role-option{display:flex;gap:10px;align-items:flex-start;text-align:left;padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);color:var(--text);cursor:pointer}
+.role-option.is-selected{border-color:rgba(70,211,137,.6);background:rgba(70,211,137,.12)}
+.role-option-icon{flex:0 0 auto;width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(70,211,137,.14);color:#79e5a5}
+.role-option-icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.role-option-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+.role-option-copy strong{font-size:14px}
+.role-option-copy small{font-size:12px;color:var(--muted);line-height:1.35}
+.member-account-chip.is-main-admin{color:#f7c948;border-color:rgba(247,201,72,.55);background:rgba(247,201,72,.13)}
+.member-account-chip .member-detail-icon{width:12px;height:12px;flex:0 0 12px;color:#f7c948}
+#admin .member-account-item.is-main-admin{border-color:rgba(247,201,72,.5)}
+html[data-theme="light"] .member-account-chip.is-main-admin{color:#8a6d1a;border-color:rgba(180,140,20,.5);background:rgba(247,201,72,.16)}
+html[data-theme="light"] .member-account-chip .member-detail-icon{color:#8a6d1a}
+html[data-theme="light"] #admin .member-account-item.is-main-admin{border-color:rgba(180,140,20,.55)}
+@media(max-width:560px){.register-role-picker{gap:8px}.role-option{padding:10px}.role-option-copy small{font-size:11px}}

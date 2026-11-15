@@ -4,6 +4,7 @@ const bootScreen = document.querySelector('#boot-screen');
 const loginForm = document.querySelector('#login-form');
 const registerForm = document.querySelector('#register-form');
 const verificationForm = document.querySelector('#verification-form');
+const adminAccessForm = document.querySelector('#admin-access-form');
 const authMessage = document.querySelector('#auth-message');
 const accountNotice = document.querySelector('#account-notice');
 const accountNoticeTitle = document.querySelector('#account-notice-title');
@@ -366,6 +367,7 @@ function setAuthMode(mode) {
   loginForm.classList.toggle('hidden', registering);
   registerForm.classList.toggle('hidden', !registering);
   verificationForm.classList.add('hidden');
+  adminAccessForm?.classList.add('hidden');
   document.querySelector('#auth-eyebrow').textContent = registering ? 'MULAI DARI SINI' : 'SELAMAT DATANG KEMBALI';
   document.querySelector('#auth-title').textContent = registering ? 'Buat akun baru' : 'Masuk ke akunmu';
   document.querySelector('#auth-subtitle').textContent = registering
@@ -389,6 +391,7 @@ function showVerificationForm(payload) {
   clearVerificationCooldown();
   loginForm.classList.add('hidden');
   registerForm.classList.add('hidden');
+  adminAccessForm?.classList.add('hidden');
   verificationForm.classList.remove('hidden');
   document.querySelector('#auth-eyebrow').textContent = 'SATU LANGKAH LAGI';
   document.querySelector('#auth-title').textContent = 'Verifikasi akunmu';
@@ -396,6 +399,20 @@ function showVerificationForm(payload) {
   setVerificationPrompt(payload);
   document.querySelector('#auth-switch').innerHTML = 'Perlu melanjutkan pendaftaran? <button type="button" data-action="show-register">Kembali ke formulir</button>';
   setAuthMessage('Pendaftaran tersimpan sementara. Akun permanen baru dibuat setelah kode verifikasi benar.');
+}
+
+function showAdminAccessForm(identifier) {
+  hideAccountNotice();
+  loginForm.classList.add('hidden');
+  registerForm.classList.add('hidden');
+  verificationForm.classList.add('hidden');
+  adminAccessForm?.classList.remove('hidden');
+  document.querySelector('#auth-eyebrow').textContent = 'SATU LANGKAH LAGI';
+  document.querySelector('#auth-title').textContent = 'Kode akses admin';
+  document.querySelector('#auth-subtitle').textContent = 'Verifikasi berhasil. Masukkan kode akses untuk membuat akun admin.';
+  document.querySelector('#auth-switch').innerHTML = 'Perlu melanjutkan pendaftaran? <button type="button" data-action="show-register">Kembali ke formulir</button>';
+  setAuthMessage('Verifikasi berhasil. Akun admin baru dibuat setelah kode akses benar.');
+  document.querySelector('#admin-access-code')?.focus();
 }
 
 function setVerificationPrompt(payload) {
@@ -885,6 +902,7 @@ adminUsersList?.addEventListener('click', async (event) => {
 });
 
 const MEMBER_ICON_PATHS = {
+  crown: ['M3 8.5 6.5 12 12 6.5 17.5 12 21 8.5 19.4 18H4.6L3 8.5Z', 'M5 20.5h14'],
   mail: ['M3.5 6h17v12h-17z', 'm4 7 8 6 8-6'],
   shield: ['M12 3.5 19 6v5.2c0 4.2-2.7 7.1-7 9.3-4.3-2.2-7-5.1-7-9.3V6z', 'm8.7 12.1 2.1 2.1 4.5-4.6'],
   activity: ['M3 12h4l2-5 4 10 2-5h6'],
@@ -976,9 +994,9 @@ async function loadAdminUsers() {
         const detailId = `member-account-detail-${encodeURIComponent(userId)}`;
         const isOpen = userId === expandedAdminUserId;
         const pairingStatus = pairingLabels[user.whatsappStatus] || 'Belum tertaut';
-        const roleLabel = user.role === 'admin' ? 'Admin' : 'Member';
+        const roleLabel = user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Admin' : 'Member';
         const article = document.createElement('article');
-        article.className = `member-account-item${isOpen ? ' is-open' : ''}`;
+        article.className = `member-account-item${isOpen ? ' is-open' : ''}${user.isMainAdmin ? ' is-main-admin' : ''}`;
 
         const toggle = document.createElement('button');
         toggle.type = 'button';
@@ -1033,7 +1051,7 @@ async function loadAdminUsers() {
         const statusRow = document.createElement('span');
         statusRow.className = 'member-account-statuses';
         const chips = [
-          { text: roleLabel, className: `member-account-chip is-role${user.role === 'admin' ? ' is-admin' : ''}` },
+          { text: roleLabel, icon: user.isMainAdmin ? 'crown' : null, className: `member-account-chip is-role${user.role === 'admin' ? ' is-admin' : ''}${user.isMainAdmin ? ' is-main-admin' : ''}`, title: user.isMainAdmin ? 'Admin Utama — akun admin dari config.json (WILYKUN), bukan admin biasa.' : null },
           ...(user.role !== 'admin' && user.banned ? [{ text: 'Diblokir', className: 'member-account-chip is-danger' }] : []),
           { text: user.panelActive ? 'Pemilik · Online' : 'Pemilik · Tidak aktif', className: `member-account-chip ${user.panelActive ? 'is-positive' : 'is-muted'}`, title: 'Status Online memakai heartbeat sesi panel dalam 75 detik terakhir; ini bukan status presence WhatsApp.' },
           { text: `WA · ${pairingStatus}`, className: `member-account-chip ${user.whatsappStatus === 'linked' ? 'is-positive' : user.whatsappStatus === 'failed' ? 'is-warning' : 'is-muted'}` },
@@ -1052,6 +1070,8 @@ async function loadAdminUsers() {
             } else {
               chip.textContent = `Runtime bot · ${user.workerStatus === 'waiting' ? 'menunggu' : 'tidak aktif'}`;
             }
+          } else if (chipInfo.icon) {
+            chip.append(createMemberIcon(chipInfo.icon), document.createTextNode(chipInfo.text));
           } else {
             chip.textContent = chipInfo.text;
           }
@@ -1068,7 +1088,7 @@ async function loadAdminUsers() {
         detailGrid.className = 'member-detail-grid';
         const detailsData = [
           { label: 'Email', value: user.email || '—', icon: 'mail' },
-          { label: 'Status akun', value: user.role === 'admin' ? 'Administrator' : user.banned ? 'Diblokir oleh admin' : user.verified ? 'Terverifikasi' : 'Belum verifikasi', icon: 'shield' },
+          { label: 'Status akun', value: user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Administrator' : user.banned ? 'Diblokir oleh admin' : user.verified ? 'Terverifikasi' : 'Belum verifikasi', icon: 'shield' },
           { label: 'Aktivitas panel', value: user.panelActive ? 'Online' : 'Tidak aktif', icon: 'activity', note: formatPanelActivityNote(user) },
           { label: 'WhatsApp', value: pairingStatus, icon: 'whatsapp' },
           { label: 'Nomor tersamarkan', value: user.whatsappNumberMasked || 'Belum aktif', icon: 'phone' },
@@ -1163,7 +1183,12 @@ async function loadAdminUsers() {
           statsGrid.append(card);
         });
         details.append(featureSection, statsGrid);
-        if (currentUser?.role === 'admin' && user.role !== 'admin') {
+        // Admin biasa hanya bisa mengelola member; Admin Utama juga bisa
+        // mengelola admin biasa (blokir/hapus/kelola bot). Admin Utama sendiri
+        // tidak bisa dikelola siapa pun (dijaga server).
+        const canManageTarget = currentUser?.role === 'admin'
+          && (user.role !== 'admin' || (currentUser.isMainAdmin === true && user.isMainAdmin !== true));
+        if (canManageTarget) {
           const adminPanel = document.createElement('section');
           adminPanel.className = 'member-admin-panel';
           const heading = document.createElement('div');
@@ -2483,6 +2508,21 @@ loginForm.addEventListener('submit', async (event) => {
   }
 });
 
+// Pilihan peran di formulir daftar: Member (default) atau Admin (butuh kode
+// akses setelah verifikasi). Nilai peran ikut terkirim lewat input hidden.
+const registerRoleInput = document.querySelector('#register-role');
+document.querySelectorAll('[data-register-role]').forEach((option) => {
+  option.addEventListener('click', () => {
+    const role = option.dataset.registerRole === 'admin' ? 'admin' : 'user';
+    if (registerRoleInput) registerRoleInput.value = role;
+    document.querySelectorAll('[data-register-role]').forEach((item) => {
+      const selected = item === option;
+      item.classList.toggle('is-selected', selected);
+      item.setAttribute('aria-pressed', String(selected));
+    });
+  });
+});
+
 registerForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   setAuthMessage('');
@@ -2522,6 +2562,10 @@ verificationForm.addEventListener('submit', async (event) => {
       method: 'POST',
       body: JSON.stringify({ identifier: verificationIdentifier, code: data.code }),
     }));
+    if (result.needsAccessCode === true) {
+      showAdminAccessForm(result.identifier || verificationIdentifier);
+      return;
+    }
     await showDashboard(result.user);
     showToast('Akun berhasil diverifikasi.');
   } catch (error) {
@@ -2532,6 +2576,27 @@ verificationForm.addEventListener('submit', async (event) => {
     setAuthSubmitLoading(button, 'verification', false);
     if (nextCooldownUntil > Date.now()) startVerificationCooldown(nextCooldownUntil);
     else if (refreshedPrompt) document.querySelector('#verification-code').focus();
+  }
+});
+
+adminAccessForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  setAuthMessage('');
+  const button = adminAccessForm.querySelector('button[type="submit"]');
+  setAuthSubmitLoading(button, 'admin-access', true);
+  try {
+    const data = Object.fromEntries(new FormData(adminAccessForm));
+    const result = await waitForAuthAnimation(api('/api/auth/admin-access', {
+      method: 'POST',
+      body: JSON.stringify({ identifier: verificationIdentifier, accessCode: data.accessCode }),
+    }));
+    await showDashboard(result.user);
+    showToast('Akun admin berhasil dibuat.');
+  } catch (error) {
+    setAuthMessage(error.message);
+    document.querySelector('#admin-access-code')?.focus();
+  } finally {
+    setAuthSubmitLoading(button, 'admin-access', false);
   }
 });
 

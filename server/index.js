@@ -8,7 +8,7 @@ import { promisify } from 'node:util';
 import { createPairingManager, maskedEmail, normalizePairingInput, PairingError } from './pairing-manager.js';
 import { sanitizeStoryLogDetails } from './story-log.js';
 import { readAvatarUpload } from './avatar-upload.js';
-import { BANNED_LOGIN_NOTICE, DELETED_LOGIN_NOTICE, isBannedAccount, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
+import { BANNED_LOGIN_NOTICE, DELETED_LOGIN_NOTICE, isBannedAccount, isMainAdminUser, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
 import { BackupArchiveError, createEncryptedBackup, decryptEncryptedBackup, MAX_ARCHIVE_BYTES, MAX_PLAINTEXT_BYTES } from './admin-backup.js';
 import { acquireRestoreLock } from './session-lock.js';
 import {
@@ -43,6 +43,7 @@ function loadConfigJson() {
     BOOTSTRAP_ADMIN_USERNAME: config.admin?.username,
     BOOTSTRAP_ADMIN_NAME: config.admin?.name,
     BOOTSTRAP_ADMIN_PASSWORD: config.admin?.password,
+    ADMIN_ACCESS_CODE: config.adminAccessCode,
   };
   for (const [key, value] of Object.entries(values)) {
     if (value !== undefined && process.env[key] === undefined) process.env[key] = String(value);
@@ -71,6 +72,8 @@ const MAX_BACKUP_UPLOAD_BYTES = MAX_ARCHIVE_BYTES;
 const MAX_BACKUP_DATA_BYTES = MAX_PLAINTEXT_BYTES;
 const PASSWORD_MIN = 12;
 const PENDING_REGISTRATION_TTL_MS = 24 * 60 * 60 * 1000;
+const ADMIN_ACCESS_CODE = String(process.env.ADMIN_ACCESS_CODE || '').trim();
+const ADMIN_ACCESS_MAX_ATTEMPTS = 5;
 const plans = new Set(['readonly', 'readonly_readsw', 'online24']);
 const AVATAR_PRESETS = new Set(Array.from({ length: 48 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`));
 const MAX_STORY_EMOJIS = 30;
@@ -104,8 +107,15 @@ function publicUser(user) {
     avatarUpdatedAt: user.avatarUpdatedAt || null,
     avatarMime: user.avatar === 'uploaded' ? (user.avatarMime || null) : null,
     role: user.role,
+    isMainAdmin: isMainAdmin(user),
     createdAt: user.createdAt,
   };
+}
+
+// Admin Utama = admin yang username-nya sama dengan admin di config.json
+// (env BOOTSTRAP_ADMIN_USERNAME, yaitu WILYKUN). Admin biasa tidak sama.
+function isMainAdmin(user) {
+  return isMainAdminUser(user, process.env.BOOTSTRAP_ADMIN_USERNAME);
 }
 
 function createVerificationChallenge() {
@@ -248,11 +258,13 @@ async function removeStalker(visitorId) {
   return operation;
 }
 
-// Cermin metadata per-akun (DATA_AKUN/<username>/): file JSON ditulis dari
-// store.json untuk satu akun; store.json tetap sumber kebenaran metadata.
-// Auth WhatsApp privat memakai session.json; login panel dicerminkan terpisah.
-// Avatar unggahan dibaca pemilik atau admin terautentikasi melalui endpoint terbatas.
+// Cermin metadata per-akun: admin di DATA_ADMIN/<username>/, member di
+// DATA_AKUN/<username>/. File JSON ditulis dari store.json untuk satu akun;
+// store.json tetap sumber kebenaran metadata. Auth WhatsApp privat memakai
+// session.json; login panel dicerminkan terpisah. Avatar unggahan dibaca
+// pemilik atau admin terautentikasi melalui endpoint terbatas.
 const ACCOUNT_DIR = path.join(ROOT, 'DATA_AKUN');
+const ADMIN_ACCOUNT_DIR = path.join(ROOT, 'DATA_ADMIN');
 const WIB_FORMAT = new Intl.DateTimeFormat('id-ID', {
   timeZone: 'Asia/Jakarta', weekday: 'long', day: 'numeric', month: 'long',
   year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
@@ -265,10 +277,18 @@ function formatWIB(iso) {
 
 // Nama folder akun = username lowercase yang sudah tervalidasi
 // [a-z0-9][a-z0-9._-]{2,23}. Kembalikan null bila tidak valid.
-function accountFolder(username) {
+// Peran dibaca dari registry: admin ke DATA_ADMIN, member ke DATA_AKUN.
+// Bila folder kanonis belum ada tapi folder lama (DATA_AKUN) ada — misal
+// sebelum migrasi — folder lama dipakai, agar sesi dan bot tidak putus.
+function accountFolder(username, role) {
   const name = String(username || '').toLowerCase();
   if (!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(name)) return null;
-  return path.join(ACCOUNT_DIR, name);
+  const resolvedRole = role || store.users.find((item) => item.username === name)?.role;
+  const canonical = path.join(resolvedRole === 'admin' ? ADMIN_ACCOUNT_DIR : ACCOUNT_DIR, name);
+  if (fsSync.existsSync(canonical)) return canonical;
+  const legacy = path.join(ACCOUNT_DIR, name);
+  if (legacy !== canonical && fsSync.existsSync(legacy)) return legacy;
+  return canonical;
 }
 
 function buildAccountFiles(snapshot, user) {
@@ -376,20 +396,25 @@ async function syncChangedAccounts(before, snapshot) {
 const ACCOUNT_MIRROR_FILES = ['akun.json', 'panel-sessions.json', 'bot.json', 'riwayat-login.json', 'pairing.json'];
 
 async function removePendingAccountMirror(username) {
-  const dir = accountFolder(username);
-  if (!dir) return;
-  for (const name of ACCOUNT_MIRROR_FILES) {
-    try {
-      await fs.rm(path.join(dir, name), { force: true });
-    } catch (error) {
-      console.warn('[panel] Tidak dapat membersihkan satu mirror pendaftaran pending:', error?.message || error);
+  const name = String(username || '').toLowerCase();
+  if (!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(name)) return;
+  // Pendaftaran pending belum punya peran di registry, jadi bersihkan kedua
+  // lokasi kandidat (DATA_ADMIN dan DATA_AKUN) agar tidak ada sisa mirror.
+  const dirs = [...new Set([path.join(ADMIN_ACCOUNT_DIR, name), path.join(ACCOUNT_DIR, name)])];
+  for (const dir of dirs) {
+    for (const file of ACCOUNT_MIRROR_FILES) {
+      try {
+        await fs.rm(path.join(dir, file), { force: true });
+      } catch (error) {
+        console.warn('[panel] Tidak dapat membersihkan satu mirror pendaftaran pending:', error?.message || error);
+      }
     }
-  }
-  try {
-    await fs.rm(dir, { recursive: false });
-  } catch (error) {
-    if (!['ENOENT', 'ENOTEMPTY', 'EEXIST'].includes(error?.code)) {
-      console.warn('[panel] Folder pendaftaran pending masih berisi file lain; file tersebut dipertahankan.');
+    try {
+      await fs.rm(dir, { recursive: false });
+    } catch (error) {
+      if (!['ENOENT', 'ENOTEMPTY', 'EEXIST'].includes(error?.code)) {
+        console.warn('[panel] Folder pendaftaran pending masih berisi file lain; file tersebut dipertahankan.');
+      }
     }
   }
 }
@@ -795,7 +820,10 @@ function validateRegistration(body) {
   if (['admin', 'administrator', 'root', 'support', 'system'].includes(username)) return { error: 'Username tersebut tidak tersedia.' };
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return { error: 'Alamat email tidak valid.' };
   if (password.length < PASSWORD_MIN || password.length > 128) return { error: `Kata sandi harus ${PASSWORD_MIN}–128 karakter.` };
-  return { displayName, username, email, password };
+  // Peran dipilih di formulir daftar; selain 'admin' selalu jadi member.
+  // 'admin' saja belum cukup — kode akses tetap diminta setelah verifikasi.
+  const role = body.role === 'admin' ? 'admin' : 'user';
+  return { displayName, username, email, password, role };
 }
 
 function normalizeStorySettings(value, mode, fallback = null) {
@@ -956,7 +984,7 @@ function isAllowedBackupPath(value) {
   if (typeof value !== 'string' || value.includes('\\') || value.includes('\0')) return false;
   const parts = value.split('/');
   if (parts.some((part) => !part || part === '.' || part === '..')) return false;
-  if (parts[0] !== 'DATA_AKUN') return false;
+  if (parts[0] !== 'DATA_AKUN' && parts[0] !== 'DATA_ADMIN') return false;
   if (parts.length === 2 && parts[1] === '.gitkeep') return true;
   if (parts.length < 3 || !ACCOUNT_FOLDER_PATTERN.test(parts[1])) return false;
   if (!parts.slice(2).every((part) => ACCOUNT_DATA_SEGMENT_PATTERN.test(part))) return false;
@@ -980,7 +1008,7 @@ async function collectBackupPayload() {
     if (files.length > 10_000) throw backupFailure('Jumlah file backup melewati batas maksimum.', 413);
   };
   await addFile('panel/store.json', STORE_FILE);
-  const walkAccount = async (directory, relative = '') => {
+  const walkAccount = async (directory, prefix, relative = '') => {
     let entries;
     try { entries = await fs.readdir(directory, { withFileTypes: true }); }
     catch (error) { if (error.code === 'ENOENT') return; throw error; }
@@ -993,15 +1021,16 @@ async function collectBackupPayload() {
       const stat = await fs.lstat(absolute);
       if (stat.isSymbolicLink()) throw backupFailure('Backup dihentikan karena ditemukan symlink pada data akun.', 409);
       if (stat.isDirectory()) {
-        await walkAccount(absolute, rel);
+        await walkAccount(absolute, prefix, rel);
       } else if (stat.isFile()) {
-        await addFile(`DATA_AKUN/${rel}`, absolute);
+        await addFile(`${prefix}/${rel}`, absolute);
       } else {
         throw backupFailure('Backup dihentikan karena ditemukan jenis file akun yang tidak didukung.', 409);
       }
     }
   };
-  await walkAccount(ACCOUNT_DIR);
+  await walkAccount(ACCOUNT_DIR, 'DATA_AKUN');
+  await walkAccount(ADMIN_ACCOUNT_DIR, 'DATA_ADMIN');
   for (const [archivePath, filename, fallback] of [
     ['DATA_STALKER/visitors.json', STALKER_FILE, { visitors: [] }],
     ['DATA_KUNJUNGAN/visitors.json', VISIT_FILE, { visitors: [] }],
@@ -1132,12 +1161,16 @@ async function assertNoOtherAccountSessionLocks() {
     }
   };
   await inspect(ACCOUNT_DIR);
+  await inspect(ADMIN_ACCOUNT_DIR);
 }
 
 async function installBackupPayload(validated, restoreLock) {
   const id = randomUUID();
   const stageAccount = await fs.mkdtemp(path.join(ROOT, `.DATA_AKUN-stage-${id}-`));
   await fs.chmod(stageAccount, 0o700).catch(() => {});
+  const stageAdminAccount = await fs.mkdtemp(path.join(ROOT, `.DATA_ADMIN-stage-${id}-`));
+  await fs.chmod(stageAdminAccount, 0o700).catch(() => {});
+  let stagedAdminFiles = 0;
   const stagedFiles = [];
   const targets = [];
   try {
@@ -1156,6 +1189,9 @@ async function installBackupPayload(validated, restoreLock) {
       } else if (archivePath === 'DATA_KUNJUNGAN/visitors.json') {
         visitStage = path.join(VISIT_DIR, `.visitors.restore-${id}`);
         target = visitStage;
+      } else if (archivePath.startsWith('DATA_ADMIN/')) {
+        stagedAdminFiles += 1;
+        target = path.join(stageAdminAccount, ...archivePath.split('/').slice(1));
       } else {
         target = path.join(stageAccount, ...archivePath.split('/').slice(1));
       }
@@ -1176,6 +1212,10 @@ async function installBackupPayload(validated, restoreLock) {
     }
     try { await fs.access(path.join(stageAccount, '.gitkeep')); }
     catch { await fs.writeFile(path.join(stageAccount, '.gitkeep'), '', { mode: 0o600, flag: 'wx' }); }
+    if (stagedAdminFiles > 0) {
+      try { await fs.access(path.join(stageAdminAccount, '.gitkeep')); }
+      catch { await fs.writeFile(path.join(stageAdminAccount, '.gitkeep'), '', { mode: 0o600, flag: 'wx' }); }
+    }
     secretStage = path.join(DATA_DIR, `.restore-secret.restore-${id}`);
     await fs.writeFile(secretStage, `${validated.sessionSecret}\n`, { mode: 0o600, flag: 'wx' });
     stagedFiles.push(secretStage);
@@ -1186,6 +1226,11 @@ async function installBackupPayload(validated, restoreLock) {
       { target: VISIT_FILE, staged: visitStage },
       { target: RESTORE_SECRET_FILE, staged: secretStage },
     );
+    // Backup lama tidak punya entri DATA_ADMIN — jangan sentuh folder admin
+    // yang sedang berjalan bila arsip tidak membawanya.
+    if (stagedAdminFiles > 0) {
+      targets.push({ target: ADMIN_ACCOUNT_DIR, staged: stageAdminAccount, directory: true });
+    }
     const changed = [];
     try {
       for (const item of targets) {
@@ -1212,6 +1257,7 @@ async function installBackupPayload(validated, restoreLock) {
   } finally {
     for (const staged of stagedFiles) await fs.rm(staged, { recursive: true, force: true }).catch(() => {});
     await fs.rm(stageAccount, { recursive: true, force: true }).catch(() => {});
+    await fs.rm(stageAdminAccount, { recursive: true, force: true }).catch(() => {});
   }
 }
 
@@ -1328,6 +1374,9 @@ async function handleApi(req, res, url) {
     const body = await readJson(req);
     const input = validateRegistration(body);
     if (input.error) return sendError(res, 400, input.error);
+    if (input.role === 'admin' && !ADMIN_ACCESS_CODE) {
+      return sendError(res, 400, 'Pendaftaran admin belum dikonfigurasi. Minta admin panel mengaturnya.');
+    }
     const salt = randomBytes(16).toString('hex');
     const passwordHash = (await scrypt(input.password, salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
     let user;
@@ -1374,8 +1423,9 @@ async function handleApi(req, res, url) {
         const verification = createVerificationChallenge();
         const created = {
           id: randomUUID(), username: input.username, email: input.email,
-          displayName: input.displayName, avatar: 'avatar-01', role: 'user', salt, passwordHash,
+          displayName: input.displayName, avatar: 'avatar-01', role: input.role, salt, passwordHash,
           verified: false, verification, pendingExpiresAt: Date.now() + PENDING_REGISTRATION_TTL_MS,
+          needsAccessCode: input.role === 'admin',
           createdAt: new Date().toISOString(),
         };
         next.pendingRegistrations.push(created);
@@ -1471,6 +1521,16 @@ async function handleApi(req, res, url) {
         result = { type: 'conflict' };
         return;
       }
+      if (current.role === 'admin' && current.needsAccessCode === true) {
+        // Verifikasi lolos, tapi akun admin belum dibuat: kode akses masih
+        // harus dimasukkan lewat /api/auth/admin-access. Pendaftaran tetap
+        // pending (batas 1 jam untuk langkah kode akses) dan belum ada sesi.
+        current.verified = true;
+        delete current.verification;
+        current.pendingExpiresAt = now + 60 * 60 * 1000;
+        result = { type: 'needs-access-code', identifier: current.username };
+        return;
+      }
       current.verified = true;
       delete current.verification;
       delete current.pendingExpiresAt;
@@ -1503,6 +1563,88 @@ async function handleApi(req, res, url) {
         cooldownUntil: result.cooldownUntil,
         retryAfterSeconds,
       }, { 'Retry-After': String(retryAfterSeconds) });
+    }
+    if (result?.type === 'needs-access-code') {
+      return sendJson(res, 200, { needsAccessCode: true, identifier: result.identifier });
+    }
+    if (isBannedAccount(verifiedUser)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true });
+    const token = await createSession(verifiedUser.id);
+    await recordLogin(verifiedUser.id, req, token.split('.')[0]);
+    return sendJson(res, 200, { user: publicUser(verifiedUser) }, { 'Set-Cookie': cookieHeader(token, SESSION_TTL_MS / 1000, req) });
+  }
+
+  // Langkah kedua pendaftaran admin: setelah verifikasi, pendaftar wajib
+  // memasukkan kode akses (config adminAccessCode). Kode dibandingkan
+  // sebagai HMAC (peka huruf diabaikan — 'kontil' tetap diterima) dan tidak
+  // pernah dikirim ke klien. 5 kali salah → pendaftaran dibatalkan.
+  if (route === 'POST /api/auth/admin-access') {
+    const limitKey = `admin-access:${clientKey(req)}`;
+    if (!allowRateLimit(limitKey, 12, 15 * 60 * 1000)) {
+      const cooldownUntil = rateLimits.get(limitKey)?.resetAt || Date.now() + 60_000;
+      const retryAfterSeconds = Math.max(1, Math.ceil((cooldownUntil - Date.now()) / 1000));
+      return sendJson(res, 429, {
+        error: `Terlalu banyak percobaan kode akses. Coba lagi dalam ${retryAfterSeconds} detik.`,
+        cooldownUntil,
+        retryAfterSeconds,
+      }, { 'Retry-After': String(retryAfterSeconds) });
+    }
+    if (!ADMIN_ACCESS_CODE) return sendError(res, 400, 'Pendaftaran admin belum dikonfigurasi.');
+    const body = await readJson(req);
+    const identifier = String(body.identifier || '').trim().toLowerCase().slice(0, 254);
+    const accessCode = typeof body.accessCode === 'string' ? body.accessCode : '';
+    if (!identifier || !accessCode) return sendError(res, 400, 'Kode akses wajib diisi.');
+    const now = Date.now();
+    let result = null;
+    let verifiedUser;
+    await mutate((next) => {
+      if (!Array.isArray(next.pendingRegistrations)) next.pendingRegistrations = [];
+      const pendingIndex = next.pendingRegistrations.findIndex((item) => item.email === identifier || item.username === identifier);
+      const current = next.pendingRegistrations[pendingIndex];
+      if (!current || current.role !== 'admin' || current.needsAccessCode !== true || current.verified !== true) {
+        result = { type: 'missing' };
+        return;
+      }
+      if (Number(current.pendingExpiresAt) <= now) {
+        next.pendingRegistrations.splice(pendingIndex, 1);
+        result = { type: 'expired' };
+        return;
+      }
+      const expectedHash = createHmac('sha256', sessionSecret).update(ADMIN_ACCESS_CODE.toUpperCase()).digest('hex');
+      const attemptHash = createHmac('sha256', sessionSecret).update(accessCode.toUpperCase()).digest('hex');
+      if (!constantTimeHexEqual(attemptHash, expectedHash)) {
+        const attempts = Number(current.accessCodeAttempts || 0) + 1;
+        if (attempts >= ADMIN_ACCESS_MAX_ATTEMPTS) {
+          next.pendingRegistrations.splice(pendingIndex, 1);
+          result = { type: 'locked' };
+        } else {
+          current.accessCodeAttempts = attempts;
+          result = { type: 'wrong', attemptsRemaining: ADMIN_ACCESS_MAX_ATTEMPTS - attempts };
+        }
+        return;
+      }
+      if (next.users.some((item) => item.username === current.username || item.email === current.email)) {
+        next.pendingRegistrations.splice(pendingIndex, 1);
+        result = { type: 'conflict' };
+        return;
+      }
+      delete current.needsAccessCode;
+      delete current.accessCodeAttempts;
+      delete current.pendingExpiresAt;
+      next.pendingRegistrations.splice(pendingIndex, 1);
+      if (!Array.isArray(next.users)) next.users = [];
+      next.users.push(current);
+      verifiedUser = current;
+      result = { type: 'verified' };
+    });
+    if (result?.type === 'missing') return sendError(res, 400, 'Pendaftaran admin tidak ditemukan. Selesaikan verifikasi dulu.');
+    if (result?.type === 'expired') return sendError(res, 400, 'Waktu memasukkan kode akses habis. Daftar ulang jika perlu.');
+    if (result?.type === 'locked') return sendError(res, 403, 'Kode akses salah berulang kali. Pendaftaran dibatalkan; daftar ulang jika perlu.');
+    if (result?.type === 'conflict') return sendError(res, 409, 'Username atau email sudah digunakan akun terverifikasi. Silakan daftar dengan data lain.');
+    if (result?.type === 'wrong') {
+      return sendJson(res, 401, {
+        error: `Kode akses salah. Sisa percobaan: ${result.attemptsRemaining}.`,
+        attemptsRemaining: result.attemptsRemaining,
+      });
     }
     if (isBannedAccount(verifiedUser)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true });
     const token = await createSession(verifiedUser.id);
@@ -1910,7 +2052,7 @@ async function handleApi(req, res, url) {
     const body = await readJson(req);
     const targetId = String(body.userId || '').slice(0, 128);
     const target = store.users.find((item) => item.id === targetId);
-    const permissionError = memberAdminPolicyError(user, target);
+    const permissionError = memberAdminPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
     if (permissionError) return sendError(res, permissionError.status, permissionError.message);
     const action = String(body.action || '');
     if (!['start', 'restart', 'stop'].includes(action)) return sendError(res, 400, 'Aksi bot tidak dikenal.');
@@ -1918,7 +2060,7 @@ async function handleApi(req, res, url) {
     try {
       return await withMemberLifecycleLock(targetId, async () => {
         const freshTarget = store.users.find((item) => item.id === targetId);
-        const currentPermissionError = memberAdminPolicyError(user, freshTarget);
+        const currentPermissionError = memberAdminPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
         if (currentPermissionError) return sendError(res, currentPermissionError.status, currentPermissionError.message);
         if (isBannedAccount(freshTarget) && action !== 'stop') return sendError(res, 409, 'Akun member sedang diblokir. Buka blokir dahulu sebelum menjalankan bot.');
         const current = pairingManager.getState(targetId);
@@ -1969,7 +2111,7 @@ async function handleApi(req, res, url) {
     const body = await readJson(req);
     const targetId = String(body.userId || '').slice(0, 128);
     const target = store.users.find((item) => item.id === targetId);
-    const permissionError = memberAdminPolicyError(user, target);
+    const permissionError = memberAdminPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
     if (permissionError) return sendError(res, permissionError.status, permissionError.message);
     const action = String(body.action || '');
     if (!['ban', 'unban'].includes(action)) return sendError(res, 400, 'Pilih aksi blokir atau buka blokir.');
@@ -1977,12 +2119,15 @@ async function handleApi(req, res, url) {
     const reason = normalizeBanReason(body.reason);
     return await withMemberLifecycleLock(targetId, async () => {
       const freshTarget = store.users.find((item) => item.id === targetId);
-      const currentPermissionError = memberAdminPolicyError(user, freshTarget);
+      const currentPermissionError = memberAdminPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
       if (currentPermissionError) return sendError(res, currentPermissionError.status, currentPermissionError.message);
       const now = new Date().toISOString();
       const updated = await mutate((next) => {
         const member = (next.users || []).find((item) => item.id === targetId);
-        if (!member || member.role === 'admin') return false;
+        if (!member) return false;
+        // Lapisan kedua di balik memberAdminPolicyError: admin biasa tidak
+        // bisa diblokir kecuali oleh Admin Utama; Admin Utama tidak bisa.
+        if (member.role === 'admin' && (isMainAdmin(member) || !isMainAdmin(user))) return false;
         if (action === 'ban') {
           member.banned = true;
           member.bannedAt = now;
@@ -2034,14 +2179,14 @@ async function handleApi(req, res, url) {
     const targetId = String(body.userId || '').slice(0, 128);
     const target = store.users.find((item) => item.id === targetId);
     if (target && target.id === user.id) return sendError(res, 400, 'Tidak dapat menghapus akun sendiri.');
-    const permissionError = memberAdminPolicyError(user, target);
+    const permissionError = memberAdminPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
     if (permissionError) return sendError(res, permissionError.status, permissionError.message);
     if (body.confirm !== true) return sendError(res, 400, 'Konfirmasikan penghapusan permanen akun member.');
     const reason = normalizeBanReason(body.reason);
     return await withMemberLifecycleLock(targetId, async () => {
       const freshTarget = store.users.find((item) => item.id === targetId);
       if (freshTarget && freshTarget.id === user.id) return sendError(res, 400, 'Tidak dapat menghapus akun sendiri.');
-      const currentPermissionError = memberAdminPolicyError(user, freshTarget);
+      const currentPermissionError = memberAdminPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
       if (currentPermissionError) return sendError(res, currentPermissionError.status, currentPermissionError.message);
       const now = new Date().toISOString();
       const username = freshTarget.username;
@@ -2060,7 +2205,9 @@ async function handleApi(req, res, url) {
         const memberIndex = (next.users || []).findIndex((item) => item.id === targetId);
         if (memberIndex < 0) return false;
         const member = next.users[memberIndex];
-        if (member.role === 'admin') return false;
+        // Lapisan kedua di balik memberAdminPolicyError: admin biasa hanya
+        // bisa dihapus oleh Admin Utama; Admin Utama tidak bisa dihapus.
+        if (member.role === 'admin' && (isMainAdmin(member) || !isMainAdmin(user))) return false;
         next.users.splice(memberIndex, 1);
         next.sessions = (next.sessions || []).filter((session) => session.userId !== targetId);
         next.bots = (next.bots || []).filter((bot) => bot.userId !== targetId);
@@ -2081,7 +2228,7 @@ async function handleApi(req, res, url) {
       const folder = accountFolder(username);
       if (folder) {
         try { await fs.rm(folder, { recursive: true, force: true }); }
-        catch { warning = 'Akun sudah dihapus dari registry, tetapi folder DATA_AKUN belum dapat dihapus. Periksa folder akun member.'; }
+        catch { warning = 'Akun sudah dihapus dari registry, tetapi folder akun belum dapat dihapus. Periksa folder akun member.'; }
       }
       return sendJson(res, 200, { ok: true, deleted: true, username, deletedAt: now, reason: reason || null, warning });
     });
@@ -2120,6 +2267,7 @@ async function handleApi(req, res, url) {
         banned: isBannedAccount(item),
         bannedAt: item.bannedAt || null,
         banReason: item.banReason || null,
+        isMainAdmin: isMainAdmin(item),
       };
     }));
     return sendJson(res, 200, { users });
@@ -2143,6 +2291,7 @@ async function handleApi(req, res, url) {
         email: maskedEmail(item.email),
         displayName: item.displayName,
         role: item.role === 'admin' ? 'admin' : 'member',
+        isMainAdmin: isMainAdmin(item),
         verified: item.verified !== false,
         createdAt: item.createdAt,
         avatar: item.avatar === 'uploaded' ? 'avatar-01' : AVATAR_PRESETS.has(item.avatar) ? item.avatar : 'avatar-01',
