@@ -33,6 +33,7 @@ let storySaveRevision = 0;
 
 const APPEARANCE_STORAGE_KEY = 'readsw-console-theme';
 const AUTH_MODE_STORAGE_KEY = 'readsw-console-auth-mode';
+const LAST_PAGE_STORAGE_KEY = 'readsw-console-last-page';
 function savedAuthMode() {
   try {
     return window.sessionStorage.getItem(AUTH_MODE_STORAGE_KEY) === 'register' ? 'register' : 'login';
@@ -1662,12 +1663,13 @@ function scrollPrivateLogToNewest(list, behavior = 'smooth') {
   });
 }
 
-function setWorkspacePage(page, updateHash = true) {
+function setWorkspacePage(page, smoothScroll = true) {
   const navItem = document.querySelector(`.side-nav .nav-item[href="#${page}"]`);
   if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || navItem?.classList.contains('hidden')) {
     page = document.body.dataset.whatsappLinked === 'true' ? 'dashboard' : 'pairing';
   }
   activeWorkspacePage = page;
+  try { window.sessionStorage.setItem(LAST_PAGE_STORAGE_KEY, page); } catch { /* Halaman terakhir tetap berjalan tanpa storage. */ }
   document.querySelectorAll('[data-page-view]').forEach((view) => {
     view.classList.toggle('view-hidden', view.dataset.pageView !== page);
   });
@@ -1675,8 +1677,9 @@ function setWorkspacePage(page, updateHash = true) {
     item.classList.toggle('active', item.getAttribute('href') === `#${page}`);
   });
   document.querySelector('#page-breadcrumb').textContent = workspacePageTitles[page];
-  if (updateHash && location.hash !== `#${page}`) history.replaceState(null, '', `#${page}`);
-  window.scrollTo({ top: 0, behavior: updateHash ? 'smooth' : 'auto' });
+  // URL panel selalu tampil bersih tanpa #halaman. Tautan dalam dengan #halaman tetap dibaca sekali saat halaman dimuat (renderLinkGate / showDashboard), lalu dibersihkan di sini.
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  window.scrollTo({ top: 0, behavior: smoothScroll ? 'smooth' : 'auto' });
   if (page === 'activity') {
     privateLogScrollOnNextRender = true;
     startPrivateLogAutoRefresh();
@@ -1730,11 +1733,16 @@ function renderLinkGate(pairing) {
   if (!activeWorkspacePage) {
     const requestedPage = location.hash.slice(1);
     const requestedNav = document.querySelector(`.side-nav .nav-item[href="#${requestedPage}"]`);
+    let rememberedPage = null;
+    try { rememberedPage = window.sessionStorage.getItem(LAST_PAGE_STORAGE_KEY); } catch { /* Halaman awal tetap berjalan tanpa storage. */ }
+    const rememberedNav = rememberedPage ? document.querySelector(`.side-nav .nav-item[href="#${rememberedPage}"]`) : null;
     const initialPage = requestedNav && !requestedNav.classList.contains('hidden')
       ? requestedPage
-      : adminVisible
-        ? 'admin'
-        : hasLinkedSession ? 'dashboard' : 'pairing';
+      : rememberedNav && !rememberedNav.classList.contains('hidden')
+        ? rememberedPage
+        : adminVisible
+          ? 'admin'
+          : hasLinkedSession ? 'dashboard' : 'pairing';
     setWorkspacePage(initialPage, false);
   } else if (hasLinkedSession && activeWorkspacePage === 'pairing') {
     setWorkspacePage('dashboard');
@@ -2392,6 +2400,7 @@ function showAuth(mode = 'login') {
   document.querySelector('#pairing-code-card')?.classList.add('hidden');
   currentUser = null;
   activeWorkspacePage = null;
+  try { window.sessionStorage.removeItem(LAST_PAGE_STORAGE_KEY); } catch { /* Halaman terakhir tetap terhapus dari memori halaman. */ }
   document.querySelectorAll('[data-page-view]').forEach((view) => view.classList.remove('view-hidden'));
   appView.classList.add('hidden');
   authView.classList.remove('hidden');

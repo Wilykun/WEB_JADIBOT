@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-15T19:44:00+07:00",
+  "updatedAt": "2026-11-15T21:23:00+07:00",
   "updates": [
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "21.23 WIB",
+      "tag": "Perubahan",
+      "title": "URL panel kini bersih tanpa #halaman dan halaman terakhir tetap diingat",
+      "description": "Saat pindah halaman di dalam panel, address bar dulu menampilkan alamat dengan #mode, #server, dan sejenisnya. Kini alamatnya selalu tampil bersih sebagai https://readsw.24h.sh/ saja. Tautan dalam seperti readsw.24h.sh/#server tetap bisa dibuka — halamannya langsung terbuka lalu alamatnya dibersihkan sendiri. Halaman terakhir yang dibuka juga tetap diingat di tab yang sama, jadi habis refresh kembali ke halaman itu, bukan ke halaman awal; tab baru tetap mulai dari halaman awal."
+    },
     {
       "day": "Minggu, 15 Nov 2026",
       "time": "19.44 WIB",
