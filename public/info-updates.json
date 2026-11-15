@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-15T16:19:00+07:00",
+  "updatedAt": "2026-11-15T16:29:00+07:00",
   "updates": [
     {
       "day": "Minggu, 15 Nov 2026",
-      "time": "16.19 WIB",
+      "time": "16.29 WIB",
       "title": "Folder akun Admin dan Member kini terpisah",
-      "description": "Data akun admin kini tersimpan di dalam folder DATA_AKUN, di subfolder DATA_ADMIN (DATA_AKUN/DATA_ADMIN), terpisah dari folder member yang langsung di bawah DATA_AKUN. Akun lama yang masih di folder lama tetap terbaca otomatis (fallback), jadi sesi dan bot tidak putus. Backup dan pemulihan ikut mencakup kedua susunan folder.",
+      "description": "Di dalam folder DATA_AKUN kini ada dua subfolder peran: ADMIN untuk akun admin (DATA_AKUN/ADMIN) dan MEMBER untuk akun member (DATA_AKUN/MEMBER) — tiap user punya foldernya sendiri, jadi admin dan member tidak bentrok walau namanya sama. Akun lama yang masih di susunan folder lama tetap terbaca otomatis (fallback), jadi sesi dan bot tidak putus. Backup dan pemulihan ikut mencakup susunan baru ini.",
       "tag": "Perubahan"
     },
     {

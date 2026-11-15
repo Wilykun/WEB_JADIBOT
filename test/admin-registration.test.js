@@ -130,7 +130,7 @@ async function registerAdminWithCode(base, { username, email, password, code = A
   return access;
 }
 
-test('member mendaftar lalu masuk; folder akun di DATA_AKUN, bukan di DATA_AKUN/DATA_ADMIN', { timeout: 30_000 }, async () => {
+test('member mendaftar lalu masuk; folder akun di DATA_AKUN/MEMBER', { timeout: 30_000 }, async () => {
   const fixture = await startFixture();
   try {
     const { verify } = await registerAndVerify(fixture.base, {
@@ -145,15 +145,15 @@ test('member mendaftar lalu masuk; folder akun di DATA_AKUN, bukan di DATA_AKUN/
     assert.ok(created);
     assert.equal(created.role, 'member');
     assert.equal(created.isMainAdmin, false);
-    assert.equal(await waitForPath(path.join(fixture.root, 'DATA_AKUN', 'memberbaru', 'akun.json')), true);
-    assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'DATA_ADMIN', 'memberbaru')), false);
-    assert.equal(await pathExists(path.join(fixture.root, 'DATA_ADMIN', 'memberbaru')), false);
+    assert.equal(await waitForPath(path.join(fixture.root, 'DATA_AKUN', 'MEMBER', 'memberbaru', 'akun.json')), true);
+    assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'memberbaru')), false);
+    assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'ADMIN', 'memberbaru')), false);
   } finally {
     await fixture.cleanup();
   }
 });
 
-test('admin mendaftar: verifikasi lalu kode akses; folder akun di DATA_AKUN/DATA_ADMIN', { timeout: 30_000 }, async () => {
+test('admin mendaftar: verifikasi lalu kode akses; folder akun di DATA_AKUN/ADMIN', { timeout: 30_000 }, async () => {
   const fixture = await startFixture();
   try {
     const { verify } = await registerAndVerify(fixture.base, {
@@ -176,8 +176,10 @@ test('admin mendaftar: verifikasi lalu kode akses; folder akun di DATA_AKUN/DATA
     assert.equal(access.payload.user.role, 'admin');
     assert.equal(access.payload.user.isMainAdmin, false);
     assert.ok(access.cookie, 'kode akses benar harus membuat sesi admin');
-    assert.equal(await waitForPath(path.join(fixture.root, 'DATA_AKUN', 'DATA_ADMIN', 'adminbaru', 'akun.json')), true);
+    assert.equal(await waitForPath(path.join(fixture.root, 'DATA_AKUN', 'ADMIN', 'adminbaru', 'akun.json')), true);
     assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'adminbaru')), false);
+    assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'MEMBER', 'adminbaru')), false);
+    assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'DATA_ADMIN', 'adminbaru')), false);
     assert.equal(await pathExists(path.join(fixture.root, 'DATA_ADMIN', 'adminbaru')), false);
   } finally {
     await fixture.cleanup();
@@ -236,8 +238,24 @@ test('folder admin lama di DATA_AKUN tetap dipakai sebagai fallback', { timeout:
     assert.equal(access.status, 200, JSON.stringify(access.payload));
     assert.equal(await waitForPath(path.join(fixture.root, 'DATA_AKUN', 'adminlama', 'akun.json')), true);
     assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'adminlama', 'penanda.txt')), true);
+    assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'ADMIN', 'adminlama')), false);
     assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'DATA_ADMIN', 'adminlama')), false);
     assert.equal(await pathExists(path.join(fixture.root, 'DATA_ADMIN', 'adminlama')), false);
+  } finally {
+    await fixture.cleanup();
+  }
+});
+
+test('folder admin lama di DATA_AKUN/DATA_ADMIN tetap dipakai sebagai fallback', { timeout: 30_000 }, async () => {
+  const fixture = await startFixture({ preCreate: [[path.join('DATA_AKUN', 'DATA_ADMIN', 'adminlama3'), 'penanda.txt']] });
+  try {
+    const access = await registerAdminWithCode(fixture.base, {
+      username: 'adminlama3', email: 'adminlama3@example.test', password: 'AdminLama3-Sandi123!',
+    });
+    assert.equal(access.status, 200, JSON.stringify(access.payload));
+    assert.equal(await waitForPath(path.join(fixture.root, 'DATA_AKUN', 'DATA_ADMIN', 'adminlama3', 'akun.json')), true);
+    assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'DATA_ADMIN', 'adminlama3', 'penanda.txt')), true);
+    assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'ADMIN', 'adminlama3')), false);
   } finally {
     await fixture.cleanup();
   }
@@ -252,6 +270,7 @@ test('folder admin lama di DATA_ADMIN luar tetap dipakai sebagai fallback', { ti
     assert.equal(access.status, 200, JSON.stringify(access.payload));
     assert.equal(await waitForPath(path.join(fixture.root, 'DATA_ADMIN', 'adminlama2', 'akun.json')), true);
     assert.equal(await pathExists(path.join(fixture.root, 'DATA_ADMIN', 'adminlama2', 'penanda.txt')), true);
+    assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'ADMIN', 'adminlama2')), false);
     assert.equal(await pathExists(path.join(fixture.root, 'DATA_AKUN', 'DATA_ADMIN', 'adminlama2')), false);
   } finally {
     await fixture.cleanup();

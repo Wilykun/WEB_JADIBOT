@@ -84,7 +84,7 @@ Buka `http://localhost:3000`. `npm start` menjalankan `start-ptero.sh` — cek N
 
 ## 🎛️ Fitur
 
-- **Pendaftaran + login** — username, email, kata sandi; pilih daftar sebagai Member atau Admin (admin wajib memasukkan kode akses setelah verifikasi); akun dapat ID acak; sesi pairing per akun di `DATA_AKUN/<username>/` (member) atau `DATA_AKUN/DATA_ADMIN/<username>/` (admin).
+- **Pendaftaran + login** — username, email, kata sandi; pilih daftar sebagai Member atau Admin (admin wajib memasukkan kode akses setelah verifikasi); akun dapat ID acak; sesi pairing per akun di `DATA_AKUN/MEMBER/<username>/` (member) atau `DATA_AKUN/ADMIN/<username>/` (admin) — tiap user foldernya sendiri, admin dan member tidak bentrok walau namanya sama.
 - **Pairing code Baileys** — masukkan nomor (digit + kode negara), kode muncul di panel dan dimasukkan di WhatsApp: Perangkat Tertaut → Tautkan Perangkat → Tautkan dengan nomor telepon. Kode cuma tampil ke sesi pemilik, maksimal 3 menit, tidak masuk log.
 - **Info Update realtime** — halaman pembaruan dibaca dari `public/info-updates.json`, refresh tiap 60 dtk; entri baru tinggal tambah ke file itu, terbaru di paling atas.
 - **Backup & pemulihan (admin)** — unduh backup terenkripsi (AES-256-GCM) dari panel; simpan ZIP + kata sandinya di luar Sandbox.
@@ -95,13 +95,13 @@ Buka `http://localhost:3000`. `npm start` menjalankan `start-ptero.sh` — cek N
 ## 📦 Data & Backup
 
 - Akun, hash kata sandi, sesi web, dan log pairing ada di `data/store.json`; kunci sesi web di `data/.session-secret`.
-- Kredensial WhatsApp (Baileys) tiap akun di `DATA_AKUN/<username>/session.json` (member) atau `DATA_AKUN/DATA_ADMIN/<username>/session.json` (admin). Folder `DATA_AKUN` (termasuk subfolder `DATA_ADMIN` di dalamnya), `DATA_KUNJUNGAN`, `DATA_STALKER` di-backup berkala ke repo ini.
+- Kredensial WhatsApp (Baileys) tiap akun di `DATA_AKUN/MEMBER/<username>/session.json` (member) atau `DATA_AKUN/ADMIN/<username>/session.json` (admin). Folder `DATA_AKUN` (termasuk subfolder `ADMIN` dan `MEMBER` di dalamnya), `DATA_KUNJUNGAN`, `DATA_STALKER` di-backup berkala ke repo ini.
 - **Jangan commit / bagikan berkas auth.** Bila sesi hilang, akun harus pairing ulang — session.json tidak bisa dipulihkan.
 - Admin dibuat saat startup dari properti `admin` di `config.json`, atau variabel `BOOTSTRAP_ADMIN_*` (email, username, password min 12 karakter, nama opsional). Jaga kerahasiaan `config.json`.
 
 ## 🔒 Catatan Keamanan
 
-- File auth berisi private key jangka panjang — simpan `DATA_AKUN` (termasuk subfolder `DATA_ADMIN`) di disk persisten yang privat, jangan di `/tmp`.
+- File auth berisi private key jangka panjang — simpan `DATA_AKUN` (termasuk subfolder `ADMIN` dan `MEMBER`) di disk persisten yang privat, jangan di `/tmp`.
 - ZIP source sengaja tidak membawa `session.json` WhatsApp aktif.
 - Repo sumber pernah mencatat token/secret di Git — perlakukan yang pernah bocor sebagai sudah bocor dan rotasi sebelum deployment.
 - Baileys `7.0.0-rc14` adalah library komunitas, bukan dari WhatsApp. Pairing code = WhatsApp Web, bukan Mobile API. Tanda dilihat + reaksi terlihat oleh pemilik story. Pakai akun sendiri dan patuhi syarat layanan WhatsApp.

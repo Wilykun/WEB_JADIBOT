@@ -258,16 +258,20 @@ async function removeStalker(visitorId) {
   return operation;
 }
 
-// Cermin metadata per-akun: admin di DATA_AKUN/DATA_ADMIN/<username>/, member di
-// DATA_AKUN/<username>/. File JSON ditulis dari store.json untuk satu akun;
-// store.json tetap sumber kebenaran metadata. Auth WhatsApp privat memakai
-// session.json; login panel dicerminkan terpisah. Avatar unggahan dibaca
-// pemilik atau admin terautentikasi melalui endpoint terbatas.
+// Cermin metadata per-akun: admin di DATA_AKUN/ADMIN/<username>/, member di
+// DATA_AKUN/MEMBER/<username>/. File JSON ditulis dari store.json untuk satu
+// akun; store.json tetap sumber kebenaran metadata. Auth WhatsApp privat
+// memakai session.json; login panel dicerminkan terpisah. Avatar unggahan
+// dibaca pemilik atau admin terautentikasi melalui endpoint terbatas.
 const ACCOUNT_DIR = path.join(ROOT, 'DATA_AKUN');
-const ADMIN_ACCOUNT_DIR = path.join(ACCOUNT_DIR, 'DATA_ADMIN');
-// Folder admin lama di luar DATA_AKUN (dipakai sebelum restrukturisasi):
-// hanya dibaca sebagai fallback, tidak pernah ditulis baru.
-const LEGACY_ADMIN_ACCOUNT_DIR = path.join(ROOT, 'DATA_ADMIN');
+const ADMIN_ACCOUNT_DIR = path.join(ACCOUNT_DIR, 'ADMIN');
+const MEMBER_ACCOUNT_DIR = path.join(ACCOUNT_DIR, 'MEMBER');
+// Folder akun lama (dipakai sebelum restrukturisasi ADMIN/MEMBER):
+// DATA_AKUN/DATA_ADMIN dari layout b91ff1f, DATA_ADMIN di luar dari layout
+// c89287b, dan akun langsung di DATA_AKUN — hanya dibaca sebagai fallback,
+// tidak pernah ditulis baru.
+const LEGACY_ADMIN_ACCOUNT_DIR = path.join(ACCOUNT_DIR, 'DATA_ADMIN');
+const LEGACY_TOP_ADMIN_ACCOUNT_DIR = path.join(ROOT, 'DATA_ADMIN');
 const WIB_FORMAT = new Intl.DateTimeFormat('id-ID', {
   timeZone: 'Asia/Jakarta', weekday: 'long', day: 'numeric', month: 'long',
   year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
@@ -280,21 +284,19 @@ function formatWIB(iso) {
 
 // Nama folder akun = username lowercase yang sudah tervalidasi
 // [a-z0-9][a-z0-9._-]{2,23}. Kembalikan null bila tidak valid.
-// Peran dibaca dari registry: admin ke DATA_AKUN/DATA_ADMIN, member ke
-// DATA_AKUN. Bila folder kanonis belum ada tapi folder lama ada — akun di
-// DATA_AKUN langsung (sebelum pemisahan peran) atau di DATA_ADMIN luar
-// (sebelum restrukturisasi bersarang) — folder lama dipakai, agar sesi
-// dan bot tidak putus.
+// Peran dibaca dari registry: admin ke DATA_AKUN/ADMIN, member ke
+// DATA_AKUN/MEMBER. Bila folder kanonis belum ada tapi folder lama ada —
+// akun langsung di DATA_AKUN, di DATA_AKUN/DATA_ADMIN, atau di DATA_ADMIN
+// luar — folder lama dipakai, agar sesi dan bot tidak putus.
 function accountFolder(username, role) {
   const name = String(username || '').toLowerCase();
   if (!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(name)) return null;
   const resolvedRole = role || store.users.find((item) => item.username === name)?.role;
-  const canonical = path.join(resolvedRole === 'admin' ? ADMIN_ACCOUNT_DIR : ACCOUNT_DIR, name);
+  const canonical = path.join(resolvedRole === 'admin' ? ADMIN_ACCOUNT_DIR : MEMBER_ACCOUNT_DIR, name);
   if (fsSync.existsSync(canonical)) return canonical;
-  const legacy = path.join(ACCOUNT_DIR, name);
-  if (legacy !== canonical && fsSync.existsSync(legacy)) return legacy;
-  const legacyAdmin = path.join(LEGACY_ADMIN_ACCOUNT_DIR, name);
-  if (legacyAdmin !== canonical && legacyAdmin !== legacy && fsSync.existsSync(legacyAdmin)) return legacyAdmin;
+  for (const candidate of [path.join(ACCOUNT_DIR, name), path.join(LEGACY_ADMIN_ACCOUNT_DIR, name), path.join(LEGACY_TOP_ADMIN_ACCOUNT_DIR, name)]) {
+    if (candidate !== canonical && fsSync.existsSync(candidate)) return candidate;
+  }
   return canonical;
 }
 
@@ -406,9 +408,10 @@ async function removePendingAccountMirror(username) {
   const name = String(username || '').toLowerCase();
   if (!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(name)) return;
   // Pendaftaran pending belum punya peran di registry, jadi bersihkan
-  // semua lokasi kandidat (DATA_AKUN/DATA_ADMIN, DATA_AKUN, dan
-  // DATA_ADMIN lama di luar) agar tidak ada sisa mirror.
-  const dirs = [...new Set([path.join(ADMIN_ACCOUNT_DIR, name), path.join(ACCOUNT_DIR, name), path.join(LEGACY_ADMIN_ACCOUNT_DIR, name)])];
+  // semua lokasi kandidat (DATA_AKUN/ADMIN, DATA_AKUN/MEMBER, DATA_AKUN
+  // langsung, DATA_AKUN/DATA_ADMIN, dan DATA_ADMIN lama di luar) agar
+  // tidak ada sisa mirror.
+  const dirs = [...new Set([path.join(ADMIN_ACCOUNT_DIR, name), path.join(MEMBER_ACCOUNT_DIR, name), path.join(ACCOUNT_DIR, name), path.join(LEGACY_ADMIN_ACCOUNT_DIR, name), path.join(LEGACY_TOP_ADMIN_ACCOUNT_DIR, name)])];
   for (const dir of dirs) {
     for (const file of ACCOUNT_MIRROR_FILES) {
       try {
@@ -994,11 +997,15 @@ function isAllowedBackupPath(value) {
   if (parts.some((part) => !part || part === '.' || part === '..')) return false;
   if (parts[0] !== 'DATA_AKUN' && parts[0] !== 'DATA_ADMIN') return false;
   if (parts.length === 2 && parts[1] === '.gitkeep') return true;
-  if (parts.length === 3 && parts[0] === 'DATA_AKUN' && parts[1] === 'DATA_ADMIN' && parts[2] === '.gitkeep') return true;
-  // Admin bersarang: DATA_AKUN/DATA_ADMIN/<username>/... — username di
-  // segmen ketiga; admin lama di DATA_ADMIN/<username>/... tetap diizinkan.
+  // Subfolder peran di dalam DATA_AKUN: ADMIN, MEMBER, atau DATA_ADMIN
+  // lama — username ada di segmen ketiga; akun langsung di DATA_AKUN
+  // dan admin lama di DATA_ADMIN luar tetap diizinkan.
+  const roleFolders = new Set(['ADMIN', 'MEMBER', 'DATA_ADMIN']);
   let userIndex = 1;
-  if (parts[0] === 'DATA_AKUN' && parts[1] === 'DATA_ADMIN') userIndex = 2;
+  if (parts[0] === 'DATA_AKUN' && roleFolders.has(parts[1])) {
+    if (parts.length === 3 && parts[2] === '.gitkeep') return true;
+    userIndex = 2;
+  }
   if (parts.length < userIndex + 2 || !ACCOUNT_FOLDER_PATTERN.test(parts[userIndex])) return false;
   if (!parts.slice(userIndex + 1).every((part) => ACCOUNT_DATA_SEGMENT_PATTERN.test(part))) return false;
   const filename = parts.at(-1);
@@ -1044,9 +1051,9 @@ async function collectBackupPayload() {
   };
   await walkAccount(ACCOUNT_DIR, 'DATA_AKUN');
   // Folder admin lama di luar DATA_AKUN ikut dibackup bila masih ada
-  // (transisi restrukturisasi); folder kanonis bersarang sudah tercakup
-  // oleh walk DATA_AKUN di atas.
-  await walkAccount(LEGACY_ADMIN_ACCOUNT_DIR, 'DATA_ADMIN');
+  // (transisi restrukturisasi); semua susunan bersarang di dalam
+  // DATA_AKUN sudah tercakup oleh walk di atas.
+  await walkAccount(LEGACY_TOP_ADMIN_ACCOUNT_DIR, 'DATA_ADMIN');
   for (const [archivePath, filename, fallback] of [
     ['DATA_STALKER/visitors.json', STALKER_FILE, { visitors: [] }],
     ['DATA_KUNJUNGAN/visitors.json', VISIT_FILE, { visitors: [] }],
@@ -1177,9 +1184,9 @@ async function assertNoOtherAccountSessionLocks() {
     }
   };
   await inspect(ACCOUNT_DIR);
-  // inspect(ACCOUNT_DIR) sudah menelusuri subfolder bersarang; folder
-  // admin lama di luar DATA_AKUN diperiksa terpisah.
-  await inspect(LEGACY_ADMIN_ACCOUNT_DIR);
+  // inspect(ACCOUNT_DIR) sudah menelusuri semua subfolder bersarang;
+  // folder admin lama di luar DATA_AKUN diperiksa terpisah.
+  await inspect(LEGACY_TOP_ADMIN_ACCOUNT_DIR);
 }
 
 async function installBackupPayload(validated, restoreLock) {
@@ -1210,6 +1217,11 @@ async function installBackupPayload(validated, restoreLock) {
       } else if (archivePath.startsWith('DATA_ADMIN/')) {
         stagedAdminFiles += 1;
         target = path.join(stageAdminAccount, ...archivePath.split('/').slice(1));
+      } else if (archivePath.startsWith('DATA_AKUN/DATA_ADMIN/')) {
+        // Arsip dari layout bersarang b91ff1f — pulihkan ke folder ADMIN
+        // yang baru, bukan ke lokasi lama.
+        stagedAdminFiles += 1;
+        target = path.join(stageAdminAccount, ...archivePath.split('/').slice(2));
       } else {
         target = path.join(stageAccount, ...archivePath.split('/').slice(1));
       }
