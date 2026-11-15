@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-15T18:36:00+07:00",
+  "updatedAt": "2026-11-15T18:54:00+07:00",
   "updates": [
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "18.54 WIB",
+      "tag": "Fitur baru",
+      "title": "Menu Info Update kini punya badge jumlah update belum dibaca",
+      "description": "Di menu samping kini muncul angka kecil di samping Info Update yang menunjukkan berapa pembaruan yang belum kamu baca — muncul untuk admin dan member. Begitu halaman Info Update dibuka, angkanya hilang karena semua pembaruan dianggap sudah dibaca. Status dibaca disimpan per akun di folder DATA_AKUN masing-masing, jadi akun lain tidak ikut terpengaruh."
+    },
     {
       "day": "Minggu, 15 Nov 2026",
       "time": "18.36 WIB",

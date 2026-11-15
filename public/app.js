@@ -1691,6 +1691,7 @@ function setWorkspacePage(page, updateHash = true) {
     infoUpdateRefreshTimer = window.setInterval(() => { void loadInfoUpdates(); }, 60000);
   } else {
     stopInfoUpdateAutoRefresh();
+    void refreshInfoUpdateBadge();
   }
   if (page === 'server') {
     void refreshWorkspaceServerStatus();
@@ -2294,6 +2295,7 @@ async function showDashboard(user) {
     showToast(error.message);
   }
   await Promise.all([loadAdminUsers(), loadAdminBackupSnapshots(), refreshPairing(), loadPairingLogs()]);
+  void refreshInfoUpdateBadge();
   await loadLoginHistory();
   startLoginHistoryPolling();
   startAdminUsersPolling();
@@ -3391,9 +3393,70 @@ async function loadInfoUpdates() {
       item.append(poster, body);
       list.append(item);
     });
+    void markInfoUpdatesSeen(updates);
   } catch { /* Biarkan daftar statis di halaman bila file belum bisa dibaca. */ }
   infoUpdatePage = 1;
   renderInfoUpdatePagination();
+}
+
+// Badge Info Update: angka update belum dibaca di menu samping. Penanda terakhir dibaca disimpan per akun di server, dihitung dari entri terbaru yang sudah dilihat.
+function countUnreadInfoUpdates(updates, seen) {
+  if (!Array.isArray(updates) || !updates.length) return 0;
+  if (!seen || !seen.day || !seen.time || !seen.title) return updates.length;
+  let unread = 0;
+  for (const update of updates) {
+    if (update.day === seen.day && update.time === seen.time && update.title === seen.title) break;
+    unread += 1;
+  }
+  return unread;
+}
+
+function renderInfoUpdateBadge(count) {
+  const item = document.querySelector('.side-nav .nav-item[href="#infoupdate"]');
+  if (!item) return;
+  let badge = item.querySelector('.nav-badge');
+  if (!count || count <= 0) {
+    badge?.remove();
+    return;
+  }
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.className = 'nav-badge';
+    item.append(badge);
+  }
+  badge.textContent = count > 99 ? '99+' : String(count);
+  badge.setAttribute('aria-label', `${count} pembaruan belum dibaca`);
+}
+
+async function refreshInfoUpdateBadge() {
+  try {
+    const [updatesResponse, seenResponse] = await Promise.all([
+      fetch('/info-updates.json', { cache: 'no-store' }),
+      fetch('/api/info-updates/seen', { credentials: 'same-origin' }),
+    ]);
+    if (!updatesResponse.ok) return;
+    const data = await updatesResponse.json();
+    const updates = Array.isArray(data?.updates) ? data.updates : [];
+    let seen = null;
+    if (seenResponse.ok) {
+      const seenData = await seenResponse.json().catch(() => ({}));
+      seen = seenData?.seen || null;
+    }
+    renderInfoUpdateBadge(countUnreadInfoUpdates(updates, seen));
+  } catch { /* Badge gagal dimuat: biarkan menu tanpa angka. */ }
+}
+
+async function markInfoUpdatesSeen(updates) {
+  const newest = Array.isArray(updates) ? updates[0] : null;
+  if (!newest?.day || !newest?.time || !newest?.title) return;
+  try {
+    const response = await fetch('/api/info-updates/seen', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ day: newest.day, time: newest.time, title: newest.title }),
+    });
+    if (response.ok) renderInfoUpdateBadge(0);
+  } catch { /* Penanda gagal disimpan: badge tetap tampil sampai berhasil. */ }
 }
 
 // Info Update: daftar pembaruan dipaginasi 3 entri per halaman agar tetap ringkas di layar kecil.

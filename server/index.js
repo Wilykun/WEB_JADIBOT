@@ -300,6 +300,41 @@ function accountFolder(username, role) {
   return canonical;
 }
 
+// Folder kanonis akun untuk penulisan baru: admin ke DATA_AKUN/ADMIN, member ke DATA_AKUN/MEMBER. Folder lama tidak pernah ditulis baru.
+function canonicalAccountFolder(user) {
+  const name = String(user.username || '').toLowerCase();
+  if (!/^[a-z0-9][a-z0-9._-]{2,23}$/.test(name)) return null;
+  return path.join(user.role === 'admin' ? ADMIN_ACCOUNT_DIR : MEMBER_ACCOUNT_DIR, name);
+}
+
+const INFO_UPDATE_SEEN_FILE = 'info-update-seen.json';
+
+// Badge Info Update: penanda terakhir dibaca disimpan per akun di folder DATA_AKUN masing-masing, jadi akun lain tidak ikut terpengaruh.
+async function readInfoUpdateSeen(user) {
+  const dir = canonicalAccountFolder(user);
+  if (!dir) return null;
+  try {
+    const parsed = JSON.parse(await fs.readFile(path.join(dir, INFO_UPDATE_SEEN_FILE), 'utf8'));
+    if (!parsed || typeof parsed !== 'object') return null;
+    const seen = {
+      day: String(parsed.day || '').trim().slice(0, 60),
+      time: String(parsed.time || '').trim().slice(0, 20),
+      title: String(parsed.title || '').trim().slice(0, 200),
+    };
+    return seen.day && seen.time && seen.title ? seen : null;
+  } catch { return null; }
+}
+
+async function writeInfoUpdateSeen(user, seen) {
+  const dir = canonicalAccountFolder(user);
+  if (!dir) throw new Error('Folder akun tidak valid.');
+  const current = await readInfoUpdateSeen(user);
+  if (current && current.day === seen.day && current.time === seen.time && current.title === seen.title) return current;
+  await fs.mkdir(dir, { recursive: true });
+  await atomicWriteJson(path.join(dir, INFO_UPDATE_SEEN_FILE), { ...seen, seenAt: new Date().toISOString() });
+  return seen;
+}
+
 function buildAccountFiles(snapshot, user) {
   const userId = user.id;
   const logins = (snapshot.loginHistory || []).filter((entry) => entry.userId === userId);
@@ -1721,6 +1756,25 @@ async function handleApi(req, res, url) {
   }
 
   const user = await authenticatedUser(req);
+  // Badge Info Update: baca dan simpan penanda terakhir dibaca untuk akun yang sedang login.
+  if (route === 'GET /api/info-updates/seen') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    const seen = await readInfoUpdateSeen(user);
+    return sendJson(res, 200, { seen });
+  }
+  if (route === 'POST /api/info-updates/seen') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (!allowRateLimit(`info-updates-seen:${user.id}`, 30, 60 * 1000)) return sendError(res, 429, 'Terlalu sering. Coba lagi sebentar.');
+    const body = await readJson(req);
+    const seen = {
+      day: String(body?.day || '').trim().slice(0, 60),
+      time: String(body?.time || '').trim().slice(0, 20),
+      title: String(body?.title || '').trim().slice(0, 200),
+    };
+    if (!seen.day || !seen.time || !seen.title) return sendError(res, 400, 'Penanda update tidak lengkap.');
+    await writeInfoUpdateSeen(user, seen);
+    return sendJson(res, 200, { seen });
+  }
   if (route === 'POST /api/admin/backup/export') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
     if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
