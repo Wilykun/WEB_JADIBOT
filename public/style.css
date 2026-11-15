@@ -2966,6 +2966,9 @@ html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
 .workspace-server-grid > div { display: grid; gap: 4px; min-width: 0; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255, 255, 255, .02); }
 .workspace-server-grid span { color: var(--muted); font-size: 10px; }
 .workspace-server-grid strong { overflow-wrap: anywhere; color: var(--text); font-size: 13px; }
+.workspace-server-grid .server-cell-label, .mobile-server-grid .server-cell-label { display: inline-flex; align-items: center; gap: 5px; }
+.workspace-server-grid .server-cell-icon, .mobile-server-grid .server-cell-icon { display: inline-flex; color: #79e5a5; flex: none; }
+.workspace-server-grid .server-cell-icon svg, .mobile-server-grid .server-cell-icon svg { display: block; width: 13px; height: 13px; }
 .workspace-server-detail { margin: 14px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .workspace-server-subhead { margin: 18px 0 0; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .workspace-server-subhead + .workspace-server-grid { margin-top: 8px; }

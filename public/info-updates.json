@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-15T13:58:00+07:00",
+  "updatedAt": "2026-11-15T14:15:00+07:00",
   "updates": [
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "14.15 WIB",
+      "title": "Halaman Server kini berikon SVG",
+      "description": "Tiap sel di halaman Server — di dalam panel maupun preview di halaman masuk — kini berikon SVG sesuai konteksnya: centang untuk status, jam untuk uptime, chip untuk CPU, database untuk RAM, hard disk untuk disk, dan kalender untuk waktu server.",
+      "tag": "Tampilan"
+    },
     {
       "day": "Minggu, 15 Nov 2026",
       "time": "13.58 WIB",

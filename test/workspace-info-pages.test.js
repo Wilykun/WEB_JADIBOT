@@ -68,3 +68,18 @@ test('workspace server page shows the full detail set, and info updates use the 
   assert.ok(js.includes(`'fitur-baru'`), 'app.js must know the fitur-baru tag icon');
   assert.match(css, /\.info-update-poster-mark svg\s*\{[^}]*width:\s*44px/);
 });
+
+test('every server stat cell shows a contextual SVG icon next to its label', async () => {
+  const html = await fs.readFile(path.join(ROOT, 'public/index.html'), 'utf8');
+  const css = await fs.readFile(path.join(ROOT, 'public/style.css'), 'utf8');
+  const icons = [...html.matchAll(/<span class="server-cell-icon" aria-hidden="true"><svg[^>]*>/g)];
+  assert.equal(icons.length, 24, 'every server stat cell (6 login preview + 18 workspace) must have an SVG icon');
+  for (const label of ['Status', 'Uptime panel', 'RAM proses', 'RAM sistem', 'Node.js', 'CPU / load', 'Model CPU', 'Core', 'Load 1 / 5 / 15 mnt', 'RAM sistem bebas', 'RAM sistem terpakai', 'Heap proses (pakai / total)', 'Total', 'Terpakai', 'Bebas', 'Server mulai', 'Uptime sistem', 'Jam server']) {
+    assert.ok(html.includes(`</span>${label}</span>`), `server cell "${label}" must keep its label right after the icon`);
+  }
+  const workspaceIcons = [...html.matchAll(/<section id="server"[\s\S]*?<\/section>/g)][0][0].match(/server-cell-icon/g) || [];
+  assert.equal(workspaceIcons.length, 18, 'workspace server page must have 18 icons');
+  const loginIcons = [...html.matchAll(/<section class="mobile-info-panel mobile-server-panel"[\s\S]*?<\/section>/g)][0][0].match(/server-cell-icon/g) || [];
+  assert.equal(loginIcons.length, 6, 'login server preview must have 6 icons');
+  assert.match(css, /\.server-cell-icon svg\s*\{[^}]*width:\s*13px/);
+});
