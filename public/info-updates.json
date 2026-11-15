@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-15T18:54:00+07:00",
+  "updatedAt": "2026-11-15T19:44:00+07:00",
   "updates": [
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "19.44 WIB",
+      "tag": "Perubahan",
+      "title": "Halaman Developer sebelum login kini sama dengan di dalam panel",
+      "description": "Tab Developer di halaman info sebelum login dulu menampilkan ringkasan singkat yang isinya berbeda dengan halaman Developer di dalam panel. Kini keduanya memakai isi yang sama — judul Ruang Developer, kartu tentang pembuat, kanal bantuan WhatsApp, Telegram, dan Facebook, serta fokus pengembangan — jadi tidak ada lagi dua versi yang berbeda. Isi panel sebelum login disalin langsung dari halaman Developer, jadi perubahan di halaman itu otomatis ikut tampil di halaman masuk."
+    },
     {
       "day": "Minggu, 15 Nov 2026",
       "time": "18.54 WIB",

@@ -2406,6 +2406,21 @@ const mobileInfoMenu = document.querySelector('[data-mobile-info-menu-view]');
 const mobileInfoTabs = document.querySelector('.mobile-info-tabs');
 let mobileServerStatusTimer = null;
 
+// Halaman Developer sebelum login memakai isi yang sama dengan halaman Developer di dalam panel agar tidak ada dua versi yang berbeda.
+function syncMobileInfoDeveloperPanel() {
+  const source = document.querySelector('#developer');
+  const target = document.querySelector('[data-mobile-info-panel="developer"]');
+  if (!source || !target || target.dataset.synced === 'true') return;
+  const clone = document.createElement('div');
+  clone.className = 'developer-section';
+  for (const child of source.children) clone.append(child.cloneNode(true));
+  clone.querySelectorAll('[id]').forEach((element) => element.removeAttribute('id'));
+  clone.querySelectorAll('[aria-labelledby]').forEach((element) => element.removeAttribute('aria-labelledby'));
+  target.replaceChildren(clone);
+  target.dataset.synced = 'true';
+}
+syncMobileInfoDeveloperPanel();
+
 function formatServerBytes(value) {
   const bytes = Number(value);
   if (!Number.isFinite(bytes) || bytes < 0) return '—';
