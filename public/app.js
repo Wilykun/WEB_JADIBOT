@@ -2391,7 +2391,7 @@ function setMobileInfo(open) {
     mobileInfoToggle.textContent = open === true ? '×' : '☰';
     mobileInfoToggle.setAttribute('aria-label', open === true ? 'Tutup informasi ReadSW' : 'Buka informasi ReadSW');
   }
-  if (open === true && !isDesktop) {
+  if (open === true) {
     setMobileInfoView('menu');
     if (!mobileServerStatusTimer) mobileServerStatusTimer = setInterval(() => { void refreshMobileServerStatus(); }, 5000);
   } else {
