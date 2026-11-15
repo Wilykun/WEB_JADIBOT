@@ -72,7 +72,7 @@ const MAX_BACKUP_DATA_BYTES = MAX_PLAINTEXT_BYTES;
 const PASSWORD_MIN = 12;
 const PENDING_REGISTRATION_TTL_MS = 24 * 60 * 60 * 1000;
 const plans = new Set(['readonly', 'readonly_readsw', 'online24']);
-const AVATAR_PRESETS = new Set(Array.from({ length: 34 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`));
+const AVATAR_PRESETS = new Set(Array.from({ length: 48 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`));
 const MAX_STORY_EMOJIS = 30;
 const emojiGraphemes = new Intl.Segmenter('en', { granularity: 'grapheme' });
 
@@ -2163,7 +2163,7 @@ const assets = new Map([
   ['/avatars/avatar-03.webp', ['avatars/avatar-03.webp', 'image/webp']],
   ['/avatars/avatar-04.webp', ['avatars/avatar-04.webp', 'image/webp']],
   ['/avatars/avatar-05.webp', ['avatars/avatar-05.webp', 'image/webp']],
-  ...Array.from({ length: 29 }, (_, index) => {
+  ...Array.from({ length: 43 }, (_, index) => {
     const id = `avatar-${String(index + 6).padStart(2, '0')}`;
     return [`/avatars/${id}.webp`, [`avatars/${id}.webp`, 'image/webp']];
   }),

@@ -1006,7 +1006,7 @@ async function loadAdminUsers() {
           const version = encodeURIComponent(user.avatarUpdatedAt || '');
           avatarImage.src = `/api/admin/user-avatar?userId=${encodeURIComponent(userId)}&v=${version}`;
         } else {
-          const preset = /^avatar-(0[1-9]|[12][0-9]|3[0-4])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
+          const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
           avatarImage.src = `/avatars/${preset}.webp`;
         }
         avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
@@ -2160,7 +2160,7 @@ document.querySelector('.avatar-tabs')?.addEventListener('click', (event) => {
 });
 
 function applyAvatar(user) {
-  const preset = /^avatar-(0[1-9]|[12][0-9]|3[0-4])$/.test(user.avatar || '') ? user.avatar : 'avatar-01';
+  const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(user.avatar || '') ? user.avatar : 'avatar-01';
   const src = user.avatar === 'uploaded'
     ? `/api/me/avatar?u=${encodeURIComponent(user.id)}&v=${encodeURIComponent(user.avatarUpdatedAt || Date.now())}`
     : `/avatars/${preset}.webp`;

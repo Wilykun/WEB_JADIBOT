@@ -6,15 +6,15 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-test('profile gallery has fourteen male and fourteen female bundled WebP avatars under 100 KB with source attribution', async () => {
+test('profile gallery has twenty-four male and twenty-four female bundled WebP avatars under 100 KB with source attribution', async () => {
   const html = await fs.readFile(path.join(ROOT, 'public/index.html'), 'utf8');
   const ids = [...html.matchAll(/data-avatar-preset="(avatar-\d+)"/g)].map((match) => match[1]);
-  assert.equal(ids.length, 28);
-  assert.equal(new Set(ids).size, 28);
+  assert.equal(ids.length, 48);
+  assert.equal(new Set(ids).size, 48);
   const male = [...html.matchAll(/data-avatar-gender="male"/g)];
   const female = [...html.matchAll(/data-avatar-gender="female"/g)];
-  assert.equal(male.length, 14);
-  assert.equal(female.length, 14);
+  assert.equal(male.length, 24);
+  assert.equal(female.length, 24);
 
   for (const id of ids) {
     const asset = path.join(ROOT, 'public/avatars', `${id}.webp`);
@@ -36,4 +36,9 @@ test('profile gallery has fourteen male and fourteen female bundled WebP avatars
   assert.match(attribution, /avatar-27\.webp/);
   assert.match(attribution, /avatar-34\.webp/);
   for (const id of ['avatar-25', 'avatar-26']) assert.ok(ids.includes(id), `${id} must be in the gallery`);
+  for (let n = 35; n <= 48; n += 1) {
+    const id = `avatar-${String(n).padStart(2, '0')}`;
+    assert.ok(ids.includes(id), `${id} must be in the gallery`);
+    assert.ok(attribution.includes(`${id}.webp`), `${id} must be documented in ATTRIBUTION.txt`);
+  }
 });
