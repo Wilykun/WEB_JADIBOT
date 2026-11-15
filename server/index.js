@@ -1287,7 +1287,8 @@ async function handleApi(req, res, url) {
     const systemFree = os.freemem();
     const systemUsed = Math.max(0, systemTotal - systemFree);
     const loadAverages = os.loadavg();
-    const cpuModel = os.cpus()[0]?.model?.trim() || null;
+    const cpuModelRaw = os.cpus()[0]?.model?.trim() || null;
+    const cpuModel = cpuModelRaw && cpuModelRaw.toLowerCase() !== 'unknown' ? cpuModelRaw : null;
     let disk = null;
     try {
       const diskStats = fsSync.statfsSync('/');
