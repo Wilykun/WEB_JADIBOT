@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T16:06:00+07:00",
+  "updatedAt": "2026-11-15T16:19:00+07:00",
   "updates": [
     {
       "day": "Minggu, 15 Nov 2026",
@@ -17,9 +17,9 @@
     },
     {
       "day": "Minggu, 15 Nov 2026",
-      "time": "16.06 WIB",
+      "time": "16.19 WIB",
       "title": "Folder akun Admin dan Member kini terpisah",
-      "description": "Data akun admin kini tersimpan di folder baru DATA_ADMIN, terpisah dari DATA_AKUN untuk member. Akun lama yang masih di folder lama tetap terbaca otomatis (fallback), jadi sesi dan bot tidak putus. Backup dan pemulihan ikut mencakup kedua folder.",
+      "description": "Data akun admin kini tersimpan di dalam folder DATA_AKUN, di subfolder DATA_ADMIN (DATA_AKUN/DATA_ADMIN), terpisah dari folder member yang langsung di bawah DATA_AKUN. Akun lama yang masih di folder lama tetap terbaca otomatis (fallback), jadi sesi dan bot tidak putus. Backup dan pemulihan ikut mencakup kedua susunan folder.",
       "tag": "Perubahan"
     },
     {
