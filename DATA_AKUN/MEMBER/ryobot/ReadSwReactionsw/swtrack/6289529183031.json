@@ -1,0 +1,122 @@
+{
+  "AC7DEF4C97EA8FEA1B45A06E3CC02D5F": {
+    "id": "AC7DEF4C97EA8FEA1B45A06E3CC02D5F",
+    "sender": "6289529183031@s.whatsapp.net",
+    "number": "6289529183031",
+    "storyJid": "6289529183031@s.whatsapp.net",
+    "resolvedPn": "6289529183031@s.whatsapp.net",
+    "name": "♥️🍀Fufu fu🍀♥️",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7DEF4C97EA8FEA1B45A06E3CC02D5F",
+      "participant": "70923449278638@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7DEF4C97EA8FEA1B45A06E3CC02D5F",
+      "participant": "70923449278638@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "70923449278638@lid",
+      "6289529183031@s.whatsapp.net"
+    ],
+    "contactHash": "532cc4cffc724d71ed8c2de443c67f20519528d8893256a46e80ea94fac21469",
+    "arrivedAt": "2026-11-14T14:38:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T14:38:21.539Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T14:38:38.491Z",
+    "readAt": "2026-11-14T14:38:38.490Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T14:38:38.490Z"
+  },
+  "AC8BADAE59C43F005D3113AF8B68D2E7": {
+    "id": "AC8BADAE59C43F005D3113AF8B68D2E7",
+    "sender": "6289529183031@s.whatsapp.net",
+    "number": "6289529183031",
+    "storyJid": "6289529183031@s.whatsapp.net",
+    "resolvedPn": "6289529183031@s.whatsapp.net",
+    "name": "♥️🍀Fufu fu🍀♥️",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8BADAE59C43F005D3113AF8B68D2E7",
+      "participant": "70923449278638@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8BADAE59C43F005D3113AF8B68D2E7",
+      "participant": "70923449278638@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "70923449278638@lid",
+      "6289529183031@s.whatsapp.net"
+    ],
+    "contactHash": "532cc4cffc724d71ed8c2de443c67f20519528d8893256a46e80ea94fac21469",
+    "arrivedAt": "2026-11-15T10:41:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T10:41:01.638Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T10:41:04.343Z",
+    "readAt": "2026-11-15T10:41:04.343Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T10:41:04.343Z"
+  },
+  "AC1B3AC93753A8DA292137C20F86F6A3": {
+    "id": "AC1B3AC93753A8DA292137C20F86F6A3",
+    "sender": "6289529183031@s.whatsapp.net",
+    "number": "6289529183031",
+    "storyJid": "6289529183031@s.whatsapp.net",
+    "resolvedPn": "6289529183031@s.whatsapp.net",
+    "name": "♥️🍀Fufu fu🍀♥️",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1B3AC93753A8DA292137C20F86F6A3",
+      "participant": "70923449278638@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1B3AC93753A8DA292137C20F86F6A3",
+      "participant": "70923449278638@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "70923449278638@lid",
+      "6289529183031@s.whatsapp.net"
+    ],
+    "contactHash": "532cc4cffc724d71ed8c2de443c67f20519528d8893256a46e80ea94fac21469",
+    "arrivedAt": "2026-11-15T10:56:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T10:56:45.920Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T10:57:00.203Z",
+    "readAt": "2026-11-15T10:57:00.202Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T10:57:00.202Z"
+  }
+}

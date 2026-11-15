@@ -1,0 +1,122 @@
+{
+  "3A0696CC96F644359208F315ED1B0B0D": {
+    "id": "3A0696CC96F644359208F315ED1B0B0D",
+    "sender": "6288294554973@s.whatsapp.net",
+    "number": "6288294554973",
+    "storyJid": "6288294554973@s.whatsapp.net",
+    "resolvedPn": "6288294554973@s.whatsapp.net",
+    "name": "caa",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3A0696CC96F644359208F315ED1B0B0D",
+      "participant": "96082948284652@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3A0696CC96F644359208F315ED1B0B0D",
+      "participant": "96082948284652@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "96082948284652@lid",
+      "6288294554973@s.whatsapp.net"
+    ],
+    "contactHash": "745b294b05a7177a8d50728b301ee2a6220d8a9999e7852d3b2b9608959b67dc",
+    "arrivedAt": "2026-11-14T14:16:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T14:16:10.854Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T14:16:14.025Z",
+    "readAt": "2026-11-14T14:16:14.025Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T14:16:14.025Z"
+  },
+  "3A60ED93C3BF41528F07ED71F8AFBC03": {
+    "id": "3A60ED93C3BF41528F07ED71F8AFBC03",
+    "sender": "6288294554973@s.whatsapp.net",
+    "number": "6288294554973",
+    "storyJid": "6288294554973@s.whatsapp.net",
+    "resolvedPn": "6288294554973@s.whatsapp.net",
+    "name": "caa",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3A60ED93C3BF41528F07ED71F8AFBC03",
+      "participant": "96082948284652@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3A60ED93C3BF41528F07ED71F8AFBC03",
+      "participant": "96082948284652@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "96082948284652@lid",
+      "6288294554973@s.whatsapp.net"
+    ],
+    "contactHash": "745b294b05a7177a8d50728b301ee2a6220d8a9999e7852d3b2b9608959b67dc",
+    "arrivedAt": "2026-11-14T14:40:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T14:40:51.485Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T14:41:10.383Z",
+    "readAt": "2026-11-14T14:41:10.383Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T14:41:10.383Z"
+  },
+  "3AE81369C4194C86848ED1FEE826F163": {
+    "id": "3AE81369C4194C86848ED1FEE826F163",
+    "sender": "6288294554973@s.whatsapp.net",
+    "number": "6288294554973",
+    "storyJid": "6288294554973@s.whatsapp.net",
+    "resolvedPn": "6288294554973@s.whatsapp.net",
+    "name": "caa",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3AE81369C4194C86848ED1FEE826F163",
+      "participant": "96082948284652@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3AE81369C4194C86848ED1FEE826F163",
+      "participant": "96082948284652@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "96082948284652@lid",
+      "6288294554973@s.whatsapp.net"
+    ],
+    "contactHash": "745b294b05a7177a8d50728b301ee2a6220d8a9999e7852d3b2b9608959b67dc",
+    "arrivedAt": "2026-11-14T15:26:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T15:26:22.902Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T15:26:26.412Z",
+    "readAt": "2026-11-14T15:26:26.411Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T15:26:26.411Z"
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "AC034B4E9BA8D77BF2B5C2E81BB63E0D": {
+    "id": "AC034B4E9BA8D77BF2B5C2E81BB63E0D",
+    "sender": "6283183469368@s.whatsapp.net",
+    "number": "6283183469368",
+    "storyJid": "6283183469368@s.whatsapp.net",
+    "resolvedPn": "6283183469368@s.whatsapp.net",
+    "name": "Wafiq _puput",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC034B4E9BA8D77BF2B5C2E81BB63E0D",
+      "participant": "82696088870920@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC034B4E9BA8D77BF2B5C2E81BB63E0D",
+      "participant": "82696088870920@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82696088870920@lid",
+      "6283183469368@s.whatsapp.net"
+    ],
+    "contactHash": "d384e702de83b4e12c676eb7a2195ef674d396e2e83be7fd3ceac50ac685ebee",
+    "arrivedAt": "2026-11-14T13:37:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:37:45.563Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:38:02.738Z",
+    "readAt": "2026-11-14T13:38:02.738Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-14T13:38:02.738Z"
+  },
+  "ACF60FBB117652F63AAA4338A1DE9EE2": {
+    "id": "ACF60FBB117652F63AAA4338A1DE9EE2",
+    "sender": "6283183469368@s.whatsapp.net",
+    "number": "6283183469368",
+    "storyJid": "6283183469368@s.whatsapp.net",
+    "resolvedPn": "6283183469368@s.whatsapp.net",
+    "name": "Wafiq _puput",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF60FBB117652F63AAA4338A1DE9EE2",
+      "participant": "82696088870920@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF60FBB117652F63AAA4338A1DE9EE2",
+      "participant": "82696088870920@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82696088870920@lid",
+      "6283183469368@s.whatsapp.net"
+    ],
+    "contactHash": "d384e702de83b4e12c676eb7a2195ef674d396e2e83be7fd3ceac50ac685ebee",
+    "arrivedAt": "2026-11-14T13:40:30.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:40:30.276Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:40:32.819Z",
+    "readAt": "2026-11-14T13:40:32.818Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-14T13:40:32.818Z"
+  },
+  "ACC45F56125B6B03995ABEB6FCCF359A": {
+    "id": "ACC45F56125B6B03995ABEB6FCCF359A",
+    "sender": "6283183469368@s.whatsapp.net",
+    "number": "6283183469368",
+    "storyJid": "6283183469368@s.whatsapp.net",
+    "resolvedPn": "6283183469368@s.whatsapp.net",
+    "name": "Wafiq _puput",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC45F56125B6B03995ABEB6FCCF359A",
+      "participant": "82696088870920@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC45F56125B6B03995ABEB6FCCF359A",
+      "participant": "82696088870920@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82696088870920@lid",
+      "6283183469368@s.whatsapp.net"
+    ],
+    "contactHash": "d384e702de83b4e12c676eb7a2195ef674d396e2e83be7fd3ceac50ac685ebee",
+    "arrivedAt": "2026-11-14T13:51:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:51:10.753Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:51:21.180Z",
+    "readAt": "2026-11-14T13:51:21.180Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-14T13:51:21.180Z"
+  },
+  "AC7CDD8482C7C790049A3BB769B0A6A0": {
+    "id": "AC7CDD8482C7C790049A3BB769B0A6A0",
+    "sender": "6283183469368@s.whatsapp.net",
+    "number": "6283183469368",
+    "storyJid": "6283183469368@s.whatsapp.net",
+    "resolvedPn": "6283183469368@s.whatsapp.net",
+    "name": "Wafiq _puput",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7CDD8482C7C790049A3BB769B0A6A0",
+      "participant": "82696088870920@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7CDD8482C7C790049A3BB769B0A6A0",
+      "participant": "82696088870920@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82696088870920@lid",
+      "6283183469368@s.whatsapp.net"
+    ],
+    "contactHash": "d384e702de83b4e12c676eb7a2195ef674d396e2e83be7fd3ceac50ac685ebee",
+    "arrivedAt": "2026-11-14T13:53:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:53:38.946Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:53:45.445Z",
+    "readAt": "2026-11-14T13:53:45.444Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-14T13:53:45.444Z"
+  }
+}

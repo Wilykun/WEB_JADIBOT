@@ -38,5 +38,45 @@
     "readAt": "2026-11-14T13:29:42.322Z",
     "emoji": "💚",
     "reactedAt": "2026-11-14T13:29:42.322Z"
+  },
+  "AC405A7991849D5119EB6BC9430733EB": {
+    "id": "AC405A7991849D5119EB6BC9430733EB",
+    "sender": "6281936263847@s.whatsapp.net",
+    "number": "6281936263847",
+    "storyJid": "6281936263847@s.whatsapp.net",
+    "resolvedPn": "6281936263847@s.whatsapp.net",
+    "name": "BebyGith",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC405A7991849D5119EB6BC9430733EB",
+      "participant": "78739635470367@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC405A7991849D5119EB6BC9430733EB",
+      "participant": "78739635470367@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "78739635470367@lid",
+      "6281936263847@s.whatsapp.net"
+    ],
+    "contactHash": "87a0f777cb3810ee957b801a6dd4a67843dde32a371a8d512e7ec2e3a6f0d1d0",
+    "arrivedAt": "2026-11-14T14:35:48.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T14:35:49.086Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T14:35:56.776Z",
+    "readAt": "2026-11-14T14:35:56.776Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T14:35:56.776Z"
   }
 }

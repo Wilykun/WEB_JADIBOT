@@ -1,44 +1,4 @@
 {
-  "AC7AF89C4E26F6D3AC2243526FFF49D3": {
-    "id": "AC7AF89C4E26F6D3AC2243526FFF49D3",
-    "sender": "6285185319820@s.whatsapp.net",
-    "number": "6285185319820",
-    "storyJid": "6285185319820@s.whatsapp.net",
-    "resolvedPn": "6285185319820@s.whatsapp.net",
-    "name": "renna yuppy balado",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC7AF89C4E26F6D3AC2243526FFF49D3",
-      "participant": "247579782697038@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC7AF89C4E26F6D3AC2243526FFF49D3",
-      "participant": "247579782697038@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "247579782697038@lid",
-      "6285185319820@s.whatsapp.net"
-    ],
-    "contactHash": "c7a83d43acaf18845f8e76ef0849aff962c1309c9273ae78526eddd65248aed5",
-    "arrivedAt": "2026-11-14T05:34:41.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-14T05:34:41.816Z",
-    "lastError": null,
-    "updatedAt": "2026-11-14T05:34:54.239Z",
-    "readAt": "2026-11-14T05:34:54.238Z",
-    "emoji": "💚",
-    "reactedAt": "2026-11-14T05:34:54.238Z"
-  },
   "AC9308AB00C2C3EB72E71AC8BA0D6404": {
     "id": "AC9308AB00C2C3EB72E71AC8BA0D6404",
     "sender": "6285185319820@s.whatsapp.net",

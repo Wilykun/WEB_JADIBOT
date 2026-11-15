@@ -1,0 +1,42 @@
+{
+  "ACDD854A4353869980A79668C791EA27": {
+    "id": "ACDD854A4353869980A79668C791EA27",
+    "sender": "6281973145146@s.whatsapp.net",
+    "number": "6281973145146",
+    "storyJid": "6281973145146@s.whatsapp.net",
+    "resolvedPn": "6281973145146@s.whatsapp.net",
+    "name": "𝘿𝙚𝙡𝙩𝙖 Z1",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDD854A4353869980A79668C791EA27",
+      "participant": "245023656403118@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDD854A4353869980A79668C791EA27",
+      "participant": "245023656403118@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "245023656403118@lid",
+      "6281973145146@s.whatsapp.net"
+    ],
+    "contactHash": "d0e4150984ba0e3d74a863ebc9b7af51b57b04e8aa770fd5fca8a71474cd92cf",
+    "arrivedAt": "2026-11-14T15:28:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T15:28:10.651Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T15:28:27.085Z",
+    "readAt": "2026-11-14T15:28:27.084Z",
+    "emoji": "🌭",
+    "reactedAt": "2026-11-14T15:28:27.084Z"
+  }
+}

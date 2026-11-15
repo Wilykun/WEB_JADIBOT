@@ -118,5 +118,45 @@
     "readAt": "2026-11-14T12:38:30.927Z",
     "emoji": "💚",
     "reactedAt": "2026-11-14T12:38:30.927Z"
+  },
+  "AC1C11A692A7D5D5DC3EE2B3F7ECCC91": {
+    "id": "AC1C11A692A7D5D5DC3EE2B3F7ECCC91",
+    "sender": "6285282221223@s.whatsapp.net",
+    "number": "6285282221223",
+    "storyJid": "6285282221223@s.whatsapp.net",
+    "resolvedPn": "6285282221223@s.whatsapp.net",
+    "name": "- 𝗛 𝗶 𝗺 𝗮 𝗿 𝗶   𝗞𝗶𝗻𝗼 ~ ❥✿",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1C11A692A7D5D5DC3EE2B3F7ECCC91",
+      "participant": "83224168542395@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1C11A692A7D5D5DC3EE2B3F7ECCC91",
+      "participant": "83224168542395@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "83224168542395@lid",
+      "6285282221223@s.whatsapp.net"
+    ],
+    "contactHash": "764f2084a372c3b282e7480e0c8d8f571fae860a701f65865b3f18f1bdd94a2a",
+    "arrivedAt": "2026-11-15T10:11:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T10:11:39.568Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T10:11:48.160Z",
+    "readAt": "2026-11-15T10:11:48.159Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T10:11:48.160Z"
   }
 }

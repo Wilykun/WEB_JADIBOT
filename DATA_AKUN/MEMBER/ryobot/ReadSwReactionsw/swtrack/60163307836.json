@@ -1,0 +1,362 @@
+{
+  "AC67F865610146CFAA435ED83435E781": {
+    "id": "AC67F865610146CFAA435ED83435E781",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "Kiyo Cowok Baik",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC67F865610146CFAA435ED83435E781",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC67F865610146CFAA435ED83435E781",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-14T13:37:42.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:37:42.399Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:37:55.376Z",
+    "readAt": "2026-11-14T13:37:55.376Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T13:37:55.376Z"
+  },
+  "AC8FDF911D88020477DE656A8C408AE3": {
+    "id": "AC8FDF911D88020477DE656A8C408AE3",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "Kiyo Cowok Baik",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8FDF911D88020477DE656A8C408AE3",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8FDF911D88020477DE656A8C408AE3",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-14T13:42:57.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:42:57.581Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:43:00.834Z",
+    "readAt": "2026-11-14T13:43:00.833Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T13:43:00.833Z"
+  },
+  "AC927E93F042C75C771D243D55B93B43": {
+    "id": "AC927E93F042C75C771D243D55B93B43",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "Kiyo Cowok Baik",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC927E93F042C75C771D243D55B93B43",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC927E93F042C75C771D243D55B93B43",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-14T13:46:41.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:46:42.021Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:46:48.540Z",
+    "readAt": "2026-11-14T13:46:48.524Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T13:46:48.524Z"
+  },
+  "ACCD6607E8FEC86A5E35650744532164": {
+    "id": "ACCD6607E8FEC86A5E35650744532164",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "Kiyo Cowok Baik",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCD6607E8FEC86A5E35650744532164",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCD6607E8FEC86A5E35650744532164",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-14T13:47:18.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:47:18.363Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:47:22.006Z",
+    "readAt": "2026-11-14T13:47:22.005Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T13:47:22.005Z"
+  },
+  "AC6BA222220063B7BD867EB9C90AB117": {
+    "id": "AC6BA222220063B7BD867EB9C90AB117",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "Kiyo Cowok Baik",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6BA222220063B7BD867EB9C90AB117",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6BA222220063B7BD867EB9C90AB117",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-14T13:52:42.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 2,
+    "lastAttemptAt": "2026-11-14T13:53:39.452Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:53:56.628Z",
+    "readAt": "2026-11-14T13:53:56.627Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T13:53:56.627Z"
+  },
+  "ACA98BA595814E751DA6E2A1DBDEABE2": {
+    "id": "ACA98BA595814E751DA6E2A1DBDEABE2",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "Kiyo Cowok Baik",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA98BA595814E751DA6E2A1DBDEABE2",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA98BA595814E751DA6E2A1DBDEABE2",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-14T13:53:13.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:53:39.272Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:53:47.615Z",
+    "readAt": "2026-11-14T13:53:47.614Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T13:53:47.614Z"
+  },
+  "AC22BC1206EBBE8898497A52821B440F": {
+    "id": "AC22BC1206EBBE8898497A52821B440F",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "Kiyo Cowok Baik",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC22BC1206EBBE8898497A52821B440F",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC22BC1206EBBE8898497A52821B440F",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-14T14:44:48.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T14:44:49.165Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T14:45:02.323Z",
+    "readAt": "2026-11-14T14:45:02.318Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T14:45:02.318Z"
+  },
+  "ACBA6E73F14748230556ECBD36E6B11D": {
+    "id": "ACBA6E73F14748230556ECBD36E6B11D",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "Kiyo Cowok Baik",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBA6E73F14748230556ECBD36E6B11D",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBA6E73F14748230556ECBD36E6B11D",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-15T01:05:12.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T01:05:13.223Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T01:05:27.363Z",
+    "readAt": "2026-11-15T01:05:27.363Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T01:05:27.363Z"
+  },
+  "AC9D4DC99534E92E1AFA4C1425E6676F": {
+    "id": "AC9D4DC99534E92E1AFA4C1425E6676F",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "Kiyo Cowok Baik",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9D4DC99534E92E1AFA4C1425E6676F",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9D4DC99534E92E1AFA4C1425E6676F",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-15T05:52:41.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T05:52:41.723Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T05:52:51.985Z",
+    "readAt": "2026-11-15T05:52:51.970Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T05:52:51.970Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "AC2F465C54D8DB7806DC5A30767047BD": {
+    "id": "AC2F465C54D8DB7806DC5A30767047BD",
+    "sender": "6281578333335@s.whatsapp.net",
+    "number": "6281578333335",
+    "storyJid": "6281578333335@s.whatsapp.net",
+    "resolvedPn": "6281578333335@s.whatsapp.net",
+    "name": "kztrxze nak miayam/kurumi",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2F465C54D8DB7806DC5A30767047BD",
+      "participant": "218498458480848@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2F465C54D8DB7806DC5A30767047BD",
+      "participant": "218498458480848@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "218498458480848@lid",
+      "6281578333335@s.whatsapp.net"
+    ],
+    "contactHash": "6e1369d57a04afb22316bc629cdda52e05274abb46d059c243a9d318bb671a07",
+    "arrivedAt": "2026-11-15T10:03:23.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T10:03:24.707Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T10:03:43.470Z",
+    "readAt": "2026-11-15T10:03:43.462Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T10:03:43.462Z"
+  }
+}

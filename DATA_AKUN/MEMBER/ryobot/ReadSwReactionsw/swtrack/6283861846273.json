@@ -38,5 +38,45 @@
     "readAt": "2026-11-14T11:59:58.383Z",
     "emoji": "💚",
     "reactedAt": "2026-11-14T11:59:58.383Z"
+  },
+  "ACED330335A2DBAABFE3551A6569A3F7": {
+    "id": "ACED330335A2DBAABFE3551A6569A3F7",
+    "sender": "6283861846273@s.whatsapp.net",
+    "number": "6283861846273",
+    "storyJid": "6283861846273@s.whatsapp.net",
+    "resolvedPn": "6283861846273@s.whatsapp.net",
+    "name": "Fernandes WTM",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACED330335A2DBAABFE3551A6569A3F7",
+      "participant": "97019502842040@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACED330335A2DBAABFE3551A6569A3F7",
+      "participant": "97019502842040@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "97019502842040@lid",
+      "6283861846273@s.whatsapp.net"
+    ],
+    "contactHash": "cf74cab69f1579f66efb56314030e1129ba36f7ddb1d9ff4d64d71adbc414d13",
+    "arrivedAt": "2026-11-14T13:36:12.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:36:13.222Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:36:23.803Z",
+    "readAt": "2026-11-14T13:36:23.803Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T13:36:23.803Z"
   }
 }

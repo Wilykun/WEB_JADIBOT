@@ -238,5 +238,45 @@
     "readAt": "2026-11-14T11:35:43.197Z",
     "emoji": "💠",
     "reactedAt": "2026-11-14T11:35:43.197Z"
+  },
+  "ACF191A1F248FC4DDCD1A02797214F04": {
+    "id": "ACF191A1F248FC4DDCD1A02797214F04",
+    "sender": "6289652429832@s.whatsapp.net",
+    "number": "6289652429832",
+    "storyJid": "6289652429832@s.whatsapp.net",
+    "resolvedPn": "6289652429832@s.whatsapp.net",
+    "name": "alicca",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF191A1F248FC4DDCD1A02797214F04",
+      "participant": "56564937408745@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF191A1F248FC4DDCD1A02797214F04",
+      "participant": "56564937408745@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "56564937408745@lid",
+      "6289652429832@s.whatsapp.net"
+    ],
+    "contactHash": "67b970e016e84a89a10e67af830c0b7a38e062584536ca1e332a762b8c857f38",
+    "arrivedAt": "2026-11-14T13:40:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T13:40:01.598Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T13:40:08.433Z",
+    "readAt": "2026-11-14T13:40:08.432Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-14T13:40:08.432Z"
   }
 }

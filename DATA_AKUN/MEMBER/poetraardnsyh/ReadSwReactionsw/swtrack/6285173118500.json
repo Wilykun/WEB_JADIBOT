@@ -1,0 +1,42 @@
+{
+  "AC32BC523181718B02AABA88E37EA636": {
+    "id": "AC32BC523181718B02AABA88E37EA636",
+    "sender": "6285173118500@s.whatsapp.net",
+    "number": "6285173118500",
+    "storyJid": "6285173118500@s.whatsapp.net",
+    "resolvedPn": "6285173118500@s.whatsapp.net",
+    "name": "Firgi Awan",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC32BC523181718B02AABA88E37EA636",
+      "participant": "231009211695279@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC32BC523181718B02AABA88E37EA636",
+      "participant": "231009211695279@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "231009211695279@lid",
+      "6285173118500@s.whatsapp.net"
+    ],
+    "contactHash": "e498dc2eb70a18a1df89781beca05236a5ed2dcc2a0aa49cfe188e04a0dd1969",
+    "arrivedAt": "2026-11-14T22:52:19.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T22:52:20.479Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T22:52:27.830Z",
+    "readAt": "2026-11-14T22:52:27.829Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T22:52:27.829Z"
+  }
+}

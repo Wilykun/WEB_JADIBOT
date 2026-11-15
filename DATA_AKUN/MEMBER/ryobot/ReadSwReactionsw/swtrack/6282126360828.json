@@ -1,0 +1,42 @@
+{
+  "AC91B71E1DB8D03080E4A979930F13B7": {
+    "id": "AC91B71E1DB8D03080E4A979930F13B7",
+    "sender": "6282126360828@s.whatsapp.net",
+    "number": "6282126360828",
+    "storyJid": "6282126360828@s.whatsapp.net",
+    "resolvedPn": "6282126360828@s.whatsapp.net",
+    "name": "putra",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC91B71E1DB8D03080E4A979930F13B7",
+      "participant": "84911771914309@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC91B71E1DB8D03080E4A979930F13B7",
+      "participant": "84911771914309@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "84911771914309@lid",
+      "6282126360828@s.whatsapp.net"
+    ],
+    "contactHash": "4f5780eb9da76d1413f25c8212826030b801fb469b5a92b5045d9dda58c468b2",
+    "arrivedAt": "2026-11-15T10:56:44.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T10:56:45.584Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T10:56:48.097Z",
+    "readAt": "2026-11-15T10:56:48.096Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T10:56:48.096Z"
+  }
+}

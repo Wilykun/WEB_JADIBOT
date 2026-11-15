@@ -1,0 +1,42 @@
+{
+  "AC2DD682BEF9DBA77B8C8F4A8D21BD52": {
+    "id": "AC2DD682BEF9DBA77B8C8F4A8D21BD52",
+    "sender": "62895321290020@s.whatsapp.net",
+    "number": "62895321290020",
+    "storyJid": "62895321290020@s.whatsapp.net",
+    "resolvedPn": "62895321290020@s.whatsapp.net",
+    "name": "RAY'N PHAY",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2DD682BEF9DBA77B8C8F4A8D21BD52",
+      "participant": "238061598310633@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2DD682BEF9DBA77B8C8F4A8D21BD52",
+      "participant": "238061598310633@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "238061598310633@lid",
+      "62895321290020@s.whatsapp.net"
+    ],
+    "contactHash": "4a227267c81e6f7c63fe67c73bb4c85f18cddd108e2f1eb6e8848748ed431c8a",
+    "arrivedAt": "2026-11-14T14:23:49.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T14:23:50.173Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T14:23:52.938Z",
+    "readAt": "2026-11-14T14:23:52.937Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T14:23:52.937Z"
+  }
+}

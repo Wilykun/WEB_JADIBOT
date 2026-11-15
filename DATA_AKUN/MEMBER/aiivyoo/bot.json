@@ -1,0 +1,30 @@
+{
+  "id": "7cd86c82-baed-4b0e-9ab0-37d73bd176d6",
+  "label": "aiivyoo bot",
+  "mode": "readonly",
+  "storySettings": {
+    "autoReaction": false,
+    "delayMinSeconds": 2,
+    "delayMaxSeconds": 20,
+    "randomDelay": true,
+    "emojiPoolVersion": 2,
+    "emojiOptions": [
+      "💗",
+      "🗿",
+      "😘",
+      "😮",
+      "😭"
+    ],
+    "emojiPool": [
+      "💗",
+      "🗿",
+      "😘",
+      "😮",
+      "😭"
+    ]
+  },
+  "autoStart": true,
+  "runnerStatus": "not_connected",
+  "createdAt": "2026-11-14T11:02:42.919Z",
+  "updatedAt": "2026-11-14T14:02:39.473Z"
+}

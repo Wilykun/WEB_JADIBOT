@@ -38,5 +38,125 @@
     "readAt": "2026-11-14T13:32:56.237Z",
     "emoji": "💚",
     "reactedAt": "2026-11-14T13:32:56.237Z"
+  },
+  "A5BA776AD9DF52D4CD8228C6C52F0F6A": {
+    "id": "A5BA776AD9DF52D4CD8228C6C52F0F6A",
+    "sender": "6283837766420@s.whatsapp.net",
+    "number": "6283837766420",
+    "storyJid": "6283837766420@s.whatsapp.net",
+    "resolvedPn": "6283837766420@s.whatsapp.net",
+    "name": "~ Dea Milea, S.Kom.",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5BA776AD9DF52D4CD8228C6C52F0F6A",
+      "participant": "244456905285729@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5BA776AD9DF52D4CD8228C6C52F0F6A",
+      "participant": "244456905285729@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "244456905285729@lid",
+      "6283837766420@s.whatsapp.net"
+    ],
+    "contactHash": "3dc8c95c43f3b6a0ed0164e1c46db33e8731dc1005be67c857b6e6870c4f91ce",
+    "arrivedAt": "2026-11-14T14:00:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T14:00:47.633Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T14:00:53.241Z",
+    "readAt": "2026-11-14T14:00:53.241Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T14:00:53.241Z"
+  },
+  "A5937D223A4EBCCB709BAF8FB1CF6F28": {
+    "id": "A5937D223A4EBCCB709BAF8FB1CF6F28",
+    "sender": "6283837766420@s.whatsapp.net",
+    "number": "6283837766420",
+    "storyJid": "6283837766420@s.whatsapp.net",
+    "resolvedPn": "6283837766420@s.whatsapp.net",
+    "name": "~ Dea Milea, S.Kom.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5937D223A4EBCCB709BAF8FB1CF6F28",
+      "participant": "244456905285729@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5937D223A4EBCCB709BAF8FB1CF6F28",
+      "participant": "244456905285729@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "244456905285729@lid",
+      "6283837766420@s.whatsapp.net"
+    ],
+    "contactHash": "3dc8c95c43f3b6a0ed0164e1c46db33e8731dc1005be67c857b6e6870c4f91ce",
+    "arrivedAt": "2026-11-14T14:57:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T14:57:09.005Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T14:57:13.438Z",
+    "readAt": "2026-11-14T14:57:13.438Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-14T14:57:13.438Z"
+  },
+  "A57D886C883C3073039FAE40BAA5AE3C": {
+    "id": "A57D886C883C3073039FAE40BAA5AE3C",
+    "sender": "6283837766420@s.whatsapp.net",
+    "number": "6283837766420",
+    "storyJid": "6283837766420@s.whatsapp.net",
+    "resolvedPn": "6283837766420@s.whatsapp.net",
+    "name": "~ Dea Milea, S.Kom.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A57D886C883C3073039FAE40BAA5AE3C",
+      "participant": "244456905285729@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A57D886C883C3073039FAE40BAA5AE3C",
+      "participant": "244456905285729@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "244456905285729@lid",
+      "6283837766420@s.whatsapp.net"
+    ],
+    "contactHash": "3dc8c95c43f3b6a0ed0164e1c46db33e8731dc1005be67c857b6e6870c4f91ce",
+    "arrivedAt": "2026-11-15T02:09:54.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T02:09:55.243Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T02:10:05.626Z",
+    "readAt": "2026-11-15T02:10:05.625Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T02:10:05.625Z"
   }
 }

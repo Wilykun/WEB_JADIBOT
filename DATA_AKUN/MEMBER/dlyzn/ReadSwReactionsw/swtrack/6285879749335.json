@@ -1,0 +1,42 @@
+{
+  "A50463F4DBDA86607FA84F5C4603E570": {
+    "id": "A50463F4DBDA86607FA84F5C4603E570",
+    "sender": "6285879749335@s.whatsapp.net",
+    "number": "6285879749335",
+    "storyJid": "6285879749335@s.whatsapp.net",
+    "resolvedPn": "6285879749335@s.whatsapp.net",
+    "name": "DAMARANGGA DARYANTO_X-I",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A50463F4DBDA86607FA84F5C4603E570",
+      "participant": "239538983145693@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A50463F4DBDA86607FA84F5C4603E570",
+      "participant": "239538983145693@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "239538983145693@lid",
+      "6285879749335@s.whatsapp.net"
+    ],
+    "contactHash": "2d35582ee82412340f0538224c2046ae3ca9b6de52e5df33874c7358df7fa601",
+    "arrivedAt": "2026-11-14T14:30:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T14:30:10.263Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T14:30:27.503Z",
+    "readAt": "2026-11-14T14:30:27.502Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-14T14:30:27.502Z"
+  }
+}

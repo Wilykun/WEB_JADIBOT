@@ -1,0 +1,42 @@
+{
+  "AC45CC84866023420DC1104A964E7B7D": {
+    "id": "AC45CC84866023420DC1104A964E7B7D",
+    "sender": "62895396271278@s.whatsapp.net",
+    "number": "62895396271278",
+    "storyJid": "62895396271278@s.whatsapp.net",
+    "resolvedPn": "62895396271278@s.whatsapp.net",
+    "name": "Bintang Romadhon",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC45CC84866023420DC1104A964E7B7D",
+      "participant": "256147755950258@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC45CC84866023420DC1104A964E7B7D",
+      "participant": "256147755950258@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "256147755950258@lid",
+      "62895396271278@s.whatsapp.net"
+    ],
+    "contactHash": "e9584448f9c9e38c9a0993dcf24eb37ef175c85039b7259feb09bceb263689e5",
+    "arrivedAt": "2026-11-15T03:43:29.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T03:43:30.089Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T03:43:40.073Z",
+    "readAt": "2026-11-15T03:43:40.072Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T03:43:40.072Z"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "3AEB93CEAADC46AEB9DEC13B454E4D9C": {
+    "id": "3AEB93CEAADC46AEB9DEC13B454E4D9C",
+    "sender": "6288247277499@s.whatsapp.net",
+    "number": "6288247277499",
+    "storyJid": "6288247277499@s.whatsapp.net",
+    "resolvedPn": "6288247277499@s.whatsapp.net",
+    "name": "Yudpenganchiken",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3AEB93CEAADC46AEB9DEC13B454E4D9C",
+      "participant": "228011492262069@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3AEB93CEAADC46AEB9DEC13B454E4D9C",
+      "participant": "228011492262069@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "228011492262069@lid",
+      "6288247277499@s.whatsapp.net"
+    ],
+    "contactHash": "65c60022ea907238698b12c3ddf9a56e4aebdff40a001af806a743bc9b64e941",
+    "arrivedAt": "2026-11-14T22:49:09.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-14T22:49:09.554Z",
+    "lastError": null,
+    "updatedAt": "2026-11-14T22:49:12.958Z",
+    "readAt": "2026-11-14T22:49:12.958Z"
+  }
+}

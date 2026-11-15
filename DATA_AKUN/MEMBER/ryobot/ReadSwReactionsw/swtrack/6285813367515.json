@@ -78,5 +78,45 @@
     "readAt": "2026-11-14T10:12:29.072Z",
     "emoji": "💚",
     "reactedAt": "2026-11-14T10:12:29.072Z"
+  },
+  "A5CBA370493E06AB25F58D93D68C3F34": {
+    "id": "A5CBA370493E06AB25F58D93D68C3F34",
+    "sender": "6285813367515@s.whatsapp.net",
+    "number": "6285813367515",
+    "storyJid": "6285813367515@s.whatsapp.net",
+    "resolvedPn": "6285813367515@s.whatsapp.net",
+    "name": "BTR RZYY",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5CBA370493E06AB25F58D93D68C3F34",
+      "participant": "251629853012223@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5CBA370493E06AB25F58D93D68C3F34",
+      "participant": "251629853012223@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "251629853012223@lid",
+      "6285813367515@s.whatsapp.net"
+    ],
+    "contactHash": "34bc57601f361ae6060030b503e8b1bc34dd7db2dd19f35675066b17711e9b9e",
+    "arrivedAt": "2026-11-15T01:11:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T01:11:40.526Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T01:11:45.907Z",
+    "readAt": "2026-11-15T01:11:45.904Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T01:11:45.904Z"
   }
 }

@@ -1,0 +1,40 @@
+{
+  "AC9A34A5FBDF36953734C191137689B1": {
+    "id": "AC9A34A5FBDF36953734C191137689B1",
+    "sender": "6283831431153@s.whatsapp.net",
+    "number": "6283831431153",
+    "storyJid": "6283831431153@s.whatsapp.net",
+    "resolvedPn": "6283831431153@s.whatsapp.net",
+    "name": "자신을 사랑하세요",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9A34A5FBDF36953734C191137689B1",
+      "participant": "95207127314587@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9A34A5FBDF36953734C191137689B1",
+      "participant": "95207127314587@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "95207127314587@lid",
+      "6283831431153@s.whatsapp.net"
+    ],
+    "contactHash": "ef573879080b7ec1bd887081ea921e25eb5e760d75d8635d97431d2027e30109",
+    "arrivedAt": "2026-11-15T08:46:41.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T08:46:41.394Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T08:46:57.697Z",
+    "readAt": "2026-11-15T08:46:57.696Z"
+  }
+}
