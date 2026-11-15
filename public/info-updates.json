@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-15T14:15:00+07:00",
+  "updatedAt": "2026-11-15T15:24:00+07:00",
   "updates": [
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "15.24 WIB",
+      "title": "Bar atas panel kini menempel saat di-scroll",
+      "description": "Bar atas (tombol menu, judul halaman, dan avatar) kini mengikuti saat halaman di-scroll ke bawah, jadi menu dan judul selalu terlihat tanpa harus scroll balik ke atas. Berlaku di semua halaman panel, HP maupun desktop.",
+      "tag": "Tampilan"
+    },
     {
       "day": "Minggu, 15 Nov 2026",
       "time": "14.15 WIB",
