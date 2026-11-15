@@ -2888,13 +2888,18 @@ html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
 .info-update-item{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px;align-items:stretch;padding:12px 13px;border:1px solid rgba(169,222,187,.12);border-radius:13px;background:rgba(11,31,19,.5);text-align:left}
 .info-update-poster{display:grid;place-items:center;min-height:128px;border-radius:11px;background:linear-gradient(160deg,#3ee69a,#1d9e63);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .info-update-poster-mark{color:#eafff3;font-size:34px;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.28)}
+.info-update-poster-mark svg{display:block;width:44px;height:44px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))}
+.info-update-item[data-tag="perubahan"] .info-update-poster{background:linear-gradient(160deg,#fbbf24,#d97706)}
 .info-update-item[data-tag="perbaikan"] .info-update-poster{background:linear-gradient(160deg,#6eb8ff,#3b82f6)}
+.info-update-item[data-tag="fitur-dihapus"] .info-update-poster{background:linear-gradient(160deg,#f87171,#dc2626)}
 .info-update-item[data-tag="tampilan"] .info-update-poster{background:linear-gradient(160deg,#a78bfa,#7c3aed)}
 .info-update-body{display:flex;flex-direction:column;gap:5px;min-width:0}
 .info-update-item h4{margin:0;color:#e8f4eb;font-size:13px;letter-spacing:-.2px}
 .info-update-meta{margin:0!important;color:#7f9b8c;font-size:10px;font-weight:600}
 .info-update-tag{align-self:flex-start;padding:3px 9px;border-radius:999px;background:rgba(49,213,139,.14);color:#7fe6ab;font-size:10px;font-weight:700}
+.info-update-item[data-tag="perubahan"] .info-update-tag{background:rgba(251,191,36,.14);color:#fcd34d}
 .info-update-item[data-tag="perbaikan"] .info-update-tag{background:rgba(110,184,255,.14);color:#8ec4ff}
+.info-update-item[data-tag="fitur-dihapus"] .info-update-tag{background:rgba(248,113,113,.14);color:#fca5a5}
 .info-update-item[data-tag="tampilan"] .info-update-tag{background:rgba(167,139,250,.16);color:#c4b5fd}
 .info-update-desc{height:80px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(127,230,171,.4) transparent}
 .info-update-desc::-webkit-scrollbar{width:4px}
@@ -2962,6 +2967,9 @@ html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
 .workspace-server-grid span { color: var(--muted); font-size: 10px; }
 .workspace-server-grid strong { overflow-wrap: anywhere; color: var(--text); font-size: 13px; }
 .workspace-server-detail { margin: 14px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.workspace-server-subhead { margin: 18px 0 0; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.workspace-server-subhead + .workspace-server-grid { margin-top: 8px; }
+.workspace-server-grid > div.is-wide { grid-column: 1 / -1; }
 .workspace-bot-list-intro { margin: 0 0 14px; color: var(--muted); font-size: 12px; line-height: 1.6; }
 .workspace-bot-list { display: grid; gap: 8px; }
 .workspace-bot-item { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: start; gap: 10px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .02); }

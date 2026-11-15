@@ -1249,11 +1249,12 @@ async function handleApi(req, res, url) {
 
   if (route === 'GET /api/public/account-stats') {
     const users = Array.isArray(store.users) ? store.users : [];
-    const active = users.filter((item) => item.verified !== false).length;
+    const botStats = pairingManager.getPublicStats();
+    // Aktif artinya bot akun itu sedang berjalan, bukan sekadar akun terverifikasi; sebelumnya hitungan memakai verified sehingga Belum aktif selalu 0 walau ada bot yang berhenti.
+    const active = users.filter((item) => pairingManager.getState(item.id)?.workerStatus === 'running').length;
     const inactive = users.length - active;
     const admin = users.filter((item) => item.role === 'admin').length;
     const member = users.length - admin;
-    const botStats = pairingManager.getPublicStats();
     return sendJson(res, 200, { total: users.length, active, inactive, admin, member, ...botStats, updatedAt: new Date().toISOString() });
   }
 
@@ -1285,20 +1286,37 @@ async function handleApi(req, res, url) {
     const systemTotal = os.totalmem();
     const systemFree = os.freemem();
     const systemUsed = Math.max(0, systemTotal - systemFree);
-    const loadAverage = os.loadavg()[0] || 0;
+    const loadAverages = os.loadavg();
+    const cpuModel = os.cpus()[0]?.model?.trim() || null;
+    let disk = null;
+    try {
+      const diskStats = fsSync.statfsSync('/');
+      const blockSize = Number(diskStats.bsize || 0);
+      const diskTotal = Number(diskStats.blocks || 0) * blockSize;
+      const diskFree = Number(diskStats.bavail || 0) * blockSize;
+      if (diskTotal > 0) disk = { totalBytes: diskTotal, freeBytes: diskFree, usedPercent: Number(((1 - diskFree / diskTotal) * 100).toFixed(1)) };
+    } catch { /* Disk tidak terbaca di host ini; kolom tampil strip. */ }
     return sendJson(res, 200, {
       status: 'online',
       uptimeSeconds: Math.floor(process.uptime()),
+      systemUptimeSeconds: Math.floor(os.uptime()),
+      serverStartedAt: new Date(Date.now() - process.uptime() * 1000).toISOString(),
       processMemoryBytes: processMemory.rss,
       processHeapUsedBytes: processMemory.heapUsed,
       processHeapTotalBytes: processMemory.heapTotal,
       systemTotalMemoryBytes: systemTotal,
       systemFreeMemoryBytes: systemFree,
       systemUsedPercent: systemTotal ? Number(((systemUsed / systemTotal) * 100).toFixed(1)) : 0,
+      diskTotalBytes: disk?.totalBytes ?? null,
+      diskFreeBytes: disk?.freeBytes ?? null,
+      diskUsedPercent: disk?.usedPercent ?? null,
       nodeVersion: process.version,
       platform: `${process.platform}/${process.arch}`,
+      cpuModel,
       cpuCount: os.cpus().length,
-      loadAverage1m: Number(loadAverage.toFixed(2)),
+      loadAverage1m: Number((loadAverages[0] || 0).toFixed(2)),
+      loadAverage5m: Number((loadAverages[1] || 0).toFixed(2)),
+      loadAverage15m: Number((loadAverages[2] || 0).toFixed(2)),
       updatedAt: new Date().toISOString(),
     });
   }

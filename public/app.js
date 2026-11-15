@@ -2349,6 +2349,19 @@ function formatServerUptime(value) {
   return `${minutes}m ${seconds % 60}d`;
 }
 
+function formatServerSize(value) {
+  const bytes = Number(value);
+  if (!Number.isFinite(bytes) || bytes < 0) return '—';
+  if (bytes >= 1024 ** 3) return `${(bytes / 1024 ** 3).toFixed(1)} GB`;
+  return formatServerBytes(bytes);
+}
+
+function formatServerDateTime(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '—';
+  return new Intl.DateTimeFormat('id-ID', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(date);
+}
+
 async function refreshMobileServerStatus() {
   try {
     const status = await api('/api/public/server-status');
@@ -2376,6 +2389,18 @@ async function refreshWorkspaceServerStatus() {
     document.querySelector('#workspace-server-system-memory-value').textContent = `${formatServerBytes(status.systemTotalMemoryBytes)} · ${status.systemUsedPercent}% terpakai`;
     document.querySelector('#workspace-server-node-value').textContent = status.nodeVersion || '—';
     document.querySelector('#workspace-server-cpu-value').textContent = `${status.cpuCount || '—'} core · ${status.loadAverage1m ?? '—'}`;
+    document.querySelector('#workspace-server-cpu-model-value').textContent = status.cpuModel || '—';
+    document.querySelector('#workspace-server-cpu-cores-value').textContent = status.cpuCount ? `${status.cpuCount} core` : '—';
+    document.querySelector('#workspace-server-cpu-load-value').textContent = [status.loadAverage1m, status.loadAverage5m, status.loadAverage15m].map((value) => (typeof value === 'number' ? value.toFixed(2) : '—')).join(' / ');
+    document.querySelector('#workspace-server-ram-free-value').textContent = formatServerBytes(status.systemFreeMemoryBytes);
+    document.querySelector('#workspace-server-ram-used-value').textContent = formatServerBytes((status.systemTotalMemoryBytes || 0) - (status.systemFreeMemoryBytes || 0));
+    document.querySelector('#workspace-server-heap-value').textContent = `${formatServerBytes(status.processHeapUsedBytes)} / ${formatServerBytes(status.processHeapTotalBytes)}`;
+    document.querySelector('#workspace-server-disk-total-value').textContent = formatServerSize(status.diskTotalBytes);
+    document.querySelector('#workspace-server-disk-used-value').textContent = status.diskTotalBytes ? `${formatServerSize(status.diskTotalBytes - status.diskFreeBytes)} · ${status.diskUsedPercent}%` : '—';
+    document.querySelector('#workspace-server-disk-free-value').textContent = formatServerSize(status.diskFreeBytes);
+    document.querySelector('#workspace-server-started-value').textContent = formatServerDateTime(status.serverStartedAt);
+    document.querySelector('#workspace-server-system-uptime-value').textContent = formatServerUptime(status.systemUptimeSeconds);
+    document.querySelector('#workspace-server-clock-value').textContent = formatServerDateTime(status.updatedAt);
     document.querySelector('#workspace-server-status-detail').textContent = `Platform ${status.platform || 'server'} · RAM proses diukur dari runtime Node.js.`;
     document.querySelector('#workspace-server-status-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date(status.updatedAt))} WIB`;
   } catch {
@@ -3202,6 +3227,15 @@ function stopWorkspaceServerAutoRefresh() {
   workspaceServerRefreshTimer = null;
 }
 // Info Update ala MyAnimeList: tiap entri kartu poster + judul + meta + tag, teks deskripsi di kotak scroll manual (bukan auto-scroll).
+// Kategori akurat: Fitur baru (hal baru yang belum ada), Perubahan (yang sudah ada berubah perilaku/tampilannya), Perbaikan (bug dibetulkan), Fitur dihapus (yang dicabut), Tampilan (hanya tampilan).
+const INFO_UPDATE_TAG_LABELS = { 'fitur-baru': 'Fitur baru', perubahan: 'Perubahan', perbaikan: 'Perbaikan', 'fitur-dihapus': 'Fitur dihapus', tampilan: 'Tampilan' };
+const INFO_UPDATE_TAG_ICONS = {
+  'fitur-baru': '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l1.9 5.4 5.6 1.6-5.6 1.9L12 17.5l-1.9-5.6-5.6-1.9 5.6-1.6z"/></svg>',
+  perubahan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v6h-6"/></svg>',
+  perbaikan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>',
+  'fitur-dihapus': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>',
+  tampilan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>',
+};
 async function loadInfoUpdates() {
   const list = document.querySelector('.info-update-list');
   if (!list) return;
@@ -3215,13 +3249,15 @@ async function loadInfoUpdates() {
     updates.forEach((update) => {
       const item = document.createElement('li');
       item.className = 'info-update-item';
-      const tag = (update.tag || 'Pembaruan').trim() || 'Pembaruan';
-      item.dataset.tag = tag.toLowerCase();
+      const rawTag = (update.tag || 'Pembaruan').trim() || 'Pembaruan';
+      const tagSlug = rawTag.toLowerCase().replace(/\s+/g, '-');
+      const tag = INFO_UPDATE_TAG_LABELS[tagSlug] || rawTag;
+      item.dataset.tag = tagSlug;
       const poster = document.createElement('div');
       poster.className = 'info-update-poster';
       const mark = document.createElement('span');
       mark.className = 'info-update-poster-mark';
-      mark.textContent = '✦';
+      mark.innerHTML = INFO_UPDATE_TAG_ICONS[tagSlug] || INFO_UPDATE_TAG_ICONS['fitur-baru'];
       mark.setAttribute('aria-hidden', 'true');
       poster.append(mark);
       const body = document.createElement('div');
