@@ -308,6 +308,53 @@ function showToast(text) {
   toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
 }
 
+// Dialog konfirmasi buatan panel menggantikan window.confirm bawaan browser agar tampilannya menyatu dengan tema panel dan muat di layar HP, dengan tombol Batal sebagai pilihan aman bila dialog ditutup.
+function showConfirm({ title, message, confirmLabel = 'Oke', cancelLabel = 'Batal', danger = false }) {
+  return new Promise((resolve) => {
+    const previousOverflow = document.body.style.overflow;
+    const overlay = document.createElement('div');
+    overlay.className = 'confirm-overlay';
+    const dialog = document.createElement('div');
+    dialog.className = 'confirm-dialog';
+    dialog.setAttribute('role', 'alertdialog');
+    dialog.setAttribute('aria-modal', 'true');
+    dialog.setAttribute('aria-label', title);
+    const titleElement = document.createElement('h3');
+    titleElement.className = 'confirm-title';
+    titleElement.textContent = title;
+    const messageElement = document.createElement('p');
+    messageElement.className = 'confirm-message';
+    messageElement.textContent = message;
+    const actions = document.createElement('div');
+    actions.className = 'confirm-actions';
+    const cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.className = 'button-secondary';
+    cancelButton.textContent = cancelLabel;
+    const confirmButton = document.createElement('button');
+    confirmButton.type = 'button';
+    confirmButton.className = danger ? 'button-danger' : 'button-primary';
+    confirmButton.textContent = confirmLabel;
+    actions.append(cancelButton, confirmButton);
+    dialog.append(titleElement, messageElement, actions);
+    overlay.append(dialog);
+    document.body.append(overlay);
+    document.body.style.overflow = 'hidden';
+    const close = (result) => {
+      document.removeEventListener('keydown', onKeyDown, true);
+      overlay.remove();
+      document.body.style.overflow = previousOverflow;
+      resolve(result);
+    };
+    const onKeyDown = (event) => { if (event.key === 'Escape') close(false); };
+    document.addEventListener('keydown', onKeyDown, true);
+    overlay.addEventListener('click', (event) => { if (event.target === overlay) close(false); });
+    cancelButton.addEventListener('click', () => close(false));
+    confirmButton.addEventListener('click', () => close(true));
+    cancelButton.focus();
+  });
+}
+
 function setAuthSubmitLoading(button, context, loading) {
   if (!button) return;
   if (loading) {
@@ -768,7 +815,7 @@ document.querySelector('#admin-backup-restore-form')?.addEventListener('submit',
   if (file.size > 80 * 1024 * 1024) return setAdminBackupStatus('Ukuran ZIP melebihi batas 80 MiB.', true);
   if ([...passphrase].length < 12) return setAdminBackupStatus('Masukkan kata sandi backup yang benar.', true);
   if (!confirmInput?.checked) return setAdminBackupStatus('Centang konfirmasi sebelum menjalankan restore.', true);
-  const approved = window.confirm('Restore akan mengganti data akun/data sesi saat ini, menghentikan koneksi WhatsApp yang sedang aktif, lalu mencoba menyambungkan sesi dari backup. Worker auto-start dapat mulai berjalan. Lanjutkan hanya jika Anda memahami dampaknya dan memiliki izin.');
+  const approved = await showConfirm({ title: 'Restore backup?', message: 'Restore akan mengganti data akun/data sesi saat ini, menghentikan koneksi WhatsApp yang sedang aktif, lalu mencoba menyambungkan sesi dari backup. Worker auto-start dapat mulai berjalan. Lanjutkan hanya jika Anda memahami dampaknya dan memiliki izin.', confirmLabel: 'Restore', danger: true });
   if (!approved) return;
   button.disabled = true;
   setAdminBackupStatus('Memvalidasi ZIP dan membuat restore point sebelum perubahan…');
@@ -819,11 +866,11 @@ adminUsersList?.addEventListener('click', async (event) => {
     const article = actionButton.closest('.member-account-item');
     const username = article?.querySelector('[data-member-toggle]')?.dataset.username || 'member';
     const confirmations = {
-      'bot-start': `Start bot untuk akun WhatsApp @${username}? Bot memakai pengaturan tersimpan dan dapat membaca status serta mengirim reaksi bila mode itu aktif. Lanjut hanya jika kamu berwenang.`,
-      'bot-restart': `Restart bot untuk akun WhatsApp @${username}? Bot berjalan kembali dengan pengaturan tersimpan. Lanjut hanya jika kamu berwenang.`,
-      'bot-stop': `Matikan worker bot @${username}? Koneksi WhatsApp tetap tertaut. Lanjut hanya jika kamu berwenang.`,
-      ban: `Blokir @${username}? Sesi panel dicabut, worker/Online 24 Jam dihentikan, pairing yang belum selesai dibatalkan, dan tautan WA aktif tidak dihapus.`,
-      unban: `Buka blokir @${username} agar pemilik dapat login kembali?`,
+      'bot-start': { title: `Start bot @${username}?`, message: 'Bot memakai pengaturan tersimpan dan dapat membaca status serta mengirim reaksi bila mode itu aktif. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Start bot' },
+      'bot-restart': { title: `Restart bot @${username}?`, message: 'Bot berjalan kembali dengan pengaturan tersimpan. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Restart bot' },
+      'bot-stop': { title: `Matikan worker bot @${username}?`, message: 'Koneksi WhatsApp tetap tertaut. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Matikan worker', danger: true },
+      ban: { title: `Blokir @${username}?`, message: 'Sesi panel dicabut, worker/Online 24 Jam dihentikan, pairing yang belum selesai dibatalkan, dan tautan WA aktif tidak dihapus.', confirmLabel: 'Blokir', danger: true },
+      unban: { title: `Buka blokir @${username}?`, message: 'Agar pemilik dapat login kembali.', confirmLabel: 'Buka blokir' },
     };
     if (action === 'member-delete') {
       if (actionButton.dataset.armed !== 'true') {
@@ -833,7 +880,7 @@ adminUsersList?.addEventListener('click', async (event) => {
       }
       delete actionButton.dataset.armed;
       actionButton.textContent = 'Hapus akun permanen';
-      if (!window.confirm(`Hapus akun @${username} secara permanen? Semua data akun di DATA_AKUN, sesi panel, dan riwayat login ikut terhapus dan tidak dapat dikembalikan.`)) return;
+      if (!(await showConfirm({ title: `Hapus akun @${username} permanen?`, message: 'Semua data akun di DATA_AKUN, sesi panel, dan riwayat login ikut terhapus dan tidak dapat dikembalikan.', confirmLabel: 'Hapus permanen', danger: true }))) return;
       const actionButtons = [...(article?.querySelectorAll('[data-admin-action]') || [])];
       actionButtons.forEach((button) => { button.disabled = true; });
       try {
@@ -852,7 +899,7 @@ adminUsersList?.addEventListener('click', async (event) => {
       }
       return;
     }
-    if (!window.confirm(confirmations[action] || 'Lanjutkan tindakan admin ini?')) return;
+    if (!(await showConfirm(confirmations[action] || { title: 'Lanjutkan tindakan admin ini?', message: 'Tindakan ini akan langsung dijalankan.', confirmLabel: 'Lanjutkan' }))) return;
     const actionButtons = [...(article?.querySelectorAll('[data-admin-action]') || [])];
     actionButtons.forEach((button) => { button.disabled = true; });
     try {
@@ -2868,7 +2915,7 @@ document.querySelector('#pairing-retry').addEventListener('click', () => {
 document.querySelector('#pairing-change-number').addEventListener('click', async (event) => {
   const button = event.currentTarget;
   if (button.disabled) return;
-  const approved = window.confirm('Batalkan pairing code yang sedang tampil? Kode lama tidak akan bisa digunakan dan kamu dapat mengganti nomor.');
+  const approved = await showConfirm({ title: 'Batalkan pairing code?', message: 'Kode lama tidak akan bisa digunakan dan kamu dapat mengganti nomor.', confirmLabel: 'Batalkan' });
   if (!approved) return;
   clearInterval(pairingPollTimer);
   button.disabled = true;
@@ -2939,8 +2986,8 @@ document.querySelector('#pairing-recover-dismiss').addEventListener('click', () 
 document.querySelector('#session-stop').addEventListener('click', () => {
   void callSessionAction('/api/pairing/stop', 'POST', 'Koneksi dihentikan; sesi lokal dipertahankan.');
 });
-document.querySelector('#session-delete').addEventListener('click', () => {
-  const approved = window.confirm('Hapus sesi WhatsApp dari server ini? Jika masih tersambung, aplikasi akan mencoba logout. Untuk menautkan lagi, kamu perlu meminta pairing code baru.');
+document.querySelector('#session-delete').addEventListener('click', async () => {
+  const approved = await showConfirm({ title: 'Hapus sesi WhatsApp?', message: 'Jika masih tersambung, aplikasi akan mencoba logout. Untuk menautkan lagi, kamu perlu meminta pairing code baru.', confirmLabel: 'Hapus sesi', danger: true });
   if (approved) void callSessionAction('/api/pairing/session', 'DELETE', 'Sesi WhatsApp dihapus.');
 });
 
@@ -2972,8 +3019,8 @@ async function callBotAction(action) {
 
 document.querySelector('#bot-start').addEventListener('click', () => { void callBotAction('start'); });
 document.querySelector('#bot-restart').addEventListener('click', () => { void callBotAction('restart'); });
-document.querySelector('#bot-stop').addEventListener('click', () => {
-  const approved = window.confirm('Matikan bot dan nonaktifkan auto-start? Bot tidak akan hidup lagi otomatis sampai kamu menekan Start bot.');
+document.querySelector('#bot-stop').addEventListener('click', async () => {
+  const approved = await showConfirm({ title: 'Matikan bot dan nonaktifkan auto-start?', message: 'Bot tidak akan hidup lagi otomatis sampai kamu menekan Start bot.', confirmLabel: 'Matikan bot' });
   if (approved) void callBotAction('stop');
 });
 

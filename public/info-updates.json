@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-15T18:26:00+07:00",
+  "updatedAt": "2026-11-15T18:36:00+07:00",
   "updates": [
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "18.36 WIB",
+      "tag": "Tampilan",
+      "title": "Konfirmasi blokir dan hapus kini pakai dialog panel, bukan bawaan browser",
+      "description": "Konfirmasi tindakan penting — blokir/buka blokir member, hapus akun permanen, restore backup, batalkan pairing code, hapus sesi WhatsApp, dan matikan bot — dulu memakai dialog bawaan browser yang tampilannya kaku dan tidak mengikuti tema panel. Kini semuanya memakai dialog buatan panel sendiri: kartu gelap senada tema, tombol Batal dan aksi yang besar dan mudah ditekan, pas di layar HP, dan bisa ditutup dengan ketuk latar atau tombol Escape."
+    },
     {
       "day": "Minggu, 15 Nov 2026",
       "time": "18.26 WIB",
