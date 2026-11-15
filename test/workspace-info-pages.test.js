@@ -69,6 +69,18 @@ test('workspace server page shows the full detail set, and info updates use the 
   assert.match(css, /\.info-update-poster-mark svg\s*\{[^}]*width:\s*44px/);
 });
 
+test('info update pagination shows a 5-page window with ellipsis and wraps on mobile', async () => {
+  const js = await fs.readFile(path.join(ROOT, 'public/app.js'), 'utf8');
+  const css = await fs.readFile(path.join(ROOT, 'public/style.css'), 'utf8');
+
+  assert.ok(js.includes('INFO_UPDATE_PAGE_WINDOW = 5'), 'pagination must cap the visible page numbers to a window of 5');
+  assert.ok(js.includes('info-page-ellipsis'), 'pagination must render an ellipsis between hidden pages');
+  assert.ok(js.includes('firstPage = Math.max(1, Math.min(infoUpdatePage - 2, pages - INFO_UPDATE_PAGE_WINDOW + 1))'), 'pagination window must slide with the current page');
+  assert.match(css, /\.info-update-pagination\{[^}]*flex-wrap:\s*wrap/, 'pagination row must wrap so it can never overflow horizontally');
+  assert.match(css, /\.info-page-ellipsis\{[^}]*color:#7f9b8c/, 'ellipsis must be styled like muted text');
+  assert.match(css, /@media\(max-width:560px\)\{\.info-update-pagination\{gap:4px\}\.info-page-button\{min-width:30px;height:30px/, 'pagination buttons must shrink on mobile');
+});
+
 test('every server stat cell shows a contextual SVG icon next to its label', async () => {
   const html = await fs.readFile(path.join(ROOT, 'public/index.html'), 'utf8');
   const css = await fs.readFile(path.join(ROOT, 'public/style.css'), 'utf8');

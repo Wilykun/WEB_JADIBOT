@@ -3351,6 +3351,8 @@ async function loadInfoUpdates() {
 
 // Info Update: daftar pembaruan dipaginasi 3 entri per halaman agar tetap ringkas di layar kecil.
 const INFO_UPDATE_PAGE_SIZE = 3;
+// Tombol nomor halaman hanya menampilkan jendela 5 halaman di sekitar halaman aktif (plus "…") agar baris paginasi tidak meluber di HP — pola yang sama dengan paginasi riwayat login.
+const INFO_UPDATE_PAGE_WINDOW = 5;
 let infoUpdatePage = 1;
 function renderInfoUpdatePagination() {
   const items = [...document.querySelectorAll('#infoupdate .info-update-item')];
@@ -3370,7 +3372,7 @@ function renderInfoUpdatePagination() {
   prevButton.disabled = infoUpdatePage <= 1;
   prevButton.addEventListener('click', () => { infoUpdatePage -= 1; renderInfoUpdatePagination(); });
   pager.append(prevButton);
-  for (let page = 1; page <= pages; page += 1) {
+  const addPageButton = (page) => {
     const pageButton = document.createElement('button');
     pageButton.type = 'button';
     pageButton.className = `info-page-button${page === infoUpdatePage ? ' is-active' : ''}`;
@@ -3380,7 +3382,19 @@ function renderInfoUpdatePagination() {
     pageButton.disabled = page === infoUpdatePage;
     pageButton.addEventListener('click', () => { infoUpdatePage = page; renderInfoUpdatePagination(); });
     pager.append(pageButton);
-  }
+  };
+  const addEllipsis = () => {
+    const ellipsis = document.createElement('span');
+    ellipsis.className = 'info-page-ellipsis';
+    ellipsis.textContent = '…';
+    ellipsis.setAttribute('aria-hidden', 'true');
+    pager.append(ellipsis);
+  };
+  const firstPage = Math.max(1, Math.min(infoUpdatePage - 2, pages - INFO_UPDATE_PAGE_WINDOW + 1));
+  const lastPage = Math.min(pages, firstPage + INFO_UPDATE_PAGE_WINDOW - 1);
+  if (firstPage > 1) addEllipsis();
+  for (let page = firstPage; page <= lastPage; page += 1) addPageButton(page);
+  if (lastPage < pages) addEllipsis();
   const nextButton = document.createElement('button');
   nextButton.type = 'button';
   nextButton.className = 'info-page-button';

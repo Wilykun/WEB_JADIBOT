@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-15T16:29:00+07:00",
+  "updatedAt": "2026-11-15T16:44:00+07:00",
   "updates": [
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "16.44 WIB",
+      "tag": "Tampilan",
+      "title": "Paginasi Info Update kini rapi di HP",
+      "description": "Tombol nomor halaman 1–9 yang dulu meluber ke kanan di layar HP kini hanya menampilkan jendela 5 halaman di sekitar halaman aktif, dengan \"…\" di antara halaman yang tersembunyi. Tombol dibuat lebih kecil di HP dan baris paginasi bisa membungkus, jadi tidak ada lagi overflow horizontal."
+    },
     {
       "day": "Minggu, 15 Nov 2026",
       "time": "16.29 WIB",

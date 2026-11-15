@@ -2907,8 +2907,10 @@ html[data-theme="light"] .sidebar-account-status-copy em{color:#557060;}
 .info-update-desc::-webkit-scrollbar-track{background:transparent}
 .info-update-desc p{margin:0;color:#99b0a1;font-size:11px;line-height:1.6}
 .info-update-clock{margin:8px 0 0!important;color:#7f9b8c;font-size:11px}
-.info-update-pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px}
+.info-update-pagination{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin-top:14px}
 .info-page-button{min-width:34px;height:34px;padding:0 10px;border:1px solid rgba(169,222,187,.16);border-radius:10px;background:rgba(11,31,19,.55);color:#b9d6c2;font-size:12px;font-weight:700;cursor:pointer}
+.info-page-ellipsis{padding:0 2px;color:#7f9b8c;font-size:12px}
+@media(max-width:560px){.info-update-pagination{gap:4px}.info-page-button{min-width:30px;height:30px;padding:0 8px;border-radius:9px;font-size:11px}}
 .info-page-button:hover:not(:disabled){border-color:rgba(99,225,148,.45);color:#e8f4eb}
 .info-page-button.is-active{background:linear-gradient(135deg,#3ee69a,#22bd78);border-color:transparent;color:#062115}
 .info-page-button:disabled{opacity:.45;cursor:default}
