@@ -1004,6 +1004,11 @@ async function loadAdminUsers() {
     const isAdmin = currentUser?.role === 'admin';
     const result = await api(isAdmin ? '/api/admin/users' : '/api/members');
     const users = Array.isArray(result.users) ? result.users : [];
+    // Badge Member ikut diperbarui realtime dari daftar yang sama: saat sedang
+    // melihat halaman Member, penanda ikut maju; saat di halaman lain, angka
+    // badge dihitung ulang dari daftar terbaru.
+    if (activeWorkspacePage === 'admin') void markMemberListSeen(users);
+    else if (memberListSeenLoaded) renderMemberBadge(countNewMembers(users, memberListSeen));
     adminUsersList.replaceChildren();
     if (!users.some((user) => String(user.id || user.username) === expandedAdminUserId)) expandedAdminUserId = null;
     if (!users.length) {
@@ -1696,6 +1701,11 @@ function setWorkspacePage(page, smoothScroll = true) {
     stopInfoUpdateAutoRefresh();
     void refreshInfoUpdateBadge();
   }
+  if (page === 'admin') {
+    void markMemberListSeen();
+  } else {
+    void refreshMemberBadge();
+  }
   if (page === 'server') {
     void refreshWorkspaceServerStatus();
     stopWorkspaceServerAutoRefresh();
@@ -2304,6 +2314,7 @@ async function showDashboard(user) {
   }
   await Promise.all([loadAdminUsers(), loadAdminBackupSnapshots(), refreshPairing(), loadPairingLogs()]);
   void refreshInfoUpdateBadge();
+  void refreshMemberBadge();
   await loadLoginHistory();
   startLoginHistoryPolling();
   startAdminUsersPolling();
@@ -3498,6 +3509,86 @@ async function markInfoUpdatesSeen(updates) {
       body: JSON.stringify({ day: newest.day, time: newest.time, title: newest.title }),
     });
     if (response.ok) renderInfoUpdateBadge(0);
+  } catch { /* Penanda gagal disimpan: badge tetap tampil sampai berhasil. */ }
+}
+
+// Badge Member: angka akun baru (member maupun admin) yang belum dilihat.
+// Penanda disimpan per akun di server, jadi admin dan member melihat angka
+// yang berbeda — masing-masing dihitung dari terakhir kali akun itu membuka
+// halaman Member.
+let memberListSeen = null;
+let memberListSeenLoaded = false;
+function countNewMembers(users, seen) {
+  if (!Array.isArray(users) || !users.length) return 0;
+  if (!seen || !seen.createdAt || Number.isNaN(Date.parse(seen.createdAt))) return users.length;
+  const seenAt = Date.parse(seen.createdAt);
+  return users.filter((user) => {
+    const createdAt = Date.parse(user?.createdAt || '');
+    return Number.isFinite(createdAt) && createdAt > seenAt;
+  }).length;
+}
+function renderMemberBadge(count) {
+  const item = document.querySelector('#admin-nav');
+  if (!item) return;
+  let badge = item.querySelector('.nav-badge');
+  if (!count || count <= 0) {
+    badge?.remove();
+    return;
+  }
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.className = 'nav-badge';
+    item.append(badge);
+  }
+  badge.textContent = count > 99 ? '99+' : String(count);
+  badge.setAttribute('aria-label', `${count} akun baru belum dilihat`);
+}
+async function refreshMemberBadge() {
+  try {
+    const [membersResponse, seenResponse] = await Promise.all([
+      fetch('/api/members', { credentials: 'same-origin' }),
+      fetch('/api/member-list/seen', { credentials: 'same-origin' }),
+    ]);
+    if (!membersResponse.ok) return;
+    const data = await membersResponse.json();
+    const users = Array.isArray(data?.users) ? data.users : [];
+    let seen = null;
+    if (seenResponse.ok) {
+      const seenData = await seenResponse.json().catch(() => ({}));
+      seen = seenData?.seen || null;
+    }
+    memberListSeen = seen;
+    memberListSeenLoaded = true;
+    renderMemberBadge(countNewMembers(users, seen));
+  } catch { /* Badge gagal dimuat: biarkan menu tanpa angka. */ }
+}
+async function markMemberListSeen(users) {
+  try {
+    let list = Array.isArray(users) ? users : null;
+    if (!list) {
+      const response = await fetch('/api/members', { credentials: 'same-origin' });
+      if (!response.ok) return;
+      const data = await response.json();
+      list = Array.isArray(data?.users) ? data.users : [];
+    }
+    const newest = [...list]
+      .filter((user) => Number.isFinite(Date.parse(user?.createdAt || '')))
+      .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))[0];
+    if (!newest?.createdAt || !newest?.username) return;
+    if (memberListSeen?.createdAt === newest.createdAt && memberListSeen?.username === newest.username) {
+      renderMemberBadge(0);
+      return;
+    }
+    const response = await fetch('/api/member-list/seen', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ createdAt: newest.createdAt, username: newest.username }),
+    });
+    if (response.ok) {
+      memberListSeen = { createdAt: newest.createdAt, username: newest.username };
+      memberListSeenLoaded = true;
+      renderMemberBadge(0);
+    }
   } catch { /* Penanda gagal disimpan: badge tetap tampil sampai berhasil. */ }
 }
 

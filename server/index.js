@@ -335,6 +335,33 @@ async function writeInfoUpdateSeen(user, seen) {
   return seen;
 }
 
+const MEMBER_LIST_SEEN_FILE = 'member-list-seen.json';
+
+// Badge Member: penanda akun terbaru yang sudah dilihat, disimpan per akun di
+// folder DATA_AKUN masing-masing, jadi angka badge tiap akun berbeda.
+async function readMemberListSeen(user) {
+  const dir = canonicalAccountFolder(user);
+  if (!dir) return null;
+  try {
+    const parsed = JSON.parse(await fs.readFile(path.join(dir, MEMBER_LIST_SEEN_FILE), 'utf8'));
+    if (!parsed || typeof parsed !== 'object') return null;
+    const createdAt = String(parsed.createdAt || '').trim();
+    const username = String(parsed.username || '').trim().slice(0, 24);
+    if (!createdAt || Number.isNaN(Date.parse(createdAt)) || !username) return null;
+    return { createdAt, username };
+  } catch { return null; }
+}
+
+async function writeMemberListSeen(user, seen) {
+  const dir = canonicalAccountFolder(user);
+  if (!dir) throw new Error('Folder akun tidak valid.');
+  const current = await readMemberListSeen(user);
+  if (current && current.createdAt === seen.createdAt && current.username === seen.username) return current;
+  await fs.mkdir(dir, { recursive: true });
+  await atomicWriteJson(path.join(dir, MEMBER_LIST_SEEN_FILE), { ...seen, seenAt: new Date().toISOString() });
+  return seen;
+}
+
 function buildAccountFiles(snapshot, user) {
   const userId = user.id;
   const logins = (snapshot.loginHistory || []).filter((entry) => entry.userId === userId);
@@ -1773,6 +1800,22 @@ async function handleApi(req, res, url) {
     };
     if (!seen.day || !seen.time || !seen.title) return sendError(res, 400, 'Penanda update tidak lengkap.');
     await writeInfoUpdateSeen(user, seen);
+    return sendJson(res, 200, { seen });
+  }
+  // Badge Member: baca dan simpan penanda akun terbaru yang sudah dilihat.
+  if (route === 'GET /api/member-list/seen') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    const seen = await readMemberListSeen(user);
+    return sendJson(res, 200, { seen });
+  }
+  if (route === 'POST /api/member-list/seen') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (!allowRateLimit(`member-list-seen:${user.id}`, 30, 60 * 1000)) return sendError(res, 429, 'Terlalu sering. Coba lagi sebentar.');
+    const body = await readJson(req);
+    const createdAt = String(body?.createdAt || '').trim();
+    const username = String(body?.username || '').trim().slice(0, 24);
+    if (!createdAt || Number.isNaN(Date.parse(createdAt)) || !username) return sendError(res, 400, 'Penanda daftar member tidak lengkap.');
+    const seen = await writeMemberListSeen(user, { createdAt, username });
     return sendJson(res, 200, { seen });
   }
   if (route === 'POST /api/admin/backup/export') {
