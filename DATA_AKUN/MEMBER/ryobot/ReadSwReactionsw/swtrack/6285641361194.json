@@ -38,5 +38,45 @@
     "readAt": "2026-11-15T15:57:35.358Z",
     "emoji": "💚",
     "reactedAt": "2026-11-15T15:57:35.358Z"
+  },
+  "ACBD4EFD5ADB0BFEC886C6343B413980": {
+    "id": "ACBD4EFD5ADB0BFEC886C6343B413980",
+    "sender": "6285641361194@s.whatsapp.net",
+    "number": "6285641361194",
+    "storyJid": "6285641361194@s.whatsapp.net",
+    "resolvedPn": "6285641361194@s.whatsapp.net",
+    "name": "kyla🐣",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBD4EFD5ADB0BFEC886C6343B413980",
+      "participant": "10995284107393@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBD4EFD5ADB0BFEC886C6343B413980",
+      "participant": "10995284107393@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "10995284107393@lid",
+      "6285641361194@s.whatsapp.net"
+    ],
+    "contactHash": "f6749c538109288509a6f7fdc14ad50fcd03494bce51049fdc4674ff2c1ae04c",
+    "arrivedAt": "2026-11-16T11:23:05.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T11:23:06.620Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T11:23:14.991Z",
+    "readAt": "2026-11-16T11:23:14.990Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T11:23:14.990Z"
   }
 }

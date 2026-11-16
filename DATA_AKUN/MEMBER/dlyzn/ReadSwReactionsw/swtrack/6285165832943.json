@@ -1,0 +1,42 @@
+{
+  "ACE42149F197A199D7FB1AF508AA2C4E": {
+    "id": "ACE42149F197A199D7FB1AF508AA2C4E",
+    "sender": "6285165832943@s.whatsapp.net",
+    "number": "6285165832943",
+    "storyJid": "6285165832943@s.whatsapp.net",
+    "resolvedPn": "6285165832943@s.whatsapp.net",
+    "name": "Nagi/Febri?",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE42149F197A199D7FB1AF508AA2C4E",
+      "participant": "18636500676704@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE42149F197A199D7FB1AF508AA2C4E",
+      "participant": "18636500676704@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "18636500676704@lid",
+      "6285165832943@s.whatsapp.net"
+    ],
+    "contactHash": "8f4a03b0a5edb6759faaf588134ed38b11128e42fa4074656e2bed0c0b9b6a19",
+    "arrivedAt": "2026-11-16T10:31:57.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T10:31:57.911Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T10:32:00.636Z",
+    "readAt": "2026-11-16T10:32:00.636Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-16T10:32:00.636Z"
+  }
+}

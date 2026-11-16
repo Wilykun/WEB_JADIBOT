@@ -1,0 +1,42 @@
+{
+  "AC4DA3B50DEF741B3FBC4B5EEE759520": {
+    "id": "AC4DA3B50DEF741B3FBC4B5EEE759520",
+    "sender": "6285727045990@s.whatsapp.net",
+    "number": "6285727045990",
+    "storyJid": "6285727045990@s.whatsapp.net",
+    "resolvedPn": "6285727045990@s.whatsapp.net",
+    "name": "Ma2 FizNayEl",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4DA3B50DEF741B3FBC4B5EEE759520",
+      "participant": "271532160995479@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4DA3B50DEF741B3FBC4B5EEE759520",
+      "participant": "271532160995479@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "271532160995479@lid",
+      "6285727045990@s.whatsapp.net"
+    ],
+    "contactHash": "b6f1bad34b32a16cfb0aa02efcbc343b421ff3f77b1ca9ae304e780089854591",
+    "arrivedAt": "2026-11-16T04:23:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T04:23:11.928Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T04:23:17.894Z",
+    "readAt": "2026-11-16T04:23:17.894Z",
+    "emoji": "🆗",
+    "reactedAt": "2026-11-16T04:23:17.894Z"
+  }
+}

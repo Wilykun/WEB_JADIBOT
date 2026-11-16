@@ -38,5 +38,45 @@
     "readAt": "2026-11-16T02:15:07.162Z",
     "emoji": "❤️‍🔥",
     "reactedAt": "2026-11-16T02:15:07.162Z"
+  },
+  "AC0D1715DC26D908647DF7E9EFA8D754": {
+    "id": "AC0D1715DC26D908647DF7E9EFA8D754",
+    "sender": "6288986217592@s.whatsapp.net",
+    "number": "6288986217592",
+    "storyJid": "6288986217592@s.whatsapp.net",
+    "resolvedPn": "6288986217592@s.whatsapp.net",
+    "name": "org baik",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0D1715DC26D908647DF7E9EFA8D754",
+      "participant": "20770914836537@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0D1715DC26D908647DF7E9EFA8D754",
+      "participant": "20770914836537@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "20770914836537@lid",
+      "6288986217592@s.whatsapp.net"
+    ],
+    "contactHash": "58e216fe49f200d7109eace6fc81c02349593b6c3d81f0ade07f937ed5b76327",
+    "arrivedAt": "2026-11-16T14:48:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T14:48:53.112Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T14:48:57.471Z",
+    "readAt": "2026-11-16T14:48:57.470Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-16T14:48:57.470Z"
   }
 }

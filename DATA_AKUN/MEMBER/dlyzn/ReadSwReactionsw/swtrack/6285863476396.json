@@ -1,1 +1,122 @@
-{}
+{
+  "AC5BBD04D421623BA53995140AEB8D35": {
+    "id": "AC5BBD04D421623BA53995140AEB8D35",
+    "sender": "6285863476396@s.whatsapp.net",
+    "number": "6285863476396",
+    "storyJid": "6285863476396@s.whatsapp.net",
+    "resolvedPn": "6285863476396@s.whatsapp.net",
+    "name": "カイリゼン",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5BBD04D421623BA53995140AEB8D35",
+      "participant": "248730800382070@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5BBD04D421623BA53995140AEB8D35",
+      "participant": "248730800382070@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "248730800382070@lid",
+      "6285863476396@s.whatsapp.net"
+    ],
+    "contactHash": "a6554236beb890d0f226f7bc6f83450019043e006e7b063b8db86d53e63df3a6",
+    "arrivedAt": "2026-11-16T04:37:12.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T04:37:13.228Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T04:37:15.987Z",
+    "readAt": "2026-11-16T04:37:15.987Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-16T04:37:15.987Z"
+  },
+  "AC7324D833E2F48DE434EAC6042E42F4": {
+    "id": "AC7324D833E2F48DE434EAC6042E42F4",
+    "sender": "6285863476396@s.whatsapp.net",
+    "number": "6285863476396",
+    "storyJid": "6285863476396@s.whatsapp.net",
+    "resolvedPn": "6285863476396@s.whatsapp.net",
+    "name": "カイリゼン",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7324D833E2F48DE434EAC6042E42F4",
+      "participant": "248730800382070@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7324D833E2F48DE434EAC6042E42F4",
+      "participant": "248730800382070@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "248730800382070@lid",
+      "6285863476396@s.whatsapp.net"
+    ],
+    "contactHash": "a6554236beb890d0f226f7bc6f83450019043e006e7b063b8db86d53e63df3a6",
+    "arrivedAt": "2026-11-16T06:34:12.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T06:34:12.845Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T06:34:15.645Z",
+    "readAt": "2026-11-16T06:34:15.644Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-16T06:34:15.644Z"
+  },
+  "ACCBCC8FDACCFADA5042920B291C3095": {
+    "id": "ACCBCC8FDACCFADA5042920B291C3095",
+    "sender": "6285863476396@s.whatsapp.net",
+    "number": "6285863476396",
+    "storyJid": "6285863476396@s.whatsapp.net",
+    "resolvedPn": "6285863476396@s.whatsapp.net",
+    "name": "カイリゼン",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCBCC8FDACCFADA5042920B291C3095",
+      "participant": "248730800382070@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCBCC8FDACCFADA5042920B291C3095",
+      "participant": "248730800382070@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "248730800382070@lid",
+      "6285863476396@s.whatsapp.net"
+    ],
+    "contactHash": "a6554236beb890d0f226f7bc6f83450019043e006e7b063b8db86d53e63df3a6",
+    "arrivedAt": "2026-11-16T11:16:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T11:16:08.460Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T11:16:10.039Z",
+    "readAt": "2026-11-16T11:16:10.039Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-16T11:16:10.039Z"
+  }
+}

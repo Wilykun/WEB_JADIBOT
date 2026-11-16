@@ -36,5 +36,45 @@
     "lastError": null,
     "updatedAt": "2026-11-16T01:47:38.172Z",
     "readAt": "2026-11-16T01:47:38.172Z"
+  },
+  "AC4BC45F74AB14FC56903C6D70494C49": {
+    "id": "AC4BC45F74AB14FC56903C6D70494C49",
+    "sender": "6285786253710@s.whatsapp.net",
+    "number": "6285786253710",
+    "storyJid": "6285786253710@s.whatsapp.net",
+    "resolvedPn": "6285786253710@s.whatsapp.net",
+    "name": "Ratna Novita Sari",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4BC45F74AB14FC56903C6D70494C49",
+      "participant": "167516794003641@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4BC45F74AB14FC56903C6D70494C49",
+      "participant": "167516794003641@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "167516794003641@lid",
+      "6285786253710@s.whatsapp.net"
+    ],
+    "contactHash": "4a4ce5ba30a85f58ccac6f8c6fcd3c1803d34398962f9bbf10c3461c9fc9a676",
+    "arrivedAt": "2026-11-16T10:01:15.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T10:01:15.673Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T10:01:24.319Z",
+    "readAt": "2026-11-16T10:01:24.318Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-16T10:01:24.318Z"
   }
 }

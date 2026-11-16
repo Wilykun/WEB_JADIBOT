@@ -1,1 +1,42 @@
-{}
+{
+  "AC0C2746EFDC0DDCA7472B7D4B29B562": {
+    "id": "AC0C2746EFDC0DDCA7472B7D4B29B562",
+    "sender": "6285778517902@s.whatsapp.net",
+    "number": "6285778517902",
+    "storyJid": "6285778517902@s.whatsapp.net",
+    "resolvedPn": "6285778517902@s.whatsapp.net",
+    "name": "Stephanie Floriska",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0C2746EFDC0DDCA7472B7D4B29B562",
+      "participant": "178701056626923@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0C2746EFDC0DDCA7472B7D4B29B562",
+      "participant": "178701056626923@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178701056626923@lid",
+      "6285778517902@s.whatsapp.net"
+    ],
+    "contactHash": "d42a3f4e5f5a1564260f4a0afe864dc7eb2d98f67b20704d118eb3ebbb17df43",
+    "arrivedAt": "2026-11-16T05:27:46.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T05:27:47.864Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T05:28:03.016Z",
+    "readAt": "2026-11-16T05:28:03.016Z",
+    "emoji": "🐴",
+    "reactedAt": "2026-11-16T05:28:03.016Z"
+  }
+}

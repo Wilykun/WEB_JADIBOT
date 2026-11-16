@@ -1,1 +1,362 @@
-{}
+{
+  "AC3D4C00F5E9A7650B99E126A325DB45": {
+    "id": "AC3D4C00F5E9A7650B99E126A325DB45",
+    "sender": "628993694617@s.whatsapp.net",
+    "number": "628993694617",
+    "storyJid": "628993694617@s.whatsapp.net",
+    "resolvedPn": "628993694617@s.whatsapp.net",
+    "name": "涨芬",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3D4C00F5E9A7650B99E126A325DB45",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3D4C00F5E9A7650B99E126A325DB45",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "280543438594083@lid",
+      "628993694617@s.whatsapp.net"
+    ],
+    "contactHash": "2fdb3d932dbca410ff4230e6d6881e38752063e598a96b667594dca1d7534d77",
+    "arrivedAt": "2026-11-16T08:30:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T08:30:27.997Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T08:30:37.845Z",
+    "readAt": "2026-11-16T08:30:37.845Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-16T08:30:37.845Z"
+  },
+  "AC69BAC6B58193E12338C7466C1BF461": {
+    "id": "AC69BAC6B58193E12338C7466C1BF461",
+    "sender": "628993694617@s.whatsapp.net",
+    "number": "628993694617",
+    "storyJid": "628993694617@s.whatsapp.net",
+    "resolvedPn": "628993694617@s.whatsapp.net",
+    "name": "涨芬",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC69BAC6B58193E12338C7466C1BF461",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC69BAC6B58193E12338C7466C1BF461",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "280543438594083@lid",
+      "628993694617@s.whatsapp.net"
+    ],
+    "contactHash": "2fdb3d932dbca410ff4230e6d6881e38752063e598a96b667594dca1d7534d77",
+    "arrivedAt": "2026-11-16T08:58:30.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T08:58:31.633Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T08:58:38.590Z",
+    "readAt": "2026-11-16T08:58:38.590Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-16T08:58:38.590Z"
+  },
+  "ACCAF16B7BC76B8D150DDDC98B483002": {
+    "id": "ACCAF16B7BC76B8D150DDDC98B483002",
+    "sender": "628993694617@s.whatsapp.net",
+    "number": "628993694617",
+    "storyJid": "628993694617@s.whatsapp.net",
+    "resolvedPn": "628993694617@s.whatsapp.net",
+    "name": "涨芬",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCAF16B7BC76B8D150DDDC98B483002",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCAF16B7BC76B8D150DDDC98B483002",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "280543438594083@lid",
+      "628993694617@s.whatsapp.net"
+    ],
+    "contactHash": "2fdb3d932dbca410ff4230e6d6881e38752063e598a96b667594dca1d7534d77",
+    "arrivedAt": "2026-11-16T09:32:49.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T09:32:50.062Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T09:32:55.083Z",
+    "readAt": "2026-11-16T09:32:55.082Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-16T09:32:55.082Z"
+  },
+  "AC9C860768CD7B20FB1BE11D97A88995": {
+    "id": "AC9C860768CD7B20FB1BE11D97A88995",
+    "sender": "628993694617@s.whatsapp.net",
+    "number": "628993694617",
+    "storyJid": "628993694617@s.whatsapp.net",
+    "resolvedPn": "628993694617@s.whatsapp.net",
+    "name": "涨芬",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9C860768CD7B20FB1BE11D97A88995",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9C860768CD7B20FB1BE11D97A88995",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "280543438594083@lid",
+      "628993694617@s.whatsapp.net"
+    ],
+    "contactHash": "2fdb3d932dbca410ff4230e6d6881e38752063e598a96b667594dca1d7534d77",
+    "arrivedAt": "2026-11-16T09:47:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T09:47:39.954Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T09:47:45.343Z",
+    "readAt": "2026-11-16T09:47:45.342Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-16T09:47:45.342Z"
+  },
+  "AC7BC35B11555C1E1379F8FD08C31FBC": {
+    "id": "AC7BC35B11555C1E1379F8FD08C31FBC",
+    "sender": "628993694617@s.whatsapp.net",
+    "number": "628993694617",
+    "storyJid": "628993694617@s.whatsapp.net",
+    "resolvedPn": "628993694617@s.whatsapp.net",
+    "name": "涨芬",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7BC35B11555C1E1379F8FD08C31FBC",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7BC35B11555C1E1379F8FD08C31FBC",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "280543438594083@lid",
+      "628993694617@s.whatsapp.net"
+    ],
+    "contactHash": "2fdb3d932dbca410ff4230e6d6881e38752063e598a96b667594dca1d7534d77",
+    "arrivedAt": "2026-11-16T12:03:19.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T12:03:20.169Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T12:03:23.169Z",
+    "readAt": "2026-11-16T12:03:23.169Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-16T12:03:23.169Z"
+  },
+  "AC5D0F2415ACD06E7544252B074CDF19": {
+    "id": "AC5D0F2415ACD06E7544252B074CDF19",
+    "sender": "628993694617@s.whatsapp.net",
+    "number": "628993694617",
+    "storyJid": "628993694617@s.whatsapp.net",
+    "resolvedPn": "628993694617@s.whatsapp.net",
+    "name": "涨芬",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5D0F2415ACD06E7544252B074CDF19",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5D0F2415ACD06E7544252B074CDF19",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "280543438594083@lid",
+      "628993694617@s.whatsapp.net"
+    ],
+    "contactHash": "2fdb3d932dbca410ff4230e6d6881e38752063e598a96b667594dca1d7534d77",
+    "arrivedAt": "2026-11-16T14:27:58.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T14:41:37.038Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T14:41:42.505Z",
+    "readAt": "2026-11-16T14:41:42.484Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-16T14:41:42.484Z"
+  },
+  "ACBA2AC4ABFC2C65F1308FC110AF4FEB": {
+    "id": "ACBA2AC4ABFC2C65F1308FC110AF4FEB",
+    "sender": "628993694617@s.whatsapp.net",
+    "number": "628993694617",
+    "storyJid": "628993694617@s.whatsapp.net",
+    "resolvedPn": "628993694617@s.whatsapp.net",
+    "name": "涨芬",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBA2AC4ABFC2C65F1308FC110AF4FEB",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBA2AC4ABFC2C65F1308FC110AF4FEB",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "280543438594083@lid",
+      "628993694617@s.whatsapp.net"
+    ],
+    "contactHash": "2fdb3d932dbca410ff4230e6d6881e38752063e598a96b667594dca1d7534d77",
+    "arrivedAt": "2026-11-16T14:27:58.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T14:41:37.203Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T14:41:42.480Z",
+    "readAt": "2026-11-16T14:41:42.419Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-16T14:41:42.419Z"
+  },
+  "AC16CC7B7666D675D9995F60E4695837": {
+    "id": "AC16CC7B7666D675D9995F60E4695837",
+    "sender": "628993694617@s.whatsapp.net",
+    "number": "628993694617",
+    "storyJid": "628993694617@s.whatsapp.net",
+    "resolvedPn": "628993694617@s.whatsapp.net",
+    "name": "涨芬",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC16CC7B7666D675D9995F60E4695837",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC16CC7B7666D675D9995F60E4695837",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "280543438594083@lid",
+      "628993694617@s.whatsapp.net"
+    ],
+    "contactHash": "2fdb3d932dbca410ff4230e6d6881e38752063e598a96b667594dca1d7534d77",
+    "arrivedAt": "2026-11-16T14:27:59.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T14:41:37.204Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T14:41:40.342Z",
+    "readAt": "2026-11-16T14:41:40.341Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-16T14:41:40.341Z"
+  },
+  "AC9E164C7EF3A367CB4C864E16E6847A": {
+    "id": "AC9E164C7EF3A367CB4C864E16E6847A",
+    "sender": "628993694617@s.whatsapp.net",
+    "number": "628993694617",
+    "storyJid": "628993694617@s.whatsapp.net",
+    "resolvedPn": "628993694617@s.whatsapp.net",
+    "name": "涨芬",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9E164C7EF3A367CB4C864E16E6847A",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9E164C7EF3A367CB4C864E16E6847A",
+      "participant": "280543438594083@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "280543438594083@lid",
+      "628993694617@s.whatsapp.net"
+    ],
+    "contactHash": "2fdb3d932dbca410ff4230e6d6881e38752063e598a96b667594dca1d7534d77",
+    "arrivedAt": "2026-11-16T14:28:00.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T14:41:37.695Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T14:41:45.425Z",
+    "readAt": "2026-11-16T14:41:45.409Z",
+    "emoji": "🆖",
+    "reactedAt": "2026-11-16T14:41:45.409Z"
+  }
+}

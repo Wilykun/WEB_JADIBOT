@@ -3,6 +3,10 @@
   "status": "belum_pernah",
   "nomorTertaut": null,
   "workerStatus": "stopped",
-  "terakhirUpdate": null,
-  "logTerakhir": null
+  "terakhirUpdate": "2026-11-16T03:37:30.405Z",
+  "logTerakhir": {
+    "event": "Permintaan pairing gagal (HTTP 504): WhatsApp belum siap mengeluarkan pairing code. Coba lagi nanti.; kode/kredensial tidak dicatat.",
+    "waktu": "2026-11-16T03:37:30.405Z",
+    "waktuWIB": "Senin, 16 November 2026 pukul 10.37.30 WIB"
+  }
 }

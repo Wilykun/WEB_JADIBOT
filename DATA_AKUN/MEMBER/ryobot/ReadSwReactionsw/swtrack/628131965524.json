@@ -1,0 +1,42 @@
+{
+  "ACCE15A1C240CA4D6DD83825B74A4BFA": {
+    "id": "ACCE15A1C240CA4D6DD83825B74A4BFA",
+    "sender": "628131965524@s.whatsapp.net",
+    "number": "628131965524",
+    "storyJid": "628131965524@s.whatsapp.net",
+    "resolvedPn": "628131965524@s.whatsapp.net",
+    "name": "Hae Soo",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCE15A1C240CA4D6DD83825B74A4BFA",
+      "participant": "13190532452385@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCE15A1C240CA4D6DD83825B74A4BFA",
+      "participant": "13190532452385@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "13190532452385@lid",
+      "628131965524@s.whatsapp.net"
+    ],
+    "contactHash": "8246d68236c66507c4e6ca0a0e597675688fcf7624c552af5dd7d0bceec909c7",
+    "arrivedAt": "2026-11-16T05:17:07.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T05:17:08.577Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T05:17:15.531Z",
+    "readAt": "2026-11-16T05:17:15.525Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T05:17:15.525Z"
+  }
+}

@@ -1,1 +1,122 @@
-{}
+{
+  "ACD89C8FF875408345C64F529CB49CA2": {
+    "id": "ACD89C8FF875408345C64F529CB49CA2",
+    "sender": "628156593203@s.whatsapp.net",
+    "number": "628156593203",
+    "storyJid": "628156593203@s.whatsapp.net",
+    "resolvedPn": "628156593203@s.whatsapp.net",
+    "name": "ac_asya",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD89C8FF875408345C64F529CB49CA2",
+      "participant": "191285344342067@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD89C8FF875408345C64F529CB49CA2",
+      "participant": "191285344342067@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191285344342067@lid",
+      "628156593203@s.whatsapp.net"
+    ],
+    "contactHash": "c7166be73c8a737289fdb4dfab37ee05a297724ae8266f90ec6e55c638ac7049",
+    "arrivedAt": "2026-11-16T07:45:35.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T07:45:35.854Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T07:45:42.452Z",
+    "readAt": "2026-11-16T07:45:42.449Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-16T07:45:42.449Z"
+  },
+  "ACF3716A393CEEF742C7034D4480EE54": {
+    "id": "ACF3716A393CEEF742C7034D4480EE54",
+    "sender": "628156593203@s.whatsapp.net",
+    "number": "628156593203",
+    "storyJid": "628156593203@s.whatsapp.net",
+    "resolvedPn": "628156593203@s.whatsapp.net",
+    "name": "ac_asya",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF3716A393CEEF742C7034D4480EE54",
+      "participant": "191285344342067@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF3716A393CEEF742C7034D4480EE54",
+      "participant": "191285344342067@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191285344342067@lid",
+      "628156593203@s.whatsapp.net"
+    ],
+    "contactHash": "c7166be73c8a737289fdb4dfab37ee05a297724ae8266f90ec6e55c638ac7049",
+    "arrivedAt": "2026-11-16T12:42:40.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T12:42:40.621Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T12:42:45.724Z",
+    "readAt": "2026-11-16T12:42:45.724Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-16T12:42:45.724Z"
+  },
+  "AC33627E7D17FAB3A1C962DCFE294EA4": {
+    "id": "AC33627E7D17FAB3A1C962DCFE294EA4",
+    "sender": "628156593203@s.whatsapp.net",
+    "number": "628156593203",
+    "storyJid": "628156593203@s.whatsapp.net",
+    "resolvedPn": "628156593203@s.whatsapp.net",
+    "name": "ac_asya",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC33627E7D17FAB3A1C962DCFE294EA4",
+      "participant": "191285344342067@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC33627E7D17FAB3A1C962DCFE294EA4",
+      "participant": "191285344342067@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191285344342067@lid",
+      "628156593203@s.whatsapp.net"
+    ],
+    "contactHash": "c7166be73c8a737289fdb4dfab37ee05a297724ae8266f90ec6e55c638ac7049",
+    "arrivedAt": "2026-11-16T12:49:23.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T12:49:23.705Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T12:49:25.647Z",
+    "readAt": "2026-11-16T12:49:25.617Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-16T12:49:25.617Z"
+  }
+}

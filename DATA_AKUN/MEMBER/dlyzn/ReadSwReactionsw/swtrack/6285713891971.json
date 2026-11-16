@@ -1,0 +1,162 @@
+{
+  "AC575798EA78BA8D3402CC78F424FB9F": {
+    "id": "AC575798EA78BA8D3402CC78F424FB9F",
+    "sender": "6285713891971@s.whatsapp.net",
+    "number": "6285713891971",
+    "storyJid": "6285713891971@s.whatsapp.net",
+    "resolvedPn": "6285713891971@s.whatsapp.net",
+    "name": "Laili Rafiah",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC575798EA78BA8D3402CC78F424FB9F",
+      "participant": "272515842724072@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC575798EA78BA8D3402CC78F424FB9F",
+      "participant": "272515842724072@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "272515842724072@lid",
+      "6285713891971@s.whatsapp.net"
+    ],
+    "contactHash": "50eed857ba5d3db8aab4b95c4614989965e5fc5bfd885fe60900d2d4955f0584",
+    "arrivedAt": "2026-11-16T03:59:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T03:59:27.562Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T03:59:36.389Z",
+    "readAt": "2026-11-16T03:59:36.388Z",
+    "emoji": "🆗",
+    "reactedAt": "2026-11-16T03:59:36.388Z"
+  },
+  "ACA6814C6C66747A1D0C016EFA3C206C": {
+    "id": "ACA6814C6C66747A1D0C016EFA3C206C",
+    "sender": "6285713891971@s.whatsapp.net",
+    "number": "6285713891971",
+    "storyJid": "6285713891971@s.whatsapp.net",
+    "resolvedPn": "6285713891971@s.whatsapp.net",
+    "name": "Laili Rafiah",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA6814C6C66747A1D0C016EFA3C206C",
+      "participant": "272515842724072@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA6814C6C66747A1D0C016EFA3C206C",
+      "participant": "272515842724072@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "272515842724072@lid",
+      "6285713891971@s.whatsapp.net"
+    ],
+    "contactHash": "50eed857ba5d3db8aab4b95c4614989965e5fc5bfd885fe60900d2d4955f0584",
+    "arrivedAt": "2026-11-16T09:31:54.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T09:31:54.819Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T09:32:03.200Z",
+    "readAt": "2026-11-16T09:32:03.200Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-16T09:32:03.200Z"
+  },
+  "AC225D1ABAD95A3996D958E0C7B5B764": {
+    "id": "AC225D1ABAD95A3996D958E0C7B5B764",
+    "sender": "6285713891971@s.whatsapp.net",
+    "number": "6285713891971",
+    "storyJid": "6285713891971@s.whatsapp.net",
+    "resolvedPn": "6285713891971@s.whatsapp.net",
+    "name": "Laili Rafiah",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC225D1ABAD95A3996D958E0C7B5B764",
+      "participant": "272515842724072@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC225D1ABAD95A3996D958E0C7B5B764",
+      "participant": "272515842724072@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "272515842724072@lid",
+      "6285713891971@s.whatsapp.net"
+    ],
+    "contactHash": "50eed857ba5d3db8aab4b95c4614989965e5fc5bfd885fe60900d2d4955f0584",
+    "arrivedAt": "2026-11-16T09:43:19.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T09:43:19.374Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T09:43:28.344Z",
+    "readAt": "2026-11-16T09:43:28.343Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-16T09:43:28.343Z"
+  },
+  "AC6C19B49BF567541ECDD5A19F16B506": {
+    "id": "AC6C19B49BF567541ECDD5A19F16B506",
+    "sender": "6285713891971@s.whatsapp.net",
+    "number": "6285713891971",
+    "storyJid": "6285713891971@s.whatsapp.net",
+    "resolvedPn": "6285713891971@s.whatsapp.net",
+    "name": "Laili Rafiah",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6C19B49BF567541ECDD5A19F16B506",
+      "participant": "272515842724072@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6C19B49BF567541ECDD5A19F16B506",
+      "participant": "272515842724072@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "272515842724072@lid",
+      "6285713891971@s.whatsapp.net"
+    ],
+    "contactHash": "50eed857ba5d3db8aab4b95c4614989965e5fc5bfd885fe60900d2d4955f0584",
+    "arrivedAt": "2026-11-16T15:09:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T15:09:28.090Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T15:09:31.984Z",
+    "readAt": "2026-11-16T15:09:31.983Z",
+    "emoji": "🆖",
+    "reactedAt": "2026-11-16T15:09:31.983Z"
+  }
+}

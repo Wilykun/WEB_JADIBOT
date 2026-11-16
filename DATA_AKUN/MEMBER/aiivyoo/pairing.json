@@ -3,28 +3,10 @@
   "status": "linked",
   "nomorTertaut": "62838****8873",
   "workerStatus": "running",
-  "terakhirUpdate": "2026-11-16T00:51:30.803Z",
+  "terakhirUpdate": "2026-11-16T16:10:30.068Z",
   "logTerakhir": {
-    "event": "Story story · Dilihat ✓ · delay 19.6 dtk",
-    "details": {
-      "kind": "story",
-      "mode": "Read Only",
-      "mediaType": "Story 📖",
-      "storyId": "AC4FA9DF···1807",
-      "greeting": "Pagi ☀️",
-      "dayName": "Senin",
-      "date": "16 Nov 2026",
-      "time": "07.51",
-      "name": ".l",
-      "number": "6289****070",
-      "storyCount": 1,
-      "emojiMode": "—",
-      "success": "Dilihat ✓",
-      "reaction": "Off ❌",
-      "resolve": "LID → PN ✓",
-      "delaySeconds": 19.6
-    },
-    "waktu": "2026-11-16T00:51:30.803Z",
-    "waktuWIB": "Senin, 16 November 2026 pukul 07.51.30 WIB"
+    "event": "Koneksi WhatsApp aktif kembali dari panel akun.",
+    "waktu": "2026-11-16T16:10:30.068Z",
+    "waktuWIB": "Senin, 16 November 2026 pukul 23.10.30 WIB"
   }
 }

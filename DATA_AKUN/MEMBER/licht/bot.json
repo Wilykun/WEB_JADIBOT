@@ -1,0 +1,22 @@
+{
+  "id": "48b590a7-f70b-4da8-87a9-51f9ede3a23b",
+  "label": "licht bot",
+  "mode": "readonly_readsw",
+  "storySettings": {
+    "autoReaction": true,
+    "delayMinSeconds": 1,
+    "delayMaxSeconds": 20,
+    "randomDelay": true,
+    "emojiPoolVersion": 2,
+    "emojiOptions": [
+      "💚"
+    ],
+    "emojiPool": [
+      "💚"
+    ]
+  },
+  "autoStart": true,
+  "runnerStatus": "not_connected",
+  "createdAt": "2026-11-16T06:43:21.523Z",
+  "updatedAt": "2026-11-16T06:47:57.162Z"
+}

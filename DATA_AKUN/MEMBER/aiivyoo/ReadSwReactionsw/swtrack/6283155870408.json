@@ -1,0 +1,40 @@
+{
+  "ACEE6C8AE50D14638AEEF858E8576E88": {
+    "id": "ACEE6C8AE50D14638AEEF858E8576E88",
+    "sender": "6283155870408@s.whatsapp.net",
+    "number": "6283155870408",
+    "storyJid": "6283155870408@s.whatsapp.net",
+    "resolvedPn": "6283155870408@s.whatsapp.net",
+    "name": "the Dark Knight",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEE6C8AE50D14638AEEF858E8576E88",
+      "participant": "256959840260299@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEE6C8AE50D14638AEEF858E8576E88",
+      "participant": "256959840260299@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "256959840260299@lid",
+      "6283155870408@s.whatsapp.net"
+    ],
+    "contactHash": "ad37f6dbc9dad6f4474be24b676800e9efa47eea143c80185cefb319b7a2f978",
+    "arrivedAt": "2026-11-16T12:48:26.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T12:48:27.258Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T12:48:43.060Z",
+    "readAt": "2026-11-16T12:48:43.060Z"
+  }
+}

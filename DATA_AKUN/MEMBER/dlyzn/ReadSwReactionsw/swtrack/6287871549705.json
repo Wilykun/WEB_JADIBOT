@@ -1,0 +1,122 @@
+{
+  "AC33C4637D80C62055B4A2C1DD66B8BF": {
+    "id": "AC33C4637D80C62055B4A2C1DD66B8BF",
+    "sender": "6287871549705@s.whatsapp.net",
+    "number": "6287871549705",
+    "storyJid": "6287871549705@s.whatsapp.net",
+    "resolvedPn": "6287871549705@s.whatsapp.net",
+    "name": "Mattias de ligt",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC33C4637D80C62055B4A2C1DD66B8BF",
+      "participant": "53158910926981@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC33C4637D80C62055B4A2C1DD66B8BF",
+      "participant": "53158910926981@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "53158910926981@lid",
+      "6287871549705@s.whatsapp.net"
+    ],
+    "contactHash": "15c12a5bf21bd37bee40d78d2cb4d2beaa577fcf4751f5f6637be5b39992da4e",
+    "arrivedAt": "2026-11-16T08:28:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T08:28:52.304Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T08:28:57.183Z",
+    "readAt": "2026-11-16T08:28:57.182Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-16T08:28:57.182Z"
+  },
+  "ACB2AC8ECC5E8C9E3A23222B7D77CC83": {
+    "id": "ACB2AC8ECC5E8C9E3A23222B7D77CC83",
+    "sender": "6287871549705@s.whatsapp.net",
+    "number": "6287871549705",
+    "storyJid": "6287871549705@s.whatsapp.net",
+    "resolvedPn": "6287871549705@s.whatsapp.net",
+    "name": "Mattias de ligt",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB2AC8ECC5E8C9E3A23222B7D77CC83",
+      "participant": "53158910926981@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB2AC8ECC5E8C9E3A23222B7D77CC83",
+      "participant": "53158910926981@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "53158910926981@lid",
+      "6287871549705@s.whatsapp.net"
+    ],
+    "contactHash": "15c12a5bf21bd37bee40d78d2cb4d2beaa577fcf4751f5f6637be5b39992da4e",
+    "arrivedAt": "2026-11-16T08:48:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T08:48:36.953Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T08:48:47.303Z",
+    "readAt": "2026-11-16T08:48:47.302Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-16T08:48:47.302Z"
+  },
+  "AC9DF7FB2C73C3CF4EEB1F21CF5B12A8": {
+    "id": "AC9DF7FB2C73C3CF4EEB1F21CF5B12A8",
+    "sender": "6287871549705@s.whatsapp.net",
+    "number": "6287871549705",
+    "storyJid": "6287871549705@s.whatsapp.net",
+    "resolvedPn": "6287871549705@s.whatsapp.net",
+    "name": "Mattias de ligt",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9DF7FB2C73C3CF4EEB1F21CF5B12A8",
+      "participant": "53158910926981@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9DF7FB2C73C3CF4EEB1F21CF5B12A8",
+      "participant": "53158910926981@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "53158910926981@lid",
+      "6287871549705@s.whatsapp.net"
+    ],
+    "contactHash": "15c12a5bf21bd37bee40d78d2cb4d2beaa577fcf4751f5f6637be5b39992da4e",
+    "arrivedAt": "2026-11-16T08:58:34.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T08:58:35.021Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T08:58:40.804Z",
+    "readAt": "2026-11-16T08:58:40.803Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-16T08:58:40.803Z"
+  }
+}

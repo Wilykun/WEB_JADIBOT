@@ -1,1 +1,42 @@
-{}
+{
+  "AC717D3969D2E48546985B016D294788": {
+    "id": "AC717D3969D2E48546985B016D294788",
+    "sender": "6285262200800@s.whatsapp.net",
+    "number": "6285262200800",
+    "storyJid": "6285262200800@s.whatsapp.net",
+    "resolvedPn": "6285262200800@s.whatsapp.net",
+    "name": "cecelupppkatanya",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC717D3969D2E48546985B016D294788",
+      "participant": "155018590216429@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC717D3969D2E48546985B016D294788",
+      "participant": "155018590216429@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "155018590216429@lid",
+      "6285262200800@s.whatsapp.net"
+    ],
+    "contactHash": "d465177c176aea4014eb8f048419d0152afcc95efcf50b6a10ea42b120d8bcfe",
+    "arrivedAt": "2026-11-16T14:58:41.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T14:58:41.874Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T14:58:48.928Z",
+    "readAt": "2026-11-16T14:58:48.928Z",
+    "emoji": "🆖",
+    "reactedAt": "2026-11-16T14:58:48.928Z"
+  }
+}

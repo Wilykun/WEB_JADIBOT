@@ -1,0 +1,42 @@
+{
+  "AC116E327EEE2AC528B6FCA22CD62AB0": {
+    "id": "AC116E327EEE2AC528B6FCA22CD62AB0",
+    "sender": "62895420940506@s.whatsapp.net",
+    "number": "62895420940506",
+    "storyJid": "62895420940506@s.whatsapp.net",
+    "resolvedPn": "62895420940506@s.whatsapp.net",
+    "name": "Ferly Elvarette",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC116E327EEE2AC528B6FCA22CD62AB0",
+      "participant": "49929464631400@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC116E327EEE2AC528B6FCA22CD62AB0",
+      "participant": "49929464631400@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "49929464631400@lid",
+      "62895420940506@s.whatsapp.net"
+    ],
+    "contactHash": "a1917912e86c97ec6c57ed663d93a0408180488f0369e6012972997865126602",
+    "arrivedAt": "2026-11-16T11:54:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T11:54:10.952Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T11:54:14.012Z",
+    "readAt": "2026-11-16T11:54:14.011Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T11:54:14.011Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "ACF65135632C080569B515C1AB6B2865": {
+    "id": "ACF65135632C080569B515C1AB6B2865",
+    "sender": "6282235958819@s.whatsapp.net",
+    "number": "6282235958819",
+    "storyJid": "6282235958819@s.whatsapp.net",
+    "resolvedPn": "6282235958819@s.whatsapp.net",
+    "name": "XPIRAVI-DOKTRIN",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF65135632C080569B515C1AB6B2865",
+      "participant": "139749830430782@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF65135632C080569B515C1AB6B2865",
+      "participant": "139749830430782@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "139749830430782@lid",
+      "6282235958819@s.whatsapp.net"
+    ],
+    "contactHash": "b148076ee6a11be7e958d645647885357d1595f160cf87bc96489e821baf169a",
+    "arrivedAt": "2026-11-16T10:20:07.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T10:20:08.073Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T10:20:17.099Z",
+    "readAt": "2026-11-16T10:20:17.099Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-16T10:20:17.099Z"
+  }
+}

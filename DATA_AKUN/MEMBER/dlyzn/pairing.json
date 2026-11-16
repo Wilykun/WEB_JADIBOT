@@ -3,28 +3,28 @@
   "status": "linked",
   "nomorTertaut": "62857****1374",
   "workerStatus": "running",
-  "terakhirUpdate": "2026-11-16T02:27:13.863Z",
+  "terakhirUpdate": "2026-11-16T16:21:20.199Z",
   "logTerakhir": {
-    "event": "Story video · Read + Reaction ✓ · 👻 · delay 2.6 dtk",
+    "event": "Story video · Read + Reaction ✓ · 🫟 · delay 2.1 dtk",
     "details": {
       "kind": "story",
       "mode": "Read+Reaction ✓",
       "mediaType": "Video 🎥",
-      "storyId": "AC6FA57D···7809",
-      "greeting": "Pagi ☀️",
+      "storyId": "ACEBB01A···1D4B",
+      "greeting": "Malam 🌃",
       "dayName": "Senin",
       "date": "16 Nov 2026",
-      "time": "09.27",
-      "name": "Niaa",
-      "number": "6285****815",
-      "storyCount": 3,
+      "time": "23.21",
+      "name": ".",
+      "number": "6285****672",
+      "storyCount": 2,
       "emojiMode": "Custom 🟢",
       "success": "Read + Reaction ✓",
-      "reaction": "👻",
+      "reaction": "🫟",
       "resolve": "LID → PN ✓",
-      "delaySeconds": 2.6
+      "delaySeconds": 2.1
     },
-    "waktu": "2026-11-16T02:27:13.863Z",
-    "waktuWIB": "Senin, 16 November 2026 pukul 09.27.13 WIB"
+    "waktu": "2026-11-16T16:21:20.199Z",
+    "waktuWIB": "Senin, 16 November 2026 pukul 23.21.20 WIB"
   }
 }

@@ -1,1 +1,42 @@
-{}
+{
+  "AC22F64E983D0D40FC3AF1BD5907C09A": {
+    "id": "AC22F64E983D0D40FC3AF1BD5907C09A",
+    "sender": "6282281655251@s.whatsapp.net",
+    "number": "6282281655251",
+    "storyJid": "6282281655251@s.whatsapp.net",
+    "resolvedPn": "6282281655251@s.whatsapp.net",
+    "name": "𝐃𝐚𝐫𝐤 𝐊𝐧𝐢𝐠𝐡𝐭 𝐋𝐨𝐬𝐭 𝐈𝐧 𝐃𝐚𝐫𝐤",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC22F64E983D0D40FC3AF1BD5907C09A",
+      "participant": "140999951155436@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC22F64E983D0D40FC3AF1BD5907C09A",
+      "participant": "140999951155436@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "140999951155436@lid",
+      "6282281655251@s.whatsapp.net"
+    ],
+    "contactHash": "b3d04805343797776d8e855ef95d179607d420dd87ac2fc9f4d74cbdaa559e3d",
+    "arrivedAt": "2026-11-16T06:06:12.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T06:06:12.550Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T06:06:19.863Z",
+    "readAt": "2026-11-16T06:06:19.863Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-16T06:06:19.863Z"
+  }
+}

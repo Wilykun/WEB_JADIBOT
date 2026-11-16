@@ -1,0 +1,122 @@
+{
+  "AC01F9E37508980EFB3A0A5D927815CB": {
+    "id": "AC01F9E37508980EFB3A0A5D927815CB",
+    "sender": "6281360172305@s.whatsapp.net",
+    "number": "6281360172305",
+    "storyJid": "6281360172305@s.whatsapp.net",
+    "resolvedPn": "6281360172305@s.whatsapp.net",
+    "name": "checu",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC01F9E37508980EFB3A0A5D927815CB",
+      "participant": "210449404551381@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC01F9E37508980EFB3A0A5D927815CB",
+      "participant": "210449404551381@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "210449404551381@lid",
+      "6281360172305@s.whatsapp.net"
+    ],
+    "contactHash": "a978565a7add5fd0038780112f5f6c10da95ddf9dc2f173c9652e03a6c3dfd8a",
+    "arrivedAt": "2026-11-16T10:45:13.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T10:45:13.579Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T10:45:16.372Z",
+    "readAt": "2026-11-16T10:45:16.372Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-16T10:45:16.372Z"
+  },
+  "AC634200532F8F56E31C345AB155A8DD": {
+    "id": "AC634200532F8F56E31C345AB155A8DD",
+    "sender": "6281360172305@s.whatsapp.net",
+    "number": "6281360172305",
+    "storyJid": "6281360172305@s.whatsapp.net",
+    "resolvedPn": "6281360172305@s.whatsapp.net",
+    "name": "checu",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC634200532F8F56E31C345AB155A8DD",
+      "participant": "210449404551381@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC634200532F8F56E31C345AB155A8DD",
+      "participant": "210449404551381@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "210449404551381@lid",
+      "6281360172305@s.whatsapp.net"
+    ],
+    "contactHash": "a978565a7add5fd0038780112f5f6c10da95ddf9dc2f173c9652e03a6c3dfd8a",
+    "arrivedAt": "2026-11-16T11:16:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T11:16:11.329Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T11:16:13.551Z",
+    "readAt": "2026-11-16T11:16:13.551Z",
+    "emoji": "🆖",
+    "reactedAt": "2026-11-16T11:16:13.551Z"
+  },
+  "AC9CB7EECEEBA430AF1DC46BFB9940DD": {
+    "id": "AC9CB7EECEEBA430AF1DC46BFB9940DD",
+    "sender": "6281360172305@s.whatsapp.net",
+    "number": "6281360172305",
+    "storyJid": "6281360172305@s.whatsapp.net",
+    "resolvedPn": "6281360172305@s.whatsapp.net",
+    "name": "checu",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9CB7EECEEBA430AF1DC46BFB9940DD",
+      "participant": "210449404551381@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9CB7EECEEBA430AF1DC46BFB9940DD",
+      "participant": "210449404551381@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "210449404551381@lid",
+      "6281360172305@s.whatsapp.net"
+    ],
+    "contactHash": "a978565a7add5fd0038780112f5f6c10da95ddf9dc2f173c9652e03a6c3dfd8a",
+    "arrivedAt": "2026-11-16T15:33:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T15:33:11.972Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T15:33:17.255Z",
+    "readAt": "2026-11-16T15:33:17.255Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-16T15:33:17.255Z"
+  }
+}

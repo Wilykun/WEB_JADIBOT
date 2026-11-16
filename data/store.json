@@ -236,7 +236,7 @@
         ]
       },
       "online24": false,
-      "autoStart": true,
+      "autoStart": false,
       "runnerStatus": "not_connected",
       "createdAt": "2026-11-14T09:16:02.145Z",
       "updatedAt": "2026-11-14T12:18:47.905Z"
@@ -454,6 +454,18 @@
       "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
       "expiresAt": 1795398248195,
       "lastSeen": 1794793706779
+    },
+    {
+      "sid": "b341a07d2139e2c4711c685d3a993eba3d7fccde0990eefa",
+      "userId": "27a99646-6ac7-405b-8d0d-3597f12b5aa0",
+      "expiresAt": 1795450253916,
+      "lastSeen": 1794846002865
+    },
+    {
+      "sid": "0c86c49fdf66029a8b236c4cd5badcf5e3ac5ccc261d06be",
+      "userId": "27a99646-6ac7-405b-8d0d-3597f12b5aa0",
+      "expiresAt": 1795450355559,
+      "lastSeen": 1794846085370
     }
   ],
   "pairingLogs": [
@@ -47340,6 +47352,300 @@
         "delaySeconds": 2.6
       },
       "createdAt": "2026-11-16T02:27:13.863Z"
+    },
+    {
+      "id": "8cfe489f-410f-41db-a905-28f213962271",
+      "userId": "27a99646-6ac7-405b-8d0d-3597f12b5aa0",
+      "event": "Permintaan sambung ulang sesi WhatsApp dimulai.",
+      "createdAt": "2026-11-16T16:10:28.332Z"
+    },
+    {
+      "id": "826da86a-c0cc-487c-addd-d41dc765a2b0",
+      "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
+      "event": "Permintaan sambung ulang sesi WhatsApp dimulai.",
+      "createdAt": "2026-11-16T16:10:28.406Z"
+    },
+    {
+      "id": "fb51cbfd-fbd8-4bee-a8ef-d086ed1ec49a",
+      "userId": "382df819-68a3-4c79-b5c6-aff60fb533a4",
+      "event": "Permintaan sambung ulang sesi WhatsApp dimulai.",
+      "createdAt": "2026-11-16T16:10:28.575Z"
+    },
+    {
+      "id": "cc5c2d3c-ab11-43e9-ad30-185fbfa1bcaf",
+      "userId": "f51c7fcb-175a-4305-9fa8-06b12532902c",
+      "event": "Permintaan sambung ulang sesi WhatsApp dimulai.",
+      "createdAt": "2026-11-16T16:10:28.625Z"
+    },
+    {
+      "id": "78c6640e-3658-43a9-9a80-502c28649dde",
+      "userId": "197589e7-d4c9-43c0-942a-3fc66124c463",
+      "event": "Permintaan sambung ulang sesi WhatsApp dimulai.",
+      "createdAt": "2026-11-16T16:10:28.692Z"
+    },
+    {
+      "id": "38f73d1e-2c13-432e-8ffe-04913e334822",
+      "userId": "382df819-68a3-4c79-b5c6-aff60fb533a4",
+      "event": "Koneksi WhatsApp aktif kembali dari panel akun.",
+      "createdAt": "2026-11-16T16:10:29.572Z"
+    },
+    {
+      "id": "fd958650-4f99-4f7b-ab4a-364ed330c4f0",
+      "userId": "27a99646-6ac7-405b-8d0d-3597f12b5aa0",
+      "event": "Koneksi WhatsApp aktif kembali dari panel akun.",
+      "createdAt": "2026-11-16T16:10:30.019Z"
+    },
+    {
+      "id": "fd436762-98eb-4c32-91e2-c5d62f7b905a",
+      "userId": "197589e7-d4c9-43c0-942a-3fc66124c463",
+      "event": "Koneksi WhatsApp aktif kembali dari panel akun.",
+      "createdAt": "2026-11-16T16:10:30.068Z"
+    },
+    {
+      "id": "ed1e71d7-ee8a-414e-a925-9a268ca878c0",
+      "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
+      "event": "Koneksi WhatsApp aktif kembali dari panel akun.",
+      "createdAt": "2026-11-16T16:10:30.242Z"
+    },
+    {
+      "id": "ddeb818c-2050-4411-9467-0d493a2c8c88",
+      "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
+      "event": "Pemulihan 3 story tertunda dari penyimpanan akun selesai diproses paralel.",
+      "createdAt": "2026-11-16T16:10:31.233Z"
+    },
+    {
+      "id": "25c38231-8615-4fd8-ae2d-1ba575afceac",
+      "userId": "f51c7fcb-175a-4305-9fa8-06b12532902c",
+      "event": "Sesi WhatsApp ditolak; mencoba pulihkan otomatis dari sesi tersimpan.",
+      "createdAt": "2026-11-16T16:10:32.902Z"
+    },
+    {
+      "id": "6f361d63-a9ca-4367-8739-19e5c030098c",
+      "userId": "f51c7fcb-175a-4305-9fa8-06b12532902c",
+      "event": "Permintaan sambung ulang sesi WhatsApp dimulai.",
+      "createdAt": "2026-11-16T16:10:32.931Z"
+    },
+    {
+      "id": "7c13797b-47a9-44b3-8e83-0a228da84e80",
+      "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
+      "event": "Story story · Read + Reaction ✓ · 👻 · delay 1.8 dtk",
+      "details": {
+        "kind": "story",
+        "mode": "Read+Reaction ✓",
+        "mediaType": "Story 📖",
+        "storyId": "AC0A57E1···3F72",
+        "greeting": "Malam 🌃",
+        "dayName": "Senin",
+        "date": "16 Nov 2026",
+        "time": "23.10",
+        "name": "「 pИe🥶 」",
+        "number": "6289****220",
+        "storyCount": 1,
+        "emojiMode": "Custom 🟢",
+        "success": "Read + Reaction ✓",
+        "reaction": "👻",
+        "resolve": "LID → PN ✓",
+        "delaySeconds": 1.8
+      },
+      "createdAt": "2026-11-16T16:10:33.020Z"
+    },
+    {
+      "id": "fdb16354-8fbd-4fb2-ab69-3b9bf8f59cdf",
+      "userId": "f51c7fcb-175a-4305-9fa8-06b12532902c",
+      "event": "WhatsApp menolak sesi tersimpan (kode 401); tautkan ulang diperlukan.",
+      "createdAt": "2026-11-16T16:10:34.072Z"
+    },
+    {
+      "id": "9099d46a-7254-4891-b90c-b88b7238c327",
+      "userId": "f51c7fcb-175a-4305-9fa8-06b12532902c",
+      "event": "Cadangan sesi terakhir yang sehat dipulihkan; mencoba sambung ulang.",
+      "createdAt": "2026-11-16T16:10:34.543Z"
+    },
+    {
+      "id": "0d05684b-f17e-45a4-aac0-b952fa332239",
+      "userId": "f51c7fcb-175a-4305-9fa8-06b12532902c",
+      "event": "Permintaan sambung ulang sesi WhatsApp dimulai.",
+      "createdAt": "2026-11-16T16:10:34.592Z"
+    },
+    {
+      "id": "7e2aef3a-f97c-47d4-bd2c-429dbb1c238e",
+      "userId": "f51c7fcb-175a-4305-9fa8-06b12532902c",
+      "event": "WhatsApp menolak sesi tersimpan (kode 401); tautkan ulang diperlukan.",
+      "createdAt": "2026-11-16T16:10:39.816Z"
+    },
+    {
+      "id": "2a7173c6-c390-47cb-9769-0678e9820b7e",
+      "userId": "f51c7fcb-175a-4305-9fa8-06b12532902c",
+      "event": "WhatsApp menolak sesi tersimpan (kode 401); tautkan ulang diperlukan.",
+      "createdAt": "2026-11-16T16:10:40.180Z"
+    },
+    {
+      "id": "e7815fae-e24b-495e-a0c6-630cb62edc35",
+      "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
+      "event": "Story story · Read + Reaction ✓ · 🫟 · delay 11.4 dtk",
+      "details": {
+        "kind": "story",
+        "mode": "Read+Reaction ✓",
+        "mediaType": "Story 📖",
+        "storyId": "AC61EF70···72DE",
+        "greeting": "Malam 🌃",
+        "dayName": "Senin",
+        "date": "16 Nov 2026",
+        "time": "23.10",
+        "name": "zavian",
+        "number": "6282****686",
+        "storyCount": 1,
+        "emojiMode": "Custom 🟢",
+        "success": "Read + Reaction ✓",
+        "reaction": "🫟",
+        "resolve": "LID → PN ✓",
+        "delaySeconds": 11.4
+      },
+      "createdAt": "2026-11-16T16:10:42.804Z"
+    },
+    {
+      "id": "65d4c00a-7705-4eb2-8f0b-13e7ca34e518",
+      "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
+      "event": "Story story · Read + Reaction ✓ · ❤️‍🔥 · delay 12.2 dtk",
+      "details": {
+        "kind": "story",
+        "mode": "Read+Reaction ✓",
+        "mediaType": "Story 📖",
+        "storyId": "ACD59BE4···C791",
+        "greeting": "Malam 🌃",
+        "dayName": "Senin",
+        "date": "16 Nov 2026",
+        "time": "23.10",
+        "name": ".",
+        "number": "6288****038",
+        "storyCount": 1,
+        "emojiMode": "Custom 🟢",
+        "success": "Read + Reaction ✓",
+        "reaction": "❤️‍🔥",
+        "resolve": "LID → PN ✓",
+        "delaySeconds": 12.2
+      },
+      "createdAt": "2026-11-16T16:10:43.809Z"
+    },
+    {
+      "id": "53a1b6bd-07a4-4729-a434-da813302cad5",
+      "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
+      "event": "Story story · Read + Reaction ✓ · 🙂‍↔️ · delay 11.3 dtk",
+      "details": {
+        "kind": "story",
+        "mode": "Read+Reaction ✓",
+        "mediaType": "Story 📖",
+        "storyId": "ACDC7232···8250",
+        "greeting": "Malam 🌃",
+        "dayName": "Senin",
+        "date": "16 Nov 2026",
+        "time": "23.13",
+        "name": ".",
+        "number": "6281****185",
+        "storyCount": 1,
+        "emojiMode": "Custom 🟢",
+        "success": "Read + Reaction ✓",
+        "reaction": "🙂‍↔️",
+        "resolve": "LID → PN ✓",
+        "delaySeconds": 11.3
+      },
+      "createdAt": "2026-11-16T16:13:09.189Z"
+    },
+    {
+      "id": "15a2797d-87fe-49b1-96c4-3567a9b17587",
+      "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
+      "event": "Story video · Read + Reaction ✓ · ❓️ · delay 14.9 dtk",
+      "details": {
+        "kind": "story",
+        "mode": "Read+Reaction ✓",
+        "mediaType": "Video 🎥",
+        "storyId": "AC3792E1···25D5",
+        "greeting": "Malam 🌃",
+        "dayName": "Senin",
+        "date": "16 Nov 2026",
+        "time": "23.16",
+        "name": ".",
+        "number": "6285****672",
+        "storyCount": 1,
+        "emojiMode": "Custom 🟢",
+        "success": "Read + Reaction ✓",
+        "reaction": "❓️",
+        "resolve": "LID → PN ✓",
+        "delaySeconds": 14.9
+      },
+      "createdAt": "2026-11-16T16:16:45.543Z"
+    },
+    {
+      "id": "bb3e0714-a393-42d8-be28-1eab0042cfd8",
+      "userId": "27a99646-6ac7-405b-8d0d-3597f12b5aa0",
+      "event": "Story video · Read + Reaction ✓ · 🐴 · delay 2.7 dtk",
+      "details": {
+        "kind": "story",
+        "mode": "Read+Reaction ✓",
+        "mediaType": "Video 🎥",
+        "storyId": "ACEC1C14···3A51",
+        "greeting": "Malam 🌃",
+        "dayName": "Senin",
+        "date": "16 Nov 2026",
+        "time": "23.19",
+        "name": "γυς ρου",
+        "number": "6281****657",
+        "storyCount": 1,
+        "emojiMode": "Custom 🟢",
+        "success": "Read + Reaction ✓",
+        "reaction": "🐴",
+        "resolve": "LID → PN ✓",
+        "delaySeconds": 2.7
+      },
+      "createdAt": "2026-11-16T16:19:14.666Z"
+    },
+    {
+      "id": "96f9fa98-a73a-4d45-ba11-f92c56342c56",
+      "userId": "f6f7d6c9-c402-47a0-afb4-93406ce4b0c2",
+      "event": "Story video · Read + Reaction ✓ · 🫟 · delay 2.1 dtk",
+      "details": {
+        "kind": "story",
+        "mode": "Read+Reaction ✓",
+        "mediaType": "Video 🎥",
+        "storyId": "ACEBB01A···1D4B",
+        "greeting": "Malam 🌃",
+        "dayName": "Senin",
+        "date": "16 Nov 2026",
+        "time": "23.21",
+        "name": ".",
+        "number": "6285****672",
+        "storyCount": 2,
+        "emojiMode": "Custom 🟢",
+        "success": "Read + Reaction ✓",
+        "reaction": "🫟",
+        "resolve": "LID → PN ✓",
+        "delaySeconds": 2.1
+      },
+      "createdAt": "2026-11-16T16:21:20.199Z"
+    },
+    {
+      "id": "142ef137-0c2e-411e-a318-88b4d8cde7e9",
+      "userId": "382df819-68a3-4c79-b5c6-aff60fb533a4",
+      "event": "Story story · Read + Reaction ✓ · 💚 · delay 2.2 dtk",
+      "details": {
+        "kind": "story",
+        "mode": "Read+Reaction ✓",
+        "mediaType": "Story 📖",
+        "storyId": "AC6BA3A0···1B2E",
+        "greeting": "Malam 🌃",
+        "dayName": "Senin",
+        "date": "16 Nov 2026",
+        "time": "23.21",
+        "name": "gheyaa",
+        "number": "6285****744",
+        "storyCount": 1,
+        "emojiMode": "Custom 🟢",
+        "success": "Read + Reaction ✓",
+        "reaction": "💚",
+        "resolve": "LID → PN ✓",
+        "delaySeconds": 2.2
+      },
+      "createdAt": "2026-11-16T16:21:21.520Z"
     }
   ],
   "loginHistory": [
@@ -48224,6 +48530,34 @@
         "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36"
       },
       "createdAt": "2026-11-16T01:44:08.215Z"
+    },
+    {
+      "id": "0337f9ba-2190-4d63-8755-5234a54f57a3",
+      "userId": "27a99646-6ac7-405b-8d0d-3597f12b5aa0",
+      "sid": "b341a07d2139e2c4711c685d3a993eba3d7fccde0990eefa",
+      "ip": "103.153.247.218",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Mobile Safari/537.36",
+      "device": {
+        "category": "HP",
+        "os": "Android 10",
+        "browser": "Chrome 158.0.0.0",
+        "model": "K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Mobile Safari/537.36"
+      },
+      "createdAt": "2026-11-16T16:10:53.937Z"
+    },
+    {
+      "id": "c68ba1d3-f46c-474f-886f-d688564a8f64",
+      "userId": "27a99646-6ac7-405b-8d0d-3597f12b5aa0",
+      "sid": "0c86c49fdf66029a8b236c4cd5badcf5e3ac5ccc261d06be",
+      "ip": "104.29.205.90",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "device": {
+        "category": "Desktop",
+        "os": "Linux",
+        "browser": "Chrome 157.0.0.0",
+        "model": null
+      },
+      "createdAt": "2026-11-16T16:12:35.580Z"
     }
   ],
   "deletedAccounts": [

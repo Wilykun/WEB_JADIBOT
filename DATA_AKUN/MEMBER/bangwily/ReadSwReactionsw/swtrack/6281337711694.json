@@ -1,1 +1,122 @@
-{}
+{
+  "ACF023507CCF895F0A8220D775488B7B": {
+    "id": "ACF023507CCF895F0A8220D775488B7B",
+    "sender": "6281337711694@s.whatsapp.net",
+    "number": "6281337711694",
+    "storyJid": "6281337711694@s.whatsapp.net",
+    "resolvedPn": "6281337711694@s.whatsapp.net",
+    "name": "S",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF023507CCF895F0A8220D775488B7B",
+      "participant": "249516745867409@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF023507CCF895F0A8220D775488B7B",
+      "participant": "249516745867409@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "249516745867409@lid",
+      "6281337711694@s.whatsapp.net"
+    ],
+    "contactHash": "fd88769bb9574772d311429d8c0f774b9d49ae86002895cfa892bfc89a4a4104",
+    "arrivedAt": "2026-11-16T07:24:43.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T07:24:44.152Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T07:25:03.199Z",
+    "readAt": "2026-11-16T07:25:03.198Z",
+    "emoji": "🦄",
+    "reactedAt": "2026-11-16T07:25:03.198Z"
+  },
+  "AC7E76427C9A44EABAC89878223C8404": {
+    "id": "AC7E76427C9A44EABAC89878223C8404",
+    "sender": "6281337711694@s.whatsapp.net",
+    "number": "6281337711694",
+    "storyJid": "6281337711694@s.whatsapp.net",
+    "resolvedPn": "6281337711694@s.whatsapp.net",
+    "name": "S",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7E76427C9A44EABAC89878223C8404",
+      "participant": "249516745867409@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7E76427C9A44EABAC89878223C8404",
+      "participant": "249516745867409@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "249516745867409@lid",
+      "6281337711694@s.whatsapp.net"
+    ],
+    "contactHash": "fd88769bb9574772d311429d8c0f774b9d49ae86002895cfa892bfc89a4a4104",
+    "arrivedAt": "2026-11-16T08:42:42.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T08:42:42.422Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T08:42:49.361Z",
+    "readAt": "2026-11-16T08:42:49.361Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T08:42:49.361Z"
+  },
+  "AC090FA4A48546359D430DC6033FCAFF": {
+    "id": "AC090FA4A48546359D430DC6033FCAFF",
+    "sender": "6281337711694@s.whatsapp.net",
+    "number": "6281337711694",
+    "storyJid": "6281337711694@s.whatsapp.net",
+    "resolvedPn": "6281337711694@s.whatsapp.net",
+    "name": "S",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC090FA4A48546359D430DC6033FCAFF",
+      "participant": "249516745867409@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC090FA4A48546359D430DC6033FCAFF",
+      "participant": "249516745867409@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "249516745867409@lid",
+      "6281337711694@s.whatsapp.net"
+    ],
+    "contactHash": "fd88769bb9574772d311429d8c0f774b9d49ae86002895cfa892bfc89a4a4104",
+    "arrivedAt": "2026-11-16T08:55:29.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T08:55:29.529Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T08:55:38.270Z",
+    "readAt": "2026-11-16T08:55:38.260Z",
+    "emoji": "🌭",
+    "reactedAt": "2026-11-16T08:55:38.260Z"
+  }
+}

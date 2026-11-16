@@ -1,0 +1,42 @@
+{
+  "AC97B9262CBFD7CDC47EFE4DE3A555FC": {
+    "id": "AC97B9262CBFD7CDC47EFE4DE3A555FC",
+    "sender": "6287755281218@s.whatsapp.net",
+    "number": "6287755281218",
+    "storyJid": "6287755281218@s.whatsapp.net",
+    "resolvedPn": "6287755281218@s.whatsapp.net",
+    "name": "gavin O'connor",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC97B9262CBFD7CDC47EFE4DE3A555FC",
+      "participant": "108444266840240@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC97B9262CBFD7CDC47EFE4DE3A555FC",
+      "participant": "108444266840240@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "108444266840240@lid",
+      "6287755281218@s.whatsapp.net"
+    ],
+    "contactHash": "7382af2e1f619eba99eebb2a9cf7d6b36b53e9c17b15f90a33c0686a39e96b2e",
+    "arrivedAt": "2026-11-16T11:08:16.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T11:08:17.018Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T11:08:34.722Z",
+    "readAt": "2026-11-16T11:08:34.721Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T11:08:34.721Z"
+  }
+}

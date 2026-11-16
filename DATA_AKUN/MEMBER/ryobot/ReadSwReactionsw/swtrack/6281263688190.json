@@ -1,0 +1,42 @@
+{
+  "AC7D8BD6E24EAE3F250368EFA1CCCCFD": {
+    "id": "AC7D8BD6E24EAE3F250368EFA1CCCCFD",
+    "sender": "6281263688190@s.whatsapp.net",
+    "number": "6281263688190",
+    "storyJid": "6281263688190@s.whatsapp.net",
+    "resolvedPn": "6281263688190@s.whatsapp.net",
+    "name": "𝘠𝘶𝘢𝘗𝘳𝘪𝘴𝘦𝘵` 𝘧𝘵 𝙑𝙎𝘾",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7D8BD6E24EAE3F250368EFA1CCCCFD",
+      "participant": "184813180973061@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7D8BD6E24EAE3F250368EFA1CCCCFD",
+      "participant": "184813180973061@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "184813180973061@lid",
+      "6281263688190@s.whatsapp.net"
+    ],
+    "contactHash": "0806f114cc0af0276c7b3cd71cd2aa08960273a00211c8b1ff238bcb3ccef0ca",
+    "arrivedAt": "2026-11-16T15:09:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T15:11:58.780Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T15:12:06.150Z",
+    "readAt": "2026-11-16T15:12:06.143Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T15:12:06.143Z"
+  }
+}

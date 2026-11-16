@@ -1,0 +1,42 @@
+{
+  "AC89C6BA16FA72D8F37386B16FADCEBD": {
+    "id": "AC89C6BA16FA72D8F37386B16FADCEBD",
+    "sender": "6285174227710@s.whatsapp.net",
+    "number": "6285174227710",
+    "storyJid": "6285174227710@s.whatsapp.net",
+    "resolvedPn": "6285174227710@s.whatsapp.net",
+    "name": "〽️KeroSene🥇",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC89C6BA16FA72D8F37386B16FADCEBD",
+      "participant": "33338089832623@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC89C6BA16FA72D8F37386B16FADCEBD",
+      "participant": "33338089832623@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "33338089832623@lid",
+      "6285174227710@s.whatsapp.net"
+    ],
+    "contactHash": "118b7eec44dc76de12aedb00d0350910c1084af1e7af73e32a562e0ddc7069f3",
+    "arrivedAt": "2026-11-16T05:38:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T05:38:53.367Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T05:38:59.257Z",
+    "readAt": "2026-11-16T05:38:59.254Z",
+    "emoji": "🆗",
+    "reactedAt": "2026-11-16T05:38:59.254Z"
+  }
+}
