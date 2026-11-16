@@ -1811,7 +1811,8 @@ async function handleApi(req, res, url) {
 
   if (route === 'POST /api/auth/login') {
     const body = await readJson(req);
-    const identifier = String(body.identifier || '').trim().toLowerCase().slice(0, 254);
+    const rawIdentifier = String(body.identifier || '').trim().slice(0, 254);
+    const identifier = rawIdentifier.toLowerCase();
     const ip = clientKey(req);
     if (!allowRateLimit(`login-ip:${ip}`, 30, 15 * 60 * 1000) || !allowRateLimit(`login-id:${identifier}`, 8, 15 * 60 * 1000)) {
       return sendError(res, 429, 'Terlalu banyak percobaan login. Tunggu beberapa menit.');
@@ -1830,9 +1831,11 @@ async function handleApi(req, res, url) {
       if (pending) return sendError(res, 403, 'Pendaftaran belum selesai. Kembali ke formulir daftar dengan username, email, dan kata sandi yang sama untuk melanjutkan verifikasi.');
       const deleted = (store.deletedAccounts || []).find((item) => item.username === identifier || item.email === identifier);
       if (deleted) return sendJson(res, 403, { error: DELETED_LOGIN_NOTICE, deleted: true, reason: deleted.reason || null });
-      return sendError(res, 404, 'Akun dengan email/username itu belum terdaftar. Silakan daftar dulu.');
+      // Pesan menyebut identifier yang diketik agar jelas: akunnya yang tidak ditemukan, bukan kata sandinya.
+      return sendError(res, 404, `Akun ${rawIdentifier} tidak ditemukan. Periksa ejaan atau daftar dulu.`);
     }
-    if (!valid) return sendError(res, 401, 'Kata sandi salah. Coba lagi.');
+    // Pesan menyebut identifier yang diketik agar jelas: akunnya ditemukan, kata sandinya yang salah.
+    if (!valid) return sendError(res, 401, `Akun ${rawIdentifier} ditemukan, tapi kata sandi salah. Coba lagi.`);
     if (isBannedAccount(user)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true, banReason: user.banReason || null }, { 'Set-Cookie': cookieHeader('', 0, req) });
     if (user.verified === false) return sendError(res, 403, 'Akun belum diverifikasi. Selesaikan CAPTCHA setelah pendaftaran terlebih dahulu.');
     const token = await createSession(user.id);

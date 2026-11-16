@@ -1390,8 +1390,11 @@ async function loadAdminUsers() {
     document.querySelector('#admin-description').textContent = isAdmin
       ? 'Status akun diperbarui tiap 15 detik dan runtime worker tiap detik. “Panel aktif” berarti akun masih membuka web dalam 75 detik terakhir; status panel ini berbeda dari status WhatsApp dan worker bot.'
       : 'Daftar ini hanya untuk melihat identitas dasar akun. Member tidak dapat mengontrol, mengedit, memasangkan WhatsApp, atau membuka data akun member lain.';
-    // Halaman Backup (menu + seksi) hanya untuk admin; area backup kini hidup di dalam halaman itu, jadi gating cukup di tingkat halaman.
-    document.querySelector('#backup-nav')?.classList.toggle('hidden', !isAdmin);
+    // Halaman Backup (menu + seksi) hanya untuk admin; menunya tetap terlihat tapi terkunci untuk member, isi halamannya disembunyikan total.
+    const backupNav = document.querySelector('#backup-nav');
+    backupNav?.classList.remove('hidden');
+    backupNav?.classList.toggle('nav-item-locked', !isAdmin);
+    backupNav?.setAttribute('aria-disabled', String(!isAdmin));
     document.querySelector('#backup')?.classList.toggle('hidden', !isAdmin);
     document.querySelector('#admin-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
     ensureWorkerRuntimeTicker();
@@ -1709,7 +1712,8 @@ function scrollPrivateLogToNewest(list, behavior = 'smooth') {
 
 function setWorkspacePage(page, smoothScroll = true) {
   const navItem = document.querySelector(`.side-nav .nav-item[href="#${page}"]`);
-  if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || navItem?.classList.contains('hidden')) {
+  // Halaman Backup dijaga juga lewat peran (bukan hanya lewat menu yang tersembunyi), karena menunya kini terlihat tapi terkunci untuk member.
+  if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || (page === 'backup' && currentUser?.role !== 'admin') || navItem?.classList.contains('hidden')) {
     page = document.body.dataset.whatsappLinked === 'true' ? 'dashboard' : 'pairing';
   }
   // Penanda Member hanya maju saat halaman Member dibuka dengan sengaja
@@ -2330,8 +2334,11 @@ async function showDashboard(user) {
   const isAdmin = user.role === 'admin';
   document.querySelector('#admin-nav')?.classList.remove('hidden');
   document.querySelector('#admin')?.classList.remove('hidden');
-  // Halaman Backup hanya untuk admin (Admin Utama dan admin biasa): menu dan halamannya disembunyikan total untuk member agar tidak bisa dibuka lewat tautan langsung sekalipun.
-  document.querySelector('#backup-nav')?.classList.toggle('hidden', !isAdmin);
+  // Halaman Backup hanya untuk admin (Admin Utama dan admin biasa): menunya terlihat untuk semua akun yang login, tapi terkunci untuk member (lencana Terkunci, tidak bisa diklik); isi halamannya tetap disembunyikan total untuk member.
+  const backupNav = document.querySelector('#backup-nav');
+  backupNav?.classList.remove('hidden');
+  backupNav?.classList.toggle('nav-item-locked', !isAdmin);
+  backupNav?.setAttribute('aria-disabled', String(!isAdmin));
   document.querySelector('#backup')?.classList.toggle('hidden', !isAdmin);
   const requestedPage = location.hash.slice(1);
   if (requestedPage === 'profile' || requestedPage === 'admin') {
@@ -3427,6 +3434,12 @@ document.querySelector('#save-profile').addEventListener('click', async () => {
 
 document.querySelectorAll('.nav-item[href^="#"]').forEach((item) => {
   item.addEventListener('click', (event) => {
+    // Menu Backup yang terkunci (member) tidak bisa dibuka: beri tahu bahwa fitur ini hanya untuk admin.
+    if (item.id === 'backup-nav' && item.classList.contains('nav-item-locked')) {
+      event.preventDefault();
+      showToast('Backup hanya untuk admin.');
+      return;
+    }
     const target = document.querySelector(item.getAttribute('href'));
     if (!target || target.classList.contains('hidden')) return;
     event.preventDefault();

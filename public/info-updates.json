@@ -1,6 +1,27 @@
 {
-  "updatedAt": "2026-11-16T19:14:00+07:00",
+  "updatedAt": "2026-11-16T19:51:00+07:00",
   "updates": [
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.51 WIB",
+      "title": "Menu Backup kini terlihat untuk member, tapi terkunci",
+      "description": "Menu Backup kini terlihat di sidebar member, dengan lencana Terkunci di sampingnya. Member tidak bisa membukanya — diketuk pun muncul pesan 'Backup hanya untuk admin.' Hanya Admin Utama dan admin biasa yang bisa membuka halaman Backup & pemulihan.",
+      "tag": "Perubahan"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.51 WIB",
+      "title": "Menu Member pindah ke kategori Info",
+      "description": "Menu Member kini berada di kategori Info (setelah List Bot), bukan lagi di kategori Admin. Kategori Admin kini hanya berisi Backup. Susunan menu jadi lebih sesuai konteks untuk admin maupun member.",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.51 WIB",
+      "title": "Pesan gagal login kini menyebut akunnya dengan akurat",
+      "description": "Saat gagal masuk, pesannya kini jelas menyebut akun yang diketik: kalau akunnya tidak ditemukan, pesannya 'Akun ... tidak ditemukan. Periksa ejaan atau daftar dulu.'; kalau akunnya ditemukan tapi kata sandinya salah, pesannya 'Akun ... ditemukan, tapi kata sandi salah. Coba lagi.'",
+      "tag": "Perbaikan"
+    },
     {
       "day": "Senin, 16 Nov 2026",
       "time": "19.14 WIB",

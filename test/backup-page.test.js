@@ -24,15 +24,19 @@ test('Backup & pemulihan hidup di halaman sendiri, bukan lagi di halaman Member'
   assert.ok(html.includes('aria-labelledby="admin-backup-title"'), '#backup harus menunjuk ke judul Backup & pemulihan');
 });
 
-test('menu sidebar punya item Backup setelah Member dan tersembunyi secara default', () => {
+test('menu sidebar punya item Backup setelah Member, dengan lencana Terkunci untuk member', () => {
   const nav = html.match(/<a id="backup-nav"[^>]*>/);
   assert.ok(nav, 'harus ada nav item #backup-nav');
   assert.match(nav[0], /href="#backup"/, 'nav Backup harus menunjuk ke #backup');
-  assert.match(nav[0], /class="[^"]*hidden/, 'nav Backup harus hidden secara default — hanya admin yang melihatnya');
+  assert.match(nav[0], /class="[^"]*hidden/, 'nav Backup harus hidden secara default — baru ditampilkan saat login');
   const memberNav = html.indexOf('id="admin-nav"');
   const backupNav = html.indexOf('id="backup-nav"');
   assert.ok(backupNav > memberNav, 'nav Backup harus berada setelah nav Member di sidebar');
-  assert.ok(html.includes('>Backup</a>'), 'nav Backup harus berlabel Backup');
+  assert.ok(html.includes('>Backup<span class="nav-lock"'), 'nav Backup harus berlabel Backup dengan lencana Terkunci');
+  const lock = html.match(/<span class="nav-lock"[^>]*>([\s\S]*?)<\/span>/);
+  assert.ok(lock, 'lencana Terkunci harus ada di nav Backup');
+  assert.match(lock[1], /<svg[^>]*viewBox="0 0 24 24"/, 'lencana Terkunci harus punya ikon gembok SVG');
+  assert.ok(lock[1].includes('Terkunci'), 'lencana Terkunci harus bertuliskan Terkunci');
 });
 
 test('judul halaman Backup terdaftar di router supaya breadcrumb dan deep-link jalan', () => {
@@ -57,12 +61,28 @@ test('seluruh gaya backup kini memakai scope #backup, bukan #admin', () => {
   assert.match(css, /#backup \.admin-backup-heading-copy\{flex-direction:\s*column;align-items:\s*center/, 'di layar kecil (<=560px) ikon harus menumpuk di atas judul yang rata tengah');
 });
 
-test('halaman Backup hanya dibuka admin: menu dan seksi disembunyikan untuk member', () => {
-  assert.match(appJs, /document\.querySelector\('#backup-nav'\)\?\.classList\.toggle\('hidden', !isAdmin\)/, 'showDashboard/loadAdminUsers harus menyembunyikan nav Backup untuk member');
+test('halaman Backup hanya dibuka admin: menu terlihat tapi terkunci untuk member, seksi disembunyikan', () => {
+  // Menu Backup kini terlihat untuk semua akun yang login, tapi terkunci untuk member; isi halamannya tetap disembunyikan total.
+  assert.match(appJs, /backupNav\?\.classList\.remove\('hidden'\)/, 'showDashboard/loadAdminUsers harus menampilkan nav Backup untuk semua akun yang login');
+  assert.match(appJs, /backupNav\?\.classList\.toggle\('nav-item-locked', !isAdmin\)/, 'nav Backup harus dikunci (nav-item-locked) untuk member');
+  assert.match(appJs, /backupNav\?\.setAttribute\('aria-disabled', String\(!isAdmin\)\)/, 'nav Backup yang terkunci harus ditandai aria-disabled');
   assert.match(appJs, /document\.querySelector\('#backup'\)\?\.classList\.toggle\('hidden', !isAdmin\)/, 'showDashboard/loadAdminUsers harus menyembunyikan seksi Backup untuk member');
   assert.ok(appJs.includes("if (page === 'backup')"), 'setWorkspacePage harus punya hook khusus halaman backup');
+  assert.match(appJs, /\(page === 'backup' && currentUser\?\.role !== 'admin'\)/, 'setWorkspacePage harus menolak halaman Backup untuk member lewat peran, bukan hanya lewat menu yang tersembunyi');
   assert.match(appJs, /if \(page === 'backup'\) \{[\s\S]*?loadAdminBackupTelegramStatus\(\)/, 'membuka halaman Backup harus memuat ulang status Telegram');
   assert.match(appJs, /if \(page === 'backup'\) \{[\s\S]*?loadAdminBackupSnapshots\(\)/, 'membuka halaman Backup harus memuat ulang restore point');
+  // Klik menu Backup yang terkunci harus memberi tahu bahwa fitur ini hanya untuk admin, bukan diam-diam mengalihkan.
+  assert.match(appJs, /item\.id === 'backup-nav' && item\.classList\.contains\('nav-item-locked'\)/, 'klik nav Backup yang terkunci harus dicegat');
+  assert.match(appJs, /showToast\('Backup hanya untuk admin\.'\)/, 'klik nav Backup yang terkunci harus menampilkan pesan Backup hanya untuk admin');
+});
+
+test('lencana Terkunci hanya tampil saat nav Backup dikunci dan disembunyikan di rel ikon tertutup', () => {
+  assert.match(css, /\.nav-lock\{[^}]*display:\s*none/, 'lencana Terkunci harus tersembunyi secara default');
+  assert.match(css, /#backup-nav\.nav-item-locked \.nav-lock\{display:\s*inline-flex\}/, 'lencana Terkunci harus tampil saat nav Backup dikunci');
+  assert.match(css, /#backup-nav\.nav-item-locked\{[^}]*opacity:\s*\.6/, 'nav Backup yang terkunci harus tampak redup');
+  assert.match(css, /#backup-nav\.nav-item-locked\{[^}]*cursor:\s*not-allowed/, 'nav Backup yang terkunci harus berkursor tidak bisa diklik');
+  assert.match(css, /\.sidebar:not\(\.is-open\) \.nav-lock\{display:\s*none\}/, 'di rel ikon tertutup, lencana Terkunci harus disembunyikan');
+  assert.match(css, /html\[data-theme="light"\] \.nav-lock\{/, 'lencana Terkunci harus punya gaya tema terang');
 });
 
 function plainZipCompressedSize(archive) {
