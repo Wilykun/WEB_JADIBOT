@@ -2509,7 +2509,7 @@ async function refreshWorkspaceServerStatus() {
 }
 
 function setMobileInfoView(view = 'menu') {
-  const selected = ['menu', 'overview', 'developer', 'server', 'bots'].includes(view) ? view : 'menu';
+  const selected = ['menu', 'overview', 'developer', 'server', 'bots', 'infoupdate'].includes(view) ? view : 'menu';
   const isMenu = selected === 'menu';
   mobileInfoPage?.setAttribute('data-mobile-info-view', selected);
   if (mobileInfoMenu) mobileInfoMenu.hidden = !isMenu;
@@ -2523,6 +2523,7 @@ function setMobileInfoView(view = 'menu') {
     panel.hidden = isMenu || panel.dataset.mobileInfoPanel !== selected;
   });
   if (selected === 'server') void refreshMobileServerStatus();
+  if (selected === 'infoupdate') void loadMobileInfoUpdates();
 }
 
 function setMobileInfo(open) {
@@ -2784,7 +2785,12 @@ function updatePhoneNumberPreview(value) {
   const formatted = phone.formatInternational();
   const valid = phone.isValid();
   const possible = phone.isPossible();
-  showMethodPicker(valid);
+  // Pemilih metode tampil begitu langkahnya dibuka, apa pun validitas nomornya:
+  // QR tidak butuh nomor, dan Pairing Code memvalidasi nomor di Gasss kedua.
+  // Memakai `valid` di sini dulu menyembunyikan pemilih untuk nomor yang terurai
+  // tapi tidak valid — kolom nomor ikut tersembunyi dan tombol terkunci, jadi
+  // pengguna mentok tanpa jalan keluar.
+  showMethodPicker(pairingMethodPickerUnlocked);
   if (valid) {
     formatLabel.textContent = `Format internasional: ${formatted}`;
     validity.textContent = 'Format valid · cek WA saat lanjut';
@@ -2806,6 +2812,7 @@ pairingPhoneInput.addEventListener('input', (event) => {
   const firstButton = document.querySelector('#pairing-submit');
   if (firstButton) { firstButton.disabled = false; firstButton.innerHTML = 'Gasss Slurrr :V <span>→</span>'; }
   event.target.value = event.target.value.replace(/\D/g, '').slice(0, 15);
+  event.target.setCustomValidity('');
   updatePhoneNumberPreview(event.target.value);
 });
 updatePhoneNumberPreview(pairingPhoneInput.value);
@@ -2841,7 +2848,10 @@ function updatePairingConsentGuidance() {
   });
 }
 document.querySelectorAll('#pairing-confirm, #pairing-auto-confirm').forEach((input) => {
-  input.addEventListener('change', updatePairingConsentGuidance);
+  input.addEventListener('change', () => {
+    input.setCustomValidity('');
+    updatePairingConsentGuidance();
+  });
 });
 pairingForm.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -2854,8 +2864,14 @@ pairingForm.addEventListener('submit', async (event) => {
   if (!ownershipConsent.checked || !autoConsent.checked) {
     if (!ownershipConsent.checked) ownershipConsent.closest('.pairing-consent')?.classList.add('is-required-error');
     if (!autoConsent.checked) autoConsent.closest('.pairing-consent')?.classList.add('is-required-error');
-    setPairingNotice('Wajib centang 2 persetujuan terlebih dahulu: Konfirmasi kepemilikan dan Setuju dengan mode otomatis.');
-    (ownershipConsent.checked ? autoConsent : ownershipConsent).focus();
+    // Pesan kesalahan tampil sebagai gelembung bawaan browser yang menempel di
+    // kotak persetujuan yang belum dicentang — sama seperti gelembung validasi
+    // email di halaman daftar — bukan lagi kotak notif generik di bawah tombol.
+    const firstMissing = ownershipConsent.checked ? autoConsent : ownershipConsent;
+    firstMissing.setCustomValidity(firstMissing === ownershipConsent
+      ? 'Centang Konfirmasi kepemilikan dulu — wajib sebelum pairing.'
+      : 'Centang Setuju dengan mode otomatis dulu — wajib sebelum pairing.');
+    firstMissing.reportValidity();
     return;
   }
 	  if (!pairingMethodPickerUnlocked) {
@@ -2884,16 +2900,16 @@ pairingForm.addEventListener('submit', async (event) => {
   let phoneNumber = null;
   if (pairingMethod === 'pairing') {
     if (!/^[1-9]\d{6,14}$/.test(enteredNumber)) {
-      setPairingNotice('Untuk Pairing Code, masukkan 7–15 digit dengan kode negara, tanpa tanda + atau pemisah.');
       pairingPhoneField?.classList.remove('hidden');
-      pairingPhoneInput.focus();
+      pairingPhoneInput.setCustomValidity('Masukkan 7–15 digit dengan kode negara, tanpa tanda + atau pemisah.');
+      pairingPhoneInput.reportValidity();
       return;
     }
     const parsedPhone = updatePhoneNumberPreview(enteredNumber);
     if (!parsedPhone?.isValid()) {
-      setPairingNotice('Nomor belum valid menurut format penomoran internasional. Periksa kode negara dan digitnya. Valid menurut format belum memastikan nomor memiliki akun WhatsApp.');
       pairingPhoneField?.classList.remove('hidden');
-      pairingPhoneInput.focus();
+      pairingPhoneInput.setCustomValidity('Nomor belum valid menurut format penomoran internasional. Periksa kode negara dan digitnya.');
+      pairingPhoneInput.reportValidity();
       return;
     }
     phoneNumber = enteredNumber;
@@ -3374,8 +3390,42 @@ const INFO_UPDATE_TAG_ICONS = {
   'fitur-dihapus': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>',
   tampilan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>',
 };
+function createInfoUpdateItem(update) {
+  const item = document.createElement('li');
+  item.className = 'info-update-item';
+  const rawTag = (update.tag || 'Pembaruan').trim() || 'Pembaruan';
+  const tagSlug = rawTag.toLowerCase().replace(/\s+/g, '-');
+  const tag = INFO_UPDATE_TAG_LABELS[tagSlug] || rawTag;
+  item.dataset.tag = tagSlug;
+  const poster = document.createElement('div');
+  poster.className = 'info-update-poster';
+  const mark = document.createElement('span');
+  mark.className = 'info-update-poster-mark';
+  mark.innerHTML = INFO_UPDATE_TAG_ICONS[tagSlug] || INFO_UPDATE_TAG_ICONS['fitur-baru'];
+  mark.setAttribute('aria-hidden', 'true');
+  poster.append(mark);
+  const body = document.createElement('div');
+  body.className = 'info-update-body';
+  const title = document.createElement('h4');
+  title.textContent = update.title || '';
+  const meta = document.createElement('p');
+  meta.className = 'info-update-meta';
+  meta.textContent = [update.day, update.time].filter(Boolean).join(' · ');
+  const tagEl = document.createElement('span');
+  tagEl.className = 'info-update-tag';
+  tagEl.textContent = tag;
+  const desc = document.createElement('div');
+  desc.className = 'info-update-desc';
+  const description = document.createElement('p');
+  description.textContent = update.description || '';
+  desc.append(description);
+  body.append(title, meta, tagEl, desc);
+  item.append(poster, body);
+  return item;
+}
+
 async function loadInfoUpdates() {
-  const list = document.querySelector('.info-update-list');
+  const list = document.querySelector('#infoupdate .info-update-list');
   if (!list) return;
   try {
     const response = await fetch('/info-updates.json', { cache: 'no-store' });
@@ -3384,39 +3434,7 @@ async function loadInfoUpdates() {
     const updates = Array.isArray(data?.updates) ? data.updates : [];
     if (!updates.length) throw new Error('empty');
     list.innerHTML = '';
-    updates.forEach((update) => {
-      const item = document.createElement('li');
-      item.className = 'info-update-item';
-      const rawTag = (update.tag || 'Pembaruan').trim() || 'Pembaruan';
-      const tagSlug = rawTag.toLowerCase().replace(/\s+/g, '-');
-      const tag = INFO_UPDATE_TAG_LABELS[tagSlug] || rawTag;
-      item.dataset.tag = tagSlug;
-      const poster = document.createElement('div');
-      poster.className = 'info-update-poster';
-      const mark = document.createElement('span');
-      mark.className = 'info-update-poster-mark';
-      mark.innerHTML = INFO_UPDATE_TAG_ICONS[tagSlug] || INFO_UPDATE_TAG_ICONS['fitur-baru'];
-      mark.setAttribute('aria-hidden', 'true');
-      poster.append(mark);
-      const body = document.createElement('div');
-      body.className = 'info-update-body';
-      const title = document.createElement('h4');
-      title.textContent = update.title || '';
-      const meta = document.createElement('p');
-      meta.className = 'info-update-meta';
-      meta.textContent = [update.day, update.time].filter(Boolean).join(' · ');
-      const tagEl = document.createElement('span');
-      tagEl.className = 'info-update-tag';
-      tagEl.textContent = tag;
-      const desc = document.createElement('div');
-      desc.className = 'info-update-desc';
-      const description = document.createElement('p');
-      description.textContent = update.description || '';
-      desc.append(description);
-      body.append(title, meta, tagEl, desc);
-      item.append(poster, body);
-      list.append(item);
-    });
+    updates.forEach((update) => list.append(createInfoUpdateItem(update)));
     void markInfoUpdatesSeen(updates);
   } catch { /* Biarkan daftar statis di halaman bila file belum bisa dibaca. */ }
   infoUpdatePage = 1;
@@ -3555,6 +3573,74 @@ function renderInfoUpdatePagination() {
   pager.append(lastButton);
 }
 renderInfoUpdatePagination();
+
+// Info Update sebelum login: daftar yang sama dengan di dalam panel, dibaca dari
+// file publik yang sama, tapi tanpa penanda sudah dibaca (butuh akun) dan dengan
+// paginasi sendiri agar tidak mengganggu paginasi di dalam panel.
+let mobileInfoUpdatePage = 1;
+async function loadMobileInfoUpdates() {
+  const list = document.querySelector('#mobile-info-update-list');
+  if (!list) return;
+  try {
+    const response = await fetch('/info-updates.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    const updates = Array.isArray(data?.updates) ? data.updates : [];
+    if (!updates.length) throw new Error('empty');
+    list.innerHTML = '';
+    updates.forEach((update) => list.append(createInfoUpdateItem(update)));
+  } catch {
+    list.innerHTML = '<li class="info-update-item"><div class="info-update-body"><h4>Info Update belum bisa dimuat</h4><p class="info-update-meta">Coba buka lagi halaman ini.</p><p>Login untuk melihat Info Update di dalam panel.</p></div></li>';
+  }
+  mobileInfoUpdatePage = 1;
+  renderMobileInfoUpdatePagination();
+}
+function renderMobileInfoUpdatePagination() {
+  const items = [...document.querySelectorAll('#mobile-info-update-list .info-update-item')];
+  const pager = document.querySelector('#mobile-info-update-pagination');
+  if (!pager) return;
+  const pages = Math.max(1, Math.ceil(items.length / INFO_UPDATE_PAGE_SIZE));
+  mobileInfoUpdatePage = Math.min(Math.max(1, mobileInfoUpdatePage), pages);
+  items.forEach((item, index) => {
+    item.classList.toggle('hidden', Math.floor(index / INFO_UPDATE_PAGE_SIZE) + 1 !== mobileInfoUpdatePage);
+  });
+  pager.innerHTML = '';
+  const makeButton = (label, ariaLabel, disabled, onClick, isActive = false) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `info-page-button${isActive ? ' is-active' : ''}`;
+    button.textContent = label;
+    button.setAttribute('aria-label', ariaLabel);
+    if (isActive) button.setAttribute('aria-current', 'page');
+    button.disabled = disabled;
+    button.addEventListener('click', onClick);
+    pager.append(button);
+    return button;
+  };
+  makeButton('«', 'Halaman pertama', mobileInfoUpdatePage <= 1, () => { mobileInfoUpdatePage = 1; renderMobileInfoUpdatePagination(); });
+  makeButton('‹', 'Halaman sebelumnya', mobileInfoUpdatePage <= 1, () => { mobileInfoUpdatePage -= 1; renderMobileInfoUpdatePagination(); });
+  const firstPage = Math.max(1, Math.min(mobileInfoUpdatePage - 2, pages - INFO_UPDATE_PAGE_WINDOW + 1));
+  const lastPage = Math.min(pages, firstPage + INFO_UPDATE_PAGE_WINDOW - 1);
+  if (firstPage > 1) {
+    const ellipsis = document.createElement('span');
+    ellipsis.className = 'info-page-ellipsis';
+    ellipsis.textContent = '…';
+    ellipsis.setAttribute('aria-hidden', 'true');
+    pager.append(ellipsis);
+  }
+  for (let page = firstPage; page <= lastPage; page += 1) {
+    makeButton(String(page), `Halaman ${page}`, page === mobileInfoUpdatePage, () => { mobileInfoUpdatePage = page; renderMobileInfoUpdatePagination(); }, page === mobileInfoUpdatePage);
+  }
+  if (lastPage < pages) {
+    const ellipsis = document.createElement('span');
+    ellipsis.className = 'info-page-ellipsis';
+    ellipsis.textContent = '…';
+    ellipsis.setAttribute('aria-hidden', 'true');
+    pager.append(ellipsis);
+  }
+  makeButton('›', 'Halaman berikutnya', mobileInfoUpdatePage >= pages, () => { mobileInfoUpdatePage += 1; renderMobileInfoUpdatePagination(); });
+  makeButton('»', 'Halaman terakhir', mobileInfoUpdatePage >= pages, () => { mobileInfoUpdatePage = pages; renderMobileInfoUpdatePagination(); });
+}
 
 // Tombol kembali ke atas di pojok kanan bawah, muncul setelah halaman di-scroll ke bawah.
 const backToTopButton = document.querySelector('#back-to-top');

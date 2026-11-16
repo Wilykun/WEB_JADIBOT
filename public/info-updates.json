@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-11-16T08:42:00+07:00",
+  "updatedAt": "2026-11-16T10:25:00+07:00",
   "updates": [
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "10.25 WIB",
+      "tag": "Fitur baru",
+      "title": "Info Update kini bisa dibuka sebelum login",
+      "description": "Menu informasi sebelum login dulu hanya punya Info, Developer, Server, dan List Bot — daftar pembaruan panel hanya bisa dilihat setelah masuk. Kini ada kartu Info Update selebar penuh di menu itu: daftar perubahan, fitur baru, dan perbaikan terbaru bisa dibaca sebelum login, dengan paginasi yang sama seperti di dalam panel."
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "10.24 WIB",
+      "tag": "Tampilan",
+      "title": "Kesalahan pairing kini muncul sebagai gelembung di kolomnya",
+      "description": "Saat menekan Gasss tanpa mencentang dua persetujuan atau dengan nomor yang tidak valid, pesannya dulu tampil sebagai kotak notif di bawah tombol. Kini pesannya muncul sebagai gelembung bawaan browser yang menempel di kolom yang salah dan menyebut persis apa yang kurang — sama seperti gelembung validasi email di halaman daftar. Pemilih metode juga tidak lagi hilang saat nomor tidak valid: dulu nomor seperti itu membuat pemilih tersembunyi sementara tombol terkunci, jadi pengguna mentok; kini pemilih tetap tampil karena QR tidak butuh nomor dan Pairing Code memvalidasi nomor di Gasss kedua."
+    },
     {
       "day": "Senin, 16 Nov 2026",
       "time": "08.42 WIB",
