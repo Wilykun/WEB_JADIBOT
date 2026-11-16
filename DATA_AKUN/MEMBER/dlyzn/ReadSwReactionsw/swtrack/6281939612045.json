@@ -1,0 +1,42 @@
+{
+  "A5F001802E566F56C5E021369B569998": {
+    "id": "A5F001802E566F56C5E021369B569998",
+    "sender": "6281939612045@s.whatsapp.net",
+    "number": "6281939612045",
+    "storyJid": "6281939612045@s.whatsapp.net",
+    "resolvedPn": "6281939612045@s.whatsapp.net",
+    "name": "Sovia",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5F001802E566F56C5E021369B569998",
+      "participant": "2199526621411@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5F001802E566F56C5E021369B569998",
+      "participant": "2199526621411@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "2199526621411@lid",
+      "6281939612045@s.whatsapp.net"
+    ],
+    "contactHash": "c7a24da8d7eb9d1ee5e204c7e23f49b1764fc5f2882982df4e79a8352699039a",
+    "arrivedAt": "2026-11-16T02:17:58.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T02:17:58.780Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T02:18:06.286Z",
+    "readAt": "2026-11-16T02:18:06.285Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-16T02:18:06.285Z"
+  }
+}

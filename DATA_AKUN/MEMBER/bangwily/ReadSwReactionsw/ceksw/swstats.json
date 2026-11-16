@@ -1,32 +1,836 @@
 {
   "6285700996045": {
-    "name": "ieo",
+    "name": "yae",
     "number": "6285700996045",
     "jid": "6285700996045@s.whatsapp.net",
-    "reads": 1,
-    "reactions": 1,
-    "lastSeen": "2026-11-15T10:25:38.284Z",
+    "reads": 14,
+    "reactions": 14,
+    "lastSeen": "2026-11-16T01:13:42.335Z",
     "activeSW": {
       "A5994AFEE84392A3B0FC6EC1888B731A": {
         "at": 1794738338284,
+        "reacted": true
+      },
+      "A50DD424B9C25F3AA0E23C5C3FC632A5": {
+        "at": 1794742471180,
+        "reacted": true
+      },
+      "A5C7356B018AFACAFBE4C37CEB453A48": {
+        "at": 1794746833912,
+        "reacted": true
+      },
+      "A5BB99608DA183E31B6949A557905E69": {
+        "at": 1794748769033,
+        "reacted": true
+      },
+      "A5EE03FB9460C4044A36249EC2EF3675": {
+        "at": 1794748856373,
+        "reacted": true
+      },
+      "A5D08305C5374F46A50B7DE17E53FE7D": {
+        "at": 1794775523295,
+        "reacted": true
+      },
+      "A55418C8E7EEB4060E40BB9DAEEE1F86": {
+        "at": 1794778945269,
+        "reacted": true
+      },
+      "A5DFE7BDCE678A79975875AF1014F0CD": {
+        "at": 1794780386899,
+        "reacted": true
+      },
+      "A5F9645D7142B2A42DD1E889E0868F2D": {
+        "at": 1794780432760,
+        "reacted": true
+      },
+      "A50C8A803318EC576DE01CB4303D7B06": {
+        "at": 1794783891435,
+        "reacted": true
+      },
+      "A5E5028913F52596D00E56638A61427A": {
+        "at": 1794784554362,
+        "reacted": true
+      },
+      "A52AF94A3C282489BDB603667D36EA09": {
+        "at": 1794787782932,
+        "reacted": true
+      },
+      "A54145C85C34933D0263D949BECD78F8": {
+        "at": 1794789212700,
+        "reacted": true
+      },
+      "A539D799291248765C4C99175420F24B": {
+        "at": 1794791622335,
         "reacted": true
       }
     }
   },
   "_emojiStats": {
-    "🍕": 1,
-    "🐸": 1
+    "🍕": 10,
+    "🐸": 12,
+    "🦄": 12,
+    "🐲": 7,
+    "🦓": 12,
+    "🐼": 11,
+    "🌭": 15,
+    "💚": 4,
+    "🍟": 7,
+    "🍔": 6,
+    "🐔": 8,
+    "🐴": 4
   },
   "6282239841068": {
     "name": "yaya",
     "number": "6282239841068",
     "jid": "6282239841068@s.whatsapp.net",
-    "reads": 1,
-    "reactions": 1,
-    "lastSeen": "2026-11-15T10:55:13.634Z",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-15T12:23:46.661Z",
     "activeSW": {
       "AC7AABDD971B315D2DE3AD80A3F7A56E": {
         "at": 1794740113634,
+        "reacted": true
+      },
+      "AC59A3287491E32B9E61848B5E1F75BB": {
+        "at": 1794745426661,
+        "reacted": true
+      }
+    }
+  },
+  "6289654837567": {
+    "name": ".",
+    "number": "6289654837567",
+    "jid": "6289654837567@s.whatsapp.net",
+    "reads": 3,
+    "reactions": 3,
+    "lastSeen": "2026-11-15T13:24:07.310Z",
+    "activeSW": {
+      "AC8AF956B6E591200675C40146079817": {
+        "at": 1794740372333,
+        "reacted": true
+      },
+      "AC9F1DAC5A2FE3841838EDCAF4C2AE3B": {
+        "at": 1794743855924,
+        "reacted": true
+      },
+      "ACEDF5AF08106F4A73F4E6095715FBED": {
+        "at": 1794749047310,
+        "reacted": true
+      }
+    }
+  },
+  "6285150762138": {
+    "name": "design",
+    "number": "6285150762138",
+    "jid": "6285150762138@s.whatsapp.net",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-15T11:20:31.970Z",
+    "activeSW": {
+      "A5B961592CB10392E4266BF1B2FC3BC3": {
+        "at": 1794740373352,
+        "reacted": true
+      },
+      "A5D84D6A572EF147AACF78F35E011AF5": {
+        "at": 1794741631970,
+        "reacted": true
+      }
+    }
+  },
+  "6285649093224": {
+    "name": "xyrroe",
+    "number": "6285649093224",
+    "jid": "6285649093224@s.whatsapp.net",
+    "reads": 4,
+    "reactions": 4,
+    "lastSeen": "2026-11-15T22:50:29.334Z",
+    "activeSW": {
+      "AC409E84495684974F0E8FEED89015BA": {
+        "at": 1794740973354,
+        "reacted": true
+      },
+      "ACA1F8A33CF143F8D9546417AAF2BEF5": {
+        "at": 1794755405090,
+        "reacted": true
+      },
+      "AC5573697CF1D8D44A25A9350250B3D4": {
+        "at": 1794782893782,
+        "reacted": true
+      },
+      "ACBE1FBDC5FCBB58CC2000FE05900853": {
+        "at": 1794783029334,
+        "reacted": true
+      }
+    }
+  },
+  "6283134844523": {
+    "name": "Anda Siapa?",
+    "number": "6283134844523",
+    "jid": "6283134844523@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T11:13:51.824Z",
+    "activeSW": {
+      "A54D44770C0E38B510057BF2D08D88DD": {
+        "at": 1794741231824,
+        "reacted": true
+      }
+    }
+  },
+  "6281368074650": {
+    "name": "🔮",
+    "number": "6281368074650",
+    "jid": "6281368074650@s.whatsapp.net",
+    "reads": 6,
+    "reactions": 6,
+    "lastSeen": "2026-11-16T02:08:07.935Z",
+    "activeSW": {
+      "AC2D56483A034979FD0FCC55382B0438": {
+        "at": 1794741926250,
+        "reacted": true
+      },
+      "AC335E35A6CA74A98B0AC9F78442E5E5": {
+        "at": 1794749939045,
+        "reacted": true
+      },
+      "AC9AB7D57FA68EB76451D91C43688CF7": {
+        "at": 1794749979492,
+        "reacted": true
+      },
+      "AC551409D9F2F666894BB24B2BD2E897": {
+        "at": 1794750017765,
+        "reacted": true
+      },
+      "ACD4E7CAA37358327C3BC23F914A9689": {
+        "at": 1794754776223,
+        "reacted": true
+      },
+      "AC22365257D2F04D15A323AF26561EAB": {
+        "at": 1794794887935,
+        "reacted": true
+      }
+    }
+  },
+  "6282142532503": {
+    "name": "darkness",
+    "number": "6282142532503",
+    "jid": "6282142532503@s.whatsapp.net",
+    "reads": 3,
+    "reactions": 3,
+    "lastSeen": "2026-11-15T23:40:05.436Z",
+    "activeSW": {
+      "AC96F23AA106134C38CD595FDC904977": {
+        "at": 1794742408497,
+        "reacted": true
+      },
+      "ACCFE1D6164E40842D547656BE67ABFE": {
+        "at": 1794742429762,
+        "reacted": true
+      },
+      "ACB84CAA11CFD906D3322F635C3D3388": {
+        "at": 1794786005436,
+        "reacted": true
+      }
+    }
+  },
+  "6281345393467": {
+    "name": "Ardani",
+    "number": "6281345393467",
+    "jid": "6281345393467@s.whatsapp.net",
+    "reads": 9,
+    "reactions": 9,
+    "lastSeen": "2026-11-15T22:23:32.703Z",
+    "activeSW": {
+      "A5BD4CB3128A4BA2D6E3146D07A14C65": {
+        "at": 1794742418686,
+        "reacted": true
+      },
+      "A54BB6F8DAAE03B1184F9F3D1553C8E3": {
+        "at": 1794749478864,
+        "reacted": true
+      },
+      "A5A771D94366DA449E25C20B88B45780": {
+        "at": 1794749481133,
+        "reacted": true
+      },
+      "A535944C61214FE7BA4E44E013012F7A": {
+        "at": 1794749483250,
+        "reacted": true
+      },
+      "A582D2BD8C13E6865BD2EB4C4F1B98A3": {
+        "at": 1794750577814,
+        "reacted": true
+      },
+      "A52728BEF01EAD73818EA58CDA80FD9B": {
+        "at": 1794752249829,
+        "reacted": true
+      },
+      "A5CD12244C119B21868C3D49E878BD30": {
+        "at": 1794752255363,
+        "reacted": true
+      },
+      "A58CC1DCB2720FACC90FFBE9C46D9E8A": {
+        "at": 1794781404112,
+        "reacted": true
+      },
+      "A52493A95077D652B58DC6EA399BED99": {
+        "at": 1794781412703,
+        "reacted": true
+      }
+    }
+  },
+  "6283897069764": {
+    "name": "WansXDR",
+    "number": "6283897069764",
+    "jid": "6283897069764@s.whatsapp.net",
+    "reads": 3,
+    "reactions": 3,
+    "lastSeen": "2026-11-15T13:24:52.275Z",
+    "activeSW": {
+      "A5082B83CA421D2FA0190FB526801AC1": {
+        "at": 1794742695542,
+        "reacted": true
+      },
+      "A5D835944C80DC02B0F7D03DE673781F": {
+        "at": 1794748146775,
+        "reacted": true
+      },
+      "A54343EC7C6C5B65E9751A80B90592BA": {
+        "at": 1794749092275,
+        "reacted": true
+      }
+    }
+  },
+  "6282113794951": {
+    "name": "naa",
+    "number": "6282113794951",
+    "jid": "6282113794951@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T11:45:43.859Z",
+    "activeSW": {
+      "ACEAE83032E9C958967D2F5A12EA2CB6": {
+        "at": 1794743143859,
+        "reacted": true
+      }
+    }
+  },
+  "6282388417118": {
+    "name": "Kaguya",
+    "number": "6282388417118",
+    "jid": "6282388417118@s.whatsapp.net",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-15T23:51:18.823Z",
+    "activeSW": {
+      "AC937C5C8BF04EB1601CA2DDDD6E58B7": {
+        "at": 1794744128202,
+        "reacted": true
+      },
+      "ACC743421AE5C4C4898A2486C8247A47": {
+        "at": 1794786678823,
+        "reacted": true
+      }
+    }
+  },
+  "6285394015819": {
+    "name": "Farid",
+    "number": "6285394015819",
+    "jid": "6285394015819@s.whatsapp.net",
+    "reads": 3,
+    "reactions": 3,
+    "lastSeen": "2026-11-15T12:06:20.421Z",
+    "activeSW": {
+      "ACCB70C90E91B6E0182F1E47D98FD65E": {
+        "at": 1794744259954,
+        "reacted": true
+      },
+      "ACF242057D35DA118089C4D238CF3952": {
+        "at": 1794744302938,
+        "reacted": true
+      },
+      "ACFE1C6E59456163A9FCB674070B8D9B": {
+        "at": 1794744380421,
+        "reacted": true
+      }
+    }
+  },
+  "6288742843562": {
+    "name": "Jju, sä oot mun ❤️💐",
+    "number": "6288742843562",
+    "jid": "6288742843562@s.whatsapp.net",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-15T13:44:32.247Z",
+    "activeSW": {
+      "ACA86F41B268A8A8DC1826706C064C69": {
+        "at": 1794744501733,
+        "reacted": true
+      },
+      "AC091E3A2491C403654F10A80E9A42E5": {
+        "at": 1794750272247,
+        "reacted": true
+      }
+    }
+  },
+  "6289637862698": {
+    "name": "zencen",
+    "number": "6289637862698",
+    "jid": "6289637862698@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T12:10:37.596Z",
+    "activeSW": {
+      "AC0954A8BD4414B7A6FC67C665A15C62": {
+        "at": 1794744637596,
+        "reacted": true
+      }
+    }
+  },
+  "6282252134009": {
+    "name": "STCZZ",
+    "number": "6282252134009",
+    "jid": "6282252134009@s.whatsapp.net",
+    "reads": 8,
+    "reactions": 8,
+    "lastSeen": "2026-11-15T23:54:11.584Z",
+    "activeSW": {
+      "AC6ED6137D78C59301450FFD3471B8A8": {
+        "at": 1794745469788,
+        "reacted": true
+      },
+      "ACDC7084B1CDEFC0421A7BD47CE9A44A": {
+        "at": 1794783172254,
+        "reacted": true
+      },
+      "AC618443E16A9F589195EFA779115772": {
+        "at": 1794783178044,
+        "reacted": true
+      },
+      "AC1EEC62C11FB1D70931DF57EB3FAE19": {
+        "at": 1794783200271,
+        "reacted": true
+      },
+      "AC5A9C8C466ADA75558EDEB2367889C9": {
+        "at": 1794783201310,
+        "reacted": true
+      },
+      "ACCBB85DF611228B99C72DBE186874D3": {
+        "at": 1794783204094,
+        "reacted": true
+      },
+      "AC6CA2A2E539F7DADC055DDC3A70ED81": {
+        "at": 1794783467607,
+        "reacted": true
+      },
+      "AC50192356FB71AB1CDAAEE78C0CCD0C": {
+        "at": 1794786851584,
+        "reacted": true
+      }
+    }
+  },
+  "6281222884622": {
+    "name": "~ Alfian",
+    "number": "6281222884622",
+    "jid": "6281222884622@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T12:41:28.062Z",
+    "activeSW": {
+      "AC306DF19B5F8F4BD01184489977DC98": {
+        "at": 1794746488062,
+        "reacted": true
+      }
+    }
+  },
+  "62882003110997": {
+    "name": "sibukk",
+    "number": "62882003110997",
+    "jid": "62882003110997@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T12:54:48.206Z",
+    "activeSW": {
+      "ACC4AA4BA14983730FBFBDBE47E4FF22": {
+        "at": 1794747288206,
+        "reacted": true
+      }
+    }
+  },
+  "6281326870686": {
+    "name": "ге kу",
+    "number": "6281326870686",
+    "jid": "6281326870686@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T12:57:28.483Z",
+    "activeSW": {
+      "ACF1BB312EC1FA0BE1B31650F472FD20": {
+        "at": 1794747448483,
+        "reacted": true
+      }
+    }
+  },
+  "6282277708591": {
+    "name": "munawirahmadr",
+    "number": "6282277708591",
+    "jid": "6282277708591@s.whatsapp.net",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-16T01:01:37.784Z",
+    "activeSW": {
+      "ACF1BF4601CB4AF5945613B15D20835C": {
+        "at": 1794747771581,
+        "reacted": true
+      },
+      "AC8C53DD740E93873B439C1837191486": {
+        "at": 1794790897784,
+        "reacted": true
+      }
+    }
+  },
+  "6283822135658": {
+    "name": "cz",
+    "number": "6283822135658",
+    "jid": "6283822135658@s.whatsapp.net",
+    "reads": 4,
+    "reactions": 4,
+    "lastSeen": "2026-11-15T22:38:48.140Z",
+    "activeSW": {
+      "ACA878D509CA952DC58AFA76238646D8": {
+        "at": 1794748852324,
+        "reacted": true
+      },
+      "ACEA6E0A06A72BC6FB00706314CFF449": {
+        "at": 1794749073904,
+        "reacted": true
+      },
+      "AC244A8EBFE71B07C455C592DEF7D591": {
+        "at": 1794781835949,
+        "reacted": true
+      },
+      "AC1293C42D7E227F0BBDA980C2BDF5D9": {
+        "at": 1794782328140,
+        "reacted": true
+      }
+    }
+  },
+  "6283182665936": {
+    "name": "aku LUI",
+    "number": "6283182665936",
+    "jid": "6283182665936@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T13:23:05.742Z",
+    "activeSW": {
+      "AC5C776E446DDA45A418B4A4A2711D05": {
+        "at": 1794748985742,
+        "reacted": true
+      }
+    }
+  },
+  "6282216501151": {
+    "name": "saepulfariz",
+    "number": "6282216501151",
+    "jid": "6282216501151@s.whatsapp.net",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-15T21:07:34.506Z",
+    "activeSW": {
+      "ACF98B14BBEFCEDC6EA1E027273D29E2": {
+        "at": 1794749650181,
+        "reacted": true
+      },
+      "AC98C0CFE86BD1738FC28DC83048FB20": {
+        "at": 1794776854506,
+        "reacted": true
+      }
+    }
+  },
+  "6285246277215": {
+    "name": "정한",
+    "number": "6285246277215",
+    "jid": "6285246277215@s.whatsapp.net",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-16T02:00:17.359Z",
+    "activeSW": {
+      "AC21EE97FBD43CB6B5A9A1919679D9FC": {
+        "at": 1794750184551,
+        "reacted": true
+      },
+      "ACE8AE79C54A71485922F3B871E5E99C": {
+        "at": 1794794417359,
+        "reacted": true
+      }
+    }
+  },
+  "6285216433695": {
+    "name": "apalah dia",
+    "number": "6285216433695",
+    "jid": "6285216433695@s.whatsapp.net",
+    "reads": 3,
+    "reactions": 3,
+    "lastSeen": "2026-11-16T00:45:46.086Z",
+    "activeSW": {
+      "AC0C5975E66FA97D3A6EEAB065912C4A": {
+        "at": 1794750774939,
+        "reacted": true
+      },
+      "AC48238B50AD3C1CEC91E8744109BC13": {
+        "at": 1794787453945,
+        "reacted": true
+      },
+      "ACB6A4F365C785B41D06AFF298B542D1": {
+        "at": 1794789946086,
+        "reacted": true
+      }
+    }
+  },
+  "6281393564657": {
+    "name": "γυς ρου",
+    "number": "6281393564657",
+    "jid": "6281393564657@s.whatsapp.net",
+    "reads": 3,
+    "reactions": 3,
+    "lastSeen": "2026-11-15T14:29:08.616Z",
+    "activeSW": {
+      "AC0ECFCF835A5835D59F71715F827345": {
+        "at": 1794750957419,
+        "reacted": true
+      },
+      "ACB30AA251657D092CB204891FF4E4B7": {
+        "at": 1794751328239,
+        "reacted": true
+      },
+      "AC4E123A6146CA70BA0671667EEBD58A": {
+        "at": 1794752948616,
+        "reacted": true
+      }
+    }
+  },
+  "6288239774015": {
+    "name": "woy",
+    "number": "6288239774015",
+    "jid": "6288239774015@s.whatsapp.net",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-15T14:17:32.067Z",
+    "activeSW": {
+      "AC7A72F86F7D69AEC79ED4CE46933D91": {
+        "at": 1794751219369,
+        "reacted": true
+      },
+      "ACCD8482FAEF7BA15F2623B7E94B5A69": {
+        "at": 1794752252067,
+        "reacted": true
+      }
+    }
+  },
+  "6281288237083": {
+    "name": "Ryo",
+    "number": "6281288237083",
+    "jid": "6281288237083@s.whatsapp.net",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-15T15:47:14.082Z",
+    "activeSW": {
+      "ACB8101D3D3DF15C039B5110A4AD6AD4": {
+        "at": 1794753539417,
+        "reacted": true
+      },
+      "AC439439EA11E25EE5F7F8372C091C7B": {
+        "at": 1794757634082,
+        "reacted": true
+      }
+    }
+  },
+  "62895346275224": {
+    "name": "Nanael",
+    "number": "62895346275224",
+    "jid": "62895346275224@s.whatsapp.net",
+    "reads": 3,
+    "reactions": 3,
+    "lastSeen": "2026-11-15T15:01:37.620Z",
+    "activeSW": {
+      "ACEB6FD431665A9C0C6F472A1A99C496": {
+        "at": 1794754655370,
+        "reacted": true
+      },
+      "AC67C6BCD0C5E4BB8B57458F863765EF": {
+        "at": 1794754823572,
+        "reacted": true
+      },
+      "ACBD77363243B8B408A020CE3996F53F": {
+        "at": 1794754897620,
+        "reacted": true
+      }
+    }
+  },
+  "6289678522775": {
+    "name": "Zacky Ariansyah",
+    "number": "6289678522775",
+    "jid": "6289678522775@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T15:20:44.516Z",
+    "activeSW": {
+      "AC54D45BA785BA7BB371463236DBCE95": {
+        "at": 1794756044516,
+        "reacted": true
+      }
+    }
+  },
+  "6287812372599": {
+    "name": "ZiiBa_Kadotani Anzu",
+    "number": "6287812372599",
+    "jid": "6287812372599@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T15:30:45.143Z",
+    "activeSW": {
+      "A5CB900CE20F46C1464FE21AE415A4E6": {
+        "at": 1794756645143,
+        "reacted": true
+      }
+    }
+  },
+  "62881011687099": {
+    "name": "Heru Kurniawan",
+    "number": "62881011687099",
+    "jid": "62881011687099@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T15:36:43.876Z",
+    "activeSW": {
+      "ACCD074C47E2FC25C495104207D5054B": {
+        "at": 1794757003876,
+        "reacted": true
+      }
+    }
+  },
+  "6281259313838": {
+    "name": "s10e0n4p10",
+    "number": "6281259313838",
+    "jid": "6281259313838@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T15:58:26.388Z",
+    "activeSW": {
+      "3EB0A00D19BD60F5F53140": {
+        "at": 1794758306388,
+        "reacted": true
+      }
+    }
+  },
+  "6285846832214": {
+    "name": "iyazaan",
+    "number": "6285846832214",
+    "jid": "6285846832214@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T20:41:16.335Z",
+    "activeSW": {
+      "ACB0BD7B8842E799E523FEFB8021ED43": {
+        "at": 1794775276335,
+        "reacted": true
+      }
+    }
+  },
+  "6285799241374": {
+    "name": "𝐃𝐥𝐲𝐳𝐧",
+    "number": "6285799241374",
+    "jid": "6285799241374@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-15T22:42:53.625Z",
+    "activeSW": {
+      "A55F8F167926254938310C5CF6DC81AC": {
+        "at": 1794782573625,
+        "reacted": true
+      }
+    }
+  },
+  "6289688206739": {
+    "name": "Wily",
+    "number": "6289688206739",
+    "jid": "6289688206739@s.whatsapp.net",
+    "reads": 7,
+    "reactions": 7,
+    "lastSeen": "2026-11-16T00:07:22.568Z",
+    "activeSW": {
+      "A5CD21E2257F08132C1689E4090A88FC": {
+        "at": 1794787078576,
+        "reacted": true
+      },
+      "A5C3DF9801FC677DD24D05377BA219D5": {
+        "at": 1794787104770,
+        "reacted": true
+      },
+      "A56AFFFC2A8E36063D6C168E064530E3": {
+        "at": 1794787111349,
+        "reacted": true
+      },
+      "A594C3FDC916AFCF03459FEC8986DF87": {
+        "at": 1794787112433,
+        "reacted": true
+      },
+      "A540049D3489CCAC5660EA52E057CDEB": {
+        "at": 1794787113035,
+        "reacted": true
+      },
+      "A50CAAD6A16012307D9BCE7B4A722FF1": {
+        "at": 1794787119682,
+        "reacted": true
+      },
+      "A517D0A77E7B26B2A73E29B6020FBF8A": {
+        "at": 1794787642568,
+        "reacted": true
+      }
+    }
+  },
+  "6282172560701": {
+    "name": "Nemuri•",
+    "number": "6282172560701",
+    "jid": "6282172560701@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-16T00:30:43.725Z",
+    "activeSW": {
+      "AC8C885D6FDA2073100422344087F664": {
+        "at": 1794789043725,
+        "reacted": true
+      }
+    }
+  },
+  "628388589625": {
+    "name": "𝙢𝙖𝙪𝙡𝙖𝙣𝙖 𝙣𝙜𝙚𝙣",
+    "number": "628388589625",
+    "jid": "628388589625@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-16T00:41:43.538Z",
+    "activeSW": {
+      "AC7E86247111AE53584B7C3F8119C656": {
+        "at": 1794789703538,
+        "reacted": true
+      }
+    }
+  },
+  "60172160495": {
+    "name": "AldySensei",
+    "number": "60172160495",
+    "jid": "60172160495@s.whatsapp.net",
+    "reads": 2,
+    "reactions": 2,
+    "lastSeen": "2026-11-16T02:12:41.220Z",
+    "activeSW": {
+      "ACCCE8ECB139D47C9ECA6266820B263B": {
+        "at": 1794793494055,
+        "reacted": true
+      },
+      "ACB9FD150558B43B7D9E6178531C66FA": {
+        "at": 1794795161220,
         "reacted": true
       }
     }

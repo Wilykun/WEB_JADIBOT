@@ -188,5 +188,81 @@
     "lastError": null,
     "updatedAt": "2026-11-15T06:14:49.854Z",
     "readAt": "2026-11-15T06:14:49.854Z"
+  },
+  "AC6CD79C579A042BA0AD8A8A1BF124C3": {
+    "id": "AC6CD79C579A042BA0AD8A8A1BF124C3",
+    "sender": "6287793599712@s.whatsapp.net",
+    "number": "6287793599712",
+    "storyJid": "6287793599712@s.whatsapp.net",
+    "resolvedPn": "6287793599712@s.whatsapp.net",
+    "name": "naaaa",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6CD79C579A042BA0AD8A8A1BF124C3",
+      "participant": "45720648298536@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6CD79C579A042BA0AD8A8A1BF124C3",
+      "participant": "45720648298536@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "45720648298536@lid",
+      "6287793599712@s.whatsapp.net"
+    ],
+    "contactHash": "039edc40180f3f54fb94160746f3af9f5047fe0e0a56c021821c075089bfefe0",
+    "arrivedAt": "2026-11-15T15:01:30.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T15:01:30.788Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T15:01:50.291Z",
+    "readAt": "2026-11-15T15:01:50.290Z"
+  },
+  "AC4C3C9D8D3179BFACE24CB3EE45D46D": {
+    "id": "AC4C3C9D8D3179BFACE24CB3EE45D46D",
+    "sender": "6287793599712@s.whatsapp.net",
+    "number": "6287793599712",
+    "storyJid": "6287793599712@s.whatsapp.net",
+    "resolvedPn": "6287793599712@s.whatsapp.net",
+    "name": "naaaa",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4C3C9D8D3179BFACE24CB3EE45D46D",
+      "participant": "45720648298536@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4C3C9D8D3179BFACE24CB3EE45D46D",
+      "participant": "45720648298536@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "45720648298536@lid",
+      "6287793599712@s.whatsapp.net"
+    ],
+    "contactHash": "039edc40180f3f54fb94160746f3af9f5047fe0e0a56c021821c075089bfefe0",
+    "arrivedAt": "2026-11-15T15:24:45.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T15:24:46.004Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T15:24:49.609Z",
+    "readAt": "2026-11-15T15:24:49.609Z"
   }
 }

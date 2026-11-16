@@ -1,0 +1,122 @@
+{
+  "A5082B83CA421D2FA0190FB526801AC1": {
+    "id": "A5082B83CA421D2FA0190FB526801AC1",
+    "sender": "6283897069764@s.whatsapp.net",
+    "number": "6283897069764",
+    "storyJid": "6283897069764@s.whatsapp.net",
+    "resolvedPn": "6283897069764@s.whatsapp.net",
+    "name": "WansXDR",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5082B83CA421D2FA0190FB526801AC1",
+      "participant": "59236289622095@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5082B83CA421D2FA0190FB526801AC1",
+      "participant": "59236289622095@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "59236289622095@lid",
+      "6283897069764@s.whatsapp.net"
+    ],
+    "contactHash": "204cb3543d075bb6de5250a80091b2135ad04e37090277d302098eeeb8ebe793",
+    "arrivedAt": "2026-11-15T11:37:56.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T11:37:57.035Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T11:38:15.542Z",
+    "readAt": "2026-11-15T11:38:15.541Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T11:38:15.541Z"
+  },
+  "A5D835944C80DC02B0F7D03DE673781F": {
+    "id": "A5D835944C80DC02B0F7D03DE673781F",
+    "sender": "6283897069764@s.whatsapp.net",
+    "number": "6283897069764",
+    "storyJid": "6283897069764@s.whatsapp.net",
+    "resolvedPn": "6283897069764@s.whatsapp.net",
+    "name": "WansXDR",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5D835944C80DC02B0F7D03DE673781F",
+      "participant": "59236289622095@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5D835944C80DC02B0F7D03DE673781F",
+      "participant": "59236289622095@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "59236289622095@lid",
+      "6283897069764@s.whatsapp.net"
+    ],
+    "contactHash": "204cb3543d075bb6de5250a80091b2135ad04e37090277d302098eeeb8ebe793",
+    "arrivedAt": "2026-11-15T13:08:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T13:08:46.295Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T13:09:06.775Z",
+    "readAt": "2026-11-15T13:09:06.775Z",
+    "emoji": "🍟",
+    "reactedAt": "2026-11-15T13:09:06.775Z"
+  },
+  "A54343EC7C6C5B65E9751A80B90592BA": {
+    "id": "A54343EC7C6C5B65E9751A80B90592BA",
+    "sender": "6283897069764@s.whatsapp.net",
+    "number": "6283897069764",
+    "storyJid": "6283897069764@s.whatsapp.net",
+    "resolvedPn": "6283897069764@s.whatsapp.net",
+    "name": "WansXDR",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A54343EC7C6C5B65E9751A80B90592BA",
+      "participant": "59236289622095@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A54343EC7C6C5B65E9751A80B90592BA",
+      "participant": "59236289622095@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "59236289622095@lid",
+      "6283897069764@s.whatsapp.net"
+    ],
+    "contactHash": "204cb3543d075bb6de5250a80091b2135ad04e37090277d302098eeeb8ebe793",
+    "arrivedAt": "2026-11-15T13:24:42.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T13:24:42.503Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T13:24:52.273Z",
+    "readAt": "2026-11-15T13:24:52.267Z",
+    "emoji": "🐔",
+    "reactedAt": "2026-11-15T13:24:52.267Z"
+  }
+}

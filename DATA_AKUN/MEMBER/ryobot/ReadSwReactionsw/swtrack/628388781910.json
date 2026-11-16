@@ -1,0 +1,42 @@
+{
+  "AC99D9D494D01C8CBA730455DEC4C0FE": {
+    "id": "AC99D9D494D01C8CBA730455DEC4C0FE",
+    "sender": "628388781910@s.whatsapp.net",
+    "number": "628388781910",
+    "storyJid": "628388781910@s.whatsapp.net",
+    "resolvedPn": "628388781910@s.whatsapp.net",
+    "name": "​​kane.ヅ 𝖋𝖙`[𝙎𝙁_𝘼𝘾𝙁]",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC99D9D494D01C8CBA730455DEC4C0FE",
+      "participant": "25658705068166@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC99D9D494D01C8CBA730455DEC4C0FE",
+      "participant": "25658705068166@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "25658705068166@lid",
+      "628388781910@s.whatsapp.net"
+    ],
+    "contactHash": "16f2bc258ec83ee8a42acd1e79414c8be707132671d01ec51a145d22391a4300",
+    "arrivedAt": "2026-11-15T14:47:29.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T14:47:30.031Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T14:47:47.262Z",
+    "readAt": "2026-11-15T14:47:47.261Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T14:47:47.261Z"
+  }
+}

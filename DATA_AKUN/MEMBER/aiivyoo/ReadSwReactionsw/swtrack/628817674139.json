@@ -264,5 +264,43 @@
     "lastError": null,
     "updatedAt": "2026-11-15T10:13:29.409Z",
     "readAt": "2026-11-15T10:13:29.409Z"
+  },
+  "ACE42FA9ADBAA58174229C39A3FA21CB": {
+    "id": "ACE42FA9ADBAA58174229C39A3FA21CB",
+    "sender": "628817674139@s.whatsapp.net",
+    "number": "628817674139",
+    "storyJid": "628817674139@s.whatsapp.net",
+    "resolvedPn": "628817674139@s.whatsapp.net",
+    "name": "monikaa",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE42FA9ADBAA58174229C39A3FA21CB",
+      "participant": "175179300880577@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE42FA9ADBAA58174229C39A3FA21CB",
+      "participant": "175179300880577@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "175179300880577@lid",
+      "628817674139@s.whatsapp.net"
+    ],
+    "contactHash": "3abe00ba7e0a8d8fb974e49b353fe933df1edae54f22416fee6ad361d4d403f5",
+    "arrivedAt": "2026-11-15T13:50:30.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T13:50:30.641Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T13:50:39.944Z",
+    "readAt": "2026-11-15T13:50:39.944Z"
   }
 }

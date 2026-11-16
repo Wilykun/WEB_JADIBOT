@@ -1,6 +1,6 @@
 {
-  "AC5FE74B94C0CCF757B5638081281BF4": {
-    "id": "AC5FE74B94C0CCF757B5638081281BF4",
+  "AC5C776E446DDA45A418B4A4A2711D05": {
+    "id": "AC5C776E446DDA45A418B4A4A2711D05",
     "sender": "6283182665936@s.whatsapp.net",
     "number": "6283182665936",
     "storyJid": "6283182665936@s.whatsapp.net",
@@ -11,13 +11,13 @@
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "AC5FE74B94C0CCF757B5638081281BF4",
+      "id": "AC5C776E446DDA45A418B4A4A2711D05",
       "participant": "165536713416760@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "AC5FE74B94C0CCF757B5638081281BF4",
+      "id": "AC5C776E446DDA45A418B4A4A2711D05",
       "participant": "165536713416760@lid",
       "fromMe": false
     },
@@ -26,257 +26,17 @@
       "6283182665936@s.whatsapp.net"
     ],
     "contactHash": "4264e9c5ffcd2f7e079ba566681b90ec1aeaf2e5c6ac0fca46c9d0194af6c6aa",
-    "arrivedAt": "2026-11-14T14:11:38.000Z",
+    "arrivedAt": "2026-11-15T13:23:03.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-14T14:11:39.045Z",
+    "lastAttemptAt": "2026-11-15T13:23:03.914Z",
     "lastError": null,
-    "updatedAt": "2026-11-14T14:11:42.522Z",
-    "readAt": "2026-11-14T14:11:42.518Z",
+    "updatedAt": "2026-11-15T13:23:05.741Z",
+    "readAt": "2026-11-15T13:23:05.741Z",
     "emoji": "🐸",
-    "reactedAt": "2026-11-14T14:11:42.518Z"
-  },
-  "ACA1B59842F45CBA32C9FC8BF70A944E": {
-    "id": "ACA1B59842F45CBA32C9FC8BF70A944E",
-    "sender": "6283182665936@s.whatsapp.net",
-    "number": "6283182665936",
-    "storyJid": "6283182665936@s.whatsapp.net",
-    "resolvedPn": "6283182665936@s.whatsapp.net",
-    "name": "aku LUI",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACA1B59842F45CBA32C9FC8BF70A944E",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACA1B59842F45CBA32C9FC8BF70A944E",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "165536713416760@lid",
-      "6283182665936@s.whatsapp.net"
-    ],
-    "contactHash": "4264e9c5ffcd2f7e079ba566681b90ec1aeaf2e5c6ac0fca46c9d0194af6c6aa",
-    "arrivedAt": "2026-11-14T14:24:33.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-14T14:24:33.929Z",
-    "lastError": null,
-    "updatedAt": "2026-11-14T14:24:41.893Z",
-    "readAt": "2026-11-14T14:24:41.892Z",
-    "emoji": "🦓",
-    "reactedAt": "2026-11-14T14:24:41.892Z"
-  },
-  "AC5CF22094EEB27078D3D95DAC831F37": {
-    "id": "AC5CF22094EEB27078D3D95DAC831F37",
-    "sender": "6283182665936@s.whatsapp.net",
-    "number": "6283182665936",
-    "storyJid": "6283182665936@s.whatsapp.net",
-    "resolvedPn": "6283182665936@s.whatsapp.net",
-    "name": "aku LUI",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC5CF22094EEB27078D3D95DAC831F37",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC5CF22094EEB27078D3D95DAC831F37",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "165536713416760@lid",
-      "6283182665936@s.whatsapp.net"
-    ],
-    "contactHash": "4264e9c5ffcd2f7e079ba566681b90ec1aeaf2e5c6ac0fca46c9d0194af6c6aa",
-    "arrivedAt": "2026-11-14T14:54:34.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-14T14:54:34.584Z",
-    "lastError": null,
-    "updatedAt": "2026-11-14T14:54:37.138Z",
-    "readAt": "2026-11-14T14:54:37.137Z",
-    "emoji": "🐼",
-    "reactedAt": "2026-11-14T14:54:37.137Z"
-  },
-  "AC944A86ED23B2B7C062F1733B41CD62": {
-    "id": "AC944A86ED23B2B7C062F1733B41CD62",
-    "sender": "6283182665936@s.whatsapp.net",
-    "number": "6283182665936",
-    "storyJid": "6283182665936@s.whatsapp.net",
-    "resolvedPn": "6283182665936@s.whatsapp.net",
-    "name": "aku LUI",
-    "type": "imageMessage",
-    "contentType": "imageMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC944A86ED23B2B7C062F1733B41CD62",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC944A86ED23B2B7C062F1733B41CD62",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "165536713416760@lid",
-      "6283182665936@s.whatsapp.net"
-    ],
-    "contactHash": "4264e9c5ffcd2f7e079ba566681b90ec1aeaf2e5c6ac0fca46c9d0194af6c6aa",
-    "arrivedAt": "2026-11-14T15:06:50.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-14T15:06:50.539Z",
-    "lastError": null,
-    "updatedAt": "2026-11-14T15:06:56.540Z",
-    "readAt": "2026-11-14T15:06:56.540Z",
-    "emoji": "🐸",
-    "reactedAt": "2026-11-14T15:06:56.540Z"
-  },
-  "ACCEDE33C11FB86A4155EE50AF47D5F4": {
-    "id": "ACCEDE33C11FB86A4155EE50AF47D5F4",
-    "sender": "6283182665936@s.whatsapp.net",
-    "number": "6283182665936",
-    "storyJid": "6283182665936@s.whatsapp.net",
-    "resolvedPn": "6283182665936@s.whatsapp.net",
-    "name": "aku LUI",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACCEDE33C11FB86A4155EE50AF47D5F4",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACCEDE33C11FB86A4155EE50AF47D5F4",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "165536713416760@lid",
-      "6283182665936@s.whatsapp.net"
-    ],
-    "contactHash": "4264e9c5ffcd2f7e079ba566681b90ec1aeaf2e5c6ac0fca46c9d0194af6c6aa",
-    "arrivedAt": "2026-11-14T15:17:55.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-14T15:17:55.407Z",
-    "lastError": null,
-    "updatedAt": "2026-11-14T15:18:14.593Z",
-    "readAt": "2026-11-14T15:18:14.592Z",
-    "emoji": "🐼",
-    "reactedAt": "2026-11-14T15:18:14.592Z"
-  },
-  "ACA303079CC1E0E9C665EAE84AFBA2F5": {
-    "id": "ACA303079CC1E0E9C665EAE84AFBA2F5",
-    "sender": "6283182665936@s.whatsapp.net",
-    "number": "6283182665936",
-    "storyJid": "6283182665936@s.whatsapp.net",
-    "resolvedPn": "6283182665936@s.whatsapp.net",
-    "name": "aku LUI",
-    "type": "imageMessage",
-    "contentType": "imageMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACA303079CC1E0E9C665EAE84AFBA2F5",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACA303079CC1E0E9C665EAE84AFBA2F5",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "165536713416760@lid",
-      "6283182665936@s.whatsapp.net"
-    ],
-    "contactHash": "4264e9c5ffcd2f7e079ba566681b90ec1aeaf2e5c6ac0fca46c9d0194af6c6aa",
-    "arrivedAt": "2026-11-14T15:21:01.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-14T15:21:01.870Z",
-    "lastError": null,
-    "updatedAt": "2026-11-14T15:21:21.343Z",
-    "readAt": "2026-11-14T15:21:21.341Z",
-    "emoji": "🦓",
-    "reactedAt": "2026-11-14T15:21:21.341Z"
-  },
-  "ACA688C6D5DD45D1599ED27A58844DE3": {
-    "id": "ACA688C6D5DD45D1599ED27A58844DE3",
-    "sender": "6283182665936@s.whatsapp.net",
-    "number": "6283182665936",
-    "storyJid": "6283182665936@s.whatsapp.net",
-    "resolvedPn": "6283182665936@s.whatsapp.net",
-    "name": "aku LUI",
-    "type": "videoMessage",
-    "contentType": "videoMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACA688C6D5DD45D1599ED27A58844DE3",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACA688C6D5DD45D1599ED27A58844DE3",
-      "participant": "165536713416760@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "165536713416760@lid",
-      "6283182665936@s.whatsapp.net"
-    ],
-    "contactHash": "4264e9c5ffcd2f7e079ba566681b90ec1aeaf2e5c6ac0fca46c9d0194af6c6aa",
-    "arrivedAt": "2026-11-14T15:35:09.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-14T15:35:09.494Z",
-    "lastError": null,
-    "updatedAt": "2026-11-14T15:35:28.877Z",
-    "readAt": "2026-11-14T15:35:28.877Z",
-    "emoji": "🦄",
-    "reactedAt": "2026-11-14T15:35:28.877Z"
+    "reactedAt": "2026-11-15T13:23:05.741Z"
   }
 }

@@ -1,0 +1,21 @@
+{
+  "username": "welll",
+  "sesiAktif": [
+    {
+      "sid": "1bceb33d",
+      "ip": "103.216.106.199",
+      "device": "HP · in-id · Android 13 · Chrome 115.0.5970.168",
+      "dibuat": "2026-11-16T00:29:11.909Z",
+      "dibuatWIB": "Senin, 16 November 2026 pukul 07.29.11 WIB",
+      "terakhirAktif": "2026-11-16T00:29:46.448Z",
+      "terakhirAktifWIB": "Senin, 16 November 2026 pukul 07.29.46 WIB",
+      "berakhir": "2026-11-23T00:29:11.888Z"
+    }
+  ],
+  "loginTerakhir": {
+    "waktu": "2026-11-16T00:29:11.909Z",
+    "waktuWIB": "Senin, 16 November 2026 pukul 07.29.11 WIB",
+    "ip": "103.216.106.199",
+    "device": "HP · in-id · Android 13 · Chrome 115.0.5970.168"
+  }
+}

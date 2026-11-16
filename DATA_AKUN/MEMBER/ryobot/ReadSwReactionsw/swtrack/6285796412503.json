@@ -38,5 +38,45 @@
     "readAt": "2026-11-15T03:36:45.931Z",
     "emoji": "💚",
     "reactedAt": "2026-11-15T03:36:45.931Z"
+  },
+  "AC714A553C37C8EDF1E994614C63D2C5": {
+    "id": "AC714A553C37C8EDF1E994614C63D2C5",
+    "sender": "6285796412503@s.whatsapp.net",
+    "number": "6285796412503",
+    "storyJid": "6285796412503@s.whatsapp.net",
+    "resolvedPn": "6285796412503@s.whatsapp.net",
+    "name": "🐾´ₜᵣᵢₜᵢₐ｀ฅ⁠^•o•⁠^⁠ฅ",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC714A553C37C8EDF1E994614C63D2C5",
+      "participant": "190026717618330@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC714A553C37C8EDF1E994614C63D2C5",
+      "participant": "190026717618330@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "190026717618330@lid",
+      "6285796412503@s.whatsapp.net"
+    ],
+    "contactHash": "b63c1ab313325537ad1d049a842e0ee26a4996d8f0ee6b8217c7edf4e2dd8238",
+    "arrivedAt": "2026-11-16T01:52:07.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T01:52:08.124Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T01:52:11.906Z",
+    "readAt": "2026-11-16T01:52:11.898Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T01:52:11.898Z"
   }
 }

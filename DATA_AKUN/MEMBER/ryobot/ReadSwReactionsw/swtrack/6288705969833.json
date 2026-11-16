@@ -1,0 +1,42 @@
+{
+  "AC5701B08910BFED1918ED0A54D69811__part__yay3a94k": {
+    "id": "AC5701B08910BFED1918ED0A54D69811__part__yay3a94k",
+    "sender": "6288705969833@s.whatsapp.net",
+    "number": "6288705969833",
+    "storyJid": "6288705969833@s.whatsapp.net",
+    "resolvedPn": "6288705969833@s.whatsapp.net",
+    "name": "Aldrich🤓",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5701B08910BFED1918ED0A54D69811__part__yay3a94k",
+      "participant": "117356290412700@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5701B08910BFED1918ED0A54D69811__part__yay3a94k",
+      "participant": "117356290412700@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "117356290412700@lid",
+      "6288705969833@s.whatsapp.net"
+    ],
+    "contactHash": "9d9e538c1a967a2ec881fa5e30d74e366a813c22fede23f1eca568b0dc06bbed",
+    "arrivedAt": "2026-11-16T00:44:37.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T00:44:38.356Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T00:44:43.653Z",
+    "readAt": "2026-11-16T00:44:43.652Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T00:44:43.652Z"
+  }
+}

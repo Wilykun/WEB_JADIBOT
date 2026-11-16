@@ -3,28 +3,28 @@
   "status": "linked",
   "nomorTertaut": "628953****3845",
   "workerStatus": "running",
-  "terakhirUpdate": "2026-11-15T10:58:03.680Z",
+  "terakhirUpdate": "2026-11-16T02:22:41.085Z",
   "logTerakhir": {
-    "event": "Story video · Read + Reaction ✓ · 💚 · delay 7.0 dtk",
+    "event": "Story foto · Read + Reaction ✓ · 💚 · delay 1.5 dtk",
     "details": {
       "kind": "story",
       "mode": "Read+Reaction ✓",
-      "mediaType": "Video 🎥",
-      "storyId": "4A51D2AB···DDB6",
-      "greeting": "Sore 🌇",
-      "dayName": "Minggu",
-      "date": "15 Nov 2026",
-      "time": "17.58",
-      "name": "Lynn",
-      "number": "6283****333",
-      "storyCount": 1,
+      "mediaType": "Foto 📷",
+      "storyId": "ACECD409···A260",
+      "greeting": "Pagi ☀️",
+      "dayName": "Senin",
+      "date": "16 Nov 2026",
+      "time": "09.22",
+      "name": "Firgi Awan",
+      "number": "6285****500",
+      "storyCount": 2,
       "emojiMode": "Custom 🟢",
       "success": "Read + Reaction ✓",
       "reaction": "💚",
       "resolve": "LID → PN ✓",
-      "delaySeconds": 7
+      "delaySeconds": 1.5
     },
-    "waktu": "2026-11-15T10:58:03.680Z",
-    "waktuWIB": "Minggu, 15 November 2026 pukul 17.58.03 WIB"
+    "waktu": "2026-11-16T02:22:41.085Z",
+    "waktuWIB": "Senin, 16 November 2026 pukul 09.22.41 WIB"
   }
 }

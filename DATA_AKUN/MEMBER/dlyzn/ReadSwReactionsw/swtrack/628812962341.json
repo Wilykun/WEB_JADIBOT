@@ -1,0 +1,42 @@
+{
+  "ACAF02B5866841F6E6F70CCCD6B7B321": {
+    "id": "ACAF02B5866841F6E6F70CCCD6B7B321",
+    "sender": "628812962341@s.whatsapp.net",
+    "number": "628812962341",
+    "storyJid": "628812962341@s.whatsapp.net",
+    "resolvedPn": "628812962341@s.whatsapp.net",
+    "name": "Sibuk",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAF02B5866841F6E6F70CCCD6B7B321",
+      "participant": "50461906333847@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAF02B5866841F6E6F70CCCD6B7B321",
+      "participant": "50461906333847@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "50461906333847@lid",
+      "628812962341@s.whatsapp.net"
+    ],
+    "contactHash": "e2bcea03ce4932455129a822ccd9dc940a90bc231ed14af6d562628f74e579ee",
+    "arrivedAt": "2026-11-16T01:49:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T01:49:45.572Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T01:49:57.626Z",
+    "readAt": "2026-11-16T01:49:57.626Z",
+    "emoji": "💠",
+    "reactedAt": "2026-11-16T01:49:57.626Z"
+  }
+}

@@ -78,5 +78,45 @@
     "readAt": "2026-11-15T08:38:48.018Z",
     "emoji": "💚",
     "reactedAt": "2026-11-15T08:38:48.018Z"
+  },
+  "AC17524D98B11E452DB4E834C44C6E05": {
+    "id": "AC17524D98B11E452DB4E834C44C6E05",
+    "sender": "62882000298706@s.whatsapp.net",
+    "number": "62882000298706",
+    "storyJid": "62882000298706@s.whatsapp.net",
+    "resolvedPn": "62882000298706@s.whatsapp.net",
+    "name": "𝐗𝐚𝐯𝐢𝐞𝐫𝐚 𝐍𝐨𝐫 𝐋𝐞𝐧𝐳𝐱",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC17524D98B11E452DB4E834C44C6E05",
+      "participant": "131285003591773@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC17524D98B11E452DB4E834C44C6E05",
+      "participant": "131285003591773@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "131285003591773@lid",
+      "62882000298706@s.whatsapp.net"
+    ],
+    "contactHash": "a36f6f8b273c8c357bc1b04c9fe42158bf7ec67c51a5ad6caa596085f78ce495",
+    "arrivedAt": "2026-11-15T13:57:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T13:57:17.762Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T13:57:36.097Z",
+    "readAt": "2026-11-15T13:57:36.097Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T13:57:36.097Z"
   }
 }

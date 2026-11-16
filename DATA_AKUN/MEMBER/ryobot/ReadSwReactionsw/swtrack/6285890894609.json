@@ -1,0 +1,42 @@
+{
+  "AC46E5AEACA03104B67287FBF5944BAF": {
+    "id": "AC46E5AEACA03104B67287FBF5944BAF",
+    "sender": "6285890894609@s.whatsapp.net",
+    "number": "6285890894609",
+    "storyJid": "6285890894609@s.whatsapp.net",
+    "resolvedPn": "6285890894609@s.whatsapp.net",
+    "name": "Satoruu Gojoo",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC46E5AEACA03104B67287FBF5944BAF",
+      "participant": "114052957245694@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC46E5AEACA03104B67287FBF5944BAF",
+      "participant": "114052957245694@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "114052957245694@lid",
+      "6285890894609@s.whatsapp.net"
+    ],
+    "contactHash": "c7cd9413bdfefa5e6a82a24476f20d40e17852cc48bd1c94daa869ff8bf8d5c1",
+    "arrivedAt": "2026-11-15T14:23:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T14:23:09.045Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T14:23:25.812Z",
+    "readAt": "2026-11-15T14:23:25.812Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T14:23:25.812Z"
+  }
+}

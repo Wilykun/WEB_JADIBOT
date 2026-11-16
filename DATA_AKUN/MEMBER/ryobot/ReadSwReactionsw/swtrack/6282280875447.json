@@ -238,5 +238,45 @@
     "readAt": "2026-11-15T07:48:15.504Z",
     "emoji": "💚",
     "reactedAt": "2026-11-15T07:48:15.504Z"
+  },
+  "AC42B7B7BAB1B657C805CDE7734E3C07": {
+    "id": "AC42B7B7BAB1B657C805CDE7734E3C07",
+    "sender": "6282280875447@s.whatsapp.net",
+    "number": "6282280875447",
+    "storyJid": "6282280875447@s.whatsapp.net",
+    "resolvedPn": "6282280875447@s.whatsapp.net",
+    "name": "𝑖𝑙𝑦 𝑠𝑢𝑘𝑎 𝑛𝑔𝑎𝑐𝑎",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC42B7B7BAB1B657C805CDE7734E3C07",
+      "participant": "125555148095700@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC42B7B7BAB1B657C805CDE7734E3C07",
+      "participant": "125555148095700@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "125555148095700@lid",
+      "6282280875447@s.whatsapp.net"
+    ],
+    "contactHash": "0719f45415c06ed653314da630edc34f4ff80be406d9a883e20ac3a110606e18",
+    "arrivedAt": "2026-11-15T12:07:35.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T12:07:35.525Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T12:07:39.153Z",
+    "readAt": "2026-11-15T12:07:39.149Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T12:07:39.149Z"
   }
 }

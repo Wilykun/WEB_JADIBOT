@@ -1,0 +1,42 @@
+{
+  "ACFBD5BDE158D8CA1ACA69C37CCA1199": {
+    "id": "ACFBD5BDE158D8CA1ACA69C37CCA1199",
+    "sender": "6285651436150@s.whatsapp.net",
+    "number": "6285651436150",
+    "storyJid": "6285651436150@s.whatsapp.net",
+    "resolvedPn": "6285651436150@s.whatsapp.net",
+    "name": "Agil",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFBD5BDE158D8CA1ACA69C37CCA1199",
+      "participant": "43963402731739@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFBD5BDE158D8CA1ACA69C37CCA1199",
+      "participant": "43963402731739@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "43963402731739@lid",
+      "6285651436150@s.whatsapp.net"
+    ],
+    "contactHash": "16ac3c88a72a2f00f811bcb8fd9eb6980b867e5d787735243ae78d17819b06ea",
+    "arrivedAt": "2026-11-15T11:27:40.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T11:27:41.232Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T11:27:49.462Z",
+    "readAt": "2026-11-15T11:27:49.462Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T11:27:49.462Z"
+  }
+}

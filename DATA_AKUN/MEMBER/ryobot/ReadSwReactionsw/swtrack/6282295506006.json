@@ -1,6 +1,6 @@
 {
-  "A5668409782AADB0D155C6544B586B91": {
-    "id": "A5668409782AADB0D155C6544B586B91",
+  "A5F215C1FB79C29474C2D46648A20BD0": {
+    "id": "A5F215C1FB79C29474C2D46648A20BD0",
     "sender": "6282295506006@s.whatsapp.net",
     "number": "6282295506006",
     "storyJid": "6282295506006@s.whatsapp.net",
@@ -11,13 +11,13 @@
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "A5668409782AADB0D155C6544B586B91",
+      "id": "A5F215C1FB79C29474C2D46648A20BD0",
       "participant": "87725126500394@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "A5668409782AADB0D155C6544B586B91",
+      "id": "A5F215C1FB79C29474C2D46648A20BD0",
       "participant": "87725126500394@lid",
       "fromMe": false
     },
@@ -26,17 +26,97 @@
       "6282295506006@s.whatsapp.net"
     ],
     "contactHash": "fc650456c1b37468ced647ad86f70740d7812fc8de54650b07d3c692fd12c8e0",
-    "arrivedAt": "2026-11-14T11:39:24.000Z",
+    "arrivedAt": "2026-11-15T14:48:50.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-14T11:39:25.653Z",
+    "lastAttemptAt": "2026-11-15T14:48:51.990Z",
     "lastError": null,
-    "updatedAt": "2026-11-14T11:39:40.276Z",
-    "readAt": "2026-11-14T11:39:40.275Z",
+    "updatedAt": "2026-11-15T14:49:08.514Z",
+    "readAt": "2026-11-15T14:49:08.514Z",
     "emoji": "💚",
-    "reactedAt": "2026-11-14T11:39:40.275Z"
+    "reactedAt": "2026-11-15T14:49:08.514Z"
+  },
+  "A5C5A2E4FC3EBC5FAF803C33508F0ED8": {
+    "id": "A5C5A2E4FC3EBC5FAF803C33508F0ED8",
+    "sender": "6282295506006@s.whatsapp.net",
+    "number": "6282295506006",
+    "storyJid": "6282295506006@s.whatsapp.net",
+    "resolvedPn": "6282295506006@s.whatsapp.net",
+    "name": "Viola Morningstar",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5C5A2E4FC3EBC5FAF803C33508F0ED8",
+      "participant": "87725126500394@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5C5A2E4FC3EBC5FAF803C33508F0ED8",
+      "participant": "87725126500394@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "87725126500394@lid",
+      "6282295506006@s.whatsapp.net"
+    ],
+    "contactHash": "fc650456c1b37468ced647ad86f70740d7812fc8de54650b07d3c692fd12c8e0",
+    "arrivedAt": "2026-11-15T17:13:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T17:13:03.478Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T17:13:20.407Z",
+    "readAt": "2026-11-15T17:13:20.407Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T17:13:20.407Z"
+  },
+  "A5549ED2C3FEC70CDDA916762EA0C578": {
+    "id": "A5549ED2C3FEC70CDDA916762EA0C578",
+    "sender": "6282295506006@s.whatsapp.net",
+    "number": "6282295506006",
+    "storyJid": "6282295506006@s.whatsapp.net",
+    "resolvedPn": "6282295506006@s.whatsapp.net",
+    "name": "Viola Morningstar",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5549ED2C3FEC70CDDA916762EA0C578",
+      "participant": "87725126500394@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5549ED2C3FEC70CDDA916762EA0C578",
+      "participant": "87725126500394@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "87725126500394@lid",
+      "6282295506006@s.whatsapp.net"
+    ],
+    "contactHash": "fc650456c1b37468ced647ad86f70740d7812fc8de54650b07d3c692fd12c8e0",
+    "arrivedAt": "2026-11-16T00:28:40.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T00:28:41.986Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T00:29:01.065Z",
+    "readAt": "2026-11-16T00:29:01.054Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T00:29:01.054Z"
   }
 }

@@ -1,12 +1,30 @@
 {
   "username": "dlyzn",
-  "status": "invalid",
+  "status": "linked",
   "nomorTertaut": "62857****1374",
-  "workerStatus": "stopped",
-  "terakhirUpdate": "2026-11-15T10:53:30.422Z",
+  "workerStatus": "running",
+  "terakhirUpdate": "2026-11-16T02:27:13.863Z",
   "logTerakhir": {
-    "event": "WhatsApp menolak sesi tersimpan (kode 401); tautkan ulang diperlukan.",
-    "waktu": "2026-11-15T10:53:30.422Z",
-    "waktuWIB": "Minggu, 15 November 2026 pukul 17.53.30 WIB"
+    "event": "Story video · Read + Reaction ✓ · 👻 · delay 2.6 dtk",
+    "details": {
+      "kind": "story",
+      "mode": "Read+Reaction ✓",
+      "mediaType": "Video 🎥",
+      "storyId": "AC6FA57D···7809",
+      "greeting": "Pagi ☀️",
+      "dayName": "Senin",
+      "date": "16 Nov 2026",
+      "time": "09.27",
+      "name": "Niaa",
+      "number": "6285****815",
+      "storyCount": 3,
+      "emojiMode": "Custom 🟢",
+      "success": "Read + Reaction ✓",
+      "reaction": "👻",
+      "resolve": "LID → PN ✓",
+      "delaySeconds": 2.6
+    },
+    "waktu": "2026-11-16T02:27:13.863Z",
+    "waktuWIB": "Senin, 16 November 2026 pukul 09.27.13 WIB"
   }
 }

@@ -97,8 +97,8 @@
       "device": "Desktop · Windows 10.0 · Chrome 157.0.0.0",
       "dibuat": "2026-11-15T06:38:38.437Z",
       "dibuatWIB": "Minggu, 15 November 2026 pukul 13.38.38 WIB",
-      "terakhirAktif": "2026-11-15T07:47:25.172Z",
-      "terakhirAktifWIB": "Minggu, 15 November 2026 pukul 14.47.25 WIB",
+      "terakhirAktif": "2026-11-15T14:42:38.595Z",
+      "terakhirAktifWIB": "Minggu, 15 November 2026 pukul 21.42.38 WIB",
       "berakhir": "2026-11-22T06:38:38.417Z"
     },
     {
@@ -202,20 +202,30 @@
       "berakhir": "2026-11-22T09:52:31.021Z"
     },
     {
-      "sid": "c8a7e937",
+      "sid": "e3c6adba",
       "ip": "104.29.205.89",
       "device": "Desktop · Linux · Chrome 157.0.0.0",
-      "dibuat": "2026-11-15T10:57:27.476Z",
-      "dibuatWIB": "Minggu, 15 November 2026 pukul 17.57.27 WIB",
-      "terakhirAktif": "2026-11-15T10:58:47.057Z",
-      "terakhirAktifWIB": "Minggu, 15 November 2026 pukul 17.58.47 WIB",
-      "berakhir": "2026-11-22T10:57:27.458Z"
+      "dibuat": "2026-11-15T13:01:22.947Z",
+      "dibuatWIB": "Minggu, 15 November 2026 pukul 20.01.22 WIB",
+      "terakhirAktif": "2026-11-16T02:28:24.356Z",
+      "terakhirAktifWIB": "Senin, 16 November 2026 pukul 09.28.24 WIB",
+      "berakhir": "2026-11-22T13:01:22.929Z"
+    },
+    {
+      "sid": "01b4199e",
+      "ip": "103.153.247.218",
+      "device": "HP · K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Mobile Safari/537.36 · Android 10 · Chrome 158.0.0.0",
+      "dibuat": "2026-11-15T15:18:24.594Z",
+      "dibuatWIB": "Minggu, 15 November 2026 pukul 22.18.24 WIB",
+      "terakhirAktif": "2026-11-16T02:11:26.175Z",
+      "terakhirAktifWIB": "Senin, 16 November 2026 pukul 09.11.26 WIB",
+      "berakhir": "2026-11-22T15:18:24.574Z"
     }
   ],
   "loginTerakhir": {
-    "waktu": "2026-11-15T10:57:27.476Z",
-    "waktuWIB": "Minggu, 15 November 2026 pukul 17.57.27 WIB",
-    "ip": "104.29.205.89",
-    "device": "Desktop · Linux · Chrome 157.0.0.0"
+    "waktu": "2026-11-15T15:18:24.594Z",
+    "waktuWIB": "Minggu, 15 November 2026 pukul 22.18.24 WIB",
+    "ip": "103.153.247.218",
+    "device": "HP · K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Mobile Safari/537.36 · Android 10 · Chrome 158.0.0.0"
   }
 }

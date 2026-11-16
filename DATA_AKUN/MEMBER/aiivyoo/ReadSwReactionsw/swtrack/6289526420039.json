@@ -226,5 +226,119 @@
     "lastError": null,
     "updatedAt": "2026-11-15T08:45:34.716Z",
     "readAt": "2026-11-15T08:45:34.716Z"
+  },
+  "ACEE58093229857E2DE5E70E560C0821": {
+    "id": "ACEE58093229857E2DE5E70E560C0821",
+    "sender": "6289526420039@s.whatsapp.net",
+    "number": "6289526420039",
+    "storyJid": "6289526420039@s.whatsapp.net",
+    "resolvedPn": "6289526420039@s.whatsapp.net",
+    "name": "mermaid kayang.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEE58093229857E2DE5E70E560C0821",
+      "participant": "37371231907976@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEE58093229857E2DE5E70E560C0821",
+      "participant": "37371231907976@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "37371231907976@lid",
+      "6289526420039@s.whatsapp.net"
+    ],
+    "contactHash": "0f66f762d02ff8ff5a2916c0990143e0c88b304ae7881a2f8a294010a3319508",
+    "arrivedAt": "2026-11-15T13:05:13.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T13:05:13.413Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T13:05:25.615Z",
+    "readAt": "2026-11-15T13:05:25.615Z"
+  },
+  "AC63D0086AF01F7BEB6B3DB7A51BA0B2": {
+    "id": "AC63D0086AF01F7BEB6B3DB7A51BA0B2",
+    "sender": "6289526420039@s.whatsapp.net",
+    "number": "6289526420039",
+    "storyJid": "6289526420039@s.whatsapp.net",
+    "resolvedPn": "6289526420039@s.whatsapp.net",
+    "name": "mermaid kayang.",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC63D0086AF01F7BEB6B3DB7A51BA0B2",
+      "participant": "37371231907976@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC63D0086AF01F7BEB6B3DB7A51BA0B2",
+      "participant": "37371231907976@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "37371231907976@lid",
+      "6289526420039@s.whatsapp.net"
+    ],
+    "contactHash": "0f66f762d02ff8ff5a2916c0990143e0c88b304ae7881a2f8a294010a3319508",
+    "arrivedAt": "2026-11-15T13:07:05.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T13:07:05.391Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T13:07:11.793Z",
+    "readAt": "2026-11-15T13:07:11.793Z"
+  },
+  "AC73F00D171DFE7BD81A28643F3552AA": {
+    "id": "AC73F00D171DFE7BD81A28643F3552AA",
+    "sender": "6289526420039@s.whatsapp.net",
+    "number": "6289526420039",
+    "storyJid": "6289526420039@s.whatsapp.net",
+    "resolvedPn": "6289526420039@s.whatsapp.net",
+    "name": "mermaid kayang.",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC73F00D171DFE7BD81A28643F3552AA",
+      "participant": "37371231907976@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC73F00D171DFE7BD81A28643F3552AA",
+      "participant": "37371231907976@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "37371231907976@lid",
+      "6289526420039@s.whatsapp.net"
+    ],
+    "contactHash": "0f66f762d02ff8ff5a2916c0990143e0c88b304ae7881a2f8a294010a3319508",
+    "arrivedAt": "2026-11-15T13:08:36.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T13:08:36.460Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T13:08:51.463Z",
+    "readAt": "2026-11-15T13:08:51.462Z"
   }
 }

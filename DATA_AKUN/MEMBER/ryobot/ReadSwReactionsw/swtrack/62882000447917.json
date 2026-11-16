@@ -1,0 +1,42 @@
+{
+  "AC16259F405D3B98BB4240470D3A37C3": {
+    "id": "AC16259F405D3B98BB4240470D3A37C3",
+    "sender": "62882000447917@s.whatsapp.net",
+    "number": "62882000447917",
+    "storyJid": "62882000447917@s.whatsapp.net",
+    "resolvedPn": "62882000447917@s.whatsapp.net",
+    "name": "fley lynee小さい...≧⁠▽⁠≦...",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC16259F405D3B98BB4240470D3A37C3",
+      "participant": "79075347538102@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC16259F405D3B98BB4240470D3A37C3",
+      "participant": "79075347538102@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "79075347538102@lid",
+      "62882000447917@s.whatsapp.net"
+    ],
+    "contactHash": "8084eee87a45782f0e16154b5a62960b31855d5183a998cdb11f259d278e4141",
+    "arrivedAt": "2026-11-15T12:12:16.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T12:12:17.503Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T12:12:32.102Z",
+    "readAt": "2026-11-15T12:12:32.095Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T12:12:32.095Z"
+  }
+}

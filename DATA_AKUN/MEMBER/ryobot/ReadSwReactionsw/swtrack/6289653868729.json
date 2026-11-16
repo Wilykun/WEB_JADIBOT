@@ -1,0 +1,42 @@
+{
+  "ACC05B346D0A30335616FF1DC26C2BB2": {
+    "id": "ACC05B346D0A30335616FF1DC26C2BB2",
+    "sender": "6289653868729@s.whatsapp.net",
+    "number": "6289653868729",
+    "storyJid": "6289653868729@s.whatsapp.net",
+    "resolvedPn": "6289653868729@s.whatsapp.net",
+    "name": "Mom Bella",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC05B346D0A30335616FF1DC26C2BB2",
+      "participant": "146390386737323@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC05B346D0A30335616FF1DC26C2BB2",
+      "participant": "146390386737323@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "146390386737323@lid",
+      "6289653868729@s.whatsapp.net"
+    ],
+    "contactHash": "34769509df51384a00e51bdfaed38597fa7d3f1e0c9f7de0e99d0a27ea687736",
+    "arrivedAt": "2026-11-15T15:38:37.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T15:38:38.099Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T15:38:46.389Z",
+    "readAt": "2026-11-15T15:38:46.389Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T15:38:46.389Z"
+  }
+}

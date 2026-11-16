@@ -1,84 +1,4 @@
 {
-  "A5E26D741D11F75CCF36AC4F3F706205": {
-    "id": "A5E26D741D11F75CCF36AC4F3F706205",
-    "sender": "6285788765218@s.whatsapp.net",
-    "number": "6285788765218",
-    "storyJid": "6285788765218@s.whatsapp.net",
-    "resolvedPn": "6285788765218@s.whatsapp.net",
-    "name": "— Fabian Putra C-3",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "A5E26D741D11F75CCF36AC4F3F706205",
-      "participant": "137516632031317@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "A5E26D741D11F75CCF36AC4F3F706205",
-      "participant": "137516632031317@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "137516632031317@lid",
-      "6285788765218@s.whatsapp.net"
-    ],
-    "contactHash": "e9616d13b1db3dc24ed1ced8a15286d8b9a1d6bdf83a1eb10a33251cd8f1ceea",
-    "arrivedAt": "2026-11-14T09:40:55.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-14T09:40:55.740Z",
-    "lastError": null,
-    "updatedAt": "2026-11-14T09:40:58.414Z",
-    "readAt": "2026-11-14T09:40:58.414Z",
-    "emoji": "💚",
-    "reactedAt": "2026-11-14T09:40:58.414Z"
-  },
-  "A594049650DFEB4F947CA955D2F01643": {
-    "id": "A594049650DFEB4F947CA955D2F01643",
-    "sender": "6285788765218@s.whatsapp.net",
-    "number": "6285788765218",
-    "storyJid": "6285788765218@s.whatsapp.net",
-    "resolvedPn": "6285788765218@s.whatsapp.net",
-    "name": "— Fabian Putra C-3",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "A594049650DFEB4F947CA955D2F01643",
-      "participant": "137516632031317@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "A594049650DFEB4F947CA955D2F01643",
-      "participant": "137516632031317@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "137516632031317@lid",
-      "6285788765218@s.whatsapp.net"
-    ],
-    "contactHash": "e9616d13b1db3dc24ed1ced8a15286d8b9a1d6bdf83a1eb10a33251cd8f1ceea",
-    "arrivedAt": "2026-11-14T17:40:03.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-14T17:40:03.963Z",
-    "lastError": null,
-    "updatedAt": "2026-11-14T17:40:24.415Z",
-    "readAt": "2026-11-14T17:40:24.412Z",
-    "emoji": "💚",
-    "reactedAt": "2026-11-14T17:40:24.412Z"
-  },
   "A59D8DE7CA7314DB6E034460EA356609": {
     "id": "A59D8DE7CA7314DB6E034460EA356609",
     "sender": "6285788765218@s.whatsapp.net",
@@ -158,5 +78,45 @@
     "readAt": "2026-11-15T10:37:01.038Z",
     "emoji": "💚",
     "reactedAt": "2026-11-15T10:37:01.038Z"
+  },
+  "A5F61253CFB77031595BAAC813FD3B19": {
+    "id": "A5F61253CFB77031595BAAC813FD3B19",
+    "sender": "6285788765218@s.whatsapp.net",
+    "number": "6285788765218",
+    "storyJid": "6285788765218@s.whatsapp.net",
+    "resolvedPn": "6285788765218@s.whatsapp.net",
+    "name": "— Fabian Putra C-3",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5F61253CFB77031595BAAC813FD3B19",
+      "participant": "137516632031317@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5F61253CFB77031595BAAC813FD3B19",
+      "participant": "137516632031317@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137516632031317@lid",
+      "6285788765218@s.whatsapp.net"
+    ],
+    "contactHash": "e9616d13b1db3dc24ed1ced8a15286d8b9a1d6bdf83a1eb10a33251cd8f1ceea",
+    "arrivedAt": "2026-11-15T18:09:30.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T18:09:30.669Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T18:09:46.578Z",
+    "readAt": "2026-11-15T18:09:46.574Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T18:09:46.574Z"
   }
 }

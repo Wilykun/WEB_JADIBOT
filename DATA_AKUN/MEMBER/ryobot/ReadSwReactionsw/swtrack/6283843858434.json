@@ -1,0 +1,42 @@
+{
+  "AC8C3579DC3149D5CCF73B376D887D9A": {
+    "id": "AC8C3579DC3149D5CCF73B376D887D9A",
+    "sender": "6283843858434@s.whatsapp.net",
+    "number": "6283843858434",
+    "storyJid": "6283843858434@s.whatsapp.net",
+    "resolvedPn": "6283843858434@s.whatsapp.net",
+    "name": "𝐗𝐚𝐯𝐢𝐞𝐫𝐚 𝐍𝐨𝐫 𝐂𝐡𝐞𝐯𝐚",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8C3579DC3149D5CCF73B376D887D9A",
+      "participant": "172100044222715@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8C3579DC3149D5CCF73B376D887D9A",
+      "participant": "172100044222715@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "172100044222715@lid",
+      "6283843858434@s.whatsapp.net"
+    ],
+    "contactHash": "b0bd1203c409982175b5c5e4c114a7bc6b3a8aaf3185410dc276da9d87bd0866",
+    "arrivedAt": "2026-11-15T12:58:18.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T12:58:19.347Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T12:58:31.646Z",
+    "readAt": "2026-11-15T12:58:31.646Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T12:58:31.646Z"
+  }
+}

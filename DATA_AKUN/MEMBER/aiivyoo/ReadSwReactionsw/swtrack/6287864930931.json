@@ -112,5 +112,43 @@
     "lastError": null,
     "updatedAt": "2026-11-15T07:34:25.752Z",
     "readAt": "2026-11-15T07:34:25.752Z"
+  },
+  "AC08A20B30032E344178E0035FD52260": {
+    "id": "AC08A20B30032E344178E0035FD52260",
+    "sender": "6287864930931@s.whatsapp.net",
+    "number": "6287864930931",
+    "storyJid": "6287864930931@s.whatsapp.net",
+    "resolvedPn": "6287864930931@s.whatsapp.net",
+    "name": "dhipp",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC08A20B30032E344178E0035FD52260",
+      "participant": "113159771836617@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC08A20B30032E344178E0035FD52260",
+      "participant": "113159771836617@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "113159771836617@lid",
+      "6287864930931@s.whatsapp.net"
+    ],
+    "contactHash": "0f43c9ed5a2eead17e715d8c192aa8ef14dd345cce9e218fd6a15a2981ec41ea",
+    "arrivedAt": "2026-11-15T17:13:31.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T17:13:31.849Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T17:13:42.752Z",
+    "readAt": "2026-11-15T17:13:42.752Z"
   }
 }

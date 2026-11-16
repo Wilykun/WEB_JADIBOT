@@ -198,5 +198,45 @@
     "readAt": "2026-11-15T06:19:27.589Z",
     "emoji": "🐲",
     "reactedAt": "2026-11-15T06:19:27.589Z"
+  },
+  "ACC4AA4BA14983730FBFBDBE47E4FF22": {
+    "id": "ACC4AA4BA14983730FBFBDBE47E4FF22",
+    "sender": "62882003110997@s.whatsapp.net",
+    "number": "62882003110997",
+    "storyJid": "62882003110997@s.whatsapp.net",
+    "resolvedPn": "62882003110997@s.whatsapp.net",
+    "name": "sibukk",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC4AA4BA14983730FBFBDBE47E4FF22",
+      "participant": "119872990265479@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC4AA4BA14983730FBFBDBE47E4FF22",
+      "participant": "119872990265479@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "119872990265479@lid",
+      "62882003110997@s.whatsapp.net"
+    ],
+    "contactHash": "6d79787c8ba58e87712a70f01a5a53e9e8bc54b4ad236d749c9cc44b1cafa58b",
+    "arrivedAt": "2026-11-15T12:54:31.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T12:54:31.394Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T12:54:48.205Z",
+    "readAt": "2026-11-15T12:54:48.205Z",
+    "emoji": "🐼",
+    "reactedAt": "2026-11-15T12:54:48.205Z"
   }
 }

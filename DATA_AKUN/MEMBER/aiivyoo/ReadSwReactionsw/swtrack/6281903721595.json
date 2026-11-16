@@ -1,0 +1,40 @@
+{
+  "AC3874EF7EBA1C7CB6B78F0E32808419": {
+    "id": "AC3874EF7EBA1C7CB6B78F0E32808419",
+    "sender": "6281903721595@s.whatsapp.net",
+    "number": "6281903721595",
+    "storyJid": "6281903721595@s.whatsapp.net",
+    "resolvedPn": "6281903721595@s.whatsapp.net",
+    "name": "Ning Sih",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3874EF7EBA1C7CB6B78F0E32808419",
+      "participant": "243318537593056@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3874EF7EBA1C7CB6B78F0E32808419",
+      "participant": "243318537593056@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "243318537593056@lid",
+      "6281903721595@s.whatsapp.net"
+    ],
+    "contactHash": "12529f223c25b0372b1df5fdf4a824b068a2623b0305bcf4f393017898747355",
+    "arrivedAt": "2026-11-15T23:31:16.000Z",
+    "modeAtArrival": "readonly",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T23:31:17.260Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T23:31:32.064Z",
+    "readAt": "2026-11-15T23:31:32.063Z"
+  }
+}

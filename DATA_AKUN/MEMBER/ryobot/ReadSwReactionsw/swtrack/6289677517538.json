@@ -1,0 +1,42 @@
+{
+  "AC36F454735EE80DBBF617FA38C28302": {
+    "id": "AC36F454735EE80DBBF617FA38C28302",
+    "sender": "6289677517538@s.whatsapp.net",
+    "number": "6289677517538",
+    "storyJid": "6289677517538@s.whatsapp.net",
+    "resolvedPn": "6289677517538@s.whatsapp.net",
+    "name": "Rifqi Haidar",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC36F454735EE80DBBF617FA38C28302",
+      "participant": "240986437513380@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC36F454735EE80DBBF617FA38C28302",
+      "participant": "240986437513380@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "240986437513380@lid",
+      "6289677517538@s.whatsapp.net"
+    ],
+    "contactHash": "8b980d55c27d09ba11bbb9e10a1632861ba306ba9303dbb368079d6b315182b4",
+    "arrivedAt": "2026-11-16T01:14:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T01:14:40.447Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T01:14:49.103Z",
+    "readAt": "2026-11-16T01:14:49.102Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T01:14:49.102Z"
+  }
+}

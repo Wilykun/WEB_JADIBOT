@@ -1,0 +1,42 @@
+{
+  "ACAB91BC7365F0A357EEF8A5FE8B515F": {
+    "id": "ACAB91BC7365F0A357EEF8A5FE8B515F",
+    "sender": "6285755132250@s.whatsapp.net",
+    "number": "6285755132250",
+    "storyJid": "6285755132250@s.whatsapp.net",
+    "resolvedPn": "6285755132250@s.whatsapp.net",
+    "name": "Uswatun 💋",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAB91BC7365F0A357EEF8A5FE8B515F",
+      "participant": "13714115797215@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAB91BC7365F0A357EEF8A5FE8B515F",
+      "participant": "13714115797215@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "13714115797215@lid",
+      "6285755132250@s.whatsapp.net"
+    ],
+    "contactHash": "4613e6f3ef6aa5e2bd14bc83b56b9ea59c9adb311fa02ea7b10676f1638b542d",
+    "arrivedAt": "2026-11-15T12:03:09.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T12:03:10.596Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T12:03:25.687Z",
+    "readAt": "2026-11-15T12:03:25.686Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T12:03:25.686Z"
+  }
+}

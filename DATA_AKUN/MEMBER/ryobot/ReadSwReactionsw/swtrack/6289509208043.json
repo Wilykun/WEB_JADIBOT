@@ -1,0 +1,42 @@
+{
+  "AC2FD23CC011BCA1B717354E72F1691B": {
+    "id": "AC2FD23CC011BCA1B717354E72F1691B",
+    "sender": "6289509208043@s.whatsapp.net",
+    "number": "6289509208043",
+    "storyJid": "6289509208043@s.whatsapp.net",
+    "resolvedPn": "6289509208043@s.whatsapp.net",
+    "name": "𝓣𝓪𝓮𝓱𝔂𝓾𝓷𝓰 ♡",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2FD23CC011BCA1B717354E72F1691B",
+      "participant": "67401358045321@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2FD23CC011BCA1B717354E72F1691B",
+      "participant": "67401358045321@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "67401358045321@lid",
+      "6289509208043@s.whatsapp.net"
+    ],
+    "contactHash": "c574d0007be8a9298031b8fcc4a37b614d5f42ec6b3145eaec461074df3fc075",
+    "arrivedAt": "2026-11-15T11:44:00.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T11:44:01.349Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T11:44:21.190Z",
+    "readAt": "2026-11-15T11:44:21.188Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T11:44:21.188Z"
+  }
+}

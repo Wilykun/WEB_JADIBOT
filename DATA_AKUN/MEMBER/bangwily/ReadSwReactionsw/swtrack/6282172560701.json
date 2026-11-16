@@ -118,5 +118,45 @@
     "readAt": "2026-11-15T08:10:27.863Z",
     "emoji": "🐼",
     "reactedAt": "2026-11-15T08:10:27.863Z"
+  },
+  "AC8C885D6FDA2073100422344087F664": {
+    "id": "AC8C885D6FDA2073100422344087F664",
+    "sender": "6282172560701@s.whatsapp.net",
+    "number": "6282172560701",
+    "storyJid": "6282172560701@s.whatsapp.net",
+    "resolvedPn": "6282172560701@s.whatsapp.net",
+    "name": "Nemuri•",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8C885D6FDA2073100422344087F664",
+      "participant": "57488271536342@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8C885D6FDA2073100422344087F664",
+      "participant": "57488271536342@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "57488271536342@lid",
+      "6282172560701@s.whatsapp.net"
+    ],
+    "contactHash": "0122643d6ea5d04b05aac10c470fabd6f496fdd541eb27457c8008fc85efc33f",
+    "arrivedAt": "2026-11-16T00:30:25.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T00:30:25.958Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T00:30:43.718Z",
+    "readAt": "2026-11-16T00:30:43.717Z",
+    "emoji": "🦄",
+    "reactedAt": "2026-11-16T00:30:43.717Z"
   }
 }

@@ -78,5 +78,125 @@
     "readAt": "2026-11-15T06:44:38.355Z",
     "emoji": "💚",
     "reactedAt": "2026-11-15T06:44:38.355Z"
+  },
+  "ACE5A19192BBDDC6320863DCB9BBF0C4": {
+    "id": "ACE5A19192BBDDC6320863DCB9BBF0C4",
+    "sender": "6281212900749@s.whatsapp.net",
+    "number": "6281212900749",
+    "storyJid": "6281212900749@s.whatsapp.net",
+    "resolvedPn": "6281212900749@s.whatsapp.net",
+    "name": "ライダ",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE5A19192BBDDC6320863DCB9BBF0C4",
+      "participant": "81037644324994@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE5A19192BBDDC6320863DCB9BBF0C4",
+      "participant": "81037644324994@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "81037644324994@lid",
+      "6281212900749@s.whatsapp.net"
+    ],
+    "contactHash": "1cdb5e92c9b38fec9b8669c61fd1bb6bda4788be78efceaa2d637312904c98df",
+    "arrivedAt": "2026-11-15T12:03:56.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T12:03:56.379Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T12:04:07.127Z",
+    "readAt": "2026-11-15T12:04:07.126Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T12:04:07.126Z"
+  },
+  "AC0D3727ED949272E293544B599C9B32": {
+    "id": "AC0D3727ED949272E293544B599C9B32",
+    "sender": "6281212900749@s.whatsapp.net",
+    "number": "6281212900749",
+    "storyJid": "6281212900749@s.whatsapp.net",
+    "resolvedPn": "6281212900749@s.whatsapp.net",
+    "name": "ライダ",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0D3727ED949272E293544B599C9B32",
+      "participant": "81037644324994@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0D3727ED949272E293544B599C9B32",
+      "participant": "81037644324994@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "81037644324994@lid",
+      "6281212900749@s.whatsapp.net"
+    ],
+    "contactHash": "1cdb5e92c9b38fec9b8669c61fd1bb6bda4788be78efceaa2d637312904c98df",
+    "arrivedAt": "2026-11-15T13:31:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-15T13:31:38.178Z",
+    "lastError": null,
+    "updatedAt": "2026-11-15T13:31:44.328Z",
+    "readAt": "2026-11-15T13:31:44.328Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-15T13:31:44.328Z"
+  },
+  "AC3F517A528EC602052E078F1ADEE169": {
+    "id": "AC3F517A528EC602052E078F1ADEE169",
+    "sender": "6281212900749@s.whatsapp.net",
+    "number": "6281212900749",
+    "storyJid": "6281212900749@s.whatsapp.net",
+    "resolvedPn": "6281212900749@s.whatsapp.net",
+    "name": "ライダ",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3F517A528EC602052E078F1ADEE169",
+      "participant": "81037644324994@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3F517A528EC602052E078F1ADEE169",
+      "participant": "81037644324994@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "81037644324994@lid",
+      "6281212900749@s.whatsapp.net"
+    ],
+    "contactHash": "1cdb5e92c9b38fec9b8669c61fd1bb6bda4788be78efceaa2d637312904c98df",
+    "arrivedAt": "2026-11-16T00:02:50.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T00:02:50.331Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T00:02:58.091Z",
+    "readAt": "2026-11-16T00:02:58.085Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T00:02:58.085Z"
   }
 }

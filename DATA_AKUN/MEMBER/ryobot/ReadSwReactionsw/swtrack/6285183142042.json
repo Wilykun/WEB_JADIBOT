@@ -78,5 +78,45 @@
     "readAt": "2026-11-15T02:31:08.219Z",
     "emoji": "💚",
     "reactedAt": "2026-11-15T02:31:08.219Z"
+  },
+  "AC71DCD955983E8B85464A328CFF7FA1": {
+    "id": "AC71DCD955983E8B85464A328CFF7FA1",
+    "sender": "6285183142042@s.whatsapp.net",
+    "number": "6285183142042",
+    "storyJid": "6285183142042@s.whatsapp.net",
+    "resolvedPn": "6285183142042@s.whatsapp.net",
+    "name": "布里安娜",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC71DCD955983E8B85464A328CFF7FA1",
+      "participant": "218408264163501@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC71DCD955983E8B85464A328CFF7FA1",
+      "participant": "218408264163501@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "218408264163501@lid",
+      "6285183142042@s.whatsapp.net"
+    ],
+    "contactHash": "fa5431f7693e0aaf9d5492e31609197a0fe53180bff193f47e7547c885b68191",
+    "arrivedAt": "2026-11-16T00:06:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-16T00:06:38.417Z",
+    "lastError": null,
+    "updatedAt": "2026-11-16T00:06:46.674Z",
+    "readAt": "2026-11-16T00:06:46.626Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-16T00:06:46.626Z"
   }
 }
