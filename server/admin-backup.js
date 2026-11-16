@@ -191,7 +191,8 @@ function zipDeflated(entries) {
       throw new BackupArchiveError('Isi arsip terlalu besar atau nama entri tidak valid.');
     }
     const checksum = crc32(data);
-    const compressed = deflateRawSync(data, { level: 6 });
+    // Level 9 memberi ZIP terkecil yang masih dibuka aplikasi bawaan HP karena tetap DEFLATE standar, hanya sedikit lebih lambat saat membuat arsip.
+    const compressed = deflateRawSync(data, { level: 9 });
     if (compressed.length > 0xffffffff) throw new BackupArchiveError('Isi arsip terlalu besar.');
     const local = Buffer.alloc(30 + nameBytes.length);
     local.writeUInt32LE(0x04034b50, 0);

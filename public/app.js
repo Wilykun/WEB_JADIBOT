@@ -1390,7 +1390,9 @@ async function loadAdminUsers() {
     document.querySelector('#admin-description').textContent = isAdmin
       ? 'Status akun diperbarui tiap 15 detik dan runtime worker tiap detik. “Panel aktif” berarti akun masih membuka web dalam 75 detik terakhir; status panel ini berbeda dari status WhatsApp dan worker bot.'
       : 'Daftar ini hanya untuk melihat identitas dasar akun. Member tidak dapat mengontrol, mengedit, memasangkan WhatsApp, atau membuka data akun member lain.';
-    document.querySelector('#admin-backup-area')?.classList.toggle('hidden', !isAdmin);
+    // Halaman Backup (menu + seksi) hanya untuk admin; area backup kini hidup di dalam halaman itu, jadi gating cukup di tingkat halaman.
+    document.querySelector('#backup-nav')?.classList.toggle('hidden', !isAdmin);
+    document.querySelector('#backup')?.classList.toggle('hidden', !isAdmin);
     document.querySelector('#admin-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
     ensureWorkerRuntimeTicker();
   } catch (error) {
@@ -1669,7 +1671,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   if (running) logPollTimer = setInterval(() => { void loadPairingLogs(); }, 4000);
 }
 
-const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member' };
+const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan' };
 let activeWorkspacePage = null;
 let privateLogAutoRefreshTimer = null;
 let privateLogScrollOnNextRender = false;
@@ -1753,6 +1755,11 @@ function setWorkspacePage(page, smoothScroll = true) {
     workspaceServerRefreshTimer = window.setInterval(() => { void refreshWorkspaceServerStatus(); }, 5000);
   } else {
     stopWorkspaceServerAutoRefresh();
+  }
+  // Halaman Backup memuat ulang status Telegram dan restore point setiap kali dibuka agar angkanya selalu dari data live, bukan sisa login.
+  if (page === 'backup') {
+    void loadAdminBackupTelegramStatus();
+    void loadAdminBackupSnapshots();
   }
   setMenu(false);
 }
@@ -2323,6 +2330,9 @@ async function showDashboard(user) {
   const isAdmin = user.role === 'admin';
   document.querySelector('#admin-nav')?.classList.remove('hidden');
   document.querySelector('#admin')?.classList.remove('hidden');
+  // Halaman Backup hanya untuk admin (Admin Utama dan admin biasa): menu dan halamannya disembunyikan total untuk member agar tidak bisa dibuka lewat tautan langsung sekalipun.
+  document.querySelector('#backup-nav')?.classList.toggle('hidden', !isAdmin);
+  document.querySelector('#backup')?.classList.toggle('hidden', !isAdmin);
   const requestedPage = location.hash.slice(1);
   if (requestedPage === 'profile' || requestedPage === 'admin') {
     setWorkspacePage(requestedPage, false);

@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-11-16T17:06:00+07:00",
+  "updatedAt": "2026-11-16T19:01:00+07:00",
   "updates": [
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.01 WIB",
+      "title": "Backup & pemulihan kini punya halaman sendiri",
+      "description": "Bagian Backup & pemulihan pindah dari halaman Member ke halaman sendiri di menu sidebar, dengan ikon unduh dan judul rata tengah di HP. Halaman ini hanya untuk Admin Utama dan admin biasa — member tidak melihat menunya dan tidak bisa membukanya lewat tautan langsung.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.01 WIB",
+      "title": "ZIP backup langsung kini lebih kecil",
+      "description": "Unduhan langsung kini memakai kompresi DEFLATE level 9 (paling kuat), jadi file ZIP-nya sedikit lebih kecil. Formatnya tetap ZIP biasa, jadi tetap bisa dibuka langsung pakai aplikasi bawaan HP tanpa aplikasi tambahan.",
+      "tag": "Perbaikan"
+    },
     {
       "day": "Senin, 16 Nov 2026",
       "time": "17.06 WIB",
