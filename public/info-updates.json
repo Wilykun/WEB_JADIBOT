@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-16T16:40:00+07:00",
+  "updatedAt": "2026-11-16T17:06:00+07:00",
   "updates": [
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "17.06 WIB",
+      "title": "Menu garis tiga kini muncul di tempat saat diketuk setelah scroll",
+      "description": "Menu dropdown garis tiga dulu menempel di atas halaman, jadi kalau halaman sudah di-scroll ke bawah, menu terbuka di luar layar dan harus scroll balik ke atas untuk melihatnya. Kini menu nempel di layar tepat di bawah topbar, jadi muncul di tempat di mana pun posisi scroll — di desktop maupun di HP.",
+      "tag": "Perbaikan"
+    },
     {
       "day": "Senin, 16 Nov 2026",
       "time": "16.40 WIB",

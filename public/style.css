@@ -21,7 +21,7 @@
 #menu-toggle.has-alert .menu-toggle-alert{display:block}
 .menu-toggle:hover{border-color:rgba(82,226,146,.45);background:rgba(55,186,115,.08)}
 .menu-toggle[aria-expanded="true"]{border-color:rgba(82,226,146,.55);background:rgba(55,186,115,.14);color:#7df0ae}
-.sidebar{position:absolute;top:76px;left:14px;right:auto;bottom:auto;width:min(274px,100vw - 28px);height:auto;max-height:calc(100vh - 92px);overflow:auto;padding:16px 12px 12px;border:1px solid var(--line);border-radius:16px;background:rgba(9,19,15,.97);box-shadow:0 18px 44px rgba(0,0,0,.5);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-6px);transition:opacity .18s ease,transform .18s ease,visibility .18s;z-index:30;align-items:stretch}
+.sidebar{position:fixed;top:76px;left:14px;right:auto;bottom:auto;width:min(274px,100vw - 28px);height:auto;max-height:calc(100vh - 92px);overflow:auto;padding:16px 12px 12px;border:1px solid var(--line);border-radius:16px;background:rgba(9,19,15,.97);box-shadow:0 18px 44px rgba(0,0,0,.5);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-6px);transition:opacity .18s ease,transform .18s ease,visibility .18s;z-index:30;align-items:stretch}
 .sidebar.is-open{opacity:1;visibility:visible;pointer-events:auto;transform:none}
 .sidebar .brand{padding:2px 9px 18px}
 .sidebar .brand>span:last-child{display:inline}
