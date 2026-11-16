@@ -1071,7 +1071,11 @@ function isAllowedBackupPath(value) {
   if (parts.length < userIndex + 2 || !ACCOUNT_FOLDER_PATTERN.test(parts[userIndex])) return false;
   if (!parts.slice(userIndex + 1).every((part) => ACCOUNT_DATA_SEGMENT_PATTERN.test(part))) return false;
   const filename = parts.at(-1);
-  return filename === '.gitkeep' || /\.(json|webp|upload|txt|bin)$/i.test(filename);
+  // File pemulihan sesi (.good = sesi terakhir yang bagus, .bak =
+  // salinan berkala) adalah bagian dari data akun dan wajib ikut
+  // ter-backup; tanpa keduanya, ekspor backup gagal begitu ada akun
+  // yang pernah tersambung WhatsApp.
+  return filename === '.gitkeep' || /\.(json|webp|upload|txt|bin|good|bak)$/i.test(filename);
 }
 
 async function collectBackupPayload() {
@@ -1096,7 +1100,7 @@ async function collectBackupPayload() {
     catch (error) { if (error.code === 'ENOENT') return; throw error; }
     for (const entry of entries) {
       if (entry.name === '.readsw-whatsapp-session.lock' || entry.name === '.readsw-restore.lock'
-        || entry.name.includes('.tmp') || entry.name.includes('.stale.')) continue;
+        || entry.name.includes('.tmp') || entry.name.includes('.stale.') || entry.name.includes('.MATI-')) continue;
       if (!ACCOUNT_DATA_SEGMENT_PATTERN.test(entry.name)) throw backupFailure('Nama file/folder akun tidak didukung untuk backup.', 409);
       const absolute = path.join(directory, entry.name);
       const rel = relative ? `${relative}/${entry.name}` : entry.name;

@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { createEncryptedBackup, decryptEncryptedBackup } from '../server/admin-backup.js';
 
 const passphrase = 'kunci-backup-uji-2026';
@@ -20,6 +21,13 @@ test('rejects an incorrect passphrase and tampered ZIP bytes', async () => {
   const tampered = Buffer.from(archive);
   tampered[40] ^= 0x20;
   await assert.rejects(decryptEncryptedBackup(tampered, passphrase));
+});
+
+test('backup mengizinkan file pemulihan sesi (.good/.bak) dan melewati sisa sesi mati (.MATI-)', () => {
+  const serverJs = fs.readFileSync(new URL('../server/index.js', import.meta.url), 'utf8');
+  assert.equal(serverJs.includes('\\.(json|webp|upload|txt|bin|good|bak)$/i'), true);
+  assert.equal(serverJs.includes('File pemulihan sesi'), true);
+  assert.equal(serverJs.includes("entry.name.includes('.MATI-')"), true);
 });
 
 test('rejects archives containing unrecognized path entries', async () => {

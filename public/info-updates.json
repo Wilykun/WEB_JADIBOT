@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-16T14:20:00+07:00",
+  "updatedAt": "2026-11-16T15:42:00+07:00",
   "updates": [
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "15.42 WIB",
+      "tag": "Perbaikan",
+      "title": "Unduh backup terenkripsi kini berfungsi untuk semua akun",
+      "description": "Tombol Unduh backup terenkripsi sebelumnya selalu gagal begitu ada akun yang pernah tersambung WhatsApp, karena file pemulihan sesi (session.json.good dan session.json.bak) tidak ada dalam daftar file yang boleh di-backup. Sekarang kedua file itu ikut ter-backup, jadi ZIP berisi data akun, sesi WhatsApp beserta pemulihannya, DATA_KUNJUNGAN, dan DATA_STALKER — dibuat dari isi disk saat tombol diklik, tanpa perlu muat ulang. Catatan: Restore point otomatis hanya dibuat tepat sebelum restore (maksimal 3 tersimpan), bukan berkala."
+    },
     {
       "day": "Senin, 16 Nov 2026",
       "time": "14.20 WIB",
