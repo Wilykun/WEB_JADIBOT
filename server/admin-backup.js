@@ -1,4 +1,5 @@
 import { createCipheriv, createDecipheriv, randomBytes, scrypt as scryptCallback } from 'node:crypto';
+import { deflateRawSync } from 'node:zlib';
 import { promisify } from 'node:util';
 
 const scrypt = promisify(scryptCallback);
@@ -176,6 +177,89 @@ function aad(manifest) {
 }
 async function deriveKey(passphrase, salt) {
   return scrypt(passphrase, salt, 32, { N: KDF_N, r: KDF_R, p: KDF_P, maxmem: 64 * 1024 * 1024 });
+}
+
+function zipDeflated(entries) {
+  const localParts = [];
+  const centralParts = [];
+  let offset = 0;
+  const { time, day } = dosDateTime();
+  for (const [name, value] of entries) {
+    const nameBytes = Buffer.from(name, 'ascii');
+    const data = Buffer.from(value);
+    if (!nameBytes.length || nameBytes.toString('ascii') !== name || data.length > 0xffffffff) {
+      throw new BackupArchiveError('Isi arsip terlalu besar atau nama entri tidak valid.');
+    }
+    const checksum = crc32(data);
+    const compressed = deflateRawSync(data, { level: 6 });
+    if (compressed.length > 0xffffffff) throw new BackupArchiveError('Isi arsip terlalu besar.');
+    const local = Buffer.alloc(30 + nameBytes.length);
+    local.writeUInt32LE(0x04034b50, 0);
+    local.writeUInt16LE(20, 4);
+    local.writeUInt16LE(0, 6);
+    local.writeUInt16LE(8, 8);
+    local.writeUInt16LE(time, 10);
+    local.writeUInt16LE(day, 12);
+    local.writeUInt32LE(checksum, 14);
+    local.writeUInt32LE(compressed.length, 18);
+    local.writeUInt32LE(data.length, 22);
+    local.writeUInt16LE(nameBytes.length, 26);
+    local.writeUInt16LE(0, 28);
+    nameBytes.copy(local, 30);
+    localParts.push(local, compressed);
+
+    const central = Buffer.alloc(46 + nameBytes.length);
+    central.writeUInt32LE(0x02014b50, 0);
+    central.writeUInt16LE(20, 4);
+    central.writeUInt16LE(20, 6);
+    central.writeUInt16LE(0, 8);
+    central.writeUInt16LE(8, 10);
+    central.writeUInt16LE(time, 12);
+    central.writeUInt16LE(day, 14);
+    central.writeUInt32LE(checksum, 16);
+    central.writeUInt32LE(compressed.length, 20);
+    central.writeUInt32LE(data.length, 24);
+    central.writeUInt16LE(nameBytes.length, 28);
+    central.writeUInt16LE(0, 30);
+    central.writeUInt16LE(0, 32);
+    central.writeUInt16LE(0, 34);
+    central.writeUInt16LE(0, 36);
+    central.writeUInt32LE(0, 38);
+    central.writeUInt32LE(offset, 42);
+    nameBytes.copy(central, 46);
+    centralParts.push(central);
+    offset += local.length + compressed.length;
+  }
+  const centralDirectory = Buffer.concat(centralParts);
+  if (entries.length > 0xffff || offset > 0xffffffff || centralDirectory.length > 0xffffffff) {
+    throw new BackupArchiveError('Arsip melewati batas format ZIP yang didukung.');
+  }
+  const end = Buffer.alloc(22);
+  end.writeUInt32LE(0x06054b50, 0);
+  end.writeUInt16LE(0, 4);
+  end.writeUInt16LE(0, 6);
+  end.writeUInt16LE(entries.length, 8);
+  end.writeUInt16LE(entries.length, 10);
+  end.writeUInt32LE(centralDirectory.length, 12);
+  end.writeUInt32LE(offset, 16);
+  end.writeUInt16LE(0, 20);
+  return Buffer.concat([...localParts, centralDirectory, end]);
+}
+
+// ZIP biasa (tanpa sandi) berisi file backup apa adanya, dikompres
+// DEFLATE supaya ukurannya kecil untuk diunduh langsung di HP dan
+// dikirim lewat Telegram (batas file bot 50 MB). Berbeda dengan arsip
+// terenkripsi, ZIP ini TIDAK memakai passphrase dan bisa dibuka siapa
+// pun yang memegang filenya, jadi simpan di tempat aman.
+export function createPlainBackupZip(payload) {
+  if (!payload || !Array.isArray(payload.files) || typeof payload.sessionSecret !== 'string') {
+    throw new BackupArchiveError('Data backup tidak valid.');
+  }
+  const entries = payload.files.map((file) => [file.path, Buffer.from(file.data, 'base64')]);
+  entries.push(['panel/session-secret.txt', Buffer.from(payload.sessionSecret, 'utf8')]);
+  const archive = zipDeflated(entries);
+  if (archive.length > MAX_ARCHIVE_BYTES) throw new BackupArchiveError('Arsip backup melewati batas ukuran maksimum 80 MiB.');
+  return archive;
 }
 
 export async function createEncryptedBackup(payload, passphraseValue) {

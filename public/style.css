@@ -15,7 +15,10 @@
 /* Menu hamburger — port dari preview v11: sidebar jadi panel dropdown, konten full */
 .app-shell{position:relative}
 .topbar-left{display:flex;align-items:center;gap:12px;min-width:0}
-.menu-toggle{display:inline-grid;place-items:center;width:42px;height:42px;flex:none;border:1px solid rgba(205,239,216,.14);border-radius:11px;background:rgba(231,250,238,.04);color:#eaf3ed;font-size:19px;line-height:1;cursor:pointer;transition:border-color .16s ease,background .16s ease,color .16s ease}
+.menu-toggle{position:relative;display:inline-grid;place-items:center;width:42px;height:42px;flex:none;border:1px solid rgba(205,239,216,.14);border-radius:11px;background:rgba(231,250,238,.04);color:#eaf3ed;font-size:19px;line-height:1;cursor:pointer;transition:border-color .16s ease,background .16s ease,color .16s ease}
+.menu-toggle-alert{position:absolute;top:-5px;right:-5px;display:none;width:14px;height:14px;pointer-events:none}
+.menu-toggle-alert svg{display:block;width:14px;height:14px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+#menu-toggle.has-alert .menu-toggle-alert{display:block}
 .menu-toggle:hover{border-color:rgba(82,226,146,.45);background:rgba(55,186,115,.08)}
 .menu-toggle[aria-expanded="true"]{border-color:rgba(82,226,146,.55);background:rgba(55,186,115,.14);color:#7df0ae}
 .sidebar{position:absolute;top:76px;left:14px;right:auto;bottom:auto;width:min(274px,100vw - 28px);height:auto;max-height:calc(100vh - 92px);overflow:auto;padding:16px 12px 12px;border:1px solid var(--line);border-radius:16px;background:rgba(9,19,15,.97);box-shadow:0 18px 44px rgba(0,0,0,.5);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-6px);transition:opacity .18s ease,transform .18s ease,visibility .18s;z-index:30;align-items:stretch}
@@ -2565,6 +2568,7 @@ html[data-theme="light"] #auth-message.is-banned{border-color:#edcaca;background
 #admin .admin-backup-heading h3{margin:4px 0 0;font-size:19px}
 #admin .admin-backup-badge{padding:6px 9px;border:1px solid rgba(109,220,153,.26);border-radius:999px;color:#8de0a9;background:rgba(46,127,73,.12);font-size:10px;font-weight:700;white-space:nowrap}
 #admin .admin-backup-warning{margin:0;padding:12px 13px;border:1px solid rgba(255,190,86,.22);border-radius:11px;background:rgba(131,86,25,.12);color:var(--muted);font-size:12px;line-height:1.65}
+#admin .admin-backup-note{margin:0;color:var(--muted);font-size:11px;line-height:1.6;overflow-wrap:anywhere}
 #admin .admin-backup-form{display:grid;gap:9px;padding:14px;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.12)}
 #admin .admin-backup-form>label:not(.admin-backup-confirm){display:flex;justify-content:space-between;gap:10px;color:var(--text);font-size:12px;font-weight:650}
 #admin .admin-backup-form>label span{color:var(--muted);font-size:10px;font-weight:450}

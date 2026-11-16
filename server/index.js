@@ -9,7 +9,7 @@ import { createPairingManager, maskedEmail, normalizePairingInput, PairingError 
 import { sanitizeStoryLogDetails } from './story-log.js';
 import { readAvatarUpload } from './avatar-upload.js';
 import { BANNED_LOGIN_NOTICE, DELETED_LOGIN_NOTICE, isBannedAccount, isMainAdminUser, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
-import { BackupArchiveError, createEncryptedBackup, decryptEncryptedBackup, MAX_ARCHIVE_BYTES, MAX_PLAINTEXT_BYTES } from './admin-backup.js';
+import { BackupArchiveError, createEncryptedBackup, createPlainBackupZip, decryptEncryptedBackup, MAX_ARCHIVE_BYTES, MAX_PLAINTEXT_BYTES } from './admin-backup.js';
 import { acquireRestoreLock } from './session-lock.js';
 import {
   randomBytes,
@@ -59,6 +59,8 @@ const STORE_FILE = path.join(DATA_DIR, 'store.json');
 const SECRET_FILE = path.join(DATA_DIR, '.session-secret');
 const RESTORE_SECRET_FILE = path.join(DATA_DIR, '.restore-session-secret');
 const BACKUP_SNAPSHOT_DIR = path.join(DATA_DIR, 'backup-snapshots');
+const TELEGRAM_CONFIG_FILE = path.join(DATA_DIR, 'telegram.json');
+const TELEGRAM_MAX_BYTES = 50 * 1024 * 1024;
 const STALKER_DIR = path.join(ROOT, 'DATA_STALKER');
 const STALKER_FILE = path.join(STALKER_DIR, 'visitors.json');
 const VISIT_DIR = path.join(ROOT, 'DATA_KUNJUNGAN');
@@ -1047,6 +1049,65 @@ const pairingManager = createPairingManager({
 
 const ACCOUNT_FOLDER_PATTERN = /^[a-z0-9][a-z0-9._-]{2,23}$/;
 const ACCOUNT_DATA_SEGMENT_PATTERN = /^[A-Za-z0-9._-]{1,180}$/;
+function readTelegramConfig() {
+  // Urutan sumber: env var, lalu data/telegram.json (tidak masuk git),
+  // lalu bagian telegram di config.json. Token bot TIDAK disimpan di
+  // config.json karena repo ini publik — token di sana bisa dipakai
+  // siapa pun untuk mengirim pesan sebagai bot.
+  const fromEnv = {
+    botToken: (process.env.TELEGRAM_BOT_TOKEN || '').trim(),
+    chatId: (process.env.TELEGRAM_CHAT_ID || '').trim(),
+  };
+  if (fromEnv.botToken && fromEnv.chatId) return fromEnv;
+  try {
+    const parsed = JSON.parse(fsSync.readFileSync(TELEGRAM_CONFIG_FILE, 'utf8'));
+    const botToken = String(parsed?.botToken || '').trim();
+    const chatId = String(parsed?.chatId || '').trim();
+    if (botToken && chatId) return { botToken, chatId };
+  } catch { /* Lanjut ke config.json. */ }
+  try {
+    const parsed = JSON.parse(fsSync.readFileSync(path.join(ROOT, 'config.json'), 'utf8'));
+    return {
+      botToken: String(parsed?.telegram?.botToken || '').trim(),
+      chatId: String(parsed?.telegram?.chatId || '').trim(),
+    };
+  } catch { return { botToken: '', chatId: '' }; }
+}
+
+async function sendBackupToTelegram(archive, filename) {
+  const { botToken, chatId } = readTelegramConfig();
+  if (!botToken || !chatId) throw backupFailure('Bot Telegram belum diatur. Isi token bot dan chat ID di data/telegram.json di server.', 503);
+  if (archive.length > TELEGRAM_MAX_BYTES) throw backupFailure('Ukuran backup melewati batas 50 MB Telegram.', 413);
+  const stamp = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
+  const form = new FormData();
+  form.append('chat_id', chatId);
+  form.append('caption', `Backup ReadSW Console — ${stamp} — ${backupBytesLabel(archive.length)} — ${filename}`);
+  form.append('document', new Blob([archive], { type: 'application/zip' }), filename);
+  let response;
+  try {
+    response = await fetch(`https://api.telegram.org/bot${botToken}/sendDocument`, {
+      method: 'POST', body: form, signal: AbortSignal.timeout(120_000),
+    });
+  } catch {
+    throw backupFailure('Tidak dapat menghubungi Telegram. Coba lagi nanti.', 502);
+  }
+  let body = {};
+  try { body = await response.json(); } catch { /* Pakai pesan umum. */ }
+  if (!response.ok || !body.ok) {
+    const reason = String(body?.description || '');
+    if (/chat not found/i.test(reason)) throw backupFailure('Bot belum di-start. Buka bot di Telegram dan kirim /start dulu, lalu coba lagi.', 400);
+    if (/blocked/i.test(reason)) throw backupFailure('Bot diblokir di Telegram. Buka blokirnya dulu, lalu coba lagi.', 400);
+    if (/unauthorized|not found/i.test(reason)) throw backupFailure('Token bot Telegram tidak valid. Periksa token di data/telegram.json.', 400);
+    throw backupFailure(reason ? `Telegram menolak pengiriman: ${reason}` : 'Telegram menolak pengiriman.', 502);
+  }
+  return { chatId, bytes: archive.length };
+}
+
+function backupBytesLabel(bytes) {
+  const value = Number(bytes) || 0;
+  return value >= 1024 * 1024 ? `${(value / (1024 * 1024)).toFixed(1)} MiB` : `${Math.ceil(value / 1024)} KiB`;
+}
+
 function backupFailure(message, status = 400) {
   const error = new Error(message);
   error.status = status;
@@ -1830,6 +1891,31 @@ async function handleApi(req, res, url) {
     const archive = await createEncryptedBackup(await collectBackupPayload(), body.passphrase);
     const stamp = new Date().toISOString().replace(/[:.]/g, '-');
     return sendZip(res, 200, archive, `readsw-backup-${stamp}.zip`);
+  }
+  if (route === 'GET /api/admin/backup/download') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
+    if (!allowRateLimit(`admin-backup-download:${user.id}`, 5, 60 * 60 * 1000)) return sendError(res, 429, 'Batas unduh backup tercapai. Coba lagi nanti.');
+    const archive = createPlainBackupZip(await collectBackupPayload());
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    return sendZip(res, 200, archive, `readsw-backup-${stamp}.zip`);
+  }
+  if (route === 'GET /api/admin/backup/telegram-status') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
+    const { botToken, chatId } = readTelegramConfig();
+    const masked = chatId.length > 4 ? `${chatId.slice(0, 4)}…${chatId.slice(-4)}` : chatId;
+    return sendJson(res, 200, { configured: Boolean(botToken && chatId), chatId: masked });
+  }
+  if (route === 'POST /api/admin/backup/telegram') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
+    if (!allowRateLimit(`admin-backup-telegram:${user.id}`, 5, 60 * 60 * 1000)) return sendError(res, 429, 'Batas kirim backup tercapai. Coba lagi nanti.');
+    const archive = createPlainBackupZip(await collectBackupPayload());
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const filename = `readsw-backup-${stamp}.zip`;
+    const result = await sendBackupToTelegram(archive, filename);
+    return sendJson(res, 200, { sent: true, bytes: result.bytes, filename, chatId: result.chatId });
   }
   if (route === 'GET /api/admin/backup/snapshots') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');

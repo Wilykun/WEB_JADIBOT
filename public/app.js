@@ -763,6 +763,43 @@ async function loadAdminBackupSnapshots() {
   }
 }
 document.querySelector('#admin-backup-refresh-snapshots')?.addEventListener('click', () => void loadAdminBackupSnapshots());
+async function loadAdminBackupTelegramStatus() {
+  const target = document.querySelector('#admin-backup-telegram-target');
+  const button = document.querySelector('#admin-backup-telegram-send');
+  if (!target || currentUser?.role !== 'admin') return;
+  try {
+    const { configured, chatId } = await api('/api/admin/backup/telegram-status');
+    target.textContent = configured
+      ? `Bot Telegram siap — backup dikirim ke chat ${chatId}. Pastikan kamu sudah /start bot-nya.`
+      : 'Bot Telegram belum diatur. Isi token bot dan chat ID di data/telegram.json di server.';
+    if (button) button.disabled = !configured;
+  } catch (error) {
+    target.textContent = 'Tidak dapat memeriksa pengaturan bot Telegram.';
+    if (button) button.disabled = true;
+    if (error.status === 401) showAuth();
+  }
+}
+document.querySelector('#admin-backup-direct-download')?.addEventListener('click', () => {
+  if (currentUser?.role !== 'admin') return;
+  setAdminBackupStatus('Mengunduh backup… Jika unduhan tidak mulai dalam beberapa detik, muat ulang halaman dan coba lagi.');
+  window.location.href = '/api/admin/backup/download';
+});
+document.querySelector('#admin-backup-telegram-send')?.addEventListener('click', async (event) => {
+  if (currentUser?.role !== 'admin') return;
+  const button = event.currentTarget;
+  button.disabled = true;
+  setAdminBackupStatus('Menyiapkan dan mengirim backup ke Telegram…');
+  try {
+    const result = await api('/api/admin/backup/telegram', { method: 'POST' });
+    setAdminBackupStatus(`Backup terkirim ke Telegram (${backupBytesLabel(result.bytes)}). Cek chat Telegram kamu.`);
+  } catch (error) {
+    setAdminBackupStatus(error.message, true);
+    if (error.status === 401) showAuth();
+  } finally {
+    button.disabled = false;
+    await loadAdminBackupTelegramStatus();
+  }
+});
 document.querySelector('#admin-backup-export-form')?.addEventListener('submit', async (event) => {
   event.preventDefault();
   if (currentUser?.role !== 'admin') return;
@@ -2316,7 +2353,7 @@ async function showDashboard(user) {
     if (error.status === 401) return showAuth();
     showToast(error.message);
   }
-  await Promise.all([loadAdminUsers(), loadAdminBackupSnapshots(), refreshPairing(), loadPairingLogs()]);
+  await Promise.all([loadAdminUsers(), loadAdminBackupSnapshots(), loadAdminBackupTelegramStatus(), refreshPairing(), loadPairingLogs()]);
   void refreshInfoUpdateBadge();
   void refreshMemberBadge();
   await loadLoginHistory();
@@ -2391,6 +2428,9 @@ function saveStoryPreferences() {
 }
 
 function showAuth(mode = 'login') {
+  infoUpdateUnreadCount = 0;
+  memberNewCount = 0;
+  updateMenuToggleAlert();
   setMenu(false);
   setMobileInfo(false);
   stopPrivateLogAutoRefresh();
@@ -3468,7 +3508,23 @@ function countUnreadInfoUpdates(updates, seen) {
   return unread;
 }
 
+let infoUpdateUnreadCount = 0;
+let memberNewCount = 0;
+// Tanda seru di tombol garis tiga: muncul selama masih ada notifikasi
+// yang belum dilihat (Info Update belum dibaca atau akun baru di Member),
+// hilang begitu semuanya sudah dilihat. Angkanya mengikuti badge yang
+// sama, jadi tidak ada sumber hitungan baru.
+function updateMenuToggleAlert() {
+  const button = document.querySelector('#menu-toggle');
+  if (!button) return;
+  const hasAlert = infoUpdateUnreadCount + memberNewCount > 0;
+  button.classList.toggle('has-alert', hasAlert);
+  button.setAttribute('aria-label', hasAlert ? 'Buka menu (ada notifikasi)' : 'Buka menu');
+}
+
 function renderInfoUpdateBadge(count) {
+  infoUpdateUnreadCount = count > 0 ? count : 0;
+  updateMenuToggleAlert();
   const item = document.querySelector('.side-nav .nav-item[href="#infoupdate"]');
   if (!item) return;
   let badge = item.querySelector('.nav-badge');
@@ -3532,6 +3588,8 @@ function countNewMembers(users, seen) {
   }).length;
 }
 function renderMemberBadge(count) {
+  memberNewCount = count > 0 ? count : 0;
+  updateMenuToggleAlert();
   const item = document.querySelector('#admin-nav');
   if (!item) return;
   let badge = item.querySelector('.nav-badge');

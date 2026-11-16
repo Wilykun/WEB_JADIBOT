@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-11-16T15:42:00+07:00",
+  "updatedAt": "2026-11-16T16:40:00+07:00",
   "updates": [
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "16.40 WIB",
+      "title": "Tombol garis tiga kini menunjukkan tanda seru saat ada notifikasi",
+      "description": "Tanda seru merah muncul di tombol garis tiga selama masih ada Info Update yang belum dibaca atau akun baru di Member. Tandanya hilang begitu semuanya sudah dilihat, dan diperbarui realtime tanpa muat ulang halaman.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "16.30 WIB",
+      "title": "Backup kini bisa diunduh langsung tanpa sandi atau dikirim ke Telegram",
+      "description": "Di halaman Backup & pemulihan ada dua pilihan baru khusus admin: Unduh langsung tanpa sandi (ZIP biasa yang lebih kecil, langsung diunduh browser) dan Kirim ke Telegram (bot mengirim ZIP ke chat Telegram kamu). Unduh terenkripsi dengan kata sandi tetap tersedia.",
+      "tag": "Fitur baru"
+    },
     {
       "day": "Senin, 16 Nov 2026",
       "time": "15.42 WIB",
