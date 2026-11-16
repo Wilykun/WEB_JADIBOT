@@ -3,3 +3,10 @@ data/
 runtime-data/
 config.json
 *.log
+# Lock sesi WhatsApp bersifat runtime (per proses/host) dan TIDAK BOLEH masuk git:
+# lock basi dari host lama (mis. Buddy) membuat server baru mengira sesi sedang dipakai
+# proses lain, sehingga resume sesi gagal 409 dan bot tidak jalan + panel minta pairing ulang.
+.readsw-whatsapp-session.lock
+.readsw-restore.lock
+.readsw-whatsapp-session.lock.stale.*
+.readsw-restore.lock.stale.*
