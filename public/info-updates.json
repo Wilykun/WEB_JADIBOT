@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-16T19:51:00+07:00",
+  "updatedAt": "2026-11-17T05:24:00+07:00",
   "updates": [
+    {
+      "day": "Selasa, 17 Nov 2026",
+      "time": "05.24 WIB",
+      "title": "Info Update dan Member kini punya pencarian + filter kategori",
+      "description": "Halaman Info Update dan Member kini punya kotak pencarian dan pil kategori berangka dengan tampilan yang sama seperti Log privat — Info Update bisa dicari berdasarkan judul, deskripsi, dan kategori serta difilter ke Fitur baru, Perubahan, Perbaikan, Fitur dihapus, atau Tampilan, sedangkan Member bisa dicari berdasarkan akun, nama, dan email serta difilter ke Admin, Member, Bot jalan, WA tertaut, atau Belum aktif — dengan angka hitungan yang diperbarui realtime setiap daftar me-refresh sendiri tanpa muat ulang dan filter yang sedang aktif tetap dipertahankan.",
+      "tag": "Fitur baru"
+    },
     {
       "day": "Senin, 16 Nov 2026",
       "time": "19.51 WIB",

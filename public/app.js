@@ -1087,6 +1087,11 @@ async function loadAdminUsers() {
         const roleLabel = user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Admin' : 'Member';
         const article = document.createElement('article');
         article.className = `member-account-item${isOpen ? ' is-open' : ''}${user.isMainAdmin ? ' is-main-admin' : ''}`;
+        // Data filter Member: peran, status bot, dan status WhatsApp dibaca dari field yang sama dengan chip status di atas, supaya hitungan pil selalu sama dengan yang terlihat di kartu.
+        article.dataset.memberRole = user.role === 'admin' ? 'admin' : 'member';
+        article.dataset.memberBot = user.workerStatus === 'running' ? 'running' : 'stopped';
+        article.dataset.memberWa = user.whatsappStatus === 'linked' ? 'linked' : 'unlinked';
+        article.dataset.memberSearch = [username, displayName, user.email || ''].join(' ').toLowerCase();
 
         const toggle = document.createElement('button');
         toggle.type = 'button';
@@ -1383,6 +1388,8 @@ async function loadAdminUsers() {
       }
       adminUsersList.append(groupSection);
     }
+    updateMemberFilterCounts();
+    applyMemberFilter();
     const visible = Boolean(currentUser);
     section.classList.toggle('hidden', !visible);
     document.querySelector('#admin-nav').classList.toggle('hidden', !visible);
@@ -1405,6 +1412,67 @@ async function loadAdminUsers() {
     }
   }
 }
+
+// Filter + pencarian Member ala Log privat: pil kategori berangka dan kotak pencarian di atas daftar, dengan hitungan yang dihitung ulang dari akun yang sedang tampil setiap kali daftar me-refresh (15 detik) dan filter yang sedang aktif tetap dipertahankan.
+let memberFilter = 'all';
+let memberQuery = '';
+function memberFilterCounts() {
+  const counts = { all: 0, admin: 0, member: 0, running: 0, linked: 0, inactive: 0 };
+  document.querySelectorAll('#admin-users .member-account-item').forEach((article) => {
+    counts.all += 1;
+    if (article.dataset.memberRole === 'admin') counts.admin += 1;
+    if (article.dataset.memberRole === 'member') counts.member += 1;
+    if (article.dataset.memberBot === 'running') counts.running += 1;
+    if (article.dataset.memberWa === 'linked') counts.linked += 1;
+    if (article.dataset.memberBot !== 'running' && article.dataset.memberWa !== 'linked') counts.inactive += 1;
+  });
+  return counts;
+}
+function updateMemberFilterCounts() {
+  const counts = memberFilterCounts();
+  document.querySelectorAll('[data-member-filters] [data-filter-count]').forEach((countEl) => {
+    const key = countEl.dataset.filterCount;
+    if (Object.hasOwn(counts, key)) countEl.textContent = String(counts[key]);
+  });
+}
+function memberArticleMatches(article) {
+  if (memberFilter === 'admin' && article.dataset.memberRole !== 'admin') return false;
+  if (memberFilter === 'member' && article.dataset.memberRole !== 'member') return false;
+  if (memberFilter === 'running' && article.dataset.memberBot !== 'running') return false;
+  if (memberFilter === 'linked' && article.dataset.memberWa !== 'linked') return false;
+  if (memberFilter === 'inactive' && (article.dataset.memberBot === 'running' || article.dataset.memberWa === 'linked')) return false;
+  if (!memberQuery) return true;
+  return (article.dataset.memberSearch || '').includes(memberQuery);
+}
+function applyMemberFilter() {
+  const articles = [...document.querySelectorAll('#admin-users .member-account-item')];
+  let visible = 0;
+  articles.forEach((article) => {
+    const match = memberArticleMatches(article);
+    article.classList.toggle('is-filtered-out', !match);
+    if (match) visible += 1;
+  });
+  document.querySelectorAll('#admin-users .member-account-group').forEach((group) => {
+    const hasVisible = [...group.querySelectorAll('.member-account-item')].some((article) => !article.classList.contains('is-filtered-out'));
+    group.toggleAttribute('hidden', !hasVisible);
+  });
+  document.querySelector('#member-filter-empty')?.toggleAttribute('hidden', !(articles.length > 0 && visible === 0));
+}
+document.querySelector('#member-search')?.addEventListener('input', (event) => {
+  memberQuery = String(event.target.value || '').trim().toLowerCase();
+  applyMemberFilter();
+});
+document.querySelector('[data-member-filters]')?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-member-filter]');
+  if (!button) return;
+  memberFilter = button.dataset.memberFilter;
+  document.querySelectorAll('[data-member-filters] .filter-pill').forEach((pill) => {
+    const active = pill === button;
+    pill.classList.toggle('is-active', active);
+    pill.setAttribute('aria-pressed', String(active));
+  });
+  applyMemberFilter();
+});
 let loginHistoryTimer = null;
 let adminUsersTimer = null;
 let presenceHeartbeatTimer = null;
@@ -3515,9 +3583,62 @@ async function loadInfoUpdates() {
     updates.forEach((update) => list.append(createInfoUpdateItem(update)));
     void markInfoUpdatesSeen(updates);
   } catch { /* Biarkan daftar statis di halaman bila file belum bisa dibaca. */ }
-  infoUpdatePage = 1;
+  updateInfoUpdateFilterCounts();
+  applyInfoUpdateFilter({ resetPage: false });
+}
+
+// Filter + pencarian Info Update ala Log privat: pil kategori berangka dan kotak pencarian di atas daftar, dengan hitungan yang dihitung ulang dari data yang sedang tampil setiap kali daftar me-refresh (60 detik) dan filter yang sedang aktif tetap dipertahankan.
+let infoUpdateFilter = 'all';
+let infoUpdateQuery = '';
+function infoUpdateFilterCounts() {
+  const counts = { all: 0, 'fitur-baru': 0, perubahan: 0, perbaikan: 0, 'fitur-dihapus': 0, tampilan: 0 };
+  document.querySelectorAll('#infoupdate .info-update-item').forEach((item) => {
+    const tag = item.dataset.tag || '';
+    counts.all += 1;
+    if (Object.hasOwn(counts, tag)) counts[tag] += 1;
+  });
+  return counts;
+}
+function updateInfoUpdateFilterCounts() {
+  const counts = infoUpdateFilterCounts();
+  document.querySelectorAll('[data-info-update-filters] [data-filter-count]').forEach((countEl) => {
+    const key = countEl.dataset.filterCount;
+    if (Object.hasOwn(counts, key)) countEl.textContent = String(counts[key]);
+  });
+}
+function infoUpdateItemMatches(item) {
+  if (infoUpdateFilter !== 'all' && (item.dataset.tag || '') !== infoUpdateFilter) return false;
+  if (!infoUpdateQuery) return true;
+  const haystack = `${item.querySelector('h4')?.textContent || ''} ${item.querySelector('.info-update-desc')?.textContent || ''} ${item.querySelector('.info-update-tag')?.textContent || ''}`.toLowerCase();
+  return haystack.includes(infoUpdateQuery);
+}
+function applyInfoUpdateFilter({ resetPage = true } = {}) {
+  const items = [...document.querySelectorAll('#infoupdate .info-update-item')];
+  let visible = 0;
+  items.forEach((item) => {
+    const match = infoUpdateItemMatches(item);
+    item.classList.toggle('is-filtered-out', !match);
+    if (match) visible += 1;
+  });
+  document.querySelector('#info-update-empty')?.toggleAttribute('hidden', visible > 0);
+  if (resetPage) infoUpdatePage = 1;
   renderInfoUpdatePagination();
 }
+document.querySelector('#info-update-search')?.addEventListener('input', (event) => {
+  infoUpdateQuery = String(event.target.value || '').trim().toLowerCase();
+  applyInfoUpdateFilter();
+});
+document.querySelector('[data-info-update-filters]')?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-info-filter]');
+  if (!button) return;
+  infoUpdateFilter = button.dataset.infoFilter;
+  document.querySelectorAll('[data-info-update-filters] .filter-pill').forEach((pill) => {
+    const active = pill === button;
+    pill.classList.toggle('is-active', active);
+    pill.setAttribute('aria-pressed', String(active));
+  });
+  applyInfoUpdateFilter();
+});
 
 // Badge Info Update: angka update belum dibaca di menu samping. Penanda terakhir dibaca disimpan per akun di server, dihitung dari entri terbaru yang sudah dilihat.
 function countUnreadInfoUpdates(updates, seen) {
@@ -3683,7 +3804,8 @@ const INFO_UPDATE_PAGE_SIZE = 3;
 const INFO_UPDATE_PAGE_WINDOW = 5;
 let infoUpdatePage = 1;
 function renderInfoUpdatePagination() {
-  const items = [...document.querySelectorAll('#infoupdate .info-update-item')];
+  // Paginasi hanya menghitung entri yang lolos filter aktif, supaya halaman dan jumlahnya selalu sesuai dengan yang terlihat.
+  const items = [...document.querySelectorAll('#infoupdate .info-update-item')].filter((item) => !item.classList.contains('is-filtered-out'));
   const pager = document.querySelector('#info-update-pagination');
   if (!pager) return;
   const pages = Math.max(1, Math.ceil(items.length / INFO_UPDATE_PAGE_SIZE));
@@ -3749,6 +3871,9 @@ function renderInfoUpdatePagination() {
   pager.append(lastButton);
 }
 renderInfoUpdatePagination();
+// Hitungan pil + filter langsung diterapkan ke daftar statis fallback, supaya pencarian dan kategori sudah bekerja sebelum file JSON selesai dimuat.
+updateInfoUpdateFilterCounts();
+applyInfoUpdateFilter({ resetPage: false });
 
 // Info Update sebelum login: daftar yang sama dengan di dalam panel, dibaca dari
 // file publik yang sama, tapi tanpa penanda sudah dibaca (butuh akun) dan dengan

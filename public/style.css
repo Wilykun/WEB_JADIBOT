@@ -2839,6 +2839,39 @@ html[data-theme="light"] #activity .private-log-search input{color:#263a2c}
 html[data-theme="light"] #activity .private-log-search input::placeholder,html[data-theme="light"] #activity .private-log-search-hint{color:#7c8d80}
 html[data-theme="light"] #activity .private-log-filter{border-color:#dce6de;background:#fff;color:#556a5c}
 html[data-theme="light"] #activity .private-log-filter.is-active{border-color:#add8b9;background:#edf8f0;color:#237545}
+/* Filter + pencarian generik ala Log privat, dipakai Info Update dan Member: kotak pencarian di atas, pil kategori berangka di bawahnya. */
+.filter-controls{display:grid;gap:11px;padding:12px;border:1px solid rgba(105,143,117,.15);border-radius:14px;background:rgba(7,19,12,.52)}
+.filter-search{display:flex;align-items:center;gap:9px;min-height:42px;padding:0 11px;border:1px solid rgba(111,152,124,.2);border-radius:10px;background:rgba(232,248,237,.035);color:#7cc997}
+.filter-search:focus-within{border-color:rgba(81,215,135,.6);box-shadow:0 0 0 3px rgba(81,215,135,.08)}
+.filter-search svg{display:block;flex:none;width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:#78c993}
+.filter-search input{width:100%;min-width:0;min-height:40px;padding:0;border:0;outline:0;background:transparent;color:#e2efe5;font:500 10px/1.4 'Inter',system-ui,sans-serif}
+.filter-search input::placeholder{color:#6e8475}
+.filter-search-hint{flex:none;color:#718879;font-size:8px}
+.filter-row{display:grid;grid-template-columns:62px minmax(0,1fr);align-items:center;gap:8px}
+.filter-label{color:#859b8b;font-size:8px;font-weight:800;letter-spacing:.55px;text-transform:uppercase}
+.filter-pills{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.filter-pill{display:inline-flex;align-items:center;gap:7px;min-height:29px;padding:5px 9px;border:1px solid rgba(109,143,121,.17);border-radius:999px;background:rgba(255,255,255,.025);color:#9cafa2;font:650 8px/1 'Inter',system-ui,sans-serif;white-space:nowrap;cursor:pointer;transition:border-color .16s ease,background .16s ease,color .16s ease}
+.filter-pill:hover{border-color:rgba(80,206,128,.34);color:#d4e8d9}
+.filter-pill.is-active{border-color:rgba(76,215,132,.34);background:rgba(43,151,83,.14);color:#a8efbd}
+.filter-pill svg{display:block;flex:none;width:12px;height:12px}
+.filter-pill small{display:grid;min-width:18px;height:18px;place-items:center;padding:0 4px;border-radius:999px;background:rgba(255,255,255,.055);color:#8ca091;font-size:7px;font-weight:800;font-variant-numeric:tabular-nums}
+.filter-pill.is-active small{background:rgba(75,208,126,.16);color:#a7eabb}
+.filter-pill:focus-visible{outline:2px solid rgba(91,220,141,.72);outline-offset:2px}
+.filter-empty{margin:0;padding:20px;border:1px dashed rgba(111,150,123,.2);border-radius:12px;color:#8ea292;font-size:10px;text-align:center}
+.filter-empty[hidden]{display:none!important}
+.info-update-item.is-filtered-out,.member-account-item.is-filtered-out{display:none!important}
+.member-account-group[hidden]{display:none!important}
+html[data-theme="light"] .filter-controls{border-color:#dfe8e1;background:#f8faf8}
+html[data-theme="light"] .filter-search{border-color:#d9e4dc;background:#fff}
+html[data-theme="light"] .filter-search input{color:#263a2c}
+html[data-theme="light"] .filter-search input::placeholder,html[data-theme="light"] .filter-search-hint{color:#7c8d80}
+html[data-theme="light"] .filter-label{color:#6d8172}
+html[data-theme="light"] .filter-pill{border-color:#dce6de;background:#fff;color:#556a5c}
+html[data-theme="light"] .filter-pill.is-active{border-color:#add8b9;background:#edf8f0;color:#237545}
+html[data-theme="light"] .filter-pill small{background:rgba(35,70,45,.07);color:#5c7263}
+html[data-theme="light"] .filter-pill.is-active small{background:rgba(63,171,101,.14);color:#237545}
+html[data-theme="light"] .filter-empty{border-color:#cfe0d4;color:#5c7263}
+@media(max-width:760px){.filter-controls{gap:10px;padding:10px}.filter-row{grid-template-columns:minmax(0,1fr);gap:6px}}
 html[data-theme="light"] #activity .private-log-list .activity-log-entry{border-color:#dfe8e1;background:linear-gradient(120deg,#fff,#f8faf8)}
 html[data-theme="light"] #activity .private-log-list .activity-log-entry:hover{border-color:#b6ddc1;background:#fbfefc}
 html[data-theme="light"] #activity .private-log-list time{color:#637769}
