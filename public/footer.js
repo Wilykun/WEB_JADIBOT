@@ -67,4 +67,9 @@
   window.setInterval(sendVisitorHeartbeat, 20000);
   window.setInterval(refreshPresence, 10000);
   void refreshPresence();
+  // Saat tab kembali dibuka, angka langsung diperbarui — tanpa menunggu
+  // interval berikutnya dan tanpa muat ulang halaman.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') void refreshPresence();
+  });
 })();

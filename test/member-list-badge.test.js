@@ -51,10 +51,17 @@ test('badge member: buka halaman Member menandai akun terbaru lalu menghilangkan
   assert.match(appJs, /async function markMemberListSeen\(users\)/);
   assert.match(appJs, /\.sort\(\(a, b\) => Date\.parse\(b\.createdAt\) - Date\.parse\(a\.createdAt\)\)\[0\];/);
   assert.match(appJs, /body: JSON\.stringify\(\{ createdAt: newest\.createdAt, username: newest\.username \}\)/);
-  assert.match(appJs, /if \(page === 'admin'\) \{\n    void markMemberListSeen\(\);\n  \} else \{\n    void refreshMemberBadge\(\);\n  \}/);
+  assert.match(appJs, /if \(page === 'admin'\) \{\n    if \(previousPage !== null\) void markMemberListSeen\(\);\n  \} else \{\n    void refreshMemberBadge\(\);\n  \}/);
+});
+
+test('badge member: mendarat otomatis di Member setelah login tidak memajukan penanda', () => {
+  assert.match(appJs, /const previousPage = activeWorkspacePage;\n  activeWorkspacePage = page;/);
+  assert.match(appJs, /Penanda Member hanya maju saat halaman Member dibuka dengan sengaja/);
+  assert.doesNotMatch(appJs, /if \(page === 'admin'\) \{\n    void markMemberListSeen\(\);\n  \}/);
 });
 
 test('badge member: dimuat setelah login dan diperbarui realtime dari daftar yang sama', () => {
   assert.match(appJs, /void refreshInfoUpdateBadge\(\);\n  void refreshMemberBadge\(\);/);
-  assert.match(appJs, /if \(activeWorkspacePage === 'admin'\) void markMemberListSeen\(users\);\n    else if \(memberListSeenLoaded\) renderMemberBadge\(countNewMembers\(users, memberListSeen\)\);/);
+  assert.match(appJs, /if \(memberListSeenLoaded\) renderMemberBadge\(countNewMembers\(users, memberListSeen\)\);/);
+  assert.doesNotMatch(appJs, /if \(activeWorkspacePage === 'admin'\) void markMemberListSeen\(users\);/);
 });

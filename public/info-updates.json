@@ -1,12 +1,19 @@
 {
-  "updatedAt": "2026-11-16T13:42:00+07:00",
+  "updatedAt": "2026-11-16T14:20:00+07:00",
   "updates": [
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "14.20 WIB",
+      "tag": "Perbaikan",
+      "title": "Angka footer kini langsung diperbarui saat tab kembali dibuka",
+      "description": "Angka Online, Stalker, dan Kunjungan di footer memang sudah diperbarui otomatis tiap 10 detik tanpa muat ulang — tapi saat tab sempat ditinggal, angkanya bisa tertinggal sampai interval berikutnya. Sekarang begitu tab kembali dibuka, angkanya langsung diambil ulang dari server, jadi yang terlihat selalu angka terbaru."
+    },
     {
       "day": "Senin, 16 Nov 2026",
       "time": "13.42 WIB",
       "tag": "Fitur baru",
       "title": "Menu Member kini punya notif akun baru",
-      "description": "Menu Member di sidebar kini menampilkan angka hijau seperti di Info Update, tapi isinya berbeda: jumlah akun baru — member maupun admin — yang belum kamu lihat. Angkanya dihitung per akun, jadi yang dilihat admin dan member bisa berbeda. Begitu halaman Member dibuka, angkanya hilang; akun baru yang daftar setelah itu muncul lagi sebagai angka baru, dan diperbarui otomatis tiap 15 detik tanpa perlu muat ulang."
+      "description": "Menu Member di sidebar kini menampilkan angka hijau seperti di Info Update, tapi isinya berbeda: jumlah akun baru — member maupun admin — yang belum kamu lihat. Angkanya dihitung per akun, jadi yang dilihat admin dan member bisa berbeda. Begitu halaman Member dibuka dengan sengaja, angkanya hilang. Perbaikan: angka tidak lagi hilang begitu login — penanda hanya maju saat halaman Member diklik, bukan saat aplikasi mendarat di sana otomatis setelah login, jadi angka sempat terlihat; akun baru yang daftar setelah itu muncul lagi sebagai angka baru, dan diperbarui otomatis tiap 15 detik tanpa perlu muat ulang."
     },
     {
       "day": "Senin, 16 Nov 2026",

@@ -1004,11 +1004,11 @@ async function loadAdminUsers() {
     const isAdmin = currentUser?.role === 'admin';
     const result = await api(isAdmin ? '/api/admin/users' : '/api/members');
     const users = Array.isArray(result.users) ? result.users : [];
-    // Badge Member ikut diperbarui realtime dari daftar yang sama: saat sedang
-    // melihat halaman Member, penanda ikut maju; saat di halaman lain, angka
-    // badge dihitung ulang dari daftar terbaru.
-    if (activeWorkspacePage === 'admin') void markMemberListSeen(users);
-    else if (memberListSeenLoaded) renderMemberBadge(countNewMembers(users, memberListSeen));
+    // Badge Member ikut diperbarui realtime dari daftar yang sama (tiap
+    // 15 detik), tanpa memajukan penanda: penanda hanya maju saat halaman
+    // Member dibuka dengan sengaja, jadi angka badge tetap akurat selama
+    // daftar ini dilihat.
+    if (memberListSeenLoaded) renderMemberBadge(countNewMembers(users, memberListSeen));
     adminUsersList.replaceChildren();
     if (!users.some((user) => String(user.id || user.username) === expandedAdminUserId)) expandedAdminUserId = null;
     if (!users.length) {
@@ -1673,6 +1673,10 @@ function setWorkspacePage(page, smoothScroll = true) {
   if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || navItem?.classList.contains('hidden')) {
     page = document.body.dataset.whatsappLinked === 'true' ? 'dashboard' : 'pairing';
   }
+  // Penanda Member hanya maju saat halaman Member dibuka dengan sengaja
+  // (klik menu), bukan saat aplikasi mendarat di sana otomatis setelah
+  // login — kalau tidak, badge akun baru tidak pernah sempat terlihat.
+  const previousPage = activeWorkspacePage;
   activeWorkspacePage = page;
   try { window.sessionStorage.setItem(LAST_PAGE_STORAGE_KEY, page); } catch { /* Halaman terakhir tetap berjalan tanpa storage. */ }
   document.querySelectorAll('[data-page-view]').forEach((view) => {
@@ -1702,7 +1706,7 @@ function setWorkspacePage(page, smoothScroll = true) {
     void refreshInfoUpdateBadge();
   }
   if (page === 'admin') {
-    void markMemberListSeen();
+    if (previousPage !== null) void markMemberListSeen();
   } else {
     void refreshMemberBadge();
   }
