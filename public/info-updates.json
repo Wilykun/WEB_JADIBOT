@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-16T19:01:00+07:00",
+  "updatedAt": "2026-11-16T19:14:00+07:00",
   "updates": [
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.14 WIB",
+      "title": "Menu sidebar kini dikelompokkan dengan garis pemisah",
+      "description": "Menu sidebar kini terbagi jadi 4 kategori — Utama (Panel, Profil akun), Bot (Fitur Bot, Pairing WhatsApp, Log privat), Info (Developer, Info Update, Server, List Bot), dan Admin (Member, Backup) — masing-masing dengan label kecil dan garis pemisah tipis, supaya lebih rapi dan mudah dicari di HP. Di rel ikon yang tertutup, label disembunyikan dan garisnya jadi garis pendek di tengah.",
+      "tag": "Tampilan"
+    },
     {
       "day": "Senin, 16 Nov 2026",
       "time": "19.01 WIB",
