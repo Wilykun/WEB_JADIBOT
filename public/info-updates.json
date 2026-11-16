@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-15T21:23:00+07:00",
+  "updatedAt": "2026-11-16T08:42:00+07:00",
   "updates": [
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "08.42 WIB",
+      "tag": "Perbaikan",
+      "title": "Penjelasan halaman pairing saat sesi ditolak kini lebih jelas dan akurat",
+      "description": "Halaman Pairing WhatsApp saat sesi ditolak dulu menulis perangkat masih tertaut dan menyuruh coba pulihkan dulu, padahal sesi yang sudah dicabut WhatsApp tidak bisa dipulihkan lagi. Kini halamannya menjelaskan dengan jujur: coba pulihkan dulu, tapi kalau gagal terus berarti sesi sudah dicabut — hapus perangkat lama di WhatsApp > Perangkat tertaut, lalu pairing ulang dengan nomor baru."
+    },
     {
       "day": "Minggu, 15 Nov 2026",
       "time": "21.23 WIB",

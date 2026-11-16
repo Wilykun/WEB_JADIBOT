@@ -1949,12 +1949,12 @@ function renderPairingState(pairing) {
     if (pairing.maskedPhone) {
       controls.classList.add('hidden');
       recoveryCard.classList.remove('hidden');
-      if (recoveryCopy) recoveryCopy.textContent = `Sesi ${pairing.maskedPhone} ditolak, tapi nomor ini masih terdaftar tertaut. Coba pulihkan dulu — nggak perlu masukkan nomor lagi.`;
+      if (recoveryCopy) recoveryCopy.textContent = `Sesi ${pairing.maskedPhone} ditolak WhatsApp. Coba pulihkan dulu — kalau sesinya masih bagus, panel akan sambung lagi tanpa perlu nomor baru. Kalau pulihkan gagal terus, berarti sesi ini sudah dicabut WhatsApp: hapus perangkat lama di WhatsApp > Perangkat tertaut, lalu pairing ulang dengan nomor baru.`;
       statusValue.textContent = 'Sesi ditolak WhatsApp';
-      statusDescription.textContent = 'Perangkat masih tertaut di WhatsApp. Coba pulihkan dulu; pairing ulang hanya bila pemulihan gagal.';
-      statusFoot.textContent = 'Bisa dipulihkan';
+      statusDescription.textContent = 'Coba pulihkan dulu. Kalau gagal terus, hapus perangkat lama di WhatsApp > Perangkat tertaut lalu pairing ulang.';
+      statusFoot.textContent = 'Coba pulihkan dulu';
       statusDot.className = 'muted-dot';
-      setPairingNotice('Sesi ditolak WhatsApp. Coba pulihkan dulu — perangkatmu masih tertaut.', false, true);
+      setPairingNotice('Sesi ditolak WhatsApp. Coba pulihkan dulu; kalau gagal terus, hapus perangkat lama di WhatsApp lalu pairing ulang.', false, true);
       void loadPairingLogs();
       pairingPollTimer = setInterval(() => { void refreshPairing(); }, 5000);
       return;
