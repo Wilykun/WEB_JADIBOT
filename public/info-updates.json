@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T07:33:00+07:00",
+  "updatedAt": "2026-11-17T07:50:00+07:00",
   "updates": [
+    {
+      "day": "Selasa, 17 Nov 2026",
+      "time": "07.50 WIB",
+      "title": "Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP",
+      "description": "Tiga kartu mode di halaman Fitur Bot kini bisa digeser ke samping di HP seperti carousel, lengkap dengan titik indikator yang mengikuti kartu yang terlihat dan kartu yang terbuka mengikuti kartu yang terlihat. Halaman Fitur Bot juga punya kotak pencarian dan pil kategori seperti Log privat — Semua 6, Mode 3, Delay 2, Emoji 1 — yang memfilter kartu mode serta pengaturan delay dan emoji secara realtime.",
+      "tag": "Fitur baru"
+    },
     {
       "day": "Selasa, 17 Nov 2026",
       "time": "07.33 WIB",

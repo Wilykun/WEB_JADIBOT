@@ -39,7 +39,7 @@ test('fitur bot mode cards form a single-open accordion with the active mode ope
   // Satu terbuka dalam satu waktu: mengetuk header menutup semua kartu lain dulu.
   assert.ok(js.includes('function setPlanCardOpen'), 'accordion must have a single open/close helper');
   assert.ok(js.includes("document.querySelectorAll('.plan-card').forEach((other) => setPlanCardOpen(other, false))"), 'opening a card must close every other card first');
-  assert.ok(js.includes('if (card && !wasOpen) setPlanCardOpen(card, true)'), 'tapping the open card must close it again');
+  assert.ok(js.includes('if (card && !wasOpen) {') && js.includes('setPlanCardOpen(card, true);'), 'tapping the open card must close it again');
   assert.ok(js.includes('planAccordionUserTouched = true'), 'a manual toggle must mark the accordion as user-controlled');
   assert.ok(js.includes("const planToggle = event.target.closest('.plan-card-toggle')"), 'the toggle must be handled in the global click delegation');
 

@@ -2512,6 +2512,50 @@ html[data-theme="light"] #auth-message.is-banned{border-color:#edcaca;background
 }
 html[data-theme="light"] .plan-status.is-active { color: #176b3c; }
 
+/* Carousel horizontal kartu mode di HP: kartu digeser ke samping dengan snap,
+   satu kartu dominan terlihat dan kartu berikutnya mengintip di tepi, lengkap
+   dengan titik indikator di bawahnya. Di desktop wadah titik tidak pernah tampil. */
+.plan-carousel-dots { display: none; }
+@media (max-width: 560px) {
+  .plan-grid[data-page-view="mode"] {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  /* Spacer akhir flex agar kartu terakhir bisa snap penuh ke tepi kiri: tanpa
+     spacer, scroll maksimum berhenti sebelum titik snap kartu terakhir. */
+  .plan-grid[data-page-view="mode"]::after {
+    content: '';
+    flex: 0 0 15%;
+  }
+  .plan-grid[data-page-view="mode"]::-webkit-scrollbar { display: none; }
+  .plan-grid[data-page-view="mode"] .plan-card {
+    flex: 0 0 85%;
+    width: 85%;
+    max-width: none;
+    margin-inline: 0;
+    scroll-snap-align: start;
+  }
+  .plan-carousel-dots { display: flex; justify-content: center; align-items: center; gap: 7px; margin: 2px auto 0; padding: 6px 0 2px; }
+  .plan-carousel-dots.is-hidden { display: none; }
+  .plan-carousel-dot { width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+  .plan-carousel-dot::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.28); transition: width .2s ease, background .2s ease; }
+  .plan-carousel-dot.is-active::before { width: 18px; border-radius: 999px; background: var(--green); }
+  .plan-carousel-dot[hidden] { display: none; }
+  .plan-carousel-dot:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; border-radius: 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plan-carousel-dot::before { transition: none; }
+}
+html[data-theme="light"] .plan-carousel-dot::before { background: rgba(35,70,45,.28); }
+html[data-theme="light"] .plan-carousel-dot.is-active::before { background: #1f9d55; }
+
 /* Strong mobile/touch override for Story Preferences, including Android Desktop site mode. */
 @media (max-width: 1100px) and (pointer: coarse), (max-width: 560px) {
   .story-settings-card[data-page-view="mode"] {
@@ -2887,7 +2931,7 @@ html[data-theme="light"] #activity .private-log-filter.is-active{border-color:#a
 .filter-pill:focus-visible{outline:2px solid rgba(91,220,141,.72);outline-offset:2px}
 .filter-empty{margin:0;padding:20px;border:1px dashed rgba(111,150,123,.2);border-radius:12px;color:#8ea292;font-size:10px;text-align:center}
 .filter-empty[hidden]{display:none!important}
-.info-update-item.is-filtered-out,.member-account-item.is-filtered-out{display:none!important}
+.info-update-item.is-filtered-out,.member-account-item.is-filtered-out,.plan-card.is-filtered-out,[data-fiturbot-item].is-filtered-out,.story-settings-card.is-filtered-out,.plan-grid.is-filtered-out,.emoji-pool-field.is-filtered-out{display:none!important}
 .member-account-group[hidden]{display:none!important}
 html[data-theme="light"] .filter-controls{border-color:#dfe8e1;background:#f8faf8}
 html[data-theme="light"] .filter-search{border-color:#d9e4dc;background:#fff}

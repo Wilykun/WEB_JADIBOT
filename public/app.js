@@ -648,6 +648,162 @@ function modeSummary(mode) {
   return modeDescriptions[mode] || 'Pilih preferensi bot untuk menyimpannya.';
 }
 
+// Carousel horizontal kartu mode di HP (<=560px): kartu digeser ke samping dengan
+// snap, titik indikator mengikuti kartu yang terlihat, dan kartu yang terbuka
+// mengikuti kartu yang terlihat. Di desktop carousel tidak aktif dan kartu tetap
+// accordion vertikal seperti biasa.
+const planCarouselMedia = window.matchMedia('(max-width: 560px)');
+const planCarouselGrid = document.querySelector('.plan-grid[data-page-view="mode"]');
+const planCarouselDots = document.querySelector('.plan-carousel-dots');
+let planCarouselScrollTimer = null;
+function planCarouselActive() {
+  return planCarouselMedia.matches && !!planCarouselGrid;
+}
+function planCarouselCards() {
+  return [...document.querySelectorAll('.plan-card')];
+}
+function planCarouselVisibleCards() {
+  return planCarouselCards().filter((card) => !card.classList.contains('is-filtered-out'));
+}
+function planCarouselCardTargetLeft(card) {
+  const gridRect = planCarouselGrid.getBoundingClientRect();
+  const cardRect = card.getBoundingClientRect();
+  return planCarouselGrid.scrollLeft + (cardRect.left - gridRect.left);
+}
+function scrollToPlanCard(card, behavior = 'smooth') {
+  if (!planCarouselActive() || !card) return;
+  planCarouselGrid.scrollTo({ left: planCarouselCardTargetLeft(card), behavior });
+}
+function planCarouselMostVisibleCard() {
+  const visible = planCarouselVisibleCards();
+  if (!visible.length) return null;
+  const left = planCarouselGrid.scrollLeft;
+  return visible.reduce((best, card) => (Math.abs(planCarouselCardTargetLeft(card) - left) < Math.abs(planCarouselCardTargetLeft(best) - left) ? card : best));
+}
+function syncPlanCarouselDots() {
+  if (!planCarouselDots) return;
+  const visible = planCarouselVisibleCards();
+  const active = planCarouselMostVisibleCard();
+  const showDots = planCarouselActive() && visible.length >= 2;
+  planCarouselDots.classList.toggle('is-hidden', !showDots);
+  const cards = planCarouselCards();
+  [...planCarouselDots.querySelectorAll('.plan-carousel-dot')].forEach((dot) => {
+    const card = cards[Number(dot.dataset.planDot)];
+    dot.toggleAttribute('hidden', !card || card.classList.contains('is-filtered-out'));
+    const isActive = showDots && card === active;
+    dot.classList.toggle('is-active', isActive);
+    if (isActive) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
+  });
+}
+function syncPlanCarouselOpenCard() {
+  if (!planCarouselActive()) return;
+  const card = planCarouselMostVisibleCard();
+  if (!card || !card.classList.contains('is-collapsed')) return;
+  planAccordionUserTouched = true;
+  planCarouselCards().forEach((other) => setPlanCardOpen(other, false));
+  setPlanCardOpen(card, true);
+}
+function syncPlanCarouselPosition() {
+  if (!planCarouselActive()) return;
+  const openCard = planCarouselCards().find((card) => !card.classList.contains('is-collapsed'))
+    || planCarouselCards().find((card) => card.classList.contains('selected'))
+    || planCarouselVisibleCards()[0];
+  if (openCard) scrollToPlanCard(openCard, 'auto');
+  syncPlanCarouselDots();
+}
+planCarouselGrid?.addEventListener('scroll', () => {
+  window.clearTimeout(planCarouselScrollTimer);
+  planCarouselScrollTimer = window.setTimeout(() => {
+    syncPlanCarouselDots();
+    syncPlanCarouselOpenCard();
+  }, 120);
+}, { passive: true });
+planCarouselGrid?.addEventListener('scrollend', () => {
+  window.clearTimeout(planCarouselScrollTimer);
+  syncPlanCarouselDots();
+  syncPlanCarouselOpenCard();
+});
+document.querySelector('.plan-carousel-dots')?.addEventListener('click', (event) => {
+  const dot = event.target.closest('.plan-carousel-dot');
+  if (!dot) return;
+  const card = planCarouselCards()[Number(dot.dataset.planDot)];
+  if (!card || card.classList.contains('is-filtered-out')) return;
+  scrollToPlanCard(card, 'smooth');
+});
+
+// Pencarian + pil kategori Fitur Bot: memfilter 6 item (3 kartu mode, 2 delay,
+// 1 emoji) berdasarkan kategori dan kata kunci, dan menyesuaikan carousel HP
+// (kartu tersembunyi tidak ikut snap maupun titik indikator).
+let fiturbotFilterCategory = 'all';
+let fiturbotFilterQuery = '';
+function fiturbotFilterCounts() {
+  const counts = { all: 0, mode: 0, delay: 0, emoji: 0 };
+  document.querySelectorAll('[data-fiturbot-item]').forEach((item) => {
+    counts.all += 1;
+    if (Object.hasOwn(counts, item.dataset.fiturbotCategory)) counts[item.dataset.fiturbotCategory] += 1;
+  });
+  return counts;
+}
+function updateFiturbotFilterCounts() {
+  const counts = fiturbotFilterCounts();
+  document.querySelectorAll('[data-fiturbot-filters] [data-filter-count]').forEach((countEl) => {
+    const key = countEl.dataset.filterCount;
+    if (Object.hasOwn(counts, key)) countEl.textContent = String(counts[key]);
+  });
+}
+function fiturbotItemMatches(item) {
+  if (fiturbotFilterCategory !== 'all' && item.dataset.fiturbotCategory !== fiturbotFilterCategory) return false;
+  if (!fiturbotFilterQuery) return true;
+  return (item.dataset.fiturbotSearch || '').includes(fiturbotFilterQuery);
+}
+function applyFiturbotFilter() {
+  const items = [...document.querySelectorAll('[data-fiturbot-item]')];
+  let visibleCount = 0;
+  items.forEach((item) => {
+    const match = fiturbotItemMatches(item);
+    item.classList.toggle('is-filtered-out', !match);
+    if (match) visibleCount += 1;
+  });
+  // Kolom pemilih emoji mengikuti saklar reaksi emoji: tampil hanya bila saklarnya lolos filter.
+  const reactionSwitch = document.querySelector('.story-reaction-switch[data-fiturbot-item]');
+  document.querySelector('.emoji-pool-field')?.classList.toggle('is-filtered-out', !!reactionSwitch?.classList.contains('is-filtered-out'));
+  // Seksi Delay & emoji hanya tampil bila ada pengaturannya yang lolos filter.
+  const storyCard = document.querySelector('.story-settings-card[data-page-view="mode"]');
+  const storyVisible = items.some((item) => item.closest('.story-settings-card') && !item.classList.contains('is-filtered-out'));
+  storyCard?.classList.toggle('is-filtered-out', !storyVisible);
+  // Wadah kartu disembunyikan bila tidak ada kartu yang lolos filter.
+  const cardsVisible = items.some((item) => item.classList.contains('plan-card') && !item.classList.contains('is-filtered-out'));
+  planCarouselGrid?.classList.toggle('is-filtered-out', !cardsVisible);
+  // Bila kartu yang terbuka ikut tersembunyi, buka kartu pertama yang masih terlihat.
+  const openCard = planCarouselCards().find((card) => !card.classList.contains('is-collapsed'));
+  if (openCard?.classList.contains('is-filtered-out')) {
+    const firstVisible = planCarouselVisibleCards()[0];
+    planCarouselCards().forEach((other) => setPlanCardOpen(other, false));
+    if (firstVisible) setPlanCardOpen(firstVisible, true);
+  }
+  document.querySelector('#fiturbot-filter-empty')?.toggleAttribute('hidden', visibleCount !== 0);
+  updateFiturbotFilterCounts();
+  syncPlanCarouselDots();
+  const visibleOpenCard = planCarouselCards().find((card) => !card.classList.contains('is-collapsed') && !card.classList.contains('is-filtered-out'));
+  if (visibleOpenCard) scrollToPlanCard(visibleOpenCard, 'auto');
+}
+document.querySelector('#fiturbot-search')?.addEventListener('input', (event) => {
+  fiturbotFilterQuery = String(event.target.value || '').trim().toLowerCase();
+  applyFiturbotFilter();
+});
+document.querySelector('[data-fiturbot-filters]')?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-fiturbot-filter]');
+  if (!button) return;
+  fiturbotFilterCategory = button.dataset.fiturbotFilter;
+  document.querySelectorAll('[data-fiturbot-filters] .filter-pill').forEach((pill) => {
+    const active = pill === button;
+    pill.classList.toggle('is-active', active);
+    pill.setAttribute('aria-pressed', String(active));
+  });
+  applyFiturbotFilter();
+});
+applyFiturbotFilter();
+
 // Kartu mode Fitur Bot tampil sebagai accordion: hanya satu kartu terbuka dalam
 // satu waktu, dan penanda status di header kartu selalu mengikuti class selected
 // yang sama dengan tombol Aktif di dalam kartu.
@@ -675,6 +831,9 @@ function syncPlanAccordionDefault() {
     || cards.find((card) => card.classList.contains('plan-featured'))
     || cards[0];
   cards.forEach((card) => setPlanCardOpen(card, card === openCard));
+  // Di HP, carousel langsung diposisikan ke kartu yang terbuka bawaan tanpa animasi kasar.
+  scrollToPlanCard(openCard, 'auto');
+  syncPlanCarouselDots();
 }
 
 function applyBot(bot) {
@@ -1865,6 +2024,10 @@ function setWorkspacePage(page, smoothScroll = true) {
   if (page === 'backup') {
     void loadAdminBackupTelegramStatus();
     void loadAdminBackupSnapshots();
+  }
+  // Halaman Fitur Bot dibuka: posisikan carousel HP ke kartu yang terbuka dan segarkan titik indikatornya.
+  if (page === 'mode') {
+    syncPlanCarouselPosition();
   }
   setMenu(false);
 }
@@ -3361,7 +3524,11 @@ document.addEventListener('click', async (event) => {
     const card = planToggle.closest('.plan-card');
     const wasOpen = card && !card.classList.contains('is-collapsed');
     document.querySelectorAll('.plan-card').forEach((other) => setPlanCardOpen(other, false));
-    if (card && !wasOpen) setPlanCardOpen(card, true);
+    if (card && !wasOpen) {
+      setPlanCardOpen(card, true);
+      // Di HP, kartu yang dibuka ikut digeser ke posisi terlihat di carousel.
+      scrollToPlanCard(card, 'smooth');
+    }
     return;
   }
   const mode = event.target.closest('[data-plan]')?.dataset.plan;

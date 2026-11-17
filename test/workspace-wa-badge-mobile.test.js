@@ -63,23 +63,27 @@ test('whatsapp connection badge stays visible on a 360px phone with a short labe
   assert.ok(js.includes("'WHATSAPP ONLINE'"), 'the long label must still say WHATSAPP ONLINE on wide screens');
 });
 
-test('info update entry for the badge fix and mode accordion matches the JSON and fallback', async () => {
+test('info update entry for the mode carousel and fitur bot filter matches the JSON and fallback', async () => {
   const html = await read('public/index.html');
   const data = JSON.parse(await read('public/info-updates.json'));
 
-  assert.equal(data.updatedAt, '2026-11-17T07:33:00+07:00', 'updatedAt must equal the newest entry time');
+  assert.equal(data.updatedAt, '2026-11-17T07:50:00+07:00', 'updatedAt must equal the newest entry time');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler', 'the newest entry must describe both fixes');
+  assert.equal(newest.title, 'Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP', 'the newest entry must describe the carousel and filter');
   assert.equal(newest.tag, 'Fitur baru', 'the newest entry must use the Fitur baru display tag');
   assert.equal(newest.day, 'Selasa, 17 Nov 2026', 'the newest entry day must match');
-  assert.equal(newest.time, '07.33 WIB', 'the newest entry time must match');
-  assert.ok(newest.description.includes('360px'), 'the description must name the 360px cause');
-  assert.ok(newest.description.includes('WA Online'), 'the description must name the short label');
-  assert.ok(newest.description.includes('spoiler'), 'the description must name the accordion change');
-  assert.equal(data.updates.length, 49, 'the list must grow by exactly one entry');
+  assert.equal(newest.time, '07.50 WIB', 'the newest entry time must match');
+  assert.ok(newest.description.includes('carousel'), 'the description must name the carousel');
+  assert.ok(newest.description.includes('titik'), 'the description must name the dot indicator');
+  assert.ok(newest.description.includes('Semua 6, Mode 3, Delay 2, Emoji 1'), 'the description must name the filter pill counts');
+  assert.equal(data.updates.length, 50, 'the list must grow by exactly one entry');
 
   // Fallback statis di index.html harus sama persis dengan entri JSON terbaru.
   assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'the fallback must carry the fitur-baru slug for the newest entry');
-  assert.ok(html.includes('<h4>Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler</h4>'), 'the fallback title must match the JSON title');
-  assert.ok(html.includes('Selasa, 17 Nov 2026 · 07.33 WIB'), 'the fallback meta must match the JSON day and time');
+  assert.ok(html.includes('<h4>Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP</h4>'), 'the fallback title must match the JSON title');
+  assert.ok(html.includes('Selasa, 17 Nov 2026 · 07.50 WIB'), 'the fallback meta must match the JSON day and time');
+
+  // Entri accordion sebelumnya tetap ada di posisi kedua beserta fallback-nya.
+  assert.equal(data.updates[1].title, 'Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler', 'the badge fix entry must stay second');
+  assert.ok(html.includes('<h4>Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler</h4>'), 'the badge fix fallback must stay');
 });
