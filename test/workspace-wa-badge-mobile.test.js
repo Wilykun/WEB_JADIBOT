@@ -67,25 +67,35 @@ test('info update entry for the presence resync matches the JSON and fallback', 
   const html = await read('public/index.html');
   const data = JSON.parse(await read('public/info-updates.json'));
 
-  assert.equal(data.updatedAt, '2026-11-17T12:50:00+07:00', 'updatedAt must equal the newest entry time');
+  assert.equal(data.updatedAt, '2026-11-17T13:30:00+07:00', 'updatedAt must equal the newest entry time');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Status Pemilik kini pulih seketika saat kembali ke tab', 'the newest entry must describe the presence resync');
-  assert.equal(newest.tag, 'Perbaikan', 'the newest entry must use the Perbaikan display tag');
+  assert.equal(newest.title, 'Halaman Kontrol Bot untuk admin', 'the newest entry must describe the Kontrol Bot page');
+  assert.equal(newest.tag, 'Fitur baru', 'the newest entry must use the Fitur baru display tag');
   assert.equal(newest.day, 'Selasa, 17 Nov 2026', 'the newest entry day must match');
-  assert.equal(newest.time, '12.50 WIB', 'the newest entry time must match');
-  assert.ok(newest.description.includes('heartbeat'), 'the description must name the heartbeat');
-  assert.ok(newest.description.includes('Pemilik'), 'the description must name the Pemilik status');
-  assert.ok(newest.description.includes('tanpa muat ulang'), 'the description must promise no reload');
-  assert.equal(data.updates.length, 51, 'the list must grow by exactly one entry');
+  assert.equal(newest.time, '13.30 WIB', 'the newest entry time must match');
+  assert.equal(data.updates.length, 52, 'the list must grow by exactly one entry');
 
   // Fallback statis di index.html harus sama persis dengan entri JSON terbaru.
-  assert.ok(html.includes('<li class="info-update-item" data-tag="perbaikan">'), 'the fallback must carry the perbaikan slug for the newest entry');
+  assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'the fallback must carry the fitur-baru slug for the newest entry');
+  assert.ok(html.includes('<h4>Halaman Kontrol Bot untuk admin</h4>'), 'the fallback title must match the JSON title');
+  assert.ok(html.includes('Selasa, 17 Nov 2026 · 13.30 WIB'), 'the fallback meta must match the JSON day and time');
+
+  // Entri presence sebelumnya kini di posisi kedua beserta fallback-nya.
+  const presence = data.updates[1];
+  assert.equal(presence.title, 'Status Pemilik kini pulih seketika saat kembali ke tab', 'the presence entry must stay second');
+  assert.equal(presence.tag, 'Perbaikan', 'the presence entry must use the Perbaikan display tag');
+  assert.equal(presence.day, 'Selasa, 17 Nov 2026', 'the presence entry day must match');
+  assert.equal(presence.time, '12.50 WIB', 'the presence entry time must match');
+  assert.ok(presence.description.includes('heartbeat'), 'the description must name the heartbeat');
+  assert.ok(presence.description.includes('Pemilik'), 'the description must name the Pemilik status');
+  assert.ok(presence.description.includes('tanpa muat ulang'), 'the description must promise no reload');
+  assert.ok(html.includes('<li class="info-update-item" data-tag="perbaikan">'), 'the fallback must carry the perbaikan slug for the presence entry');
   assert.ok(html.includes('<h4>Status Pemilik kini pulih seketika saat kembali ke tab</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 12.50 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri carousel sebelumnya tetap ada di posisi kedua beserta fallback-nya.
-  assert.equal(data.updates[1].title, 'Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP', 'the carousel entry must stay second');
+  // Entri carousel sebelumnya tetap ada di posisi ketiga beserta fallback-nya.
+  assert.equal(data.updates[2].title, 'Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP', 'the carousel entry must stay third');
   assert.ok(html.includes('<h4>Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP</h4>'), 'the carousel fallback must stay');
-  assert.equal(data.updates[2].title, 'Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler', 'the badge fix entry must stay third');
+  assert.equal(data.updates[3].title, 'Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler', 'the badge fix entry must stay fourth');
   assert.ok(html.includes('<h4>Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler</h4>'), 'the badge fix fallback must stay');
 });

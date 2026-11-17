@@ -38,7 +38,7 @@ test('menu sidebar dikelompokkan jadi 4 kategori dengan label dan garis pemisah'
     ['dashboard', 'profile'],
     ['mode', 'pairing', 'activity'],
     ['developer', 'infoupdate', 'server', 'bots', 'admin'],
-    ['backup'],
+    ['backup', 'botcontrol'],
   ], `isi tiap kategori harus sesuai — dapat: ${JSON.stringify(groups)}`);
 });
 
@@ -50,22 +50,26 @@ test('label dan garis pemisah disembunyikan dari pembaca layar (hanya visual)', 
 });
 
 test('semua kait gating menu tetap ada setelah pengelompokan ulang', () => {
-  for (const id of ['admin-nav', 'backup-nav', 'pairing-nav', 'private-log-nav', 'developer-nav']) {
+  for (const id of ['admin-nav', 'backup-nav', 'botcontrol-nav', 'pairing-nav', 'private-log-nav', 'developer-nav']) {
     assert.ok(html.includes(`id="${id}"`), `nav item #${id} harus tetap ada`);
   }
   assert.ok(html.includes('id="admin-nav" class="nav-item hidden"'), 'nav Member tetap hidden secara default');
   assert.ok(html.includes('id="backup-nav" class="nav-item hidden"'), 'nav Backup tetap hidden secara default (baru ditampilkan saat login)');
   assert.ok(html.includes('id="backup-nav" class="nav-item hidden" href="#backup"'), 'nav Backup tetap menunjuk ke #backup');
+  assert.ok(html.includes('id="botcontrol-nav" class="nav-item hidden"'), 'nav Kontrol Bot tetap hidden secara default (baru ditampilkan saat login)');
+  assert.ok(html.includes('id="botcontrol-nav" class="nav-item hidden" href="#botcontrol"'), 'nav Kontrol Bot tetap menunjuk ke #botcontrol');
 });
 
 test('item Member kini berada di grup Info, bukan lagi di grup Admin', () => {
   const items = navChildren();
   const adminIdx = items.findIndex((i) => i.kind === 'link' && i.href === 'admin');
   const backupIdx = items.findIndex((i) => i.kind === 'link' && i.href === 'backup');
+  const botcontrolIdx = items.findIndex((i) => i.kind === 'link' && i.href === 'botcontrol');
   const adminLabelIdx = items.findIndex((i) => i.kind === 'label' && i.text === 'Admin');
-  assert.ok(adminIdx > -1 && backupIdx > -1 && adminLabelIdx > -1, 'Member, Backup, dan label Admin harus ada');
+  assert.ok(adminIdx > -1 && backupIdx > -1 && botcontrolIdx > -1 && adminLabelIdx > -1, 'Member, Backup, Kontrol Bot, dan label Admin harus ada');
   assert.ok(adminIdx < adminLabelIdx, 'Member harus berada sebelum label Admin (di grup Info), bukan di dalam grup Admin');
-  assert.ok(backupIdx > adminLabelIdx, 'Backup harus berada setelah label Admin (satu-satunya isi grup Admin)');
+  assert.ok(backupIdx > adminLabelIdx, 'Backup harus berada setelah label Admin (di grup Admin)');
+  assert.ok(botcontrolIdx > backupIdx, 'Kontrol Bot harus berada setelah Backup (di grup Admin)');
 });
 
 test('gaya label dan garis pemisah ada untuk desktop, rel tertutup, dan tema terang', () => {

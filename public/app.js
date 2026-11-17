@@ -1227,6 +1227,12 @@ function sortAdminUsersByRuntime(users) {
   });
 }
 
+// Label status WhatsApp dipakai kartu akun di halaman Member dan di halaman Kontrol Bot.
+const pairingLabels = {
+  linked: 'Tersambung', disconnected: 'Terputus', reconnecting: 'Menyambung', stopped: 'Dihentikan',
+  awaiting_code: 'Menunggu pairing', connecting: 'Menyiapkan pairing', linking: 'Menyelesaikan tautan', failed: 'Gagal',
+};
+
 async function loadAdminUsers() {
   const section = document.querySelector('#admin');
   try {
@@ -1247,10 +1253,6 @@ async function loadAdminUsers() {
       adminUsersList.append(empty);
     }
 
-    const pairingLabels = {
-      linked: 'Tersambung', disconnected: 'Terputus', reconnecting: 'Menyambung', stopped: 'Dihentikan',
-      awaiting_code: 'Menunggu pairing', connecting: 'Menyiapkan pairing', linking: 'Menyelesaikan tautan', failed: 'Gagal',
-    };
     const groups = [
       { key: 'admin', title: 'Admin', users: sortAdminUsersByRuntime(users.filter((user) => user.role === 'admin')) },
       { key: 'member', title: 'Member', users: sortAdminUsersByRuntime(users.filter((user) => user.role !== 'admin')) },
@@ -1595,6 +1597,12 @@ async function loadAdminUsers() {
     backupNav?.classList.toggle('nav-item-locked', !isAdmin);
     backupNav?.setAttribute('aria-disabled', String(!isAdmin));
     document.querySelector('#backup')?.classList.toggle('hidden', !isAdmin);
+    // Halaman Kontrol Bot diperlakukan sama seperti Backup: menunya tetap terlihat tapi terkunci untuk member, isi halamannya disembunyikan total.
+    const botControlNav = document.querySelector('#botcontrol-nav');
+    botControlNav?.classList.remove('hidden');
+    botControlNav?.classList.toggle('nav-item-locked', !isAdmin);
+    botControlNav?.setAttribute('aria-disabled', String(!isAdmin));
+    document.querySelector('#botcontrol')?.classList.toggle('hidden', !isAdmin);
     document.querySelector('#admin-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
     ensureWorkerRuntimeTicker();
   } catch (error) {
@@ -1665,6 +1673,320 @@ document.querySelector('[data-member-filters]')?.addEventListener('click', (even
   });
   applyMemberFilter();
 });
+
+// Kontrol Bot: daftar bot akun lain untuk admin. Admin biasa hanya bisa
+// mengelola member, Admin Utama juga bisa mengelola admin biasa, dan Admin
+// Utama sendiri tidak bisa dikelola siapa pun — aturan yang sama dipakai
+// server, jadi kartu yang tidak bisa dikontrol sudah terlihat terkunci
+// sebelum tombolnya ditekan.
+let botControlFilter = 'all';
+let botControlQuery = '';
+let expandedBotControlUserId = null;
+let botControlUsersTimer = null;
+const botControlUsersList = document.querySelector('#botcontrol-users');
+
+function botControlFilterCounts() {
+  const counts = { all: 0, running: 0, stopped: 0, linked: 0, inactive: 0 };
+  document.querySelectorAll('#botcontrol-users .member-account-item').forEach((article) => {
+    counts.all += 1;
+    if (article.dataset.memberBot === 'running') counts.running += 1;
+    else counts.stopped += 1;
+    if (article.dataset.memberWa === 'linked') counts.linked += 1;
+    if (article.dataset.memberBot !== 'running' && article.dataset.memberWa !== 'linked') counts.inactive += 1;
+  });
+  return counts;
+}
+function updateBotControlFilterCounts() {
+  const counts = botControlFilterCounts();
+  document.querySelectorAll('[data-botcontrol-filters] [data-filter-count]').forEach((countEl) => {
+    const key = countEl.dataset.filterCount;
+    if (Object.hasOwn(counts, key)) countEl.textContent = String(counts[key]);
+  });
+}
+function botControlArticleMatches(article) {
+  if (botControlFilter === 'running' && article.dataset.memberBot !== 'running') return false;
+  if (botControlFilter === 'stopped' && article.dataset.memberBot === 'running') return false;
+  if (botControlFilter === 'linked' && article.dataset.memberWa !== 'linked') return false;
+  if (botControlFilter === 'inactive' && (article.dataset.memberBot === 'running' || article.dataset.memberWa === 'linked')) return false;
+  if (!botControlQuery) return true;
+  return (article.dataset.memberSearch || '').includes(botControlQuery);
+}
+function applyBotControlFilter() {
+  const articles = [...document.querySelectorAll('#botcontrol-users .member-account-item')];
+  let visible = 0;
+  articles.forEach((article) => {
+    const match = botControlArticleMatches(article);
+    article.classList.toggle('is-filtered-out', !match);
+    if (match) visible += 1;
+  });
+  document.querySelector('#botcontrol-filter-empty')?.toggleAttribute('hidden', !(articles.length > 0 && visible === 0));
+}
+document.querySelector('#botcontrol-search')?.addEventListener('input', (event) => {
+  botControlQuery = String(event.target.value || '').trim().toLowerCase();
+  applyBotControlFilter();
+});
+document.querySelector('[data-botcontrol-filters]')?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-botcontrol-filter]');
+  if (!button) return;
+  botControlFilter = button.dataset.botcontrolFilter;
+  document.querySelectorAll('[data-botcontrol-filters] .filter-pill').forEach((pill) => {
+    const active = pill === button;
+    pill.classList.toggle('is-active', active);
+    pill.setAttribute('aria-pressed', String(active));
+  });
+  applyBotControlFilter();
+});
+
+function buildBotControlCard(user) {
+  const userId = String(user.id || user.username || '');
+  const username = String(user.username || 'akun');
+  const displayName = String(user.displayName || username);
+  const detailId = `botcontrol-detail-${encodeURIComponent(userId)}`;
+  const isOpen = userId === expandedBotControlUserId;
+  const canManageTarget = currentUser?.role === 'admin'
+    && (user.role !== 'admin' || (currentUser.isMainAdmin === true && user.isMainAdmin !== true));
+  const pairingStatus = pairingLabels[user.whatsappStatus] || 'Belum tertaut';
+  const roleLabel = user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Admin' : 'Member';
+  const article = document.createElement('article');
+  article.className = `member-account-item${isOpen ? ' is-open' : ''}${user.isMainAdmin ? ' is-main-admin' : ''}`;
+  // Data filter Kontrol Bot memakai field yang sama dengan chip status di
+  // atas, supaya hitungan pil selalu sama dengan yang terlihat di kartu.
+  article.dataset.memberRole = user.role === 'admin' ? 'admin' : 'member';
+  article.dataset.memberBot = user.workerStatus === 'running' ? 'running' : 'stopped';
+  article.dataset.memberWa = user.whatsappStatus === 'linked' ? 'linked' : 'unlinked';
+  article.dataset.memberSearch = [username, displayName, user.email || ''].join(' ').toLowerCase();
+
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'member-account-toggle';
+  toggle.dataset.botcontrolToggle = 'true';
+  toggle.dataset.userId = userId;
+  toggle.dataset.username = username;
+  toggle.setAttribute('aria-expanded', String(isOpen));
+  toggle.setAttribute('aria-controls', detailId);
+  toggle.setAttribute('aria-label', `${isOpen ? 'Tutup' : 'Buka'} kontrol bot @${username}`);
+
+  const topRow = document.createElement('span');
+  topRow.className = 'member-account-top-row';
+  const identity = document.createElement('span');
+  identity.className = 'member-account-identity';
+  const avatarImage = document.createElement('img');
+  avatarImage.className = 'member-account-avatar';
+  avatarImage.width = 44;
+  avatarImage.height = 44;
+  avatarImage.loading = 'lazy';
+  avatarImage.decoding = 'async';
+  avatarImage.alt = `Avatar ${roleLabel} ${displayName}`;
+  const selectedAvatar = String(user.avatar || 'avatar-01');
+  if (selectedAvatar === 'uploaded' && currentUser?.role === 'admin') {
+    const version = encodeURIComponent(user.avatarUpdatedAt || '');
+    avatarImage.src = `/api/admin/user-avatar?userId=${encodeURIComponent(userId)}&v=${version}`;
+  } else {
+    const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
+    avatarImage.src = `/avatars/${preset}.webp`;
+  }
+  avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
+  const identityText = document.createElement('span');
+  identityText.className = 'member-account-identity-text';
+  const name = document.createElement('strong');
+  name.textContent = displayName;
+  const handle = document.createElement('small');
+  handle.textContent = `@${username}`;
+  identityText.append(name, handle);
+  identity.append(avatarImage, identityText);
+  const control = document.createElement('span');
+  control.className = 'member-account-control';
+  const controlLabel = document.createElement('span');
+  controlLabel.className = 'member-account-toggle-label';
+  controlLabel.textContent = isOpen ? 'Tutup kontrol' : 'Kontrol bot';
+  const chevron = document.createElement('span');
+  chevron.className = 'member-account-chevron';
+  chevron.setAttribute('aria-hidden', 'true');
+  chevron.textContent = '⌄';
+  control.append(controlLabel, chevron);
+  topRow.append(identity, control);
+
+  const statusRow = document.createElement('span');
+  statusRow.className = 'member-account-statuses';
+  const chips = [
+    { text: roleLabel, icon: user.isMainAdmin ? 'crown' : null, className: `member-account-chip is-role${user.role === 'admin' ? ' is-admin' : ''}${user.isMainAdmin ? ' is-main-admin' : ''}`, title: user.isMainAdmin ? 'Admin Utama — akun admin dari config.json (WILYKUN), bukan admin biasa.' : null },
+    ...(user.role !== 'admin' && user.banned ? [{ text: 'Diblokir', className: 'member-account-chip is-danger' }] : []),
+    { text: user.panelActive ? 'Pemilik · Online' : 'Pemilik · Tidak aktif', className: `member-account-chip ${user.panelActive ? 'is-positive' : 'is-muted'}`, title: 'Status Online memakai heartbeat sesi panel dalam 75 detik terakhir; ini bukan status presence WhatsApp.' },
+    { text: `WA · ${pairingStatus}`, className: `member-account-chip ${user.whatsappStatus === 'linked' ? 'is-positive' : user.whatsappStatus === 'failed' ? 'is-warning' : 'is-muted'}` },
+    { text: `Bot WhatsApp · ${user.workerStatus === 'running' ? 'Berjalan' : user.workerStatus === 'waiting' ? 'Menunggu' : 'Berhenti'}`, className: `member-account-chip ${user.workerStatus === 'running' ? 'is-positive' : user.workerStatus === 'waiting' ? 'is-warning' : 'is-muted'}` },
+    { text: `Mode · ${user.featureStats?.modeLabel || 'Mode belum dipilih'}`, className: `member-account-chip ${user.featureStats?.modeLabel && user.featureStats.modeLabel !== 'Mode belum dipilih' ? 'is-positive' : 'is-muted'}` },
+    { runtime: true, className: `member-account-chip ${user.workerStatus === 'running' ? 'is-positive' : 'is-muted'}` },
+  ];
+  chips.forEach((chipInfo) => {
+    const chip = document.createElement('span');
+    chip.className = chipInfo.className;
+    if (chipInfo.runtime) {
+      if (user.workerStatus === 'running') {
+        chip.dataset.workerRuntime = String(user.workerStartedAt || '');
+        chip.dataset.runtimePrefix = 'Runtime bot';
+        chip.textContent = `Runtime bot · ${formatWorkerRuntime(user.workerStartedAt)}`;
+      } else {
+        chip.textContent = `Runtime bot · ${user.workerStatus === 'waiting' ? 'menunggu' : 'tidak aktif'}`;
+      }
+    } else if (chipInfo.icon) {
+      chip.append(createMemberIcon(chipInfo.icon), document.createTextNode(chipInfo.text));
+    } else {
+      chip.textContent = chipInfo.text;
+    }
+    if (chipInfo.title) chip.title = chipInfo.title;
+    statusRow.append(chip);
+  });
+  toggle.append(topRow, statusRow);
+
+  const details = document.createElement('div');
+  details.id = detailId;
+  details.className = 'member-account-details';
+  details.hidden = !isOpen;
+  if (canManageTarget) {
+    const adminPanel = document.createElement('section');
+    adminPanel.className = 'member-admin-panel';
+    const heading = document.createElement('div');
+    heading.className = 'member-admin-heading';
+    const title = document.createElement('strong');
+    title.textContent = `Kontrol bot · @${username}`;
+    const accountState = document.createElement('span');
+    accountState.className = `member-admin-status${user.banned ? ' is-banned' : ''}`;
+    accountState.textContent = user.banned ? 'Akun diblokir' : 'Akun aktif';
+    heading.append(title, accountState);
+    const note = document.createElement('p');
+    note.className = 'member-admin-note';
+    note.textContent = 'Admin dapat memantau dan mengelola worker bot, tetapi tidak masuk sebagai member. Pemilik akun menautkan WhatsApp sendiri.';
+    const botActions = document.createElement('div');
+    botActions.className = 'member-admin-actions';
+    const addControlButton = (label, action, disabled = false, variant = '') => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `button member-admin-button ${variant}`.trim();
+      button.dataset.botcontrolAction = action;
+      button.dataset.userId = userId;
+      button.textContent = label;
+      button.disabled = disabled;
+      botActions.append(button);
+    };
+    const linked = user.whatsappStatus === 'linked';
+    const hasWorker = user.workerStatus === 'running' || user.workerStatus === 'waiting' || user.botAutoStart === true || user.hasBotProfile === true;
+    addControlButton('Nyalakan bot', 'bot-start', user.banned || !linked || user.workerStatus === 'running', 'button-primary');
+    addControlButton('Restart bot', 'bot-restart', user.banned || !linked || user.workerStatus !== 'running', 'button-secondary');
+    addControlButton('Matikan bot', 'bot-stop', !hasWorker, 'button-secondary');
+    addControlButton('Hapus sesi WhatsApp', 'bot-session-delete', !linked && !hasWorker, 'button-danger');
+    const controlsNote = document.createElement('small');
+    controlsNote.className = 'member-admin-hint';
+    controlsNote.textContent = linked ? 'Nyalakan/restart memakai konfigurasi member. Hapus sesi memutus WhatsApp — pemilik akun harus menautkan ulang dari akunnya sendiri.' : 'Nyalakan/restart tersedia setelah member menautkan WhatsApp dari akunnya sendiri.';
+    const stateNote = document.createElement('p');
+    stateNote.className = `member-admin-account-state${user.banned ? ' is-banned' : ''}`;
+    stateNote.textContent = user.banned
+      ? `Diblokir${user.bannedAt ? ` sejak ${prettyDateTime(user.bannedAt)}` : ''}${user.banReason ? ` · alasan: ${user.banReason}` : ''}. Worker/Online 24 Jam dimatikan; tautan WhatsApp tidak dihapus.`
+      : 'Akun aktif. Admin tidak melihat kata sandi, kode pairing, atau isi percakapan.';
+    adminPanel.append(heading, note, botActions, controlsNote, stateNote);
+    details.append(adminPanel);
+  } else {
+    const note = document.createElement('p');
+    note.className = 'member-admin-note';
+    note.textContent = user.isMainAdmin
+      ? 'Akun Admin Utama tidak dapat dikontrol dari sini — kelola botnya dari halaman Fitur Bot.'
+      : 'Akun ini tidak dapat dikontrol oleh admin biasa.';
+    details.append(note);
+  }
+  article.append(toggle, details);
+  return article;
+}
+
+async function loadBotControlUsers() {
+  const list = document.querySelector('#botcontrol-users');
+  if (!list || currentUser?.role !== 'admin') return;
+  try {
+    const data = await api('/api/admin/users');
+    const users = Array.isArray(data.users) ? data.users : [];
+    // Admin Utama paling atas, lalu admin biasa, lalu member — tiap kelompok diurutkan menurut nama tampilan.
+    const sorted = [...users].sort((a, b) => {
+      const rank = (item) => (item.isMainAdmin ? 0 : item.role === 'admin' ? 1 : 2);
+      return rank(a) - rank(b) || String(a.displayName || a.username || '').localeCompare(String(b.displayName || b.username || ''), 'id');
+    });
+    list.replaceChildren();
+    for (const user of sorted) list.append(buildBotControlCard(user));
+    if (sorted.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'member-list-empty';
+      empty.textContent = 'Belum ada akun terdaftar.';
+      list.append(empty);
+    }
+    updateBotControlFilterCounts();
+    applyBotControlFilter();
+    document.querySelector('#botcontrol-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
+  } catch (error) {
+    if (error.status === 401) showAuth();
+  }
+}
+
+function startBotControlUsersPolling() {
+  if (botControlUsersTimer) return;
+  botControlUsersTimer = window.setInterval(() => {
+    if (activeWorkspacePage === 'botcontrol' && document.visibilityState === 'visible') void loadBotControlUsers();
+  }, 15000);
+}
+
+botControlUsersList?.addEventListener('click', async (event) => {
+  const actionButton = event.target.closest('[data-botcontrol-action]');
+  if (actionButton && botControlUsersList.contains(actionButton)) {
+    const action = actionButton.dataset.botcontrolAction;
+    const userId = actionButton.dataset.userId;
+    const article = actionButton.closest('.member-account-item');
+    const username = article?.querySelector('[data-botcontrol-toggle]')?.dataset.username || 'member';
+    const confirmations = {
+      'bot-start': { title: `Start bot @${username}?`, message: 'Bot memakai pengaturan tersimpan dan dapat membaca status serta mengirim reaksi bila mode itu aktif. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Start bot' },
+      'bot-restart': { title: `Restart bot @${username}?`, message: 'Bot berjalan kembali dengan pengaturan tersimpan. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Restart bot' },
+      'bot-stop': { title: `Matikan worker bot @${username}?`, message: 'Koneksi WhatsApp tetap tertaut. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Matikan worker', danger: true },
+      'bot-session-delete': { title: `Hapus sesi WhatsApp @${username}?`, message: 'Koneksi WhatsApp terputus dan sesi di server dihapus. Pemilik akun harus menautkan WhatsApp lagi dari akunnya sendiri. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Hapus sesi', danger: true },
+    };
+    if (!(await showConfirm(confirmations[action] || { title: 'Lanjutkan tindakan admin ini?', message: 'Tindakan ini akan langsung dijalankan.', confirmLabel: 'Lanjutkan' }))) return;
+    const actionButtons = [...(article?.querySelectorAll('[data-botcontrol-action]') || [])];
+    actionButtons.forEach((button) => { button.disabled = true; });
+    try {
+      if (action === 'bot-session-delete') {
+        await api('/api/admin/users/session/delete', {
+          method: 'POST',
+          body: JSON.stringify({ userId, confirm: true }),
+        });
+        showToast(`Sesi WhatsApp @${username} dihapus. Pemilik akun harus menautkan ulang.`);
+      } else {
+        const botAction = action.slice('bot-'.length);
+        const result = await api('/api/admin/users/bot', {
+          method: 'POST',
+          body: JSON.stringify({ userId, action: botAction, confirmActivity: botAction !== 'stop' }),
+        });
+        showToast(`Kontrol bot ${botAction} berhasil. Worker: ${result.workerStatus === 'running' ? 'berjalan' : 'berhenti'}.`);
+      }
+      await loadBotControlUsers();
+    } catch (error) {
+      if (error.status === 401) showAuth();
+      else showToast(error.message);
+      actionButtons.forEach((button) => { button.disabled = false; });
+    }
+    return;
+  }
+  // Spoiler kontrol bot: membuka satu kartu menutup kartu lain secara otomatis.
+  const trigger = event.target.closest('[data-botcontrol-toggle]');
+  if (!trigger || !botControlUsersList.contains(trigger)) return;
+  const shouldOpen = trigger.getAttribute('aria-expanded') !== 'true';
+  expandedBotControlUserId = shouldOpen ? trigger.dataset.userId : null;
+  botControlUsersList.querySelectorAll('.member-account-item').forEach((item) => {
+    const button = item.querySelector('[data-botcontrol-toggle]');
+    const panel = item.querySelector('.member-account-details');
+    const isOpen = Boolean(shouldOpen && button === trigger);
+    button?.setAttribute('aria-expanded', String(isOpen));
+    button?.setAttribute('aria-label', `${isOpen ? 'Tutup' : 'Buka'} kontrol bot @${button?.dataset.username || ''}`);
+    const label = button?.querySelector('.member-account-toggle-label');
+    if (label) label.textContent = isOpen ? 'Tutup kontrol' : 'Kontrol bot';
+    if (panel) panel.hidden = !isOpen;
+    item.classList.toggle('is-open', isOpen);
+  });
+});
+
 let loginHistoryTimer = null;
 let adminUsersTimer = null;
 let presenceHeartbeatTimer = null;
@@ -1952,7 +2274,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   if (running) logPollTimer = setInterval(() => { void loadPairingLogs(); }, 4000);
 }
 
-const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan' };
+const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot' };
 let activeWorkspacePage = null;
 let privateLogAutoRefreshTimer = null;
 let privateLogScrollOnNextRender = false;
@@ -1990,8 +2312,8 @@ function scrollPrivateLogToNewest(list, behavior = 'smooth') {
 
 function setWorkspacePage(page, smoothScroll = true) {
   const navItem = document.querySelector(`.side-nav .nav-item[href="#${page}"]`);
-  // Halaman Backup dijaga juga lewat peran (bukan hanya lewat menu yang tersembunyi), karena menunya kini terlihat tapi terkunci untuk member.
-  if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || (page === 'backup' && currentUser?.role !== 'admin') || navItem?.classList.contains('hidden')) {
+  // Halaman Backup dijaga juga lewat peran (bukan hanya lewat menu yang tersembunyi), karena menunya kini terlihat tapi terkunci untuk member. Halaman Kontrol Bot dijaga dengan cara yang sama.
+  if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || (page === 'backup' && currentUser?.role !== 'admin') || (page === 'botcontrol' && currentUser?.role !== 'admin') || navItem?.classList.contains('hidden')) {
     page = document.body.dataset.whatsappLinked === 'true' ? 'dashboard' : 'pairing';
   }
   // Penanda Member hanya maju saat halaman Member dibuka dengan sengaja
@@ -2042,6 +2364,11 @@ function setWorkspacePage(page, smoothScroll = true) {
   if (page === 'backup') {
     void loadAdminBackupTelegramStatus();
     void loadAdminBackupSnapshots();
+  }
+  // Halaman Kontrol Bot memuat ulang daftar bot setiap kali dibuka agar statusnya selalu dari data live, bukan sisa login.
+  if (page === 'botcontrol') {
+    void loadBotControlUsers();
+    startBotControlUsersPolling();
   }
   // Halaman Fitur Bot dibuka: posisikan carousel HP ke kartu yang terbuka dan segarkan titik indikatornya.
   if (page === 'mode') {
@@ -2630,6 +2957,12 @@ async function showDashboard(user) {
   backupNav?.classList.toggle('nav-item-locked', !isAdmin);
   backupNav?.setAttribute('aria-disabled', String(!isAdmin));
   document.querySelector('#backup')?.classList.toggle('hidden', !isAdmin);
+  // Halaman Kontrol Bot hanya untuk admin (Admin Utama dan admin biasa): menunya terlihat untuk semua akun yang login, tapi terkunci untuk member (lencana Terkunci, tidak bisa diklik); isi halamannya tetap disembunyikan total untuk member.
+  const botControlNav = document.querySelector('#botcontrol-nav');
+  botControlNav?.classList.remove('hidden');
+  botControlNav?.classList.toggle('nav-item-locked', !isAdmin);
+  botControlNav?.setAttribute('aria-disabled', String(!isAdmin));
+  document.querySelector('#botcontrol')?.classList.toggle('hidden', !isAdmin);
   const requestedPage = location.hash.slice(1);
   if (requestedPage === 'profile' || requestedPage === 'admin') {
     setWorkspacePage(requestedPage, false);
@@ -2666,6 +2999,7 @@ async function showDashboard(user) {
   await loadLoginHistory();
   startLoginHistoryPolling();
   startAdminUsersPolling();
+  startBotControlUsersPolling();
   startPresenceHeartbeat();
 }
 
@@ -3743,6 +4077,12 @@ document.querySelectorAll('.nav-item[href^="#"]').forEach((item) => {
     if (item.id === 'backup-nav' && item.classList.contains('nav-item-locked')) {
       event.preventDefault();
       showToast('Backup hanya untuk admin.');
+      return;
+    }
+    // Menu Kontrol Bot yang terkunci (member) tidak bisa dibuka: beri tahu bahwa fitur ini hanya untuk admin.
+    if (item.id === 'botcontrol-nav' && item.classList.contains('nav-item-locked')) {
+      event.preventDefault();
+      showToast('Kontrol Bot hanya untuk admin.');
       return;
     }
     const target = document.querySelector(item.getAttribute('href'));

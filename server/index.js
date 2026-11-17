@@ -2325,6 +2325,35 @@ async function handleApi(req, res, url) {
     }
   }
 
+  if (route === 'POST /api/admin/users/session/delete') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
+    const body = await readJson(req);
+    const targetId = String(body.userId || '').slice(0, 128);
+    const target = store.users.find((item) => item.id === targetId);
+    const permissionError = memberAdminPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
+    if (permissionError) return sendError(res, permissionError.status, permissionError.message);
+    if (body.confirm !== true) return sendError(res, 400, 'Konfirmasi hapus sesi diperlukan.');
+    try {
+      return await withMemberLifecycleLock(targetId, async () => {
+        const freshTarget = store.users.find((item) => item.id === targetId);
+        const currentPermissionError = memberAdminPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
+        if (currentPermissionError) return sendError(res, currentPermissionError.status, currentPermissionError.message);
+        await pairingManager.deleteSession(targetId);
+        await mutate((next) => {
+          if (!Array.isArray(next.adminAudit)) next.adminAudit = [];
+          next.adminAudit.push({ id: randomUUID(), actorId: user.id, targetId, action: 'bot_session_delete', createdAt: new Date().toISOString() });
+          if (next.adminAudit.length > 500) next.adminAudit.splice(0, next.adminAudit.length - 500);
+        });
+        return sendJson(res, 200, { ok: true, pairing: pairingManager.getState(targetId) || null });
+      });
+    } catch (error) {
+      const status = error instanceof PairingError ? error.status : 502;
+      const message = error instanceof PairingError ? error.message : 'Sesi WhatsApp member belum dapat dihapus.';
+      return sendError(res, status, message);
+    }
+  }
+
   if (route === 'POST /api/admin/users/ban') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
     if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');

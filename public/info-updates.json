@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T12:50:00+07:00",
+  "updatedAt": "2026-11-17T13:30:00+07:00",
   "updates": [
+    {
+      "day": "Selasa, 17 Nov 2026",
+      "time": "13.30 WIB",
+      "title": "Halaman Kontrol Bot untuk admin",
+      "description": "Menu Kontrol Bot kini ada di kategori Admin, di bawah Backup. Admin Utama dan admin biasa bisa memilih akun lalu mengontrol botnya — Nyalakan bot, Restart bot, Matikan bot, dan Hapus sesi WhatsApp — dengan konfirmasi sebelum setiap aksi; admin biasa tidak bisa mengontrol Admin Utama, dan akun Admin Utama tidak bisa dikontrol siapa pun dari halaman ini. Member hanya melihat menunya dengan lencana Terkunci, sama seperti Backup. Daftarnya bisa dicari dan difilter ke Bot jalan, Bot berhenti, WA tertaut, atau Belum aktif, dan membuka satu kartu otomatis menutup kartu lain.",
+      "tag": "Fitur baru"
+    },
     {
       "day": "Selasa, 17 Nov 2026",
       "time": "12.50 WIB",
