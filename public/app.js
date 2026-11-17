@@ -202,6 +202,7 @@ function applyStorySettings(settings, mode = selectedMode) {
   reaction.disabled = false;
   const options = Array.isArray(values.emojiOptions) ? values.emojiOptions : values.emojiPool;
   renderEmojiPool(options, Array.isArray(values.emojiPool) ? values.emojiPool : DEFAULT_STORY_SETTINGS.emojiPool);
+  syncStoryEmojiWarning();
 }
 
 function readStorySettings() {
@@ -214,6 +215,18 @@ function readStorySettings() {
     emojiOptions: [...document.querySelectorAll('.emoji-choice')].map((button) => button.dataset.emoji),
     emojiPool: [...document.querySelectorAll('.emoji-choice.selected')].map((button) => button.dataset.emoji),
   };
+}
+
+// Peringatan saat mode Read Only + ReadSW tidak bisa mengirim reaksi sama
+// sekali: tidak ada emoji dan reaksi otomatis mati, jadi bot hanya menandai
+// story sebagai dibaca (ReadSW biasa). Di mode Read Only biasa peringatan
+// tidak perlu karena reaksi memang tidak diharapkan di sana.
+function syncStoryEmojiWarning() {
+  const warning = document.querySelector('#story-emoji-warning');
+  if (!warning) return;
+  const pool = document.querySelectorAll('.emoji-choice.selected').length;
+  const reacting = document.querySelector('#story-reaction-enabled')?.checked === true;
+  warning.classList.toggle('hidden', !(selectedMode === 'readonly_readsw' && !reacting && pool === 0));
 }
 
 function isSingleEmoji(value) {
@@ -1782,6 +1795,10 @@ function syncBotControlSettingsCard(article, draft) {
   }
   const grid = article.querySelector('.botcontrol-emoji-grid');
   if (grid) renderBotControlEmojiGrid(grid, draft);
+  // Peringatan yang sama dengan halaman Fitur Bot: mode ReadSW tanpa emoji
+  // dan tanpa reaksi otomatis berarti bot hanya menandai story sebagai dibaca.
+  const warning = article.querySelector('.botcontrol-emoji-warning');
+  if (warning) warning.classList.toggle('hidden', !(draft.mode === 'readonly_readsw' && !draft.autoReaction && draft.emojiPool.length === 0));
 }
 const botControlUsersList = document.querySelector('#botcontrol-users');
 
@@ -1934,7 +1951,22 @@ function buildBotControlSettings(user, draft) {
   emojiLabel.textContent = 'Emoji reaksi — klik emoji untuk mengaktifkan atau menonaktifkan';
   const grid = document.createElement('div');
   grid.className = 'botcontrol-emoji-grid';
-  section.append(emojiLabel, grid);
+  const emojiWarning = document.createElement('div');
+  emojiWarning.className = 'emoji-warning botcontrol-emoji-warning hidden';
+  emojiWarning.setAttribute('role', 'status');
+  const warningIcon = document.createElement('span');
+  warningIcon.className = 'emoji-warning-icon';
+  warningIcon.setAttribute('aria-hidden', 'true');
+  warningIcon.textContent = '!';
+  const warningCopy = document.createElement('div');
+  warningCopy.className = 'emoji-warning-copy';
+  const warningTitle = document.createElement('strong');
+  warningTitle.textContent = 'Reaksi emoji tidak aktif';
+  const warningText = document.createElement('p');
+  warningText.textContent = 'Tidak ada emoji dan reaksi otomatis mati — bot hanya menandai story sebagai dibaca, tanpa mengirim reaksi. Tambahkan emoji dan nyalakan reaksi otomatis bila mau ada reaksi.';
+  warningCopy.append(warningTitle, warningText);
+  emojiWarning.append(warningIcon, warningCopy);
+  section.append(emojiLabel, grid, emojiWarning);
 
   const addRow = document.createElement('div');
   addRow.className = 'botcontrol-emoji-add-row';
@@ -2263,7 +2295,9 @@ botControlUsersList?.addEventListener('click', async (event) => {
         const emoji = emojiRemove.dataset.removeEmoji;
         draft.emojiOptions = draft.emojiOptions.filter((item) => item !== emoji);
         draft.emojiPool = draft.emojiPool.filter((item) => item !== emoji);
-        renderBotControlEmojiGrid(article.querySelector('.botcontrol-emoji-grid'), draft);
+        // Hapus emoji bisa memicu peringatan (emoji habis), jadi sinkronkan
+        // seluruh kartu — bukan hanya grid-nya.
+        syncBotControlSettingsCard(article, draft);
         return;
       }
       const emojiAdd = event.target.closest('.botcontrol-emoji-add');
@@ -2279,7 +2313,8 @@ botControlUsersList?.addEventListener('click', async (event) => {
           if (!draft.emojiPool.includes(emoji)) draft.emojiPool.push(emoji);
         }
         input.value = '';
-        renderBotControlEmojiGrid(article.querySelector('.botcontrol-emoji-grid'), draft);
+        // Tambah emoji bisa mematikan peringatan, jadi sinkronkan seluruh kartu.
+        syncBotControlSettingsCard(article, draft);
         setFeedback('success', `${emojis.length} emoji ditambahkan — tekan Simpan pengaturan.`);
         return;
       }
@@ -2344,7 +2379,13 @@ botControlUsersList?.addEventListener('change', (event) => {
   const reaction = event.target.closest('.botcontrol-auto-reaction');
   if (reaction && botControlUsersList.contains(reaction)) {
     const draft = botControlSettingsDrafts.get(reaction.dataset.userId || '');
-    if (draft) draft.autoReaction = reaction.checked;
+    if (draft) {
+      draft.autoReaction = reaction.checked;
+      // Ceklis reaksi ikut menentukan peringatan emoji, jadi kartu harus
+      // disinkronkan lagi — tanpa ini peringatan tidak muncul saat ceklis dimatikan.
+      const article = reaction.closest('.member-account-item');
+      if (article) syncBotControlSettingsCard(article, draft);
+    }
   }
 });
 
@@ -4133,6 +4174,7 @@ document.querySelector('#story-emoji-grid').addEventListener('click', (event) =>
     settings.emojiPool = settings.emojiPool.filter((item) => item !== emoji);
     if (!settings.emojiPool.length) document.querySelector('#story-reaction-enabled').checked = false;
     renderEmojiPool(settings.emojiOptions, settings.emojiPool);
+    syncStoryEmojiWarning();
     scheduleStorySettingsSave();
     return;
   }
@@ -4144,6 +4186,7 @@ document.querySelector('#story-emoji-grid').addEventListener('click', (event) =>
   if (!selected && !document.querySelector('.emoji-choice.selected')) {
     document.querySelector('#story-reaction-enabled').checked = false;
   }
+  syncStoryEmojiWarning();
   scheduleStorySettingsSave();
 });
 
@@ -4170,6 +4213,7 @@ async function addStoryEmoji() {
   settings.emojiOptions.push(...newEmojis);
   settings.emojiPool.push(...newEmojis);
   renderEmojiPool(settings.emojiOptions, settings.emojiPool);
+  syncStoryEmojiWarning();
   input.value = '';
   scheduleStorySettingsSave();
   const skipped = duplicates + invalid.length;
@@ -4188,6 +4232,7 @@ document.querySelector('#story-reaction-enabled').addEventListener('change', () 
     document.querySelector('.select-plan[data-plan="readonly_readsw"]')?.click();
     return;
   }
+  syncStoryEmojiWarning();
   scheduleStorySettingsSave();
 });
 document.querySelector('#save-story-settings').addEventListener('click', () => { void saveStoryPreferences(); });

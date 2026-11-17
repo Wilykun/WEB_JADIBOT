@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T14:35:00+07:00",
+  "updatedAt": "2026-11-17T14:55:00+07:00",
   "updates": [
+    {
+      "title": "Peringatan bila ReadSW tidak bisa mengirim reaksi emoji",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "14.55 WIB",
+      "tag": "Fitur baru",
+      "description": "Bila mode Read Only + ReadSW aktif tetapi tidak ada emoji dan reaksi otomatis mati, kini muncul peringatan di editor — bot hanya menandai story sebagai dibaca, tanpa mengirim reaksi. Peringatan muncul di halaman Fitur Bot member sendiri dan di editor Kontrol Bot saat admin memantau member; hilang begitu emoji ditambahkan atau reaksi otomatis dinyalakan."
+    },
     {
       "title": "Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot",
       "day": "Selasa, 17 Nov 2026",
