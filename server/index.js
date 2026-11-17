@@ -2618,6 +2618,7 @@ async function handleApi(req, res, url) {
 const assets = new Map([
   ['/', ['index.html', 'text/html; charset=utf-8']],
   ['/favicon.svg', ['favicon.svg', 'image/svg+xml; charset=utf-8']],
+  ['/og-image.png', ['og-image.png', 'image/png']],
   ['/fonts/inter-latin.woff2', ['fonts/inter-latin.woff2', 'font/woff2']],
   ['/style.css', ['style.css', 'text/css; charset=utf-8']],
   ['/footer.js', ['footer.js', 'text/javascript; charset=utf-8']],

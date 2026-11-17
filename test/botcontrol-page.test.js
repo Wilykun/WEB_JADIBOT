@@ -139,8 +139,8 @@ test('urutan runtime: bot jalan terbaru di atas, bot berhenti di bawah', () => {
 });
 
 test('entri Info Update terbaru menjelaskan halaman Kontrol Bot', () => {
-  const newest = infoUpdates.updates[0];
-  assert.equal(newest.title, 'Halaman Kontrol Bot untuk admin');
+  const newest = infoUpdates.updates.find((entry) => entry.title === 'Halaman Kontrol Bot untuk admin');
+  assert.ok(newest, 'entri Kontrol Bot harus ada di Info Update');
   assert.equal(newest.tag, 'Fitur baru');
   assert.match(newest.description, /Admin Utama kini bisa mengelola botnya sendiri/);
   assert.match(newest.description, /admin biasa tetap tidak bisa mengelola Admin Utama/);
@@ -152,6 +152,6 @@ test('entri Info Update terbaru menjelaskan halaman Kontrol Bot', () => {
   assert.match(newest.description, /Nyalakan bot|Restart bot|Matikan bot|Hapus sesi/);
   assert.match(newest.description, /Read Only, ReadSW \+ ReactionSW, Online 24 Jam/);
   assert.match(newest.description, /delay 1–20 detik serta emoji reaksi/);
-  assert.equal(infoUpdates.updatedAt, '2026-11-17T13:30:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(infoUpdates.updatedAt, '2026-11-17T14:15:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.ok(html.includes('data-tag="fitur-baru"') && html.includes('Halaman Kontrol Bot untuk admin'), 'fallback HTML Info Update harus memuat entri Kontrol Bot');
 });

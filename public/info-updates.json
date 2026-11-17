@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T13:30:00+07:00",
+  "updatedAt": "2026-11-17T14:15:00+07:00",
   "updates": [
+    {
+      "title": "Tautan panel kini menampilkan pratinjau bergambar saat dibagikan",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "14.15 WIB",
+      "tag": "Tampilan",
+      "description": "Saat tautan panel dibagikan di WhatsApp atau aplikasi lain, kini muncul kartu pratinjau dengan gambar ReactionSw (judul, deskripsi, dan thumbnail 1200×630), bukan lagi tautan polos. Gambar pratinjaunya mengikuti tema panel dan memakai ikon wajah ReactionSw."
+    },
     {
       "day": "Selasa, 17 Nov 2026",
       "time": "13.30 WIB",
