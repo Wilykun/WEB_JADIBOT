@@ -1870,6 +1870,9 @@ function rankLevelFor(count) {
   if (value >= 1) return { label: 'Aktif', className: 'rank-level-aktif' };
   return { label: 'Pemula', className: 'rank-level-pemula' };
 }
+function rankModeShortLabel(modeLabel) {
+  return String(modeLabel).replace('ReadSW + ReactionSW', 'ReadSW + Reaksi');
+}
 function sortRankBotUsers(users, category) {
   const inCategory = category === 'all' ? users : users.filter((user) => rankCategoryOf(user) === category);
   return [...inCategory].sort((a, b) => {
@@ -1937,7 +1940,7 @@ function renderRankBot() {
     handle.textContent = `@${username}`;
     const modeChip = document.createElement('span');
     modeChip.className = 'rankbot-mode';
-    modeChip.textContent = String(user?.featureStats?.modeLabel || 'Mode belum dipilih');
+    modeChip.textContent = rankModeShortLabel(String(user?.featureStats?.modeLabel || 'Mode belum dipilih'));
     const statsLine = document.createElement('p');
     statsLine.className = 'rankbot-stats';
     statsLine.textContent = `${reads} story dibaca · ${reactions} reaksi terkirim`;

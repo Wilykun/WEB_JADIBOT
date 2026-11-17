@@ -67,7 +67,9 @@ test('setiap peringkat menampilkan nama, profil, mode, dan level rank', () => {
   assert.ok(js.includes("avatarImage.className = 'rankbot-avatar';"), 'setiap peringkat harus menampilkan avatar profil');
   assert.ok(js.includes("name.className = 'rankbot-name';"), 'setiap peringkat harus menampilkan nama');
   assert.ok(js.includes("handle.textContent = `@${username}`;"), 'setiap peringkat harus menampilkan @akun');
-  assert.ok(js.includes("modeChip.textContent = String(user?.featureStats?.modeLabel"), 'setiap peringkat harus menampilkan modenya');
+  assert.ok(js.includes("function rankModeShortLabel(modeLabel)"), 'harus ada fungsi pemendek label mode Rank Bot');
+  assert.ok(js.includes("return String(modeLabel).replace('ReadSW + ReactionSW', 'ReadSW + Reaksi');"), 'label ReadSW + ReactionSW harus dipersingkat jadi ReadSW + Reaksi agar muat di HP (termasuk bila ada akhiran + Online 24 Jam)');
+  assert.ok(js.includes("modeChip.textContent = rankModeShortLabel(String(user?.featureStats?.modeLabel"), 'setiap peringkat harus menampilkan modenya dengan label pendek');
   assert.ok(js.includes("statsLine.textContent = `${reads} story dibaca · ${reactions} reaksi terkirim`;"), 'setiap peringkat harus menampilkan kedua hitungannya');
   const css = read('public/style.css');
   assert.ok(css.includes('.rankbot-item{'), 'kartu peringkat harus punya gaya sendiri');
@@ -75,7 +77,22 @@ test('setiap peringkat menampilkan nama, profil, mode, dan level rank', () => {
   assert.ok(css.includes('.rankbot-avatar{flex:0 0 44px'), 'avatar peringkat harus kecil (44px) di samping nama');
   assert.ok(css.includes('.rankbot-position{'), 'nomor peringkat harus punya lencana sendiri');
   assert.ok(css.includes('.rankbot-level{'), 'level rank harus punya lencana sendiri');
-  assert.ok(css.includes('@media(max-width:560px){.rankbot-item{gap:10px'), 'di HP baris peringkat harus makin ringkas agar muat');
+  assert.ok(css.includes('.rankbot-mode{font-size:11px;color:var(--soft);line-height:1.45;overflow-wrap:anywhere}'), 'mode peringkat harus membungkus ke baris berikut, bukan dipotong dengan ellipsis');
+  assert.ok(css.includes('.rankbot-stats{margin:0;font-size:11px;color:var(--muted);line-height:1.45;overflow-wrap:anywhere}'), 'statistik peringkat harus membungkus ke baris berikut, bukan dipotong dengan ellipsis');
+  assert.ok(css.includes('@media(max-width:560px){.rankbot-item{gap:8px;padding:10px 10px'), 'di HP baris peringkat harus makin ringkas agar muat');
+  assert.ok(css.includes('.rankbot-avatar{flex-basis:34px;width:34px;height:34px}'), 'di HP avatar peringkat harus makin kecil (34px) agar nama muat');
+  assert.ok(css.includes('.rankbot-position{flex-basis:30px}'), 'di HP lencana nomor peringkat harus makin ramping (30px) agar nama muat');
+});
+
+test('label mode Rank Bot dipersingkat dengan benar (fungsi asli dijalankan)', () => {
+  const js = read('public/app.js');
+  const match = js.match(/function rankModeShortLabel\(modeLabel\) \{[\s\S]*?\n\}/);
+  assert.ok(match, 'fungsi rankModeShortLabel harus bisa diekstrak dari app.js');
+  const short = eval(`(${match[0].replace('function rankModeShortLabel', 'function')})`);
+  assert.equal(short('ReadSW + ReactionSW'), 'ReadSW + Reaksi', 'mode panjang harus dipersingkat');
+  assert.equal(short('ReadSW + ReactionSW + Online 24 Jam'), 'ReadSW + Reaksi + Online 24 Jam', 'mode panjang dengan akhiran Online 24 Jam harus ikut dipersingkat');
+  assert.equal(short('ReadSW'), 'ReadSW', 'mode Read Only tidak berubah');
+  assert.equal(short('Mode belum dipilih'), 'Mode belum dipilih', 'mode kosong tidak berubah');
 });
 
 test('peringkat diperbarui realtime dan mengikuti pencarian serta pil kategori', () => {
@@ -96,5 +113,7 @@ test('entri Info Update terbaru menjelaskan halaman Rank Bot', () => {
   assert.equal(newest.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri terbaru harus menjelaskan halaman Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.time, '17.00 WIB', 'waktu entri terbaru harus cocok');
+  assert.ok(newest.description.includes("label mode dipersingkat jadi 'ReadSW + Reaksi'"), 'entri terbaru harus menjelaskan perbaikan nama fitur yang terpotong');
+  assert.ok(html.includes("label mode dipersingkat jadi 'ReadSW + Reaksi'"), 'fallback harus memuat perbaikan nama fitur yang terpotong');
   assert.ok(html.includes('<h4>Halaman Rank Bot untuk melihat bot teraktif</h4>'), 'fallback harus memuat judul entri terbaru');
 });

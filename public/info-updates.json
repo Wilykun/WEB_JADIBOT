@@ -6,7 +6,7 @@
       "day": "Selasa, 17 Nov 2026",
       "time": "17.00 WIB",
       "tag": "Fitur baru",
-      "description": "Menu baru Rank Bot di posisi atas sidebar — peringkat bot teraktif yang bisa dilihat member, Admin Utama, dan admin biasa. Tiga kategori terpisah: Semua (total aktivitas), Read Only (story dibaca), dan ReadSW + ReactionSW (reaksi terkirim), dihitung dari data tiap akun (DATA_AKUN) dan diurutkan terbanyak di atas. Setiap peringkat berbentuk baris ringkas — avatar kecil di samping nama, profil, mode, jumlah aktivitas, dan level rank (Pemula, Aktif, Rajin, Master, Legenda) — agar muat di HP; ada pencarian dan pil kategori, diperbarui realtime tiap 15 detik tanpa refresh."
+      "description": "Menu baru Rank Bot di posisi atas sidebar — peringkat bot teraktif yang bisa dilihat member, Admin Utama, dan admin biasa. Tiga kategori terpisah: Semua (total aktivitas), Read Only (story dibaca), dan ReadSW + ReactionSW (reaksi terkirim), dihitung dari data tiap akun (DATA_AKUN) dan diurutkan terbanyak di atas. Setiap peringkat berbentuk baris ringkas — avatar kecil di samping nama, profil, mode, jumlah aktivitas, dan level rank (Pemula, Aktif, Rajin, Master, Legenda) — agar muat di HP; ada pencarian dan pil kategori, diperbarui realtime tiap 15 detik tanpa refresh. Nama fitur dan statistik kini tampil penuh di HP tanpa terpotong: label mode dipersingkat jadi 'ReadSW + Reaksi' dan teks panjang membungkus ke baris berikut."
     },
     {
       "title": "Member belum tertaut tidak bisa masuk Fitur Bot",
