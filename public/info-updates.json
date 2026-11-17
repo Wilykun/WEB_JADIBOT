@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T15:50:00+07:00",
+  "updatedAt": "2026-11-17T16:45:00+07:00",
   "updates": [
+    {
+      "title": "Member belum tertaut tidak bisa masuk Fitur Bot",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "16.45 WIB",
+      "tag": "Perubahan",
+      "description": "Member biasa yang WhatsApp-nya belum tertaut kini tidak bisa masuk ke halaman Fitur Bot sama sekali — harus tertaut dulu baru bisa masuk. Mengetuk menu Fitur Bot menampilkan notifikasi di tengah layar dan member diarahkan ke halaman Pairing. Aturan ini hanya berlaku untuk member biasa: Admin Utama dan admin biasa tetap bisa masuk Fitur Bot walau belum tertaut."
+    },
     {
       "title": "Pemberitahuan tautan WhatsApp kini muncul di layar",
       "day": "Selasa, 17 Nov 2026",

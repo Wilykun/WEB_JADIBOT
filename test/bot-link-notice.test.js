@@ -41,7 +41,7 @@ test('pengingat tautan hanya untuk member biasa dan mengikuti status tautan real
   assert.ok(js.includes("document.body.dataset.whatsappLinked === 'false'"), 'kunci harus membaca penanda status tautan yang sama dengan lencana koneksi');
   assert.ok(js.includes('function syncBotLinkNotice()'), 'harus ada fungsi sinkronisasi pengingat tautan');
   assert.ok(js.includes('function showBotLinkNotice()'), 'harus ada fungsi menampilkan lagi pengingat tautan');
-  assert.ok(js.includes('botLinkNoticeDismissed = false;\n  syncBotLinkNotice();'), 'mengetuk tombol mode yang terkunci harus menampilkan lagi notifikasinya');
+  assert.ok(js.includes("botLinkNoticeDismissed = false;\n  showLinkNoticeOverlay();"), 'mengetuk tombol mode yang terkunci harus menampilkan lagi notifikasinya');
   assert.ok(js.includes('if (isBotLockedForMember()) { showBotLinkNotice(); return; }'), 'klik mode dan Online 24 Jam saat terkunci harus menampilkan notifikasi dan berhenti');
   assert.ok(js.includes("control.disabled = locked"), 'pengaturan story harus dinonaktifkan saat terkunci');
   assert.ok(js.includes("button.classList.toggle('is-locked', locked)"), 'tombol mode harus ditandai terkunci secara visual');
@@ -64,14 +64,25 @@ test('tombol Aktifkan di semua kartu mode memakai warna aksi yang sama', () => {
   assert.ok(css.includes('.select-plan.is-locked'), 'tombol terkunci harus tampak redup');
 });
 
-test('entri Info Update terbaru menjelaskan pengingat tautan di layar', () => {
+test('member belum tertaut tidak bisa masuk Fitur Bot, admin tetap bisa', () => {
+  const js = read('public/app.js');
+  assert.ok(js.includes("if (page === 'mode' && isBotLockedForMember()) {"), 'masuk Fitur Bot harus dicegat untuk member yang belum tertaut');
+  assert.ok(js.includes('showBotLinkNotice();\n    page = \'pairing\';'), 'upaya masuk yang dicegat harus menampilkan notifikasi dan mengarahkan ke Pairing');
+  assert.ok(js.includes('function showLinkNoticeOverlay()'), 'isi notifikasi harus dipakai bersama oleh sinkronisasi dan tampilan eksplisit');
+  assert.ok(js.includes("botLinkNoticeDismissed = false;\n  showLinkNoticeOverlay();"), 'tampilan eksplisit harus menampilkan notifikasi walau sempat ditutup dan walau belum di Fitur Bot');
+});
+
+test('entri Info Update terbaru menjelaskan member belum tertaut tidak bisa masuk Fitur Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-17T15:50:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 57, 'daftar harus bertambah satu entri');
+  assert.equal(data.updatedAt, '2026-11-17T16:45:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 58, 'daftar harus bertambah satu entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Pemberitahuan tautan WhatsApp kini muncul di layar', 'entri terbaru harus menjelaskan pengingat tautan di layar');
-  assert.equal(newest.tag, 'Tampilan', 'entri terbaru harus bertag Tampilan');
-  assert.equal(newest.time, '15.50 WIB', 'waktu entri terbaru harus cocok');
-  assert.ok(html.includes('<h4>Pemberitahuan tautan WhatsApp kini muncul di layar</h4>'), 'fallback harus memuat judul entri terbaru');
+  assert.equal(newest.title, 'Member belum tertaut tidak bisa masuk Fitur Bot', 'entri terbaru harus menjelaskan aturan masuk Fitur Bot');
+  assert.equal(newest.tag, 'Perubahan', 'entri terbaru harus bertag Perubahan');
+  assert.equal(newest.time, '16.45 WIB', 'waktu entri terbaru harus cocok');
+  assert.ok(html.includes('<h4>Member belum tertaut tidak bisa masuk Fitur Bot</h4>'), 'fallback harus memuat judul entri terbaru');
+  const linkEntry = data.updates.find((item) => item.title === 'Pemberitahuan tautan WhatsApp kini muncul di layar');
+  assert.ok(linkEntry, 'entri notifikasi tautan di layar harus tetap ada');
+  assert.equal(data.updates.indexOf(linkEntry), 1, 'entri notifikasi tautan di layar kini di posisi kedua');
 });

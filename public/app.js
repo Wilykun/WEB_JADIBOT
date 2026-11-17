@@ -1003,6 +1003,15 @@ let botLinkNoticeDismissed = false;
 function isBotLockedForMember() {
   return Boolean(currentUser) && currentUser.role !== 'admin' && document.body.dataset.whatsappLinked === 'false';
 }
+function showLinkNoticeOverlay() {
+  showNoticeOverlay({
+    title: 'WhatsApp belum tertaut',
+    text: 'Fitur bot belum aktif untuk akun ini. Tautkan WhatsApp dulu — begitu tertaut, Read Only + ReadSW dan Online 24 Jam otomatis aktif.',
+    context: { kind: 'link' },
+    addLabel: 'Buka Pairing WhatsApp',
+    onAdd: () => setWorkspacePage('pairing'),
+  });
+}
 function syncBotLinkNotice() {
   const locked = isBotLockedForMember();
   document.querySelectorAll('.select-plan, [data-online24-toggle]').forEach((button) => {
@@ -1022,19 +1031,14 @@ function syncBotLinkNotice() {
   // di halaman lain (misalnya dashboard setelah login) notifikasinya tidak
   // menutupi layar dan menunggu sampai member masuk ke Fitur Bot.
   if (activeWorkspacePage !== 'mode') return;
-  showNoticeOverlay({
-    title: 'WhatsApp belum tertaut',
-    text: 'Fitur bot belum aktif untuk akun ini. Tautkan WhatsApp dulu — begitu tertaut, Read Only + ReadSW dan Online 24 Jam otomatis aktif.',
-    context: { kind: 'link' },
-    addLabel: 'Buka Pairing WhatsApp',
-    onAdd: () => setWorkspacePage('pairing'),
-  });
+  showLinkNoticeOverlay();
 }
 function showBotLinkNotice() {
-  // Dipanggil saat member mengetuk tombol mode yang terkunci: tampilkan lagi
-  // walau notifikasinya sempat ditutup.
+  // Tampilan eksplisit — dipakai saat member mencoba masuk Fitur Bot atau
+  // mengetuk tombol mode yang terkunci: tampilkan walau notifikasinya sempat
+  // ditutup dan walau member belum berada di halaman Fitur Bot.
   botLinkNoticeDismissed = false;
-  syncBotLinkNotice();
+  showLinkNoticeOverlay();
 }
 
 let workerRuntimeTimer = null;
@@ -2823,6 +2827,14 @@ function scrollPrivateLogToNewest(list, behavior = 'smooth') {
 }
 
 function setWorkspacePage(page, smoothScroll = true) {
+  // Member biasa yang WhatsApp-nya belum tertaut TIDAK BISA masuk Fitur Bot:
+  // harus tertaut dulu baru bisa masuk. Upaya masuk menampilkan notifikasi di
+  // layar dan member diarahkan ke halaman Pairing. Admin (Admin Utama dan
+  // admin biasa) tidak kena aturan ini dan tetap bisa masuk walau belum tertaut.
+  if (page === 'mode' && isBotLockedForMember()) {
+    showBotLinkNotice();
+    page = 'pairing';
+  }
   const navItem = document.querySelector(`.side-nav .nav-item[href="#${page}"]`);
   // Halaman Backup dijaga juga lewat peran (bukan hanya lewat menu yang tersembunyi), karena menunya kini terlihat tapi terkunci untuk member. Halaman Kontrol Bot dijaga dengan cara yang sama.
   if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || (page === 'backup' && currentUser?.role !== 'admin') || (page === 'botcontrol' && currentUser?.role !== 'admin') || navItem?.classList.contains('hidden')) {
@@ -2894,7 +2906,10 @@ function renderLinkGate(pairing) {
   const linkedSessionStates = new Set(['linked', 'disconnected', 'reconnecting', 'stopped']);
   const hasLinkedSession = linkedSessionStates.has(pairing?.status);
   document.body.dataset.whatsappLinked = String(hasLinkedSession);
-  // Menu dan halaman Fitur Bot selalu tampil walau WhatsApp belum tertaut agar mode dan pengaturan story bisa diatur dulu, worker bot baru jalan otomatis begitu akun tertaut.
+  // Menu Fitur Bot selalu tampil walau WhatsApp belum tertaut: member yang
+  // mengetuknya mendapat notifikasi di layar dan diarahkan ke Pairing — masuk
+  // ke halamannya sendiri diblokir sampai WhatsApp tertaut (lihat
+  // setWorkspacePage). Admin tidak kena aturan ini.
   document.querySelectorAll('[data-linked-only]:not([data-page-view="mode"])').forEach((element) => {
     element.classList.toggle('hidden', !hasLinkedSession);
   });
