@@ -107,13 +107,17 @@ test('peringkat diperbarui realtime dan mengikuti pencarian serta pil kategori',
 test('entri Info Update terbaru menjelaskan halaman Rank Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-17T17:00:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 59, 'daftar harus bertambah satu entri');
+  assert.equal(data.updatedAt, '2026-11-17T21:50:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 60, 'daftar harus bertambah satu entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri terbaru harus menjelaskan halaman Rank Bot');
-  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
-  assert.equal(newest.time, '17.00 WIB', 'waktu entri terbaru harus cocok');
-  assert.ok(newest.description.includes("label mode dipersingkat jadi 'ReadSW + Reaksi'"), 'entri terbaru harus menjelaskan perbaikan nama fitur yang terpotong');
+  assert.equal(newest.title, 'Panel kini memuat jauh lebih cepat', 'entri terbaru harus menjelaskan panel yang lebih cepat');
+  assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perbaikan');
+  assert.equal(newest.time, '21.50 WIB', 'waktu entri terbaru harus cocok');
+  const rankbotEntry = data.updates[1];
+  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedua');
+  assert.equal(rankbotEntry.tag, 'Fitur baru', 'entri Rank Bot harus bertag Fitur baru');
+  assert.equal(rankbotEntry.time, '17.00 WIB', 'waktu entri Rank Bot harus cocok');
+  assert.ok(rankbotEntry.description.includes("label mode dipersingkat jadi 'ReadSW + Reaksi'"), 'entri Rank Bot harus menjelaskan perbaikan nama fitur yang terpotong');
   assert.ok(html.includes("label mode dipersingkat jadi 'ReadSW + Reaksi'"), 'fallback harus memuat perbaikan nama fitur yang terpotong');
-  assert.ok(html.includes('<h4>Halaman Rank Bot untuk melihat bot teraktif</h4>'), 'fallback harus memuat judul entri terbaru');
+  assert.ok(html.includes('<h4>Halaman Rank Bot untuk melihat bot teraktif</h4>'), 'fallback harus memuat judul entri Rank Bot');
 });

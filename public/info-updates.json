@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T17:00:00+07:00",
+  "updatedAt": "2026-11-17T21:50:00+07:00",
   "updates": [
+    {
+      "title": "Panel kini memuat jauh lebih cepat",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "21.50 WIB",
+      "tag": "Perbaikan",
+      "description": "Membuka panel terasa berat karena tiap kunjungan mengunduh ulang sekitar 1 MB tanpa kompresi dan tanpa cache. Kini file statis dikirim terkompres (gzip), aset yang sudah berversi boleh disimpan browser selama setahun, dan pustaka nomor telepon (252 KB) hanya dimuat saat halaman Pairing dibuka — bukan di halaman login. Unduhan awal turun dari sekitar 1 MB menjadi sekitar 200 KB dan form login tampil jauh lebih cepat; kunjungan berikutnya lebih ringan lagi karena asetnya sudah tersimpan. Tidak ada fitur yang berubah cara kerjanya."
+    },
     {
       "title": "Halaman Rank Bot untuk melihat bot teraktif",
       "day": "Selasa, 17 Nov 2026",

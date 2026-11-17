@@ -1,4 +1,5 @@
 import http from 'node:http';
+import { gzipSync } from 'node:zlib';
 import os from 'node:os';
 import fs from 'node:fs/promises';
 import fsSync from 'node:fs';
@@ -2652,14 +2653,26 @@ async function handle(req, res) {
     visitorCookie = cookies.readsw_visitor || randomBytes(24).toString('hex');
     await touchStalker(req, visitorCookie);
   }
+  // Aset statis dikirim terkompres (gzip) bila browser memintanya, dan aset
+  // yang sudah berversi (?v=...) boleh disimpan browser selama setahun —
+  // nomor versinya ganti tiap rilis, jadi deploy baru tetap langsung sampai.
+  // Halaman HTML tidak pernah di-cache (titik masuk harus selalu baru).
+  const isHtmlPage = ['/', '/privacy', '/dmca', '/terms'].includes(url.pathname);
+  const compressible = /^(text\/|application\/(json|javascript))/.test(contentType) || contentType.startsWith('image/svg+xml');
+  const acceptsGzip = req.method === 'GET' && compressible && /\bgzip\b/.test(req.headers['accept-encoding'] || '');
+  const body = acceptsGzip ? gzipSync(content) : content;
   setHeaders(res);
-  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Cache-Control', !isHtmlPage && url.searchParams.has('v') ? 'public, max-age=31536000, immutable' : 'no-store');
+  if (acceptsGzip) {
+    res.setHeader('Content-Encoding', 'gzip');
+    res.setHeader('Vary', 'Accept-Encoding');
+  }
   res.writeHead(200, {
     'Content-Type': contentType,
-    'Content-Length': content.length,
+    'Content-Length': body.length,
     ...(visitorCookie ? { 'Set-Cookie': stalkerCookieHeader(visitorCookie) } : {}),
   });
-  res.end(req.method === 'HEAD' ? undefined : content);
+  res.end(req.method === 'HEAD' ? undefined : body);
 }
 
 await initializeStore();

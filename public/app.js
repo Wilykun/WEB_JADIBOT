@@ -3066,6 +3066,11 @@ function setWorkspacePage(page, smoothScroll = true) {
     void loadRankBot();
     startRankBotPolling();
   }
+  // Halaman Pairing memuat pustaka nomor telepon hanya saat dibuka, supaya
+  // halaman login tidak ikut mengunduh file 252 KB itu di awal.
+  if (page === 'pairing') {
+    void ensureLibphonenumber();
+  }
   // Halaman Fitur Bot dibuka: posisikan carousel HP ke kartu yang terbuka dan segarkan titik indikatornya.
   if (page === 'mode') {
     syncPlanCarouselPosition();
@@ -4128,6 +4133,21 @@ document.querySelector('#pairing-qr-change-method')?.addEventListener('click', (
   if (submit) { submit.disabled = true; submit.innerHTML = 'Pilih QR atau Pairing Code <span>↑</span>'; }
   setPairingNotice('Pilih QR Code atau Pairing Code di atas, lalu tekan Gasss Slurrr :V.');
 });
+
+let libphonenumberLoadPromise = null;
+function ensureLibphonenumber() {
+  if (window.libphonenumber) return Promise.resolve();
+  if (!libphonenumberLoadPromise) {
+    libphonenumberLoadPromise = new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = '/vendor/libphonenumber-max.js?v=libphone-20261117';
+      script.onload = () => resolve();
+      script.onerror = () => resolve();
+      document.head.append(script);
+    });
+  }
+  return libphonenumberLoadPromise;
+}
 
 function parseInternationalNumber(digits) {
   const parser = window.libphonenumber?.parsePhoneNumberFromString;
