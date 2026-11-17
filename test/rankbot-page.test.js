@@ -71,10 +71,11 @@ test('setiap peringkat menampilkan nama, profil, mode, dan level rank', () => {
   assert.ok(js.includes("statsLine.textContent = `${reads} story dibaca · ${reactions} reaksi terkirim`;"), 'setiap peringkat harus menampilkan kedua hitungannya');
   const css = read('public/style.css');
   assert.ok(css.includes('.rankbot-item{'), 'kartu peringkat harus punya gaya sendiri');
-  assert.ok(css.includes('.rankbot-item{position:relative'), 'kartu peringkat harus rapi dan teksnya di tengah');
+  assert.ok(css.includes('.rankbot-item{display:flex;align-items:center'), 'kartu peringkat harus berbentuk baris ringkas dengan ikon kecil di samping');
+  assert.ok(css.includes('.rankbot-avatar{flex:0 0 44px'), 'avatar peringkat harus kecil (44px) di samping nama');
   assert.ok(css.includes('.rankbot-position{'), 'nomor peringkat harus punya lencana sendiri');
   assert.ok(css.includes('.rankbot-level{'), 'level rank harus punya lencana sendiri');
-  assert.ok(css.includes('@media(max-width:560px){.rankbot-list{grid-template-columns:1fr}'), 'di HP peringkat harus satu kolom penuh lebar');
+  assert.ok(css.includes('@media(max-width:560px){.rankbot-item{gap:10px'), 'di HP baris peringkat harus makin ringkas agar muat');
 });
 
 test('peringkat diperbarui realtime dan mengikuti pencarian serta pil kategori', () => {
