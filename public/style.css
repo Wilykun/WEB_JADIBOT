@@ -2790,7 +2790,7 @@ html[data-theme="light"] #backup .admin-backup-spoiler summary small{color:#876d
   .private-log-list .activity-log-story{overflow-wrap:anywhere}
 }
 
-/* Final member-card alignment: desktop uses a calm horizontal header; mobile centers each card (avatar above the name, detail control and chips centered). */
+/* Final member-card alignment: desktop uses a calm horizontal header; mobile uses compact rows like Rank Bot (small avatar at the side, name beside it, chips left-aligned). */
 @media (min-width: 821px) {
   .member-page .member-account-group-heading{justify-content:space-between;text-align:left}
   .member-page .member-account-group-heading h3,.member-page .member-account-group-heading>span{text-align:left}
@@ -2826,6 +2826,17 @@ html[data-theme="light"] #backup .admin-backup-spoiler summary small{color:#876d
   .member-page .member-feature-card{align-items:center}
   .member-page .member-feature-copy{text-align:left}
   .member-page .member-story-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Member cards, compact rows on phones: the old centered stack put the avatar above the name so it dominated each card, so on narrow screens the avatar shrinks to 34px and sits beside the name, exactly like the Rank Bot rows. */
+@media (max-width: 560px), (max-width: 1100px) and (hover: none) {
+  .member-page .member-account-toggle{gap:10px;padding:12px;text-align:left}
+  .member-page .member-account-top-row{flex-direction:row;align-items:center;justify-content:space-between;gap:10px;text-align:left}
+  .member-page .member-account-identity{flex-direction:row;align-items:center;justify-content:flex-start;width:auto;min-width:0;text-align:left}
+  .member-page .member-account-identity-text{justify-items:start;text-align:left}
+  .member-page .member-account-avatar{flex-basis:34px;width:34px;height:34px}
+  .member-page .member-account-control{align-self:auto;justify-content:flex-end;text-align:right}
+  .member-page .member-account-statuses{justify-content:flex-start}
 }
 
 /* Private Log console refresh, inspired by focused log viewers and responsive admin dashboards. */
