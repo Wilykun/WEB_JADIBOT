@@ -75,14 +75,14 @@ test('member belum tertaut tidak bisa masuk Fitur Bot, admin tetap bisa', () => 
 test('entri Info Update terbaru menjelaskan member belum tertaut tidak bisa masuk Fitur Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-17T16:45:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 58, 'daftar harus bertambah satu entri');
+  assert.equal(data.updatedAt, '2026-11-17T17:00:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 59, 'daftar harus bertambah satu entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Member belum tertaut tidak bisa masuk Fitur Bot', 'entri terbaru harus menjelaskan aturan masuk Fitur Bot');
-  assert.equal(newest.tag, 'Perubahan', 'entri terbaru harus bertag Perubahan');
-  assert.equal(newest.time, '16.45 WIB', 'waktu entri terbaru harus cocok');
-  assert.ok(html.includes('<h4>Member belum tertaut tidak bisa masuk Fitur Bot</h4>'), 'fallback harus memuat judul entri terbaru');
+  assert.equal(newest.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri terbaru harus menjelaskan halaman Rank Bot');
+  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
+  assert.equal(newest.time, '17.00 WIB', 'waktu entri terbaru harus cocok');
+  assert.ok(html.includes('<h4>Halaman Rank Bot untuk melihat bot teraktif</h4>'), 'fallback harus memuat judul entri terbaru');
   const linkEntry = data.updates.find((item) => item.title === 'Pemberitahuan tautan WhatsApp kini muncul di layar');
   assert.ok(linkEntry, 'entri notifikasi tautan di layar harus tetap ada');
-  assert.equal(data.updates.indexOf(linkEntry), 1, 'entri notifikasi tautan di layar kini di posisi kedua');
+  assert.equal(data.updates.indexOf(linkEntry), 2, 'entri notifikasi tautan di layar kini di posisi ketiga');
 });

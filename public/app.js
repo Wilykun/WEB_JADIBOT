@@ -1837,6 +1837,161 @@ document.querySelector('[data-member-filters]')?.addEventListener('click', (even
   applyMemberFilter();
 });
 
+// Rank Bot: peringkat bot teraktif berdasarkan data tiap akun (DATA_AKUN) —
+// story dibaca dan reaksi terkirim dari swstats.json masing-masing akun,
+// dibaca server lewat readAccountFeatureStats dan dikirim lewat /api/members
+// yang bisa dibuka semua akun yang login (member, Admin Utama, admin biasa).
+// Tiga kategori terpisah: Semua (total aktivitas), Read Only (story dibaca),
+// ReadSW + ReactionSW (reaksi terkirim). Urutan selalu terbanyak di atas.
+let rankBotUsers = [];
+let rankBotFilter = 'all';
+let rankBotQuery = '';
+let rankBotTimer = null;
+const rankBotList = document.querySelector('#rankbot-users');
+function rankCategoryOf(user) {
+  const modeLabel = String(user?.featureStats?.modeLabel || '');
+  if (modeLabel.startsWith('ReadSW + ReactionSW')) return 'readsw';
+  if (modeLabel.startsWith('ReadSW')) return 'readonly';
+  return 'none';
+}
+function rankScoreOf(user, category) {
+  const stats = user?.featureStats || {};
+  const reads = Math.max(0, Number(stats.storyReadCount) || 0);
+  const reactions = Math.max(0, Number(stats.reactionCount) || 0);
+  if (category === 'readonly') return reads;
+  if (category === 'readsw') return reactions;
+  return reads + reactions;
+}
+function rankLevelFor(count) {
+  const value = Math.max(0, Number(count) || 0);
+  if (value >= 500) return { label: 'Legenda', className: 'rank-level-legend' };
+  if (value >= 200) return { label: 'Master', className: 'rank-level-master' };
+  if (value >= 50) return { label: 'Rajin', className: 'rank-level-rajin' };
+  if (value >= 1) return { label: 'Aktif', className: 'rank-level-aktif' };
+  return { label: 'Pemula', className: 'rank-level-pemula' };
+}
+function sortRankBotUsers(users, category) {
+  const inCategory = category === 'all' ? users : users.filter((user) => rankCategoryOf(user) === category);
+  return [...inCategory].sort((a, b) => {
+    const diff = rankScoreOf(b, category) - rankScoreOf(a, category);
+    if (diff !== 0) return diff;
+    return String(a.displayName || a.username || '').localeCompare(String(b.displayName || b.username || ''), 'id');
+  });
+}
+function renderRankBot() {
+  if (!rankBotList) return;
+  const sorted = sortRankBotUsers(rankBotUsers, rankBotFilter);
+  rankBotList.replaceChildren();
+  if (!sorted.length) {
+    const empty = document.createElement('p');
+    empty.className = 'member-list-empty';
+    empty.textContent = 'Belum ada bot di kategori ini.';
+    rankBotList.append(empty);
+    document.querySelector('#rankbot-filter-empty')?.setAttribute('hidden', '');
+    return;
+  }
+  let visible = 0;
+  for (const [index, user] of sorted.entries()) {
+    const username = String(user.username || 'akun');
+    const displayName = String(user.displayName || username);
+    const searchText = [username, displayName].join(' ').toLowerCase();
+    if (rankBotQuery && !searchText.includes(rankBotQuery)) continue;
+    visible += 1;
+    const position = index + 1;
+    const score = rankScoreOf(user, rankBotFilter);
+    const level = rankLevelFor(score);
+    const reads = Math.max(0, Number(user?.featureStats?.storyReadCount) || 0);
+    const reactions = Math.max(0, Number(user?.featureStats?.reactionCount) || 0);
+    const scoreLabel = rankBotFilter === 'readonly' ? 'story dibaca' : rankBotFilter === 'readsw' ? 'reaksi terkirim' : 'total aktivitas';
+    const roleLabel = user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Admin' : 'Member';
+    const article = document.createElement('article');
+    article.className = `rankbot-item${position <= 3 ? ` rank-top-${position}` : ''}${user.isMainAdmin ? ' is-main-admin' : ''}`;
+    article.dataset.rankbotSearch = searchText;
+    const positionBadge = document.createElement('span');
+    positionBadge.className = `rankbot-position rank-${position <= 3 ? position : 'rest'}`;
+    positionBadge.textContent = `#${position}`;
+    const avatarImage = document.createElement('img');
+    avatarImage.className = 'rankbot-avatar';
+    avatarImage.width = 56;
+    avatarImage.height = 56;
+    avatarImage.loading = 'lazy';
+    avatarImage.decoding = 'async';
+    avatarImage.alt = `Avatar ${roleLabel} ${displayName}`;
+    const selectedAvatar = String(user.avatar || 'avatar-01');
+    const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
+    avatarImage.src = `/avatars/${preset}.webp`;
+    avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
+    const name = document.createElement('strong');
+    name.className = 'rankbot-name';
+    name.textContent = displayName;
+    const handle = document.createElement('small');
+    handle.className = 'rankbot-handle';
+    handle.textContent = `@${username}`;
+    const roleChip = document.createElement('span');
+    roleChip.className = 'rankbot-role';
+    roleChip.textContent = roleLabel;
+    const modeChip = document.createElement('span');
+    modeChip.className = 'rankbot-mode';
+    modeChip.textContent = String(user?.featureStats?.modeLabel || 'Mode belum dipilih');
+    const scoreBlock = document.createElement('div');
+    scoreBlock.className = 'rankbot-score';
+    const scoreValue = document.createElement('strong');
+    scoreValue.textContent = String(score);
+    const scoreLabelEl = document.createElement('span');
+    scoreLabelEl.textContent = scoreLabel;
+    scoreBlock.append(scoreValue, scoreLabelEl);
+    const statsLine = document.createElement('p');
+    statsLine.className = 'rankbot-stats';
+    statsLine.textContent = `${reads} story dibaca · ${reactions} reaksi terkirim`;
+    const levelBadge = document.createElement('span');
+    levelBadge.className = `rankbot-level ${level.className}`;
+    levelBadge.textContent = level.label;
+    article.append(positionBadge, avatarImage, name, handle, roleChip, modeChip, scoreBlock, statsLine, levelBadge);
+    rankBotList.append(article);
+  }
+  document.querySelector('#rankbot-filter-empty')?.toggleAttribute('hidden', !(sorted.length > 0 && visible === 0));
+  const counts = {
+    all: rankBotUsers.length,
+    readonly: rankBotUsers.filter((user) => rankCategoryOf(user) === 'readonly').length,
+    readsw: rankBotUsers.filter((user) => rankCategoryOf(user) === 'readsw').length,
+  };
+  document.querySelectorAll('[data-rankbot-filters] [data-filter-count]').forEach((countEl) => {
+    const key = countEl.dataset.filterCount;
+    if (Object.hasOwn(counts, key)) countEl.textContent = String(counts[key]);
+  });
+}
+async function loadRankBot() {
+  try {
+    const result = await api('/api/members');
+    rankBotUsers = Array.isArray(result.users) ? result.users : [];
+    renderRankBot();
+    document.querySelector('#rankbot-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
+  } catch (error) {
+    if (error.status === 401) showAuth();
+  }
+}
+function startRankBotPolling() {
+  if (rankBotTimer) return;
+  rankBotTimer = window.setInterval(() => {
+    if (activeWorkspacePage === 'rankbot' && document.visibilityState === 'visible') void loadRankBot();
+  }, 15000);
+}
+document.querySelector('#rankbot-search')?.addEventListener('input', (event) => {
+  rankBotQuery = String(event.target.value || '').trim().toLowerCase();
+  renderRankBot();
+});
+document.querySelector('[data-rankbot-filters]')?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-rankbot-filter]');
+  if (!button) return;
+  rankBotFilter = button.dataset.rankbotFilter;
+  document.querySelectorAll('[data-rankbot-filters] .filter-pill').forEach((pill) => {
+    const active = pill === button;
+    pill.classList.toggle('is-active', active);
+    pill.setAttribute('aria-pressed', String(active));
+  });
+  renderRankBot();
+});
+
 // Kontrol Bot: daftar bot akun lain untuk admin. Admin biasa hanya bisa
 // mengelola member, Admin Utama juga bisa mengelola admin biasa, dan Admin
 // Utama sendiri tidak bisa dikelola siapa pun — aturan yang sama dipakai
@@ -2790,7 +2945,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   if (running) logPollTimer = setInterval(() => { void loadPairingLogs(); }, 4000);
 }
 
-const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot' };
+const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot' };
 let activeWorkspacePage = null;
 let privateLogAutoRefreshTimer = null;
 let privateLogScrollOnNextRender = false;
@@ -2894,6 +3049,11 @@ function setWorkspacePage(page, smoothScroll = true) {
     void loadBotControlUsers();
     startBotControlUsersPolling();
   }
+  // Halaman Rank Bot memuat ulang peringkat setiap kali dibuka agar angkanya selalu dari data live, bukan sisa login.
+  if (page === 'rankbot') {
+    void loadRankBot();
+    startRankBotPolling();
+  }
   // Halaman Fitur Bot dibuka: posisikan carousel HP ke kartu yang terbuka dan segarkan titik indikatornya.
   if (page === 'mode') {
     syncPlanCarouselPosition();
@@ -2922,6 +3082,7 @@ function renderLinkGate(pairing) {
   });
   const adminVisible = Boolean(currentUser);
   document.querySelector('#admin')?.classList.toggle('hidden', !adminVisible);
+  document.querySelector('#rankbot')?.classList.remove('hidden');
   document.querySelector('#admin-nav')?.classList.toggle('hidden', !adminVisible);
   document.querySelector('.side-nav .nav-item[href="#dashboard"]')?.classList.toggle('hidden', !hasLinkedSession);
   document.querySelector('.side-nav .nav-item[href="#activity"]')?.classList.toggle('hidden', !hasLinkedSession);
