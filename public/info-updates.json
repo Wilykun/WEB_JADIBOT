@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T07:50:00+07:00",
+  "updatedAt": "2026-11-17T12:50:00+07:00",
   "updates": [
+    {
+      "day": "Selasa, 17 Nov 2026",
+      "time": "12.50 WIB",
+      "title": "Status Pemilik kini pulih seketika saat kembali ke tab",
+      "description": "Sebelumnya, pemilik akun yang pindah tab atau mengunci HP lebih dari 75 detik langsung terlihat 'Pemilik · Tidak aktif' dan statusnya baru pulih sampai 40 detik setelah kembali — terasa seperti harus refresh. Kini begitu tab kembali dibuka atau jendela kembali fokus, heartbeat dan daftar member langsung dimuat ulang, dan setiap heartbeat yang berhasil langsung diikuti pemuatan ulang daftar member, jadi status Pemilik serta angka Online, Stalker, dan Kunjungan di footer pulih seketika tanpa muat ulang. Catatan: 'Pemilik · Tidak aktif' berarti pemilik akun sedang tidak membuka web panel — bukan botnya berhenti; bot yang berjalan tetap tampil 'Bot WhatsApp · Berjalan'.",
+      "tag": "Perbaikan"
+    },
     {
       "day": "Selasa, 17 Nov 2026",
       "time": "07.50 WIB",

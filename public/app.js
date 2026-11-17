@@ -1673,6 +1673,10 @@ async function sendPresenceHeartbeat() {
   if (!currentUser || document.visibilityState !== 'visible' || appView.classList.contains('hidden')) return;
   try {
     await api('/api/me/heartbeat', { method: 'POST', body: '{}' });
+    // Daftar member langsung dimuat ulang begitu heartbeat berhasil, jadi
+    // status Pemilik milik sendiri mengikuti heartbeat tanpa menunggu
+    // giliran polling 15 detik berikutnya.
+    void loadAdminUsers();
   } catch (error) {
     if (error.status === 401) showAuth();
   }
@@ -1683,6 +1687,20 @@ function startPresenceHeartbeat() {
   void sendPresenceHeartbeat();
   presenceHeartbeatTimer = setInterval(() => { void sendPresenceHeartbeat(); }, 25000);
 }
+
+// Saat tab kembali dibuka atau jendela kembali fokus, status kehadiran
+// langsung disinkronkan ulang tanpa menunggu giliran interval berikutnya —
+// tanpa ini, pengguna yang kembali dari tab lain bisa terlihat "Tidak aktif"
+// sampai 40 detik walau tab panelnya tidak pernah ditutup.
+function resyncPresenceOnReturn() {
+  if (!currentUser || appView.classList.contains('hidden')) return;
+  void sendPresenceHeartbeat();
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') resyncPresenceOnReturn();
+});
+window.addEventListener('focus', resyncPresenceOnReturn);
 
 const LOGIN_HISTORY_PAGE_SIZE = 5;
 const LOGIN_HISTORY_PAGE_WINDOW = 3;

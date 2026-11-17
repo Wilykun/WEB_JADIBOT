@@ -72,4 +72,7 @@
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') void refreshPresence();
   });
+  // Jendela kembali fokus (misalnya setelah pindah aplikasi) juga langsung
+  // memuat ulang angka, jadi footer tidak menunggu giliran interval.
+  window.addEventListener('focus', () => { void refreshPresence(); });
 })();

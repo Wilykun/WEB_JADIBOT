@@ -16,3 +16,7 @@ test('footer realtime: angka Online/Stalker/Kunjungan diperbarui berkala tanpa m
 test('footer realtime: saat tab kembali dibuka, angka langsung diperbarui tanpa menunggu interval', () => {
   assert.match(footerJs, /document\.addEventListener\('visibilitychange', \(\) => \{\n    if \(document\.visibilityState === 'visible'\) void refreshPresence\(\);\n  \}\);/);
 });
+
+test('footer realtime: saat jendela kembali fokus, angka langsung diperbarui tanpa menunggu interval', () => {
+  assert.match(footerJs, /window\.addEventListener\('focus', \(\) => \{ void refreshPresence\(\); \}\);/);
+});
