@@ -76,11 +76,11 @@ test('halaman Backup hanya dibuka admin: menu terlihat tapi terkunci untuk membe
   assert.match(appJs, /showToast\('Backup hanya untuk admin\.'\)/, 'klik nav Backup yang terkunci harus menampilkan pesan Backup hanya untuk admin');
 });
 
-test('lencana Terkunci hanya tampil saat nav Backup dikunci dan disembunyikan di rel ikon tertutup', () => {
+test('lencana Terkunci hanya tampil saat nav dikunci dan disembunyikan di rel ikon tertutup', () => {
   assert.match(css, /\.nav-lock\{[^}]*display:\s*none/, 'lencana Terkunci harus tersembunyi secara default');
-  assert.match(css, /#backup-nav\.nav-item-locked \.nav-lock\{display:\s*inline-flex\}/, 'lencana Terkunci harus tampil saat nav Backup dikunci');
-  assert.match(css, /#backup-nav\.nav-item-locked\{[^}]*opacity:\s*\.6/, 'nav Backup yang terkunci harus tampak redup');
-  assert.match(css, /#backup-nav\.nav-item-locked\{[^}]*cursor:\s*not-allowed/, 'nav Backup yang terkunci harus berkursor tidak bisa diklik');
+  assert.match(css, /\.nav-item-locked \.nav-lock\{display:\s*inline-flex\}/, 'lencana Terkunci harus tampil saat nav dikunci (Backup, Kontrol Bot, dan menu terkunci lain)');
+  assert.match(css, /\.nav-item-locked\{[^}]*opacity:\s*\.6/, 'nav yang terkunci harus tampak redup');
+  assert.match(css, /\.nav-item-locked\{[^}]*cursor:\s*not-allowed/, 'nav yang terkunci harus berkursor tidak bisa diklik');
   assert.match(css, /\.sidebar:not\(\.is-open\) \.nav-lock\{display:\s*none\}/, 'di rel ikon tertutup, lencana Terkunci harus disembunyikan');
   assert.match(css, /html\[data-theme="light"\] \.nav-lock\{/, 'lencana Terkunci harus punya gaya tema terang');
 });

@@ -76,6 +76,40 @@ test('gaya kartu Member dipakai ulang halaman Kontrol Bot lewat kelas bersama', 
   assert.match(css, /\.side-nav \.nav-icon svg\{/, 'ikon SVG di menu sidebar harus punya ukuran yang sama dengan ikon teks');
 });
 
+test('lencana Terkunci muncul di semua menu terkunci, bukan hanya Backup', () => {
+  assert.match(css, /\.nav-item-locked \.nav-lock\{display:inline-flex\}/, 'aturan tampil lencana harus generik untuk semua menu terkunci');
+  assert.doesNotMatch(css, /#backup-nav\.nav-item-locked \.nav-lock/, 'aturan tampil lencana tidak boleh hanya berlaku untuk Backup');
+});
+
+test('editor pengaturan fitur ada di dalam spoiler kartu yang bisa dikelola', () => {
+  assert.match(appJs, /function buildBotControlSettings\(user, draft\)/, 'editor pengaturan fitur harus dibangun per kartu');
+  assert.match(appJs, /const draft = botControlSettingsDrafts\.get\(userId\) \|\| normalizeBotControlSettings\(user\.botSettings\)/, 'editor harus memakai draf per akun supaya editan tidak hilang saat daftar diperbarui');
+  assert.match(appJs, /adminPanel\.append\(heading, note, botActions, controlsNote, stateNote, settingsSection\)/, 'editor harus menempel di panel admin kartu yang bisa dikelola');
+  assert.match(appJs, /\['readonly', 'Read Only'\]/, 'editor harus punya pilihan mode Read Only');
+  assert.match(appJs, /\['readonly_readsw', 'ReadSW \+ ReactionSW'\]/, 'editor harus punya pilihan mode ReadSW + ReactionSW');
+  assert.match(appJs, /pill\.dataset\.botcontrolMode = value/, 'pil mode harus membawa nilai modenya');
+  assert.match(appJs, /data-botcontrol-online24/, 'editor harus punya tombol Online 24 Jam');
+  assert.match(appJs, /botcontrol-delay-min/, 'editor harus punya pilihan delay minimum');
+  assert.match(appJs, /botcontrol-delay-max/, 'editor harus punya pilihan delay maksimum');
+  assert.match(appJs, /botcontrol-auto-reaction/, 'editor harus punya saklar reaksi emoji otomatis');
+  assert.match(appJs, /botcontrol-emoji-grid/, 'editor harus punya daftar emoji reaksi');
+  assert.match(appJs, /botcontrol-emoji-new/, 'editor harus punya kolom tambah emoji baru');
+  assert.match(appJs, /data-botcontrol-settings-save/, 'editor harus punya tombol Simpan pengaturan');
+  assert.match(css, /\.botcontrol-settings\{/, 'editor pengaturan fitur harus punya gaya sendiri');
+  assert.match(css, /\.botcontrol-emoji-choice\.selected\{/, 'emoji aktif di editor harus terlihat terpilih');
+  assert.match(css, /@media\(max-width:560px\)\{\.botcontrol-delay-row\{grid-template-columns:1fr\}/, 'editor harus menumpuk di layar HP');
+});
+
+test('pengaturan fitur disimpan lewat endpoint admin dengan aturan izin yang sama', () => {
+  assert.match(appJs, /api\('\/api\/admin\/users\/bot-settings'/, 'simpan pengaturan harus memanggil endpoint admin bot-settings');
+  assert.match(appJs, /method: 'PUT'/, 'simpan pengaturan harus memakai PUT');
+  assert.match(appJs, /mode: draft\.mode, online24: draft\.online24, storySettings: \{/, 'simpan pengaturan harus mengirim mode, Online 24 Jam, dan preferensi story');
+  assert.match(appJs, /autoReaction, delayMinSeconds: draft\.delayMinSeconds, delayMaxSeconds: draft\.delayMaxSeconds/, 'preferensi story harus berisi reaksi otomatis dan rentang delay');
+  assert.match(appJs, /emojiOptions: draft\.emojiOptions, emojiPool: draft\.emojiPool/, 'preferensi story harus berisi daftar emoji dan emoji aktif');
+  assert.match(appJs, /Pilih mode dulu: Read Only atau Read Only \+ ReadSW\./, 'simpan tanpa mode harus ditolak di sisi klien');
+  assert.match(appJs, /Delay minimum harus kurang dari atau sama dengan delay maksimum\./, 'rentang delay terbalik harus ditolak di sisi klien');
+});
+
 test('entri Info Update terbaru menjelaskan halaman Kontrol Bot', () => {
   const newest = infoUpdates.updates[0];
   assert.equal(newest.title, 'Halaman Kontrol Bot untuk admin');
@@ -83,6 +117,8 @@ test('entri Info Update terbaru menjelaskan halaman Kontrol Bot', () => {
   assert.match(newest.description, /Admin Utama dan admin biasa/);
   assert.match(newest.description, /admin biasa tidak bisa mengontrol Admin Utama/);
   assert.match(newest.description, /Nyalakan bot|Restart bot|Matikan bot|Hapus sesi/);
+  assert.match(newest.description, /Read Only, ReadSW \+ ReactionSW, Online 24 Jam/);
+  assert.match(newest.description, /delay 1–20 detik serta emoji reaksi/);
   assert.equal(infoUpdates.updatedAt, '2026-11-17T13:30:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.ok(html.includes('data-tag="fitur-baru"') && html.includes('Halaman Kontrol Bot untuk admin'), 'fallback HTML Info Update harus memuat entri Kontrol Bot');
 });

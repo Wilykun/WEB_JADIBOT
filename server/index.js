@@ -2354,6 +2354,51 @@ async function handleApi(req, res, url) {
     }
   }
 
+  if (route === 'PUT /api/admin/users/bot-settings') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
+    const body = await readJson(req);
+    const targetId = String(body.userId || '').slice(0, 128);
+    const target = store.users.find((item) => item.id === targetId);
+    const permissionError = memberAdminPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
+    if (permissionError) return sendError(res, permissionError.status, permissionError.message);
+    if (!String(body.label || '').trim()) {
+      const existing = botForUser(targetId);
+      body.label = existing?.label || `${target.displayName || target.username} bot`;
+    }
+    const input = validateBotSettings(body);
+    if (input.error) return sendError(res, 400, input.error);
+    return await withMemberLifecycleLock(targetId, async () => {
+      const freshTarget = store.users.find((item) => item.id === targetId);
+      const currentPermissionError = memberAdminPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
+      if (currentPermissionError) return sendError(res, currentPermissionError.status, currentPermissionError.message);
+      if (isBannedAccount(freshTarget)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true });
+      const bot = await mutate((next) => {
+        let record = next.bots.find((item) => item.userId === targetId);
+        const storySettings = input.storySettings || normalizeStorySettings(record?.storySettings, input.mode);
+        if (storySettings.error) return { error: storySettings.error };
+        if (!record) {
+          record = { id: randomUUID(), userId: targetId, createdAt: new Date().toISOString(), runnerStatus: 'not_connected', autoStart: false };
+          next.bots.push(record);
+        }
+        record.label = input.label;
+        record.mode = input.mode;
+        record.online24 = input.online24 === true;
+        record.storySettings = storySettings;
+        record.autoStart = record.autoStart === true;
+        record.updatedAt = new Date().toISOString();
+        record.runnerStatus = 'not_connected';
+        if (!Array.isArray(next.adminAudit)) next.adminAudit = [];
+        next.adminAudit.push({ id: randomUUID(), actorId: user.id, targetId, action: 'bot_settings_update', createdAt: new Date().toISOString() });
+        if (next.adminAudit.length > 500) next.adminAudit.splice(0, next.adminAudit.length - 500);
+        return { id: record.id, label: record.label, mode: record.mode, online24: record.online24, storySettings: record.storySettings, autoStart: record.autoStart === true, runnerStatus: record.runnerStatus, updatedAt: record.updatedAt };
+      });
+      if (bot.error) return sendError(res, 400, bot.error);
+      const pairing = await pairingManager.setOnline24(targetId, input.online24);
+      return sendJson(res, 200, { ok: true, bot, pairing });
+    });
+  }
+
   if (route === 'POST /api/admin/users/ban') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
     if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
@@ -2512,6 +2557,14 @@ async function handleApi(req, res, url) {
         workerStatus: pairing?.workerStatus || 'stopped',
         workerStartedAt: pairing?.workerStartedAt || null,
         botAutoStart: (store.bots || []).some((bot) => bot.userId === item.id && bot.autoStart === true),
+        botSettings: (() => {
+          if (memberAdminPolicyError(user, item, process.env.BOOTSTRAP_ADMIN_USERNAME)) return null;
+          const bot = botForUser(item.id);
+          if (!bot) return null;
+          const mode = bot.mode === 'online24' ? 'readonly' : bot.mode;
+          const storySettings = normalizeStorySettings(bot.storySettings, mode);
+          return { label: bot.label ?? null, mode, online24: bot.online24 === true || bot.mode === 'online24', storySettings: storySettings.error ? normalizeStorySettings(undefined, mode) : storySettings };
+        })(),
         featureStats,
         banned: isBannedAccount(item),
         bannedAt: item.bannedAt || null,

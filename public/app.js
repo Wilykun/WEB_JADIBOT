@@ -1683,6 +1683,72 @@ let botControlFilter = 'all';
 let botControlQuery = '';
 let expandedBotControlUserId = null;
 let botControlUsersTimer = null;
+// Draf pengaturan fitur per akun, supaya editan admin yang belum disimpan tidak hilang saat daftar diperbarui berkala.
+const botControlSettingsDrafts = new Map();
+
+function normalizeBotControlSettings(botSettings) {
+  const raw = botSettings?.storySettings || {};
+  const values = { ...DEFAULT_STORY_SETTINGS, ...raw };
+  const min = Math.min(20, Math.max(1, Number(values.delayMinSeconds) || 1));
+  const max = Math.min(20, Math.max(min, Number(values.delayMaxSeconds) || 20));
+  const mode = botSettings?.mode === 'readonly_readsw' ? 'readonly_readsw' : botSettings?.mode === 'readonly' ? 'readonly' : null;
+  const options = [...new Set(Array.isArray(values.emojiOptions) ? values.emojiOptions : values.emojiPool)];
+  const pool = [...new Set(Array.isArray(values.emojiPool) ? values.emojiPool : [])].filter((emoji) => options.includes(emoji));
+  return { label: botSettings?.label || null, mode, online24: botSettings?.online24 === true, delayMinSeconds: min, delayMaxSeconds: max, autoReaction: mode === 'readonly_readsw' && values.autoReaction !== false, emojiOptions: options, emojiPool: pool };
+}
+
+function renderBotControlEmojiGrid(grid, draft) {
+  grid.replaceChildren();
+  if (!draft.emojiOptions.length) {
+    const empty = document.createElement('small');
+    empty.className = 'emoji-empty';
+    empty.textContent = 'Belum ada emoji. Tambahkan satu di bawah.';
+    grid.append(empty);
+    return;
+  }
+  const selected = new Set(draft.emojiPool);
+  for (const emoji of draft.emojiOptions) {
+    const item = document.createElement('div');
+    item.className = 'botcontrol-emoji-item';
+    const choice = document.createElement('button');
+    choice.type = 'button';
+    choice.className = 'botcontrol-emoji-choice';
+    choice.dataset.emoji = emoji;
+    choice.textContent = emoji;
+    choice.classList.toggle('selected', selected.has(emoji));
+    choice.setAttribute('aria-pressed', String(selected.has(emoji)));
+    choice.setAttribute('aria-label', `${emoji} ${selected.has(emoji) ? 'aktif' : 'nonaktif'}`);
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'botcontrol-emoji-remove';
+    remove.dataset.removeEmoji = emoji;
+    remove.textContent = '×';
+    remove.setAttribute('aria-label', `Hapus emoji ${emoji} dari akun ini`);
+    item.append(choice, remove);
+    grid.append(item);
+  }
+}
+
+function syncBotControlSettingsCard(article, draft) {
+  article.querySelectorAll('[data-botcontrol-mode]').forEach((button) => {
+    const active = button.dataset.botcontrolMode === draft.mode;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+  const onlineButton = article.querySelector('[data-botcontrol-online24]');
+  if (onlineButton) {
+    onlineButton.classList.toggle('is-active', draft.online24);
+    onlineButton.setAttribute('aria-pressed', String(draft.online24));
+    onlineButton.querySelector('.botcontrol-online-state')?.replaceChildren(document.createTextNode(draft.online24 ? 'Aktif ✓' : 'Nonaktif'));
+  }
+  const reaction = article.querySelector('.botcontrol-auto-reaction');
+  if (reaction) {
+    reaction.checked = draft.mode === 'readonly_readsw' && draft.autoReaction;
+    reaction.disabled = draft.mode !== 'readonly_readsw';
+  }
+  const grid = article.querySelector('.botcontrol-emoji-grid');
+  if (grid) renderBotControlEmojiGrid(grid, draft);
+}
 const botControlUsersList = document.querySelector('#botcontrol-users');
 
 function botControlFilterCounts() {
@@ -1736,6 +1802,138 @@ document.querySelector('[data-botcontrol-filters]')?.addEventListener('click', (
   });
   applyBotControlFilter();
 });
+
+function buildBotControlSettings(user, draft) {
+  const userId = String(user.id || user.username || '');
+  const section = document.createElement('section');
+  section.className = 'botcontrol-settings';
+  section.dataset.userId = userId;
+  const heading = document.createElement('strong');
+  heading.className = 'botcontrol-settings-title';
+  heading.textContent = 'Pengaturan fitur';
+  const note = document.createElement('p');
+  note.className = 'botcontrol-settings-note';
+  note.textContent = user.botSettings
+    ? 'Mode dan preferensi story akun ini. Perubahan hanya tersimpan setelah tombol Simpan pengaturan ditekan.'
+    : 'Akun ini belum punya profil bot — simpan pengaturan untuk membuatnya.';
+  section.append(heading, note);
+
+  const modeLabel = document.createElement('span');
+  modeLabel.className = 'botcontrol-field-label';
+  modeLabel.textContent = 'Mode bot';
+  const modeRow = document.createElement('div');
+  modeRow.className = 'botcontrol-mode-row';
+  for (const [value, label] of [['readonly', 'Read Only'], ['readonly_readsw', 'ReadSW + ReactionSW']]) {
+    const pill = document.createElement('button');
+    pill.type = 'button';
+    pill.className = 'filter-pill botcontrol-mode-pill';
+    pill.dataset.botcontrolMode = value;
+    pill.dataset.userId = userId;
+    pill.textContent = label;
+    modeRow.append(pill);
+  }
+  const onlineButton = document.createElement('button');
+  onlineButton.type = 'button';
+  onlineButton.className = 'filter-pill botcontrol-mode-pill';
+  onlineButton.dataset.botcontrolOnline24 = 'true';
+  onlineButton.dataset.userId = userId;
+  onlineButton.setAttribute('aria-label', 'Online 24 Jam');
+  const onlineIcon = document.createElement('span');
+  onlineIcon.textContent = '⏱';
+  const onlineText = document.createElement('span');
+  onlineText.textContent = 'Online 24 Jam';
+  const onlineState = document.createElement('span');
+  onlineState.className = 'botcontrol-online-state';
+  onlineButton.append(onlineIcon, onlineText, onlineState);
+  modeRow.append(onlineButton);
+  section.append(modeLabel, modeRow);
+
+  const storyTitle = document.createElement('strong');
+  storyTitle.className = 'botcontrol-settings-title';
+  storyTitle.textContent = 'Preferensi story';
+  const storyNote = document.createElement('p');
+  storyNote.className = 'botcontrol-settings-note';
+  storyNote.textContent = 'Delay & emoji ReadSW. Pengaturan ini tersimpan terpisah untuk akun ini. Tidak mengirim apa pun sampai bot dijalankan.';
+  section.append(storyTitle, storyNote);
+
+  const delayRow = document.createElement('div');
+  delayRow.className = 'botcontrol-delay-row';
+  for (const [field, label] of [['delayMinSeconds', 'Delay minimum'], ['delayMaxSeconds', 'Delay maksimum']]) {
+    const wrap = document.createElement('label');
+    wrap.className = 'botcontrol-field';
+    const caption = document.createElement('span');
+    caption.className = 'botcontrol-field-label';
+    caption.textContent = `${label} (detik · 1–20)`;
+    const select = document.createElement('select');
+    select.className = `botcontrol-delay-${field === 'delayMinSeconds' ? 'min' : 'max'}`;
+    select.dataset.userId = userId;
+    for (let second = 1; second <= 20; second += 1) {
+      const option = document.createElement('option');
+      option.value = String(second);
+      option.textContent = `${second} detik`;
+      select.append(option);
+    }
+    select.value = String(field === 'delayMinSeconds' ? draft.delayMinSeconds : draft.delayMaxSeconds);
+    wrap.append(caption, select);
+    delayRow.append(wrap);
+  }
+  section.append(delayRow);
+
+  const reactionLabel = document.createElement('label');
+  reactionLabel.className = 'botcontrol-reaction-label';
+  const reaction = document.createElement('input');
+  reaction.type = 'checkbox';
+  reaction.className = 'botcontrol-auto-reaction';
+  reaction.dataset.userId = userId;
+  const reactionText = document.createElement('span');
+  reactionText.textContent = 'Reaksi emoji otomatis — hanya berjalan pada mode Read Only + ReadSW. Reaksi akan terlihat oleh pemilik story.';
+  reactionLabel.append(reaction, reactionText);
+  section.append(reactionLabel);
+
+  const emojiLabel = document.createElement('span');
+  emojiLabel.className = 'botcontrol-field-label';
+  emojiLabel.textContent = 'Emoji reaksi — klik emoji untuk mengaktifkan atau menonaktifkan';
+  const grid = document.createElement('div');
+  grid.className = 'botcontrol-emoji-grid';
+  section.append(emojiLabel, grid);
+
+  const addRow = document.createElement('div');
+  addRow.className = 'botcontrol-emoji-add-row';
+  const addInput = document.createElement('input');
+  addInput.type = 'text';
+  addInput.className = 'botcontrol-emoji-new';
+  addInput.placeholder = 'Tempel emoji baru, pisahkan dengan koma';
+  addInput.setAttribute('aria-label', 'Emoji baru');
+  const addButton = document.createElement('button');
+  addButton.type = 'button';
+  addButton.className = 'button button-secondary botcontrol-emoji-add';
+  addButton.dataset.userId = userId;
+  addButton.textContent = '＋ Tambah emoji';
+  addRow.append(addInput, addButton);
+  const addHint = document.createElement('small');
+  addHint.className = 'member-admin-hint';
+  addHint.textContent = 'Bisa tempel banyak emoji sekaligus: satu per baris atau pisahkan dengan koma. Emoji baru langsung dipilih dan disimpan ke akun ini.';
+  section.append(addRow, addHint);
+
+  const saveRow = document.createElement('div');
+  saveRow.className = 'botcontrol-save-row';
+  const saveButton = document.createElement('button');
+  saveButton.type = 'button';
+  saveButton.className = 'button button-primary botcontrol-settings-save';
+  saveButton.dataset.botcontrolSettingsSave = 'true';
+  saveButton.dataset.userId = userId;
+  saveButton.textContent = 'Simpan pengaturan';
+  const feedback = document.createElement('p');
+  feedback.className = 'botcontrol-settings-feedback';
+  feedback.setAttribute('role', 'status');
+  saveRow.append(saveButton, feedback);
+  section.append(saveRow);
+  const saveHint = document.createElement('small');
+  saveHint.className = 'member-admin-hint';
+  saveHint.textContent = 'Read Only menandai story sebagai dilihat tanpa emoji. Read Only + ReadSW bisa mengirim emoji pilihan setelah delay. Bot tidak menyimpan foto/video story.';
+  section.append(saveHint);
+  return section;
+}
 
 function buildBotControlCard(user) {
   const userId = String(user.id || user.username || '');
@@ -1882,8 +2080,12 @@ function buildBotControlCard(user) {
     stateNote.textContent = user.banned
       ? `Diblokir${user.bannedAt ? ` sejak ${prettyDateTime(user.bannedAt)}` : ''}${user.banReason ? ` · alasan: ${user.banReason}` : ''}. Worker/Online 24 Jam dimatikan; tautan WhatsApp tidak dihapus.`
       : 'Akun aktif. Admin tidak melihat kata sandi, kode pairing, atau isi percakapan.';
-    adminPanel.append(heading, note, botActions, controlsNote, stateNote);
+    const draft = botControlSettingsDrafts.get(userId) || normalizeBotControlSettings(user.botSettings);
+    botControlSettingsDrafts.set(userId, draft);
+    const settingsSection = buildBotControlSettings(user, draft);
+    adminPanel.append(heading, note, botActions, controlsNote, stateNote, settingsSection);
     details.append(adminPanel);
+    syncBotControlSettingsCard(adminPanel, draft);
   } else {
     const note = document.createElement('p');
     note.className = 'member-admin-note';
@@ -1969,6 +2171,92 @@ botControlUsersList?.addEventListener('click', async (event) => {
     }
     return;
   }
+  // Editor pengaturan fitur: mode, Online 24 Jam, delay, emoji — draf per akun dijaga supaya tidak hilang saat daftar diperbarui.
+  const settingsSection = event.target.closest('.botcontrol-settings');
+  if (settingsSection && botControlUsersList.contains(settingsSection)) {
+    const article = settingsSection.closest('.member-account-item');
+    const userId = settingsSection.dataset.userId || '';
+    const draft = botControlSettingsDrafts.get(userId);
+    const feedback = settingsSection.querySelector('.botcontrol-settings-feedback');
+    const setFeedback = (type, text) => { if (feedback) { feedback.textContent = text; feedback.className = `botcontrol-settings-feedback${type ? ` is-${type}` : ''}`; } };
+    if (article && draft) {
+      const modeButton = event.target.closest('[data-botcontrol-mode]');
+      if (modeButton) {
+        draft.mode = modeButton.dataset.botcontrolMode;
+        if (draft.mode !== 'readonly_readsw') draft.autoReaction = false;
+        syncBotControlSettingsCard(article, draft);
+        return;
+      }
+      const onlineButton = event.target.closest('[data-botcontrol-online24]');
+      if (onlineButton) {
+        draft.online24 = !draft.online24;
+        syncBotControlSettingsCard(article, draft);
+        return;
+      }
+      const emojiChoice = event.target.closest('.botcontrol-emoji-choice');
+      if (emojiChoice) {
+        const emoji = emojiChoice.dataset.emoji;
+        if (draft.emojiPool.includes(emoji)) draft.emojiPool = draft.emojiPool.filter((item) => item !== emoji);
+        else draft.emojiPool.push(emoji);
+        syncBotControlSettingsCard(article, draft);
+        return;
+      }
+      const emojiRemove = event.target.closest('.botcontrol-emoji-remove');
+      if (emojiRemove) {
+        const emoji = emojiRemove.dataset.removeEmoji;
+        draft.emojiOptions = draft.emojiOptions.filter((item) => item !== emoji);
+        draft.emojiPool = draft.emojiPool.filter((item) => item !== emoji);
+        renderBotControlEmojiGrid(article.querySelector('.botcontrol-emoji-grid'), draft);
+        return;
+      }
+      const emojiAdd = event.target.closest('.botcontrol-emoji-add');
+      if (emojiAdd) {
+        const input = article.querySelector('.botcontrol-emoji-new');
+        if (!input) return;
+        const { emojis, invalid } = parseEmojiBatch(input.value);
+        if (invalid.length) { setFeedback('error', `Emoji tidak valid: ${invalid.join(' ')}`); return; }
+        if (!emojis.length) { setFeedback('error', 'Tempel minimal satu emoji dulu.'); return; }
+        if (draft.emojiOptions.length + emojis.filter((emoji) => !draft.emojiOptions.includes(emoji)).length > 30) { setFeedback('error', 'Maksimal 30 emoji per akun.'); return; }
+        for (const emoji of emojis) {
+          if (!draft.emojiOptions.includes(emoji)) draft.emojiOptions.push(emoji);
+          if (!draft.emojiPool.includes(emoji)) draft.emojiPool.push(emoji);
+        }
+        input.value = '';
+        renderBotControlEmojiGrid(article.querySelector('.botcontrol-emoji-grid'), draft);
+        setFeedback('success', `${emojis.length} emoji ditambahkan — tekan Simpan pengaturan.`);
+        return;
+      }
+      const saveButton = event.target.closest('[data-botcontrol-settings-save]');
+      if (saveButton) {
+        const username = article.querySelector('[data-botcontrol-toggle]')?.dataset.username || 'member';
+        const displayName = article.querySelector('.member-account-identity-text strong')?.textContent || username;
+        draft.delayMinSeconds = Number(article.querySelector('.botcontrol-delay-min')?.value || draft.delayMinSeconds);
+        draft.delayMaxSeconds = Number(article.querySelector('.botcontrol-delay-max')?.value || draft.delayMaxSeconds);
+        if (!draft.mode) { setFeedback('error', 'Pilih mode dulu: Read Only atau Read Only + ReadSW.'); return; }
+        if (draft.delayMinSeconds > draft.delayMaxSeconds) { setFeedback('error', 'Delay minimum harus kurang dari atau sama dengan delay maksimum.'); return; }
+        const autoReaction = draft.mode === 'readonly_readsw' && draft.autoReaction;
+        if (autoReaction && draft.emojiPool.length === 0) { setFeedback('error', 'Aktifkan minimal satu emoji atau matikan reaksi otomatis.'); return; }
+        saveButton.disabled = true;
+        setFeedback('info', 'Menyimpan pengaturan…');
+        void (async () => {
+          try {
+            await api('/api/admin/users/bot-settings', {
+              method: 'PUT',
+              body: JSON.stringify({ userId, label: draft.label || `${displayName} bot`, mode: draft.mode, online24: draft.online24, storySettings: { autoReaction, delayMinSeconds: draft.delayMinSeconds, delayMaxSeconds: draft.delayMaxSeconds, randomDelay: true, emojiPoolVersion: 2, emojiOptions: draft.emojiOptions, emojiPool: draft.emojiPool } }),
+            });
+            botControlSettingsDrafts.delete(userId);
+            showToast(`Pengaturan bot @${username} tersimpan.`);
+            await loadBotControlUsers();
+          } catch (error) {
+            if (error.status === 401) showAuth();
+            else setFeedback('error', error.message);
+            saveButton.disabled = false;
+          }
+        })();
+        return;
+      }
+    }
+  }
   // Spoiler kontrol bot: membuka satu kartu menutup kartu lain secara otomatis.
   const trigger = event.target.closest('[data-botcontrol-toggle]');
   if (!trigger || !botControlUsersList.contains(trigger)) return;
@@ -1985,6 +2273,22 @@ botControlUsersList?.addEventListener('click', async (event) => {
     if (panel) panel.hidden = !isOpen;
     item.classList.toggle('is-open', isOpen);
   });
+});
+
+botControlUsersList?.addEventListener('change', (event) => {
+  const select = event.target.closest('.botcontrol-delay-min, .botcontrol-delay-max');
+  if (select && botControlUsersList.contains(select)) {
+    const draft = botControlSettingsDrafts.get(select.dataset.userId || '');
+    if (!draft) return;
+    if (select.classList.contains('botcontrol-delay-min')) draft.delayMinSeconds = Number(select.value);
+    else draft.delayMaxSeconds = Number(select.value);
+    return;
+  }
+  const reaction = event.target.closest('.botcontrol-auto-reaction');
+  if (reaction && botControlUsersList.contains(reaction)) {
+    const draft = botControlSettingsDrafts.get(reaction.dataset.userId || '');
+    if (draft) draft.autoReaction = reaction.checked;
+  }
 });
 
 let loginHistoryTimer = null;
