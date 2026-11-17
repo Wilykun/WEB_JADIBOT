@@ -10,6 +10,7 @@ import { sanitizeStoryLogDetails } from './story-log.js';
 import { readAvatarUpload } from './avatar-upload.js';
 import { BANNED_LOGIN_NOTICE, DELETED_LOGIN_NOTICE, botControlPolicyError, isBannedAccount, isMainAdminUser, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
 import { BackupArchiveError, createEncryptedBackup, createPlainBackupZip, decryptEncryptedBackup, MAX_ARCHIVE_BYTES, MAX_PLAINTEXT_BYTES } from './admin-backup.js';
+import { createDefaultBotRecord } from './default-bot.js';
 import { acquireRestoreLock } from './session-lock.js';
 import {
   randomBytes,
@@ -1019,16 +1020,8 @@ const pairingManager = createPairingManager({
   getAuthDir: (userId) => accountFolder(store.users.find((user) => user.id === userId)?.username),
   ensureDefaultBot: async (userId) => {
     if (botForUser(userId)) return false;
-    const now = new Date().toISOString();
     const storySettings = normalizeStorySettings(undefined, 'readonly_readsw');
-    return mutate((next) => {
-      if (next.bots.some((item) => item.userId === userId)) return false;
-      next.bots.push({
-        id: randomUUID(), userId, label: 'Bot saya', mode: 'readonly_readsw', storySettings,
-        online24: true, autoStart: true, runnerStatus: 'not_connected', createdAt: now, updatedAt: now,
-      });
-      return true;
-    });
+    return mutate((next) => createDefaultBotRecord(next.bots, userId, storySettings) !== null);
   },
   getStorySettings: (userId) => {
     const bot = botForUser(userId);

@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T14:15:00+07:00",
+  "updatedAt": "2026-11-17T14:35:00+07:00",
   "updates": [
+    {
+      "title": "Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "14.35 WIB",
+      "tag": "Fitur baru",
+      "description": "Member biasa yang WhatsApp-nya belum tertaut kini melihat kartu pengingat di halaman Fitur Bot: fitur bot belum aktif sampai WhatsApp ditautkan, dan tombolnya langsung membuka halaman Pairing WhatsApp. Selama belum tertaut, tombol mode dan pengaturan story tidak bisa dipakai — mengetuknya menampilkan kartu pengingat itu lagi. Begitu WhatsApp tertaut pertama kali, Read Only + ReadSW dan Online 24 Jam otomatis aktif (sudah begitu sejak lama lewat profil default, kini juga ada tesnya). Tombol Aktifkan di semua kartu mode kini sama-sama hijau agar jelas itu tombol aksi. Admin tidak melihat kartu ini."
+    },
     {
       "title": "Tautan panel kini menampilkan pratinjau bergambar saat dibagikan",
       "day": "Selasa, 17 Nov 2026",

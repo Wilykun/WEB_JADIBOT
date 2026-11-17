@@ -849,8 +849,10 @@ function applyBot(bot) {
       button.innerHTML = active ? 'Aktif <span>✓</span>' : 'Aktifkan <span>→</span>';
       button.setAttribute('aria-pressed', String(active));
       button.setAttribute('aria-label', active ? `${modeNames[card.dataset.planCard]} sedang aktif` : `Aktifkan ${modeNames[card.dataset.planCard]}`);
-      button.classList.toggle('button-primary', active || card.dataset.planCard === 'readonly_readsw');
-      button.classList.toggle('button-secondary', !active && card.dataset.planCard !== 'readonly_readsw');
+      // Tombol Aktifkan selalu hijau primer di semua kartu: bedanya dengan kartu
+      // aktif terlihat dari label "Aktif ✓" dan garis hijau kartu yang terpilih.
+      button.classList.add('button-primary');
+      button.classList.remove('button-secondary');
     }
   });
   const onlineCard = document.querySelector('[data-online-addon]');
@@ -860,8 +862,8 @@ function applyBot(bot) {
     onlineButton.innerHTML = online24 ? 'Aktif <span>✓</span>' : 'Aktifkan <span>→</span>';
     onlineButton.setAttribute('aria-pressed', String(online24));
     onlineButton.setAttribute('aria-label', online24 ? 'Online 24 Jam sedang aktif' : 'Aktifkan Online 24 Jam');
-    onlineButton.classList.toggle('button-primary', online24);
-    onlineButton.classList.toggle('button-secondary', !online24);
+    onlineButton.classList.add('button-primary');
+    onlineButton.classList.remove('button-secondary');
   }
   // Penanda status di header kartu accordion selalu mengikuti state mode yang
   // sama dengan tombol di dalam kartu, dan kartu mode yang aktif terbuka bawaan.
@@ -876,6 +878,38 @@ function applyBot(bot) {
   document.querySelector('#saved-label').textContent = bot?.updatedAt
     ? `Preferensi disimpan · ${prettyDate(bot.updatedAt)}`
     : 'Belum ada perubahan';
+}
+
+// Kartu pengingat untuk member biasa yang WhatsApp-nya belum tertaut: fitur bot
+// belum aktif, dan menautkan WhatsApp adalah satu-satunya jalan mengaktifkannya.
+// Admin (Admin Utama dan admin biasa) tidak pernah melihat kartu ini dan
+// pengaturannya tidak pernah dikunci. Status tautan dibaca dari penanda yang
+// sama dengan lencana koneksi, jadi kartu ini muncul dan hilang realtime
+// mengikuti poll status pairing.
+function isBotLockedForMember() {
+  return Boolean(currentUser) && currentUser.role !== 'admin' && document.body.dataset.whatsappLinked === 'false';
+}
+function syncBotLinkNotice() {
+  const notice = document.querySelector('#bot-link-notice');
+  if (!notice) return;
+  const locked = isBotLockedForMember();
+  notice.classList.toggle('hidden', !locked);
+  document.querySelectorAll('.select-plan, [data-online24-toggle]').forEach((button) => {
+    button.classList.toggle('is-locked', locked);
+    button.setAttribute('aria-disabled', String(locked));
+  });
+  document.querySelectorAll('#story-delay-min, #story-delay-max, #story-reaction-enabled, #story-emoji-input, #story-emoji-add, #save-story-settings, #story-emoji-grid button').forEach((control) => {
+    control.disabled = locked;
+  });
+}
+function showBotLinkNotice() {
+  syncBotLinkNotice();
+  const notice = document.querySelector('#bot-link-notice');
+  if (!notice) return;
+  notice.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  notice.classList.add('is-flashing');
+  window.setTimeout(() => notice.classList.remove('is-flashing'), 1400);
+  showToast('Tautkan WhatsApp dulu di Pairing WhatsApp — fitur bot aktif setelah tertaut.');
 }
 
 let workerRuntimeTimer = null;
@@ -2736,6 +2770,7 @@ function renderLinkGate(pairing) {
     : hasLinkedSession ? 'TERTAUT' : 'TAUTKAN';
   document.querySelector('#connection-badge').textContent = badgeText;
   document.querySelector('#connection-badge-short').textContent = badgeShortText;
+  syncBotLinkNotice();
   if (!activeWorkspacePage) {
     const requestedPage = location.hash.slice(1);
     const requestedNav = document.querySelector(`.side-nav .nav-item[href="#${requestedPage}"]`);
@@ -4210,9 +4245,15 @@ document.addEventListener('click', async (event) => {
     }
     return;
   }
+  const openPairing = event.target.closest('[data-open-pairing]');
+  if (openPairing) {
+    setWorkspacePage('pairing');
+    return;
+  }
   const mode = event.target.closest('[data-plan]')?.dataset.plan;
   if (mode) {
     if (!currentUser) return showAuth();
+    if (isBotLockedForMember()) { showBotLinkNotice(); return; }
     clearTimeout(storySaveTimer);
     storySaveRevision += 1;
     const userId = currentUser.id;
@@ -4252,6 +4293,7 @@ document.addEventListener('click', async (event) => {
   const onlineToggle = event.target.closest('[data-online24-toggle]');
   if (onlineToggle) {
     if (!currentUser) return showAuth();
+    if (isBotLockedForMember()) { showBotLinkNotice(); return; }
     const userId = currentUser.id;
     const enabled = !document.querySelector('[data-online-addon]')?.classList.contains('selected');
     onlineToggle.disabled = true;

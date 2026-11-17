@@ -96,11 +96,11 @@ test('server menyajikan /og-image.png sebagai image/png (bukan 404)', { timeout:
   }
 });
 
-test('entri Info Update terbaru menjelaskan pratinjau tautan bergambar', () => {
-  const newest = infoUpdates.updates[0];
-  assert.equal(newest.title, 'Tautan panel kini menampilkan pratinjau bergambar saat dibagikan');
-  assert.equal(newest.tag, 'Tampilan');
-  assert.match(newest.description, /thumbnail 1200×630/);
-  assert.equal(infoUpdates.updatedAt, '2026-11-17T14:15:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+test('entri Info Update pratinjau tautan bergambar tetap ada di posisi kedua', () => {
+  const entry = infoUpdates.updates.find((item) => item.title === 'Tautan panel kini menampilkan pratinjau bergambar saat dibagikan');
+  assert.ok(entry, 'entri pratinjau tautan harus tetap ada');
+  assert.equal(infoUpdates.updates.indexOf(entry), 1, 'entri pratinjau tautan kini di posisi kedua');
+  assert.equal(entry.tag, 'Tampilan');
+  assert.match(entry.description, /thumbnail 1200×630/);
   assert.ok(html.includes('data-tag="tampilan"') && html.includes('Tautan panel kini menampilkan pratinjau bergambar saat dibagikan'), 'fallback HTML Info Update harus memuat entri pratinjau tautan');
 });
