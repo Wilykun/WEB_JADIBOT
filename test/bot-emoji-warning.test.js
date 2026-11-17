@@ -34,9 +34,9 @@ test('kartu peringatan inline dari ronde sebelumnya sudah tidak ada', () => {
 
 test('notifikasi halaman sendiri muncul saat mode ReadSW tanpa emoji dan tanpa reaksi', () => {
   const js = read('public/app.js');
-  assert.ok(js.includes('function showEmojiNotice('), 'harus ada fungsi menampilkan notifikasi overlay');
-  assert.ok(js.includes('function hideEmojiNotice()'), 'harus ada fungsi menyembunyikan notifikasi overlay');
-  assert.ok(js.includes('function dismissEmojiNotice()'), 'harus ada fungsi menutup notifikasi dengan mengingat penutupan');
+  assert.ok(js.includes('function showNoticeOverlay('), 'harus ada fungsi menampilkan notifikasi overlay');
+  assert.ok(js.includes('function hideNoticeOverlay()'), 'harus ada fungsi menyembunyikan notifikasi overlay');
+  assert.ok(js.includes('function dismissNoticeOverlay()'), 'harus ada fungsi menutup notifikasi dengan mengingat penutupan');
   assert.ok(js.includes('function syncStoryEmojiNotice()'), 'harus ada fungsi sinkronisasi notifikasi halaman sendiri');
   assert.ok(js.includes("selectedMode === 'readonly_readsw'"), 'syaratnya harus mencakup mode Read Only + ReadSW');
   assert.ok(js.includes("document.querySelectorAll('.emoji-choice.selected').length === 0"), 'syaratnya harus mencakup tidak ada emoji aktif');
@@ -50,7 +50,7 @@ test('notifikasi tidak muncul lagi setelah ditutup sampai keadaannya berubah', (
   assert.ok(js.includes('if (emojiNoticeDismissed) return;'), 'notifikasi harus diam setelah ditutup');
   assert.ok(js.includes('emojiNoticeDismissed = false;'), 'ingatan penutupan harus dihapus begitu keadaannya hilang');
   assert.ok(js.includes('const botControlEmojiNoticeDismissed = new Set()'), 'penutupan di Kontrol Bot harus diingat per akun');
-  assert.ok(js.includes('botControlEmojiNoticeDismissed.add(emojiNoticeContext.userId)'), 'menutup notifikasi member harus mengingat akunnya');
+  assert.ok(js.includes('botControlEmojiNoticeDismissed.add(noticeContext.userId)'), 'menutup notifikasi member harus mengingat akunnya');
 });
 
 test('notifikasi Kontrol Bot menyebut nama member dan tombolnya membuka kartunya', () => {
@@ -64,9 +64,9 @@ test('notifikasi Kontrol Bot menyebut nama member dan tombolnya membuka kartunya
 
 test('notifikasi bisa ditutup dari latar dan tombol Escape', () => {
   const js = read('public/app.js');
-  assert.ok(js.includes("if (event.target === event.currentTarget) dismissEmojiNotice();"), 'mengetuk latar overlay harus menutup notifikasi');
+  assert.ok(js.includes("if (event.target === event.currentTarget) dismissNoticeOverlay();"), 'mengetuk latar overlay harus menutup notifikasi');
   assert.ok(js.includes("if (event.key === 'Escape'"), 'tombol Escape harus menutup notifikasi');
-  assert.ok(js.includes("overlay.querySelector('[data-emoji-notice-add]')?.focus();"), 'fokus harus jatuh ke tombol aksi saat notifikasi muncul');
+  assert.ok(js.includes('addButton?.focus();'), 'fokus harus jatuh ke tombol aksi saat notifikasi muncul');
 });
 
 test('gaya notifikasi mengikuti pola overlay panel dan pas di HP', () => {
@@ -77,14 +77,14 @@ test('gaya notifikasi mengikuti pola overlay panel dan pas di HP', () => {
   assert.ok(css.includes('@media(max-width:560px){.notice-overlay{padding:12px}.notice-card{padding:18px 16px 16px}.notice-actions{flex-direction:column}'), 'di HP tombol harus bertumpuk penuh lebar');
 });
 
-test('entri Info Update terbaru menjelaskan notifikasi di layar', () => {
+test('entri Info Update notifikasi reaksi di layar tetap ada di posisi kedua', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-17T15:15:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 56, 'daftar harus bertambah satu entri');
-  const newest = data.updates[0];
-  assert.equal(newest.title, 'Peringatan reaksi kini muncul sebagai notifikasi di layar', 'entri terbaru harus menjelaskan notifikasi di layar');
-  assert.equal(newest.tag, 'Tampilan', 'entri terbaru harus bertag Tampilan');
-  assert.equal(newest.time, '15.15 WIB', 'waktu entri terbaru harus cocok');
+  assert.equal(data.updates.length, 57, 'daftar harus bertambah satu entri');
+  const entry = data.updates.find((item) => item.title === 'Peringatan reaksi kini muncul sebagai notifikasi di layar');
+  assert.ok(entry, 'entri notifikasi reaksi di layar harus tetap ada');
+  assert.equal(data.updates.indexOf(entry), 1, 'entri notifikasi reaksi di layar kini di posisi kedua');
+  assert.equal(entry.tag, 'Tampilan', 'entri notifikasi reaksi harus bertag Tampilan');
+  assert.equal(entry.time, '15.15 WIB', 'waktu entri notifikasi reaksi harus cocok');
   assert.ok(html.includes('<h4>Peringatan reaksi kini muncul sebagai notifikasi di layar</h4>'), 'fallback harus memuat judul entri terbaru');
 });

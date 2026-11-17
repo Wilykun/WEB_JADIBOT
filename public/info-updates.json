@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T15:15:00+07:00",
+  "updatedAt": "2026-11-17T15:50:00+07:00",
   "updates": [
+    {
+      "title": "Pemberitahuan tautan WhatsApp kini muncul di layar",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "15.50 WIB",
+      "tag": "Tampilan",
+      "description": "Pengingat untuk member biasa yang WhatsApp-nya belum tertaut kini tampil sebagai kartu notifikasi di tengah layar — sama seperti notifikasi reaksi: latar gelap, ikon peringatan kuning, tombol 'Buka Pairing WhatsApp' yang langsung membuka halaman Pairing, dan tombol 'Tutup'. Bukan lagi kartu di bawah judul halaman dan bukan notifikasi bawaan browser. Notifikasi muncul begitu member membuka Fitur Bot selagi belum tertaut, dan muncul lagi bila tombol mode yang terkunci diketuk; sekali ditutup, tidak muncul lagi sampai keadaan berubah."
+    },
     {
       "title": "Peringatan reaksi kini muncul sebagai notifikasi di layar",
       "day": "Selasa, 17 Nov 2026",

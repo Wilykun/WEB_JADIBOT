@@ -1,6 +1,8 @@
-// Kartu pengingat untuk member biasa yang WhatsApp-nya belum tertaut: fitur bot
-// belum aktif, tombolnya membuka halaman Pairing, dan mengetuk tombol mode saat
-// terkunci menampilkan lagi kartu itu. Admin tidak pernah melihat kartu ini.
+// Pengingat tautan WhatsApp untuk member biasa kini tampil sebagai notifikasi
+// overlay di tengah layar — sama seperti notifikasi reaksi — bukan lagi kartu
+// di bawah judul halaman dan bukan notifikasi bawaan browser. Muncul begitu
+// member membuka Fitur Bot selagi belum tertaut, dan muncul lagi bila tombol
+// mode yang terkunci diketuk. Admin tidak pernah melihat notifikasi ini.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -10,34 +12,44 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (rel) => readFileSync(path.join(root, rel), 'utf8');
 
-test('kartu pengingat tautan ada di halaman Fitur Bot dan mengarah ke Pairing', () => {
+test('kartu pengingat inline dari ronde sebelumnya sudah tidak ada', () => {
   const html = read('public/index.html');
-  assert.ok(html.includes('<section id="bot-link-notice"'), 'kartu pengingat harus ada');
-  assert.ok(html.includes('data-page-view="mode"'), 'kartu harus ikut halaman Fitur Bot');
-  assert.ok(html.includes('<h3>WhatsApp belum tertaut</h3>'), 'judul kartu harus menjelaskan WhatsApp belum tertaut');
-  assert.ok(html.includes('Read Only + ReadSW dan Online 24 Jam otomatis aktif'), 'kartu harus menjanjikan dua fitur default aktif setelah tertaut');
-  assert.ok(html.includes('data-open-pairing'), 'kartu harus punya tombol ke halaman Pairing');
-  assert.ok(html.includes('Buka Pairing WhatsApp'), 'tombol kartu harus bernama Buka Pairing WhatsApp');
+  assert.ok(!html.includes('id="bot-link-notice"'), 'kartu inline pengingat tautan harus sudah dihapus');
+  assert.ok(!html.includes('data-open-pairing'), 'tombol kartu inline harus sudah dihapus');
+  const css = read('public/style.css');
+  assert.ok(!css.includes('.bot-link-notice'), 'gaya kartu inline harus sudah dihapus');
+  const js = read('public/app.js');
+  assert.ok(!js.includes('is-flashing'), 'efek kedip kartu inline harus sudah dihapus');
 });
 
-test('kartu hanya untuk member biasa dan mengikuti status tautan realtime', () => {
+test('pengingat tautan memakai komponen notifikasi overlay yang sama', () => {
   const js = read('public/app.js');
-  assert.ok(js.includes("function isBotLockedForMember()"), 'harus ada fungsi pengunci khusus member');
+  assert.ok(js.includes('function showNoticeOverlay('), 'harus ada fungsi notifikasi overlay bersama');
+  assert.ok(js.includes('function syncBotLinkNotice()'), 'harus ada fungsi sinkronisasi pengingat tautan');
+  assert.ok(js.includes("title: 'WhatsApp belum tertaut'"), 'pengingat tautan harus berjudul WhatsApp belum tertaut');
+  assert.ok(js.includes('Read Only + ReadSW dan Online 24 Jam otomatis aktif'), 'pengingat tautan harus menyebut dua fitur default');
+  assert.ok(js.includes("addLabel: 'Buka Pairing WhatsApp'"), 'tombol aksi pengingat tautan harus berlabel Buka Pairing WhatsApp');
+  assert.ok(js.includes("onAdd: () => setWorkspacePage('pairing')"), 'tombol aksi harus membuka halaman Pairing');
+  assert.ok(js.includes('if (botLinkNoticeDismissed) return;'), 'pengingat tautan harus diam setelah ditutup');
+  assert.ok(js.includes('let botLinkNoticeDismissed = false'), 'penutupan pengingat tautan harus diingat');
+});
+
+test('pengingat tautan hanya untuk member biasa dan mengikuti status tautan realtime', () => {
+  const js = read('public/app.js');
+  assert.ok(js.includes('function isBotLockedForMember()'), 'harus ada fungsi pengunci khusus member');
   assert.ok(js.includes("currentUser.role !== 'admin'"), 'admin (Admin Utama dan admin biasa) tidak pernah dikunci');
   assert.ok(js.includes("document.body.dataset.whatsappLinked === 'false'"), 'kunci harus membaca penanda status tautan yang sama dengan lencana koneksi');
-  assert.ok(js.includes('function syncBotLinkNotice()'), 'harus ada fungsi sinkronisasi kartu');
-  assert.ok(js.includes("notice.classList.toggle('hidden', !locked)"), 'kartu harus muncul saat terkunci dan hilang saat tertaut');
+  assert.ok(js.includes('function syncBotLinkNotice()'), 'harus ada fungsi sinkronisasi pengingat tautan');
+  assert.ok(js.includes('function showBotLinkNotice()'), 'harus ada fungsi menampilkan lagi pengingat tautan');
+  assert.ok(js.includes('botLinkNoticeDismissed = false;\n  syncBotLinkNotice();'), 'mengetuk tombol mode yang terkunci harus menampilkan lagi notifikasinya');
+  assert.ok(js.includes('if (isBotLockedForMember()) { showBotLinkNotice(); return; }'), 'klik mode dan Online 24 Jam saat terkunci harus menampilkan notifikasi dan berhenti');
   assert.ok(js.includes("control.disabled = locked"), 'pengaturan story harus dinonaktifkan saat terkunci');
   assert.ok(js.includes("button.classList.toggle('is-locked', locked)"), 'tombol mode harus ditandai terkunci secara visual');
+  assert.ok(js.includes("if (noticeContext?.kind === 'link') hideNoticeOverlay();"), 'notifikasi harus hilang begitu WhatsApp tertaut');
+  assert.ok(js.includes('if (isBotLockedForMember()) return;'), 'notifikasi reaksi harus menunggu sampai WhatsApp tertaut');
+  assert.ok(js.includes("if (activeWorkspacePage !== 'mode') return;"), 'notifikasi hanya boleh muncul saat member sedang di halaman Fitur Bot, bukan di dashboard');
+  assert.ok(js.includes("if (page === 'mode') {\n    syncPlanCarouselPosition();\n    syncBotLinkNotice();\n  }"), 'membuka Fitur Bot harus langsung mengecek pengingat tautan');
   assert.ok(js.includes('syncBotLinkNotice();'), 'sinkronisasi harus dipanggil dari renderLinkGate agar realtime mengikuti poll pairing');
-});
-
-test('mengetuk tombol mode saat terkunci menampilkan kartu, bukan mengubah mode', () => {
-  const js = read('public/app.js');
-  assert.ok(js.includes("if (isBotLockedForMember()) { showBotLinkNotice(); return; }"), 'klik mode dan Online 24 Jam saat terkunci harus menampilkan kartu dan berhenti');
-  assert.ok(js.includes("notice.scrollIntoView({ behavior: 'smooth', block: 'center' })"), 'kartu harus digeser ke tengah layar saat ditampilkan ulang');
-  assert.ok(js.includes('Tautkan WhatsApp dulu di Pairing WhatsApp'), 'toast harus mengarahkan ke Pairing WhatsApp');
-  assert.ok(js.includes("setWorkspacePage('pairing')"), 'tombol kartu harus membuka halaman Pairing');
 });
 
 test('tombol Aktifkan di semua kartu mode memakai warna aksi yang sama', () => {
@@ -49,19 +61,17 @@ test('tombol Aktifkan di semua kartu mode memakai warna aksi yang sama', () => {
   assert.ok(html.includes('<button class="button button-primary online24-toggle"'), 'kartu Online 24 Jam harus hijau sejak HTML awal');
   assert.ok(!html.includes('button-secondary select-plan'), 'tidak boleh ada lagi tombol mode sekunder di HTML');
   const css = read('public/style.css');
-  assert.ok(css.includes('.bot-link-notice{'), 'kartu pengingat harus punya gaya sendiri');
   assert.ok(css.includes('.select-plan.is-locked'), 'tombol terkunci harus tampak redup');
-  assert.ok(css.includes('@media(max-width:560px){.bot-link-notice{flex-wrap:wrap}'), 'kartu harus rapi di HP sempit');
 });
 
-test('entri Info Update terbaru menjelaskan kartu pengingat member', () => {
+test('entri Info Update terbaru menjelaskan pengingat tautan di layar', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updates.length, 56, 'daftar harus bertambah satu entri');
-  const entry = data.updates.find((item) => item.title === 'Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot');
-  assert.ok(entry, 'entri kartu pengingat harus tetap ada');
-  assert.equal(data.updates.indexOf(entry), 2, 'entri kartu pengingat kini di posisi ketiga');
-  assert.equal(entry.tag, 'Fitur baru', 'entri kartu pengingat harus bertag Fitur baru');
-  assert.equal(entry.time, '14.35 WIB', 'waktu entri kartu pengingat harus cocok');
-  assert.ok(html.includes('<h4>Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot</h4>'), 'fallback harus memuat judul entri terbaru');
+  assert.equal(data.updatedAt, '2026-11-17T15:50:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 57, 'daftar harus bertambah satu entri');
+  const newest = data.updates[0];
+  assert.equal(newest.title, 'Pemberitahuan tautan WhatsApp kini muncul di layar', 'entri terbaru harus menjelaskan pengingat tautan di layar');
+  assert.equal(newest.tag, 'Tampilan', 'entri terbaru harus bertag Tampilan');
+  assert.equal(newest.time, '15.50 WIB', 'waktu entri terbaru harus cocok');
+  assert.ok(html.includes('<h4>Pemberitahuan tautan WhatsApp kini muncul di layar</h4>'), 'fallback harus memuat judul entri terbaru');
 });

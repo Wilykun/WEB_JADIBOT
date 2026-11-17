@@ -222,51 +222,64 @@ function readStorySettings() {
 // ReadSW tidak bisa mengirim reaksi sama sekali — tidak ada emoji dan reaksi
 // otomatis mati, jadi bot hanya menandai story sebagai dibaca (ReadSW biasa).
 // Sekali ditutup, notifikasi tidak muncul lagi sampai keadaannya hilang lalu
-// muncul kembali. Tombol "Tambah emoji" menutup notifikasi lalu mengarahkan
-// ke kolom emoji yang bersangkutan.
+// Notifikasi di layar (overlay di tengah layar, bukan notifikasi bawaan browser
+// dan bukan kartu di bawah pengaturan): satu komponen bersama untuk semua
+// pemberitahuan yang harus terlihat — peringatan reaksi emoji dan pengingat
+// tautan WhatsApp. Sekali ditutup, notifikasi tidak muncul lagi sampai
+// keadaannya hilang lalu muncul kembali. Tombol aksi menutup notifikasi lalu
+// menjalankan aksi konteksnya (mengarahkan ke kolom emoji, atau membuka
+// halaman Pairing).
 let emojiNoticeDismissed = false;
-let emojiNoticeContext = null;
+let noticeContext = null;
 // Akun Kontrol Bot yang notifikasinya sudah ditutup selagi keadaannya masih
 // aktif — ditutup per akun supaya admin tidak diganggu berulang kali.
 const botControlEmojiNoticeDismissed = new Set();
-function showEmojiNotice({ title, text, context, addTarget }) {
+function showNoticeOverlay({ title, text, context, addTarget, addLabel, onAdd }) {
   const overlay = document.querySelector('#emoji-notice-overlay');
   if (!overlay) return;
-  const nextContext = { ...(context || {}), addTarget: addTarget || null };
+  const nextContext = { ...(context || {}), addTarget: addTarget || null, onAdd: onAdd || null };
   // Notifikasi yang sama sudah tampil: jangan ambil alih fokus pengguna dengan
   // menampilkannya ulang (misalnya saat daftar Kontrol Bot diperbarui tiap 15 detik).
   if (!overlay.classList.contains('hidden')
-    && emojiNoticeContext?.kind === nextContext.kind
-    && emojiNoticeContext?.userId === nextContext.userId) return;
+    && noticeContext?.kind === nextContext.kind
+    && noticeContext?.userId === nextContext.userId) return;
   document.querySelector('#emoji-notice-title').textContent = title;
   document.querySelector('#emoji-notice-text').textContent = text;
-  emojiNoticeContext = nextContext;
+  const addButton = overlay.querySelector('[data-emoji-notice-add]');
+  if (addButton) addButton.textContent = addLabel || 'Tambah emoji';
+  noticeContext = nextContext;
   overlay.classList.remove('hidden');
-  overlay.querySelector('[data-emoji-notice-add]')?.focus();
+  addButton?.focus();
 }
-function hideEmojiNotice() {
+function hideNoticeOverlay() {
   document.querySelector('#emoji-notice-overlay')?.classList.add('hidden');
-  emojiNoticeContext = null;
+  noticeContext = null;
 }
-function dismissEmojiNotice() {
-  if (emojiNoticeContext?.kind === 'botcontrol' && emojiNoticeContext.userId) {
-    botControlEmojiNoticeDismissed.add(emojiNoticeContext.userId);
+function dismissNoticeOverlay() {
+  if (noticeContext?.kind === 'botcontrol' && noticeContext.userId) {
+    botControlEmojiNoticeDismissed.add(noticeContext.userId);
+  } else if (noticeContext?.kind === 'link') {
+    botLinkNoticeDismissed = true;
   } else {
     emojiNoticeDismissed = true;
   }
-  hideEmojiNotice();
+  hideNoticeOverlay();
 }
 function syncStoryEmojiNotice() {
+  // Pengingat tautan lebih penting: member yang belum tertaut tidak bisa
+  // menjalankan bot sama sekali, jadi notifikasi reaksinya menunggu sampai
+  // WhatsApp tertaut.
+  if (isBotLockedForMember()) return;
   const active = selectedMode === 'readonly_readsw'
     && document.querySelector('#story-reaction-enabled')?.checked !== true
     && document.querySelectorAll('.emoji-choice.selected').length === 0;
   if (!active) {
     emojiNoticeDismissed = false;
-    if (emojiNoticeContext?.kind !== 'botcontrol') hideEmojiNotice();
+    if (noticeContext?.kind === 'self' || !noticeContext) hideNoticeOverlay();
     return;
   }
   if (emojiNoticeDismissed) return;
-  showEmojiNotice({
+  showNoticeOverlay({
     title: 'Reaksi emoji tidak aktif',
     text: 'Tidak ada emoji dan reaksi otomatis mati — bot hanya menandai story sebagai dibaca, tanpa mengirim reaksi. Tambahkan emoji dan nyalakan reaksi otomatis bila mau ada reaksi.',
     context: { kind: 'self' },
@@ -292,16 +305,18 @@ function openBotControlCard(userId) {
 }
 
 document.querySelector('#emoji-notice-overlay')?.addEventListener('click', (event) => {
-  if (event.target === event.currentTarget) dismissEmojiNotice();
+  if (event.target === event.currentTarget) dismissNoticeOverlay();
   const closeButton = event.target.closest('[data-emoji-notice-close]');
-  if (closeButton) dismissEmojiNotice();
+  if (closeButton) dismissNoticeOverlay();
   const addButton = event.target.closest('[data-emoji-notice-add]');
   if (addButton) {
-    // Tangkap konteks dulu: dismissEmojiNotice mengosongkan konteksnya.
-    const target = emojiNoticeContext?.addTarget;
-    const userId = emojiNoticeContext?.userId;
-    const kind = emojiNoticeContext?.kind;
-    dismissEmojiNotice();
+    // Tangkap konteks dulu: dismissNoticeOverlay mengosongkan konteksnya.
+    const target = noticeContext?.addTarget;
+    const userId = noticeContext?.userId;
+    const kind = noticeContext?.kind;
+    const onAdd = noticeContext?.onAdd;
+    dismissNoticeOverlay();
+    if (typeof onAdd === 'function') { onAdd(); return; }
     if (kind === 'botcontrol' && userId) openBotControlCard(userId);
     if (target && document.contains(target)) {
       target.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -310,7 +325,7 @@ document.querySelector('#emoji-notice-overlay')?.addEventListener('click', (even
   }
 });
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && !document.querySelector('#emoji-notice-overlay')?.classList.contains('hidden')) dismissEmojiNotice();
+  if (event.key === 'Escape' && !document.querySelector('#emoji-notice-overlay')?.classList.contains('hidden')) dismissNoticeOverlay();
 });
 
 function isSingleEmoji(value) {
@@ -977,20 +992,19 @@ function applyBot(bot) {
     : 'Belum ada perubahan';
 }
 
-// Kartu pengingat untuk member biasa yang WhatsApp-nya belum tertaut: fitur bot
+// Pengingat untuk member biasa yang WhatsApp-nya belum tertaut: fitur bot
 // belum aktif, dan menautkan WhatsApp adalah satu-satunya jalan mengaktifkannya.
-// Admin (Admin Utama dan admin biasa) tidak pernah melihat kartu ini dan
+// Admin (Admin Utama dan admin biasa) tidak pernah melihat notifikasi ini dan
 // pengaturannya tidak pernah dikunci. Status tautan dibaca dari penanda yang
-// sama dengan lencana koneksi, jadi kartu ini muncul dan hilang realtime
-// mengikuti poll status pairing.
+// sama dengan lencana koneksi, jadi notifikasi ini muncul dan hilang realtime
+// mengikuti poll status pairing. Notifikasinya tampil sebagai overlay di tengah
+// layar (komponen yang sama dengan notifikasi reaksi), bukan kartu di bawah.
+let botLinkNoticeDismissed = false;
 function isBotLockedForMember() {
   return Boolean(currentUser) && currentUser.role !== 'admin' && document.body.dataset.whatsappLinked === 'false';
 }
 function syncBotLinkNotice() {
-  const notice = document.querySelector('#bot-link-notice');
-  if (!notice) return;
   const locked = isBotLockedForMember();
-  notice.classList.toggle('hidden', !locked);
   document.querySelectorAll('.select-plan, [data-online24-toggle]').forEach((button) => {
     button.classList.toggle('is-locked', locked);
     button.setAttribute('aria-disabled', String(locked));
@@ -998,15 +1012,29 @@ function syncBotLinkNotice() {
   document.querySelectorAll('#story-delay-min, #story-delay-max, #story-reaction-enabled, #story-emoji-input, #story-emoji-add, #save-story-settings, #story-emoji-grid button').forEach((control) => {
     control.disabled = locked;
   });
+  if (!locked) {
+    botLinkNoticeDismissed = false;
+    if (noticeContext?.kind === 'link') hideNoticeOverlay();
+    return;
+  }
+  if (botLinkNoticeDismissed) return;
+  // Notifikasi hanya muncul saat member sedang berada di halaman Fitur Bot —
+  // di halaman lain (misalnya dashboard setelah login) notifikasinya tidak
+  // menutupi layar dan menunggu sampai member masuk ke Fitur Bot.
+  if (activeWorkspacePage !== 'mode') return;
+  showNoticeOverlay({
+    title: 'WhatsApp belum tertaut',
+    text: 'Fitur bot belum aktif untuk akun ini. Tautkan WhatsApp dulu — begitu tertaut, Read Only + ReadSW dan Online 24 Jam otomatis aktif.',
+    context: { kind: 'link' },
+    addLabel: 'Buka Pairing WhatsApp',
+    onAdd: () => setWorkspacePage('pairing'),
+  });
 }
 function showBotLinkNotice() {
+  // Dipanggil saat member mengetuk tombol mode yang terkunci: tampilkan lagi
+  // walau notifikasinya sempat ditutup.
+  botLinkNoticeDismissed = false;
   syncBotLinkNotice();
-  const notice = document.querySelector('#bot-link-notice');
-  if (!notice) return;
-  notice.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  notice.classList.add('is-flashing');
-  window.setTimeout(() => notice.classList.remove('is-flashing'), 1400);
-  showToast('Tautkan WhatsApp dulu di Pairing WhatsApp — fitur bot aktif setelah tertaut.');
 }
 
 let workerRuntimeTimer = null;
@@ -1886,11 +1914,11 @@ function syncBotControlSettingsCard(article, draft) {
   const noticeActive = draft.mode === 'readonly_readsw' && !draft.autoReaction && draft.emojiPool.length === 0;
   if (!noticeActive) {
     botControlEmojiNoticeDismissed.delete(userId);
-    if (emojiNoticeContext?.kind === 'botcontrol' && emojiNoticeContext.userId === userId) hideEmojiNotice();
+    if (noticeContext?.kind === 'botcontrol' && noticeContext.userId === userId) hideNoticeOverlay();
     return;
   }
   if (botControlEmojiNoticeDismissed.has(userId)) return;
-  showEmojiNotice({
+  showNoticeOverlay({
     title: `Reaksi emoji @${username} tidak aktif`,
     text: `Akun @${username} tidak punya emoji dan reaksi otomatis mati — bot hanya menandai story sebagai dibaca, tanpa mengirim reaksi. Tambahkan emoji dan nyalakan reaksi otomatis bila mau ada reaksi.`,
     context: { kind: 'botcontrol', userId },
@@ -2857,6 +2885,7 @@ function setWorkspacePage(page, smoothScroll = true) {
   // Halaman Fitur Bot dibuka: posisikan carousel HP ke kartu yang terbuka dan segarkan titik indikatornya.
   if (page === 'mode') {
     syncPlanCarouselPosition();
+    syncBotLinkNotice();
   }
   setMenu(false);
 }
@@ -4370,11 +4399,6 @@ document.addEventListener('click', async (event) => {
       // Di HP, kartu yang dibuka ikut digeser ke posisi terlihat di carousel.
       scrollToPlanCard(card, 'smooth');
     }
-    return;
-  }
-  const openPairing = event.target.closest('[data-open-pairing]');
-  if (openPairing) {
-    setWorkspacePage('pairing');
     return;
   }
   const mode = event.target.closest('[data-plan]')?.dataset.plan;

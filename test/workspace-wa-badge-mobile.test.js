@@ -67,37 +67,45 @@ test('info update entry for the presence resync matches the JSON and fallback', 
   const html = await read('public/index.html');
   const data = JSON.parse(await read('public/info-updates.json'));
 
-  assert.equal(data.updatedAt, '2026-11-17T15:15:00+07:00', 'updatedAt must equal the newest entry time');
+  assert.equal(data.updatedAt, '2026-11-17T15:50:00+07:00', 'updatedAt must equal the newest entry time');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Peringatan reaksi kini muncul sebagai notifikasi di layar', 'the newest entry must describe the on-screen notice');
+  assert.equal(newest.title, 'Pemberitahuan tautan WhatsApp kini muncul di layar', 'the newest entry must describe the link notice on screen');
   assert.equal(newest.tag, 'Tampilan', 'the newest entry must use the Tampilan display tag');
   assert.equal(newest.day, 'Selasa, 17 Nov 2026', 'the newest entry day must match');
-  assert.equal(newest.time, '15.15 WIB', 'the newest entry time must match');
-  assert.equal(data.updates.length, 56, 'the list must grow by exactly one entry');
+  assert.equal(newest.time, '15.50 WIB', 'the newest entry time must match');
+  assert.equal(data.updates.length, 57, 'the list must grow by exactly one entry');
 
   // Fallback statis di index.html harus sama persis dengan entri JSON terbaru.
   assert.ok(html.includes('<li class="info-update-item" data-tag="tampilan">'), 'the fallback must carry the tampilan slug for the newest entry');
+  assert.ok(html.includes('<h4>Pemberitahuan tautan WhatsApp kini muncul di layar</h4>'), 'the fallback title must match the JSON title');
+  assert.ok(html.includes('Selasa, 17 Nov 2026 · 15.50 WIB'), 'the fallback meta must match the JSON day and time');
+
+  // Entri notifikasi reaksi di layar sebelumnya kini di posisi kedua beserta fallback-nya.
+  const emojiNotice = data.updates[1];
+  assert.equal(emojiNotice.title, 'Peringatan reaksi kini muncul sebagai notifikasi di layar', 'the emoji notice entry must stay second');
+  assert.equal(emojiNotice.tag, 'Tampilan', 'the emoji notice entry must use the Tampilan display tag');
+  assert.equal(emojiNotice.time, '15.15 WIB', 'the emoji notice entry time must match');
   assert.ok(html.includes('<h4>Peringatan reaksi kini muncul sebagai notifikasi di layar</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 15.15 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri peringatan reaksi sebelumnya kini di posisi kedua beserta fallback-nya.
-  const emojiWarning = data.updates[1];
-  assert.equal(emojiWarning.title, 'Peringatan bila ReadSW tidak bisa mengirim reaksi emoji', 'the emoji warning entry must stay second');
+  // Entri peringatan reaksi sebelumnya kini di posisi ketiga beserta fallback-nya.
+  const emojiWarning = data.updates[2];
+  assert.equal(emojiWarning.title, 'Peringatan bila ReadSW tidak bisa mengirim reaksi emoji', 'the emoji warning entry must stay third');
   assert.equal(emojiWarning.tag, 'Fitur baru', 'the emoji warning entry must use the Fitur baru display tag');
   assert.equal(emojiWarning.time, '14.55 WIB', 'the emoji warning entry time must match');
   assert.ok(html.includes('<h4>Peringatan bila ReadSW tidak bisa mengirim reaksi emoji</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 14.55 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri kartu pengingat member sebelumnya kini di posisi ketiga beserta fallback-nya.
-  const memberNotice = data.updates[2];
-  assert.equal(memberNotice.title, 'Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot', 'the member notice entry must stay third');
+  // Entri kartu pengingat member sebelumnya kini di posisi keempat beserta fallback-nya.
+  const memberNotice = data.updates[3];
+  assert.equal(memberNotice.title, 'Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot', 'the member notice entry must stay fourth');
   assert.equal(memberNotice.tag, 'Fitur baru', 'the member notice entry must use the Fitur baru display tag');
   assert.equal(memberNotice.time, '14.35 WIB', 'the member notice entry time must match');
   assert.ok(html.includes('<h4>Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 14.35 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri pratinjau tautan sebelumnya kini di posisi keempat beserta fallback-nya.
-  const ogPreview = data.updates[3];
+  // Entri pratinjau tautan sebelumnya kini di posisi kelima beserta fallback-nya.
+  const ogPreview = data.updates[4];
   assert.equal(ogPreview.title, 'Tautan panel kini menampilkan pratinjau bergambar saat dibagikan', 'the link preview entry must stay second');
   assert.equal(ogPreview.tag, 'Tampilan', 'the link preview entry must use the Tampilan display tag');
   assert.equal(ogPreview.time, '14.15 WIB', 'the link preview entry time must match');
@@ -105,8 +113,8 @@ test('info update entry for the presence resync matches the JSON and fallback', 
   assert.ok(html.includes('<h4>Tautan panel kini menampilkan pratinjau bergambar saat dibagikan</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 14.15 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri Kontrol Bot sebelumnya kini di posisi kelima beserta fallback-nya.
-  const kontrolBot = data.updates[4];
+  // Entri Kontrol Bot sebelumnya kini di posisi keenam beserta fallback-nya.
+  const kontrolBot = data.updates[5];
   assert.equal(kontrolBot.title, 'Halaman Kontrol Bot untuk admin', 'the Kontrol Bot entry must stay second');
   assert.equal(kontrolBot.tag, 'Fitur baru', 'the Kontrol Bot entry must use the Fitur baru display tag');
   assert.equal(kontrolBot.time, '13.30 WIB', 'the Kontrol Bot entry time must match');
@@ -114,8 +122,8 @@ test('info update entry for the presence resync matches the JSON and fallback', 
   assert.ok(html.includes('<h4>Halaman Kontrol Bot untuk admin</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 13.30 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri presence sebelumnya kini di posisi keenam beserta fallback-nya.
-  const presence = data.updates[5];
+  // Entri presence sebelumnya kini di posisi ketujuh beserta fallback-nya.
+  const presence = data.updates[6];
   assert.equal(presence.title, 'Status Pemilik kini pulih seketika saat kembali ke tab', 'the presence entry must stay second');
   assert.equal(presence.tag, 'Perbaikan', 'the presence entry must use the Perbaikan display tag');
   assert.equal(presence.day, 'Selasa, 17 Nov 2026', 'the presence entry day must match');
@@ -127,9 +135,9 @@ test('info update entry for the presence resync matches the JSON and fallback', 
   assert.ok(html.includes('<h4>Status Pemilik kini pulih seketika saat kembali ke tab</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 12.50 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri carousel sebelumnya tetap ada di posisi ketujuh beserta fallback-nya.
-  assert.equal(data.updates[6].title, 'Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP', 'the carousel entry must stay seventh');
+  // Entri carousel sebelumnya tetap ada di posisi kedelapan beserta fallback-nya.
+  assert.equal(data.updates[7].title, 'Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP', 'the carousel entry must stay eighth');
   assert.ok(html.includes('<h4>Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP</h4>'), 'the carousel fallback must stay');
-  assert.equal(data.updates[7].title, 'Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler', 'the badge fix entry must stay eighth');
+  assert.equal(data.updates[8].title, 'Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler', 'the badge fix entry must stay ninth');
   assert.ok(html.includes('<h4>Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler</h4>'), 'the badge fix fallback must stay');
 });
