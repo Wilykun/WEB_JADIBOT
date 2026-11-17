@@ -21,8 +21,8 @@ test('info update filter pills match the JSON taxonomy and count the real entrie
   const counts = { all: updates.length };
   for (const update of updates) counts[slug(update.tag)] = (counts[slug(update.tag)] || 0) + 1;
   // Hitungan pil harus akurat: Semua = total entri, tiap kategori = jumlah entri dengan tag itu.
-  assert.equal(counts.all, 48, 'Semua must equal the total number of entries');
-  assert.equal(counts['fitur-baru'], 16, 'Fitur baru count must match the JSON data');
+  assert.equal(counts.all, 49, 'Semua must equal the total number of entries');
+  assert.equal(counts['fitur-baru'], 17, 'Fitur baru count must match the JSON data');
   assert.equal(counts.perubahan, 8, 'Perubahan count must match the JSON data');
   assert.equal(counts.perbaikan, 12, 'Perbaikan count must match the JSON data');
   assert.equal(counts['fitur-dihapus'] || 0, 0, 'Fitur dihapus count must match the JSON data');
@@ -157,22 +157,24 @@ test('filter controls share the Log privat look without duplicating its scoped C
   assert.ok(!infoSection.includes('private-log-filter') && !memberSection.includes('private-log-filter'), 'info update and member must not reuse the Log-scoped classes');
 });
 
-test('the new feature entry sits first in info-updates.json and matches the static fallback exactly', async () => {
+test('the filter feature entry sits in info-updates.json and matches the static fallback exactly', async () => {
   const html = await read('public/index.html');
   const data = JSON.parse(await read('public/info-updates.json'));
-  const first = data.updates[0];
+  // Entri fitur filter tidak lagi di posisi pertama sejak ada entri yang lebih
+  // baru, jadi dicari berdasarkan judul, bukan posisi.
+  const index = data.updates.findIndex((update) => update.title === 'Info Update dan Member kini punya pencarian + filter kategori');
+  assert.ok(index >= 0, 'the filter feature entry must exist in info-updates.json');
+  const entry = data.updates[index];
 
-  assert.equal(first.tag, 'Fitur baru', 'the new entry must use the display name tag');
-  assert.equal(first.title, 'Info Update dan Member kini punya pencarian + filter kategori', 'the new entry title must describe the feature');
-  assert.equal(data.updatedAt, '2026-11-17T05:24:00+07:00', 'updatedAt must equal the newest entry time');
-  assert.equal(first.day, 'Selasa, 17 Nov 2026', 'the new entry day must be today');
-  assert.equal(first.time, '05.24 WIB', 'the new entry time must match updatedAt');
+  assert.equal(entry.tag, 'Fitur baru', 'the entry must use the display name tag');
+  assert.equal(entry.day, 'Selasa, 17 Nov 2026', 'the entry day must be the day it shipped');
+  assert.equal(entry.time, '05.24 WIB', 'the entry time must match when it shipped');
 
   const fallbackItems = [...html.matchAll(/<li class="info-update-item" data-tag="([^"]+)">([\s\S]*?)<\/li>/g)];
   assert.equal(fallbackItems.length, data.updates.length, 'static fallback must list the same entries as info-updates.json');
-  const firstFallback = fallbackItems[0];
-  assert.equal(firstFallback[1], 'fitur-baru', 'fallback data-tag must use the slug, not the display name');
-  assert.ok(firstFallback[2].includes(`<h4>${first.title}</h4>`), 'fallback title must match the JSON entry');
-  assert.ok(firstFallback[2].includes(first.description), 'fallback description must match the JSON entry');
-  assert.ok(firstFallback[2].includes('<span class="info-update-tag">Fitur baru</span>'), 'fallback tag must match the JSON entry');
+  const fallback = fallbackItems[index];
+  assert.equal(fallback[1], 'fitur-baru', 'fallback data-tag must use the slug, not the display name');
+  assert.ok(fallback[2].includes(`<h4>${entry.title}</h4>`), 'fallback title must match the JSON entry');
+  assert.ok(fallback[2].includes(entry.description), 'fallback description must match the JSON entry');
+  assert.ok(fallback[2].includes('<span class="info-update-tag">Fitur baru</span>'), 'fallback tag must match the JSON entry');
 });

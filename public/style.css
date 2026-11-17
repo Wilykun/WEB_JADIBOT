@@ -590,6 +590,7 @@
 }
 
 /* On phones, keep the WhatsApp connection badge identifiable (not a theme switch). */
+#connection-badge-short { display: none; }
 @media (max-width: 560px) {
   .demo-badge {
     gap: 5px;
@@ -598,11 +599,12 @@
     letter-spacing: .2px;
     white-space: nowrap;
   }
+  /* Layar sempit memakai label ringkas agar lencana tetap muat dan terbaca. */
   .demo-badge #connection-badge {
+    display: none;
+  }
+  .demo-badge #connection-badge-short {
     display: inline;
-    max-width: 78px;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 
@@ -1094,7 +1096,9 @@ html[data-theme="light"] #bot-worker-status { color: #344b3a !important; }
   .breadcrumbs b { display: none; }
   .breadcrumbs strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .topbar-right { flex: 0 0 auto; min-width: 0; gap: 0; }
-  .topbar-right .demo-badge { display: none; }
+  /* Lencana koneksi tetap tampil di layar 360px dengan label ringkas, bukan
+     disembunyikan: ruang sempit bukan alasan menghilangkan status WhatsApp. */
+  .topbar-right .demo-badge { padding: 5px 6px; }
   .user-chip { flex: 0 0 auto; min-width: 0; gap: 0; padding: 3px; }
   .user-chip #top-user-name,
   .user-chip .chevron { display: none; }
@@ -2457,7 +2461,8 @@ html[data-theme="light"] #auth-message.is-banned{border-color:#edcaca;background
   .plan-grid[data-page-view="mode"] { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 10px; }
   .plan-grid[data-page-view="mode"] .plan-card { width: 100%; max-width: 42rem; min-width: 0; margin-inline: auto; box-sizing: border-box; padding: 16px 14px; text-align: center; }
   .plan-grid[data-page-view="mode"] .plan-card-head { justify-content: center; }
-  .plan-grid[data-page-view="mode"] .plan-card h3 { font-size: 17px; }
+  .plan-grid[data-page-view="mode"] .plan-card h3,
+  .plan-grid[data-page-view="mode"] .plan-card-title { font-size: 17px; }
   .plan-grid[data-page-view="mode"] .plan-copy { max-width: 25rem; margin-inline: auto; font-size: 10px; line-height: 1.6; }
   .plan-grid[data-page-view="mode"] .plan-card ul { width: min(100%, 18rem); margin: 13px auto 16px; text-align: left; }
   .plan-grid[data-page-view="mode"] .plan-card .button { width: 100%; min-height: 45px; }
@@ -2483,6 +2488,29 @@ html[data-theme="light"] #auth-message.is-banned{border-color:#edcaca;background
   .story-settings-note { text-align: center; line-height: 1.55; }
 }
 
+/* Kartu mode Fitur Bot sebagai accordion: header selalu terlihat, isi detail bisa
+   dibuka-tutup, dan hanya satu kartu terbuka dalam satu waktu. */
+.plan-grid { align-items: start; }
+.plan-card { min-height: 0; }
+.plan-card-toggle { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; color: inherit; font: inherit; }
+.plan-card-toggle:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; border-radius: 10px; }
+.plan-grid .plan-card-toggle .plan-card-head { justify-content: space-between; margin-bottom: 10px; }
+.plan-title-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.plan-card-title { flex: 1 1 auto; min-width: 0; font: 700 15px 'Inter',system-ui,sans-serif; letter-spacing: -.3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.plan-status { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border-radius: 20px; border: 1px solid var(--line); color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .3px; white-space: nowrap; }
+.plan-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.plan-status.is-active { color: #7df0b0; border-color: rgba(61,222,137,.5); background: rgba(49,213,139,.12); }
+.plan-status.is-active::before { background: var(--green); box-shadow: 0 0 8px rgba(49,213,139,.6); }
+.plan-chevron { flex: 0 0 auto; font-size: 14px; line-height: 1; color: var(--muted); transition: transform .25s ease; }
+.plan-card.is-collapsed .plan-chevron { transform: rotate(-90deg); }
+.plan-card-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .25s ease; }
+.plan-card.is-collapsed .plan-card-body { grid-template-rows: 0fr; }
+.plan-card-body-inner { overflow: hidden; min-height: 0; }
+.plan-card-body-inner .plan-copy { margin-top: 10px; }
+@media (prefers-reduced-motion: reduce) {
+  .plan-card-body, .plan-chevron { transition: none; }
+}
+html[data-theme="light"] .plan-status.is-active { color: #176b3c; }
 
 /* Strong mobile/touch override for Story Preferences, including Android Desktop site mode. */
 @media (max-width: 1100px) and (pointer: coarse), (max-width: 560px) {

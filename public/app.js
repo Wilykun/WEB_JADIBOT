@@ -648,6 +648,35 @@ function modeSummary(mode) {
   return modeDescriptions[mode] || 'Pilih preferensi bot untuk menyimpannya.';
 }
 
+// Kartu mode Fitur Bot tampil sebagai accordion: hanya satu kartu terbuka dalam
+// satu waktu, dan penanda status di header kartu selalu mengikuti class selected
+// yang sama dengan tombol Aktif di dalam kartu.
+let planAccordionUserTouched = false;
+function setPlanCardOpen(card, open) {
+  card.classList.toggle('is-collapsed', !open);
+  card.querySelector('.plan-card-toggle')?.setAttribute('aria-expanded', String(open));
+}
+function renderPlanCardStatuses() {
+  document.querySelectorAll('.plan-card').forEach((card) => {
+    const status = card.querySelector('[data-plan-status]');
+    if (!status) return;
+    const active = card.classList.contains('selected');
+    status.classList.toggle('is-active', active);
+    status.textContent = active ? '✓ Aktif' : 'Tidak aktif';
+  });
+}
+function syncPlanAccordionDefault() {
+  // Pilihan buka/tutup pengguna tidak pernah ditimpa: sinkronisasi bawaan hanya
+  // berjalan sebelum pengguna menyentuh accordion untuk pertama kali.
+  if (planAccordionUserTouched) return;
+  const cards = [...document.querySelectorAll('.plan-card')];
+  if (!cards.length) return;
+  const openCard = cards.find((card) => card.classList.contains('selected'))
+    || cards.find((card) => card.classList.contains('plan-featured'))
+    || cards[0];
+  cards.forEach((card) => setPlanCardOpen(card, card === openCard));
+}
+
 function applyBot(bot) {
   selectedMode = bot?.mode === 'online24' ? 'readonly' : bot?.mode || null;
   const online24 = bot?.online24 === true || bot?.mode === 'online24';
@@ -675,6 +704,10 @@ function applyBot(bot) {
     onlineButton.classList.toggle('button-primary', online24);
     onlineButton.classList.toggle('button-secondary', !online24);
   }
+  // Penanda status di header kartu accordion selalu mengikuti state mode yang
+  // sama dengan tombol di dalam kartu, dan kartu mode yang aktif terbuka bawaan.
+  renderPlanCardStatuses();
+  syncPlanAccordionDefault();
   document.querySelector('#current-mode').textContent = selectedMode
     ? `${modeNames[selectedMode]}${online24 ? ' + Online 24 Jam' : ''}`
     : 'Belum dipilih';
@@ -1857,9 +1890,17 @@ function renderLinkGate(pairing) {
   document.querySelector('.side-nav .nav-item[href="#dashboard"]')?.classList.toggle('hidden', !hasLinkedSession);
   document.querySelector('.side-nav .nav-item[href="#activity"]')?.classList.toggle('hidden', !hasLinkedSession);
   document.querySelector('#pairing-nav')?.classList.toggle('hidden', hasLinkedSession);
-  document.querySelector('#connection-badge').textContent = pairing?.status === 'linked'
+  // Lencana koneksi punya dua label: label panjang untuk layar lebar dan label
+  // ringkas untuk HP sempit, keduanya selalu diisi dari status yang sama agar
+  // tampilannya akurat di semua ukuran layar.
+  const badgeText = pairing?.status === 'linked'
     ? 'WHATSAPP ONLINE'
     : hasLinkedSession ? 'SESI TERTAUT' : 'TAUTKAN WHATSAPP';
+  const badgeShortText = pairing?.status === 'linked'
+    ? 'WA ONLINE'
+    : hasLinkedSession ? 'TERTAUT' : 'TAUTKAN';
+  document.querySelector('#connection-badge').textContent = badgeText;
+  document.querySelector('#connection-badge-short').textContent = badgeShortText;
   if (!activeWorkspacePage) {
     const requestedPage = location.hash.slice(1);
     const requestedNav = document.querySelector(`.side-nav .nav-item[href="#${requestedPage}"]`);
@@ -3310,6 +3351,17 @@ document.addEventListener('click', async (event) => {
   }
   if (action === 'profile') {
     setWorkspacePage('profile');
+    return;
+  }
+  // Header kartu mode adalah tombol accordion: membuka satu kartu menutup kartu
+  // lain yang sedang terbuka, dan mengetuk kartu yang terbuka akan menutupnya.
+  const planToggle = event.target.closest('.plan-card-toggle');
+  if (planToggle) {
+    planAccordionUserTouched = true;
+    const card = planToggle.closest('.plan-card');
+    const wasOpen = card && !card.classList.contains('is-collapsed');
+    document.querySelectorAll('.plan-card').forEach((other) => setPlanCardOpen(other, false));
+    if (card && !wasOpen) setPlanCardOpen(card, true);
     return;
   }
   const mode = event.target.closest('[data-plan]')?.dataset.plan;

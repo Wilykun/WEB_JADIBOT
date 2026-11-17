@@ -6,10 +6,10 @@
   <meta name="description" content="Panel akun dan preferensi bot ReadSW.">
   <title>ReactionSw</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="stylesheet" href="/style.css?v=info-update-v3-20261117">
+  <link rel="stylesheet" href="/style.css?v=fiturbot-v1-20261117">
   <script src="/footer.js" defer=""></script>
   <script src="/vendor/libphonenumber-max.js" defer=""></script>
-  <script src="/app.js?v=info-update-v3-20261117" defer=""></script>
+  <script src="/app.js?v=fiturbot-v1-20261117" defer=""></script>
 </head>
 <body>
   <div id="boot-screen" class="boot-screen" role="status" aria-live="polite" aria-label="Memulihkan sesi">
@@ -278,7 +278,7 @@
           <button id="menu-toggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="app-sidebar" aria-label="Buka menu">☰<span class="menu-toggle-alert" aria-hidden="true"><svg viewBox="0 0 14 14" width="14" height="14"><circle cx="7" cy="7" r="7" fill="#ff5a5a"/><rect x="6.1" y="2.6" width="1.8" height="5.2" rx="0.9" fill="#fff"/><circle cx="7" cy="10.6" r="1.1" fill="#fff"/></svg></span></button>
           <div class="breadcrumbs"><span>Workspace</span><b>/</b><strong id="page-breadcrumb">Memuat halaman…</strong></div>
         </div>
-        <div class="topbar-right"><span class="demo-badge"><i></i> <span id="connection-badge">TAUTKAN WHATSAPP</span></span><button class="user-chip" data-action="profile"><img class="avatar avatar-image" id="avatar-initials" src="/avatars/avatar-01.webp" alt="Avatar profil"><span id="top-user-name">Akun</span><span class="chevron">⌄</span></button></div>
+        <div class="topbar-right"><span class="demo-badge"><i></i> <span id="connection-badge">TAUTKAN WHATSAPP</span><span id="connection-badge-short" aria-hidden="true">TAUTKAN</span></span><button class="user-chip" data-action="profile"><img class="avatar avatar-image" id="avatar-initials" src="/avatars/avatar-01.webp" alt="Avatar profil"><span id="top-user-name">Akun</span><span class="chevron">⌄</span></button></div>
       </header>
 
       <div class="content-wrap">
@@ -305,24 +305,39 @@
 
         <section id="mode" class="section-heading hidden" data-linked-only="" data-page-view="mode"><div><div class="eyebrow">AKTIVASI BOT</div><h2>Pilih mode story &amp; status online</h2><p>Pilih satu mode story. Online 24 Jam dapat dinyalakan bersamaan selama host persisten dan sesi WhatsApp aktif.</p></div><span class="section-counter">03 <i>/</i> MODE</span></section>
         <section class="plan-grid hidden" data-linked-only="" data-page-view="mode" aria-label="Pilihan mode bot">
-          <article class="plan-card" data-plan-card="readonly">
-            <div class="plan-card-head"><span class="plan-icon icon-book">▤</span><span class="plan-tag">DASAR</span></div>
-            <h3>Read Only</h3><p class="plan-copy">Mode baca saja untuk preferensi penggunaan sederhana.</p>
-            <ul><li><span>✓</span> Tandai story sebagai dilihat</li><li><span>✓</span> Tanpa reaksi emoji</li><li><span>✓</span> Delay acak bisa diatur</li></ul>
-            <button class="button button-secondary select-plan" type="button" data-plan="readonly">Aktifkan <span>→</span></button>
+          <article class="plan-card is-collapsed" data-plan-card="readonly">
+            <button class="plan-card-toggle" type="button" aria-expanded="false" aria-controls="plan-body-readonly">
+              <span class="plan-card-head"><span class="plan-icon icon-book">▤</span><span class="plan-tag">DASAR</span></span>
+              <span class="plan-title-row"><span class="plan-card-title">Read Only</span><span class="plan-status" data-plan-status>Tidak aktif</span><span class="plan-chevron" aria-hidden="true">⌄</span></span>
+            </button>
+            <div class="plan-card-body" id="plan-body-readonly"><div class="plan-card-body-inner">
+              <p class="plan-copy">Mode baca saja untuk preferensi penggunaan sederhana.</p>
+              <ul><li><span>✓</span> Tandai story sebagai dilihat</li><li><span>✓</span> Tanpa reaksi emoji</li><li><span>✓</span> Delay acak bisa diatur</li></ul>
+              <button class="button button-secondary select-plan" type="button" data-plan="readonly">Aktifkan <span>→</span></button>
+            </div></div>
           </article>
           <article class="plan-card plan-featured" data-plan-card="readonly_readsw">
             <div class="featured-ribbon">PILIHAN POPULER</div>
-            <div class="plan-card-head"><span class="plan-icon icon-spark">✳</span><span class="plan-tag">READSW</span></div>
-            <h3>Read Only + ReadSW</h3><p class="plan-copy">Tandai story sebagai dilihat, lalu kirim reaksi emoji pilihan setelah delay acak.</p>
-            <ul><li><span>✓</span> Baca status dari event WhatsApp</li><li><span>✓</span> Reaksi emoji bisa diatur</li><li><span>✓</span> Delay acak 1–20 detik</li></ul>
-            <button class="button button-primary select-plan" type="button" data-plan="readonly_readsw">Aktifkan <span>→</span></button>
+            <button class="plan-card-toggle" type="button" aria-expanded="true" aria-controls="plan-body-readonly-readsw">
+              <span class="plan-card-head"><span class="plan-icon icon-spark">✳</span><span class="plan-tag">READSW</span></span>
+              <span class="plan-title-row"><span class="plan-card-title">Read Only + ReadSW</span><span class="plan-status" data-plan-status>Tidak aktif</span><span class="plan-chevron" aria-hidden="true">⌄</span></span>
+            </button>
+            <div class="plan-card-body" id="plan-body-readonly-readsw"><div class="plan-card-body-inner">
+              <p class="plan-copy">Tandai story sebagai dilihat, lalu kirim reaksi emoji pilihan setelah delay acak.</p>
+              <ul><li><span>✓</span> Baca status dari event WhatsApp</li><li><span>✓</span> Reaksi emoji bisa diatur</li><li><span>✓</span> Delay acak 1–20 detik</li></ul>
+              <button class="button button-primary select-plan" type="button" data-plan="readonly_readsw">Aktifkan <span>→</span></button>
+            </div></div>
           </article>
-          <article class="plan-card plan-card-addon" data-online-addon="true">
-            <div class="plan-card-head"><span class="plan-icon icon-clock">◷</span><span class="plan-tag">ALWAYS-ON</span></div>
-            <h3>Online 24 Jam</h3><p class="plan-copy">Kirim presence available berkala agar akun terlihat online selama host persisten aktif.</p>
-            <ul><li><span>✓</span> Bisa bersama ReadSW</li><li><span>✓</span> Heartbeat presence 25 detik</li><li><span>!</span> Perlu host persisten</li></ul>
-            <button class="button button-secondary online24-toggle" type="button" data-online24-toggle="">Aktifkan <span>→</span></button>
+          <article class="plan-card plan-card-addon is-collapsed" data-online-addon="true">
+            <button class="plan-card-toggle" type="button" aria-expanded="false" aria-controls="plan-body-online24">
+              <span class="plan-card-head"><span class="plan-icon icon-clock">◷</span><span class="plan-tag">ALWAYS-ON</span></span>
+              <span class="plan-title-row"><span class="plan-card-title">Online 24 Jam</span><span class="plan-status" data-plan-status>Tidak aktif</span><span class="plan-chevron" aria-hidden="true">⌄</span></span>
+            </button>
+            <div class="plan-card-body" id="plan-body-online24"><div class="plan-card-body-inner">
+              <p class="plan-copy">Kirim presence available berkala agar akun terlihat online selama host persisten aktif.</p>
+              <ul><li><span>✓</span> Bisa bersama ReadSW</li><li><span>✓</span> Heartbeat presence 25 detik</li><li><span>!</span> Perlu host persisten</li></ul>
+              <button class="button button-secondary online24-toggle" type="button" data-online24-toggle="">Aktifkan <span>→</span></button>
+            </div></div>
           </article>
         </section>
 
@@ -673,6 +688,7 @@
                 </div></div>
               </div>
               <ul class="info-update-list">
+<li class="info-update-item" data-tag="fitur-baru"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l1.9 5.4 5.6 1.6-5.6 1.9L12 17.5l-1.9-5.6-5.6-1.9 5.6-1.6z"/></svg></span></div><div class="info-update-body"><h4>Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler</h4><p class="info-update-meta">Selasa, 17 Nov 2026 · 07.33 WIB</p><span class="info-update-tag">Fitur baru</span><div class="info-update-desc"><p>Lencana WHATSAPP ONLINE di header sempat hilang di HP layar 360px karena aturan CSS menyembunyikannya di lebar itu — kini lencana tetap tampil dengan label ringkas WA Online dan ikut berubah realtime mengikuti status koneksi. Halaman Fitur Bot juga dirapikan: tiga kartu mode (Read Only, Read Only + ReadSW, Online 24 Jam) kini berupa spoiler yang hanya membuka satu kartu dalam satu waktu, dengan penanda Aktif atau Tidak aktif yang akurat di header tiap kartu.</p></div></div></li>
 <li class="info-update-item" data-tag="fitur-baru"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l1.9 5.4 5.6 1.6-5.6 1.9L12 17.5l-1.9-5.6-5.6-1.9 5.6-1.6z"/></svg></span></div><div class="info-update-body"><h4>Info Update dan Member kini punya pencarian + filter kategori</h4><p class="info-update-meta">Selasa, 17 Nov 2026 · 05.24 WIB</p><span class="info-update-tag">Fitur baru</span><div class="info-update-desc"><p>Halaman Info Update dan Member kini punya kotak pencarian dan pil kategori berangka dengan tampilan yang sama seperti Log privat — Info Update bisa dicari berdasarkan judul, deskripsi, dan kategori serta difilter ke Fitur baru, Perubahan, Perbaikan, Fitur dihapus, atau Tampilan, sedangkan Member bisa dicari berdasarkan akun, nama, dan email serta difilter ke Admin, Member, Bot jalan, WA tertaut, atau Belum aktif — dengan angka hitungan yang diperbarui realtime setiap daftar me-refresh sendiri tanpa muat ulang dan filter yang sedang aktif tetap dipertahankan.</p></div></div></li>
 <li class="info-update-item" data-tag="perubahan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg></span></div><div class="info-update-body"><h4>Menu Backup kini terlihat untuk member, tapi terkunci</h4><p class="info-update-meta">Senin, 16 Nov 2026 · 19.51 WIB</p><span class="info-update-tag">Perubahan</span><div class="info-update-desc"><p>Menu Backup kini terlihat di sidebar member, dengan lencana Terkunci di sampingnya. Member tidak bisa membukanya — diketuk pun muncul pesan 'Backup hanya untuk admin.' Hanya Admin Utama dan admin biasa yang bisa membuka halaman Backup & pemulihan.</p></div></div></li>
 <li class="info-update-item" data-tag="tampilan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l1.9 5.4 5.6 1.6-5.6 1.9L12 17.5l-1.9-5.6-5.6-1.9 5.6-1.6z"/></svg></span></div><div class="info-update-body"><h4>Menu Member pindah ke kategori Info</h4><p class="info-update-meta">Senin, 16 Nov 2026 · 19.51 WIB</p><span class="info-update-tag">Tampilan</span><div class="info-update-desc"><p>Menu Member kini berada di kategori Info (setelah List Bot), bukan lagi di kategori Admin. Kategori Admin kini hanya berisi Backup. Susunan menu jadi lebih sesuai konteks untuk admin maupun member.</p></div></div></li>
