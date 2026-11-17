@@ -5,7 +5,7 @@
       "day": "Selasa, 17 Nov 2026",
       "time": "13.30 WIB",
       "title": "Halaman Kontrol Bot untuk admin",
-      "description": "Menu Kontrol Bot kini ada di kategori Admin, di bawah Backup. Admin Utama dan admin biasa bisa memilih akun lalu mengontrol botnya — Nyalakan bot, Restart bot, Matikan bot, dan Hapus sesi WhatsApp — dengan konfirmasi sebelum setiap aksi. Di dalam tiap kartu, admin juga mengatur mode bot akun itu (Read Only, ReadSW + ReactionSW, Online 24 Jam) dan preferensi story-nya (delay 1–20 detik serta emoji reaksi); admin biasa tidak bisa mengontrol Admin Utama, dan akun Admin Utama tidak bisa dikontrol siapa pun dari halaman ini. Member hanya melihat menunya dengan lencana Terkunci, sama seperti Backup. Daftarnya bisa dicari dan difilter ke Bot jalan, Bot berhenti, WA tertaut, atau Belum aktif, dan membuka satu kartu otomatis menutup kartu lain.",
+      "description": "Halaman Kontrol Bot untuk admin. Daftar akun dipisah Admin dan Member, dan di tiap kelompok bot yang jalan dengan runtime terbaru selalu di atas — urutannya diperbarui realtime tiap 15 detik. Admin Utama kini bisa mengelola botnya sendiri dari halaman ini (admin biasa tetap tidak bisa mengelola Admin Utama, tetapi bisa mengelola sesama admin biasa dan member). Admin Utama dan admin biasa bisa memilih akun lalu mengontrol botnya — Nyalakan bot, Restart bot, Matikan bot, dan Hapus sesi WhatsApp — dengan konfirmasi sebelum setiap aksi. Di dalam tiap kartu, admin juga mengatur mode bot akun itu (Read Only, ReadSW + ReactionSW, Online 24 Jam) dan preferensi story-nya (delay 1–20 detik serta emoji reaksi); setiap perubahan tersimpan langsung ke DATA_AKUN akun yang diubah.",
       "tag": "Fitur baru"
     },
     {

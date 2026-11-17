@@ -3177,3 +3177,15 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .botcontrol-settings-feedback.is-error{color:#ff9b9b}
 .botcontrol-settings-feedback.is-success{color:#74d99a}
 @media(max-width:560px){.botcontrol-delay-row{grid-template-columns:1fr}.botcontrol-emoji-add-row{flex-wrap:wrap}.botcontrol-emoji-add{width:100%}}
+
+/* Kontrol Bot: teks di dalam spoiler kartu rata tengah sesuai konteks,
+   supaya judul, catatan, dan label pengaturan sejajar dengan kartu yang
+   kontennya memang dipusatkan di tampilan mobile. Hanya halaman Kontrol
+   Bot yang dipusatkan — halaman Member tidak berubah. */
+#botcontrol .member-admin-heading{justify-content:center;text-align:center}
+#botcontrol .member-admin-note,#botcontrol .member-admin-hint,#botcontrol .member-admin-account-state{text-align:center}
+#botcontrol .botcontrol-settings-title,#botcontrol .botcontrol-settings-note,#botcontrol .botcontrol-field-label{text-align:center}
+#botcontrol .botcontrol-mode-row,#botcontrol .botcontrol-emoji-grid{justify-content:center}
+#botcontrol .botcontrol-reaction-label{justify-content:center}
+#botcontrol .botcontrol-save-row{justify-content:center}
+#botcontrol .botcontrol-settings-feedback{text-align:center}

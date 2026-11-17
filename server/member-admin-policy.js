@@ -21,6 +21,23 @@ export function memberAdminPolicyError(actor, target, bootstrapUsername) {
   return null;
 }
 
+// Aturan KHUSUS kontrol bot (start/stop/restart/hapus sesi/atur
+// pengaturan): Admin Utama boleh mengelola siapa pun termasuk dirinya
+// sendiri; admin biasa boleh mengelola member dan sesama admin biasa,
+// tetapi tidak Admin Utama. Aturan ini lebih longgar dari
+// memberAdminPolicyError yang dipakai ban/hapus akun — jangan dipakai di
+// sana, supaya admin biasa tetap tidak bisa memblokir atau menghapus
+// sesama admin.
+export function botControlPolicyError(actor, target, bootstrapUsername) {
+  if (!actor) return { status: 401, message: 'Silakan masuk kembali.' };
+  if (actor.role !== 'admin') return { status: 403, message: 'Akses admin diperlukan.' };
+  if (!target) return { status: 404, message: 'Akun member tidak ditemukan.' };
+  if (isMainAdminUser(target, bootstrapUsername) && !isMainAdminUser(actor, bootstrapUsername)) {
+    return { status: 400, message: 'Akun Admin Utama tidak dapat diubah.' };
+  }
+  return null;
+}
+
 export function isBannedAccount(user) {
   return user?.banned === true;
 }

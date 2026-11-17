@@ -41,9 +41,9 @@ test('halaman Kontrol Bot dijaga perannya seperti Backup: member tidak bisa memb
   assert.ok(appJs.includes("showToast('Kontrol Bot hanya untuk admin.')"), 'klik nav Kontrol Bot yang terkunci harus menampilkan pesan hanya untuk admin');
 });
 
-test('kartu Kontrol Bot memakai aturan yang sama dengan server: admin biasa tidak bisa mengontrol Admin Utama', () => {
-  assert.match(appJs, /const canManageTarget = currentUser\?\.role === 'admin'\s*\n\s*&& \(user\.role !== 'admin' \|\| \(currentUser\.isMainAdmin === true && user\.isMainAdmin !== true\)\)/, 'aturan kelola target harus sama dengan halaman Member');
-  assert.ok(appJs.includes('Akun Admin Utama tidak dapat dikontrol dari sini'), 'kartu Admin Utama harus menjelaskan bahwa ia tidak bisa dikontrol dari sini');
+test('kartu Kontrol Bot memakai aturan yang sama dengan server: Admin Utama bisa mengelola dirinya sendiri, admin biasa tidak bisa mengontrol Admin Utama', () => {
+  assert.match(appJs, /const canManageTarget = currentUser\?\.role === 'admin'\s*\n\s*&& \(user\.isMainAdmin !== true \|\| currentUser\.isMainAdmin === true\)/, 'aturan kelola target harus sama dengan kebijakan kontrol bot di server');
+  assert.ok(appJs.includes('Akun Admin Utama hanya bisa dikontrol oleh Admin Utama.'), 'kartu Admin Utama harus menjelaskan bahwa hanya Admin Utama yang bisa mengontrolnya');
   assert.ok(appJs.includes("data-botcontrol-action"), 'tombol aksi Kontrol Bot harus memakai data-botcontrol-action');
   for (const action of ['bot-start', 'bot-restart', 'bot-stop', 'bot-session-delete']) {
     assert.ok(appJs.includes(`'${action}'`), `aksi ${action} harus ada di panel kontrol`);
@@ -51,6 +51,18 @@ test('kartu Kontrol Bot memakai aturan yang sama dengan server: admin biasa tida
   assert.match(appJs, /api\('\/api\/admin\/users\/bot'/, 'aksi bot harus memanggil endpoint admin yang sama dengan halaman Member');
   assert.match(appJs, /api\('\/api\/admin\/users\/session\/delete'/, 'hapus sesi harus memanggil endpoint hapus sesi admin');
   assert.match(appJs, /body: JSON\.stringify\(\{ userId, confirm: true \}\)/, 'hapus sesi harus mengirim konfirmasi eksplisit');
+});
+
+test('daftar Kontrol Bot dipisah Admin dan Member, bot jalan dengan runtime terbaru di atas, teks spoiler rata tengah', () => {
+  assert.match(appJs, /const groups = \[\s*\n\s*\{ key: 'admin', title: 'Admin', users: sortAdminUsersByRuntime\(users\.filter\(\(user\) => user\.role === 'admin'\)\) \},/, 'daftar Kontrol Bot harus memakai pemisah Admin seperti halaman Member');
+  assert.match(appJs, /\{ key: 'member', title: 'Member', users: sortAdminUsersByRuntime\(users\.filter\(\(user\) => user\.role !== 'admin'\)\) \}/, 'daftar Kontrol Bot harus memakai pemisah Member seperti halaman Member');
+  assert.match(appJs, /groupSection\.className = 'member-account-group'/, 'pemisah kelompok harus memakai gaya yang sama dengan halaman Member');
+  assert.match(appJs, /groupHeading\.className = 'member-account-group-heading'/, 'judul pemisah harus memakai gaya yang sama dengan halaman Member');
+  assert.match(appJs, /groupSection\.toggleAttribute\('hidden', !groupVisible\)/, 'pemisah kelompok harus hilang bila semua kartunya terfilter');
+  assert.match(css, /#botcontrol \.member-admin-heading\{justify-content:center;text-align:center\}/, 'judul panel kontrol harus rata tengah');
+  assert.match(css, /#botcontrol \.member-admin-note,#botcontrol \.member-admin-hint,#botcontrol \.member-admin-account-state\{text-align:center\}/, 'catatan panel kontrol harus rata tengah');
+  assert.match(css, /#botcontrol \.botcontrol-settings-title,#botcontrol \.botcontrol-settings-note,#botcontrol \.botcontrol-field-label\{text-align:center\}/, 'judul dan label pengaturan harus rata tengah');
+  assert.match(css, /#botcontrol \.botcontrol-mode-row,#botcontrol \.botcontrol-emoji-grid\{justify-content:center\}/, 'pil mode dan daftar emoji harus rata tengah');
 });
 
 test('spoiler kontrol bot membuka satu kartu dan menutup kartu lain secara otomatis', () => {
@@ -110,12 +122,33 @@ test('pengaturan fitur disimpan lewat endpoint admin dengan aturan izin yang sam
   assert.match(appJs, /Delay minimum harus kurang dari atau sama dengan delay maksimum\./, 'rentang delay terbalik harus ditolak di sisi klien');
 });
 
+test('urutan runtime: bot jalan terbaru di atas, bot berhenti di bawah', () => {
+  // sortAdminUsersByRuntime dipakai halaman Member dan Kontrol Bot; jalankan
+  // fungsi aslinya (bukan tiruan) dengan data buatan supaya urutannya terbukti.
+  const match = appJs.match(/function sortAdminUsersByRuntime\(users\) \{[\s\S]*?\n\}/);
+  assert.ok(match, 'sortAdminUsersByRuntime harus ada di app.js');
+  const sortAdminUsersByRuntime = new Function(`${match[0]}; return sortAdminUsersByRuntime;`)();
+  const users = [
+    { username: 'berhenti', workerStatus: 'stopped', workerStartedAt: null },
+    { username: 'lama', workerStatus: 'running', workerStartedAt: 100 },
+    { username: 'tanpa-waktu', workerStatus: 'running', workerStartedAt: null },
+    { username: 'terbaru', workerStatus: 'running', workerStartedAt: 200 },
+  ];
+  const sorted = sortAdminUsersByRuntime(users).map((user) => user.username);
+  assert.deepEqual(sorted, ['terbaru', 'lama', 'berhenti', 'tanpa-waktu']);
+});
+
 test('entri Info Update terbaru menjelaskan halaman Kontrol Bot', () => {
   const newest = infoUpdates.updates[0];
   assert.equal(newest.title, 'Halaman Kontrol Bot untuk admin');
   assert.equal(newest.tag, 'Fitur baru');
-  assert.match(newest.description, /Admin Utama dan admin biasa/);
-  assert.match(newest.description, /admin biasa tidak bisa mengontrol Admin Utama/);
+  assert.match(newest.description, /Admin Utama kini bisa mengelola botnya sendiri/);
+  assert.match(newest.description, /admin biasa tetap tidak bisa mengelola Admin Utama/);
+  assert.match(newest.description, /bisa mengelola sesama admin biasa dan member/);
+  assert.match(newest.description, /Admin Utama kini bisa mengelola botnya sendiri/);
+  assert.match(newest.description, /Daftar akun dipisah Admin dan Member/);
+  assert.match(newest.description, /bot yang jalan dengan runtime terbaru selalu di atas/);
+  assert.match(newest.description, /tersimpan langsung ke DATA_AKUN akun yang diubah/);
   assert.match(newest.description, /Nyalakan bot|Restart bot|Matikan bot|Hapus sesi/);
   assert.match(newest.description, /Read Only, ReadSW \+ ReactionSW, Online 24 Jam/);
   assert.match(newest.description, /delay 1–20 detik serta emoji reaksi/);

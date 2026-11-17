@@ -1785,6 +1785,11 @@ function applyBotControlFilter() {
     article.classList.toggle('is-filtered-out', !match);
     if (match) visible += 1;
   });
+  // Pemisah kelompok ikut hilang bila semua kartunya terfilter.
+  for (const groupSection of document.querySelectorAll('#botcontrol-users .member-account-group')) {
+    const groupVisible = [...groupSection.querySelectorAll('.member-account-item')].some((article) => !article.classList.contains('is-filtered-out'));
+    groupSection.toggleAttribute('hidden', !groupVisible);
+  }
   document.querySelector('#botcontrol-filter-empty')?.toggleAttribute('hidden', !(articles.length > 0 && visible === 0));
 }
 document.querySelector('#botcontrol-search')?.addEventListener('input', (event) => {
@@ -1942,7 +1947,7 @@ function buildBotControlCard(user) {
   const detailId = `botcontrol-detail-${encodeURIComponent(userId)}`;
   const isOpen = userId === expandedBotControlUserId;
   const canManageTarget = currentUser?.role === 'admin'
-    && (user.role !== 'admin' || (currentUser.isMainAdmin === true && user.isMainAdmin !== true));
+    && (user.isMainAdmin !== true || currentUser.isMainAdmin === true);
   const pairingStatus = pairingLabels[user.whatsappStatus] || 'Belum tertaut';
   const roleLabel = user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Admin' : 'Member';
   const article = document.createElement('article');
@@ -2090,7 +2095,7 @@ function buildBotControlCard(user) {
     const note = document.createElement('p');
     note.className = 'member-admin-note';
     note.textContent = user.isMainAdmin
-      ? 'Akun Admin Utama tidak dapat dikontrol dari sini — kelola botnya dari halaman Fitur Bot.'
+      ? 'Akun Admin Utama hanya bisa dikontrol oleh Admin Utama.'
       : 'Akun ini tidak dapat dikontrol oleh admin biasa.';
     details.append(note);
   }
@@ -2104,14 +2109,32 @@ async function loadBotControlUsers() {
   try {
     const data = await api('/api/admin/users');
     const users = Array.isArray(data.users) ? data.users : [];
-    // Admin Utama paling atas, lalu admin biasa, lalu member — tiap kelompok diurutkan menurut nama tampilan.
-    const sorted = [...users].sort((a, b) => {
-      const rank = (item) => (item.isMainAdmin ? 0 : item.role === 'admin' ? 1 : 2);
-      return rank(a) - rank(b) || String(a.displayName || a.username || '').localeCompare(String(b.displayName || b.username || ''), 'id');
-    });
+    // Pemisah Admin dan Member seperti halaman Member, dan di tiap kelompok
+    // bot yang jalan dengan runtime terbaru paling atas (realtime, ikut
+    // diperbarui tiap poll 15 detik) — urutan yang sama dipakai halaman
+    // Member lewat sortAdminUsersByRuntime.
+    const groups = [
+      { key: 'admin', title: 'Admin', users: sortAdminUsersByRuntime(users.filter((user) => user.role === 'admin')) },
+      { key: 'member', title: 'Member', users: sortAdminUsersByRuntime(users.filter((user) => user.role !== 'admin')) },
+    ];
     list.replaceChildren();
-    for (const user of sorted) list.append(buildBotControlCard(user));
-    if (sorted.length === 0) {
+    for (const group of groups) {
+      if (!group.users.length) continue;
+      const groupSection = document.createElement('section');
+      groupSection.className = 'member-account-group';
+      groupSection.setAttribute('aria-label', `${group.title}, ${group.users.length} akun`);
+      const groupHeading = document.createElement('div');
+      groupHeading.className = 'member-account-group-heading';
+      const groupTitle = document.createElement('h3');
+      groupTitle.textContent = group.title;
+      const groupCount = document.createElement('span');
+      groupCount.textContent = `${group.users.length} akun`;
+      groupHeading.append(groupTitle, groupCount);
+      groupSection.append(groupHeading);
+      for (const user of group.users) groupSection.append(buildBotControlCard(user));
+      list.append(groupSection);
+    }
+    if (users.length === 0) {
       const empty = document.createElement('p');
       empty.className = 'member-list-empty';
       empty.textContent = 'Belum ada akun terdaftar.';

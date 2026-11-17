@@ -44,7 +44,7 @@ async function login(base, identifier, password) {
   return { ...result, cookie: result.cookie };
 }
 
-test('admin dapat mengatur mode dan preferensi story member; Admin Utama tidak dapat diubah siapa pun', { timeout: 30_000 }, async () => {
+test('admin dapat mengatur mode dan preferensi story member dan admin biasa; Admin Utama hanya bisa diatur oleh dirinya sendiri', { timeout: 30_000 }, async () => {
   const temp = await mkdtemp(path.join(os.tmpdir(), 'readsw-botcontrol-settings-test-'));
   const root = path.join(temp, 'project');
   const dataDir = path.join(root, 'runtime-data');
@@ -114,9 +114,10 @@ test('admin dapat mengatur mode dan preferensi story member; Admin Utama tidak d
     assert.equal(mainTarget.status, 400);
     assert.match(mainTarget.payload.error, /Admin Utama tidak dapat diubah/i);
 
-    // Admin biasa tidak bisa mengatur bot admin biasa lain: 400.
+    // Admin biasa boleh mengatur bot sesama admin biasa: 200.
     const adminTarget = await jsonRequest(base, '/api/admin/users/bot-settings', { method: 'PUT', cookie: adminLogin.cookie, body: settingsBody(adminId) });
-    assert.equal(adminTarget.status, 400);
+    assert.equal(adminTarget.status, 200);
+    assert.equal(adminTarget.payload.bot.mode, 'readonly_readsw');
 
     // Mode tidak valid: 400.
     const badMode = await jsonRequest(base, '/api/admin/users/bot-settings', { method: 'PUT', cookie: mainLogin.cookie, body: settingsBody(memberId, { mode: 'semua' }) });
@@ -148,21 +149,35 @@ test('admin dapat mengatur mode dan preferensi story member; Admin Utama tidak d
     assert.equal(adminSaved.payload.bot.online24, false);
     assert.equal(adminSaved.payload.bot.storySettings.autoReaction, false);
 
+    // Admin Utama boleh mengatur botnya sendiri: 200.
+    const selfSaved = await jsonRequest(base, '/api/admin/users/bot-settings', { method: 'PUT', cookie: mainLogin.cookie, body: settingsBody(mainId, { mode: 'readonly', online24: false, storySettings: { autoReaction: false, delayMinSeconds: 3, delayMaxSeconds: 12, randomDelay: true, emojiPoolVersion: 2, emojiOptions: ['💚'], emojiPool: ['💚'] } }) });
+    assert.equal(selfSaved.status, 200);
+    assert.equal(selfSaved.payload.bot.mode, 'readonly');
+    assert.equal(selfSaved.payload.bot.storySettings.delayMinSeconds, 3);
+
     // Pengaturan tersimpan di store dan tercatat di audit.
     const store = JSON.parse(await readFile(path.join(dataDir, 'store.json'), 'utf8'));
     const memberBot = (store.bots || []).find((bot) => bot.userId === memberId);
     assert.equal(memberBot?.mode, 'readonly');
     assert.equal(memberBot?.storySettings.delayMaxSeconds, 20);
     const updates = (store.adminAudit || []).filter((entry) => entry.action === 'bot_settings_update');
-    assert.equal(updates.length, 2);
-    assert.deepEqual(updates.map((entry) => entry.targetId).sort(), [memberId, memberId].sort());
+    assert.equal(updates.length, 4);
+    assert.deepEqual(updates.map((entry) => entry.targetId).sort(), [memberId, memberId, adminId, mainId].sort());
+
+    // Perubahan juga tersimpan realtime ke cermin DATA_AKUN akun itu
+    // (DATA_AKUN hidup di root proyek, bukan di dalam folder data).
+    const memberMirror = JSON.parse(await readFile(path.join(root, 'DATA_AKUN', 'MEMBER', 'fixturemember', 'bot.json'), 'utf8'));
+    assert.equal(memberMirror.mode, 'readonly');
+    assert.equal(memberMirror.storySettings.delayMaxSeconds, 20);
 
     // Daftar admin memuat botSettings hanya untuk target yang bisa dikelola.
     const users = await jsonRequest(base, '/api/admin/users', { cookie: adminLogin.cookie });
     assert.equal(users.status, 200);
     const mainEntry = users.payload.users.find((entry) => entry.id === mainId);
+    const adminEntry = users.payload.users.find((entry) => entry.id === adminId);
     const memberEntry = users.payload.users.find((entry) => entry.id === memberId);
     assert.equal(mainEntry.botSettings, null);
+    assert.equal(adminEntry.botSettings.mode, 'readonly_readsw');
     assert.equal(memberEntry.botSettings.mode, 'readonly');
     assert.equal(memberEntry.botSettings.online24, false);
     assert.equal(memberEntry.botSettings.storySettings.delayMinSeconds, 1);
@@ -172,7 +187,7 @@ test('admin dapat mengatur mode dan preferensi story member; Admin Utama tidak d
   }
 });
 
-test('admin dapat menghapus sesi WhatsApp member; Admin Utama tidak dapat dihapus siapa pun', { timeout: 30_000 }, async () => {
+test('admin dapat menghapus sesi WhatsApp member dan admin biasa; Admin Utama hanya bisa dihapus sesinya oleh dirinya sendiri', { timeout: 30_000 }, async () => {
   const temp = await mkdtemp(path.join(os.tmpdir(), 'readsw-botcontrol-route-test-'));
   const root = path.join(temp, 'project');
   const dataDir = path.join(root, 'runtime-data');
@@ -255,23 +270,35 @@ test('admin dapat menghapus sesi WhatsApp member; Admin Utama tidak dapat dihapu
     assert.equal(mainTarget.status, 400);
     assert.match(mainTarget.payload.error, /Admin Utama tidak dapat diubah/i);
 
-    // Admin biasa tidak bisa menghapus sesi admin biasa lain: 400.
+    // Admin biasa boleh menghapus sesi sesama admin biasa: 200.
     const adminTarget = await jsonRequest(base, '/api/admin/users/session/delete', {
       method: 'POST', cookie: adminLogin.cookie, body: { userId: adminId, confirm: true },
     });
-    assert.equal(adminTarget.status, 400);
+    assert.equal(adminTarget.status, 200);
+    assert.equal(adminTarget.payload.ok, true);
 
-    // Admin Utama pun tidak bisa menghapus sesinya sendiri lewat endpoint ini: 400.
+    // Admin Utama boleh menghapus sesinya sendiri: 200.
     const selfTarget = await jsonRequest(base, '/api/admin/users/session/delete', {
       method: 'POST', cookie: mainLogin.cookie, body: { userId: mainId, confirm: true },
     });
-    assert.equal(selfTarget.status, 400);
+    assert.equal(selfTarget.status, 200);
+    assert.equal(selfTarget.payload.ok, true);
 
     // Aturan yang sama berlaku untuk kontrol bot: admin biasa tidak bisa start bot Admin Utama.
     const mainBot = await jsonRequest(base, '/api/admin/users/bot', {
       method: 'POST', cookie: adminLogin.cookie, body: { userId: mainId, action: 'start', confirmActivity: true },
     });
     assert.equal(mainBot.status, 400);
+
+    // Tetapi Admin Utama boleh mematikan botnya sendiri, dan admin biasa boleh mematikan bot sesama admin biasa.
+    const selfStop = await jsonRequest(base, '/api/admin/users/bot', {
+      method: 'POST', cookie: mainLogin.cookie, body: { userId: mainId, action: 'stop' },
+    });
+    assert.equal(selfStop.status, 200);
+    const adminStop = await jsonRequest(base, '/api/admin/users/bot', {
+      method: 'POST', cookie: adminLogin.cookie, body: { userId: adminId, action: 'stop' },
+    });
+    assert.equal(adminStop.status, 200);
 
     // Admin Utama boleh menghapus sesi admin biasa: 200.
     const adminDeleted = await jsonRequest(base, '/api/admin/users/session/delete', {
@@ -287,13 +314,13 @@ test('admin dapat menghapus sesi WhatsApp member; Admin Utama tidak dapat dihapu
     assert.equal(memberDeleted.status, 200);
     assert.equal(memberDeleted.payload.ok, true);
 
-    // Audit tercatat untuk kedua penghapusan.
+    // Audit tercatat untuk keempat penghapusan.
     const users = await jsonRequest(base, '/api/admin/users', { cookie: mainLogin.cookie });
     assert.equal(users.status, 200);
     const store = JSON.parse(await readFile(path.join(dataDir, 'store.json'), 'utf8'));
     const deletions = (store.adminAudit || []).filter((entry) => entry.action === 'bot_session_delete');
-    assert.equal(deletions.length, 2);
-    assert.deepEqual(deletions.map((entry) => entry.targetId).sort(), [adminId, memberId].sort());
+    assert.equal(deletions.length, 4);
+    assert.deepEqual(deletions.map((entry) => entry.targetId).sort(), [adminId, mainId, adminId, memberId].sort());
   } finally {
     if (child && child.exitCode === null) child.kill('SIGTERM');
     await rm(temp, { recursive: true, force: true });

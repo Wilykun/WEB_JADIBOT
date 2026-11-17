@@ -8,7 +8,7 @@ import { promisify } from 'node:util';
 import { createPairingManager, maskedEmail, normalizePairingInput, PairingError } from './pairing-manager.js';
 import { sanitizeStoryLogDetails } from './story-log.js';
 import { readAvatarUpload } from './avatar-upload.js';
-import { BANNED_LOGIN_NOTICE, DELETED_LOGIN_NOTICE, isBannedAccount, isMainAdminUser, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
+import { BANNED_LOGIN_NOTICE, DELETED_LOGIN_NOTICE, botControlPolicyError, isBannedAccount, isMainAdminUser, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
 import { BackupArchiveError, createEncryptedBackup, createPlainBackupZip, decryptEncryptedBackup, MAX_ARCHIVE_BYTES, MAX_PLAINTEXT_BYTES } from './admin-backup.js';
 import { acquireRestoreLock } from './session-lock.js';
 import {
@@ -2272,7 +2272,7 @@ async function handleApi(req, res, url) {
     const body = await readJson(req);
     const targetId = String(body.userId || '').slice(0, 128);
     const target = store.users.find((item) => item.id === targetId);
-    const permissionError = memberAdminPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
+    const permissionError = botControlPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
     if (permissionError) return sendError(res, permissionError.status, permissionError.message);
     const action = String(body.action || '');
     if (!['start', 'restart', 'stop'].includes(action)) return sendError(res, 400, 'Aksi bot tidak dikenal.');
@@ -2280,7 +2280,7 @@ async function handleApi(req, res, url) {
     try {
       return await withMemberLifecycleLock(targetId, async () => {
         const freshTarget = store.users.find((item) => item.id === targetId);
-        const currentPermissionError = memberAdminPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
+        const currentPermissionError = botControlPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
         if (currentPermissionError) return sendError(res, currentPermissionError.status, currentPermissionError.message);
         if (isBannedAccount(freshTarget) && action !== 'stop') return sendError(res, 409, 'Akun member sedang diblokir. Buka blokir dahulu sebelum menjalankan bot.');
         const current = pairingManager.getState(targetId);
@@ -2331,13 +2331,13 @@ async function handleApi(req, res, url) {
     const body = await readJson(req);
     const targetId = String(body.userId || '').slice(0, 128);
     const target = store.users.find((item) => item.id === targetId);
-    const permissionError = memberAdminPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
+    const permissionError = botControlPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
     if (permissionError) return sendError(res, permissionError.status, permissionError.message);
     if (body.confirm !== true) return sendError(res, 400, 'Konfirmasi hapus sesi diperlukan.');
     try {
       return await withMemberLifecycleLock(targetId, async () => {
         const freshTarget = store.users.find((item) => item.id === targetId);
-        const currentPermissionError = memberAdminPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
+        const currentPermissionError = botControlPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
         if (currentPermissionError) return sendError(res, currentPermissionError.status, currentPermissionError.message);
         await pairingManager.deleteSession(targetId);
         await mutate((next) => {
@@ -2360,7 +2360,7 @@ async function handleApi(req, res, url) {
     const body = await readJson(req);
     const targetId = String(body.userId || '').slice(0, 128);
     const target = store.users.find((item) => item.id === targetId);
-    const permissionError = memberAdminPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
+    const permissionError = botControlPolicyError(user, target, process.env.BOOTSTRAP_ADMIN_USERNAME);
     if (permissionError) return sendError(res, permissionError.status, permissionError.message);
     if (!String(body.label || '').trim()) {
       const existing = botForUser(targetId);
@@ -2370,7 +2370,7 @@ async function handleApi(req, res, url) {
     if (input.error) return sendError(res, 400, input.error);
     return await withMemberLifecycleLock(targetId, async () => {
       const freshTarget = store.users.find((item) => item.id === targetId);
-      const currentPermissionError = memberAdminPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
+      const currentPermissionError = botControlPolicyError(user, freshTarget, process.env.BOOTSTRAP_ADMIN_USERNAME);
       if (currentPermissionError) return sendError(res, currentPermissionError.status, currentPermissionError.message);
       if (isBannedAccount(freshTarget)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true });
       const bot = await mutate((next) => {
@@ -2558,7 +2558,7 @@ async function handleApi(req, res, url) {
         workerStartedAt: pairing?.workerStartedAt || null,
         botAutoStart: (store.bots || []).some((bot) => bot.userId === item.id && bot.autoStart === true),
         botSettings: (() => {
-          if (memberAdminPolicyError(user, item, process.env.BOOTSTRAP_ADMIN_USERNAME)) return null;
+          if (botControlPolicyError(user, item, process.env.BOOTSTRAP_ADMIN_USERNAME)) return null;
           const bot = botForUser(item.id);
           if (!bot) return null;
           const mode = bot.mode === 'online24' ? 'readonly' : bot.mode;
