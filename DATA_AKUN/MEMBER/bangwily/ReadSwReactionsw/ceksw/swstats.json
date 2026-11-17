@@ -78,18 +78,18 @@
     }
   },
   "_emojiStats": {
-    "🍕": 15,
-    "🐸": 19,
-    "🦄": 20,
-    "🐲": 16,
-    "🦓": 17,
+    "🍕": 16,
+    "🐸": 22,
+    "🦄": 22,
+    "🐲": 17,
+    "🦓": 19,
     "🐼": 21,
     "🌭": 18,
-    "💚": 14,
-    "🍟": 14,
+    "💚": 16,
+    "🍟": 16,
     "🍔": 12,
     "🐔": 14,
-    "🐴": 10
+    "🐴": 13
   },
   "6282239841068": {
     "name": "yaya",
@@ -177,32 +177,16 @@
     "name": "xyrroe",
     "number": "6285649093224",
     "jid": "6285649093224@s.whatsapp.net",
-    "reads": 6,
-    "reactions": 6,
-    "lastSeen": "2026-11-16T03:02:23.112Z",
+    "reads": 7,
+    "reactions": 7,
+    "lastSeen": "2026-11-17T04:41:54.493Z",
     "activeSW": {
-      "AC409E84495684974F0E8FEED89015BA": {
-        "at": 1794740973354,
-        "reacted": true
-      },
-      "ACA1F8A33CF143F8D9546417AAF2BEF5": {
-        "at": 1794755405090,
-        "reacted": true
-      },
-      "AC5573697CF1D8D44A25A9350250B3D4": {
-        "at": 1794782893782,
-        "reacted": true
-      },
-      "ACBE1FBDC5FCBB58CC2000FE05900853": {
-        "at": 1794783029334,
-        "reacted": true
-      },
-      "ACA7BAD5A87D811239309E48CE804A00": {
-        "at": 1794796469224,
-        "reacted": true
-      },
       "ACB81D5117158D8FC97BF5BF6B631BDD": {
         "at": 1794798143112,
+        "reacted": true
+      },
+      "AC09FE12BE5111EFCD210B8D0F095E59": {
+        "at": 1794890514493,
         "reacted": true
       }
     }
@@ -413,28 +397,24 @@
     "name": "Farid",
     "number": "6285394015819",
     "jid": "6285394015819@s.whatsapp.net",
-    "reads": 5,
-    "reactions": 5,
-    "lastSeen": "2026-11-16T12:17:36.682Z",
+    "reads": 7,
+    "reactions": 7,
+    "lastSeen": "2026-11-17T03:43:37.900Z",
     "activeSW": {
-      "ACCB70C90E91B6E0182F1E47D98FD65E": {
-        "at": 1794744259954,
-        "reacted": true
-      },
-      "ACF242057D35DA118089C4D238CF3952": {
-        "at": 1794744302938,
-        "reacted": true
-      },
-      "ACFE1C6E59456163A9FCB674070B8D9B": {
-        "at": 1794744380421,
-        "reacted": true
-      },
       "AC90AC6E3754EA423B2660877284158B": {
         "at": 1794828751333,
         "reacted": true
       },
       "ACF524C57C5D08318A4FE07F5CCA2DB6": {
         "at": 1794831456682,
+        "reacted": true
+      },
+      "AC73554B4666E021F066B42D4E7742C2": {
+        "at": 1794887006318,
+        "reacted": true
+      },
+      "ACD1112D8A894DD415FCD6FED2B70DED": {
+        "at": 1794887017900,
         "reacted": true
       }
     }
@@ -475,42 +455,10 @@
     "name": "STCZZ",
     "number": "6282252134009",
     "jid": "6282252134009@s.whatsapp.net",
-    "reads": 12,
-    "reactions": 12,
-    "lastSeen": "2026-11-16T12:00:46.511Z",
+    "reads": 17,
+    "reactions": 17,
+    "lastSeen": "2026-11-17T05:02:03.457Z",
     "activeSW": {
-      "AC6ED6137D78C59301450FFD3471B8A8": {
-        "at": 1794745469788,
-        "reacted": true
-      },
-      "ACDC7084B1CDEFC0421A7BD47CE9A44A": {
-        "at": 1794783172254,
-        "reacted": true
-      },
-      "AC618443E16A9F589195EFA779115772": {
-        "at": 1794783178044,
-        "reacted": true
-      },
-      "AC1EEC62C11FB1D70931DF57EB3FAE19": {
-        "at": 1794783200271,
-        "reacted": true
-      },
-      "AC5A9C8C466ADA75558EDEB2367889C9": {
-        "at": 1794783201310,
-        "reacted": true
-      },
-      "ACCBB85DF611228B99C72DBE186874D3": {
-        "at": 1794783204094,
-        "reacted": true
-      },
-      "AC6CA2A2E539F7DADC055DDC3A70ED81": {
-        "at": 1794783467607,
-        "reacted": true
-      },
-      "AC50192356FB71AB1CDAAEE78C0CCD0C": {
-        "at": 1794786851584,
-        "reacted": true
-      },
       "ACB4FE82B079BBC36D9C90DEBFFC961C": {
         "at": 1794827998773,
         "reacted": true
@@ -525,6 +473,26 @@
       },
       "AC234D6BED6B1ED53DD277AE96D56367": {
         "at": 1794830446511,
+        "reacted": true
+      },
+      "AC22C26293380E8991FA01324A6DCD60": {
+        "at": 1794887083847,
+        "reacted": true
+      },
+      "AC13BBB6078C0E94ECF1CBE280EE7ED6": {
+        "at": 1794887089878,
+        "reacted": true
+      },
+      "AC1555DF9C082FB2CC3B37A88467B09D": {
+        "at": 1794891712972,
+        "reacted": true
+      },
+      "ACDE1A7F24CC590469DDD9078E27BCD9": {
+        "at": 1794891721215,
+        "reacted": true
+      },
+      "ACB1AE573907A84615EE4DCD9D0FA962": {
+        "at": 1794891723457,
         "reacted": true
       }
     }
@@ -583,18 +551,10 @@
     "name": "munawirahmadr",
     "number": "6282277708591",
     "jid": "6282277708591@s.whatsapp.net",
-    "reads": 6,
-    "reactions": 6,
-    "lastSeen": "2026-11-16T11:46:01.146Z",
+    "reads": 7,
+    "reactions": 7,
+    "lastSeen": "2026-11-17T03:41:28.343Z",
     "activeSW": {
-      "ACF1BF4601CB4AF5945613B15D20835C": {
-        "at": 1794747771581,
-        "reacted": true
-      },
-      "AC8C53DD740E93873B439C1837191486": {
-        "at": 1794790897784,
-        "reacted": true
-      },
       "ACA9C4102C1E9FE492E91BF7FCECAD27": {
         "at": 1794797683589,
         "reacted": true
@@ -609,6 +569,10 @@
       },
       "ACA6A4F17FDEADDB5C9FB9651AC6442B": {
         "at": 1794829561146,
+        "reacted": true
+      },
+      "AC7925C4FB524325FBF2DEB6F6A57D38": {
+        "at": 1794886888343,
         "reacted": true
       }
     }
@@ -643,16 +607,16 @@
     "name": "aku LUI",
     "number": "6283182665936",
     "jid": "6283182665936@s.whatsapp.net",
-    "reads": 2,
-    "reactions": 2,
-    "lastSeen": "2026-11-16T03:01:59.247Z",
+    "reads": 3,
+    "reactions": 3,
+    "lastSeen": "2026-11-17T04:02:46.000Z",
     "activeSW": {
-      "AC5C776E446DDA45A418B4A4A2711D05": {
-        "at": 1794748985742,
-        "reacted": true
-      },
       "AC0790430BFC464BB2E5B0B27D58AA63": {
         "at": 1794798119247,
+        "reacted": true
+      },
+      "AC978C7B26DB2816335000619F2FCA5C": {
+        "at": 1794888166000,
         "reacted": true
       }
     }
@@ -835,20 +799,20 @@
     "name": "Zacky Ariansyah",
     "number": "6289678522775",
     "jid": "6289678522775@s.whatsapp.net",
-    "reads": 3,
-    "reactions": 3,
-    "lastSeen": "2026-11-16T07:36:42.330Z",
+    "reads": 4,
+    "reactions": 4,
+    "lastSeen": "2026-11-17T03:43:34.827Z",
     "activeSW": {
-      "AC54D45BA785BA7BB371463236DBCE95": {
-        "at": 1794756044516,
-        "reacted": true
-      },
       "ACCBE9863D0D48B9D0332D7286FC39D0": {
         "at": 1794798043551,
         "reacted": true
       },
       "AC4DF9ABFEA24BE951C9F9BEDDC153C6": {
         "at": 1794814602330,
+        "reacted": true
+      },
+      "AC75A8D8489C87E57CFD63C935E27CC3": {
+        "at": 1794887014827,
         "reacted": true
       }
     }
@@ -935,38 +899,10 @@
     "name": "Wily",
     "number": "6289688206739",
     "jid": "6289688206739@s.whatsapp.net",
-    "reads": 12,
-    "reactions": 12,
-    "lastSeen": "2026-11-16T10:31:01.120Z",
+    "reads": 14,
+    "reactions": 14,
+    "lastSeen": "2026-11-17T04:43:13.534Z",
     "activeSW": {
-      "A5CD21E2257F08132C1689E4090A88FC": {
-        "at": 1794787078576,
-        "reacted": true
-      },
-      "A5C3DF9801FC677DD24D05377BA219D5": {
-        "at": 1794787104770,
-        "reacted": true
-      },
-      "A56AFFFC2A8E36063D6C168E064530E3": {
-        "at": 1794787111349,
-        "reacted": true
-      },
-      "A594C3FDC916AFCF03459FEC8986DF87": {
-        "at": 1794787112433,
-        "reacted": true
-      },
-      "A540049D3489CCAC5660EA52E057CDEB": {
-        "at": 1794787113035,
-        "reacted": true
-      },
-      "A50CAAD6A16012307D9BCE7B4A722FF1": {
-        "at": 1794787119682,
-        "reacted": true
-      },
-      "A517D0A77E7B26B2A73E29B6020FBF8A": {
-        "at": 1794787642568,
-        "reacted": true
-      },
       "A5C9ACCA476E133504E9D7A943C91A17": {
         "at": 1794825047966,
         "reacted": true
@@ -985,6 +921,14 @@
       },
       "A5A75A78ABDF026923935134FA972F30": {
         "at": 1794825061120,
+        "reacted": true
+      },
+      "A529F1D6B67BD36C24E2EE9B6E9A8E01": {
+        "at": 1794890589837,
+        "reacted": true
+      },
+      "A544E1393A8C3FC7A7F75D1AE7BFA28F": {
+        "at": 1794890593534,
         "reacted": true
       }
     }
@@ -1211,12 +1155,20 @@
     "name": "Rejaanimm nonchalant 1975",
     "number": "62895323007900",
     "jid": "62895323007900@s.whatsapp.net",
-    "reads": 1,
-    "reactions": 1,
-    "lastSeen": "2026-11-16T11:20:02.758Z",
+    "reads": 3,
+    "reactions": 3,
+    "lastSeen": "2026-11-17T04:03:00.667Z",
     "activeSW": {
       "ACF582E132E52EFD21439CBA9C2B1B71": {
         "at": 1794828002758,
+        "reacted": true
+      },
+      "AC9503B52F8E76D9ABCEC85EBC307D42": {
+        "at": 1794888167755,
+        "reacted": true
+      },
+      "AC15DD68F69615F9D9508104BD784FAA": {
+        "at": 1794888180667,
         "reacted": true
       }
     }
@@ -1235,6 +1187,20 @@
       },
       "ACB2D19340A130AC7C2BC6551D838D6C": {
         "at": 1794831293727,
+        "reacted": true
+      }
+    }
+  },
+  "6281227315377": {
+    "name": "nnnnnnn.",
+    "number": "6281227315377",
+    "jid": "6281227315377@s.whatsapp.net",
+    "reads": 1,
+    "reactions": 1,
+    "lastSeen": "2026-11-17T03:43:42.582Z",
+    "activeSW": {
+      "AC746FFB253406663BEC919BA929552D": {
+        "at": 1794887022582,
         "reacted": true
       }
     }

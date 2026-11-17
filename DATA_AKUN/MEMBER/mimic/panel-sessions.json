@@ -1,0 +1,21 @@
+{
+  "username": "mimic",
+  "sesiAktif": [
+    {
+      "sid": "4fa1651d",
+      "ip": "103.153.247.218",
+      "device": "Desktop · Windows 10.0 · Chrome 157.0.0.0",
+      "dibuat": "2026-11-17T04:50:04.028Z",
+      "dibuatWIB": "Selasa, 17 November 2026 pukul 11.50.04 WIB",
+      "terakhirAktif": "2026-11-17T05:27:03.692Z",
+      "terakhirAktifWIB": "Selasa, 17 November 2026 pukul 12.27.03 WIB",
+      "berakhir": "2026-11-24T04:50:03.986Z"
+    }
+  ],
+  "loginTerakhir": {
+    "waktu": "2026-11-17T04:50:04.028Z",
+    "waktuWIB": "Selasa, 17 November 2026 pukul 11.50.04 WIB",
+    "ip": "103.153.247.218",
+    "device": "Desktop · Windows 10.0 · Chrome 157.0.0.0"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "AC449D6FAD4D076F1257C5F06FC2E1AB": {
+    "id": "AC449D6FAD4D076F1257C5F06FC2E1AB",
+    "sender": "6283895071110@s.whatsapp.net",
+    "number": "6283895071110",
+    "storyJid": "6283895071110@s.whatsapp.net",
+    "resolvedPn": "6283895071110@s.whatsapp.net",
+    "name": "Kitsune 🦊",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC449D6FAD4D076F1257C5F06FC2E1AB",
+      "participant": "191470212526234@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC449D6FAD4D076F1257C5F06FC2E1AB",
+      "participant": "191470212526234@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191470212526234@lid",
+      "6283895071110@s.whatsapp.net"
+    ],
+    "contactHash": "5a6b60aa79061f3f1f9c900db508c2821b20d3efad3b7485cb01eeb7e1175a94",
+    "arrivedAt": "2026-11-17T04:58:18.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-17T05:01:53.579Z",
+    "lastError": null,
+    "updatedAt": "2026-11-17T05:02:07.277Z",
+    "readAt": "2026-11-17T05:02:07.273Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-17T05:02:07.273Z"
+  }
+}

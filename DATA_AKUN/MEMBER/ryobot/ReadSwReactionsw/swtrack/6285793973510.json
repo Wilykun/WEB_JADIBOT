@@ -78,5 +78,45 @@
     "readAt": "2026-11-16T10:44:04.787Z",
     "emoji": "💚",
     "reactedAt": "2026-11-16T10:44:04.787Z"
+  },
+  "AC4523FB9BC815C044E7D42F3A7B8B8B": {
+    "id": "AC4523FB9BC815C044E7D42F3A7B8B8B",
+    "sender": "6285793973510@s.whatsapp.net",
+    "number": "6285793973510",
+    "storyJid": "6285793973510@s.whatsapp.net",
+    "resolvedPn": "6285793973510@s.whatsapp.net",
+    "name": "oyon jeyuk puyut",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4523FB9BC815C044E7D42F3A7B8B8B",
+      "participant": "256641777819882@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4523FB9BC815C044E7D42F3A7B8B8B",
+      "participant": "256641777819882@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "256641777819882@lid",
+      "6285793973510@s.whatsapp.net"
+    ],
+    "contactHash": "5bff5b739869cd0aba2a04c2944e9e293cdd604cc9600a825f5ef1d836776702",
+    "arrivedAt": "2026-11-17T03:14:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-17T03:41:20.378Z",
+    "lastError": null,
+    "updatedAt": "2026-11-17T03:41:25.426Z",
+    "readAt": "2026-11-17T03:41:25.338Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-17T03:41:25.338Z"
   }
 }

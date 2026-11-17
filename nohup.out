@@ -1,0 +1,8 @@
+
+> readsw-console@0.2.0 start
+> bash start-ptero.sh
+
+Menjalankan ReadSW Console (Node.js v20.20.0)...
+[Baileys] WhatsApp Web protocol version 2.3000.1043857760.
+[panel] ReadSW Console berjalan pada http://0.0.0.0:3000
+[panel] Sesi WhatsApp dipulihkan per akun; bot worker dikendalikan dari panel akun.

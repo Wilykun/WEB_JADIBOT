@@ -1,124 +1,4 @@
 {
-  "AC6684507C69C28CC51E478D3B2577E6": {
-    "id": "AC6684507C69C28CC51E478D3B2577E6",
-    "sender": "6285126796652@s.whatsapp.net",
-    "number": "6285126796652",
-    "storyJid": "6285126796652@s.whatsapp.net",
-    "resolvedPn": "6285126796652@s.whatsapp.net",
-    "name": "Rara Slebew🍒",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC6684507C69C28CC51E478D3B2577E6",
-      "participant": "221457808421110@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC6684507C69C28CC51E478D3B2577E6",
-      "participant": "221457808421110@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "221457808421110@lid",
-      "6285126796652@s.whatsapp.net"
-    ],
-    "contactHash": "27a819a16a199420764f80baf446de9a9490a293c87f10f4874a7cb1150ef67f",
-    "arrivedAt": "2026-11-15T16:52:04.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-15T16:52:04.906Z",
-    "lastError": null,
-    "updatedAt": "2026-11-15T16:52:07.798Z",
-    "readAt": "2026-11-15T16:52:07.790Z",
-    "emoji": "💚",
-    "reactedAt": "2026-11-15T16:52:07.790Z"
-  },
-  "ACF3B18EF615E3591E0E94F397C85A6C": {
-    "id": "ACF3B18EF615E3591E0E94F397C85A6C",
-    "sender": "6285126796652@s.whatsapp.net",
-    "number": "6285126796652",
-    "storyJid": "6285126796652@s.whatsapp.net",
-    "resolvedPn": "6285126796652@s.whatsapp.net",
-    "name": "Rara Slebew🍒",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACF3B18EF615E3591E0E94F397C85A6C",
-      "participant": "221457808421110@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACF3B18EF615E3591E0E94F397C85A6C",
-      "participant": "221457808421110@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "221457808421110@lid",
-      "6285126796652@s.whatsapp.net"
-    ],
-    "contactHash": "27a819a16a199420764f80baf446de9a9490a293c87f10f4874a7cb1150ef67f",
-    "arrivedAt": "2026-11-16T02:48:44.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T02:48:45.123Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T02:48:56.506Z",
-    "readAt": "2026-11-16T02:48:56.501Z",
-    "emoji": "💚",
-    "reactedAt": "2026-11-16T02:48:56.501Z"
-  },
-  "AC893BA67718C70CB0CA8CCE393B0644": {
-    "id": "AC893BA67718C70CB0CA8CCE393B0644",
-    "sender": "6285126796652@s.whatsapp.net",
-    "number": "6285126796652",
-    "storyJid": "6285126796652@s.whatsapp.net",
-    "resolvedPn": "6285126796652@s.whatsapp.net",
-    "name": "Rara Slebew🍒",
-    "type": "videoMessage",
-    "contentType": "videoMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC893BA67718C70CB0CA8CCE393B0644",
-      "participant": "221457808421110@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC893BA67718C70CB0CA8CCE393B0644",
-      "participant": "221457808421110@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "221457808421110@lid",
-      "6285126796652@s.whatsapp.net"
-    ],
-    "contactHash": "27a819a16a199420764f80baf446de9a9490a293c87f10f4874a7cb1150ef67f",
-    "arrivedAt": "2026-11-16T02:49:19.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T02:49:19.496Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T02:49:31.990Z",
-    "readAt": "2026-11-16T02:49:31.989Z",
-    "emoji": "💚",
-    "reactedAt": "2026-11-16T02:49:31.989Z"
-  },
   "ACE3664EA69C085BEF71092C4DD85AF7": {
     "id": "ACE3664EA69C085BEF71092C4DD85AF7",
     "sender": "6285126796652@s.whatsapp.net",
@@ -278,5 +158,45 @@
     "readAt": "2026-11-16T05:22:28.887Z",
     "emoji": "💚",
     "reactedAt": "2026-11-16T05:22:28.887Z"
+  },
+  "AC18B9AFE1890CB57AA185732AEBC538": {
+    "id": "AC18B9AFE1890CB57AA185732AEBC538",
+    "sender": "6285126796652@s.whatsapp.net",
+    "number": "6285126796652",
+    "storyJid": "6285126796652@s.whatsapp.net",
+    "resolvedPn": "6285126796652@s.whatsapp.net",
+    "name": "Rara Slebew🍒",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC18B9AFE1890CB57AA185732AEBC538",
+      "participant": "221457808421110@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC18B9AFE1890CB57AA185732AEBC538",
+      "participant": "221457808421110@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "221457808421110@lid",
+      "6285126796652@s.whatsapp.net"
+    ],
+    "contactHash": "27a819a16a199420764f80baf446de9a9490a293c87f10f4874a7cb1150ef67f",
+    "arrivedAt": "2026-11-17T04:03:07.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-17T04:03:12.042Z",
+    "lastError": null,
+    "updatedAt": "2026-11-17T04:03:19.356Z",
+    "readAt": "2026-11-17T04:03:19.338Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-17T04:03:19.338Z"
   }
 }

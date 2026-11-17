@@ -1,0 +1,42 @@
+{
+  "ACC273D9CB9FBFFE18285B45EADA9C7E": {
+    "id": "ACC273D9CB9FBFFE18285B45EADA9C7E",
+    "sender": "6282251762263@s.whatsapp.net",
+    "number": "6282251762263",
+    "storyJid": "6282251762263@s.whatsapp.net",
+    "resolvedPn": "6282251762263@s.whatsapp.net",
+    "name": "James Walker",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC273D9CB9FBFFE18285B45EADA9C7E",
+      "participant": "10432693678192@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC273D9CB9FBFFE18285B45EADA9C7E",
+      "participant": "10432693678192@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "10432693678192@lid",
+      "6282251762263@s.whatsapp.net"
+    ],
+    "contactHash": "ea72ff9096ff513d40337b55e4e66f663cfa263c3914bb99b985bdfe435e9d11",
+    "arrivedAt": "2026-11-17T02:21:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-17T03:40:37.022Z",
+    "lastError": null,
+    "updatedAt": "2026-11-17T03:40:51.792Z",
+    "readAt": "2026-11-17T03:40:51.791Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-17T03:40:51.791Z"
+  }
+}

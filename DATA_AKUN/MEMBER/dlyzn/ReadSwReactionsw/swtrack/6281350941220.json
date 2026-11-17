@@ -1,1 +1,42 @@
-{}
+{
+  "ACDDB50F6579B5E614D9B80E1B82F7B6": {
+    "id": "ACDDB50F6579B5E614D9B80E1B82F7B6",
+    "sender": "6281350941220@s.whatsapp.net",
+    "number": "6281350941220",
+    "storyJid": "6281350941220@s.whatsapp.net",
+    "resolvedPn": "6281350941220@s.whatsapp.net",
+    "name": "Tiara Ara",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDDB50F6579B5E614D9B80E1B82F7B6",
+      "participant": "148503091241026@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDDB50F6579B5E614D9B80E1B82F7B6",
+      "participant": "148503091241026@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "148503091241026@lid",
+      "6281350941220@s.whatsapp.net"
+    ],
+    "contactHash": "5e3bcdc8479a1e739f64471ee1532e4aab7f0b77f63c509954d6ac77a7124847",
+    "arrivedAt": "2026-11-17T04:06:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-17T04:09:17.531Z",
+    "lastError": null,
+    "updatedAt": "2026-11-17T04:09:20.214Z",
+    "readAt": "2026-11-17T04:09:20.214Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-17T04:09:20.214Z"
+  }
+}

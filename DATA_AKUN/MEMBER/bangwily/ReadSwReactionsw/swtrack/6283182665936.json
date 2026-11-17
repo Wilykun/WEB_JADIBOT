@@ -1,1 +1,42 @@
-{}
+{
+  "AC978C7B26DB2816335000619F2FCA5C": {
+    "id": "AC978C7B26DB2816335000619F2FCA5C",
+    "sender": "6283182665936@s.whatsapp.net",
+    "number": "6283182665936",
+    "storyJid": "6283182665936@s.whatsapp.net",
+    "resolvedPn": "6283182665936@s.whatsapp.net",
+    "name": "aku LUI",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC978C7B26DB2816335000619F2FCA5C",
+      "participant": "165536713416760@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC978C7B26DB2816335000619F2FCA5C",
+      "participant": "165536713416760@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "165536713416760@lid",
+      "6283182665936@s.whatsapp.net"
+    ],
+    "contactHash": "4264e9c5ffcd2f7e079ba566681b90ec1aeaf2e5c6ac0fca46c9d0194af6c6aa",
+    "arrivedAt": "2026-11-17T03:56:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-17T04:02:41.299Z",
+    "lastError": null,
+    "updatedAt": "2026-11-17T04:02:45.999Z",
+    "readAt": "2026-11-17T04:02:45.997Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-17T04:02:45.997Z"
+  }
+}

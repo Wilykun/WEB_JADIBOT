@@ -5,3 +5,24 @@ channel = "stable-25_05"
 
 [agent]
 expertMode = true
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "cloudrun"
+
+[deployment.run]
+args = ["sh", "-c", "/nix/store/hkbylipx1iiawqdcjv858p501wv81bpm-bash-interactive-5.3p3/bin/bash $file"]
+
+[workflows]
+
+[[workflows.workflow]]
+name = "Run"
+mode = "sequential"
+author = 18555780
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm start"

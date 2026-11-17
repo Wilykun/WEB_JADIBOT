@@ -1,44 +1,4 @@
 {
-  "AC1C63DB35DF6D1CF45783830C8A382D": {
-    "id": "AC1C63DB35DF6D1CF45783830C8A382D",
-    "sender": "6281527116245@s.whatsapp.net",
-    "number": "6281527116245",
-    "storyJid": "6281527116245@s.whatsapp.net",
-    "resolvedPn": "6281527116245@s.whatsapp.net",
-    "name": "Liu Jing (刘静)",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC1C63DB35DF6D1CF45783830C8A382D",
-      "participant": "273469174468614@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC1C63DB35DF6D1CF45783830C8A382D",
-      "participant": "273469174468614@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "273469174468614@lid",
-      "6281527116245@s.whatsapp.net"
-    ],
-    "contactHash": "420ad6d65bf5c748a79c8aaaf957c065c70c303995eee95aea0b4ea1d384467a",
-    "arrivedAt": "2026-11-16T02:53:31.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T02:53:32.066Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T02:53:34.457Z",
-    "readAt": "2026-11-16T02:53:34.451Z",
-    "emoji": "🦓",
-    "reactedAt": "2026-11-16T02:53:34.451Z"
-  },
   "ACB3BD8110A01D99F875DF879F443752": {
     "id": "ACB3BD8110A01D99F875DF879F443752",
     "sender": "6281527116245@s.whatsapp.net",

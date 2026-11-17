@@ -1,1 +1,122 @@
-{}
+{
+  "AC1B29D8D5C6D52676A4DB51DF8729C6": {
+    "id": "AC1B29D8D5C6D52676A4DB51DF8729C6",
+    "sender": "6281818796407@s.whatsapp.net",
+    "number": "6281818796407",
+    "storyJid": "6281818796407@s.whatsapp.net",
+    "resolvedPn": "6281818796407@s.whatsapp.net",
+    "name": "Siyoon🇦🇱",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1B29D8D5C6D52676A4DB51DF8729C6",
+      "participant": "191658989768704@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1B29D8D5C6D52676A4DB51DF8729C6",
+      "participant": "191658989768704@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191658989768704@lid",
+      "6281818796407@s.whatsapp.net"
+    ],
+    "contactHash": "0074342a0257d2b8c7fc80081ebb78bacbebc450b59883eed6fea98d7d4ed7d1",
+    "arrivedAt": "2026-11-17T03:24:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-17T03:41:05.003Z",
+    "lastError": null,
+    "updatedAt": "2026-11-17T03:41:19.804Z",
+    "readAt": "2026-11-17T03:41:19.803Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-17T03:41:19.803Z"
+  },
+  "AC95228A3E2CFF1CAD6B7126F0C0A459": {
+    "id": "AC95228A3E2CFF1CAD6B7126F0C0A459",
+    "sender": "6281818796407@s.whatsapp.net",
+    "number": "6281818796407",
+    "storyJid": "6281818796407@s.whatsapp.net",
+    "resolvedPn": "6281818796407@s.whatsapp.net",
+    "name": "Siyoon🇦🇱",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC95228A3E2CFF1CAD6B7126F0C0A459",
+      "participant": "191658989768704@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC95228A3E2CFF1CAD6B7126F0C0A459",
+      "participant": "191658989768704@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191658989768704@lid",
+      "6281818796407@s.whatsapp.net"
+    ],
+    "contactHash": "0074342a0257d2b8c7fc80081ebb78bacbebc450b59883eed6fea98d7d4ed7d1",
+    "arrivedAt": "2026-11-17T03:41:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-17T04:03:01.356Z",
+    "lastError": null,
+    "updatedAt": "2026-11-17T04:03:02.841Z",
+    "readAt": "2026-11-17T04:03:02.841Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-17T04:03:02.841Z"
+  },
+  "AC6F70E4611395982550200D22B5D3B7": {
+    "id": "AC6F70E4611395982550200D22B5D3B7",
+    "sender": "6281818796407@s.whatsapp.net",
+    "number": "6281818796407",
+    "storyJid": "6281818796407@s.whatsapp.net",
+    "resolvedPn": "6281818796407@s.whatsapp.net",
+    "name": "Siyoon🇦🇱",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6F70E4611395982550200D22B5D3B7",
+      "participant": "191658989768704@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6F70E4611395982550200D22B5D3B7",
+      "participant": "191658989768704@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191658989768704@lid",
+      "6281818796407@s.whatsapp.net"
+    ],
+    "contactHash": "0074342a0257d2b8c7fc80081ebb78bacbebc450b59883eed6fea98d7d4ed7d1",
+    "arrivedAt": "2026-11-17T04:01:05.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-17T04:03:01.504Z",
+    "lastError": null,
+    "updatedAt": "2026-11-17T04:03:04.397Z",
+    "readAt": "2026-11-17T04:03:04.396Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-17T04:03:04.396Z"
+  }
+}
