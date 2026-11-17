@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-17T14:55:00+07:00",
+  "updatedAt": "2026-11-17T15:15:00+07:00",
   "updates": [
+    {
+      "title": "Peringatan reaksi kini muncul sebagai notifikasi di layar",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "15.15 WIB",
+      "tag": "Tampilan",
+      "description": "Peringatan saat Read Only + ReadSW tidak bisa mengirim reaksi kini tampil sebagai kartu notifikasi di tengah layar — bukan lagi kartu di bawah pengaturan. Kartunya mengikuti desain notifikasi modern: latar gelap, ikon peringatan kuning, tombol 'Tambah emoji' yang langsung mengarahkan ke kolom emoji, dan tombol 'Tutup'; bisa juga ditutup dengan mengetuk latar atau tombol Escape. Sekali ditutup, notifikasi tidak muncul lagi sampai keadaannya hilang lalu muncul kembali."
+    },
     {
       "title": "Peringatan bila ReadSW tidak bisa mengirim reaksi emoji",
       "day": "Selasa, 17 Nov 2026",

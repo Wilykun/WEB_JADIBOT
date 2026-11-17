@@ -202,7 +202,7 @@ function applyStorySettings(settings, mode = selectedMode) {
   reaction.disabled = false;
   const options = Array.isArray(values.emojiOptions) ? values.emojiOptions : values.emojiPool;
   renderEmojiPool(options, Array.isArray(values.emojiPool) ? values.emojiPool : DEFAULT_STORY_SETTINGS.emojiPool);
-  syncStoryEmojiWarning();
+  syncStoryEmojiNotice();
 }
 
 function readStorySettings() {
@@ -217,17 +217,101 @@ function readStorySettings() {
   };
 }
 
-// Peringatan saat mode Read Only + ReadSW tidak bisa mengirim reaksi sama
-// sekali: tidak ada emoji dan reaksi otomatis mati, jadi bot hanya menandai
-// story sebagai dibaca (ReadSW biasa). Di mode Read Only biasa peringatan
-// tidak perlu karena reaksi memang tidak diharapkan di sana.
-function syncStoryEmojiWarning() {
-  const warning = document.querySelector('#story-emoji-warning');
-  if (!warning) return;
-  const pool = document.querySelectorAll('.emoji-choice.selected').length;
-  const reacting = document.querySelector('#story-reaction-enabled')?.checked === true;
-  warning.classList.toggle('hidden', !(selectedMode === 'readonly_readsw' && !reacting && pool === 0));
+// Notifikasi reaksi di layar (overlay di tengah layar, bukan notifikasi bawaan
+// browser dan bukan kartu di bawah pengaturan): muncul saat mode Read Only +
+// ReadSW tidak bisa mengirim reaksi sama sekali — tidak ada emoji dan reaksi
+// otomatis mati, jadi bot hanya menandai story sebagai dibaca (ReadSW biasa).
+// Sekali ditutup, notifikasi tidak muncul lagi sampai keadaannya hilang lalu
+// muncul kembali. Tombol "Tambah emoji" menutup notifikasi lalu mengarahkan
+// ke kolom emoji yang bersangkutan.
+let emojiNoticeDismissed = false;
+let emojiNoticeContext = null;
+// Akun Kontrol Bot yang notifikasinya sudah ditutup selagi keadaannya masih
+// aktif — ditutup per akun supaya admin tidak diganggu berulang kali.
+const botControlEmojiNoticeDismissed = new Set();
+function showEmojiNotice({ title, text, context, addTarget }) {
+  const overlay = document.querySelector('#emoji-notice-overlay');
+  if (!overlay) return;
+  const nextContext = { ...(context || {}), addTarget: addTarget || null };
+  // Notifikasi yang sama sudah tampil: jangan ambil alih fokus pengguna dengan
+  // menampilkannya ulang (misalnya saat daftar Kontrol Bot diperbarui tiap 15 detik).
+  if (!overlay.classList.contains('hidden')
+    && emojiNoticeContext?.kind === nextContext.kind
+    && emojiNoticeContext?.userId === nextContext.userId) return;
+  document.querySelector('#emoji-notice-title').textContent = title;
+  document.querySelector('#emoji-notice-text').textContent = text;
+  emojiNoticeContext = nextContext;
+  overlay.classList.remove('hidden');
+  overlay.querySelector('[data-emoji-notice-add]')?.focus();
 }
+function hideEmojiNotice() {
+  document.querySelector('#emoji-notice-overlay')?.classList.add('hidden');
+  emojiNoticeContext = null;
+}
+function dismissEmojiNotice() {
+  if (emojiNoticeContext?.kind === 'botcontrol' && emojiNoticeContext.userId) {
+    botControlEmojiNoticeDismissed.add(emojiNoticeContext.userId);
+  } else {
+    emojiNoticeDismissed = true;
+  }
+  hideEmojiNotice();
+}
+function syncStoryEmojiNotice() {
+  const active = selectedMode === 'readonly_readsw'
+    && document.querySelector('#story-reaction-enabled')?.checked !== true
+    && document.querySelectorAll('.emoji-choice.selected').length === 0;
+  if (!active) {
+    emojiNoticeDismissed = false;
+    if (emojiNoticeContext?.kind !== 'botcontrol') hideEmojiNotice();
+    return;
+  }
+  if (emojiNoticeDismissed) return;
+  showEmojiNotice({
+    title: 'Reaksi emoji tidak aktif',
+    text: 'Tidak ada emoji dan reaksi otomatis mati — bot hanya menandai story sebagai dibaca, tanpa mengirim reaksi. Tambahkan emoji dan nyalakan reaksi otomatis bila mau ada reaksi.',
+    context: { kind: 'self' },
+    addTarget: document.querySelector('#story-emoji-input'),
+  });
+}
+
+// Membuka kartu Kontrol Bot seorang member (dipakai tombol "Tambah emoji" di
+// notifikasi supaya kolom emoji member itu terlihat dan bisa difokuskan).
+function openBotControlCard(userId) {
+  expandedBotControlUserId = userId;
+  botControlUsersList.querySelectorAll('.member-account-item').forEach((item) => {
+    const button = item.querySelector('[data-botcontrol-toggle]');
+    const panel = item.querySelector('.member-account-details');
+    const isOpen = Boolean(button && button.dataset.userId === userId);
+    button?.setAttribute('aria-expanded', String(isOpen));
+    button?.setAttribute('aria-label', `${isOpen ? 'Tutup' : 'Buka'} kontrol bot @${button?.dataset.username || ''}`);
+    const label = button?.querySelector('.member-account-toggle-label');
+    if (label) label.textContent = isOpen ? 'Tutup kontrol' : 'Kontrol bot';
+    if (panel) panel.hidden = !isOpen;
+    item.classList.toggle('is-open', isOpen);
+  });
+}
+
+document.querySelector('#emoji-notice-overlay')?.addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) dismissEmojiNotice();
+  const closeButton = event.target.closest('[data-emoji-notice-close]');
+  if (closeButton) dismissEmojiNotice();
+  const addButton = event.target.closest('[data-emoji-notice-add]');
+  if (addButton) {
+    // Tangkap konteks dulu: dismissEmojiNotice mengosongkan konteksnya.
+    const target = emojiNoticeContext?.addTarget;
+    const userId = emojiNoticeContext?.userId;
+    const kind = emojiNoticeContext?.kind;
+    dismissEmojiNotice();
+    if (kind === 'botcontrol' && userId) openBotControlCard(userId);
+    if (target && document.contains(target)) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => target.focus({ preventScroll: true }), 250);
+    }
+  }
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !document.querySelector('#emoji-notice-overlay')?.classList.contains('hidden')) dismissEmojiNotice();
+});
 
 function isSingleEmoji(value) {
   const emoji = String(value || '').trim().normalize('NFC');
@@ -1795,10 +1879,23 @@ function syncBotControlSettingsCard(article, draft) {
   }
   const grid = article.querySelector('.botcontrol-emoji-grid');
   if (grid) renderBotControlEmojiGrid(grid, draft);
-  // Peringatan yang sama dengan halaman Fitur Bot: mode ReadSW tanpa emoji
-  // dan tanpa reaksi otomatis berarti bot hanya menandai story sebagai dibaca.
-  const warning = article.querySelector('.botcontrol-emoji-warning');
-  if (warning) warning.classList.toggle('hidden', !(draft.mode === 'readonly_readsw' && !draft.autoReaction && draft.emojiPool.length === 0));
+  // Notifikasi reaksi di layar yang sama dengan halaman Fitur Bot, dengan nama
+  // member-nya supaya admin tahu akun siapa yang dimaksud.
+  const userId = article.querySelector('.botcontrol-settings')?.dataset.userId || '';
+  const username = article.querySelector('[data-botcontrol-toggle]')?.dataset.username || 'member';
+  const noticeActive = draft.mode === 'readonly_readsw' && !draft.autoReaction && draft.emojiPool.length === 0;
+  if (!noticeActive) {
+    botControlEmojiNoticeDismissed.delete(userId);
+    if (emojiNoticeContext?.kind === 'botcontrol' && emojiNoticeContext.userId === userId) hideEmojiNotice();
+    return;
+  }
+  if (botControlEmojiNoticeDismissed.has(userId)) return;
+  showEmojiNotice({
+    title: `Reaksi emoji @${username} tidak aktif`,
+    text: `Akun @${username} tidak punya emoji dan reaksi otomatis mati — bot hanya menandai story sebagai dibaca, tanpa mengirim reaksi. Tambahkan emoji dan nyalakan reaksi otomatis bila mau ada reaksi.`,
+    context: { kind: 'botcontrol', userId },
+    addTarget: article.querySelector('.botcontrol-emoji-new'),
+  });
 }
 const botControlUsersList = document.querySelector('#botcontrol-users');
 
@@ -1951,22 +2048,7 @@ function buildBotControlSettings(user, draft) {
   emojiLabel.textContent = 'Emoji reaksi — klik emoji untuk mengaktifkan atau menonaktifkan';
   const grid = document.createElement('div');
   grid.className = 'botcontrol-emoji-grid';
-  const emojiWarning = document.createElement('div');
-  emojiWarning.className = 'emoji-warning botcontrol-emoji-warning hidden';
-  emojiWarning.setAttribute('role', 'status');
-  const warningIcon = document.createElement('span');
-  warningIcon.className = 'emoji-warning-icon';
-  warningIcon.setAttribute('aria-hidden', 'true');
-  warningIcon.textContent = '!';
-  const warningCopy = document.createElement('div');
-  warningCopy.className = 'emoji-warning-copy';
-  const warningTitle = document.createElement('strong');
-  warningTitle.textContent = 'Reaksi emoji tidak aktif';
-  const warningText = document.createElement('p');
-  warningText.textContent = 'Tidak ada emoji dan reaksi otomatis mati — bot hanya menandai story sebagai dibaca, tanpa mengirim reaksi. Tambahkan emoji dan nyalakan reaksi otomatis bila mau ada reaksi.';
-  warningCopy.append(warningTitle, warningText);
-  emojiWarning.append(warningIcon, warningCopy);
-  section.append(emojiLabel, grid, emojiWarning);
+  section.append(emojiLabel, grid);
 
   const addRow = document.createElement('div');
   addRow.className = 'botcontrol-emoji-add-row';
@@ -4174,7 +4256,7 @@ document.querySelector('#story-emoji-grid').addEventListener('click', (event) =>
     settings.emojiPool = settings.emojiPool.filter((item) => item !== emoji);
     if (!settings.emojiPool.length) document.querySelector('#story-reaction-enabled').checked = false;
     renderEmojiPool(settings.emojiOptions, settings.emojiPool);
-    syncStoryEmojiWarning();
+    syncStoryEmojiNotice();
     scheduleStorySettingsSave();
     return;
   }
@@ -4186,7 +4268,7 @@ document.querySelector('#story-emoji-grid').addEventListener('click', (event) =>
   if (!selected && !document.querySelector('.emoji-choice.selected')) {
     document.querySelector('#story-reaction-enabled').checked = false;
   }
-  syncStoryEmojiWarning();
+  syncStoryEmojiNotice();
   scheduleStorySettingsSave();
 });
 
@@ -4213,7 +4295,7 @@ async function addStoryEmoji() {
   settings.emojiOptions.push(...newEmojis);
   settings.emojiPool.push(...newEmojis);
   renderEmojiPool(settings.emojiOptions, settings.emojiPool);
-  syncStoryEmojiWarning();
+  syncStoryEmojiNotice();
   input.value = '';
   scheduleStorySettingsSave();
   const skipped = duplicates + invalid.length;
@@ -4232,7 +4314,7 @@ document.querySelector('#story-reaction-enabled').addEventListener('change', () 
     document.querySelector('.select-plan[data-plan="readonly_readsw"]')?.click();
     return;
   }
-  syncStoryEmojiWarning();
+  syncStoryEmojiNotice();
   scheduleStorySettingsSave();
 });
 document.querySelector('#save-story-settings').addEventListener('click', () => { void saveStoryPreferences(); });

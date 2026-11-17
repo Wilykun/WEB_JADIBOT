@@ -57,10 +57,10 @@ test('tombol Aktifkan di semua kartu mode memakai warna aksi yang sama', () => {
 test('entri Info Update terbaru menjelaskan kartu pengingat member', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updates.length, 55, 'daftar harus bertambah satu entri');
+  assert.equal(data.updates.length, 56, 'daftar harus bertambah satu entri');
   const entry = data.updates.find((item) => item.title === 'Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot');
   assert.ok(entry, 'entri kartu pengingat harus tetap ada');
-  assert.equal(data.updates.indexOf(entry), 1, 'entri kartu pengingat kini di posisi kedua');
+  assert.equal(data.updates.indexOf(entry), 2, 'entri kartu pengingat kini di posisi ketiga');
   assert.equal(entry.tag, 'Fitur baru', 'entri kartu pengingat harus bertag Fitur baru');
   assert.equal(entry.time, '14.35 WIB', 'waktu entri kartu pengingat harus cocok');
   assert.ok(html.includes('<h4>Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot</h4>'), 'fallback harus memuat judul entri terbaru');
