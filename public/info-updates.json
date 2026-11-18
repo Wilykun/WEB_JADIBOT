@@ -1,12 +1,19 @@
 {
-  "updatedAt": "2026-11-18T07:25:00+07:00",
+  "updatedAt": "2026-11-18T07:55:00+07:00",
   "updates": [
+    {
+      "title": "Tab panel kini ikut diperbarui sendiri saat ada versi baru",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "07.55 WIB",
+      "tag": "Fitur baru",
+      "description": "Tab panel yang sudah terbuka kini memeriksa versi terbaru lewat heartbeat tiap 25 detik. Bila ada versi baru dan pengguna sedang tidak mengetik atau membuka notifikasi, halaman langsung memuat ulang sendiri sehingga fitur terbaru langsung terpakai tanpa muat ulang manual. Bila pengguna sedang mengetik atau ada notifikasi terbuka, muncul kartu 'Versi baru tersedia' dengan tombol 'Muat ulang' — tawarannya hanya muncul sekali per versi. Berlaku untuk semua akun yang login. Versi dibaca dari ?v= app.js di index.html, jadi setiap perubahan app.js wajib menaikkan nomor versinya."
+    },
     {
       "title": "Member yang mengetuk menu terkunci kini melihat notifikasi di layar",
       "day": "Rabu, 18 Nov 2026",
       "time": "07.25 WIB",
       "tag": "Tampilan",
-      "description": "Member biasa yang mengetuk menu Backup atau Kontrol Bot (yang terkunci untuk member) kini melihat notifikasi di tengah layar — kartu yang sama dengan notifikasi reaksi dan tautan WhatsApp: latar gelap, ikon peringatan, judul dan penjelasan bahwa fitur itu hanya untuk admin, serta tombol 'Tutup'; bisa juga ditutup dengan mengetuk latar atau tombol Escape. Sebelumnya hanya muncul toast kecil. Notifikasi tampil lagi tiap kali menu terkunci diketuk. Admin Utama dan admin biasa tidak melihat notifikasi ini karena mereka bisa membuka kedua halaman itu."
+      "description": "Member biasa yang mengetuk menu Backup atau Kontrol Bot (yang terkunci untuk member) kini melihat notifikasi di tengah layar — kartu yang sama dengan notifikasi reaksi dan tautan WhatsApp: latar gelap, ikon peringatan, judul dan penjelasan bahwa fitur itu hanya untuk admin, serta tombol 'Tutup'; bisa juga ditutup dengan mengetuk latar atau tombol Escape. Sebelumnya hanya muncul toast kecil. Notifikasi tampil lagi tiap kali menu terkunci diketuk. Admin Utama dan admin biasa tidak melihat notifikasi ini karena mereka bisa membuka kedua halaman itu. Menunya tetap terbuka setelah notifikasi ditutup, jadi member bisa langsung mengetuk menu lain."
     },
     {
       "title": "Tampilan Member kini lebih ringkas di HP",

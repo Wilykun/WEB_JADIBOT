@@ -54,6 +54,21 @@ function loadConfigJson() {
 
 loadConfigJson();
 process.umask(0o077);
+
+// Versi kode klien dari tag script di index.html (?v= app.js): berubah tiap
+// kali versinya dinaikkan — wajib tiap deploy yang mengubah app.js — jadi tab
+// yang sudah terbuka bisa mendeteksi versi baru lewat heartbeat dan
+// memperbarui diri tanpa muat ulang manual. Dibaca dari disk tiap kali agar
+// deploy checkout (tanpa restart server) langsung terdeteksi.
+function getClientVersion() {
+  try {
+    const html = fsSync.readFileSync(path.join(PUBLIC_DIR, 'index.html'), 'utf8');
+    const match = html.match(/\/app\.js\?v=([^"'\s&]+)/);
+    return match ? match[1] : null;
+  } catch {
+    return null;
+  }
+}
 const scrypt = promisify(scryptCallback);
 const PUBLIC_DIR = path.join(ROOT, 'public');
 const DATA_DIR = path.resolve(ROOT, process.env.PANEL_DATA_DIR || 'data');
@@ -2010,7 +2025,7 @@ async function handleApi(req, res, url) {
       const session = next.sessions.find((item) => item.sid === sid && item.userId === user.id);
       if (session) session.lastSeen = Date.now();
     });
-    return sendJson(res, 200, { ok: true });
+    return sendJson(res, 200, { ok: true, version: getClientVersion() });
   }
   if (route === 'GET /api/pairing/status') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');

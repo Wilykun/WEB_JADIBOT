@@ -78,10 +78,14 @@ menuToggle?.addEventListener('click', () => {
 document.addEventListener('click', (event) => {
   if (!sidebar?.classList.contains('is-open')) return;
   if (sidebar.contains(event.target) || menuToggle?.contains(event.target)) return;
+  // Ketukan di atas overlay modal (misalnya tombol Tutup pada notifikasi menu
+  // terkunci) bukan ketukan di luar menu: menunya harus tetap terbuka.
+  if (event.target.closest?.('#emoji-notice-overlay, .confirm-overlay')) return;
   setMenu(false);
 });
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') setMenu(false);
+  // Escape saat overlay modal terbuka hanya menutup overlay itu, bukan menunya.
+  if (event.key === 'Escape' && !document.querySelector('#emoji-notice-overlay:not(.hidden)') && !document.querySelector('.confirm-overlay')) setMenu(false);
 });
 
 const modeNames = {
@@ -231,6 +235,9 @@ function readStorySettings() {
 // halaman Pairing).
 let emojiNoticeDismissed = false;
 let noticeContext = null;
+// Versi yang tawaran muat ulangnya sudah ditutup, supaya tawaran yang sama
+// tidak muncul lagi tiap heartbeat sampai ada versi yang lebih baru.
+let newVersionPrompted = null;
 // Akun Kontrol Bot yang notifikasinya sudah ditutup selagi keadaannya masih
 // aktif — ditutup per akun supaya admin tidak diganggu berulang kali.
 const botControlEmojiNoticeDismissed = new Set();
@@ -243,7 +250,8 @@ function showNoticeOverlay({ title, text, context, addTarget, addLabel, onAdd })
   if (!overlay.classList.contains('hidden')
     && noticeContext?.kind === nextContext.kind
     && noticeContext?.userId === nextContext.userId
-    && noticeContext?.feature === nextContext.feature) return;
+    && noticeContext?.feature === nextContext.feature
+    && noticeContext?.version === nextContext.version) return;
   document.querySelector('#emoji-notice-title').textContent = title;
   document.querySelector('#emoji-notice-text').textContent = text;
   const addButton = overlay.querySelector('[data-emoji-notice-add]');
@@ -269,6 +277,9 @@ function dismissNoticeOverlay() {
     botLinkNoticeDismissed = true;
   } else if (noticeContext?.kind === 'locked') {
     // Tanpa ingatan: notifikasi menu terkunci tampil lagi tiap kali menunya diketuk.
+  } else if (noticeContext?.kind === 'version') {
+    // Ingat versi yang sudah ditawarkan supaya tidak mengganggu tiap heartbeat.
+    newVersionPrompted = noticeContext.version || null;
   } else {
     emojiNoticeDismissed = true;
   }
@@ -2695,10 +2706,48 @@ let loginHistoryTimer = null;
 let adminUsersTimer = null;
 let presenceHeartbeatTimer = null;
 
+// Versi kode yang dimuat tab ini (dari ?v= di tag script app.js): dipakai
+// untuk mendeteksi deploy baru supaya tab yang sudah terbuka ikut diperbarui
+// tanpa muat ulang manual.
+const loadedClientVersion = (() => {
+  const src = document.querySelector('script[src*="/app.js"]')?.src || '';
+  try { return new URL(src, location.href).searchParams.get('v'); } catch { return null; }
+})();
+
+// Muat ulang otomatis hanya bila pengguna sedang tidak diganggu: tidak ada
+// overlay terbuka dan tidak sedang mengetik di kolom apa pun.
+function isClientIdleForReload() {
+  if (!document.querySelector('#emoji-notice-overlay')?.classList.contains('hidden')) return false;
+  if (document.querySelector('.confirm-overlay')) return false;
+  const active = document.activeElement;
+  if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT' || active.isContentEditable)) return false;
+  return true;
+}
+
+// Versi baru dari server: muat ulang sendiri bila sedang tidak dipakai; bila
+// sedang dipakai, tawarkan sekali lewat notifikasi di tengah layar.
+function checkClientVersion(serverVersion) {
+  if (!serverVersion || !loadedClientVersion || serverVersion === loadedClientVersion) {
+    newVersionPrompted = null;
+    if (noticeContext?.kind === 'version') hideNoticeOverlay();
+    return;
+  }
+  if (serverVersion === newVersionPrompted) return;
+  if (isClientIdleForReload()) { location.reload(); return; }
+  showNoticeOverlay({
+    title: 'Versi baru tersedia',
+    text: 'Panel baru saja diperbarui. Muat ulang halaman untuk memakai versi terbaru.',
+    context: { kind: 'version', version: serverVersion },
+    addLabel: 'Muat ulang',
+    onAdd: () => location.reload(),
+  });
+}
+
 async function sendPresenceHeartbeat() {
   if (!currentUser || document.visibilityState !== 'visible' || appView.classList.contains('hidden')) return;
   try {
-    await api('/api/me/heartbeat', { method: 'POST', body: '{}' });
+    const result = await api('/api/me/heartbeat', { method: 'POST', body: '{}' });
+    checkClientVersion(result?.version);
     // Daftar member langsung dimuat ulang begitu heartbeat berhasil, jadi
     // status Pemilik milik sendiri mengikuti heartbeat tanpa menunggu
     // giliran polling 15 detik berikutnya.
