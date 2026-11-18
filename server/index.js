@@ -12,7 +12,7 @@ import { readAvatarUpload } from './avatar-upload.js';
 import { BANNED_LOGIN_NOTICE, DELETED_LOGIN_NOTICE, botControlPolicyError, isBannedAccount, isMainAdminUser, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
 import { BackupArchiveError, createEncryptedBackup, createPlainBackupZip, decryptEncryptedBackup, MAX_ARCHIVE_BYTES, MAX_PLAINTEXT_BYTES } from './admin-backup.js';
 import { createDefaultBotRecord } from './default-bot.js';
-import { TELEGRAM_API_BASE, readStoredTelegramConfig, validateTelegramConfig } from './telegram-config.js';
+import { TELEGRAM_API_BASE, readStoredTelegramConfig, validateTelegramChat, validateTelegramConfig } from './telegram-config.js';
 import { acquireRestoreLock } from './session-lock.js';
 import {
   randomBytes,
@@ -1935,13 +1935,23 @@ async function handleApi(req, res, url) {
     const body = await readJson(req);
     const botToken = String(body.botToken || '').trim().slice(0, 200);
     const chatId = String(body.chatId || '').trim().slice(0, 32);
-    if (!botToken || !chatId) return sendError(res, 400, 'Isi token bot dan chat ID dulu.');
-    const result = await validateTelegramConfig(botToken, chatId, fetch, process.env.TELEGRAM_API_BASE_URL || TELEGRAM_API_BASE);
+    if (!chatId) return sendError(res, 400, 'Isi token bot dan chat ID dulu.');
+    const stored = await readStoredTelegramConfig(TELEGRAM_CONFIG_FILE);
+    // Token kosong berarti pakai token yang sudah tersimpan di data/telegram.json,
+    // supaya mengubah chat ID saja tidak mengharuskan mengetik ulang token. Token
+    // dari env atau config.json tidak dipakai ulang di sini karena menyimpannya
+    // ke file tidak akan mengubah pengaturan efektif selama sumber itu masih ada.
+    if (!botToken && !stored.botToken) return sendError(res, 400, 'Isi token bot dan chat ID dulu.');
+    const result = botToken
+      ? await validateTelegramConfig(botToken, chatId, fetch, process.env.TELEGRAM_API_BASE_URL || TELEGRAM_API_BASE)
+      : await validateTelegramChat(chatId, stored.botToken, fetch, process.env.TELEGRAM_API_BASE_URL || TELEGRAM_API_BASE);
     if (!result.tokenValid) return sendJson(res, 400, { saved: false, tokenValid: false, chatValid: null, botUsername: null, error: result.tokenError });
-    await atomicWriteJson(TELEGRAM_CONFIG_FILE, { botToken, chatId, botUsername: result.botUsername, chatValid: result.chatValid, validatedAt: new Date().toISOString() });
+    const savedToken = botToken || stored.botToken;
+    const savedUsername = botToken ? result.botUsername : stored.botUsername;
+    await atomicWriteJson(TELEGRAM_CONFIG_FILE, { botToken: savedToken, chatId, botUsername: savedUsername, chatValid: result.chatValid, validatedAt: new Date().toISOString() });
     const effective = readTelegramConfig();
     const masked = effective.chatId.length > 4 ? `${effective.chatId.slice(0, 4)}…${effective.chatId.slice(-4)}` : effective.chatId;
-    return sendJson(res, 200, { saved: true, tokenValid: true, chatValid: result.chatValid, chatError: result.chatError, botUsername: result.botUsername, configured: Boolean(effective.botToken && effective.chatId), chatId: masked });
+    return sendJson(res, 200, { saved: true, tokenValid: true, chatValid: result.chatValid, chatError: result.chatError, botUsername: savedUsername, configured: Boolean(effective.botToken && effective.chatId), chatId: masked });
   }
   if (route === 'POST /api/admin/backup/telegram') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');

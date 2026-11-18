@@ -9,7 +9,7 @@ import net from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readStoredTelegramConfig, validateTelegramConfig } from '../server/telegram-config.js';
+import { readStoredTelegramConfig, validateTelegramChat, validateTelegramConfig } from '../server/telegram-config.js';
 
 const sourceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const html = fs.readFileSync(new URL('../public/index.html', import.meta.url), 'utf8');
@@ -106,6 +106,50 @@ test('validateTelegramConfig: bot diblokir berarti chat belum valid dengan pesan
   assert.match(result.chatError, /diblokir/);
 });
 
+test('validateTelegramChat: chat ok berarti chat valid tanpa memanggil getMe', async () => {
+  const stub = stubFetch((url) => {
+    assert.match(url, /\/getChat\?chat_id=987654321$/, 'hanya getChat yang boleh dipanggil');
+    return okJson(200, { ok: true, result: { id: 987654321, type: 'private' } });
+  });
+  const result = await validateTelegramChat('987654321', VALID_TOKEN, stub.fetchImpl);
+  assert.equal(result.tokenValid, true);
+  assert.equal(result.chatValid, true);
+  assert.equal(stub.calls(), 1);
+});
+
+test('validateTelegramChat: format chat ID buruk tidak menyentuh jaringan', async () => {
+  const stub = stubFetch(() => okJson(200, { ok: true, result: {} }));
+  const result = await validateTelegramChat('abc', VALID_TOKEN, stub.fetchImpl);
+  assert.equal(result.chatValid, false);
+  assert.match(result.chatError, /Format chat ID/);
+  assert.equal(stub.calls(), 0, 'chat berformat buruk tidak boleh memanggil Telegram sama sekali');
+});
+
+test('validateTelegramChat: chat not found dan diblokir dilaporkan sebagai chat belum valid', async () => {
+  const notFound = await validateTelegramChat('111111111', VALID_TOKEN, async () => okJson(400, { ok: false, error_code: 400, description: 'Bad Request: chat not found' }));
+  assert.equal(notFound.tokenValid, true);
+  assert.equal(notFound.chatValid, false);
+  assert.match(notFound.chatError, /Chat tidak ditemukan/);
+  const blocked = await validateTelegramChat('222222222', VALID_TOKEN, async () => okJson(403, { ok: false, error_code: 403, description: 'Forbidden: bot was blocked by the user' }));
+  assert.equal(blocked.tokenValid, true);
+  assert.equal(blocked.chatValid, false);
+  assert.match(blocked.chatError, /diblokir/);
+});
+
+test('validateTelegramChat: getChat 401 berarti token tersimpan sudah tidak valid', async () => {
+  const result = await validateTelegramChat('987654321', VALID_TOKEN, async () => okJson(401, { ok: false, error_code: 401, description: 'Unauthorized' }));
+  assert.equal(result.tokenValid, false);
+  assert.match(result.tokenError, /Token tidak valid/);
+  assert.equal(result.chatValid, false);
+});
+
+test('validateTelegramChat: Telegram tidak terjangkau dilaporkan sebagai chat tidak dapat diperiksa', async () => {
+  const result = await validateTelegramChat('987654321', VALID_TOKEN, async () => { throw new Error('jaringan putus'); });
+  assert.equal(result.tokenValid, true, 'token tersimpan dianggap masih valid bila jaringannya yang putus');
+  assert.equal(result.chatValid, false);
+  assert.match(result.chatError, /Tidak dapat menghubungi Telegram/);
+});
+
 test('readStoredTelegramConfig: file hilang atau rusak dibaca sebagai kosong', async () => {
   const temp = await mkdtemp(path.join(os.tmpdir(), 'readsw-telegram-config-test-'));
   try {
@@ -178,15 +222,54 @@ test('gaya pil validasi Telegram ada untuk keempat keadaan dan menumpuk rapi di 
   assert.match(css, /@media\(max-width:560px\)\{#backup \.telegram-field\{flex-direction:column/, 'di HP kolom dan pil harus menumpuk vertikal');
 });
 
+test('kartu Kirim ke Telegram punya tutorial spoiler ambil token + chat ID dan petunjuk token tersimpan', () => {
+  const tutorial = html.match(/<details class="telegram-tutorial">([\s\S]*?)<\/details>/);
+  assert.ok(tutorial, 'harus ada spoiler tutorial di dalam kartu Kirim ke Telegram');
+  const body = tutorial[1];
+  assert.match(body, /Cara ambil Token bot &amp; Chat ID/, 'spoiler harus berjudul cara ambil token dan chat ID');
+  assert.ok(body.includes('@BotFather'), 'tutorial harus menyebut @BotFather untuk token');
+  assert.ok(body.includes('/newbot'), 'tutorial harus menyebut perintah /newbot');
+  assert.ok(body.includes('@getmyid_bot'), 'tutorial harus menyebut @getmyid_bot untuk chat ID');
+  assert.ok(body.includes('/start'), 'tutorial harus menyebut /start untuk chat ID dan untuk bot backup');
+  assert.ok(body.includes('rahasia'), 'tutorial harus mengingatkan token itu rahasia');
+  const send = html.indexOf('id="admin-backup-telegram-send"');
+  assert.ok(html.indexOf('<details class="telegram-tutorial">') > html.indexOf('id="admin-backup-telegram-save-status"'), 'tutorial harus berada setelah baris status simpan');
+  assert.ok(html.indexOf('<details class="telegram-tutorial">') < send, 'tutorial harus berada sebelum tombol kirim');
+  const hint = html.match(/<p id="admin-backup-telegram-token-hint"[^>]*>/);
+  assert.ok(hint, 'harus ada petunjuk token tersimpan di bawah kolom token');
+  assert.match(hint[0], /hidden/, 'petunjuk token tersimpan harus tersembunyi bila belum ada token');
+  assert.ok(html.includes('Token sudah tersimpan di server'), 'petunjuk harus menjelaskan token tidak perlu diketik ulang');
+});
+
+test('client: mengedit satu kolom hanya mereset pil kolom itu, dan chat saja bisa tersimpan bila token sudah tersimpan', () => {
+  assert.match(appJs, /const fields = \[\s*\{\s*input: tokenInput, which: 'token' \}/, 'listener ketik harus membedakan kolom token dan chat');
+  assert.match(appJs, /setTelegramConfigPill\(which, 'idle'\)/, 'mengetik harus mereset hanya pil kolom yang diketik');
+  assert.match(appJs, /telegramTokenStored/, 'client harus melacak apakah token sudah tersimpan di server');
+  assert.match(appJs, /if \(!botToken && !telegramTokenStored\) return;/, 'auto-save boleh jalan dengan chat saja bila token sudah tersimpan');
+  assert.match(appJs, /telegramTargetParts/, 'baris status harus dibangun dari potongan supaya nama bot dan chat tidak terpotong');
+  assert.match(appJs, /telegram-target-nowrap/, 'nama bot dan chat harus memakai span anti-potong');
+  assert.match(appJs, /setTelegramTokenHintVisible\(telegramTokenStored\)/, 'petunjuk token tersimpan harus mengikuti status dari server');
+});
+
+test('gaya tutorial Telegram dan anti-potong status ada dan muat di HP', () => {
+  assert.ok(css.includes('#backup .telegram-target-nowrap{white-space:nowrap}'), 'nama bot dan chat harus dilarang terpotong di tengah');
+  assert.ok(css.includes('#backup .telegram-tutorial{'), 'spoiler tutorial harus punya gaya sendiri');
+  assert.ok(css.includes('#backup .telegram-tutorial summary{'), 'judul spoiler harus punya gaya sendiri yang menimpa gaya summary global');
+  assert.ok(css.includes('#backup .telegram-tutorial ol{'), 'langkah tutorial harus punya gaya daftar sendiri');
+  assert.ok(css.includes('#backup .telegram-tutorial code{'), 'perintah Telegram di tutorial harus punya gaya kode sendiri');
+  assert.ok(css.includes('#backup .telegram-tutorial[open] .telegram-tutorial-chevron{'), 'panah spoiler harus berputar saat tutorial dibuka');
+});
+
 test('versi aset baru terpasang supaya form ini benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=telegramconfig-20261118'), 'app.js harus memakai ?v=telegramconfig-20261118');
-  assert.ok(html.includes('/style.css?v=telegramconfig-20261118'), 'style.css harus memakai ?v=telegramconfig-20261118');
+  assert.ok(html.includes('/app.js?v=telegramtutorial-20261118'), 'app.js harus memakai ?v=telegramtutorial-20261118');
+  assert.ok(html.includes('/style.css?v=telegramtutorial-20261118'), 'style.css harus memakai ?v=telegramtutorial-20261118');
 });
 
 test('server: endpoint PUT telegram-config terdaftar dengan batas rate dan auth admin', () => {
   assert.match(serverJs, /route === 'PUT \/api\/admin\/backup\/telegram-config'/, 'endpoint PUT telegram-config harus terdaftar');
   assert.match(serverJs, /admin-backup-telegram-config:\$\{user\.id\}/, 'endpoint harus punya batas rate sendiri');
   assert.match(serverJs, /validateTelegramConfig\(botToken, chatId, fetch/, 'endpoint harus memvalidasi lewat Telegram sebelum menyimpan');
+  assert.match(serverJs, /validateTelegramChat\(chatId, stored\.botToken, fetch/, 'endpoint harus bisa memeriksa chat saja dengan token tersimpan');
   assert.match(serverJs, /atomicWriteJson\(TELEGRAM_CONFIG_FILE/, 'pengaturan yang lolos validasi harus disimpan atomik ke data/telegram.json');
   assert.ok(!serverJs.includes('config.json') || !/telegram-config.*config\.json/.test(serverJs), 'endpoint tidak boleh menulis token ke config.json');
 });
@@ -258,6 +341,7 @@ test('server: PUT telegram-config menyimpan hanya bila token valid, dan status m
         if (chat[1] !== VALID_TOKEN) return send(401, { ok: false, error_code: 401, description: 'Unauthorized' });
         const chatId = url.searchParams.get('chat_id');
         if (chatId === '987654321') return send(200, { ok: true, result: { id: 987654321, type: 'private' } });
+        if (chatId === '555555555') return send(200, { ok: true, result: { id: 555555555, type: 'private' } });
         if (chatId === '111111111') return send(400, { ok: false, error_code: 400, description: 'Bad Request: chat not found' });
         if (chatId === '222222222') return send(403, { ok: false, error_code: 403, description: 'Forbidden: bot was blocked by the user' });
         return send(400, { ok: false, error_code: 400, description: 'Bad Request: chat not found' });
@@ -297,6 +381,9 @@ test('server: PUT telegram-config menyimpan hanya bila token valid, dan status m
     assert.equal(forbidden.status, 403);
     const empty = await jsonRequest(base, '/api/admin/backup/telegram-config', { method: 'PUT', cookie: adminLogin.cookie, body: {} });
     assert.equal(empty.status, 400);
+    const emptyToken = await jsonRequest(base, '/api/admin/backup/telegram-config', { method: 'PUT', cookie: adminLogin.cookie, body: { botToken: '', chatId: '987654321' } });
+    assert.equal(emptyToken.status, 400, 'token kosong tanpa token tersimpan tetap harus ditolak');
+    await assert.rejects(stat(telegramFile), 'token kosong tanpa token tersimpan tidak boleh menulis file');
     const badTokenFormat = await jsonRequest(base, '/api/admin/backup/telegram-config', { method: 'PUT', cookie: adminLogin.cookie, body: { botToken: 'bukan-token', chatId: '987654321' } });
     assert.equal(badTokenFormat.status, 400);
     assert.equal(badTokenFormat.payload.tokenValid, false);
@@ -350,12 +437,34 @@ test('server: PUT telegram-config menyimpan hanya bila token valid, dan status m
     assert.equal(blocked.payload.chatValid, false);
     assert.match(blocked.payload.chatError, /diblokir/);
 
+    const chatOnly = await jsonRequest(base, '/api/admin/backup/telegram-config', { method: 'PUT', cookie: adminLogin.cookie, body: { botToken: '', chatId: '555555555' } });
+    assert.equal(chatOnly.status, 200, 'mengubah chat ID saja harus tersimpan tanpa mengetik ulang token');
+    assert.equal(chatOnly.payload.saved, true);
+    assert.equal(chatOnly.payload.tokenValid, true);
+    assert.equal(chatOnly.payload.chatValid, true);
+    assert.equal(chatOnly.payload.botUsername, 'FixtureBackupBot');
+    stored = JSON.parse(await readFile(telegramFile, 'utf8'));
+    assert.equal(stored.botToken, VALID_TOKEN, 'token tersimpan harus dipertahankan saat hanya chat yang diubah');
+    assert.equal(stored.chatId, '555555555');
+    assert.equal(stored.botUsername, 'FixtureBackupBot');
+    assert.equal(stored.chatValid, true);
+
+    const chatOnlyNotFound = await jsonRequest(base, '/api/admin/backup/telegram-config', { method: 'PUT', cookie: adminLogin.cookie, body: { botToken: '', chatId: '111111111' } });
+    assert.equal(chatOnlyNotFound.status, 200);
+    assert.equal(chatOnlyNotFound.payload.saved, true);
+    assert.equal(chatOnlyNotFound.payload.chatValid, false);
+    assert.match(chatOnlyNotFound.payload.chatError, /\/start/);
+    stored = JSON.parse(await readFile(telegramFile, 'utf8'));
+    assert.equal(stored.botToken, VALID_TOKEN);
+    assert.equal(stored.chatId, '111111111');
+    assert.equal(stored.chatValid, false);
+
     const unknownToken = await jsonRequest(base, '/api/admin/backup/telegram-config', { method: 'PUT', cookie: adminLogin.cookie, body: { botToken: UNKNOWN_TOKEN, chatId: '987654321' } });
     assert.equal(unknownToken.status, 400);
     assert.equal(unknownToken.payload.saved, false);
     assert.equal(unknownToken.payload.tokenValid, false);
     stored = JSON.parse(await readFile(telegramFile, 'utf8'));
-    assert.equal(stored.chatId, '222222222', 'token tidak valid tidak boleh menimpa pengaturan tersimpan');
+    assert.equal(stored.chatId, '111111111', 'token tidak valid tidak boleh menimpa pengaturan tersimpan');
     assert.equal(stored.botToken, VALID_TOKEN);
   } finally {
     if (child) child.kill();

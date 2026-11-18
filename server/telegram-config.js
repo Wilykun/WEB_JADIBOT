@@ -62,6 +62,39 @@ export async function validateTelegramConfig(botToken, chatId, fetchImpl = fetch
   return result;
 }
 
+// Memeriksa chat saja dengan token yang sudah tersimpan, dipakai saat admin
+// mengubah chat ID tanpa mengetik ulang token. Token dianggap masih valid bila
+// getChat tidak menolaknya karena tidak sah; nama bot tidak dikembalikan dari
+// sini karena getChat menjawab data chat, bukan data bot.
+export async function validateTelegramChat(chatId, botToken, fetchImpl = fetch, apiBase = TELEGRAM_API_BASE) {
+  const chat = String(chatId || '').trim();
+  const token = String(botToken || '').trim();
+  const result = { tokenValid: true, tokenError: null, chatValid: false, chatError: null };
+  if (!isTelegramChatIdFormat(chat)) {
+    result.chatError = 'Format chat ID tidak valid. Chat ID hanya angka (boleh diawali tanda minus).';
+    return result;
+  }
+  try {
+    const response = await fetchImpl(`${apiBase}/bot${token}/getChat?chat_id=${encodeURIComponent(chat)}`, { signal: AbortSignal.timeout(15_000) });
+    const body = await response.json().catch(() => ({}));
+    if (response.ok && body.ok) {
+      result.chatValid = true;
+      return result;
+    }
+    const reason = String(body?.description || '');
+    if (response.status === 401 || /unauthorized/i.test(reason)) {
+      result.tokenValid = false;
+      result.tokenError = 'Token tidak valid. Periksa lagi token dari @BotFather.';
+    } else if (/chat not found/i.test(reason)) result.chatError = 'Chat tidak ditemukan. Pastikan chat ID benar dan bot sudah di-/start di Telegram.';
+    else if (/blocked/i.test(reason)) result.chatError = 'Bot diblokir di Telegram. Buka blokirnya dulu, lalu coba lagi.';
+    else if (/forbidden/i.test(reason)) result.chatError = 'Bot tidak bisa mengirim ke chat ini. Pastikan bot sudah di-/start.';
+    else result.chatError = reason ? `Telegram menolak chat ini: ${reason}` : 'Chat ini tidak dapat dipakai. Periksa lagi chat ID-nya.';
+  } catch {
+    result.chatError = 'Tidak dapat menghubungi Telegram untuk memeriksa chat. Token sudah tersimpan; coba periksa chat lagi nanti.';
+  }
+  return result;
+}
+
 export async function readStoredTelegramConfig(file) {
   const empty = { botToken: '', chatId: '', botUsername: null, chatValid: false, validatedAt: null };
   try {

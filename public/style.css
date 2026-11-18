@@ -3211,3 +3211,14 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 #backup .telegram-pill[data-state="invalid"]{color:#ff8f8f;border-color:rgba(255,107,107,.45);background:rgba(255,107,107,.12)}
 #backup .telegram-save-status{margin:0}
 @media(max-width:560px){#backup .telegram-field{flex-direction:column;align-items:stretch}#backup .telegram-pill{align-self:flex-start}}
+#backup .telegram-target-nowrap{white-space:nowrap}
+#backup .telegram-token-hint{margin:0}
+#backup .telegram-tutorial{margin:2px 0 0;border:1px solid var(--line);border-radius:12px;padding:4px 12px 10px;background:rgba(231,250,238,.02)}
+#backup .telegram-tutorial summary{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:0;margin:0;padding:8px 0;border:0;border-radius:0;background:transparent;cursor:pointer;list-style:none;user-select:none}
+#backup .telegram-tutorial-title{font-size:13px;font-weight:700;color:var(--soft)}
+#backup .telegram-tutorial-chevron{flex:none;color:var(--muted);font-size:14px;transition:transform .18s ease}
+#backup .telegram-tutorial[open] .telegram-tutorial-chevron{transform:rotate(180deg)}
+#backup .telegram-tutorial ol{margin:6px 0 0;padding-left:18px;display:grid;gap:8px;font-size:13px;line-height:1.6;color:var(--soft)}
+#backup .telegram-tutorial ol li::marker{color:var(--green);font-weight:700}
+#backup .telegram-tutorial code{padding:1px 5px;border:1px solid var(--line);border-radius:6px;background:rgba(231,250,238,.05);font-size:12px}
+#backup .telegram-tutorial-note{margin:10px 0 0;font-size:12px;line-height:1.6;color:var(--muted)}
