@@ -124,20 +124,20 @@ test('menu tetap terbuka setelah notifikasi menu terkunci ditutup', async () => 
   assert.ok(js.includes("document.querySelector('#emoji-notice-overlay:not(.hidden)')"), 'Escape harus memeriksa overlay notifikasi sebelum menutup menu');
 });
 
-test('entri Info Update terbaru menjelaskan tab yang diperbarui sendiri', async () => {
+test('entri Info Update terbaru kini titik online avatar Member', async () => {
   const data = JSON.parse(await readFile(path.join(sourceRoot, 'public', 'info-updates.json'), 'utf8'));
   const html = await readFile(path.join(sourceRoot, 'public', 'index.html'), 'utf8');
-  assert.equal(data.updates.length, 67, 'daftar harus 67 entri');
+  assert.equal(data.updates.length, 68, 'daftar harus 68 entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri terbaru harus soal status Rank Bot dan halaman Aktivitas Akun');
+  assert.equal(newest.title, 'Avatar Member kini menunjukkan titik online', 'entri terbaru harus soal titik online di avatar Member');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
   assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'fallback harus memakai slug fitur-baru untuk entri terbaru');
-  assert.ok(html.includes('<h4>Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup</h4>'), 'fallback harus memuat judul entri terbaru');
+  assert.ok(html.includes('<h4>Avatar Member kini menunjukkan titik online</h4>'), 'fallback harus memuat judul entri terbaru');
 
-  // Entri notifikasi menu terkunci sebelumnya kini di posisi kelima; deskripsinya
+  // Entri notifikasi menu terkunci sebelumnya kini di posisi ketujuh; deskripsinya
   // menyebut menunya tetap terbuka setelah notifikasi ditutup.
-  const locked = data.updates[5];
-  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi keenam');
+  const locked = data.updates[6];
+  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi ketujuh');
   assert.match(locked.description, /Menunya tetap terbuka setelah notifikasi ditutup/, 'deskripsi harus menyebut menu tetap terbuka');
 });

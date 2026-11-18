@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-18T19:46:00+07:00",
+  "updatedAt": "2026-11-18T21:07:00+07:00",
   "updates": [
+    {
+      "day": "Rabu, 18 Nov 2026",
+      "time": "21.07 WIB",
+      "title": "Avatar Member kini menunjukkan titik online",
+      "tag": "Fitur baru",
+      "description": "Di halaman Member, avatar tiap akun kini punya titik hijau di sudut kanannya bila pemilik akun sedang membuka web panel (ala Facebook) — titiknya hanya muncul untuk yang sedang online, dan hilang begitu pemilik menutup panel. Statusnya diperbarui realtime tiap 15 detik bersama daftar member, jadi titiknya mengikuti keadaan sebenarnya tanpa muat ulang. Akun yang sedang tidak membuka panel tidak mendapat titik, sama seperti sebelumnya. Halaman Kontrol Bot tidak ikut berubah: avatar di sana tetap tanpa titik."
+    },
     {
       "title": "Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun",
       "day": "Rabu, 18 Nov 2026",

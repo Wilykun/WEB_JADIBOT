@@ -203,30 +203,34 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=infoupdate-badge-20261118'), 'app.js harus memakai ?v=infoupdate-badge-20261118');
-  assert.ok(html.includes('/style.css?v=infoupdate-badge-20261118'), 'style.css harus memakai ?v=infoupdate-badge-20261118');
+  assert.ok(html.includes('/app.js?v=member-online-dot-20261118'), 'app.js harus memakai ?v=member-online-dot-20261118');
+  assert.ok(html.includes('/style.css?v=member-online-dot-20261118'), 'style.css harus memakai ?v=member-online-dot-20261118');
 });
 
-test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivitas Akun', () => {
+test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi kedua', () => {
   const data = JSON.parse(read('public/info-updates.json'));
-  assert.equal(data.updatedAt, '2026-11-18T19:46:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 67, 'daftar harus bertambah satu entri');
+  assert.equal(data.updatedAt, '2026-11-18T21:07:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 68, 'daftar harus bertambah satu entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri terbaru harus menjelaskan kedua fitur baru');
+  assert.equal(newest.title, 'Avatar Member kini menunjukkan titik online', 'entri terbaru harus soal titik online di avatar Member');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '19.46 WIB', 'waktu entri terbaru harus cocok');
-  assert.ok(newest.description.includes('Pemilik · Aktif'), 'entri harus menjelaskan status pemilik di Rank Bot');
-  assert.ok(newest.description.includes('Bot WhatsApp · Berjalan'), 'entri harus menjelaskan status bot di Rank Bot');
-  assert.ok(newest.description.includes('Aktivitas Akun'), 'entri harus menjelaskan halaman Aktivitas Akun');
-  assert.ok(newest.description.includes('Pemilik Login Ke Web'), 'entri harus menjelaskan baris waktu login di halaman Aktivitas Akun');
-  assert.ok(newest.description.includes('Baris akun sendiri kini selalu paling atas dengan lencana Kamu'), 'entri harus menjelaskan baris sendiri paling atas di Aktivitas Akun');
-  assert.ok(newest.description.includes('pemilik yang sedang aktif di panel'), 'entri harus menjelaskan pemilik aktif di atas sisanya');
-  assert.ok(newest.description.includes('titik merah'), 'entri harus menjelaskan titik merah menu saat ada login baru');
-  assert.ok(newest.description.includes('Admin Utama emas'), 'entri harus menjelaskan warna peran Admin Utama');
-  assert.ok(newest.description.includes('Pagi'), 'entri harus menjelaskan label Pagi/Siang/Sore/Malam di waktu login');
-  assert.ok(newest.description.includes('selalu menunjukkan jam saat ini, bukan jam login autentikasinya yang sudah lama'), 'entri harus menjelaskan jam yang tampil adalah aktivitas web terbaru');
-  assert.ok(html.includes('<h4>Status pemilik &amp; bot di Rank Bot, plus halaman Aktivitas Akun</h4>'), 'fallback harus memuat judul entri terbaru');
+  assert.equal(newest.time, '21.07 WIB', 'waktu entri terbaru harus cocok');
+  const status = data.updates[1];
+  assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi kedua');
+  assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Fitur baru');
+  assert.equal(status.time, '19.46 WIB', 'waktu entri status Rank Bot harus cocok');
+  assert.ok(status.description.includes('Pemilik · Aktif'), 'entri harus menjelaskan status pemilik di Rank Bot');
+  assert.ok(status.description.includes('Bot WhatsApp · Berjalan'), 'entri harus menjelaskan status bot di Rank Bot');
+  assert.ok(status.description.includes('Aktivitas Akun'), 'entri harus menjelaskan halaman Aktivitas Akun');
+  assert.ok(status.description.includes('Pemilik Login Ke Web'), 'entri harus menjelaskan baris waktu login di halaman Aktivitas Akun');
+  assert.ok(status.description.includes('Baris akun sendiri kini selalu paling atas dengan lencana Kamu'), 'entri harus menjelaskan baris sendiri paling atas di Aktivitas Akun');
+  assert.ok(status.description.includes('pemilik yang sedang aktif di panel'), 'entri harus menjelaskan pemilik aktif di atas sisanya');
+  assert.ok(status.description.includes('titik merah'), 'entri harus menjelaskan titik merah menu saat ada login baru');
+  assert.ok(status.description.includes('Admin Utama emas'), 'entri harus menjelaskan warna peran Admin Utama');
+  assert.ok(status.description.includes('Pagi'), 'entri harus menjelaskan label Pagi/Siang/Sore/Malam di waktu login');
+  assert.ok(status.description.includes('selalu menunjukkan jam saat ini, bukan jam login autentikasinya yang sudah lama'), 'entri harus menjelaskan jam yang tampil adalah aktivitas web terbaru');
+  assert.ok(html.includes('<h4>Status pemilik &amp; bot di Rank Bot, plus halaman Aktivitas Akun</h4>'), 'fallback harus memuat judul entri status Rank Bot');
   assert.ok(html.includes('Pemilik Login Ke Web'), 'fallback harus memuat baris waktu login');
 });
 

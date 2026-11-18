@@ -1650,6 +1650,17 @@ async function loadAdminUsers() {
           avatarImage.src = `/avatars/${preset}.webp`;
         }
         avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
+        const avatarWrap = document.createElement('span');
+        avatarWrap.className = 'member-account-avatar-wrap';
+        avatarWrap.append(avatarImage);
+        // Titik online ala Facebook di sudut avatar: hijau bila pemilik akun
+        // sedang membuka panel, tidak ada bila tidak aktif.
+        if (user.panelActive) {
+          const onlineDot = document.createElement('span');
+          onlineDot.className = 'member-account-online-dot';
+          onlineDot.title = 'Online';
+          avatarWrap.append(onlineDot);
+        }
         const identityText = document.createElement('span');
         identityText.className = 'member-account-identity-text';
         const name = document.createElement('strong');
@@ -1657,7 +1668,7 @@ async function loadAdminUsers() {
         const handle = document.createElement('small');
         handle.textContent = `@${username}`;
         identityText.append(name, handle);
-        identity.append(avatarImage, identityText);
+        identity.append(avatarWrap, identityText);
         const control = document.createElement('span');
         control.className = 'member-account-control';
         const controlLabel = document.createElement('span');

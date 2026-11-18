@@ -25,39 +25,47 @@ test('kartu Member ringkas di HP: avatar kecil di samping nama, bukan di atas na
   assert.ok(css.includes('.member-page .member-account-avatar{display:block;flex:0 0 44px;width:44px;height:44px;'), 'di desktop avatar tetap 44px');
 });
 
-test('entri Info Update terbaru menjelaskan tampilan Member yang ringkas', async () => {
+test('entri Info Update terbaru menjelaskan titik online di avatar Member', async () => {
   const data = JSON.parse(await read('public/info-updates.json'));
   const html = await read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T19:46:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 67, 'daftar harus 67 entri');
+  assert.equal(data.updatedAt, '2026-11-18T21:07:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 68, 'daftar harus 68 entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri terbaru harus soal status Rank Bot dan halaman Aktivitas Akun');
+  assert.equal(newest.title, 'Avatar Member kini menunjukkan titik online', 'entri terbaru harus soal titik online di avatar Member');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '19.46 WIB', 'waktu entri terbaru harus cocok');
-  assert.match(newest.description, /Pemilik · Aktif/, 'deskripsi harus menyebut status pemilik di Rank Bot');
+  assert.equal(newest.time, '21.07 WIB', 'waktu entri terbaru harus cocok');
+  assert.match(newest.description, /titik hijau di sudut kanannya/, 'deskripsi harus menyebut titik hijau di sudut avatar');
+  assert.match(newest.description, /Kontrol Bot tidak ikut berubah/, 'deskripsi harus menjelaskan Kontrol Bot tidak ikut berubah');
   assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'fallback harus memakai slug fitur-baru untuk entri terbaru');
-  assert.ok(html.includes('<h4>Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup</h4>'), 'fallback harus memuat judul entri terbaru');
-  assert.ok(html.includes('Rabu, 18 Nov 2026 · 19.46 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri terbaru');
+  assert.ok(html.includes('<h4>Avatar Member kini menunjukkan titik online</h4>'), 'fallback harus memuat judul entri terbaru');
+  assert.ok(html.includes('Rabu, 18 Nov 2026 · 21.07 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri terbaru');
 
-  // Entri notifikasi menu terkunci sebelumnya kini di posisi kelima beserta fallback-nya.
-  const locked = data.updates[5];
-  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi keenam');
+  // Entri status Rank Bot + Aktivitas Akun sebelumnya kini di posisi kedua.
+  const status = data.updates[1];
+  assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi kedua');
+  assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Fitur baru');
+  assert.equal(status.time, '19.46 WIB', 'waktu entri status Rank Bot harus cocok');
+  assert.match(status.description, /Pemilik · Aktif/, 'deskripsi harus menyebut status pemilik di Rank Bot');
+
+  // Entri notifikasi menu terkunci sebelumnya kini di posisi ketujuh beserta fallback-nya.
+  const locked = data.updates[6];
+  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi ketujuh');
   assert.equal(locked.tag, 'Tampilan', 'entri notifikasi menu terkunci harus bertag Tampilan');
   assert.equal(locked.time, '07.25 WIB', 'waktu entri notifikasi menu terkunci harus cocok');
   assert.match(locked.description, /Menunya tetap terbuka setelah notifikasi ditutup/, 'deskripsi harus menyebut menu tetap terbuka');
 
-  // Entri kartu Member ringkas sebelumnya kini di posisi keenam beserta fallback-nya.
-  const compact = data.updates[6];
-  assert.equal(compact.title, 'Tampilan Member kini lebih ringkas di HP', 'entri kartu Member ringkas kini di posisi ketujuh');
+  // Entri kartu Member ringkas sebelumnya kini di posisi kedelapan beserta fallback-nya.
+  const compact = data.updates[7];
+  assert.equal(compact.title, 'Tampilan Member kini lebih ringkas di HP', 'entri kartu Member ringkas kini di posisi kedelapan');
   assert.equal(compact.tag, 'Tampilan', 'entri kartu Member ringkas harus bertag Tampilan');
   assert.equal(compact.time, '05.50 WIB', 'waktu entri kartu Member ringkas harus cocok');
   assert.match(compact.description, /34px/, 'deskripsi harus menyebut ukuran avatar baru 34px');
   assert.match(compact.description, /Kontrol Bot/, 'deskripsi harus menjelaskan kartu Kontrol Bot ikut ringkas');
 
-  // Entri panel lebih cepat sebelumnya kini di posisi ketujuh beserta fallback-nya.
-  const perf = data.updates[7];
-  assert.equal(perf.title, 'Panel kini memuat jauh lebih cepat', 'entri panel lebih cepat kini di posisi kedelapan');
+  // Entri panel lebih cepat sebelumnya kini di posisi kesembilan beserta fallback-nya.
+  const perf = data.updates[8];
+  assert.equal(perf.title, 'Panel kini memuat jauh lebih cepat', 'entri panel lebih cepat kini di posisi kesembilan');
   assert.equal(perf.tag, 'Perbaikan', 'entri panel lebih cepat harus bertag Perbaikan');
   assert.equal(perf.time, '21.50 WIB', 'waktu entri panel lebih cepat harus cocok');
 });
