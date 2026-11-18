@@ -2306,7 +2306,15 @@ function accountActivityTimeLabel(value) {
 
 function renderAccountActivity() {
   if (!accountActivityList) return;
+  // Urutan baris: akun sendiri paling atas, lalu pemilik yang sedang aktif di panel, baru yang paling baru login.
+  const viewer = String(currentUser?.username || '');
   const sorted = [...accountActivityUsers].sort((a, b) => {
+    const aSelf = viewer && String(a.username || '') === viewer ? 0 : 1;
+    const bSelf = viewer && String(b.username || '') === viewer ? 0 : 1;
+    if (aSelf !== bSelf) return aSelf - bSelf;
+    const aActive = a.panelActive ? 0 : 1;
+    const bActive = b.panelActive ? 0 : 1;
+    if (aActive !== bActive) return aActive - bActive;
     const aMs = Date.parse(accountActivityLoginValue(a) || '') || 0;
     const bMs = Date.parse(accountActivityLoginValue(b) || '') || 0;
     return bMs - aMs;
@@ -2323,8 +2331,9 @@ function renderAccountActivity() {
     const username = String(user.username || 'akun');
     const displayName = String(user.displayName || username);
     const timeLabel = accountActivityTimeLabel(accountActivityLoginValue(user));
+    const isSelf = Boolean(viewer && username === viewer);
     const article = document.createElement('article');
-    article.className = 'accountactivity-item';
+    article.className = `accountactivity-item${isSelf ? ' is-self' : ''}`;
     const avatarImage = document.createElement('img');
     avatarImage.className = 'accountactivity-avatar';
     avatarImage.width = 40;
@@ -2338,14 +2347,23 @@ function renderAccountActivity() {
     avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
     const body = document.createElement('div');
     body.className = 'accountactivity-body';
+    const nameRow = document.createElement('div');
+    nameRow.className = 'accountactivity-namerow';
     const name = document.createElement('strong');
     name.className = 'accountactivity-name';
     name.textContent = displayName;
+    nameRow.append(name);
+    if (isSelf) {
+      const selfBadge = document.createElement('span');
+      selfBadge.className = 'rankbot-self-badge';
+      selfBadge.textContent = 'Kamu';
+      nameRow.append(selfBadge);
+    }
     const loginLine = document.createElement('p');
     loginLine.className = 'accountactivity-login';
     loginLine.append(createMemberIcon('clock'));
     loginLine.append(document.createTextNode(timeLabel ? `Pemilik Login Ke Web · ${timeLabel} WIB` : 'Pemilik Login Ke Web · Belum pernah login'));
-    body.append(name, loginLine);
+    body.append(nameRow, loginLine);
     article.append(avatarImage, body);
     accountActivityList.append(article);
   }

@@ -3,7 +3,8 @@
 //   "Bot WhatsApp · Berjalan/Menunggu/Berhenti" dari /api/members.
 // - Aktivitas Akun: halaman baru di bawah Rank Bot yang hanya menampilkan
 //   nama, avatar, dan waktu pemilik terakhir login ke web (hari, tanggal,
-//   bulan, tahun, jam WIB), diurutkan dari yang paling baru login.
+//   bulan, tahun, jam WIB); urutan baris: akun sendiri paling atas (lencana
+//   Kamu), lalu pemilik yang sedang aktif di panel, baru yang paling baru login.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
@@ -49,13 +50,29 @@ test('halaman Aktivitas Akun hanya menampilkan nama, avatar, dan waktu login web
   assert.ok(appJs.includes('function loadAccountActivity()'), 'harus ada pemuat daftar Aktivitas Akun');
   assert.ok(appJs.includes("const result = await api('/api/members');"), 'Aktivitas Akun harus dibaca dari /api/members yang bisa dibuka semua akun yang login');
   assert.ok(appJs.includes('function renderAccountActivity()'), 'harus ada perender daftar Aktivitas Akun');
-  assert.ok(appJs.includes("article.className = 'accountactivity-item';"), 'setiap baris harus berbentuk kartu akun');
+  assert.ok(appJs.includes("article.className = `accountactivity-item${isSelf ? ' is-self' : ''}`;"), 'setiap baris harus berbentuk kartu akun, baris sendiri dibedakan');
   assert.ok(appJs.includes("avatarImage.className = 'accountactivity-avatar';"), 'setiap baris harus menampilkan avatar profil');
   assert.ok(appJs.includes("name.className = 'accountactivity-name';"), 'setiap baris harus menampilkan nama pemilik');
   assert.ok(appJs.includes("loginLine.className = 'accountactivity-login';"), 'setiap baris harus menampilkan baris waktu login');
   assert.ok(appJs.includes("`Pemilik Login Ke Web · ${timeLabel} WIB`"), 'baris waktu harus bernama Pemilik Login Ke Web dengan jam WIB');
   assert.ok(appJs.includes("'Pemilik Login Ke Web · Belum pernah login'"), 'akun yang belum pernah login harus tertulis Belum pernah login');
   assert.ok(appJs.includes("loginLine.append(createMemberIcon('clock'));"), 'baris waktu harus memakai ikon jam SVG sesuai konteks');
+});
+
+test('urutan Aktivitas Akun: akun sendiri paling atas, lalu pemilik aktif, baru yang paling baru login', () => {
+  assert.ok(appJs.includes("const viewer = String(currentUser?.username || '');"), 'perender harus tahu akun yang sedang login');
+  assert.ok(appJs.includes("const aSelf = viewer && String(a.username || '') === viewer ? 0 : 1;"), 'baris sendiri harus diutamakan dalam urutan');
+  assert.ok(appJs.includes('if (aSelf !== bSelf) return aSelf - bSelf;'), 'baris sendiri harus selalu paling atas');
+  assert.ok(appJs.includes('const aActive = a.panelActive ? 0 : 1;'), 'pemilik aktif harus diutamakan setelah baris sendiri');
+  assert.ok(appJs.includes('if (aActive !== bActive) return aActive - bActive;'), 'pemilik yang sedang aktif di panel harus di atas pemilik yang tidak aktif');
+  assert.ok(appJs.includes('return bMs - aMs;'), 'sisanya tetap diurutkan dari yang paling baru login');
+  assert.ok(appJs.includes("const isSelf = Boolean(viewer && username === viewer);"), 'baris sendiri harus dikenali dari username yang login');
+  assert.ok(appJs.includes("nameRow.className = 'accountactivity-namerow';"), 'nama dan lencana harus sebaris');
+  assert.ok(appJs.includes("selfBadge.className = 'rankbot-self-badge';"), 'baris sendiri harus memakai lencana Kamu yang sama dengan Rank Bot');
+  assert.ok(appJs.includes("selfBadge.textContent = 'Kamu';"), 'lencana baris sendiri harus berbunyi Kamu');
+  assert.ok(css.includes('.accountactivity-item.is-self{'), 'baris sendiri harus punya latar emas');
+  assert.ok(css.includes('.accountactivity-item.is-self .accountactivity-avatar{'), 'avatar baris sendiri harus bercincin emas');
+  assert.ok(css.includes('.accountactivity-namerow{'), 'baris nama harus punya gaya sendiri');
 });
 
 test('waktu login diambil dari riwayat login, diurutkan dari yang paling baru', () => {
@@ -100,8 +117,8 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=accountactivity-20261118'), 'app.js harus memakai ?v=accountactivity-20261118');
-  assert.ok(html.includes('/style.css?v=accountactivity-20261118'), 'style.css harus memakai ?v=accountactivity-20261118');
+  assert.ok(html.includes('/app.js?v=accountactivity-top-20261118'), 'app.js harus memakai ?v=accountactivity-top-20261118');
+  assert.ok(html.includes('/style.css?v=accountactivity-top-20261118'), 'style.css harus memakai ?v=accountactivity-top-20261118');
 });
 
 test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivitas Akun', () => {
@@ -117,6 +134,8 @@ test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivita
   assert.ok(newest.description.includes('Bot WhatsApp · Berjalan'), 'entri harus menjelaskan status bot di Rank Bot');
   assert.ok(newest.description.includes('Aktivitas Akun'), 'entri harus menjelaskan halaman Aktivitas Akun');
   assert.ok(newest.description.includes('Pemilik Login Ke Web'), 'entri harus menjelaskan baris waktu login di halaman Aktivitas Akun');
+  assert.ok(newest.description.includes('Baris akun sendiri kini selalu paling atas dengan lencana Kamu'), 'entri harus menjelaskan baris sendiri paling atas di Aktivitas Akun');
+  assert.ok(newest.description.includes('pemilik yang sedang aktif di panel'), 'entri harus menjelaskan pemilik aktif di atas sisanya');
   assert.ok(html.includes('<h4>Status pemilik &amp; bot di Rank Bot, plus halaman Aktivitas Akun</h4>'), 'fallback harus memuat judul entri terbaru');
   assert.ok(html.includes('Pemilik Login Ke Web'), 'fallback harus memuat baris waktu login');
 });
