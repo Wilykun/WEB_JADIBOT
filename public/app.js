@@ -241,7 +241,7 @@ let newVersionPrompted = null;
 // Akun Kontrol Bot yang notifikasinya sudah ditutup selagi keadaannya masih
 // aktif — ditutup per akun supaya admin tidak diganggu berulang kali.
 const botControlEmojiNoticeDismissed = new Set();
-function showNoticeOverlay({ title, text, context, addTarget, addLabel, onAdd }) {
+function showNoticeOverlay({ title, text, context, addTarget, addLabel, onAdd, icon }) {
   const overlay = document.querySelector('#emoji-notice-overlay');
   if (!overlay) return;
   const nextContext = { ...(context || {}), addTarget: addTarget || null, onAdd: onAdd || null };
@@ -254,6 +254,8 @@ function showNoticeOverlay({ title, text, context, addTarget, addLabel, onAdd })
     && noticeContext?.version === nextContext.version) return;
   document.querySelector('#emoji-notice-title').textContent = title;
   document.querySelector('#emoji-notice-text').textContent = text;
+  const iconElement = overlay.querySelector('.notice-icon');
+  if (iconElement) iconElement.textContent = icon || '!';
   const addButton = overlay.querySelector('[data-emoji-notice-add]');
   if (addButton) {
     // addLabel null berarti notifikasi ini tanpa tombol aksi (misalnya
@@ -277,6 +279,9 @@ function dismissNoticeOverlay() {
     botLinkNoticeDismissed = true;
   } else if (noticeContext?.kind === 'locked') {
     // Tanpa ingatan: notifikasi menu terkunci tampil lagi tiap kali menunya diketuk.
+  } else if (noticeContext?.kind === 'rankovertake') {
+    // Tanpa ingatan: tiap salip baru tampil lagi, dan menutup kartu ini
+    // tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
   } else if (noticeContext?.kind === 'version') {
     // Ingat versi yang sudah ditawarkan supaya tidak mengganggu tiap heartbeat.
     newVersionPrompted = noticeContext.version || null;
@@ -2032,6 +2037,94 @@ function sortRankBotUsers(users, category) {
     return String(a.displayName || a.username || '').localeCompare(String(b.displayName || b.username || ''), 'id');
   });
 }
+
+// Notifikasi salip Rank Bot: tiap kali peringkat "Semua" dimuat ulang
+// (dibuka atau polling 15 detik), urutan baru dibandingkan dengan urutan
+// terakhir yang dilihat. Akun A menyalip B bila A dulu di bawah B dan kini
+// di atas B — akun yang baru muncul atau hilang tidak dihitung sebagai salip,
+// jadi hapus akun tidak memicu kartu palsu. Urutan terakhir disimpan juga di
+// localStorage per akun yang login, supaya salip yang terjadi selagi halaman
+// ditinggal tetap muncul sebagai kartu begitu Rank Bot dibuka lagi.
+let rankOvertakeSnapshot = null;
+let rankOvertakeSeen = false;
+const rankOvertakeNotified = new Map();
+function rankBotOrderUsernames(users) {
+  return sortRankBotUsers(users, 'all').map((user) => String(user.username || ''));
+}
+function findRankBotOvertakes(previousOrder, currentOrder) {
+  const previousPosition = new Map(previousOrder.map((username, index) => [username, index + 1]));
+  const currentPosition = new Map(currentOrder.map((username, index) => [username, index + 1]));
+  const events = [];
+  for (const overtaker of currentOrder) {
+    const before = previousPosition.get(overtaker);
+    const now = currentPosition.get(overtaker);
+    if (before === undefined || now === undefined || now >= before) continue;
+    for (const overtaken of currentOrder) {
+      if (overtaken === overtaker) continue;
+      const overtakenBefore = previousPosition.get(overtaken);
+      const overtakenNow = currentPosition.get(overtaken);
+      if (overtakenBefore === undefined || overtakenNow === undefined) continue;
+      if (overtakenBefore < before && overtakenNow > now) {
+        events.push({ overtaker, overtaken, newPosition: now, oldPosition: before, overtakenNewPosition: overtakenNow });
+      }
+    }
+  }
+  // Yang paling dekat ke puncak dulu, lalu lompatan terbesar.
+  events.sort((a, b) => (a.newPosition - b.newPosition) || ((b.oldPosition - b.newPosition) - (a.oldPosition - a.newPosition)));
+  return events;
+}
+function rankBotLastSeenKey() {
+  return `rankbot-last-seen:${String(currentUser?.username || 'anon')}`;
+}
+function readRankBotLastSeenOrder() {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(rankBotLastSeenKey()) || 'null');
+    return Array.isArray(parsed) ? parsed.filter((item) => typeof item === 'string') : null;
+  } catch { return null; }
+}
+function writeRankBotLastSeenOrder(order) {
+  try { window.localStorage.setItem(rankBotLastSeenKey(), JSON.stringify(order)); } catch { /* Urutan terakhir hanya pengingat lokal. */ }
+}
+function rankOvertakeDisplayName(username) {
+  const user = rankBotUsers.find((item) => String(item.username || '') === username);
+  return String(user?.displayName || username);
+}
+function notifyRankBotOvertake(event, live) {
+  const overtakerName = rankOvertakeDisplayName(event.overtaker);
+  const overtakenName = rankOvertakeDisplayName(event.overtaken);
+  const openers = ['Wush!', 'Ngebut!', 'Salip menyalip!'];
+  const opener = openers[(event.overtaker.length + event.newPosition) % openers.length];
+  const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date());
+  const text = live
+    ? `${opener} ${overtakerName} menyalip ${overtakenName} dan kini #${event.newPosition} — ${overtakenName} turun ke #${event.overtakenNewPosition}. ${when} WIB.`
+    : `Sejak terakhir kamu lihat, ${overtakerName} menyalip ${overtakenName} dan kini #${event.newPosition} — ${overtakenName} turun ke #${event.overtakenNewPosition}. ${when} WIB.`;
+  const overtaker = rankBotUsers.find((item) => String(item.username || '') === event.overtaker);
+  const overtaken = rankBotUsers.find((item) => String(item.username || '') === event.overtaken);
+  showNoticeOverlay({
+    title: 'Ada yang menyalip di Rank Bot!',
+    text,
+    context: { kind: 'rankovertake', userId: overtaker?.id || event.overtaker, feature: overtaken?.id || event.overtaken },
+    addLabel: null,
+    icon: '🏆',
+  });
+  rankOvertakeNotified.set(`${event.overtaker}>${event.overtaken}`, Date.now());
+}
+function checkRankBotOvertakes() {
+  const current = rankBotOrderUsernames(rankBotUsers);
+  if (!current.length) return;
+  const previous = rankOvertakeSeen ? rankOvertakeSnapshot : readRankBotLastSeenOrder();
+  if (previous && previous.length) {
+    const events = findRankBotOvertakes(previous, current);
+    // Satu kartu per muat ulang (yang paling dekat ke puncak), dan pasangan
+    // yang sama tidak diberitakan lagi dalam 10 menit supaya salip bolak-balik
+    // tidak membanjiri layar.
+    const fresh = events.find((item) => (Date.now() - (rankOvertakeNotified.get(`${item.overtaker}>${item.overtaken}`) || 0)) > 10 * 60 * 1000);
+    if (fresh) notifyRankBotOvertake(fresh, rankOvertakeSeen);
+  }
+  rankOvertakeSnapshot = current;
+  rankOvertakeSeen = true;
+  writeRankBotLastSeenOrder(current);
+}
 function renderRankBot() {
   if (!rankBotList) return;
   const sorted = sortRankBotUsers(rankBotUsers, rankBotFilter);
@@ -2058,8 +2151,11 @@ function renderRankBot() {
     const reactions = Math.max(0, Number(user?.featureStats?.reactionCount) || 0);
     const scoreLabel = rankBotFilter === 'readonly' ? 'story dibaca' : rankBotFilter === 'readsw' ? 'reaksi terkirim' : 'total aktivitas';
     const roleLabel = user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Admin' : 'Member';
+    // Baris akun sendiri (yang sedang login) dibedakan dengan cincin avatar
+    // emas dan lencana "Kamu" supaya langsung ketemu saat mencari di daftar.
+    const isSelf = Boolean(currentUser && String(currentUser.username || '') === username);
     const article = document.createElement('article');
-    article.className = `rankbot-item${position <= 3 ? ` rank-top-${position}` : ''}${user.isMainAdmin ? ' is-main-admin' : ''}`;
+    article.className = `rankbot-item${position <= 3 ? ` rank-top-${position}` : ''}${user.isMainAdmin ? ' is-main-admin' : ''}${isSelf ? ' is-self' : ''}`;
     article.dataset.rankbotSearch = searchText;
     const positionBadge = document.createElement('span');
     positionBadge.className = `rankbot-position rank-${position <= 3 ? position : 'rest'}`;
@@ -2086,6 +2182,12 @@ function renderRankBot() {
     roleChip.className = 'rankbot-role';
     roleChip.textContent = roleLabel;
     nameRow.append(name, roleChip);
+    if (isSelf) {
+      const selfBadge = document.createElement('span');
+      selfBadge.className = 'rankbot-self-badge';
+      selfBadge.textContent = 'Kamu';
+      nameRow.append(selfBadge);
+    }
     const handle = document.createElement('small');
     handle.className = 'rankbot-handle';
     handle.textContent = `@${username}`;
@@ -2128,6 +2230,7 @@ async function loadRankBot() {
     const result = await api('/api/members');
     rankBotUsers = Array.isArray(result.users) ? result.users : [];
     renderRankBot();
+    checkRankBotOvertakes();
     document.querySelector('#rankbot-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
   } catch (error) {
     if (error.status === 401) showAuth();

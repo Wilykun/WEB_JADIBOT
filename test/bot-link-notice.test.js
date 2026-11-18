@@ -75,16 +75,16 @@ test('member belum tertaut tidak bisa masuk Fitur Bot, admin tetap bisa', () => 
 test('entri Info Update terbaru menjelaskan member belum tertaut tidak bisa masuk Fitur Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T12:05:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 65, 'daftar harus bertambah satu entri');
+  assert.equal(data.updatedAt, '2026-11-18T13:10:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 66, 'daftar harus bertambah satu entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup', 'entri terbaru harus menjelaskan pengaturan bot Telegram di halaman Backup');
+  assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri terbaru harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
-  assert.equal(newest.time, '12.05 WIB', 'waktu entri terbaru harus cocok');
+  assert.equal(newest.time, '13.10 WIB', 'waktu entri terbaru harus cocok');
   assert.ok(html.includes('<h4>Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup</h4>'), 'fallback harus memuat judul entri terbaru');
-  const rankbotEntry = data.updates[6];
-  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi ketujuh');
+  const rankbotEntry = data.updates[7];
+  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedelapan');
   const linkEntry = data.updates.find((item) => item.title === 'Pemberitahuan tautan WhatsApp kini muncul di layar');
   assert.ok(linkEntry, 'entri notifikasi tautan di layar harus tetap ada');
-  assert.equal(data.updates.indexOf(linkEntry), 8, 'entri notifikasi tautan di layar kini di posisi kesembilan');
+  assert.equal(data.updates.indexOf(linkEntry), 9, 'entri notifikasi tautan di layar kini di posisi kesepuluh');
 });

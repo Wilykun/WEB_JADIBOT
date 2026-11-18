@@ -62,7 +62,7 @@ test('setiap peringkat menampilkan nama, profil, mode, dan level rank', () => {
   assert.ok(js.includes("if (value >= 50) return { label: 'Rajin'"), 'level Rajin harus mulai dari 50');
   assert.ok(js.includes("if (value >= 1) return { label: 'Aktif'"), 'level Aktif harus mulai dari 1');
   assert.ok(js.includes("return { label: 'Pemula'"), 'level Pemula harus untuk nol aktivitas');
-  assert.ok(js.includes("article.className = `rankbot-item${position <= 3 ? ` rank-top-${position}` : ''}"), 'tiga besar harus ditandai');
+  assert.ok(js.includes("article.className = `rankbot-item${position <= 3 ? ` rank-top-${position}` : ''}${user.isMainAdmin ? ' is-main-admin' : ''}${isSelf ? ' is-self' : ''}`;"), 'tiga besar harus ditandai dan baris akun sendiri harus memakai kelas is-self');
   assert.ok(js.includes("positionBadge.textContent = `#${position}`;"), 'setiap peringkat harus menampilkan nomor urutnya');
   assert.ok(js.includes("avatarImage.className = 'rankbot-avatar';"), 'setiap peringkat harus menampilkan avatar profil');
   assert.ok(js.includes("name.className = 'rankbot-name';"), 'setiap peringkat harus menampilkan nama');
@@ -107,14 +107,14 @@ test('peringkat diperbarui realtime dan mengikuti pencarian serta pil kategori',
 test('entri Info Update terbaru menjelaskan halaman Rank Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T12:05:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 65, 'daftar harus bertambah satu entri');
+  assert.equal(data.updatedAt, '2026-11-18T13:10:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 66, 'daftar harus bertambah satu entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup', 'entri terbaru harus menjelaskan pengaturan bot Telegram di halaman Backup');
+  assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri terbaru harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
-  assert.equal(newest.time, '12.05 WIB', 'waktu entri terbaru harus cocok');
-  const rankbotEntry = data.updates[6];
-  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi ketujuh');
+  assert.equal(newest.time, '13.10 WIB', 'waktu entri terbaru harus cocok');
+  const rankbotEntry = data.updates[7];
+  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedelapan');
   assert.equal(rankbotEntry.tag, 'Fitur baru', 'entri Rank Bot harus bertag Fitur baru');
   assert.equal(rankbotEntry.time, '17.00 WIB', 'waktu entri Rank Bot harus cocok');
   assert.ok(rankbotEntry.description.includes("label mode dipersingkat jadi 'ReadSW + Reaksi'"), 'entri Rank Bot harus menjelaskan perbaikan nama fitur yang terpotong');

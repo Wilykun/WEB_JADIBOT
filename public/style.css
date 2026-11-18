@@ -3222,3 +3222,9 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 #backup .telegram-tutorial ol li::marker{color:var(--green);font-weight:700}
 #backup .telegram-tutorial code{padding:1px 5px;border:1px solid var(--line);border-radius:6px;background:rgba(231,250,238,.05);font-size:12px}
 #backup .telegram-tutorial-note{margin:10px 0 0;font-size:12px;line-height:1.6;color:var(--muted)}
+
+/* Rank Bot: baris akun sendiri (yang sedang login) dibedakan supaya langsung
+   ketemu di daftar — latar emas samar, avatar bercincin emas, lencana "Kamu". */
+.rankbot-item.is-self{border-color:rgba(245,197,66,.7);background:linear-gradient(160deg,rgba(245,197,66,.14),rgba(13,25,21,.4))}
+.rankbot-item.is-self .rankbot-avatar{border-color:#f5c542;box-shadow:0 0 0 3px rgba(245,197,66,.25),0 0 14px rgba(245,197,66,.35)}
+.rankbot-self-badge{flex:0 0 auto;padding:2px 7px;border-radius:999px;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#241a02;background:linear-gradient(135deg,#f5c542,#d99a1f)}

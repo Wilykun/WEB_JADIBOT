@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-18T12:05:00+07:00",
+  "updatedAt": "2026-11-18T13:10:00+07:00",
   "updates": [
+    {
+      "title": "Rank Bot kini memberi tahu saat ada yang menyalip",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "13.10 WIB",
+      "tag": "Fitur baru",
+      "description": "Saat ada akun yang menyalip akun lain di peringkat Semua pada halaman Rank Bot, kini muncul kartu notifikasi di tengah layar — ikon trofi, kata pembuka kocak yang bergilir (Wush!, Ngebut!, Salip menyalip!), nama yang menyalip dan yang kesalip beserta posisi barunya, dan waktu lengkap hari, tanggal, bulan, tahun, dan jam WIB. Kartu muncul langsung saat salip terjadi selagi halaman dibuka, dan muncul lagi begitu Rank Bot dibuka bila salip terjadi selagi halaman ditinggal — urutan terakhir yang dilihat disimpan di perangkat. Pasangan yang sama tidak diberitakan lagi dalam 10 menit supaya salip bolak-balik tidak membanjiri layar, dan menutup kartu tidak mematikan pengingat lain. Baris akun sendiri di daftar Rank Bot kini dibedakan dengan latar dan cincin avatar emas serta lencana Kamu, supaya akun yang sedang login langsung ketemu saat mencari di daftar."
+    },
     {
       "title": "Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup",
       "day": "Rabu, 18 Nov 2026",
