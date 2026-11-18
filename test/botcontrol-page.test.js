@@ -38,7 +38,7 @@ test('halaman Kontrol Bot dijaga perannya seperti Backup: member tidak bisa memb
   assert.match(appJs, /botControlNav\?\.classList\.toggle\('nav-item-locked', !isAdmin\)/, 'nav Kontrol Bot harus terkunci untuk member');
   assert.match(appJs, /document\.querySelector\('#botcontrol'\)\?\.classList\.toggle\('hidden', !isAdmin\)/, 'isi halaman Kontrol Bot harus disembunyikan total untuk member');
   assert.match(appJs, /item\.id === 'botcontrol-nav' && item\.classList\.contains\('nav-item-locked'\)/, 'klik nav Kontrol Bot yang terkunci harus dicegat');
-  assert.ok(appJs.includes("showToast('Kontrol Bot hanya untuk admin.')"), 'klik nav Kontrol Bot yang terkunci harus menampilkan pesan hanya untuk admin');
+  assert.ok(appJs.includes("showLockedNotice('Kontrol Bot')"), 'klik nav Kontrol Bot yang terkunci harus menampilkan notifikasi di tengah layar');
 });
 
 test('kartu Kontrol Bot memakai aturan yang sama dengan server: Admin Utama bisa mengelola dirinya sendiri, admin biasa tidak bisa mengontrol Admin Utama', () => {
@@ -152,6 +152,6 @@ test('entri Info Update terbaru menjelaskan halaman Kontrol Bot', () => {
   assert.match(newest.description, /Nyalakan bot|Restart bot|Matikan bot|Hapus sesi/);
   assert.match(newest.description, /Read Only, ReadSW \+ ReactionSW, Online 24 Jam/);
   assert.match(newest.description, /delay 1–20 detik serta emoji reaksi/);
-  assert.equal(infoUpdates.updatedAt, '2026-11-18T05:50:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(infoUpdates.updatedAt, '2026-11-18T07:25:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.ok(html.includes('data-tag="fitur-baru"') && html.includes('Halaman Kontrol Bot untuk admin'), 'fallback HTML Info Update harus memuat entri Kontrol Bot');
 });

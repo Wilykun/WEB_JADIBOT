@@ -71,9 +71,9 @@ test('halaman Backup hanya dibuka admin: menu terlihat tapi terkunci untuk membe
   assert.match(appJs, /\(page === 'backup' && currentUser\?\.role !== 'admin'\)/, 'setWorkspacePage harus menolak halaman Backup untuk member lewat peran, bukan hanya lewat menu yang tersembunyi');
   assert.match(appJs, /if \(page === 'backup'\) \{[\s\S]*?loadAdminBackupTelegramStatus\(\)/, 'membuka halaman Backup harus memuat ulang status Telegram');
   assert.match(appJs, /if \(page === 'backup'\) \{[\s\S]*?loadAdminBackupSnapshots\(\)/, 'membuka halaman Backup harus memuat ulang restore point');
-  // Klik menu Backup yang terkunci harus memberi tahu bahwa fitur ini hanya untuk admin, bukan diam-diam mengalihkan.
+  // Klik menu Backup yang terkunci harus menampilkan notifikasi di tengah layar, bukan diam-diam mengalihkan.
   assert.match(appJs, /item\.id === 'backup-nav' && item\.classList\.contains\('nav-item-locked'\)/, 'klik nav Backup yang terkunci harus dicegat');
-  assert.match(appJs, /showToast\('Backup hanya untuk admin\.'\)/, 'klik nav Backup yang terkunci harus menampilkan pesan Backup hanya untuk admin');
+  assert.match(appJs, /showLockedNotice\('Backup'\)/, 'klik nav Backup yang terkunci harus menampilkan notifikasi di tengah layar');
 });
 
 test('lencana Terkunci hanya tampil saat nav dikunci dan disembunyikan di rel ikon tertutup', () => {

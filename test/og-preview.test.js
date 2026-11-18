@@ -99,7 +99,7 @@ test('server menyajikan /og-image.png sebagai image/png (bukan 404)', { timeout:
 test('entri Info Update pratinjau tautan bergambar tetap ada di posisi ketujuh', () => {
   const entry = infoUpdates.updates.find((item) => item.title === 'Tautan panel kini menampilkan pratinjau bergambar saat dibagikan');
   assert.ok(entry, 'entri pratinjau tautan harus tetap ada');
-  assert.equal(infoUpdates.updates.indexOf(entry), 8, 'entri pratinjau tautan kini di posisi kesembilan');
+  assert.equal(infoUpdates.updates.indexOf(entry), 9, 'entri pratinjau tautan kini di posisi kesepuluh');
   assert.equal(entry.tag, 'Tampilan');
   assert.match(entry.description, /thumbnail 1200×630/);
   assert.ok(html.includes('data-tag="tampilan"') && html.includes('Tautan panel kini menampilkan pratinjau bergambar saat dibagikan'), 'fallback HTML Info Update harus memuat entri pratinjau tautan');

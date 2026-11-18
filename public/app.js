@@ -242,14 +242,21 @@ function showNoticeOverlay({ title, text, context, addTarget, addLabel, onAdd })
   // menampilkannya ulang (misalnya saat daftar Kontrol Bot diperbarui tiap 15 detik).
   if (!overlay.classList.contains('hidden')
     && noticeContext?.kind === nextContext.kind
-    && noticeContext?.userId === nextContext.userId) return;
+    && noticeContext?.userId === nextContext.userId
+    && noticeContext?.feature === nextContext.feature) return;
   document.querySelector('#emoji-notice-title').textContent = title;
   document.querySelector('#emoji-notice-text').textContent = text;
   const addButton = overlay.querySelector('[data-emoji-notice-add]');
-  if (addButton) addButton.textContent = addLabel || 'Tambah emoji';
+  if (addButton) {
+    // addLabel null berarti notifikasi ini tanpa tombol aksi (misalnya
+    // pemberitahuan menu terkunci): sembunyikan tombol utamanya.
+    addButton.classList.toggle('hidden', addLabel === null);
+    if (addLabel !== null) addButton.textContent = addLabel || 'Tambah emoji';
+  }
   noticeContext = nextContext;
   overlay.classList.remove('hidden');
-  addButton?.focus();
+  if (addLabel === null) overlay.querySelector('[data-emoji-notice-close]')?.focus();
+  else addButton?.focus();
 }
 function hideNoticeOverlay() {
   document.querySelector('#emoji-notice-overlay')?.classList.add('hidden');
@@ -260,6 +267,8 @@ function dismissNoticeOverlay() {
     botControlEmojiNoticeDismissed.add(noticeContext.userId);
   } else if (noticeContext?.kind === 'link') {
     botLinkNoticeDismissed = true;
+  } else if (noticeContext?.kind === 'locked') {
+    // Tanpa ingatan: notifikasi menu terkunci tampil lagi tiap kali menunya diketuk.
   } else {
     emojiNoticeDismissed = true;
   }
@@ -1039,6 +1048,18 @@ function showBotLinkNotice() {
   // ditutup dan walau member belum berada di halaman Fitur Bot.
   botLinkNoticeDismissed = false;
   showLinkNoticeOverlay();
+}
+
+// Menu terkunci untuk member (Backup / Kontrol Bot): tampilkan notifikasi di
+// tengah layar, bukan toast kecil. Admin (Admin Utama dan admin biasa) tidak
+// pernah melihat notifikasi ini karena mereka bisa membuka kedua halaman itu.
+function showLockedNotice(featureName) {
+  showNoticeOverlay({
+    title: `${featureName} hanya untuk admin`,
+    text: `${featureName} hanya bisa dibuka Admin Utama dan admin biasa. Akun member tidak bisa memakai fitur ini — hubungi admin bila butuh bantuan.`,
+    context: { kind: 'locked', feature: featureName },
+    addLabel: null,
+  });
 }
 
 let workerRuntimeTimer = null;
@@ -3005,6 +3026,10 @@ function setWorkspacePage(page, smoothScroll = true) {
   const navItem = document.querySelector(`.side-nav .nav-item[href="#${page}"]`);
   // Halaman Backup dijaga juga lewat peran (bukan hanya lewat menu yang tersembunyi), karena menunya kini terlihat tapi terkunci untuk member. Halaman Kontrol Bot dijaga dengan cara yang sama.
   if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || (page === 'backup' && currentUser?.role !== 'admin') || (page === 'botcontrol' && currentUser?.role !== 'admin') || navItem?.classList.contains('hidden')) {
+    // Upaya masuk langsung (misalnya lewat tautan #backup) juga menampilkan notifikasi yang sama.
+    if ((page === 'backup' || page === 'botcontrol') && currentUser?.role !== 'admin') {
+      showLockedNotice(page === 'backup' ? 'Backup' : 'Kontrol Bot');
+    }
     page = document.body.dataset.whatsappLinked === 'true' ? 'dashboard' : 'pairing';
   }
   // Penanda Member hanya maju saat halaman Member dibuka dengan sengaja
@@ -4801,16 +4826,16 @@ document.querySelector('#save-profile').addEventListener('click', async () => {
 
 document.querySelectorAll('.nav-item[href^="#"]').forEach((item) => {
   item.addEventListener('click', (event) => {
-    // Menu Backup yang terkunci (member) tidak bisa dibuka: beri tahu bahwa fitur ini hanya untuk admin.
+    // Menu Backup yang terkunci (member) tidak bisa dibuka: tampilkan notifikasi di tengah layar.
     if (item.id === 'backup-nav' && item.classList.contains('nav-item-locked')) {
       event.preventDefault();
-      showToast('Backup hanya untuk admin.');
+      showLockedNotice('Backup');
       return;
     }
-    // Menu Kontrol Bot yang terkunci (member) tidak bisa dibuka: beri tahu bahwa fitur ini hanya untuk admin.
+    // Menu Kontrol Bot yang terkunci (member) tidak bisa dibuka: tampilkan notifikasi di tengah layar.
     if (item.id === 'botcontrol-nav' && item.classList.contains('nav-item-locked')) {
       event.preventDefault();
-      showToast('Kontrol Bot hanya untuk admin.');
+      showLockedNotice('Kontrol Bot');
       return;
     }
     const target = document.querySelector(item.getAttribute('href'));

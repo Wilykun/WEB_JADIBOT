@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-18T05:50:00+07:00",
+  "updatedAt": "2026-11-18T07:25:00+07:00",
   "updates": [
+    {
+      "title": "Member yang mengetuk menu terkunci kini melihat notifikasi di layar",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "07.25 WIB",
+      "tag": "Tampilan",
+      "description": "Member biasa yang mengetuk menu Backup atau Kontrol Bot (yang terkunci untuk member) kini melihat notifikasi di tengah layar — kartu yang sama dengan notifikasi reaksi dan tautan WhatsApp: latar gelap, ikon peringatan, judul dan penjelasan bahwa fitur itu hanya untuk admin, serta tombol 'Tutup'; bisa juga ditutup dengan mengetuk latar atau tombol Escape. Sebelumnya hanya muncul toast kecil. Notifikasi tampil lagi tiap kali menu terkunci diketuk. Admin Utama dan admin biasa tidak melihat notifikasi ini karena mereka bisa membuka kedua halaman itu."
+    },
     {
       "title": "Tampilan Member kini lebih ringkas di HP",
       "day": "Rabu, 18 Nov 2026",
