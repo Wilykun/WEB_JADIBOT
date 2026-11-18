@@ -202,7 +202,7 @@ test('client: token + chat ID tersimpan otomatis (debounce) ke endpoint PUT, tom
   assert.match(appJs, /initAdminBackupTelegramConfig\(\)/, 'halaman Backup harus memasang auto-save saat dibuka');
   assert.match(appJs, /if \(page === 'backup'\) \{[\s\S]*?initAdminBackupTelegramConfig\(\)/, 'init auto-save harus dipanggil dari hook halaman Backup');
   assert.match(appJs, /button\.disabled = !\(configured && chatValid\)/, 'tombol kirim hanya aktif bila token dan chat sama-sama valid');
-  assert.match(appJs, /setTelegramConfigPill\('token', 'valid'\)/, 'pil token harus bisa menampilkan Valid');
+  assert.match(appJs, /setTelegramConfigPill\('token', botToken \? 'valid' : 'idle'\)/, 'pil token harus Valid hanya bila kolom token berisi token yang diperiksa');
   assert.match(appJs, /setTelegramConfigPill\('chat', result\.chatValid \? 'valid' : 'invalid'\)/, 'pil chat harus mengikuti hasil validasi chat');
   assert.ok(!appJs.includes("tokenInput.value = "), 'kolom token tidak boleh diisi ulang dari server — token tidak pernah dikembalikan');
 });
@@ -251,6 +251,28 @@ test('client: mengedit satu kolom hanya mereset pil kolom itu, dan chat saja bis
   assert.match(appJs, /setTelegramTokenHintVisible\(telegramTokenStored\)/, 'petunjuk token tersimpan harus mengikuti status dari server');
 });
 
+test('client: pil token mengikuti isi kolom — kosong berarti Belum diperiksa walau token tersimpan valid', () => {
+  const token = html.match(/<input id="admin-backup-telegram-token"[^>]*>/);
+  assert.ok(token, 'harus ada kolom token bot');
+  const tokenPlaceholder = token[0].match(/placeholder="([^"]*)"/)?.[1] || '';
+  assert.ok(!/\d/.test(tokenPlaceholder) && !tokenPlaceholder.includes(':'), 'placeholder token tidak boleh mirip token (angka/titik dua) supaya kolom kosong tidak terlihat terisi');
+  const chat = html.match(/<input id="admin-backup-telegram-chatid"[^>]*>/);
+  const chatPlaceholder = chat[0].match(/placeholder="([^"]*)"/)?.[1] || '';
+  assert.ok(!/\d/.test(chatPlaceholder), 'placeholder chat ID tidak boleh mirip angka supaya kolom kosong tidak terlihat terisi');
+  // Saat halaman dimuat, kolom token kosong (tidak pernah diisi ulang) — pil
+  // token harus Belum diperiksa walau token tersimpan sudah valid.
+  const loadFn = appJs.match(/async function loadAdminBackupTelegramStatus\(\) \{[\s\S]*?\n\}/);
+  assert.ok(loadFn, 'fungsi loadAdminBackupTelegramStatus harus bisa diekstrak dari app.js');
+  assert.ok(loadFn[0].includes("setTelegramConfigPill('token', 'idle');"), 'saat dimuat pil token harus Belum diperiksa, bukan Valid dari token tersimpan');
+  assert.ok(!loadFn[0].includes("setTelegramConfigPill('token', status.configured"), 'pil token saat dimuat tidak boleh mengikuti status tersimpan');
+  assert.ok(loadFn[0].includes("setTelegramConfigPill('chat', status.configured ? (status.chatValid ? 'valid' : 'invalid') : 'idle');"), 'pil chat saat dimuat boleh mengikuti chat tersimpan karena kolom chat memang terisi ulang');
+  // Setelah simpan berhasil, pil token hanya Valid bila kolom token berisi
+  // token yang baru diperiksa; simpan chat saja membuat pil token idle.
+  const saveFn = appJs.match(/async function saveTelegramConfig\(botToken, chatId\) \{[\s\S]*?\n\}/);
+  assert.ok(saveFn, 'fungsi saveTelegramConfig harus bisa diekstrak dari app.js');
+  assert.ok(saveFn[0].includes("setTelegramConfigPill('token', botToken ? 'valid' : 'idle');"), 'pil token setelah simpan harus mengikuti ada tidaknya token di kolom');
+});
+
 test('gaya tutorial Telegram dan anti-potong status ada dan muat di HP', () => {
   assert.ok(css.includes('#backup .telegram-target-nowrap{white-space:nowrap}'), 'nama bot dan chat harus dilarang terpotong di tengah');
   assert.ok(css.includes('#backup .telegram-tutorial{'), 'spoiler tutorial harus punya gaya sendiri');
@@ -261,7 +283,7 @@ test('gaya tutorial Telegram dan anti-potong status ada dan muat di HP', () => {
 });
 
 test('versi aset baru terpasang supaya form ini benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=rankbotovertake-20261118'), 'app.js harus memakai ?v=rankbotovertake-20261118');
+  assert.ok(html.includes('/app.js?v=telegrampill-20261118'), 'app.js harus memakai ?v=telegrampill-20261118');
   assert.ok(html.includes('/style.css?v=rankbotovertake-20261118'), 'style.css harus memakai ?v=rankbotovertake-20261118');
 });
 

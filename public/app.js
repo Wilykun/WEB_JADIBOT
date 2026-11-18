@@ -1214,7 +1214,11 @@ async function loadAdminBackupTelegramStatus() {
     // efektif, jadi keberadaannya menandai token sudah tersimpan di server.
     telegramTokenStored = Boolean(status.configured && status.chatIdValue);
     setTelegramTokenHintVisible(telegramTokenStored);
-    setTelegramConfigPill('token', status.configured ? 'valid' : 'idle');
+    // Pil token mengikuti isi kolom, bukan token tersimpan: kolom token tidak
+    // pernah diisi ulang dari server, jadi kolom kosong selalu Belum diperiksa
+    // walau token tersimpan sudah valid — kevalidan token tersimpan sudah
+    // ditunjukkan baris status dan petunjuk di bawah kolom.
+    setTelegramConfigPill('token', 'idle');
     setTelegramConfigPill('chat', status.configured ? (status.chatValid ? 'valid' : 'invalid') : 'idle');
   } catch (error) {
     target.textContent = 'Tidak dapat memeriksa pengaturan bot Telegram.';
@@ -1249,7 +1253,10 @@ async function saveTelegramConfig(botToken, chatId) {
     renderTelegramConfigStatus(result);
     telegramTokenStored = true;
     setTelegramTokenHintVisible(true);
-    setTelegramConfigPill('token', 'valid');
+    // Pil token hanya Valid bila kolom token berisi token yang baru diperiksa;
+    // simpan chat saja (kolom token kosong, memakai token tersimpan) membuat
+    // pil token kembali Belum diperiksa, bukan Valid.
+    setTelegramConfigPill('token', botToken ? 'valid' : 'idle');
     setTelegramConfigPill('chat', result.chatValid ? 'valid' : 'invalid');
     if (saveStatus) {
       saveStatus.textContent = result.chatValid
