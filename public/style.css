@@ -3228,3 +3228,22 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .rankbot-item.is-self{border-color:rgba(245,197,66,.7);background:linear-gradient(160deg,rgba(245,197,66,.14),rgba(13,25,21,.4))}
 .rankbot-item.is-self .rankbot-avatar{border-color:#f5c542;box-shadow:0 0 0 3px rgba(245,197,66,.25),0 0 14px rgba(245,197,66,.35)}
 .rankbot-self-badge{flex:0 0 auto;padding:2px 7px;border-radius:999px;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#241a02;background:linear-gradient(135deg,#f5c542,#d99a1f)}
+
+/* Status realtime di tiap baris Rank Bot (Pemilik Aktif/Tidak Aktif dan Bot
+   WhatsApp Berjalan/Menunggu/Berhenti) dan halaman Aktivitas Akun (nama,
+   avatar, dan waktu pemilik terakhir login ke web) — baris ringkas supaya
+   muat di HP 360px. */
+.rankbot-status{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px}
+.rankbot-status-item{display:inline-flex;align-items:center;gap:5px;font-size:11px;line-height:1.4;color:var(--muted);white-space:nowrap}
+.rankbot-status-item .member-detail-icon{width:12px;height:12px;flex:0 0 12px}
+.rankbot-status-item.is-active{color:#3ee69a}
+.rankbot-status-item.is-waiting{color:#f5c542}
+.rankbot-status-item.is-muted{color:var(--muted)}
+.accountactivity-list{display:flex;flex-direction:column;gap:10px}
+.accountactivity-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(160deg,rgba(39,191,115,.07),rgba(13,25,21,.4))}
+.accountactivity-avatar{flex:0 0 40px;width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(84,226,151,.35)}
+.accountactivity-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.accountactivity-name{font-size:15px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.accountactivity-login{display:inline-flex;align-items:center;gap:6px;margin:0;font-size:11px;color:var(--muted);line-height:1.45;overflow-wrap:anywhere}
+.accountactivity-login .member-detail-icon{width:13px;height:13px;flex:0 0 13px;color:var(--green2)}
+@media(max-width:560px){.accountactivity-item{gap:10px;padding:10px 10px}.accountactivity-avatar{flex-basis:34px;width:34px;height:34px}.accountactivity-name{font-size:13px}.rankbot-status-item{font-size:10px}}

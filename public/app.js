@@ -1506,6 +1506,7 @@ adminUsersList?.addEventListener('click', async (event) => {
 
 const MEMBER_ICON_PATHS = {
   crown: ['M3 8.5 6.5 12 12 6.5 17.5 12 21 8.5 19.4 18H4.6L3 8.5Z', 'M5 20.5h14'],
+  user: ['M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z', 'M5 20.5c.8-3.2 3.6-5 7-5s6.2 1.8 7 5'],
   mail: ['M3.5 6h17v12h-17z', 'm4 7 8 6 8-6'],
   shield: ['M12 3.5 19 6v5.2c0 4.2-2.7 7.1-7 9.3-4.3-2.2-7-5.1-7-9.3V6z', 'm8.7 12.1 2.1 2.1 4.5-4.6'],
   activity: ['M3 12h4l2-5 4 10 2-5h6'],
@@ -2204,7 +2205,23 @@ function renderRankBot() {
     const statsLine = document.createElement('p');
     statsLine.className = 'rankbot-stats';
     statsLine.textContent = `${reads} story dibaca · ${reactions} reaksi terkirim`;
-    identity.append(nameRow, handle, modeChip, statsLine);
+    // Status realtime tiap baris: pemilik sedang aktif di web atau tidak, dan
+    // bot WhatsApp akun itu sedang berjalan atau berhenti — dibaca dari
+    // /api/members yang sama dengan peringkatnya.
+    const statusLine = document.createElement('div');
+    statusLine.className = 'rankbot-status';
+    const ownerItem = document.createElement('span');
+    const ownerActive = Boolean(user.panelActive);
+    ownerItem.className = `rankbot-status-item${ownerActive ? ' is-active' : ' is-muted'}`;
+    ownerItem.append(createMemberIcon('user'));
+    ownerItem.append(document.createTextNode(`Pemilik · ${ownerActive ? 'Aktif' : 'Tidak Aktif'}`));
+    const botItem = document.createElement('span');
+    const botState = user.workerStatus === 'running' ? 'running' : user.workerStatus === 'waiting' ? 'waiting' : 'stopped';
+    botItem.className = `rankbot-status-item${botState === 'running' ? ' is-active' : botState === 'waiting' ? ' is-waiting' : ' is-muted'}`;
+    botItem.append(createMemberIcon('whatsapp'));
+    botItem.append(document.createTextNode(`Bot WhatsApp · ${botState === 'running' ? 'Berjalan' : botState === 'waiting' ? 'Menunggu' : 'Berhenti'}`));
+    statusLine.append(ownerItem, botItem);
+    identity.append(nameRow, handle, modeChip, statsLine, statusLine);
     const side = document.createElement('div');
     side.className = 'rankbot-side';
     const scoreBlock = document.createElement('div');
@@ -2264,6 +2281,94 @@ document.querySelector('[data-rankbot-filters]')?.addEventListener('click', (eve
   });
   renderRankBot();
 });
+
+// Halaman Aktivitas Akun: kapan tiap pemilik terakhir login ke web panel,
+// diurutkan dari yang paling baru login; diperbarui realtime tiap 15 detik.
+// Waktu login diambil dari riwayat login akun (lastLoginAt di /api/members),
+// dan hanya bila akun belum pernah tercatat login, dipakai aktivitas panel
+// terakhir (lastSeen) sebagai pengganti.
+const accountActivityList = document.querySelector('#accountactivity-users');
+let accountActivityUsers = [];
+let accountActivityTimer = null;
+
+function accountActivityLoginValue(user) {
+  if (user?.lastLoginAt) return String(user.lastLoginAt);
+  if (user?.lastSeen) return new Date(Number(user.lastSeen)).toISOString();
+  return null;
+}
+
+function accountActivityTimeLabel(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(date);
+}
+
+function renderAccountActivity() {
+  if (!accountActivityList) return;
+  const sorted = [...accountActivityUsers].sort((a, b) => {
+    const aMs = Date.parse(accountActivityLoginValue(a) || '') || 0;
+    const bMs = Date.parse(accountActivityLoginValue(b) || '') || 0;
+    return bMs - aMs;
+  });
+  accountActivityList.replaceChildren();
+  if (!sorted.length) {
+    const empty = document.createElement('p');
+    empty.className = 'member-list-empty';
+    empty.textContent = 'Belum ada akun.';
+    accountActivityList.append(empty);
+    return;
+  }
+  for (const user of sorted) {
+    const username = String(user.username || 'akun');
+    const displayName = String(user.displayName || username);
+    const timeLabel = accountActivityTimeLabel(accountActivityLoginValue(user));
+    const article = document.createElement('article');
+    article.className = 'accountactivity-item';
+    const avatarImage = document.createElement('img');
+    avatarImage.className = 'accountactivity-avatar';
+    avatarImage.width = 40;
+    avatarImage.height = 40;
+    avatarImage.loading = 'lazy';
+    avatarImage.decoding = 'async';
+    avatarImage.alt = `Avatar ${displayName}`;
+    const selectedAvatar = String(user.avatar || 'avatar-01');
+    const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
+    avatarImage.src = `/avatars/${preset}.webp`;
+    avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
+    const body = document.createElement('div');
+    body.className = 'accountactivity-body';
+    const name = document.createElement('strong');
+    name.className = 'accountactivity-name';
+    name.textContent = displayName;
+    const loginLine = document.createElement('p');
+    loginLine.className = 'accountactivity-login';
+    loginLine.append(createMemberIcon('clock'));
+    loginLine.append(document.createTextNode(timeLabel ? `Pemilik Login Ke Web · ${timeLabel} WIB` : 'Pemilik Login Ke Web · Belum pernah login'));
+    body.append(name, loginLine);
+    article.append(avatarImage, body);
+    accountActivityList.append(article);
+  }
+}
+
+async function loadAccountActivity() {
+  try {
+    const result = await api('/api/members');
+    accountActivityUsers = Array.isArray(result.users) ? result.users : [];
+    renderAccountActivity();
+    const activityUpdated = document.querySelector('#accountactivity-updated');
+    if (activityUpdated) activityUpdated.textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
+  } catch (error) {
+    if (error.status === 401) showAuth();
+  }
+}
+
+function startAccountActivityPolling() {
+  if (accountActivityTimer) return;
+  accountActivityTimer = window.setInterval(() => {
+    if (activeWorkspacePage === 'accountactivity' && document.visibilityState === 'visible') void loadAccountActivity();
+  }, 15000);
+}
 
 // Kontrol Bot: daftar bot akun lain untuk admin. Admin biasa hanya bisa
 // mengelola member, Admin Utama juga bisa mengelola admin biasa, dan Admin
@@ -3256,7 +3361,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   if (running) logPollTimer = setInterval(() => { void loadPairingLogs(); }, 4000);
 }
 
-const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot' };
+const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot', accountactivity: 'Aktivitas Akun' };
 let activeWorkspacePage = null;
 let privateLogAutoRefreshTimer = null;
 let privateLogScrollOnNextRender = false;
@@ -3370,6 +3475,11 @@ function setWorkspacePage(page, smoothScroll = true) {
     void loadRankBot();
     startRankBotPolling();
   }
+  // Halaman Aktivitas Akun memuat ulang waktu login tiap pemilik setiap kali dibuka agar angkanya selalu dari data live, bukan sisa login.
+  if (page === 'accountactivity') {
+    void loadAccountActivity();
+    startAccountActivityPolling();
+  }
   // Halaman Pairing memuat pustaka nomor telepon hanya saat dibuka, supaya
   // halaman login tidak ikut mengunduh file 252 KB itu di awal.
   if (page === 'pairing') {
@@ -3404,6 +3514,7 @@ function renderLinkGate(pairing) {
   const adminVisible = Boolean(currentUser);
   document.querySelector('#admin')?.classList.toggle('hidden', !adminVisible);
   document.querySelector('#rankbot')?.classList.remove('hidden');
+  document.querySelector('#accountactivity')?.classList.remove('hidden');
   document.querySelector('#admin-nav')?.classList.toggle('hidden', !adminVisible);
   document.querySelector('.side-nav .nav-item[href="#dashboard"]')?.classList.toggle('hidden', !hasLinkedSession);
   document.querySelector('.side-nav .nav-item[href="#activity"]')?.classList.toggle('hidden', !hasLinkedSession);

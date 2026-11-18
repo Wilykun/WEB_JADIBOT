@@ -101,17 +101,17 @@ test('baris akun sendiri dibedakan warna emas dan lencana Kamu di Rank Bot', () 
 test('entri Info Update terbaru menjelaskan notifikasi salip Rank Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T13:10:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 66, 'daftar harus bertambah satu entri');
-  const newest = data.updates[0];
-  assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri terbaru harus menjelaskan notifikasi salip Rank Bot');
+  assert.equal(data.updatedAt, '2026-11-18T15:45:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 67, 'daftar harus bertambah satu entri');
+  const newest = data.updates[1];
+  assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
   assert.equal(newest.time, '13.10 WIB', 'waktu entri terbaru harus cocok');
   assert.ok(newest.description.includes('kartu notifikasi di tengah layar'), 'entri terbaru harus menjelaskan kartu notifikasi salip');
   assert.ok(newest.description.includes('Wush!'), 'entri terbaru harus menyebut kata kocak kartu salip');
   assert.ok(newest.description.includes('lencana Kamu'), 'entri terbaru harus menjelaskan lencana Kamu di baris akun sendiri');
-  assert.ok(html.includes('<h4>Rank Bot kini memberi tahu saat ada yang menyalip</h4>'), 'fallback harus memuat judul entri terbaru');
-  assert.ok(html.includes('Rabu, 18 Nov 2026 · 13.10 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri terbaru');
+  assert.ok(html.includes('<h4>Rank Bot kini memberi tahu saat ada yang menyalip</h4>'), 'fallback harus memuat judul entri salip');
+  assert.ok(html.includes('Rabu, 18 Nov 2026 · 13.10 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri salip');
   assert.ok(html.includes('kartu notifikasi di tengah layar'), 'fallback harus memuat penjelasan kartu notifikasi salip');
 });

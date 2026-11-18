@@ -35,7 +35,7 @@ test('menu sidebar dikelompokkan jadi 4 kategori dengan label dan garis pemisah'
   }
   if (current.length) groups.push(current);
   assert.deepEqual(groups, [
-    ['rankbot', 'dashboard', 'profile'],
+    ['rankbot', 'accountactivity', 'dashboard', 'profile'],
     ['mode', 'pairing', 'activity'],
     ['developer', 'infoupdate', 'server', 'bots', 'admin'],
     ['backup', 'botcontrol'],

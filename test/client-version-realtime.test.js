@@ -127,9 +127,9 @@ test('menu tetap terbuka setelah notifikasi menu terkunci ditutup', async () => 
 test('entri Info Update terbaru menjelaskan tab yang diperbarui sendiri', async () => {
   const data = JSON.parse(await readFile(path.join(sourceRoot, 'public', 'info-updates.json'), 'utf8'));
   const html = await readFile(path.join(sourceRoot, 'public', 'index.html'), 'utf8');
-  assert.equal(data.updates.length, 66, 'daftar harus 66 entri');
+  assert.equal(data.updates.length, 67, 'daftar harus 67 entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri terbaru harus soal notifikasi salip Rank Bot');
+  assert.equal(newest.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri terbaru harus soal status Rank Bot dan halaman Aktivitas Akun');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
   assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'fallback harus memakai slug fitur-baru untuk entri terbaru');
@@ -137,7 +137,7 @@ test('entri Info Update terbaru menjelaskan tab yang diperbarui sendiri', async 
 
   // Entri notifikasi menu terkunci sebelumnya kini di posisi kelima; deskripsinya
   // menyebut menunya tetap terbuka setelah notifikasi ditutup.
-  const locked = data.updates[4];
-  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi kelima');
+  const locked = data.updates[5];
+  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi keenam');
   assert.match(locked.description, /Menunya tetap terbuka setelah notifikasi ditutup/, 'deskripsi harus menyebut menu tetap terbuka');
 });

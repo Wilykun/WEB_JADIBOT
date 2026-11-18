@@ -1,0 +1,210 @@
+// Halaman Aktivitas Akun + status realtime di tiap baris Rank Bot:
+// - Rank Bot: tiap baris menampilkan "Pemilik · Aktif/Tidak Aktif" dan
+//   "Bot WhatsApp · Berjalan/Menunggu/Berhenti" dari /api/members.
+// - Aktivitas Akun: halaman baru di bawah Rank Bot yang hanya menampilkan
+//   nama, avatar, dan waktu pemilik terakhir login ke web (hari, tanggal,
+//   bulan, tahun, jam WIB), diurutkan dari yang paling baru login.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { spawn } from 'node:child_process';
+import { randomBytes, randomUUID, scryptSync } from 'node:crypto';
+import fs from 'node:fs';
+import { cp, mkdtemp, mkdir, symlink, writeFile } from 'node:fs/promises';
+import net from 'node:net';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const read = (rel) => fs.readFileSync(path.join(repoRoot, rel), 'utf8');
+const html = read('public/index.html');
+const css = read('public/style.css');
+const appJs = read('public/app.js');
+const serverJs = read('server/index.js');
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+test('menu Aktivitas Akun ada tepat di bawah Rank Bot dan bisa dilihat semua akun', () => {
+  const rankIndex = html.indexOf('id="rankbot-nav"');
+  const navIndex = html.indexOf('id="accountactivity-nav"');
+  assert.ok(navIndex > -1, 'menu Aktivitas Akun harus ada di sidebar');
+  assert.ok(navIndex > rankIndex, 'menu Aktivitas Akun harus berada di bawah Rank Bot');
+  assert.ok(navIndex < html.indexOf('href="#profile"'), 'menu Aktivitas Akun harus tetap di kelompok Utama');
+  assert.ok(html.includes('href="#accountactivity"'), 'menu Aktivitas Akun harus membuka halaman Aktivitas Akun');
+  assert.ok(html.includes('Aktivitas Akun</a>'), 'menu Aktivitas Akun harus bernama Aktivitas Akun');
+  const navTag = html.slice(navIndex, html.indexOf('</a>', navIndex));
+  assert.ok(navTag.includes('<svg'), 'menu Aktivitas Akun harus punya ikon SVG sesuai konteks');
+  const navClasses = navTag.match(/class="([^"]*)"/)?.[1] || '';
+  assert.ok(!navClasses.split(/\s+/).includes('hidden'), 'menu Aktivitas Akun tidak boleh tersembunyi');
+  assert.ok(!navClasses.split(/\s+/).includes('nav-item-locked'), 'menu Aktivitas Akun tidak boleh terkunci untuk member');
+});
+
+test('halaman Aktivitas Akun hanya menampilkan nama, avatar, dan waktu login web tiap pemilik', () => {
+  assert.ok(html.includes('<section id="accountactivity"'), 'halaman Aktivitas Akun harus ada');
+  assert.ok(html.includes('data-page-view="accountactivity"'), 'halaman Aktivitas Akun harus ikut sistem halaman workspace');
+  assert.ok(html.includes('<h2 id="accountactivity-title">Aktivitas Akun</h2>'), 'halaman Aktivitas Akun harus berjudul Aktivitas Akun');
+  assert.ok(html.includes('id="accountactivity-users"'), 'halaman Aktivitas Akun harus punya wadah daftar akun');
+  assert.ok(html.includes('id="accountactivity-updated"'), 'halaman Aktivitas Akun harus punya penanda waktu diperbarui');
+  assert.ok(appJs.includes("accountactivity: 'Aktivitas Akun'"), 'judul halaman Aktivitas Akun harus terdaftar di workspacePageTitles');
+  assert.ok(appJs.includes("document.querySelector('#accountactivity')?.classList.remove('hidden');"), 'halaman Aktivitas Akun harus dibuka setelah login supaya klik menu tidak tertahan');
+  assert.ok(appJs.includes('function loadAccountActivity()'), 'harus ada pemuat daftar Aktivitas Akun');
+  assert.ok(appJs.includes("const result = await api('/api/members');"), 'Aktivitas Akun harus dibaca dari /api/members yang bisa dibuka semua akun yang login');
+  assert.ok(appJs.includes('function renderAccountActivity()'), 'harus ada perender daftar Aktivitas Akun');
+  assert.ok(appJs.includes("article.className = 'accountactivity-item';"), 'setiap baris harus berbentuk kartu akun');
+  assert.ok(appJs.includes("avatarImage.className = 'accountactivity-avatar';"), 'setiap baris harus menampilkan avatar profil');
+  assert.ok(appJs.includes("name.className = 'accountactivity-name';"), 'setiap baris harus menampilkan nama pemilik');
+  assert.ok(appJs.includes("loginLine.className = 'accountactivity-login';"), 'setiap baris harus menampilkan baris waktu login');
+  assert.ok(appJs.includes("`Pemilik Login Ke Web · ${timeLabel} WIB`"), 'baris waktu harus bernama Pemilik Login Ke Web dengan jam WIB');
+  assert.ok(appJs.includes("'Pemilik Login Ke Web · Belum pernah login'"), 'akun yang belum pernah login harus tertulis Belum pernah login');
+  assert.ok(appJs.includes("loginLine.append(createMemberIcon('clock'));"), 'baris waktu harus memakai ikon jam SVG sesuai konteks');
+});
+
+test('waktu login diambil dari riwayat login, diurutkan dari yang paling baru', () => {
+  assert.ok(appJs.includes('function accountActivityLoginValue(user)'), 'harus ada fungsi pengambil waktu login tiap akun');
+  assert.ok(appJs.includes('if (user?.lastLoginAt) return String(user.lastLoginAt);'), 'waktu login harus memakai riwayat login (lastLoginAt) bila ada');
+  assert.ok(appJs.includes('if (user?.lastSeen) return new Date(Number(user.lastSeen)).toISOString();'), 'bila belum ada riwayat login, dipakai aktivitas panel terakhir sebagai pengganti');
+  assert.ok(appJs.includes('function accountActivityTimeLabel(value)'), 'harus ada fungsi pemformat waktu login');
+  const timeFn = appJs.match(/function accountActivityTimeLabel\(value\) \{[\s\S]*?\n\}/);
+  assert.ok(timeFn, 'fungsi accountActivityTimeLabel harus bisa diekstrak dari app.js');
+  const label = eval(`(${timeFn[0].replace('function accountActivityTimeLabel', 'function')})`);
+  assert.equal(label('2026-11-18T08:24:00.000Z'), 'Rabu, 18 Nov 2026, 15.24', 'waktu login harus berformat hari, tanggal, bulan, tahun, jam WIB');
+  assert.equal(label(null), null, 'waktu kosong harus menghasilkan null supaya tampil Belum pernah login');
+  assert.equal(label('bukan-tanggal'), null, 'waktu tidak valid harus menghasilkan null');
+  assert.ok(appJs.includes('return bMs - aMs;'), 'daftar harus diurutkan dari yang paling baru login');
+});
+
+test('Aktivitas Akun diperbarui realtime tiap 15 detik saat halamannya dibuka', () => {
+  assert.ok(appJs.includes('function startAccountActivityPolling()'), 'harus ada polling Aktivitas Akun');
+  assert.ok(appJs.includes("if (activeWorkspacePage === 'accountactivity' && document.visibilityState === 'visible') void loadAccountActivity();"), 'polling harus berjalan tiap 15 detik saat halaman Aktivitas Akun dibuka');
+  assert.ok(appJs.includes("if (page === 'accountactivity') {\n    void loadAccountActivity();\n    startAccountActivityPolling();\n  }"), 'membuka Aktivitas Akun harus langsung memuat daftar');
+});
+
+test('setiap baris Rank Bot menampilkan status pemilik dan status bot WhatsApp realtime', () => {
+  assert.ok(appJs.includes("statusLine.className = 'rankbot-status';"), 'setiap baris Rank Bot harus punya baris status');
+  assert.ok(appJs.includes("ownerItem.append(createMemberIcon('user'));"), 'status pemilik harus memakai ikon orang SVG');
+  assert.ok(appJs.includes("`Pemilik · ${ownerActive ? 'Aktif' : 'Tidak Aktif'}`"), 'status pemilik harus berbunyi Pemilik · Aktif atau Pemilik · Tidak Aktif');
+  assert.ok(appJs.includes("ownerActive = Boolean(user.panelActive);") || appJs.includes('const ownerActive = Boolean(user.panelActive);'), 'status pemilik harus dibaca dari panelActive /api/members');
+  assert.ok(appJs.includes("botItem.append(createMemberIcon('whatsapp'));"), 'status bot harus memakai ikon WhatsApp SVG');
+  assert.ok(appJs.includes("`Bot WhatsApp · ${botState === 'running' ? 'Berjalan' : botState === 'waiting' ? 'Menunggu' : 'Berhenti'}`"), 'status bot harus berbunyi Bot WhatsApp · Berjalan/Menunggu/Berhenti');
+  assert.ok(appJs.includes("user.workerStatus === 'running' ? 'running' : user.workerStatus === 'waiting' ? 'waiting' : 'stopped'"), 'status bot harus dibaca dari workerStatus /api/members');
+  assert.ok(appJs.includes("identity.append(nameRow, handle, modeChip, statsLine, statusLine);"), 'baris status harus berada di bawah statistik peringkat');
+  assert.ok(css.includes('.rankbot-status{'), 'baris status Rank Bot harus punya gaya sendiri');
+  assert.ok(css.includes('.rankbot-status-item.is-active{'), 'status aktif/berjalan harus berwarna hijau');
+  assert.ok(css.includes('.rankbot-status-item.is-waiting{'), 'status menunggu harus berwarna kuning');
+  assert.ok(css.includes('.rankbot-status-item.is-muted{'), 'status tidak aktif/berhenti harus berwarna redup');
+  assert.ok(css.includes('@media(max-width:560px){.accountactivity-item{gap:10px;padding:10px 10px}'), 'di HP baris Aktivitas Akun harus makin ringkas agar muat');
+});
+
+test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => {
+  assert.match(serverJs, /const last = \(store\.loginHistory \|\| \[\]\)\.filter\(\(entry\) => entry\.userId === item\.id\)\.at\(-1\);/, 'handler /api/members harus membaca riwayat login terakhir tiap akun');
+  assert.match(serverJs, /lastLoginAt: last\?\.createdAt \|\| null,/, '/api/members harus mengembalikan lastLoginAt tiap akun');
+});
+
+test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
+  assert.ok(html.includes('/app.js?v=accountactivity-20261118'), 'app.js harus memakai ?v=accountactivity-20261118');
+  assert.ok(html.includes('/style.css?v=accountactivity-20261118'), 'style.css harus memakai ?v=accountactivity-20261118');
+});
+
+test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivitas Akun', () => {
+  const data = JSON.parse(read('public/info-updates.json'));
+  assert.equal(data.updatedAt, '2026-11-18T15:45:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 67, 'daftar harus bertambah satu entri');
+  const newest = data.updates[0];
+  assert.equal(newest.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri terbaru harus menjelaskan kedua fitur baru');
+  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
+  assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
+  assert.equal(newest.time, '15.45 WIB', 'waktu entri terbaru harus cocok');
+  assert.ok(newest.description.includes('Pemilik · Aktif'), 'entri harus menjelaskan status pemilik di Rank Bot');
+  assert.ok(newest.description.includes('Bot WhatsApp · Berjalan'), 'entri harus menjelaskan status bot di Rank Bot');
+  assert.ok(newest.description.includes('Aktivitas Akun'), 'entri harus menjelaskan halaman Aktivitas Akun');
+  assert.ok(newest.description.includes('Pemilik Login Ke Web'), 'entri harus menjelaskan baris waktu login di halaman Aktivitas Akun');
+  assert.ok(html.includes('<h4>Status pemilik &amp; bot di Rank Bot, plus halaman Aktivitas Akun</h4>'), 'fallback harus memuat judul entri terbaru');
+  assert.ok(html.includes('Pemilik Login Ke Web'), 'fallback harus memuat baris waktu login');
+});
+
+function fixtureUser(username, email, role, password) {
+  const salt = randomBytes(16).toString('hex');
+  const passwordHash = scryptSync(password, salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 }).toString('hex');
+  return { id: randomUUID(), username, email, displayName: username, avatar: 'avatar-01', role, salt, passwordHash, verified: true, createdAt: new Date().toISOString() };
+}
+
+async function unusedPort() {
+  const server = net.createServer();
+  await new Promise((resolve, reject) => server.listen(0, '127.0.0.1', resolve).once('error', reject));
+  const { port } = server.address();
+  await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
+  return port;
+}
+
+async function jsonRequest(base, route, { method = 'GET', body, cookie } = {}) {
+  const headers = { Origin: base, Accept: 'application/json' };
+  if (body !== undefined) headers['Content-Type'] = 'application/json';
+  if (cookie) headers.Cookie = cookie;
+  const response = await fetch(`${base}${route}`, {
+    method,
+    headers,
+    ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+    signal: AbortSignal.timeout(5000),
+  });
+  const payload = await response.json();
+  return { status: response.status, payload, cookie: response.headers.get('set-cookie')?.split(';')[0] || null };
+}
+
+test('server: /api/members mengembalikan lastLoginAt dari riwayat login dan panelActive dari sesi yang hidup', { timeout: 60_000 }, async () => {
+  const temp = await mkdtemp(path.join(os.tmpdir(), 'readsw-account-activity-test-'));
+  const root = path.join(temp, 'project');
+  const dataDir = path.join(root, 'runtime-data');
+  const adminPassword = 'FixtureAdmin-Only-Password!';
+  const memberPassword = 'FixtureMember-Only-Password!';
+  const secret = randomBytes(48).toString('base64url');
+  let child;
+  try {
+    await mkdir(root, { recursive: true });
+    await cp(path.join(repoRoot, 'server'), path.join(root, 'server'), { recursive: true });
+    await cp(path.join(repoRoot, 'public'), path.join(root, 'public'), { recursive: true });
+    await cp(path.join(repoRoot, 'package.json'), path.join(root, 'package.json'));
+    await symlink(path.join(repoRoot, 'node_modules'), path.join(root, 'node_modules'), 'dir');
+    await mkdir(dataDir, { recursive: true });
+    const admin = fixtureUser('fixtureadmin', 'fixtureadmin@example.test', 'admin', adminPassword);
+    const member = fixtureUser('fixturemember', 'fixturemember@example.test', 'member', memberPassword);
+    await writeFile(path.join(dataDir, 'store.json'), JSON.stringify({
+      users: [admin, member], pendingRegistrations: [], bots: [], sessions: [], pairingLogs: [],
+      loginHistory: [{ id: randomUUID(), userId: member.id, sid: null, ip: '127.0.0.1', userAgent: 'test', device: 'unknown', createdAt: '2026-11-18T06:00:00.000Z' }],
+    }));
+
+    const port = await unusedPort();
+    const base = `http://127.0.0.1:${port}`;
+    const env = {
+      ...process.env,
+      HOST: '127.0.0.1', PORT: String(port), PANEL_DATA_DIR: 'runtime-data', SESSION_SECRET: secret, NODE_ENV: 'test',
+    };
+    child = spawn(process.execPath, [path.join(root, 'server/index.js')], { cwd: root, env, stdio: 'ignore' });
+    let ready = false;
+    for (let attempt = 0; attempt < 100; attempt += 1) {
+      if (child.exitCode !== null) throw new Error(`fixture server exited with code ${child.exitCode}`);
+      try {
+        const response = await fetch(`${base}/api/health`, { signal: AbortSignal.timeout(500) });
+        if (response.ok) { ready = true; break; }
+      } catch { /* Wait briefly for local fixture startup. */ }
+      await wait(100);
+    }
+    assert.equal(ready, true, 'isolated fixture server should start');
+
+    const unauthenticated = await jsonRequest(base, '/api/members');
+    assert.equal(unauthenticated.status, 401, '/api/members harus menolak tanpa login');
+    const adminLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixtureadmin', password: adminPassword } });
+    assert.equal(adminLogin.status, 200, 'admin fixture harus bisa login');
+    const members = await jsonRequest(base, '/api/members', { cookie: adminLogin.cookie });
+    assert.equal(members.status, 200, 'admin harus bisa membaca /api/members');
+    const byName = Object.fromEntries(members.payload.users.map((item) => [item.username, item]));
+    assert.equal(byName.fixturemember.lastLoginAt, '2026-11-18T06:00:00.000Z', 'member dengan riwayat login harus mengembalikan waktu login terakhirnya');
+    assert.equal(byName.fixturemember.panelActive, false, 'member yang tidak punya sesi hidup harus tertulis tidak aktif');
+    assert.equal(byName.fixturemember.workerStatus, 'stopped', 'member tanpa worker harus tertulis berhenti');
+    assert.ok(byName.fixtureadmin.lastLoginAt, 'admin yang baru login harus punya waktu login terakhir');
+    assert.ok(Math.abs(Date.parse(byName.fixtureadmin.lastLoginAt) - Date.now()) < 60_000, 'waktu login admin harus baru saja (dari login di tes ini)');
+    assert.equal(byName.fixtureadmin.panelActive, true, 'admin yang baru login harus tertulis aktif');
+    assert.equal(byName.fixtureadmin.workerStatus, 'stopped', 'admin tanpa worker harus tertulis berhenti');
+  } finally {
+    if (child && child.exitCode === null) child.kill('SIGTERM');
+    await fs.promises.rm(temp, { recursive: true, force: true });
+  }
+});

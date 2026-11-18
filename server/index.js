@@ -2622,6 +2622,7 @@ async function handleApi(req, res, url) {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
     const activeSince = Date.now() - 75_000;
     const users = await Promise.all((store.users || []).map(async (item) => {
+      const last = (store.loginHistory || []).filter((entry) => entry.userId === item.id).at(-1);
       const userSessions = (store.sessions || []).filter((session) => session.userId === item.id);
       const latestPanelSession = [...userSessions]
         .sort((a, b) => Number(b.lastSeen || 0) - Number(a.lastSeen || 0))[0];
@@ -2643,6 +2644,7 @@ async function handleApi(req, res, url) {
         panelActive: Boolean(activeSession),
         lastSeen: latestPanelSession?.lastSeen || null,
         lastSeenSource: latestPanelSession?.lastSeen ? 'panel' : null,
+        lastLoginAt: last?.createdAt || null,
         hasBotProfile: (store.bots || []).some((bot) => bot.userId === item.id),
         whatsappStatus: pairing?.status || 'not_connected',
         whatsappNumberMasked: pairing?.maskedPhone || null,
