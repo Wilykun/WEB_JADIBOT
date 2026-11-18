@@ -97,14 +97,14 @@ test('server menyajikan aset terkompres dan ter-cache sesuai aturan', { timeout:
     assert.equal(plain.headers['content-encoding'], undefined, 'tanpa Accept-Encoding gzip, jawaban tidak boleh gzip');
     assert.equal(plain.body.length, appJs.length, 'isi tanpa gzip harus utuh');
 
-    const versioned = await rawGet('/app.js?v=perf-20261117', { 'Accept-Encoding': 'gzip' });
+    const versioned = await rawGet('/app.js?v=lockednotice-20261118', { 'Accept-Encoding': 'gzip' });
     assert.match(versioned.headers['cache-control'] || '', /public, max-age=31536000, immutable/, 'app.js berversi harus immutable setahun');
     assert.equal(versioned.headers['content-encoding'], 'gzip', 'app.js berversi tetap boleh gzip');
 
     const versionedCss = await rawGet('/style.css?v=fiturbot-v2-20261117');
     assert.match(versionedCss.headers['cache-control'] || '', /immutable/, 'style.css berversi harus immutable');
 
-    const home = await rawGet('/?v=perf-20261117', { 'Accept-Encoding': 'gzip' });
+    const home = await rawGet('/?v=lockednotice-20261118', { 'Accept-Encoding': 'gzip' });
     assert.match(home.headers['cache-control'] || '', /no-store/, 'halaman utama tidak boleh immutable walau ada ?v=');
     assert.equal(home.headers['content-encoding'], 'gzip', 'halaman utama tetap boleh gzip');
 
