@@ -76,6 +76,19 @@ test('urutan Aktivitas Akun: akun sendiri paling atas, lalu pemilik aktif, baru 
   assert.ok(css.includes('.accountactivity-namerow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0}'), 'baris nama harus membungkus chip peran ke baris berikut bila sempit, jadi nama akun tidak terpotong seperti di Rank Bot (bug 18 Nov 18.46)');
 });
 
+test('titik online di sudut avatar: hijau bila pemilik sedang membuka panel (ala Facebook)', () => {
+  const appJs = read('public/app.js');
+  assert.ok(appJs.includes("avatarWrap.className = 'accountactivity-avatar-wrap';"), 'avatar harus dibungkus supaya titik online bisa menempel di sudutnya');
+  assert.ok(appJs.includes("if (user.panelActive) {"), 'titik online hanya untuk pemilik yang sedang aktif di panel');
+  assert.ok(appJs.includes("onlineDot.className = 'accountactivity-online-dot';"), 'titik online harus memakai kelas sendiri');
+  assert.ok(appJs.includes("onlineDot.title = 'Online';"), 'titik online harus berlabel Online');
+  assert.ok(appJs.includes('article.append(avatarWrap, body);'), 'baris harus memakai pembungkus avatar, bukan gambarnya langsung');
+  const css = read('public/style.css');
+  assert.ok(css.includes('.accountactivity-avatar-wrap{position:relative;flex:0 0 40px;width:40px;height:40px}'), 'pembungkus avatar harus jadi jangkar posisi titik online');
+  assert.ok(css.includes('.accountactivity-online-dot{position:absolute;right:0;bottom:0;width:12px;height:12px;border-radius:50%;background:#3ee69a;border:2px solid #08110e;box-shadow:0 0 6px rgba(62,230,154,.55)}'), 'titik online harus hijau di sudut kanan bawah avatar dengan cincin sewarna latar');
+  assert.ok(css.includes('.accountactivity-avatar-wrap{flex-basis:34px;width:34px;height:34px}.accountactivity-online-dot{width:10px;height:10px}'), 'di HP pembungkus avatar dan titik online harus mengecil');
+});
+
 test('waktu login diambil dari riwayat login, diurutkan dari yang paling baru', () => {
   assert.ok(appJs.includes('function accountActivityLoginValue(user)'), 'harus ada fungsi pengambil waktu login tiap akun');
   assert.ok(appJs.includes('const loginMs = user?.lastLoginAt ? Date.parse(String(user.lastLoginAt)) : NaN;'), 'waktu login harus dibaca dari riwayat login (lastLoginAt)');
@@ -190,8 +203,8 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=rankbot-name-20261118'), 'app.js harus memakai ?v=rankbot-name-20261118');
-  assert.ok(html.includes('/style.css?v=rankbot-name-20261118'), 'style.css harus memakai ?v=rankbot-name-20261118');
+  assert.ok(html.includes('/app.js?v=rankbot-climb-dot-20261118'), 'app.js harus memakai ?v=rankbot-climb-dot-20261118');
+  assert.ok(html.includes('/style.css?v=rankbot-climb-dot-20261118'), 'style.css harus memakai ?v=rankbot-climb-dot-20261118');
 });
 
 test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivitas Akun', () => {

@@ -85,6 +85,30 @@ test('kartu salip memakai ikon sendiri dan menutupnya tidak mematikan pengingat 
   assert.ok(!branch.slice(0, branch.indexOf('} else')).includes('emojiNoticeDismissed = true'), 'menutup kartu salip tidak boleh mematikan pengingat reaksi emoji');
 });
 
+test('notifikasi naik peringkat: kartunya beda dari kartu salip (judul, ikon, kata pembuka khusus)', () => {
+  const js = read('public/app.js');
+  assert.ok(js.includes('function notifyRankBotClimb(event, live)'), 'harus ada fungsi notifikasi naik peringkat sendiri');
+  assert.ok(js.includes("context: { kind: 'rankclimb'"), 'kartu naik peringkat harus memakai konteks rankclimb sendiri, bukan rankovertake');
+  assert.ok(js.includes("title: isTop ? 'Kamu nomor 1 di Rank Bot!' : 'Kamu naik peringkat!'"), 'judul kartu harus merayakan yang login: nomor 1 atau naik peringkat');
+  assert.ok(js.includes("icon: isTop ? '👑' : '🚀'"), 'ikon kartu harus mahkota untuk nomor 1 dan roket untuk naik peringkat, bukan trofi salip');
+  assert.ok(js.includes("const openers = isTop ? ['Puncak!', 'Juara!', 'Nomor satu!'] : ['Gas!', 'Naik terus!', 'Makin dekat ke puncak!'];"), 'kata pembuka kartu harus beda dari kata kocak kartu salip');
+  assert.ok(js.includes('Kamu menyalip ${overtakenName} dan kini #${event.newPosition} (dari #${event.oldPosition})'), 'teks kartu harus menyebut siapa yang disalip dan posisi lama ke baru');
+  assert.ok(js.includes('Sejak terakhir kamu lihat, kamu menyalip'), 'naik peringkat selagi halaman ditinggal harus dijelaskan begitu');
+  assert.ok(js.includes("addLabel: null,"), 'kartu naik peringkat tidak perlu tombol aksi, cukup Tutup');
+});
+
+test('naik peringkat sendiri didahulukan dari salip orang lain dan menutupnya tidak mematikan pengingat lain', () => {
+  const js = read('public/app.js');
+  const checker = js.slice(js.indexOf('function checkRankBotOvertakes()'), js.indexOf('function renderRankBot()'));
+  assert.ok(checker.includes("const climb = viewer ? fresh.find((item) => item.overtaker === viewer) : null;"), 'salip oleh yang login harus dikenali sebagai naik peringkat sendiri');
+  assert.ok(checker.includes('if (climb) notifyRankBotClimb(climb, rankOvertakeSeen);'), 'naik peringkat sendiri harus didahulukan dari kartu salip biasa');
+  assert.ok(checker.includes('else if (fresh[0]) notifyRankBotOvertake(fresh[0], rankOvertakeSeen);'), 'salip orang lain tetap memakai kartu salip biasa bila yang login tidak naik');
+  const dismiss = js.slice(js.indexOf('function dismissNoticeOverlay()'), js.indexOf('function syncStoryEmojiNotice()'));
+  assert.ok(dismiss.includes("noticeContext?.kind === 'rankclimb'"), 'dismiss harus punya cabang sendiri untuk rankclimb');
+  const branch = dismiss.slice(dismiss.indexOf("kind === 'rankclimb'"));
+  assert.ok(!branch.slice(0, branch.indexOf('} else')).includes('emojiNoticeDismissed = true'), 'menutup kartu naik peringkat tidak boleh mematikan pengingat reaksi emoji');
+});
+
 test('baris akun sendiri dibedakan warna emas dan lencana Kamu di Rank Bot', () => {
   const js = read('public/app.js');
   assert.ok(js.includes("const isSelf = Boolean(currentUser && String(currentUser.username || '') === username);"), 'baris sendiri harus dikenali dari akun yang sedang login');

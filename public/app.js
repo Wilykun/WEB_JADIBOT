@@ -282,6 +282,9 @@ function dismissNoticeOverlay() {
   } else if (noticeContext?.kind === 'rankovertake') {
     // Tanpa ingatan: tiap salip baru tampil lagi, dan menutup kartu ini
     // tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
+  } else if (noticeContext?.kind === 'rankclimb') {
+    // Tanpa ingatan: tiap naik peringkat baru tampil lagi, dan menutup kartu
+    // ini tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
   } else if (noticeContext?.kind === 'accountactivitylogin') {
     // Tanpa ingatan: tiap login baru tampil lagi, dan menutup kartu ini
     // tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
@@ -2120,6 +2123,26 @@ function notifyRankBotOvertake(event, live) {
   });
   rankOvertakeNotified.set(`${event.overtaker}>${event.overtaken}`, Date.now());
 }
+function notifyRankBotClimb(event, live) {
+  const overtakenName = rankOvertakeDisplayName(event.overtaken);
+  const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date());
+  const isTop = event.newPosition === 1;
+  const openers = isTop ? ['Puncak!', 'Juara!', 'Nomor satu!'] : ['Gas!', 'Naik terus!', 'Makin dekat ke puncak!'];
+  const opener = openers[(event.overtaker.length + event.newPosition) % openers.length];
+  const text = live
+    ? `${opener} Kamu menyalip ${overtakenName} dan kini #${event.newPosition} (dari #${event.oldPosition}). ${when} WIB.`
+    : `Sejak terakhir kamu lihat, kamu menyalip ${overtakenName} dan kini #${event.newPosition} (dari #${event.oldPosition}). ${when} WIB.`;
+  const overtaken = rankBotUsers.find((item) => String(item.username || '') === event.overtaken);
+  const viewer = rankBotUsers.find((item) => String(item.username || '') === event.overtaker);
+  showNoticeOverlay({
+    title: isTop ? 'Kamu nomor 1 di Rank Bot!' : 'Kamu naik peringkat!',
+    text,
+    context: { kind: 'rankclimb', userId: viewer?.id || event.overtaker, feature: overtaken?.id || event.overtaken },
+    addLabel: null,
+    icon: isTop ? '👑' : '🚀',
+  });
+  rankOvertakeNotified.set(`${event.overtaker}>${event.overtaken}`, Date.now());
+}
 function checkRankBotOvertakes() {
   const current = rankBotOrderUsernames(rankBotUsers);
   if (!current.length) return;
@@ -2129,8 +2152,13 @@ function checkRankBotOvertakes() {
     // Satu kartu per muat ulang (yang paling dekat ke puncak), dan pasangan
     // yang sama tidak diberitakan lagi dalam 10 menit supaya salip bolak-balik
     // tidak membanjiri layar.
-    const fresh = events.find((item) => (Date.now() - (rankOvertakeNotified.get(`${item.overtaker}>${item.overtaken}`) || 0)) > 10 * 60 * 1000);
-    if (fresh) notifyRankBotOvertake(fresh, rankOvertakeSeen);
+    const fresh = events.filter((item) => (Date.now() - (rankOvertakeNotified.get(`${item.overtaker}>${item.overtaken}`) || 0)) > 10 * 60 * 1000);
+    // Naik peringkat sendiri didahulukan dan kartunya beda dari kartu salip
+    // biasa: judul, ikon, dan kata pembukanya khusus untuk yang login.
+    const viewer = String(currentUser?.username || '');
+    const climb = viewer ? fresh.find((item) => item.overtaker === viewer) : null;
+    if (climb) notifyRankBotClimb(climb, rankOvertakeSeen);
+    else if (fresh[0]) notifyRankBotOvertake(fresh[0], rankOvertakeSeen);
   }
   rankOvertakeSnapshot = current;
   rankOvertakeSeen = true;
@@ -2355,6 +2383,8 @@ function renderAccountActivity() {
     const isSelf = Boolean(viewer && username === viewer);
     const article = document.createElement('article');
     article.className = `accountactivity-item${isSelf ? ' is-self' : ''}`;
+    const avatarWrap = document.createElement('span');
+    avatarWrap.className = 'accountactivity-avatar-wrap';
     const avatarImage = document.createElement('img');
     avatarImage.className = 'accountactivity-avatar';
     avatarImage.width = 40;
@@ -2366,6 +2396,15 @@ function renderAccountActivity() {
     const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
     avatarImage.src = `/avatars/${preset}.webp`;
     avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
+    avatarWrap.append(avatarImage);
+    // Titik online ala Facebook di sudut avatar: hijau bila pemilik akun
+    // sedang membuka panel, tidak ada bila tidak aktif.
+    if (user.panelActive) {
+      const onlineDot = document.createElement('span');
+      onlineDot.className = 'accountactivity-online-dot';
+      onlineDot.title = 'Online';
+      avatarWrap.append(onlineDot);
+    }
     const body = document.createElement('div');
     body.className = 'accountactivity-body';
     const nameRow = document.createElement('div');
@@ -2390,7 +2429,7 @@ function renderAccountActivity() {
     const daypart = accountActivityDaypart(accountActivityLoginValue(user));
     loginLine.append(document.createTextNode(timeLabel ? `Pemilik Login Ke Web · ${timeLabel} WIB · ${daypart}` : 'Pemilik Login Ke Web · Belum pernah login'));
     body.append(nameRow, loginLine);
-    article.append(avatarImage, body);
+    article.append(avatarWrap, body);
     accountActivityList.append(article);
   }
 }
