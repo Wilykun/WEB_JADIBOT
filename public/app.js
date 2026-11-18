@@ -2294,10 +2294,16 @@ const accountActivityList = document.querySelector('#accountactivity-users');
 let accountActivityUsers = [];
 let accountActivityTimer = null;
 
+// Jam yang tampil adalah aktivitas web terbaru akun itu: login terakhir,
+// atau terakhir terlihat di panel selagi halamannya terbuka (heartbeat
+// tiap 25 detik) — jadi akun yang sedang membuka panel selalu menunjukkan
+// jam saat ini, bukan jam login autentikasinya yang sudah lama.
 function accountActivityLoginValue(user) {
-  if (user?.lastLoginAt) return String(user.lastLoginAt);
-  if (user?.lastSeen) return new Date(Number(user.lastSeen)).toISOString();
-  return null;
+  const loginMs = user?.lastLoginAt ? Date.parse(String(user.lastLoginAt)) : NaN;
+  const seenMs = user?.lastSeen ? Number(user.lastSeen) : NaN;
+  const latestMs = Math.max(Number.isNaN(loginMs) ? -Infinity : loginMs, Number.isNaN(seenMs) ? -Infinity : seenMs);
+  if (latestMs === -Infinity) return null;
+  return new Date(latestMs).toISOString();
 }
 
 function accountActivityTimeLabel(value) {

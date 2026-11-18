@@ -77,8 +77,10 @@ test('urutan Aktivitas Akun: akun sendiri paling atas, lalu pemilik aktif, baru 
 
 test('waktu login diambil dari riwayat login, diurutkan dari yang paling baru', () => {
   assert.ok(appJs.includes('function accountActivityLoginValue(user)'), 'harus ada fungsi pengambil waktu login tiap akun');
-  assert.ok(appJs.includes('if (user?.lastLoginAt) return String(user.lastLoginAt);'), 'waktu login harus memakai riwayat login (lastLoginAt) bila ada');
-  assert.ok(appJs.includes('if (user?.lastSeen) return new Date(Number(user.lastSeen)).toISOString();'), 'bila belum ada riwayat login, dipakai aktivitas panel terakhir sebagai pengganti');
+  assert.ok(appJs.includes('const loginMs = user?.lastLoginAt ? Date.parse(String(user.lastLoginAt)) : NaN;'), 'waktu login harus dibaca dari riwayat login (lastLoginAt)');
+  assert.ok(appJs.includes('const seenMs = user?.lastSeen ? Number(user.lastSeen) : NaN;'), 'aktivitas panel terakhir (lastSeen) harus dibaca dari sesi yang hidup');
+  assert.ok(appJs.includes('const latestMs = Math.max(Number.isNaN(loginMs) ? -Infinity : loginMs, Number.isNaN(seenMs) ? -Infinity : seenMs);'), 'yang dipakai harus yang paling baru di antara login terakhir dan aktivitas panel terakhir');
+  assert.ok(appJs.includes('if (latestMs === -Infinity) return null;'), 'bila tidak ada keduanya harus menghasilkan null supaya tampil Belum pernah login');
   assert.ok(appJs.includes('function accountActivityTimeLabel(value)'), 'harus ada fungsi pemformat waktu login');
   const timeFn = appJs.match(/function accountActivityTimeLabel\(value\) \{[\s\S]*?\n\}/);
   assert.ok(timeFn, 'fungsi accountActivityTimeLabel harus bisa diekstrak dari app.js');
@@ -87,6 +89,21 @@ test('waktu login diambil dari riwayat login, diurutkan dari yang paling baru', 
   assert.equal(label(null), null, 'waktu kosong harus menghasilkan null supaya tampil Belum pernah login');
   assert.equal(label('bukan-tanggal'), null, 'waktu tidak valid harus menghasilkan null');
   assert.ok(appJs.includes('return bMs - aMs;'), 'daftar harus diurutkan dari yang paling baru login');
+});
+
+test('jam yang tampil mengikuti aktivitas web terbaru, bukan jam login lama (bug 12.55)', () => {
+  const valueFn = appJs.match(/function accountActivityLoginValue\(user\) \{[\s\S]*?\n\}/);
+  assert.ok(valueFn, 'fungsi accountActivityLoginValue harus bisa diekstrak dari app.js');
+  const value = eval(`(${valueFn[0].replace('function accountActivityLoginValue', 'function')})`);
+  // Kasus Wily: login autentikasi 12.55 WIB, tapi sesi panel masih hidup
+  // dan heartbeat terakhir 16.30 WIB — yang tampil harus 16.30, bukan 12.55.
+  assert.equal(value({ lastLoginAt: '2026-11-18T05:55:00.000Z', lastSeen: Date.parse('2026-11-18T09:30:00.000Z') }), '2026-11-18T09:30:00.000Z', 'aktivitas panel yang lebih baru harus menang atas jam login lama');
+  assert.equal(value({ lastLoginAt: '2026-11-18T09:30:00.000Z', lastSeen: Date.parse('2026-11-18T05:55:00.000Z') }), '2026-11-18T09:30:00.000Z', 'login yang lebih baru harus menang atas aktivitas panel lama');
+  assert.equal(value({ lastLoginAt: null, lastSeen: Date.parse('2026-11-18T09:30:00.000Z') }), '2026-11-18T09:30:00.000Z', 'tanpa riwayat login, aktivitas panel dipakai');
+  assert.equal(value({ lastLoginAt: '2026-11-18T05:55:00.000Z', lastSeen: null }), '2026-11-18T05:55:00.000Z', 'tanpa aktivitas panel, riwayat login dipakai');
+  assert.equal(value({ lastLoginAt: null, lastSeen: null }), null, 'tanpa keduanya harus null supaya tampil Belum pernah login');
+  assert.equal(value({ lastLoginAt: 'bukan-tanggal', lastSeen: null }), null, 'waktu login tidak valid harus diabaikan');
+  assert.equal(value({}), null, 'akun tanpa data waktu harus null');
 });
 
 test('waktu login dilengkapi label Pagi, Siang, Sore, atau Malam sesuai jam WIB', () => {
@@ -172,8 +189,8 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=accountactivity-notif-20261118'), 'app.js harus memakai ?v=accountactivity-notif-20261118');
-  assert.ok(html.includes('/style.css?v=accountactivity-notif-20261118'), 'style.css harus memakai ?v=accountactivity-notif-20261118');
+  assert.ok(html.includes('/app.js?v=accountactivity-time-20261118'), 'app.js harus memakai ?v=accountactivity-time-20261118');
+  assert.ok(html.includes('/style.css?v=accountactivity-time-20261118'), 'style.css harus memakai ?v=accountactivity-time-20261118');
 });
 
 test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivitas Akun', () => {
@@ -194,6 +211,7 @@ test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivita
   assert.ok(newest.description.includes('titik merah'), 'entri harus menjelaskan titik merah menu saat ada login baru');
   assert.ok(newest.description.includes('Admin Utama emas'), 'entri harus menjelaskan warna peran Admin Utama');
   assert.ok(newest.description.includes('Pagi'), 'entri harus menjelaskan label Pagi/Siang/Sore/Malam di waktu login');
+  assert.ok(newest.description.includes('selalu menunjukkan jam saat ini, bukan jam login autentikasinya yang sudah lama'), 'entri harus menjelaskan jam yang tampil adalah aktivitas web terbaru');
   assert.ok(html.includes('<h4>Status pemilik &amp; bot di Rank Bot, plus halaman Aktivitas Akun</h4>'), 'fallback harus memuat judul entri terbaru');
   assert.ok(html.includes('Pemilik Login Ke Web'), 'fallback harus memuat baris waktu login');
 });
