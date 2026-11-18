@@ -54,7 +54,7 @@ test('halaman Aktivitas Akun hanya menampilkan nama, avatar, dan waktu login web
   assert.ok(appJs.includes("avatarImage.className = 'accountactivity-avatar';"), 'setiap baris harus menampilkan avatar profil');
   assert.ok(appJs.includes("name.className = 'accountactivity-name';"), 'setiap baris harus menampilkan nama pemilik');
   assert.ok(appJs.includes("loginLine.className = 'accountactivity-login';"), 'setiap baris harus menampilkan baris waktu login');
-  assert.ok(appJs.includes("`Pemilik Login Ke Web · ${timeLabel} WIB`"), 'baris waktu harus bernama Pemilik Login Ke Web dengan jam WIB');
+  assert.ok(appJs.includes("`Pemilik Login Ke Web · ${timeLabel} WIB · ${daypart}`"), 'baris waktu harus bernama Pemilik Login Ke Web dengan jam WIB dan label Pagi/Siang/Sore/Malam');
   assert.ok(appJs.includes("'Pemilik Login Ke Web · Belum pernah login'"), 'akun yang belum pernah login harus tertulis Belum pernah login');
   assert.ok(appJs.includes("loginLine.append(createMemberIcon('clock'));"), 'baris waktu harus memakai ikon jam SVG sesuai konteks');
 });
@@ -89,6 +89,61 @@ test('waktu login diambil dari riwayat login, diurutkan dari yang paling baru', 
   assert.ok(appJs.includes('return bMs - aMs;'), 'daftar harus diurutkan dari yang paling baru login');
 });
 
+test('waktu login dilengkapi label Pagi, Siang, Sore, atau Malam sesuai jam WIB', () => {
+  assert.ok(appJs.includes('function accountActivityDaypart(value)'), 'harus ada fungsi penentu label waktu login');
+  const daypartFn = appJs.match(/function accountActivityDaypart\(value\) \{[\s\S]*?\n\}/);
+  assert.ok(daypartFn, 'fungsi accountActivityDaypart harus bisa diekstrak dari app.js');
+  const daypart = eval(`(${daypartFn[0].replace('function accountActivityDaypart', 'function')})`);
+  assert.equal(daypart('2026-11-18T02:00:00.000Z'), 'Pagi', '09.00 WIB harus Pagi');
+  assert.equal(daypart('2026-11-18T05:00:00.000Z'), 'Siang', '12.00 WIB harus Siang');
+  assert.equal(daypart('2026-11-18T09:00:00.000Z'), 'Sore', '16.00 WIB harus Sore');
+  assert.equal(daypart('2026-11-18T13:00:00.000Z'), 'Malam', '20.00 WIB harus Malam');
+  assert.equal(daypart('2026-11-18T20:00:00.000Z'), 'Malam', '03.00 WIB harus Malam');
+  assert.equal(daypart('2026-11-18T11:00:00.000Z'), 'Malam', '18.00 WIB harus Malam');
+  assert.equal(daypart(null), null, 'waktu kosong harus menghasilkan null');
+  assert.equal(daypart('bukan-tanggal'), null, 'waktu tidak valid harus menghasilkan null');
+  assert.ok(appJs.includes("const daypart = accountActivityDaypart(accountActivityLoginValue(user));"), 'label waktu harus dihitung dari waktu login tiap baris');
+});
+
+test('setiap baris menandai peran dengan warna khusus: Admin Utama emas, Admin hijau, Member biru', () => {
+  assert.ok(appJs.includes("const roleLabel = user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Admin' : 'Member';"), 'baris harus memakai label peran yang sama dengan Rank Bot');
+  assert.ok(appJs.includes("roleChip.className = `accountactivity-role${user.isMainAdmin ? ' is-main-admin' : user.role === 'admin' ? ' is-admin' : ''}`;"), 'chip peran harus memakai kelas berbeda untuk Admin Utama, Admin, dan Member');
+  assert.ok(appJs.includes("roleChip.textContent = roleLabel;"), 'chip peran harus menampilkan label perannya');
+  assert.ok(appJs.includes('nameRow.append(name, roleChip);'), 'chip peran harus sebaris dengan nama');
+  assert.ok(css.includes('.accountactivity-role{'), 'chip peran harus punya gaya sendiri');
+  assert.ok(css.includes('.accountactivity-role.is-main-admin{color:#f5c542;'), 'Admin Utama harus berwarna emas');
+  assert.ok(css.includes('.accountactivity-role.is-admin{color:#3ee69a;'), 'Admin biasa harus berwarna hijau');
+  assert.ok(css.includes('.accountactivity-role{flex:0 0 auto;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7db8ff;'), 'Member harus berwarna biru');
+});
+
+test('login baru ke web memunculkan kartu notifikasi realtime selagi halaman Aktivitas Akun dibuka', () => {
+  assert.ok(appJs.includes('let accountActivitySeenLogins = null;'), 'harus ada penanda login yang sudah terlihat di sesi ini');
+  assert.ok(appJs.includes('function checkAccountActivityLogins(users)'), 'harus ada pemeriksa login baru');
+  assert.ok(appJs.includes('checkAccountActivityLogins(accountActivityUsers);'), 'setiap muat daftar harus memeriksa login baru');
+  assert.ok(appJs.includes("accountActivitySeenLogins = new Map(users.map((item) => [item.id, item.lastLoginAt || null]));"), 'muatan pertama hanya menandai tanpa notifikasi supaya login lama tidak dianggap baru');
+  assert.ok(appJs.includes("String(item.username || '') !== String(currentUser?.username || '')"), 'login sendiri tidak boleh memunculkan notifikasi');
+  assert.ok(appJs.includes('Date.parse(item.lastLoginAt) > now - 5 * 60 * 1000'), 'hanya login dalam 5 menit terakhir yang diberitahukan supaya login lama tidak muncul terlambat');
+  assert.ok(appJs.includes("title: 'Ada yang baru login ke web panel!'"), 'kartu notifikasi harus berjudul ada yang baru login ke web panel');
+  assert.ok(appJs.includes("context: { kind: 'accountactivitylogin', userId: newest.id, feature: newest.lastLoginAt }"), 'kartu notifikasi harus memakai konteks login Aktivitas Akun');
+  assert.ok(appJs.includes("icon: '👤'"), 'kartu notifikasi harus memakai ikon orang');
+  assert.ok(appJs.includes("} else if (noticeContext?.kind === 'accountactivitylogin') {"), 'menutup kartu login tidak boleh mematikan pengingat reaksi emoji');
+});
+
+test('menu Aktivitas Akun mendapat titik merah realtime bila ada login yang belum dilihat', () => {
+  assert.ok(appJs.includes('function accountActivityLastSeenKey()'), 'harus ada kunci penyimpanan login terakhir yang sudah dilihat');
+  assert.ok(appJs.includes("return `accountactivity-last-seen:${String(currentUser?.username || 'anon')}`;"), 'penanda sudah dilihat harus disimpan per akun');
+  assert.ok(appJs.includes('function syncAccountActivityLoginBadge(latestLoginAt)'), 'harus ada penanda titik merah menu Aktivitas Akun');
+  assert.ok(appJs.includes("syncAccountActivityLoginBadge(result?.latestLoginAt);"), 'heartbeat harus memperbarui titik merah tiap 25 detik');
+  assert.ok(appJs.includes("if (maxLogin) window.localStorage.setItem(accountActivityLastSeenKey(), maxLogin);"), 'membuka halaman harus menandai semua login sudah dilihat supaya titik merah hilang');
+  assert.ok(appJs.includes("dot.className = 'accountactivity-dot';"), 'titik merah harus memakai kelas sendiri');
+  assert.match(serverJs, /lastLoginAt: last\?\.createdAt \|\| null,/, '/api/members harus mengembalikan lastLoginAt untuk penanda titik merah');
+  assert.ok(serverJs.includes('.filter((entry) => entry.userId !== user.id)'), 'heartbeat harus mengembalikan login terbaru akun lain, bukan diri sendiri');
+  assert.ok(serverJs.includes('latestLoginAt });'), 'heartbeat harus mengembalikan latestLoginAt');
+  assert.ok(css.includes('.accountactivity-dot{'), 'titik merah harus punya gaya sendiri');
+  assert.ok(css.includes('.accountactivity-dot{margin-left:auto;flex:none;width:8px;height:8px;border-radius:50%;background:#ff5a5a;'), 'titik merah harus berupa bulatan merah kecil di ujung menu');
+  assert.ok(css.includes('@media(max-width:820px){.sidebar:not(.is-open) .accountactivity-dot{position:absolute;top:5px;right:5px;margin-left:0}}'), 'titik merah harus tetap terlihat saat sidebar menciut di HP');
+});
+
 test('Aktivitas Akun diperbarui realtime tiap 15 detik saat halamannya dibuka', () => {
   assert.ok(appJs.includes('function startAccountActivityPolling()'), 'harus ada polling Aktivitas Akun');
   assert.ok(appJs.includes("if (activeWorkspacePage === 'accountactivity' && document.visibilityState === 'visible') void loadAccountActivity();"), 'polling harus berjalan tiap 15 detik saat halaman Aktivitas Akun dibuka');
@@ -117,8 +172,8 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=accountactivity-top-20261118'), 'app.js harus memakai ?v=accountactivity-top-20261118');
-  assert.ok(html.includes('/style.css?v=accountactivity-top-20261118'), 'style.css harus memakai ?v=accountactivity-top-20261118');
+  assert.ok(html.includes('/app.js?v=accountactivity-notif-20261118'), 'app.js harus memakai ?v=accountactivity-notif-20261118');
+  assert.ok(html.includes('/style.css?v=accountactivity-notif-20261118'), 'style.css harus memakai ?v=accountactivity-notif-20261118');
 });
 
 test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivitas Akun', () => {
@@ -136,6 +191,9 @@ test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivita
   assert.ok(newest.description.includes('Pemilik Login Ke Web'), 'entri harus menjelaskan baris waktu login di halaman Aktivitas Akun');
   assert.ok(newest.description.includes('Baris akun sendiri kini selalu paling atas dengan lencana Kamu'), 'entri harus menjelaskan baris sendiri paling atas di Aktivitas Akun');
   assert.ok(newest.description.includes('pemilik yang sedang aktif di panel'), 'entri harus menjelaskan pemilik aktif di atas sisanya');
+  assert.ok(newest.description.includes('titik merah'), 'entri harus menjelaskan titik merah menu saat ada login baru');
+  assert.ok(newest.description.includes('Admin Utama emas'), 'entri harus menjelaskan warna peran Admin Utama');
+  assert.ok(newest.description.includes('Pagi'), 'entri harus menjelaskan label Pagi/Siang/Sore/Malam di waktu login');
   assert.ok(html.includes('<h4>Status pemilik &amp; bot di Rank Bot, plus halaman Aktivitas Akun</h4>'), 'fallback harus memuat judul entri terbaru');
   assert.ok(html.includes('Pemilik Login Ke Web'), 'fallback harus memuat baris waktu login');
 });
@@ -222,6 +280,9 @@ test('server: /api/members mengembalikan lastLoginAt dari riwayat login dan pane
     assert.ok(Math.abs(Date.parse(byName.fixtureadmin.lastLoginAt) - Date.now()) < 60_000, 'waktu login admin harus baru saja (dari login di tes ini)');
     assert.equal(byName.fixtureadmin.panelActive, true, 'admin yang baru login harus tertulis aktif');
     assert.equal(byName.fixtureadmin.workerStatus, 'stopped', 'admin tanpa worker harus tertulis berhenti');
+    const heartbeat = await jsonRequest(base, '/api/me/heartbeat', { method: 'POST', body: {}, cookie: adminLogin.cookie });
+    assert.equal(heartbeat.status, 200, 'heartbeat harus menjawab');
+    assert.equal(heartbeat.payload.latestLoginAt, '2026-11-18T06:00:00.000Z', 'heartbeat harus mengembalikan login terbaru akun lain (bukan login diri sendiri)');
   } finally {
     if (child && child.exitCode === null) child.kill('SIGTERM');
     await fs.promises.rm(temp, { recursive: true, force: true });

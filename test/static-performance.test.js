@@ -97,11 +97,11 @@ test('server menyajikan aset terkompres dan ter-cache sesuai aturan', { timeout:
     assert.equal(plain.headers['content-encoding'], undefined, 'tanpa Accept-Encoding gzip, jawaban tidak boleh gzip');
     assert.equal(plain.body.length, appJs.length, 'isi tanpa gzip harus utuh');
 
-    const versioned = await rawGet('/app.js?v=accountactivity-top-20261118', { 'Accept-Encoding': 'gzip' });
+    const versioned = await rawGet('/app.js?v=accountactivity-notif-20261118', { 'Accept-Encoding': 'gzip' });
     assert.match(versioned.headers['cache-control'] || '', /public, max-age=31536000, immutable/, 'app.js berversi harus immutable setahun');
     assert.equal(versioned.headers['content-encoding'], 'gzip', 'app.js berversi tetap boleh gzip');
 
-    const versionedCss = await rawGet('/style.css?v=accountactivity-top-20261118');
+    const versionedCss = await rawGet('/style.css?v=accountactivity-notif-20261118');
     assert.match(versionedCss.headers['cache-control'] || '', /immutable/, 'style.css berversi harus immutable');
 
     const home = await rawGet('/?v=rankbotovertake-20261118', { 'Accept-Encoding': 'gzip' });

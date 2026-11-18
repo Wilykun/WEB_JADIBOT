@@ -2059,7 +2059,11 @@ async function handleApi(req, res, url) {
       const session = next.sessions.find((item) => item.sid === sid && item.userId === user.id);
       if (session) session.lastSeen = Date.now();
     });
-    return sendJson(res, 200, { ok: true, version: getClientVersion() });
+    // Login terbaru akun lain (bukan diri sendiri) untuk titik merah menu Aktivitas Akun.
+    const latestLoginAt = (store.loginHistory || [])
+      .filter((entry) => entry.userId !== user.id)
+      .reduce((max, entry) => (!max || String(entry.createdAt || '') > max ? String(entry.createdAt) : max), null);
+    return sendJson(res, 200, { ok: true, version: getClientVersion(), latestLoginAt });
   }
   if (route === 'GET /api/pairing/status') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');

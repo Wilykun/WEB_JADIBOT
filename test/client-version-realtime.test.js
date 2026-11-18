@@ -100,7 +100,7 @@ test('klien memeriksa versi tiap heartbeat dan memuat ulang sendiri bila tidak d
   const js = await readFile(path.join(sourceRoot, 'public', 'app.js'), 'utf8');
   const server = await readFile(path.join(sourceRoot, 'server', 'index.js'), 'utf8');
   assert.ok(server.includes('function getClientVersion()'), 'server harus punya penolong versi klien');
-  assert.ok(server.includes("return sendJson(res, 200, { ok: true, version: getClientVersion() });"), 'heartbeat harus mengembalikan versi klien');
+  assert.ok(server.includes("return sendJson(res, 200, { ok: true, version: getClientVersion(), latestLoginAt });"), 'heartbeat harus mengembalikan versi klien dan login terbaru akun lain');
   assert.ok(js.includes('const loadedClientVersion'), 'klien harus membaca versinya sendiri dari tag script');
   assert.ok(js.includes('function checkClientVersion(serverVersion)'), 'klien harus punya pemeriksa versi');
   assert.ok(js.includes('checkClientVersion(result?.version)'), 'heartbeat harus memanggil pemeriksa versi');

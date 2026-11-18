@@ -33,7 +33,7 @@ test('menu Backup dan Kontrol Bot yang terkunci menampilkan notifikasi di tengah
   // di-cache immutable setahun, jadi tanpa bump ini HP yang pernah buka panel
   // tetap menjalankan kode lama (toast) walau server sudah menyajikan kode baru.
   const html = await read('public/index.html');
-  assert.ok(html.includes('/app.js?v=accountactivity-top-20261118'), 'index.html harus memuat app.js dengan versi realtime-20261118');
+  assert.ok(html.includes('/app.js?v=accountactivity-notif-20261118'), 'index.html harus memuat app.js dengan versi realtime-20261118');
   assert.ok(!html.includes('/app.js?v=lockednotice-20261118'), 'versi app.js lama tidak boleh lagi dipakai');
 });
 

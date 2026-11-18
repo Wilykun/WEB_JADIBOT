@@ -282,6 +282,9 @@ function dismissNoticeOverlay() {
   } else if (noticeContext?.kind === 'rankovertake') {
     // Tanpa ingatan: tiap salip baru tampil lagi, dan menutup kartu ini
     // tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
+  } else if (noticeContext?.kind === 'accountactivitylogin') {
+    // Tanpa ingatan: tiap login baru tampil lagi, dan menutup kartu ini
+    // tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
   } else if (noticeContext?.kind === 'version') {
     // Ingat versi yang sudah ditawarkan supaya tidak mengganggu tiap heartbeat.
     newVersionPrompted = noticeContext.version || null;
@@ -2304,6 +2307,18 @@ function accountActivityTimeLabel(value) {
   return new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(date);
 }
 
+// Pagi 04.00–10.59, Siang 11.00–14.59, Sore 15.00–17.59, Malam 18.00–03.59 WIB.
+function accountActivityDaypart(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  const hour = Number(new Intl.DateTimeFormat('id-ID', { hour: 'numeric', hourCycle: 'h23', timeZone: 'Asia/Jakarta' }).format(date));
+  if (hour >= 4 && hour < 11) return 'Pagi';
+  if (hour >= 11 && hour < 15) return 'Siang';
+  if (hour >= 15 && hour < 18) return 'Sore';
+  return 'Malam';
+}
+
 function renderAccountActivity() {
   if (!accountActivityList) return;
   // Urutan baris: akun sendiri paling atas, lalu pemilik yang sedang aktif di panel, baru yang paling baru login.
@@ -2352,7 +2367,11 @@ function renderAccountActivity() {
     const name = document.createElement('strong');
     name.className = 'accountactivity-name';
     name.textContent = displayName;
-    nameRow.append(name);
+    const roleLabel = user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Admin' : 'Member';
+    const roleChip = document.createElement('span');
+    roleChip.className = `accountactivity-role${user.isMainAdmin ? ' is-main-admin' : user.role === 'admin' ? ' is-admin' : ''}`;
+    roleChip.textContent = roleLabel;
+    nameRow.append(name, roleChip);
     if (isSelf) {
       const selfBadge = document.createElement('span');
       selfBadge.className = 'rankbot-self-badge';
@@ -2362,7 +2381,8 @@ function renderAccountActivity() {
     const loginLine = document.createElement('p');
     loginLine.className = 'accountactivity-login';
     loginLine.append(createMemberIcon('clock'));
-    loginLine.append(document.createTextNode(timeLabel ? `Pemilik Login Ke Web · ${timeLabel} WIB` : 'Pemilik Login Ke Web · Belum pernah login'));
+    const daypart = accountActivityDaypart(accountActivityLoginValue(user));
+    loginLine.append(document.createTextNode(timeLabel ? `Pemilik Login Ke Web · ${timeLabel} WIB · ${daypart}` : 'Pemilik Login Ke Web · Belum pernah login'));
     body.append(nameRow, loginLine);
     article.append(avatarImage, body);
     accountActivityList.append(article);
@@ -2374,10 +2394,69 @@ async function loadAccountActivity() {
     const result = await api('/api/members');
     accountActivityUsers = Array.isArray(result.users) ? result.users : [];
     renderAccountActivity();
+    checkAccountActivityLogins(accountActivityUsers);
+    // Membuka halaman berarti semua login sudah dilihat: tandai agar titik
+    // merah di menu hilang sampai ada login baru lagi.
+    const maxLogin = accountActivityUsers.reduce((max, item) => (!max || String(item.lastLoginAt || '') > max ? String(item.lastLoginAt) : max), null);
+    if (maxLogin) window.localStorage.setItem(accountActivityLastSeenKey(), maxLogin);
+    syncAccountActivityLoginBadge(maxLogin);
     const activityUpdated = document.querySelector('#accountactivity-updated');
     if (activityUpdated) activityUpdated.textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
   } catch (error) {
     if (error.status === 401) showAuth();
+  }
+}
+
+// Login yang sudah terlihat di halaman Aktivitas Akun pada sesi ini —
+// muatan pertama hanya menandai, tanpa notifikasi, supaya login lama tidak
+// dianggap baru tiap halaman dibuka.
+let accountActivitySeenLogins = null;
+function checkAccountActivityLogins(users) {
+  const now = Date.now();
+  if (!accountActivitySeenLogins) {
+    accountActivitySeenLogins = new Map(users.map((item) => [item.id, item.lastLoginAt || null]));
+    return;
+  }
+  const fresh = users
+    .filter((item) => String(item.username || '') !== String(currentUser?.username || ''))
+    .filter((item) => item.lastLoginAt && item.lastLoginAt !== accountActivitySeenLogins.get(item.id))
+    .filter((item) => Date.parse(item.lastLoginAt) > now - 5 * 60 * 1000)
+    .sort((a, b) => Date.parse(b.lastLoginAt) - Date.parse(a.lastLoginAt));
+  for (const item of users) accountActivitySeenLogins.set(item.id, item.lastLoginAt || null);
+  const newest = fresh[0];
+  if (!newest) return;
+  const label = accountActivityTimeLabel(newest.lastLoginAt);
+  showNoticeOverlay({
+    title: 'Ada yang baru login ke web panel!',
+    text: `${newest.displayName || newest.username} baru saja login ke web panel${label ? ` · ${label} WIB` : ''}.`,
+    context: { kind: 'accountactivitylogin', userId: newest.id, feature: newest.lastLoginAt },
+    addLabel: null,
+    icon: '👤',
+  });
+}
+
+function accountActivityLastSeenKey() {
+  return `accountactivity-last-seen:${String(currentUser?.username || 'anon')}`;
+}
+
+// Titik merah di menu Aktivitas Akun bila ada login akun lain yang belum
+// dilihat — heartbeat mengabarkan login terbaru tiap 25 detik, jadi titik
+// ini muncul realtime dari halaman mana pun.
+function syncAccountActivityLoginBadge(latestLoginAt) {
+  const nav = document.querySelector('#accountactivity-nav');
+  if (!nav) return;
+  const seen = window.localStorage.getItem(accountActivityLastSeenKey());
+  const hasUnseen = Boolean(latestLoginAt && (!seen || String(latestLoginAt) > seen));
+  let dot = nav.querySelector('.accountactivity-dot');
+  if (!hasUnseen) {
+    dot?.remove();
+    return;
+  }
+  if (!dot) {
+    dot = document.createElement('span');
+    dot.className = 'accountactivity-dot';
+    dot.setAttribute('aria-label', 'Ada login baru ke web panel');
+    nav.append(dot);
   }
 }
 
@@ -3100,6 +3179,7 @@ async function sendPresenceHeartbeat() {
   try {
     const result = await api('/api/me/heartbeat', { method: 'POST', body: '{}' });
     checkClientVersion(result?.version);
+    syncAccountActivityLoginBadge(result?.latestLoginAt);
     // Daftar member langsung dimuat ulang begitu heartbeat berhasil, jadi
     // status Pemilik milik sendiri mengikuti heartbeat tanpa menunggu
     // giliran polling 15 detik berikutnya.
