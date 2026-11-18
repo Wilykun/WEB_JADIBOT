@@ -73,6 +73,7 @@ test('urutan Aktivitas Akun: akun sendiri paling atas, lalu pemilik aktif, baru 
   assert.ok(css.includes('.accountactivity-item.is-self{'), 'baris sendiri harus punya latar emas');
   assert.ok(css.includes('.accountactivity-item.is-self .accountactivity-avatar{'), 'avatar baris sendiri harus bercincin emas');
   assert.ok(css.includes('.accountactivity-namerow{'), 'baris nama harus punya gaya sendiri');
+  assert.ok(css.includes('.accountactivity-namerow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-width:0}'), 'baris nama harus membungkus chip peran ke baris berikut bila sempit, jadi nama akun tidak terpotong seperti di Rank Bot (bug 18 Nov 18.46)');
 });
 
 test('waktu login diambil dari riwayat login, diurutkan dari yang paling baru', () => {
@@ -189,8 +190,8 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=accountactivity-time-20261118'), 'app.js harus memakai ?v=accountactivity-time-20261118');
-  assert.ok(html.includes('/style.css?v=accountactivity-time-20261118'), 'style.css harus memakai ?v=accountactivity-time-20261118');
+  assert.ok(html.includes('/app.js?v=rankbot-name-20261118'), 'app.js harus memakai ?v=rankbot-name-20261118');
+  assert.ok(html.includes('/style.css?v=rankbot-name-20261118'), 'style.css harus memakai ?v=rankbot-name-20261118');
 });
 
 test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivitas Akun', () => {

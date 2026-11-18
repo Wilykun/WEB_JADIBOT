@@ -82,6 +82,7 @@ test('setiap peringkat menampilkan nama, profil, mode, dan level rank', () => {
   assert.ok(css.includes('@media(max-width:560px){.rankbot-item{gap:8px;padding:10px 10px'), 'di HP baris peringkat harus makin ringkas agar muat');
   assert.ok(css.includes('.rankbot-avatar{flex-basis:34px;width:34px;height:34px}'), 'di HP avatar peringkat harus makin kecil (34px) agar nama muat');
   assert.ok(css.includes('.rankbot-position{flex-basis:30px}'), 'di HP lencana nomor peringkat harus makin ramping (30px) agar nama muat');
+  assert.ok(css.includes('.rankbot-name-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-width:0}'), 'baris nama peringkat harus membungkus chip peran ke baris berikut bila sempit, jadi nama akun tidak terpotong menjadi "W..." di HP (bug 18 Nov 18.46)');
 });
 
 test('label mode Rank Bot dipersingkat dengan benar (fungsi asli dijalankan)', () => {
