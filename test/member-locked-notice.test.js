@@ -33,7 +33,7 @@ test('menu Backup dan Kontrol Bot yang terkunci menampilkan notifikasi di tengah
   // di-cache immutable setahun, jadi tanpa bump ini HP yang pernah buka panel
   // tetap menjalankan kode lama (toast) walau server sudah menyajikan kode baru.
   const html = await read('public/index.html');
-  assert.ok(html.includes('/app.js?v=rankbot-climb-dot-20261118'), 'index.html harus memuat app.js dengan versi realtime-20261118');
+  assert.ok(html.includes('/app.js?v=infoupdate-badge-20261118'), 'index.html harus memuat app.js dengan versi realtime-20261118');
   assert.ok(!html.includes('/app.js?v=lockednotice-20261118'), 'versi app.js lama tidak boleh lagi dipakai');
 });
 
@@ -57,7 +57,7 @@ test('overlay mendukung notifikasi tanpa tombol aksi dan tidak menelan ingatan n
 test('entri Info Update notifikasi menu terkunci kini di posisi kelima', async () => {
   const data = JSON.parse(await read('public/info-updates.json'));
   const html = await read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T15:45:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updatedAt, '2026-11-18T19:46:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.equal(data.updates.length, 67, 'daftar harus 67 entri');
   const locked = data.updates[5];
   assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi keenam');

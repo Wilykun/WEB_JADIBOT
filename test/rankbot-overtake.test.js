@@ -125,7 +125,7 @@ test('baris akun sendiri dibedakan warna emas dan lencana Kamu di Rank Bot', () 
 test('entri Info Update terbaru menjelaskan notifikasi salip Rank Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T15:45:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updatedAt, '2026-11-18T19:46:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.equal(data.updates.length, 67, 'daftar harus bertambah satu entri');
   const newest = data.updates[1];
   assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');

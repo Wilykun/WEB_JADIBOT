@@ -97,11 +97,11 @@ test('server menyajikan aset terkompres dan ter-cache sesuai aturan', { timeout:
     assert.equal(plain.headers['content-encoding'], undefined, 'tanpa Accept-Encoding gzip, jawaban tidak boleh gzip');
     assert.equal(plain.body.length, appJs.length, 'isi tanpa gzip harus utuh');
 
-    const versioned = await rawGet('/app.js?v=rankbot-climb-dot-20261118', { 'Accept-Encoding': 'gzip' });
+    const versioned = await rawGet('/app.js?v=infoupdate-badge-20261118', { 'Accept-Encoding': 'gzip' });
     assert.match(versioned.headers['cache-control'] || '', /public, max-age=31536000, immutable/, 'app.js berversi harus immutable setahun');
     assert.equal(versioned.headers['content-encoding'], 'gzip', 'app.js berversi tetap boleh gzip');
 
-    const versionedCss = await rawGet('/style.css?v=rankbot-climb-dot-20261118');
+    const versionedCss = await rawGet('/style.css?v=infoupdate-badge-20261118');
     assert.match(versionedCss.headers['cache-control'] || '', /immutable/, 'style.css berversi harus immutable');
 
     const home = await rawGet('/?v=rankbotovertake-20261118', { 'Accept-Encoding': 'gzip' });
@@ -142,7 +142,7 @@ test('entri Info Update panel lebih cepat ada di posisi kelima', () => {
   assert.match(entry.description, /200 KB/, 'deskripsi harus menyebut unduhan awal sekitar 200 KB');
   assert.match(entry.description, /Tidak ada fitur yang berubah/, 'deskripsi harus menegaskan fitur tidak berubah');
   assert.equal(data.updates.length, 67, 'daftar harus 67 entri');
-  assert.equal(data.updatedAt, '2026-11-18T15:45:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updatedAt, '2026-11-18T19:46:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.ok(html.includes('<h4>Panel kini memuat jauh lebih cepat</h4>'), 'fallback HTML harus memuat entri panel lebih cepat');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 21.50 WIB'), 'fallback meta harus cocok dengan entri terbaru');
 });

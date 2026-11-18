@@ -28,17 +28,17 @@ test('kartu Member ringkas di HP: avatar kecil di samping nama, bukan di atas na
 test('entri Info Update terbaru menjelaskan tampilan Member yang ringkas', async () => {
   const data = JSON.parse(await read('public/info-updates.json'));
   const html = await read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T15:45:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updatedAt, '2026-11-18T19:46:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.equal(data.updates.length, 67, 'daftar harus 67 entri');
   const newest = data.updates[0];
   assert.equal(newest.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri terbaru harus soal status Rank Bot dan halaman Aktivitas Akun');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '15.45 WIB', 'waktu entri terbaru harus cocok');
+  assert.equal(newest.time, '19.46 WIB', 'waktu entri terbaru harus cocok');
   assert.match(newest.description, /Pemilik · Aktif/, 'deskripsi harus menyebut status pemilik di Rank Bot');
   assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'fallback harus memakai slug fitur-baru untuk entri terbaru');
   assert.ok(html.includes('<h4>Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup</h4>'), 'fallback harus memuat judul entri terbaru');
-  assert.ok(html.includes('Rabu, 18 Nov 2026 · 15.45 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri terbaru');
+  assert.ok(html.includes('Rabu, 18 Nov 2026 · 19.46 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri terbaru');
 
   // Entri notifikasi menu terkunci sebelumnya kini di posisi kelima beserta fallback-nya.
   const locked = data.updates[5];

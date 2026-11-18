@@ -5511,6 +5511,11 @@ function countUnreadInfoUpdates(updates, seen) {
   for (const update of updates) {
     if (update.day === seen.day && update.time === seen.time && update.title === seen.title) break;
     unread += 1;
+    // Entri yang diamandemen (hari dan judul sama, jam berubah) adalah entri
+    // yang sudah dibaca itu sendiri: hitung sekali sebagai belum dibaca, lalu
+    // berhenti — entri di bawahnya sudah dibaca semua. Tanpa ini, penanda
+    // lama jadi yatim dan seluruh daftar terhitung belum dibaca.
+    if (update.day === seen.day && update.title === seen.title) break;
   }
   return unread;
 }

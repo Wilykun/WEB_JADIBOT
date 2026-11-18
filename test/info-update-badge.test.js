@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -38,4 +39,34 @@ test('Info Update unread badge is stored per account on the server, never shared
 
   assert.match(css, /\.nav-badge\{[^}]*margin-left:\s*auto;[^}]*min-width:\s*20px;[^}]*background:linear-gradient\(135deg,#3ee69a,#22bd78\)/, 'the badge must be a green pill at the right end of the menu item');
   assert.match(css, /@media\(max-width:820px\)\{[\s\S]*?\.sidebar:not\(\.is-open\) \.nav-badge\{[^}]*width:\s*8px;[^}]*height:\s*8px/, 'the badge must shrink to a dot on the collapsed icon rail');
+});
+
+function countUnreadInfoUpdates() {
+  const js = readFileSync(path.join(ROOT, 'public/app.js'), 'utf8');
+  const match = js.match(/function countUnreadInfoUpdates\(updates, seen\) \{[\s\S]*?\n\}/);
+  assert.ok(match, 'fungsi countUnreadInfoUpdates harus bisa diekstrak dari app.js');
+  return eval(`(${match[0].replace('function countUnreadInfoUpdates', 'function')})`);
+}
+
+const TITLE_67 = 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun';
+const DAY_67 = 'Rabu, 18 Nov 2026';
+
+test('amandemen entri harus memunculkan badge lagi: jam baru tidak cocok dengan penanda lama', () => {
+  const count = countUnreadInfoUpdates();
+  const updates = [
+    { day: DAY_67, time: '19.46 WIB', title: TITLE_67 },
+    { day: DAY_67, time: '13.10 WIB', title: 'Rank Bot kini memberi tahu saat ada yang menyalip' },
+  ];
+  // Penanda lama dari sebelum amandemen (jam 15.45): entri #67 yang jamnya
+  // naik ke 19.46 harus terhitung belum dibaca, supaya tanda seru muncul lagi.
+  const seenLama = { day: DAY_67, time: '15.45 WIB', title: TITLE_67 };
+  assert.equal(count(updates, seenLama), 1, 'entri yang diamandemen (jam berubah) harus terhitung 1 belum dibaca');
+  // Setelah halaman Info Update dibuka, penanda ikut jam baru: badge hilang.
+  const seenBaru = { day: DAY_67, time: '19.46 WIB', title: TITLE_67 };
+  assert.equal(count(updates, seenBaru), 0, 'penanda yang cocok dengan jam baru harus berarti sudah dibaca');
+  // Tanpa penanda sama sekali, semua entri terhitung belum dibaca.
+  assert.equal(count(updates, null), 2, 'tanpa penanda, semua entri harus terhitung belum dibaca');
+  // Entri di bawah penanda tidak terhitung.
+  const seenTengah = { day: DAY_67, time: '13.10 WIB', title: 'Rank Bot kini memberi tahu saat ada yang menyalip' };
+  assert.equal(count(updates, seenTengah), 1, 'hanya entri di atas penanda yang terhitung belum dibaca');
 });

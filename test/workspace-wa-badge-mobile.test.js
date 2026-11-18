@@ -67,12 +67,12 @@ test('info update entry for the presence resync matches the JSON and fallback', 
   const html = await read('public/index.html');
   const data = JSON.parse(await read('public/info-updates.json'));
 
-  assert.equal(data.updatedAt, '2026-11-18T15:45:00+07:00', 'updatedAt must equal the newest entry time');
+  assert.equal(data.updatedAt, '2026-11-18T19:46:00+07:00', 'updatedAt must equal the newest entry time');
   const newest = data.updates[0];
   assert.equal(newest.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'the newest entry must describe the Rank Bot status and Aktivitas Akun page');
   assert.equal(newest.tag, 'Fitur baru', 'the newest entry must use the Fitur baru display tag');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'the newest entry day must match');
-  assert.equal(newest.time, '15.45 WIB', 'the newest entry time must match');
+  assert.equal(newest.time, '19.46 WIB', 'the newest entry time must match');
   assert.equal(data.updates.length, 67, 'the list must grow by exactly one entry');
 
   // Fallback statis di index.html harus sama persis dengan entri JSON terbaru.

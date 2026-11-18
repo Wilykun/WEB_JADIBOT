@@ -283,8 +283,8 @@ test('gaya tutorial Telegram dan anti-potong status ada dan muat di HP', () => {
 });
 
 test('versi aset baru terpasang supaya form ini benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=rankbot-climb-dot-20261118'), 'app.js harus memakai ?v=rankbot-climb-dot-20261118');
-  assert.ok(html.includes('/style.css?v=rankbot-climb-dot-20261118'), 'style.css harus memakai ?v=rankbot-climb-dot-20261118');
+  assert.ok(html.includes('/app.js?v=infoupdate-badge-20261118'), 'app.js harus memakai ?v=infoupdate-badge-20261118');
+  assert.ok(html.includes('/style.css?v=infoupdate-badge-20261118'), 'style.css harus memakai ?v=infoupdate-badge-20261118');
 });
 
 test('server: endpoint PUT telegram-config terdaftar dengan batas rate dan auth admin', () => {

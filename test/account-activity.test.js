@@ -203,19 +203,19 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=rankbot-climb-dot-20261118'), 'app.js harus memakai ?v=rankbot-climb-dot-20261118');
-  assert.ok(html.includes('/style.css?v=rankbot-climb-dot-20261118'), 'style.css harus memakai ?v=rankbot-climb-dot-20261118');
+  assert.ok(html.includes('/app.js?v=infoupdate-badge-20261118'), 'app.js harus memakai ?v=infoupdate-badge-20261118');
+  assert.ok(html.includes('/style.css?v=infoupdate-badge-20261118'), 'style.css harus memakai ?v=infoupdate-badge-20261118');
 });
 
 test('entri Info Update terbaru menjelaskan status Rank Bot dan halaman Aktivitas Akun', () => {
   const data = JSON.parse(read('public/info-updates.json'));
-  assert.equal(data.updatedAt, '2026-11-18T15:45:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updatedAt, '2026-11-18T19:46:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.equal(data.updates.length, 67, 'daftar harus bertambah satu entri');
   const newest = data.updates[0];
   assert.equal(newest.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri terbaru harus menjelaskan kedua fitur baru');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '15.45 WIB', 'waktu entri terbaru harus cocok');
+  assert.equal(newest.time, '19.46 WIB', 'waktu entri terbaru harus cocok');
   assert.ok(newest.description.includes('Pemilik · Aktif'), 'entri harus menjelaskan status pemilik di Rank Bot');
   assert.ok(newest.description.includes('Bot WhatsApp · Berjalan'), 'entri harus menjelaskan status bot di Rank Bot');
   assert.ok(newest.description.includes('Aktivitas Akun'), 'entri harus menjelaskan halaman Aktivitas Akun');
