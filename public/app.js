@@ -1150,20 +1150,106 @@ async function loadAdminBackupSnapshots() {
   }
 }
 document.querySelector('#admin-backup-refresh-snapshots')?.addEventListener('click', () => void loadAdminBackupSnapshots());
+function setTelegramConfigPill(which, state) {
+  const pill = document.querySelector(which === 'token' ? '#admin-backup-telegram-token-pill' : '#admin-backup-telegram-chatid-pill');
+  if (!pill) return;
+  const labels = { idle: 'Belum diperiksa', checking: 'Memeriksa…', valid: 'Valid', invalid: 'Tidak valid' };
+  pill.dataset.state = state;
+  pill.textContent = labels[state] || labels.idle;
+}
+
+function renderTelegramConfigStatus({ configured, chatId, botUsername, chatValid }) {
+  const target = document.querySelector('#admin-backup-telegram-target');
+  const button = document.querySelector('#admin-backup-telegram-send');
+  if (!target) return;
+  if (!configured) {
+    target.textContent = 'Bot Telegram belum diatur. Isi token bot dan chat ID di bawah ini.';
+  } else if (chatValid) {
+    target.textContent = botUsername
+      ? `Bot Telegram siap — @${botUsername} · chat ${chatId}. Backup dikirim ke chat itu.`
+      : `Bot Telegram siap — backup dikirim ke chat ${chatId}. Pastikan kamu sudah /start bot-nya.`;
+  } else {
+    target.textContent = botUsername
+      ? `Token tersimpan (@${botUsername}), tapi chat belum valid — periksa chat ID dan pastikan bot sudah di-/start.`
+      : 'Token tersimpan, tapi chat belum valid — periksa chat ID dan pastikan bot sudah di-/start.';
+  }
+  if (button) button.disabled = !(configured && chatValid);
+}
+
 async function loadAdminBackupTelegramStatus() {
   const target = document.querySelector('#admin-backup-telegram-target');
   const button = document.querySelector('#admin-backup-telegram-send');
   if (!target || currentUser?.role !== 'admin') return;
   try {
-    const { configured, chatId } = await api('/api/admin/backup/telegram-status');
-    target.textContent = configured
-      ? `Bot Telegram siap — backup dikirim ke chat ${chatId}. Pastikan kamu sudah /start bot-nya.`
-      : 'Bot Telegram belum diatur. Isi token bot dan chat ID di data/telegram.json di server.';
-    if (button) button.disabled = !configured;
+    const status = await api('/api/admin/backup/telegram-status');
+    renderTelegramConfigStatus(status);
+    const chatInput = document.querySelector('#admin-backup-telegram-chatid');
+    if (chatInput && !chatInput.value && status.chatIdValue) chatInput.value = status.chatIdValue;
+    setTelegramConfigPill('token', status.configured ? 'valid' : 'idle');
+    setTelegramConfigPill('chat', status.configured ? (status.chatValid ? 'valid' : 'invalid') : 'idle');
   } catch (error) {
     target.textContent = 'Tidak dapat memeriksa pengaturan bot Telegram.';
     if (button) button.disabled = true;
     if (error.status === 401) showAuth();
+  }
+}
+
+let telegramConfigSaveTimer = null;
+let telegramConfigWired = false;
+
+function scheduleTelegramConfigSave() {
+  const tokenInput = document.querySelector('#admin-backup-telegram-token');
+  const chatInput = document.querySelector('#admin-backup-telegram-chatid');
+  if (!tokenInput || !chatInput) return;
+  if (telegramConfigSaveTimer) clearTimeout(telegramConfigSaveTimer);
+  const botToken = tokenInput.value.trim();
+  const chatId = chatInput.value.trim();
+  if (!botToken || !chatId) return;
+  telegramConfigSaveTimer = setTimeout(() => void saveTelegramConfig(botToken, chatId), 800);
+}
+
+async function saveTelegramConfig(botToken, chatId) {
+  const saveStatus = document.querySelector('#admin-backup-telegram-save-status');
+  setTelegramConfigPill('token', 'checking');
+  setTelegramConfigPill('chat', 'checking');
+  if (saveStatus) saveStatus.textContent = 'Memeriksa token dan chat ID ke Telegram…';
+  try {
+    const result = await api('/api/admin/backup/telegram-config', { method: 'PUT', body: JSON.stringify({ botToken, chatId }) });
+    renderTelegramConfigStatus(result);
+    setTelegramConfigPill('token', 'valid');
+    setTelegramConfigPill('chat', result.chatValid ? 'valid' : 'invalid');
+    if (saveStatus) {
+      saveStatus.textContent = result.chatValid
+        ? `Tersimpan otomatis · ${new Date().toLocaleTimeString('id-ID')} — bot @${result.botUsername || 'Telegram'} siap, backup dikirim ke chat itu.`
+        : `Tersimpan — ${result.chatError || 'chat belum valid.'}`;
+    }
+  } catch (error) {
+    if (error.status === 400 && error.payload?.tokenValid === false) {
+      setTelegramConfigPill('token', 'invalid');
+      setTelegramConfigPill('chat', 'idle');
+    } else {
+      setTelegramConfigPill('token', 'idle');
+      setTelegramConfigPill('chat', 'idle');
+    }
+    if (saveStatus) saveStatus.textContent = error.message || 'Tidak dapat menyimpan pengaturan Telegram.';
+    if (error.status === 401) showAuth();
+  }
+}
+
+function initAdminBackupTelegramConfig() {
+  if (telegramConfigWired) return;
+  const tokenInput = document.querySelector('#admin-backup-telegram-token');
+  const chatInput = document.querySelector('#admin-backup-telegram-chatid');
+  if (!tokenInput || !chatInput) return;
+  telegramConfigWired = true;
+  for (const input of [tokenInput, chatInput]) {
+    input.addEventListener('input', () => {
+      setTelegramConfigPill('token', 'idle');
+      setTelegramConfigPill('chat', 'idle');
+      const saveStatus = document.querySelector('#admin-backup-telegram-save-status');
+      if (saveStatus) saveStatus.textContent = 'Mengetik… pengaturan tersimpan otomatis setelah berhenti mengetik.';
+      scheduleTelegramConfigSave();
+    });
   }
 }
 document.querySelector('#admin-backup-direct-download')?.addEventListener('click', () => {
@@ -3127,6 +3213,7 @@ function setWorkspacePage(page, smoothScroll = true) {
   }
   // Halaman Backup memuat ulang status Telegram dan restore point setiap kali dibuka agar angkanya selalu dari data live, bukan sisa login.
   if (page === 'backup') {
+    initAdminBackupTelegramConfig();
     void loadAdminBackupTelegramStatus();
     void loadAdminBackupSnapshots();
   }

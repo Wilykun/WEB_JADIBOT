@@ -12,6 +12,7 @@ import { readAvatarUpload } from './avatar-upload.js';
 import { BANNED_LOGIN_NOTICE, DELETED_LOGIN_NOTICE, botControlPolicyError, isBannedAccount, isMainAdminUser, memberAdminPolicyError, normalizeBanReason, withMemberLifecycleLock } from './member-admin-policy.js';
 import { BackupArchiveError, createEncryptedBackup, createPlainBackupZip, decryptEncryptedBackup, MAX_ARCHIVE_BYTES, MAX_PLAINTEXT_BYTES } from './admin-backup.js';
 import { createDefaultBotRecord } from './default-bot.js';
+import { TELEGRAM_API_BASE, readStoredTelegramConfig, validateTelegramConfig } from './telegram-config.js';
 import { acquireRestoreLock } from './session-lock.js';
 import {
   randomBytes,
@@ -1917,7 +1918,30 @@ async function handleApi(req, res, url) {
     if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
     const { botToken, chatId } = readTelegramConfig();
     const masked = chatId.length > 4 ? `${chatId.slice(0, 4)}…${chatId.slice(-4)}` : chatId;
-    return sendJson(res, 200, { configured: Boolean(botToken && chatId), chatId: masked });
+    const stored = await readStoredTelegramConfig(TELEGRAM_CONFIG_FILE);
+    const storedIsEffective = Boolean(botToken && chatId) && stored.botToken === botToken && stored.chatId === chatId;
+    return sendJson(res, 200, {
+      configured: Boolean(botToken && chatId),
+      chatId: masked,
+      chatIdValue: storedIsEffective ? stored.chatId : '',
+      botUsername: storedIsEffective ? stored.botUsername : null,
+      chatValid: storedIsEffective ? stored.chatValid : false,
+    });
+  }
+  if (route === 'PUT /api/admin/backup/telegram-config') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
+    if (!allowRateLimit(`admin-backup-telegram-config:${user.id}`, 20, 60 * 60 * 1000)) return sendError(res, 429, 'Terlalu sering memeriksa. Tunggu sebentar lalu coba lagi.');
+    const body = await readJson(req);
+    const botToken = String(body.botToken || '').trim().slice(0, 200);
+    const chatId = String(body.chatId || '').trim().slice(0, 32);
+    if (!botToken || !chatId) return sendError(res, 400, 'Isi token bot dan chat ID dulu.');
+    const result = await validateTelegramConfig(botToken, chatId, fetch, process.env.TELEGRAM_API_BASE_URL || TELEGRAM_API_BASE);
+    if (!result.tokenValid) return sendJson(res, 400, { saved: false, tokenValid: false, chatValid: null, botUsername: null, error: result.tokenError });
+    await atomicWriteJson(TELEGRAM_CONFIG_FILE, { botToken, chatId, botUsername: result.botUsername, chatValid: result.chatValid, validatedAt: new Date().toISOString() });
+    const effective = readTelegramConfig();
+    const masked = effective.chatId.length > 4 ? `${effective.chatId.slice(0, 4)}…${effective.chatId.slice(-4)}` : effective.chatId;
+    return sendJson(res, 200, { saved: true, tokenValid: true, chatValid: result.chatValid, chatError: result.chatError, botUsername: result.botUsername, configured: Boolean(effective.botToken && effective.chatId), chatId: masked });
   }
   if (route === 'POST /api/admin/backup/telegram') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');

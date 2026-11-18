@@ -84,8 +84,9 @@ test('heartbeat mengembalikan versi klien dari index.html dan berubah tanpa rest
     assert.equal(first.payload.version, deployedVersion, 'heartbeat harus mengembalikan versi dari ?v= app.js');
 
     // Mengubah ?v= di index.html (seperti deploy checkout) harus langsung
-    // terbaca heartbeat berikutnya tanpa restart server.
-    const bumpedHtml = indexHtml.replace(deployedVersion, 'sim-version-bump-1');
+    // terbaca heartbeat berikutnya tanpa restart server. Ganti kemunculan
+    // app.js-nya saja: nilai ?v= yang sama juga dipakai style.css.
+    const bumpedHtml = indexHtml.replace(`/app.js?v=${deployedVersion}`, '/app.js?v=sim-version-bump-1');
     await writeFile(path.join(root, 'public', 'index.html'), bumpedHtml);
     const second = await jsonRequest(base, '/api/me/heartbeat', { method: 'POST', body: {}, cookie: login.cookie });
     assert.equal(second.payload.version, 'sim-version-bump-1', 'heartbeat harus membaca versi baru dari disk tanpa restart');
@@ -126,17 +127,17 @@ test('menu tetap terbuka setelah notifikasi menu terkunci ditutup', async () => 
 test('entri Info Update terbaru menjelaskan tab yang diperbarui sendiri', async () => {
   const data = JSON.parse(await readFile(path.join(sourceRoot, 'public', 'info-updates.json'), 'utf8'));
   const html = await readFile(path.join(sourceRoot, 'public', 'index.html'), 'utf8');
-  assert.equal(data.updates.length, 64, 'daftar harus 64 entri');
+  assert.equal(data.updates.length, 65, 'daftar harus 65 entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Kotak info di menu samping dihapus; tombol kembali ke atas lebih rapih', 'entri terbaru harus soal kotak info yang dihapus dan tombol kembali ke atas');
-  assert.equal(newest.tag, 'Tampilan', 'entri terbaru harus bertag Tampilan');
+  assert.equal(newest.title, 'Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup', 'entri terbaru harus soal pengaturan bot Telegram di halaman Backup');
+  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.ok(html.includes('<li class="info-update-item" data-tag="tampilan">'), 'fallback harus memakai slug tampilan untuk entri terbaru');
-  assert.ok(html.includes('<h4>Kotak info di menu samping dihapus; tombol kembali ke atas lebih rapih</h4>'), 'fallback harus memuat judul entri terbaru');
+  assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'fallback harus memakai slug fitur-baru untuk entri terbaru');
+  assert.ok(html.includes('<h4>Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup</h4>'), 'fallback harus memuat judul entri terbaru');
 
-  // Entri notifikasi menu terkunci sebelumnya kini di posisi ketiga; deskripsinya
+  // Entri notifikasi menu terkunci sebelumnya kini di posisi keempat; deskripsinya
   // menyebut menunya tetap terbuka setelah notifikasi ditutup.
-  const locked = data.updates[2];
-  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi kedua');
+  const locked = data.updates[3];
+  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi keempat');
   assert.match(locked.description, /Menunya tetap terbuka setelah notifikasi ditutup/, 'deskripsi harus menyebut menu tetap terbuka');
 });

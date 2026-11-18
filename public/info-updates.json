@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-18T11:15:00+07:00",
+  "updatedAt": "2026-11-18T12:05:00+07:00",
   "updates": [
+    {
+      "title": "Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "12.05 WIB",
+      "tag": "Fitur baru",
+      "description": "Di kartu 'Kirim ke Telegram' pada halaman Backup & pemulihan kini ada kolom Token bot dan Chat ID. Keduanya diperiksa langsung ke Telegram saat berhenti mengetik: pil Valid / Tidak valid muncul di samping tiap kolom, dan pengaturan tersimpan otomatis di server begitu token terbukti valid — tidak perlu lagi mengisi file di server. Tombol kirim hanya aktif bila token dan chat sama-sama valid, jadi backup terkirim ke chat Telegram yang benar. Token disimpan di data/telegram.json di server (tidak masuk GitHub), dan kolom token tidak pernah diisi ulang dari server."
+    },
     {
       "title": "Kotak info di menu samping dihapus; tombol kembali ke atas lebih rapih",
       "day": "Rabu, 18 Nov 2026",
