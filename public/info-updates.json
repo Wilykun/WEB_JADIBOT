@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-18T07:55:00+07:00",
+  "updatedAt": "2026-11-18T11:15:00+07:00",
   "updates": [
+    {
+      "title": "Kotak info di menu samping dihapus; tombol kembali ke atas lebih rapih",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "11.15 WIB",
+      "tag": "Tampilan",
+      "description": "Kotak info 'Pairing tersedia per akun. Worker fitur bot belum dijalankan.' di menu samping dihapus — tulisannya statis dan selalu tampil walau bot sebenarnya sedang jalan, jadi membingungkan. Tombol kembali ke atas (panah hijau di pojok kanan bawah) kini berlatar penuh sehingga tidak ada garis kartu yang terlihat menembus tombol saat tombol melayang di atas daftar."
+    },
     {
       "title": "Tab panel kini ikut diperbarui sendiri saat ada versi baru",
       "day": "Rabu, 18 Nov 2026",
@@ -20,7 +27,7 @@
       "day": "Rabu, 18 Nov 2026",
       "time": "05.50 WIB",
       "tag": "Tampilan",
-      "description": "Kartu akun di halaman Member kini berbentuk baris ringkas di HP, seperti baris Rank Bot: foto profil mengecil dari 42px menjadi 34px dan pindah ke samping nama, bukan lagi di atas nama di tengah kartu. Nama, @akun, dan tombol 'Lihat detail' sejajar dalam satu baris, dan chip status rata kiri — kartunya jauh lebih pendek sehingga daftar akun tidak perlu banyak digulir. Tidak ada informasi yang dihilangkan: peran, status Pemilik, WA, bot, mode, dan runtime tetap tampil sama seperti sebelumnya. Kartu di halaman Kontrol Bot ikut ringkas karena memakai kartu yang sama."
+      "description": "Kartu akun di halaman Member kini berbentuk baris ringkas di HP, seperti baris Rank Bot: foto profil mengecil dari 42px menjadi 34px dan pindah ke samping nama, bukan lagi di atas nama di tengah kartu. Nama, @akun, dan tombol 'Lihat detail' sejajar dalam satu baris, dan chip status rata kiri — kartunya jauh lebih pendek sehingga daftar akun tidak perlu banyak digulir. Tidak ada informasi yang dihilangkan: peran, status Pemilik, WA, bot, mode, dan runtime tetap tampil sama seperti sebelumnya. Kartu di halaman Kontrol Bot ikut ringkas karena memakai kartu yang sama. Versi style.css diperbarui agar kartu ringkas ini benar-benar sampai ke HP yang sudah pernah membuka panel, karena versi lama sempat tertahan di cache browser."
     },
     {
       "title": "Panel kini memuat jauh lebih cepat",
