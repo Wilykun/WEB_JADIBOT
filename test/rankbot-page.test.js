@@ -105,17 +105,17 @@ test('peringkat diperbarui realtime dan mengikuti pencarian serta pil kategori',
   assert.ok(js.includes("document.querySelector('[data-rankbot-filters]')?.addEventListener('click'"), 'pil kategori harus mengganti kategori peringkat');
 });
 
-test('entri Info Update terbaru menjelaskan halaman Rank Bot', () => {
+test('entri Info Update terbaru dan halaman Rank Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T21:07:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 68, 'daftar harus bertambah satu entri');
+  assert.equal(data.updatedAt, '2026-11-20T06:24:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 72, 'daftar harus bertambah empat entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Avatar Member kini menunjukkan titik online', 'entri terbaru harus soal titik online di avatar Member');
-  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
-  assert.equal(newest.time, '21.07 WIB', 'waktu entri terbaru harus cocok');
-  const rankbotEntry = data.updates[9];
-  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kesepuluh');
+  assert.equal(newest.title, 'Info Update kini memberi notifikasi realtime', 'entri terbaru harus soal notifikasi realtime Info Update');
+  assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perbaikan');
+  assert.equal(newest.time, '06.24 WIB', 'waktu entri terbaru harus cocok');
+  const rankbotEntry = data.updates[13];
+  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi keempat belas');
   assert.equal(rankbotEntry.tag, 'Fitur baru', 'entri Rank Bot harus bertag Fitur baru');
   assert.equal(rankbotEntry.time, '17.00 WIB', 'waktu entri Rank Bot harus cocok');
   assert.ok(rankbotEntry.description.includes("label mode dipersingkat jadi 'ReadSW + Reaksi'"), 'entri Rank Bot harus menjelaskan perbaikan nama fitur yang terpotong');

@@ -54,13 +54,13 @@ test('overlay mendukung notifikasi tanpa tombol aksi dan tidak menelan ingatan n
   assert.ok(!branchBody.includes('emojiNoticeDismissed'), 'cabang locked tidak boleh menyentuh ingatan notifikasi reaksi');
 });
 
-test('entri Info Update notifikasi menu terkunci kini di posisi ketujuh', async () => {
+test('entri Info Update notifikasi menu terkunci kini di posisi kesebelas', async () => {
   const data = JSON.parse(await read('public/info-updates.json'));
   const html = await read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T21:07:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 68, 'daftar harus 68 entri');
-  const locked = data.updates[6];
-  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi ketujuh');
+  assert.equal(data.updatedAt, '2026-11-20T06:24:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 72, 'daftar harus 72 entri');
+  const locked = data.updates[10];
+  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi kesebelas');
   assert.equal(locked.tag, 'Tampilan', 'entri notifikasi menu terkunci harus bertag Tampilan');
   assert.equal(locked.day, 'Rabu, 18 Nov 2026', 'hari entri notifikasi menu terkunci harus cocok');
   assert.equal(locked.time, '07.25 WIB', 'waktu entri notifikasi menu terkunci harus cocok');
@@ -70,8 +70,8 @@ test('entri Info Update notifikasi menu terkunci kini di posisi ketujuh', async 
   assert.ok(html.includes('Rabu, 18 Nov 2026 · 07.25 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri notifikasi menu terkunci');
 
   // Entri kartu Member ringkas sebelumnya kini di posisi kedelapan beserta fallback-nya.
-  const compact = data.updates[7];
-  assert.equal(compact.title, 'Tampilan Member kini lebih ringkas di HP', 'entri kartu Member ringkas kini di posisi kedelapan');
+  const compact = data.updates[11];
+  assert.equal(compact.title, 'Tampilan Member kini lebih ringkas di HP', 'entri kartu Member ringkas kini di posisi kedua belas');
   assert.equal(compact.tag, 'Tampilan', 'entri kartu Member ringkas harus bertag Tampilan');
   assert.equal(compact.time, '05.50 WIB', 'waktu entri kartu Member ringkas harus cocok');
 });

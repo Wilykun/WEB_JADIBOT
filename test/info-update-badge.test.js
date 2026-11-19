@@ -30,7 +30,7 @@ test('Info Update unread badge is stored per account on the server, never shared
   assert.ok(js.includes("document.querySelector('.side-nav .nav-item[href=\"#infoupdate\"]')"), 'the badge must sit on the Info Update nav item');
   assert.ok(js.includes("badge?.remove()"), 'the badge must disappear when nothing is unread');
   assert.ok(js.includes("count > 99 ? '99+'"), 'the badge must cap at 99+');
-  assert.ok(js.includes('function refreshInfoUpdateBadge()'), 'the client must refresh the badge from the server');
+  assert.ok(js.includes('async function refreshInfoUpdateBadge(prefetchedUpdates)'), 'the client must refresh the badge from the server');
   assert.ok(js.includes("fetch('/api/info-updates/seen'"), 'the badge must read the per-account marker from the server');
   assert.ok(js.includes('function markInfoUpdatesSeen(updates)'), 'opening the Info Update page must mark everything as read');
   assert.ok(js.includes('void markInfoUpdatesSeen(updates);'), 'the mark-as-read must run after the update list renders');

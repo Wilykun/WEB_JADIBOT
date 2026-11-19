@@ -3947,6 +3947,10 @@ function renderPairingState(pairing) {
     statusDescription.textContent = 'WhatsApp menolak kredensial sesi tersimpan. Pairing ulang diperlukan.';
     statusFoot.textContent = 'Perlu tautkan ulang';
     statusDot.className = 'muted-dot';
+    // Sesi ditolak tapi nomornya tidak tersimpan: Hapus sesi tetap harus
+    // tampil di kartu Kontrol Bot, karena hapus memakai akun (username),
+    // bukan nomor — tanpa ini pemilik akun terjebak di Panel tanpa jalan keluar.
+    sessionActions.classList.remove('hidden');
     setPairingNotice('Sesi lama tidak diterima oleh WhatsApp. Masukkan nomor yang ingin ditautkan lalu minta pairing code baru.', false, true);
     void loadPairingLogs();
     pairingPollTimer = setInterval(() => { void refreshPairing(); }, 5000);
@@ -4313,6 +4317,7 @@ async function showDashboard(user) {
   }
   await Promise.all([loadAdminUsers(), loadAdminBackupSnapshots(), loadAdminBackupTelegramStatus(), refreshPairing(), loadPairingLogs()]);
   void refreshInfoUpdateBadge();
+  startInfoUpdateNoticePolling();
   void refreshMemberBadge();
   await loadLoginHistory();
   startLoginHistoryPolling();
@@ -5082,6 +5087,10 @@ async function callBotAction(action) {
     showToast(action === 'start' ? 'Bot worker dimulai.' : action === 'restart' ? 'Bot worker dimulai ulang.' : 'Bot worker dihentikan.');
   } catch (error) {
     setControlFeedback('bot-feedback', 'error', 'Aksi tidak berhasil', error.message);
+    // Start/restart gagal karena sesi ditolak: muat ulang status pairing
+    // supaya kartu, lencana, dan tombol Hapus sesi mengikuti keadaan
+    // sebenarnya, bukan status lama sebelum aksi ditekan.
+    void refreshPairing();
   } finally {
     buttons.forEach((button) => { button.disabled = false; });
     if (pairing) renderBotWorkerUi(pairing.workerStatus, pairing.status);
@@ -5606,22 +5615,64 @@ function renderInfoUpdateBadge(count) {
   badge.setAttribute('aria-label', `${count} pembaruan belum dibaca`);
 }
 
-async function refreshInfoUpdateBadge() {
+async function refreshInfoUpdateBadge(prefetchedUpdates) {
   try {
-    const [updatesResponse, seenResponse] = await Promise.all([
-      fetch('/info-updates.json', { cache: 'no-store' }),
-      fetch('/api/info-updates/seen', { credentials: 'same-origin' }),
-    ]);
-    if (!updatesResponse.ok) return;
-    const data = await updatesResponse.json();
-    const updates = Array.isArray(data?.updates) ? data.updates : [];
+    let updates = prefetchedUpdates;
+    let updatesResponse = null;
+    let seenResponse = null;
+    if (updates) {
+      seenResponse = await fetch('/api/info-updates/seen', { credentials: 'same-origin' });
+    } else {
+      [updatesResponse, seenResponse] = await Promise.all([
+        fetch('/info-updates.json', { cache: 'no-store' }),
+        fetch('/api/info-updates/seen', { credentials: 'same-origin' }),
+      ]);
+      if (!updatesResponse.ok) return;
+      const data = await updatesResponse.json();
+      updates = Array.isArray(data?.updates) ? data.updates : [];
+    }
     let seen = null;
-    if (seenResponse.ok) {
+    if (seenResponse?.ok) {
       const seenData = await seenResponse.json().catch(() => ({}));
       seen = seenData?.seen || null;
     }
     renderInfoUpdateBadge(countUnreadInfoUpdates(updates, seen));
   } catch { /* Badge gagal dimuat: biarkan menu tanpa angka. */ }
+}
+
+// Notifikasi realtime Info Update: tiap 60 detik panel memeriksa entri
+// terbaru; kalau ada entri baru sejak terakhir diperiksa, muncul toast
+// dan badge menu diperbarui — tanpa menunggu pengguna pindah halaman atau
+// memuat ulang. Satu entri hanya diberitahukan sekali; entri yang sudah
+// ada saat panel dibuka tidak memicu toast.
+let lastNotifiedInfoUpdateMarker = null;
+let infoUpdateNoticeTimer = null;
+function infoUpdateMarker(update) {
+  return update?.day && update?.time && update?.title ? `${update.day}|${update.time}|${update.title}` : null;
+}
+function notifyNewInfoUpdate(updates) {
+  const newest = Array.isArray(updates) ? updates[0] : null;
+  const marker = infoUpdateMarker(newest);
+  if (!marker) return;
+  const isNew = lastNotifiedInfoUpdateMarker !== null && marker !== lastNotifiedInfoUpdateMarker;
+  lastNotifiedInfoUpdateMarker = marker;
+  if (isNew) showToast(`Info Update baru: ${newest.title}`);
+}
+async function checkInfoUpdateNotice() {
+  try {
+    const response = await fetch('/info-updates.json', { cache: 'no-store' });
+    if (!response.ok) return;
+    const data = await response.json();
+    const updates = Array.isArray(data?.updates) ? data.updates : [];
+    if (!updates.length) return;
+    notifyNewInfoUpdate(updates);
+    void refreshInfoUpdateBadge(updates);
+  } catch { /* Notifikasi gagal diperiksa: badge tetap diperbarui saat navigasi. */ }
+}
+function startInfoUpdateNoticePolling() {
+  if (infoUpdateNoticeTimer) return;
+  void checkInfoUpdateNotice();
+  infoUpdateNoticeTimer = window.setInterval(() => { void checkInfoUpdateNotice(); }, 60000);
 }
 
 async function markInfoUpdatesSeen(updates) {

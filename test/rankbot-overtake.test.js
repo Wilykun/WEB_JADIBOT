@@ -122,12 +122,12 @@ test('baris akun sendiri dibedakan warna emas dan lencana Kamu di Rank Bot', () 
   assert.ok(css.includes('background:linear-gradient(135deg,#f5c542,#d99a1f)'), 'lencana Kamu harus berwarna emas seperti lencana peringkat pertama');
 });
 
-test('entri Info Update terbaru menjelaskan notifikasi salip Rank Bot', () => {
+test('entri Info Update notifikasi salip Rank Bot kini di posisi ketujuh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-18T21:07:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 68, 'daftar harus bertambah satu entri');
-  const newest = data.updates[2];
+  assert.equal(data.updatedAt, '2026-11-20T06:24:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 72, 'daftar harus bertambah empat entri');
+  const newest = data.updates[6];
   assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');

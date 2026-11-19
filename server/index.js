@@ -2103,8 +2103,20 @@ async function handleApi(req, res, url) {
   }
   if (route === 'DELETE /api/pairing/session') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
-    const pairing = await pairingManager.deleteSession(user.id);
-    return sendJson(res, 200, { pairing });
+    try {
+      // Kunci lifecycle yang sama dengan resume/start: hapus sesi tidak boleh
+      // bentrok dengan sambung ulang atau start bot yang sedang berjalan.
+      return await withMemberLifecycleLock(user.id, async () => {
+        const freshUser = store.users.find((item) => item.id === user.id);
+        if (!freshUser) return sendError(res, 401, 'Silakan masuk kembali.');
+        const pairing = await pairingManager.deleteSession(user.id);
+        return sendJson(res, 200, { pairing });
+      });
+    } catch (error) {
+      const status = error instanceof PairingError ? error.status : 502;
+      const message = error instanceof PairingError ? error.message : 'Sesi WhatsApp belum dapat dihapus.';
+      return sendError(res, status, message);
+    }
   }
   if (['POST /api/bot/start', 'POST /api/bot/restart', 'POST /api/bot/stop'].includes(route)) {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');

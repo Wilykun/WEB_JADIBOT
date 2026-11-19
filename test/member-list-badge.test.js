@@ -61,7 +61,7 @@ test('badge member: mendarat otomatis di Member setelah login tidak memajukan pe
 });
 
 test('badge member: dimuat setelah login dan diperbarui realtime dari daftar yang sama', () => {
-  assert.match(appJs, /void refreshInfoUpdateBadge\(\);\n  void refreshMemberBadge\(\);/);
+  assert.match(appJs, /void refreshInfoUpdateBadge\(\);\n  startInfoUpdateNoticePolling\(\);\n  void refreshMemberBadge\(\);/);
   assert.match(appJs, /if \(memberListSeenLoaded\) renderMemberBadge\(countNewMembers\(users, memberListSeen\)\);/);
   assert.doesNotMatch(appJs, /if \(activeWorkspacePage === 'admin'\) void markMemberListSeen\(users\);/);
 });

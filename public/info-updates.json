@@ -1,6 +1,34 @@
 {
-  "updatedAt": "2026-11-18T21:07:00+07:00",
+  "updatedAt": "2026-11-20T06:24:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "06.24 WIB",
+      "title": "Info Update kini memberi notifikasi realtime",
+      "tag": "Perbaikan",
+      "description": "Selama ini angka di menu Info Update baru diperbarui saat pindah halaman, jadi pembaruan yang masuk selagi panel dibuka tidak langsung ketahuan. Kini panel memeriksa entri terbaru tiap 60 detik: begitu ada entri baru, muncul toast Info Update baru di layar dan angka di menu ikut diperbarui, tanpa pindah halaman atau memuat ulang. Satu entri hanya diberitahukan sekali, dan entri yang sudah ada saat panel dibuka tidak memicu toast."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "06.21 WIB",
+      "title": "Hapus sesi kini tersedia di kartu Kontrol Bot",
+      "tag": "Perbaikan",
+      "description": "Saat Start bot gagal karena sesi WhatsApp ditolak, panel dulu tetap menampilkan status lama dan tombol Hapus sesi tidak muncul di Panel, jadi pemilik akun terjebak di kartu Kontrol Bot tanpa jalan keluar. Kini kalau aksi bot gagal karena sesi ditolak, panel langsung memuat ulang status pairing sehingga kartu dan lencana berubah ke keadaan sebenarnya, dan tombol Hapus sesi tampil di kartu Kontrol Bot walau nomornya tidak tersimpan, karena hapus memakai akun (username), bukan nomor. Hapus sesi memakai kunci yang sama dengan Hapus sesi di Pairing dan member: timer sambung ulang dimatikan, socket logout, lalu session.json, cadangan session.json.bak dan session.json.good, serta kredensial Baileys di DATA_AKUN sesuai username dihapus, tanpa bentrok dengan sambung ulang yang sedang berjalan. Setelah dihapus, minta pairing code baru untuk menautkan lagi."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "06.04 WIB",
+      "title": "Sesi WhatsApp yang logout kini terdeteksi otomatis",
+      "tag": "Perbaikan",
+      "description": "Akun member yang sudah logout atau unlink di WhatsApp (BangWily dan 4 akun lain) dulu tetap tampil tertaut di panel karena sesi yang mati diulang sambung tanpa henti (kode 408) dan panel menganggap menyambung ulang sama dengan tertaut. Kini setelah 5 kali gagal sambung ulang berturut-turut sesi ditandai tidak dapat dipulihkan: lencana dan kartu status jujur (MENYAMBUNG, TERPUTUS, DITOLAK), tombol Sambungkan ulang dan Hapus sesi tampil di akun member yang bermasalah, dan kode pairing baru langsung muncul di layar begitu tiba (realtime) tanpa muat ulang. Akun yang masih tertaut sehat tidak terganggu. Akun yang ditandai harus tautkan ulang dari WhatsApp-nya sendiri."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "05.45 WIB",
+      "title": "Gambar pratinjau tautan readsw.my.id diperbaiki",
+      "tag": "Perbaikan",
+      "description": "Saat tautan readsw.my.id dibagikan di WhatsApp, judul dan deskripsi muncul tapi gambarnya kosong karena og:image masih mengarah ke alamat Replit lama yang sudah mati (404). Kini og:url, og:image dan twitter:image mengarah ke readsw.my.id dan gambar pratinjau 1200x630 di server sendiri, jadi kartu pratinjau tampil lengkap. WhatsApp menyimpan pratinjau lama di cache, jadi tautan yang sudah pernah dibagikan bisa perlu dibagikan ulang atau menunggu cache-nya segar."
+    },
     {
       "day": "Rabu, 18 Nov 2026",
       "time": "21.07 WIB",
