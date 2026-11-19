@@ -56,6 +56,12 @@ if [[ ! -d node_modules ]]; then
   fi
 fi
 
+# Tunnel readsw.my.id: jalanin tunnel tunnl.gg biar panel bisa dibuka lewat domain
+if [[ -x "$(dirname "$0")/tunnel/start-tunnel.sh" ]]; then
+  echo "Menjalankan tunnel readsw.my.id..."
+  "$(dirname "$0")/tunnel/start-tunnel.sh" stable || echo "Tunnel gagal start, panel tetap jalan lokal."
+fi
+
 MAX_RESTARTS="${MAX_RESTARTS:-10}"
 RESTART_DELAY="${RESTART_DELAY:-5}"
 STABLE_UPTIME_SEC="${STABLE_UPTIME_SEC:-180}"

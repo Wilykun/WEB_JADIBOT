@@ -1,0 +1,32 @@
+services:
+  panel:
+    build: .
+    container_name: readsw-panel
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+    volumes:
+      - ./data:/app/data
+      - ./DATA_AKUN:/app/DATA_AKUN
+      - ./DATA_STALKER:/app/DATA_STALKER
+      - ./DATA_KUNJUNGAN:/app/DATA_KUNJUNGAN
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  # Tunnel Cloudflare (Zero Trust). Isi token dari dashboard Cloudflare:
+  #   CLOUDFLARE_TUNNEL_TOKEN=xxxx docker compose up -d
+  # Public Hostname diatur di dashboard Cloudflare (bukan di sini):
+  #   readsw.my.id -> http://panel:3000
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: readsw-tunnel
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - panel
+    restart: unless-stopped

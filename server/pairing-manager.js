@@ -14,6 +14,9 @@ const PAIRING_REQUEST_DELAY_MS = 7_000;
 const SOCKET_READY_TIMEOUT_MS = 35_000;
 const USER_COOLDOWN_MS = 60_000;
 const MAX_PAIRING_SOCKET_RESTARTS = 2;
+// Batas percobaan sambung ulang otomatis yang gagal berturut-turut (mis. kode 408).
+// Setelah batas ini sesi ditandai tidak valid supaya member bisa pairing ulang.
+export const MAX_CONSECUTIVE_RECONNECT_FAILURES = 5;
 // Pengaturan koneksi eksplisit untuk mencegah loop Connection Closed 428
 // yang muncul berkala pada Baileys/WhatsApp Web.
 const WA_KEEP_ALIVE_INTERVAL_MS = 25_000;
@@ -521,6 +524,8 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       maskedPhone: state.maskedPhone,
       phoneNumber: ['checking_number', 'awaiting_code', 'linking'].includes(state.status) ? state.displayPhone || null : null,
       expiresAt: expired ? null : state.expiresAt,
+      reconnectAttempts: state.reconnectAttempts || 0,
+      reconnectFailures: state.consecutiveReconnectFailures || 0,
       workerStatus: state.workerStatus || 'stopped',
       workerStartedAt: state.workerStatus === 'running' ? state.workerStartedAt || null : null,
     };
@@ -591,13 +596,24 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     clearReconnectStableTimer(state);
     state.reconnectStableTimer = setTimeout(() => {
       state.reconnectStableTimer = null;
-      if (state.socket === socket && state.status === 'linked') state.reconnectAttempts = 0;
+      if (state.socket === socket && state.status === 'linked') { state.reconnectAttempts = 0; state.consecutiveReconnectFailures = 0; }
     }, RECONNECT_STABLE_WINDOW_MS);
     state.reconnectStableTimer.unref?.();
   }
 
   function isInvalidSessionCode(code) {
     return classifyDisconnectCode(code) === 'invalid_session';
+  }
+
+  function registerReconnectFailure(state) {
+    // Sesi yang kredensialnya sudah dicabut WhatsApp (mis. logout dari HP)
+    // ditutup WhatsApp berulang kali dengan kode 408 (retry), bukan 401.
+    // Tanpa batas, auto-reconnect berputar selamanya dan panel terus
+    // menampilkan sesi itu sebagai "tertaut". Setelah batas tercapai,
+    // hentikan dan tandai sesi tidak valid supaya member bisa minta
+    // pairing code baru secara realtime.
+    state.consecutiveReconnectFailures = (state.consecutiveReconnectFailures || 0) + 1;
+    return state.consecutiveReconnectFailures >= MAX_CONSECUTIVE_RECONNECT_FAILURES;
   }
 
   async function pauseAfterConnectionReplaced(state, reasonCode) {
@@ -630,6 +646,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     state.code = null;
     state.expiresAt = null;
     state.phoneNumber = null;
+    state.consecutiveReconnectFailures = 0;
     state.workerDesired = false;
     state.autoStartBeforeInvalid = getWorkerAutoStart(state.userId) === true;
     await setWorkerAutoStart(state.userId, false);
@@ -756,6 +773,10 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
 
   function scheduleAutoReconnect(state) {
     if (sessions.get(state.userId) !== state || !state.authState?.state?.creds?.registered || state.status === 'invalid') return;
+    if ((state.consecutiveReconnectFailures || 0) >= MAX_CONSECUTIVE_RECONNECT_FAILURES) {
+      void markSessionInvalid(state, null);
+      return;
+    }
     clearTimeout(state.reconnectTimer);
     const attempt = (state.reconnectAttempts || 0) + 1;
     state.reconnectAttempts = attempt;
@@ -1405,6 +1426,8 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
               state.reconnectTimer = null;
               scheduleReconnectStableReset(state, socket);
               state.status = 'linked';
+              state.consecutiveReconnectFailures = 0;
+              state.reconnectAttempts = 0;
               snapshotGoodSession(state);
               const linkedDigits = String(state.authState?.state?.creds?.me?.id || socket?.user?.id || '').split('@')[0].split(':')[0].replace(/\D/g, '');
               if (linkedDigits) state.maskedPhone = maskedNumber(linkedDigits);
@@ -1470,6 +1493,11 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
               }
               clearTimeout(state.readyTimer);
               state.readyTimer = null;
+              if (registerReconnectFailure(state)) {
+                await markSessionInvalid(state, reasonCode);
+                await log(userId, `Sesi WhatsApp tidak dapat dipulihkan setelah ${MAX_CONSECUTIVE_RECONNECT_FAILURES} kali percobaan sambung ulang gagal (kode ${reasonCode || 'timeout'}); pairing ulang diperlukan.`);
+                return;
+              }
               state.status = 'disconnected';
               state.code = null;
               state.expiresAt = null;
@@ -1644,9 +1672,20 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       if (recovered) return publicState(state);
       throw new PairingError('Sesi WhatsApp ditolak. Masukkan nomor dan minta pairing code baru.', 409);
     }
+    const manualReconnect = !auto && state?.status === 'reconnecting';
     if (state && ['connecting', 'awaiting_code', 'linking', 'linked', 'reconnecting'].includes(state.status)
-      && !(auto && state.status === 'reconnecting' && !state.socket)) {
+      && !(auto && state.status === 'reconnecting' && !state.socket)
+      && !manualReconnect) {
       return publicState(state);
+    }
+    if (manualReconnect) {
+      // Tombol "Sambungkan ulang" ditekan member saat sesi macet di
+      // reconnecting: batalkan timer lama dan mulai percobaan baru,
+      // bukan diam saja seperti sebelumnya.
+      clearTimeout(state.reconnectTimer);
+      state.reconnectTimer = null;
+      state.consecutiveReconnectFailures = 0;
+      state.reconnectAttempts = 0;
     }
     const hadSessionLock = Boolean(state?.sessionLock);
     const sessionLock = state?.sessionLock || await acquireAccountLock(userId);
@@ -1782,6 +1821,8 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         state.reconnectTimer = null;
         scheduleReconnectStableReset(state, socket);
         state.status = 'linked';
+        state.consecutiveReconnectFailures = 0;
+        state.reconnectAttempts = 0;
         snapshotGoodSession(state);
         const linkedDigits = String(state.authState?.state?.creds?.me?.id || socket?.user?.id || '').split('@')[0].split(':')[0].replace(/\D/g, '');
         if (linkedDigits) state.maskedPhone = maskedNumber(linkedDigits);
@@ -1814,6 +1855,11 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         }
         if (classifyDisconnectCode(reasonCode) === 'connection_replaced') {
           await pauseAfterConnectionReplaced(state, reasonCode);
+          return;
+        }
+        if (registerReconnectFailure(state)) {
+          await markSessionInvalid(state, reasonCode);
+          await log(userId, `Sesi WhatsApp tidak dapat dipulihkan setelah ${MAX_CONSECUTIVE_RECONNECT_FAILURES} kali percobaan sambung ulang gagal (kode ${reasonCode || 'timeout'}); pairing ulang diperlukan.`);
           return;
         }
         state.status = 'disconnected';

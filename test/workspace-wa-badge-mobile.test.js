@@ -59,7 +59,9 @@ test('whatsapp connection badge stays visible on a 360px phone with a short labe
   // Kedua label selalu diisi dari status koneksi yang sama, jadi akurat realtime.
   assert.ok(js.includes("document.querySelector('#connection-badge-short').textContent = badgeShortText"), 'renderLinkGate must fill the short label too');
   assert.ok(js.includes("'WA ONLINE'"), 'the short label must say WA ONLINE when WhatsApp is linked');
-  assert.ok(js.includes("'TERTAUT'"), 'the short label must say TERTAUT when a session is linked but not online');
+  // Lencana harus jujur: sesi yang sedang menyambung ulang bukan "TERTAUT".
+  assert.ok(js.includes("'MENYAMBUNG'"), 'the short label must say MENYAMBUNG while reconnecting');
+  assert.ok(js.includes("'TERPUTUS'"), 'the short label must say TERPUTUS when disconnected');
   assert.ok(js.includes("'WHATSAPP ONLINE'"), 'the long label must still say WHATSAPP ONLINE on wide screens');
 });
 

@@ -22,6 +22,7 @@ let workerAutoStart = false;
 let toastTimer;
 let pairingPollTimer;
 let pairingCountdownTimer;
+let lastPairingStatus = null;
 let pairingCooldownTimer;
 let pairingCooldownUntil = 0;
 let verificationCooldownTimer;
@@ -3676,12 +3677,25 @@ function renderLinkGate(pairing) {
   // Lencana koneksi punya dua label: label panjang untuk layar lebar dan label
   // ringkas untuk HP sempit, keduanya selalu diisi dari status yang sama agar
   // tampilannya akurat di semua ukuran layar.
-  const badgeText = pairing?.status === 'linked'
-    ? 'WHATSAPP ONLINE'
-    : hasLinkedSession ? 'SESI TERTAUT' : 'TAUTKAN WHATSAPP';
-  const badgeShortText = pairing?.status === 'linked'
-    ? 'WA ONLINE'
-    : hasLinkedSession ? 'TERTAUT' : 'TAUTKAN';
+  // Lencana harus jujur soal status realtime: sesi yang sedang
+  // menyambung ulang bukan "TERTAUT" — sebelumnya badge itu yang membuat
+  // sesi mati terlihat masih konek di HP member.
+  const badgeByStatus = {
+    linked: ['WHATSAPP ONLINE', 'WA ONLINE'],
+    reconnecting: ['MENYAMBUNG…', 'MENYAMBUNG'],
+    disconnected: ['WA TERPUTUS', 'TERPUTUS'],
+    stopped: ['WA DIHENTIKAN', 'BERHENTI'],
+    invalid: ['SESI DITOLAK', 'DITOLAK'],
+    awaiting_code: ['MENUNGGU KODE', 'KODE'],
+    awaiting_qr: ['MENUNGGU QR', 'QR'],
+    connecting: ['MENGHUBUNGKAN', 'HUBUNGKAN'],
+    checking_number: ['MENGHUBUNGKAN', 'HUBUNGKAN'],
+    linking: ['MENAUTKAN', 'TAUTKAN'],
+  };
+  const badgePair = badgeByStatus[pairing?.status]
+    || (hasLinkedSession ? ['SESI TERSIMPAN', 'TERSIMPAN'] : ['TAUTKAN WHATSAPP', 'TAUTKAN']);
+  const badgeText = badgePair[0];
+  const badgeShortText = badgePair[1];
   document.querySelector('#connection-badge').textContent = badgeText;
   document.querySelector('#connection-badge-short').textContent = badgeShortText;
   syncBotLinkNotice();
@@ -3708,6 +3722,8 @@ function renderLinkGate(pairing) {
 }
 
 function renderPairingState(pairing) {
+  const previousPairingStatus = lastPairingStatus;
+  lastPairingStatus = pairing?.status || null;
   renderLinkGate(pairing);
   const codeCard = document.querySelector('#pairing-code-card');
   const codeElement = document.querySelector('#pairing-code');
@@ -3817,6 +3833,12 @@ function renderPairingState(pairing) {
     tick();
     pairingCountdownTimer = setInterval(tick, 1000);
     setPairingNotice('Pairing code siap. Masukkan sendiri di WhatsApp pada Perangkat Tertaut.', true);
+    if (previousPairingStatus !== 'awaiting_code') {
+      // Kode baru muncul realtime: gulir jendela kode ke tengah layar HP
+      // supaya member langsung melihatnya tanpa mencari ke bawah.
+      codeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showToast('Pairing code baru tersedia — masukkan di WhatsApp.');
+    }
     pairingPollTimer = setInterval(() => { void refreshPairing(); }, 5000);
     return;
   }
@@ -3850,6 +3872,8 @@ function renderPairingState(pairing) {
   if (pairing.status === 'linked') {
     controls.classList.add('hidden');
     linkedCard.classList.remove('hidden');
+    linkedCard.classList.remove('is-warning');
+    linkedCard.querySelector('.linked-mark').textContent = '✓';
     sessionActions.classList.remove('hidden');
     stopButton.classList.remove('hidden');
     statusValue.textContent = 'WhatsApp Online';
@@ -3888,6 +3912,8 @@ function renderPairingState(pairing) {
   if (pairing.status === 'disconnected') {
     controls.classList.add('hidden');
     linkedCard.classList.remove('hidden');
+    linkedCard.classList.add('is-warning');
+    linkedCard.querySelector('.linked-mark').textContent = '!';
     linkedCard.querySelector('strong').textContent = 'WhatsApp mencoba tersambung ulang';
     linkedCard.querySelector('p').textContent = 'Sesi masih tersimpan dan sambung ulang otomatis dijadwalkan. Kamu juga bisa mencoba Sambungkan ulang.';
     sessionActions.classList.remove('hidden');
@@ -3904,6 +3930,9 @@ function renderPairingState(pairing) {
     if (pairing.maskedPhone) {
       controls.classList.add('hidden');
       recoveryCard.classList.remove('hidden');
+      // Sesi mati tapi kredensial masih tersimpan: member harus bisa
+      // menghapus tautan dari sini, bukan cuma "Coba pulihkan sesi".
+      sessionActions.classList.remove('hidden');
       if (recoveryCopy) recoveryCopy.textContent = `Sesi ${pairing.maskedPhone} ditolak WhatsApp. Coba pulihkan dulu — kalau sesinya masih bagus, panel akan sambung lagi tanpa perlu nomor baru. Kalau pulihkan gagal terus, berarti sesi ini sudah dicabut WhatsApp: hapus perangkat lama di WhatsApp > Perangkat tertaut, lalu pairing ulang dengan nomor baru.`;
       statusValue.textContent = 'Sesi ditolak WhatsApp';
       statusDescription.textContent = 'Coba pulihkan dulu. Kalau gagal terus, hapus perangkat lama di WhatsApp > Perangkat tertaut lalu pairing ulang.';
@@ -3926,6 +3955,9 @@ function renderPairingState(pairing) {
   if (pairing.status === 'recovering') {
     controls.classList.add('hidden');
     linkedCard.classList.remove('hidden');
+    linkedCard.classList.add('is-warning');
+    linkedCard.querySelector('.linked-mark').textContent = '…';
+    sessionActions.classList.remove('hidden');
     linkedCard.querySelector('strong').textContent = 'Memulihkan sesi…';
     linkedCard.querySelector('p').textContent = 'Sesi ditolak WhatsApp; panel mencoba sambung ulang dari sesi tersimpan dan cadangan terakhir yang sehat.';
     statusValue.textContent = 'Memulihkan sesi';
@@ -3939,10 +3971,18 @@ function renderPairingState(pairing) {
   if (pairing.status === 'reconnecting') {
     controls.classList.add('hidden');
     linkedCard.classList.remove('hidden');
+    linkedCard.classList.add('is-warning');
+    linkedCard.querySelector('.linked-mark').textContent = '…';
+    // Sebelumnya tombol aksi sesi disembunyikan di state ini, jadi member
+    // yang sesinya macet tidak bisa Sambungkan ulang maupun Hapus sesi.
+    sessionActions.classList.remove('hidden');
+    resumeButton.classList.remove('hidden');
     linkedCard.querySelector('strong').textContent = 'Menyambungkan WhatsApp…';
     linkedCard.querySelector('p').textContent = 'Sedang membuka kembali sesi yang tersimpan.';
     statusValue.textContent = 'Menyambungkan';
-    statusDescription.textContent = 'Mencoba menyambungkan ulang sesi WhatsApp.';
+    statusDescription.textContent = pairing.reconnectFailures
+      ? `Mencoba menyambungkan ulang sesi WhatsApp. Gagal ${pairing.reconnectFailures} dari 5 kali percobaan — kalau gagal terus, sesi ditandai tidak valid dan kamu bisa minta pairing code baru.`
+      : 'Mencoba menyambungkan ulang sesi WhatsApp.';
     statusFoot.textContent = 'Menghubungkan';
     statusDot.className = 'muted-dot';
     setPairingNotice('');
@@ -3952,6 +3992,8 @@ function renderPairingState(pairing) {
   if (pairing.status === 'stopped') {
     controls.classList.add('hidden');
     linkedCard.classList.remove('hidden');
+    linkedCard.classList.add('is-warning');
+    linkedCard.querySelector('.linked-mark').textContent = '!';
     linkedCard.querySelector('strong').textContent = 'Sesi WhatsApp dihentikan';
     linkedCard.querySelector('p').textContent = 'Kredensial tetap tersimpan. Sambungkan ulang untuk kembali online.';
     sessionActions.classList.remove('hidden');
