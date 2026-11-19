@@ -207,17 +207,17 @@ test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', 
   assert.ok(html.includes('/style.css?v=member-online-dot-20261118'), 'style.css harus memakai ?v=member-online-dot-20261118');
 });
 
-test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi kelima', () => {
+test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi keenam', () => {
   const data = JSON.parse(read('public/info-updates.json'));
-  assert.equal(data.updatedAt, '2026-11-20T06:24:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 72, 'daftar harus bertambah empat entri');
+  assert.equal(data.updatedAt, '2026-11-20T06:35:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 73, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Info Update kini memberi notifikasi realtime', 'entri terbaru harus soal notifikasi realtime Info Update');
+  assert.equal(newest.title, 'Sesi ditolak kini langsung pairing ulang, tanpa kartu pemulihan', 'entri terbaru harus soal pairing ulang sesi ditolak');
   assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perbaikan');
   assert.equal(newest.day, 'Jumat, 20 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '06.24 WIB', 'waktu entri terbaru harus cocok');
-  const status = data.updates[5];
-  assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi kelima');
+  assert.equal(newest.time, '06.35 WIB', 'waktu entri terbaru harus cocok');
+  const status = data.updates[6];
+  assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi keenam');
   assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Fitur baru');
   assert.equal(status.time, '19.46 WIB', 'waktu entri status Rank Bot harus cocok');
   assert.ok(status.description.includes('Pemilik · Aktif'), 'entri harus menjelaskan status pemilik di Rank Bot');

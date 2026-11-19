@@ -3928,17 +3928,16 @@ function renderPairingState(pairing) {
   }
   if (pairing.status === 'invalid') {
     if (pairing.maskedPhone) {
-      controls.classList.add('hidden');
-      recoveryCard.classList.remove('hidden');
-      // Sesi mati tapi kredensial masih tersimpan: member harus bisa
-      // menghapus tautan dari sini, bukan cuma "Coba pulihkan sesi".
+      // Sesi mati dan tidak bisa dipulihkan: jangan sembunyikan form di
+      // balik kartu pemulihan — member langsung bisa masukkan nomor dan
+      // minta pairing code baru. Kartu pemulihan tidak lagi dipakai di
+      // state ini, jadi poll 5 detik tidak akan memunculkannya lagi.
       sessionActions.classList.remove('hidden');
-      if (recoveryCopy) recoveryCopy.textContent = `Sesi ${pairing.maskedPhone} ditolak WhatsApp. Coba pulihkan dulu — kalau sesinya masih bagus, panel akan sambung lagi tanpa perlu nomor baru. Kalau pulihkan gagal terus, berarti sesi ini sudah dicabut WhatsApp: hapus perangkat lama di WhatsApp > Perangkat tertaut, lalu pairing ulang dengan nomor baru.`;
       statusValue.textContent = 'Sesi ditolak WhatsApp';
-      statusDescription.textContent = 'Coba pulihkan dulu. Kalau gagal terus, hapus perangkat lama di WhatsApp > Perangkat tertaut lalu pairing ulang.';
-      statusFoot.textContent = 'Coba pulihkan dulu';
+      statusDescription.textContent = `Sesi ${pairing.maskedPhone} ditolak WhatsApp dan tidak bisa dipulihkan. Masukkan nomor untuk pairing ulang.`;
+      statusFoot.textContent = 'Perlu pairing ulang';
       statusDot.className = 'muted-dot';
-      setPairingNotice('Sesi ditolak WhatsApp. Coba pulihkan dulu; kalau gagal terus, hapus perangkat lama di WhatsApp lalu pairing ulang.', false, true);
+      setPairingNotice(`Sesi ${pairing.maskedPhone} ditolak WhatsApp dan tidak bisa dipulihkan. Masukkan nomor untuk pairing ulang — sesi lama dibersihkan saat pairing baru dimulai.`, false, true);
       void loadPairingLogs();
       pairingPollTimer = setInterval(() => { void refreshPairing(); }, 5000);
       return;
@@ -4953,6 +4952,9 @@ pairingForm.addEventListener('submit', async (event) => {
   button.setAttribute('aria-busy', 'true');
   button.innerHTML = `<span class="pairing-submit-spinner" aria-hidden="true"></span><span>${pairingMethod === 'qr' ? 'Menyiapkan QR Code…' : 'Menyiapkan pairing code…'}</span>`;
   setPairingNotice(`Mengirim permintaan ${pairingMethod === 'qr' ? 'QR Code' : 'pairing code'} ke WhatsApp… Hanya tampil di sesi akun ini.`, false, true);
+  // Poll status lama (mis. dari kartu pemulihan) harus berhenti: kalau tidak,
+  // ia bisa menimpa form dengan status lama saat permintaan kode masih jalan.
+  clearInterval(pairingPollTimer);
   const minimumLoadingTime = new Promise((resolve) => window.setTimeout(resolve, 3000));
   const progressPollTimer = window.setInterval(() => { void refreshPairing(); }, 1200);
   try {
@@ -5054,6 +5056,9 @@ document.querySelector('#pairing-recover').addEventListener('click', async () =>
   }
 });
 document.querySelector('#pairing-recover-dismiss').addEventListener('click', () => {
+  // Hentikan poll status yang menampilkan kartu pemulihan: kalau tidak,
+  // poll 5 detik akan memunculkan lagi kartunya saat member mengetik nomor.
+  clearInterval(pairingPollTimer);
   document.querySelector('#pairing-recovery-card')?.classList.add('hidden');
   document.querySelector('#pairing-controls')?.classList.remove('hidden');
   setPairingNotice('Pairing ulang dengan nomor baru. Sesi lama akan dibersihkan saat pairing baru dimulai.', false, true);

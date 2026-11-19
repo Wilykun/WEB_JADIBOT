@@ -1209,7 +1209,13 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       existing.socket = null;
       try { oldSocket?.end(new Error('Invalid session replaced by account owner.')); } catch { /* best effort */ }
       try {
-        await removeUserAuth(userId, existing.authDir || await resolveAuthDir(userId));
+        const invalidAuthDir = existing.authDir || await resolveAuthDir(userId);
+        await removeUserAuth(userId, invalidAuthDir);
+        // Cadangan sesi yang ditolak ikut dibersihkan: kalau tidak,
+        // pemulihan otomatis bisa membangkitkan lagi sesi yang sama
+        // dari session.json.good/.bak saat pemilik akun pairing ulang.
+        await fs.rm(path.join(invalidAuthDir, GOOD_SNAPSHOT_FILENAME), { force: true }).catch(() => {});
+        await fs.rm(path.join(invalidAuthDir, BACKUP_FILENAME), { force: true }).catch(() => {});
       } catch (error) {
         if (acquiredLockHere) {
           try { await sessionLock.release(); } catch { /* Stale-lock recovery handles cleanup. */ }
@@ -1668,8 +1674,9 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     let state = sessions.get(userId);
     if (state?.status === 'invalid') {
       if (state.recoveryInProgress) return publicState(state);
-      const recovered = await attemptSessionRecovery(state, null);
-      if (recovered) return publicState(state);
+      // Sesi sudah dinyatakan mati setelah 5 kali sambung ulang gagal:
+      // memulihkan dari cadangan hanya membangkitkan lagi kredensial
+      // yang sama yang sudah ditolak WhatsApp. Langsung minta pairing ulang.
       throw new PairingError('Sesi WhatsApp ditolak. Masukkan nomor dan minta pairing code baru.', 409);
     }
     const manualReconnect = !auto && state?.status === 'reconnecting';

@@ -75,16 +75,16 @@ test('member belum tertaut tidak bisa masuk Fitur Bot, admin tetap bisa', () => 
 test('entri Info Update terbaru menjelaskan member belum tertaut tidak bisa masuk Fitur Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-20T06:24:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 72, 'daftar harus bertambah empat entri');
+  assert.equal(data.updatedAt, '2026-11-20T06:35:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 73, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Info Update kini memberi notifikasi realtime', 'entri terbaru harus soal notifikasi realtime Info Update');
+  assert.equal(newest.title, 'Sesi ditolak kini langsung pairing ulang, tanpa kartu pemulihan', 'entri terbaru harus soal pairing ulang sesi ditolak');
   assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perbaikan');
-  assert.equal(newest.time, '06.24 WIB', 'waktu entri terbaru harus cocok');
-  assert.ok(html.includes('<h4>Info Update kini memberi notifikasi realtime</h4>'), 'fallback harus memuat judul entri terbaru');
-  const rankbotEntry = data.updates[13];
-  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi keempat belas');
+  assert.equal(newest.time, '06.35 WIB', 'waktu entri terbaru harus cocok');
+  assert.ok(html.includes('<h4>Sesi ditolak kini langsung pairing ulang, tanpa kartu pemulihan</h4>'), 'fallback harus memuat judul entri terbaru');
+  const rankbotEntry = data.updates[14];
+  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kelima belas');
   const linkEntry = data.updates.find((item) => item.title === 'Pemberitahuan tautan WhatsApp kini muncul di layar');
   assert.ok(linkEntry, 'entri notifikasi tautan di layar harus tetap ada');
-  assert.equal(data.updates.indexOf(linkEntry), 15, 'entri notifikasi tautan di layar kini di posisi keenam belas');
+  assert.equal(data.updates.indexOf(linkEntry), 16, 'entri notifikasi tautan di layar kini di posisi ketujuh belas');
 });

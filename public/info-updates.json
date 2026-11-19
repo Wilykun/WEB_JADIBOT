@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-20T06:24:00+07:00",
+  "updatedAt": "2026-11-20T06:35:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "06.35 WIB",
+      "title": "Sesi ditolak kini langsung pairing ulang, tanpa kartu pemulihan",
+      "tag": "Perbaikan",
+      "description": "Sesi yang ditolak WhatsApp (mis. BangWily) dulu menampilkan kartu pemulihan dengan tombol Coba pulihkan sesi, padahal sesi itu sudah gagal disambung ulang 5 kali dan tidak bisa dipulihkan — dan saat nomor lama dimasukkan, panel malah terpental kembali ke kartu itu karena poll status tiap 5 detik menampilkan lagi kartu pemulihan selagi nomor diketik atau permintaan kode masih berjalan. Kini state sesi ditolak langsung menampilkan form pairing: masukkan nomor lama atau baru, minta pairing code, dan sesi lama dibersihkan sepenuhnya saat pairing baru dimulai, termasuk cadangan session.json.good dan session.json.bak yang sebelumnya masih tersimpan dan bisa membangkitkan lagi sesi yang ditolak. Tombol Coba pulihkan sesi dihapus dari alur ini, dan Sambungkan ulang pada sesi yang sudah ditolak langsung memberi pesan jujur untuk pairing ulang, bukan pemulihan yang pasti gagal."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "06.24 WIB",

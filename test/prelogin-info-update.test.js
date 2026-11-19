@@ -44,7 +44,7 @@ test('info update sebelum login: daftar di dalam panel tetap terpisah dari dafta
   assert.match(appJs, /list\.append\(createInfoUpdateItem\(update\)\)/);
 });
 
-test('info update sebelum login: kartu lebar penuh dan tab kelima tertata rapih', () => {
+test('info update sebelum login: kartu lebar penuh dan tab keenam tertata rapih', () => {
   assert.match(styleCss, /#auth-view\.hide-art \.mobile-info-tabs:not\(\[hidden\]\) \{ display: grid; grid-template-columns: auto repeat\(5, minmax\(0, 1fr\)\);/);
   assert.match(styleCss, /\.mobile-info-menu-card--wide \{ display: flex; align-items: center; gap: 12px; grid-column: 1 \/ -1; min-height: 64px; \}/);
   assert.match(styleCss, /#auth-view\.hide-art \.mobile-info-menu-card--wide \{ display: flex; align-items: center; gap: 12px; grid-column: 1 \/ -1; min-height: 64px; \}/);
