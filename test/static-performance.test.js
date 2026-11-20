@@ -129,20 +129,20 @@ test('server menyajikan aset terkompres dan ter-cache sesuai aturan', { timeout:
   }
 });
 
-test('entri Info Update panel lebih cepat ada di posisi kelima belas', () => {
+test('entri Info Update panel lebih cepat ada di posisi keenam belas', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
   const entry = data.updates.find((item) => item.title === 'Panel kini memuat jauh lebih cepat');
   assert.ok(entry, 'entri panel lebih cepat harus tetap ada');
-  assert.equal(data.updates.indexOf(entry), 16, 'entri panel lebih cepat kini di posisi kelima belas');
+  assert.equal(data.updates.indexOf(entry), 17, 'entri panel lebih cepat kini di posisi keenam belas');
   assert.equal(entry.title, 'Panel kini memuat jauh lebih cepat', 'entri terbaru harus soal panel yang lebih cepat');
   assert.equal(entry.tag, 'Perbaikan', 'entri harus bertag Perbaikan');
   assert.equal(entry.time, '21.50 WIB', 'waktu entri harus 21.50 WIB');
   assert.match(entry.description, /gzip/, 'deskripsi harus menyebut gzip');
   assert.match(entry.description, /200 KB/, 'deskripsi harus menyebut unduhan awal sekitar 200 KB');
   assert.match(entry.description, /Tidak ada fitur yang berubah/, 'deskripsi harus menegaskan fitur tidak berubah');
-  assert.equal(data.updates.length, 76, 'daftar harus 74 entri');
-  assert.equal(data.updatedAt, '2026-11-20T08:05:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 77, 'daftar harus 74 entri');
+  assert.equal(data.updatedAt, '2026-11-20T09:56:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.ok(html.includes('<h4>Panel kini memuat jauh lebih cepat</h4>'), 'fallback HTML harus memuat entri panel lebih cepat');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 21.50 WIB'), 'fallback meta harus cocok dengan entri terbaru');
 });

@@ -68,7 +68,45 @@ test('badge Log Bot: hanya story baru yang dihitung, per akun', async () => {
   ];
   assert.equal(countNewStoryEntries(logs, 'a'), 1, 'hanya story setelah penanda yang dihitung');
   assert.equal(countNewStoryEntries(logs, 'c'), 0, 'tidak ada yang baru setelah entri terakhir');
-  assert.equal(countNewStoryEntries(logs, 'tidak-ada'), 2, 'penanda hilang berarti semua story dihitung');
+  assert.equal(countNewStoryEntries(logs, 'tidak-ada'), 0, 'penanda hilang (log bergeser) berarti tidak ditebak — angka tidak melonjak');
+  assert.equal(countNewStoryEntries(logs, null), 0, 'tanpa penanda tidak ada yang dihitung');
+});
+
+test('badge Log Bot: angka tersimpan per akun dan pulih setelah refresh', async () => {
+  const js = await read('public/app.js');
+  const src = [
+    extractFunction(js, 'privateLogUnreadStorageKey'),
+    extractFunction(js, 'privateLogCountedStorageKey'),
+    extractFunction(js, 'loadPrivateLogUnreadCount'),
+    extractFunction(js, 'savePrivateLogUnreadCount'),
+    extractFunction(js, 'loadPrivateLogCountedIdentity'),
+    extractFunction(js, 'savePrivateLogCountedIdentity'),
+  ].join('\n');
+  // Simulasi storage per akun: currentUser bisa berganti, window lokal.
+  let currentUser = { id: '02059969-9feb-4e0f-ae09-c70c358704a7' };
+  const store = new Map();
+  const window = { localStorage: { getItem: (k) => (store.has(k) ? store.get(k) : null), setItem: (k, v) => store.set(k, v) } };
+  const fns = eval(`${src}; ({ privateLogUnreadStorageKey, privateLogCountedStorageKey, loadPrivateLogUnreadCount, savePrivateLogUnreadCount, loadPrivateLogCountedIdentity, savePrivateLogCountedIdentity })`);
+  // Angka 1 yang sudah tampil sebelum refresh harus kembali setelah refresh.
+  fns.savePrivateLogUnreadCount(1);
+  assert.equal(fns.loadPrivateLogUnreadCount(), 1, 'angka 1 sebelum refresh harus pulih setelah refresh');
+  // Story bertambah: angka naik dan tetap tersimpan.
+  fns.savePrivateLogUnreadCount(3);
+  assert.equal(fns.loadPrivateLogUnreadCount(), 3, 'angka bertambah saat story bertambah');
+  // Maks 99 saat disimpan.
+  fns.savePrivateLogUnreadCount(150);
+  assert.equal(fns.loadPrivateLogUnreadCount(), 99, 'angka disimpan maksimal 99');
+  fns.savePrivateLogUnreadCount(0);
+  assert.equal(fns.loadPrivateLogUnreadCount(), 0, 'angka nol setelah halaman Log Bot dibuka');
+  // Penanda terakhir yang dihitung ikut tersimpan (supaya tidak dihitung dua kali).
+  fns.savePrivateLogCountedIdentity('entry-123');
+  assert.equal(fns.loadPrivateLogCountedIdentity(), 'entry-123', 'penanda terakhir tersimpan');
+  // Per akun: akun lain tidak melihat angka akun ini.
+  const keyA = fns.privateLogUnreadStorageKey();
+  currentUser = { id: 'akun-lain' };
+  assert.notEqual(fns.privateLogUnreadStorageKey(), keyA, 'kunci storage berbeda per akun');
+  assert.equal(fns.loadPrivateLogUnreadCount(), 0, 'akun lain mulai dari nol');
+  assert.notEqual(fns.privateLogCountedStorageKey(), 'readsw-log-bot-counted-02059969-9feb-4e0f-ae09-c70c358704a7', 'kunci penanda berbeda per akun');
 });
 
 test('badge Log Bot: tampil saat story masuk di luar halaman, hilang saat halaman dibuka', async () => {
@@ -80,13 +118,18 @@ test('badge Log Bot: tampil saat story masuk di luar halaman, hilang saat halama
   assert.ok(badge.includes('badge?.remove()'), 'badge dihapus saat hitungan nol');
   const markSeen = extractFunction(js, 'markPrivateLogSeen');
   assert.ok(markSeen.includes('privateLogUnreadStoryCount = 0'), 'membuka halaman mereset hitungan');
-  assert.ok(markSeen.includes('savePrivateLogSeenIdentity'), 'membuka halaman menyimpan penanda sudah dilihat');
+  assert.ok(markSeen.includes('savePrivateLogUnreadCount(0)'), 'membuka halaman menyimpan angka nol');
+  assert.ok(markSeen.includes('savePrivateLogCountedIdentity'), 'membuka halaman menyimpan penanda sudah dilihat');
   assert.ok(markSeen.includes('renderPrivateLogBadge(0)'), 'membuka halaman menghapus badge');
   const load = sliceBetween(js, 'async function loadPairingLogs() {', '\ndocument.querySelector(\'.avatar-tabs\')');
+  assert.ok(load.includes('loadPrivateLogUnreadCount()'), 'angka badge dipulihkan dari storage per akun sebelum fetch');
+  assert.ok(load.includes('loadPrivateLogCountedIdentity()'), 'penanda terakhir dibaca dari storage per akun');
+  assert.ok(load.includes('privateLogFirstLoadAfterRestore'), 'muat pertama setelah refresh menghitung story selagi panel tertutup');
   assert.ok(load.includes('countNewStoryEntries(logs, privateLogCountedIdentity)'), 'pemuat log menghitung story baru dari penanda terakhir');
-  assert.ok(load.includes("activeWorkspacePage !== 'activity'"), 'story hanya dihitung saat pengguna tidak di halaman Log Bot');
+  assert.ok(load.includes("if (activeWorkspacePage === 'activity') {"), 'story hanya menambah angka saat pengguna tidak di halaman Log Bot');
+  assert.ok(load.includes('savePrivateLogUnreadCount(privateLogUnreadStoryCount)'), 'angka baru disimpan supaya refresh tidak menghilangkan');
+  assert.ok(load.includes('savePrivateLogCountedIdentity(privateLogCountedIdentity)'), 'penanda disimpan tiap pemuatan supaya tidak dihitung dua kali');
   assert.ok(load.includes('privateLogCountedIdentity = latestIdentity;'), 'penanda maju tiap pemuatan supaya tidak dihitung dua kali');
-  assert.ok(load.includes('loadPrivateLogSeenIdentity()'), 'penanda sudah dilihat dibaca dari storage per akun');
   const page = sliceBetween(js, 'function setWorkspacePage(page', "if (page === 'infoupdate') {");
   assert.ok(page.includes('markPrivateLogSeen();'), 'masuk halaman activity harus menandai log sudah dilihat');
 });

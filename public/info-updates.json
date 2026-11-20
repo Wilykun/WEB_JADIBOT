@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-20T08:05:00+07:00",
+  "updatedAt": "2026-11-20T09:56:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "09.56 WIB",
+      "title": "Notif Log Bot tidak lagi hilang saat refresh",
+      "tag": "Perbaikan",
+      "description": "Angka notifikasi di menu Log Bot sempat hilang begitu halaman di-refresh, padahal story-nya belum dilihat — angkanya hanya tersimpan di memori dan penanda sudah-dilihatnya kosong, jadi setelah refresh story itu dianggap sudah dihitung. Kini angka dan penanda terakhir yang dihitung tersimpan di perangkat per akun: refresh tidak menghilangkan angka, story baru menambah angka (maks 99+), dan angka baru hilang saat halaman Log Bot dibuka."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "08.05 WIB",

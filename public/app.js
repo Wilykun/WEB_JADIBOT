@@ -3531,6 +3531,8 @@ let lastPrivateLogCount = 0;
 // akun di perangkat, supaya tiap akun punya hitungannya sendiri.
 let privateLogUnreadStoryCount = 0;
 let privateLogCountedIdentity = null;
+let privateLogBadgeRestoredFor = undefined;
+let privateLogFirstLoadAfterRestore = false;
 
 function stopPrivateLogAutoRefresh() {
   if (privateLogAutoRefreshTimer) window.clearInterval(privateLogAutoRefreshTimer);
@@ -4196,14 +4198,30 @@ function applyPrivateLogFilters() {
 }
 
 // --- Badge notifikasi Log Bot (story baru, realtime, per akun) ---
-function privateLogSeenStorageKey() {
-  return `readsw-log-bot-seen-${currentUser?.id || 'anon'}`;
+// Angkanya tersimpan di perangkat per akun, jadi refresh tidak
+// menghilangkannya — hanya masuk ke halaman Log Bot yang mereset. Dua nilai
+// disimpan: angka belum dibaca + penanda terakhir yang sudah dihitung,
+// supaya hitungan tidak ganda setelah refresh.
+function privateLogUnreadStorageKey() {
+  return `readsw-log-bot-unread-${currentUser?.id || 'anon'}`;
 }
-function loadPrivateLogSeenIdentity() {
-  try { return window.localStorage.getItem(privateLogSeenStorageKey()); } catch { return null; }
+function privateLogCountedStorageKey() {
+  return `readsw-log-bot-counted-${currentUser?.id || 'anon'}`;
 }
-function savePrivateLogSeenIdentity(identity) {
-  try { if (identity) window.localStorage.setItem(privateLogSeenStorageKey(), identity); } catch { /* Badge tetap jalan tanpa storage. */ }
+function loadPrivateLogUnreadCount() {
+  try {
+    const value = Number(window.localStorage.getItem(privateLogUnreadStorageKey()));
+    return Number.isFinite(value) && value > 0 ? Math.min(99, Math.floor(value)) : 0;
+  } catch { return 0; }
+}
+function savePrivateLogUnreadCount(count) {
+  try { window.localStorage.setItem(privateLogUnreadStorageKey(), String(Math.max(0, Math.min(99, count)))); } catch { /* Badge tetap jalan tanpa storage. */ }
+}
+function loadPrivateLogCountedIdentity() {
+  try { return window.localStorage.getItem(privateLogCountedStorageKey()); } catch { return null; }
+}
+function savePrivateLogCountedIdentity(identity) {
+  try { if (identity) window.localStorage.setItem(privateLogCountedStorageKey(), identity); } catch { /* Badge tetap jalan tanpa storage. */ }
 }
 function privateLogEntryIdentity(entry) {
   return entry ? String(entry.id || `${entry.createdAt}:${entry.event}`) : null;
@@ -4220,11 +4238,13 @@ function isStoryLogEntry(entry) {
 }
 // Log terurut lama -> baru: hitung story yang datang setelah penanda yang
 // sudah dihitung. Penanda tidak ditemukan (log bergeser melewati 100 entri)
-// berarti semua story yang tampil dihitung sebagai baru.
+// berarti tidak ada yang dihitung — jangan menebak, supaya angka tidak
+// melonjak tiba-tiba.
 function countNewStoryEntries(logs, seenIdentity) {
+  if (!seenIdentity) return 0;
   const index = logs.findIndex((entry) => privateLogEntryIdentity(entry) === seenIdentity);
-  const fresh = index >= 0 ? logs.slice(index + 1) : logs;
-  return fresh.filter(isStoryLogEntry).length;
+  if (index < 0) return 0;
+  return logs.slice(index + 1).filter(isStoryLogEntry).length;
 }
 function renderPrivateLogBadge(count) {
   privateLogUnreadStoryCount = count > 0 ? count : 0;
@@ -4245,13 +4265,24 @@ function renderPrivateLogBadge(count) {
 function markPrivateLogSeen() {
   // Dipanggil saat halaman Log Bot dibuka: semua yang sudah ada dianggap dibaca.
   privateLogUnreadStoryCount = 0;
-  if (lastPrivateLogIdentity) savePrivateLogSeenIdentity(lastPrivateLogIdentity);
+  savePrivateLogUnreadCount(0);
+  if (lastPrivateLogIdentity) savePrivateLogCountedIdentity(lastPrivateLogIdentity);
   renderPrivateLogBadge(0);
 }
 
 async function loadPairingLogs() {
   if (privateLogLoading) return;
   privateLogLoading = true;
+  // Pulihkan angka badge dari storage (per akun) sebelum fetch: refresh
+  // tidak boleh menghilangkan angka yang belum dilihat. Dijalankan ulang
+  // kalau akun yang login berganti tanpa reload halaman.
+  if (privateLogBadgeRestoredFor !== (currentUser?.id || null)) {
+    privateLogBadgeRestoredFor = currentUser?.id || null;
+    privateLogUnreadStoryCount = loadPrivateLogUnreadCount();
+    privateLogCountedIdentity = loadPrivateLogCountedIdentity();
+    privateLogFirstLoadAfterRestore = true;
+    renderPrivateLogBadge(privateLogUnreadStoryCount);
+  }
   const summaryList = document.querySelector('#pairing-log-list');
   const detailList = document.querySelector('#private-log-list');
   try {
@@ -4264,24 +4295,27 @@ async function loadPairingLogs() {
     privateLogSnapshotReady = true;
     lastPrivateLogIdentity = latestIdentity;
     lastPrivateLogCount = logs.length;
-    // Badge notifikasi Log Bot: story baru yang masuk selagi pengguna tidak
-    // sedang di halaman Log Bot menambah angka di menu (realtime, per akun).
-    // Entri yang sudah ada saat panel pertama dibuka tidak dihitung.
+    // Badge notifikasi Log Bot: angka tersimpan per akun di perangkat, jadi
+    // refresh tidak menghilangkannya — hanya masuk ke halaman Log Bot yang
+    // mereset. Story baru menambah angka (maks 99+). Muat pertama setelah
+    // refresh juga menghitung story yang masuk selagi panel tertutup.
+    const shouldCountNewStories = privateLogFirstLoadAfterRestore || hasNewActivity;
     if (privateLogCountedIdentity === null) {
-      privateLogCountedIdentity = loadPrivateLogSeenIdentity();
-      if (privateLogCountedIdentity && activeWorkspacePage !== 'activity') {
-        privateLogUnreadStoryCount += countNewStoryEntries(logs, privateLogCountedIdentity);
-        renderPrivateLogBadge(privateLogUnreadStoryCount);
-      }
-    } else if (hasNewActivity) {
+      // Belum pernah dihitung: jadikan kondisi sekarang sebagai baseline,
+      // entri yang sudah ada tidak dihitung.
+      privateLogCountedIdentity = latestIdentity;
+    } else if (shouldCountNewStories) {
       if (activeWorkspacePage === 'activity') {
-        savePrivateLogSeenIdentity(latestIdentity);
+        privateLogUnreadStoryCount = 0;
       } else {
         privateLogUnreadStoryCount += countNewStoryEntries(logs, privateLogCountedIdentity);
-        renderPrivateLogBadge(privateLogUnreadStoryCount);
       }
+      renderPrivateLogBadge(privateLogUnreadStoryCount);
+      savePrivateLogUnreadCount(privateLogUnreadStoryCount);
     }
     privateLogCountedIdentity = latestIdentity;
+    savePrivateLogCountedIdentity(privateLogCountedIdentity);
+    privateLogFirstLoadAfterRestore = false;
     const countText = logs.length === 100 ? '100 aktivitas terbaru dimuat' : `${logs.length.toLocaleString('id-ID')} aktivitas dimuat`;
     const latestTime = latest ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Jakarta' }).format(new Date(latest.createdAt)) : '';
     const latestText = latest ? `Terakhir: ${latestTime} WIB` : 'Belum ada aktivitas tercatat.';
