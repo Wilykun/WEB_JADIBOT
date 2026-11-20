@@ -3551,6 +3551,9 @@ let chatBadgeRestoredFor = undefined;
 let chatRestoredSession = false;
 let chatReplyTo = null;
 let chatLastTypingSentAt = 0;
+let chatLastRenderedSignature = '';
+// True bila Enter terakhir ditekan bersama Shift (baris baru sengaja, bukan kirim).
+let chatEnterWasShifted = false;
 
 function stopPrivateLogAutoRefresh() {
   if (privateLogAutoRefreshTimer) window.clearInterval(privateLogAutoRefreshTimer);
@@ -4370,7 +4373,9 @@ function markChatSeen() {
   renderChatBadge(0);
 }
 function countNewChatMessages(messages, seenAt) {
-  if (!seenAt) return 0;
+  // Belum pernah membuka Obrolan: semua pesan orang lain belum dibaca —
+  // pesan pertama pun harus memunculkan notif, bukan dianggap sudah dilihat.
+  if (!seenAt) return messages.filter((message) => message.userId !== currentUser?.id).length;
   return messages.filter((message) => message.userId !== currentUser?.id && String(message.createdAt || '') > seenAt).length;
 }
 function formatChatTime(createdAt) {
@@ -4407,6 +4412,10 @@ function stopChatPolling() {
   if (chatPollTimer) window.clearInterval(chatPollTimer);
   chatPollTimer = null;
 }
+function chatMessagesSignature(messages) {
+  const last = messages.at(-1);
+  return `${messages.length}:${last ? `${last.id}@${last.createdAt}` : 'none'}`;
+}
 async function loadChatMessages() {
   if (chatLoading || !currentUser) return;
   chatLoading = true;
@@ -4423,8 +4432,14 @@ async function loadChatMessages() {
     const messages = Array.isArray(result.messages) ? result.messages : [];
     const latest = messages.at(-1);
     if (activeWorkspacePage === 'chat') {
+      const signature = chatMessagesSignature(messages);
       chatMessages = messages;
-      renderChatMessages();
+      // Daftar hanya dirender ulang bila pesannya berubah: poll tiap 5 detik
+      // yang membangun ulang seluruh daftar mematikan scroll yang sedang jalan.
+      if (signature !== chatLastRenderedSignature) {
+        renderChatMessages();
+        chatLastRenderedSignature = signature;
+      }
       renderChatTyping(Array.isArray(result.typing) ? result.typing : []);
       // Pesan yang tampil di layar dianggap dibaca — kecuali sesi yang
       // dipulihkan setelah refresh, yang badge-nya bertahan sampai pengguna
@@ -4512,6 +4527,9 @@ function renderChatMessages() {
   const list = document.querySelector('#chat-messages');
   if (!list) return;
   const wasAtBottom = list.scrollHeight - list.scrollTop - list.clientHeight < 80;
+  // Posisi scroll pengguna harus dipertahankan: membangun ulang daftar
+  // mereset scrollTop ke 0, jadi yang sedang membaca pesan lama terpental.
+  const previousScrollTop = list.scrollTop;
   list.replaceChildren();
   if (!chatMessages.length) {
     const empty = document.createElement('p');
@@ -4533,6 +4551,7 @@ function renderChatMessages() {
     list.append(buildChatMessageRow(message));
   }
   if (wasAtBottom) list.scrollTop = list.scrollHeight;
+  else list.scrollTop = previousScrollTop;
 }
 function renderChatTyping(typing) {
   const bar = document.querySelector('#chat-typing');
@@ -4577,16 +4596,21 @@ async function sendChatMessage() {
   if (!text) return;
   const sendButton = document.querySelector('#chat-send');
   sendButton.disabled = true;
+  // Kosongkan kolomnya langsung (sebelum menunggu server) supaya Enter yang
+  // masuk dua kali — keyboard HP tertentu mengirim keydown Enter sekaligus
+  // baris baru — tidak mengirim pesan yang sama dua kali.
+  input.value = '';
+  input.style.height = '';
+  const replyTo = chatReplyTo;
+  setChatReply(null);
   try {
-    await api('/api/chat/messages', { method: 'POST', body: JSON.stringify({ text, ...(chatReplyTo ? { replyToId: chatReplyTo.id } : {}) }) });
-    input.value = '';
-    input.style.height = '';
-    setChatReply(null);
+    await api('/api/chat/messages', { method: 'POST', body: JSON.stringify({ text, ...(replyTo ? { replyToId: replyTo.id } : {}) }) });
     void sendChatTyping(false);
     await loadChatMessages();
     const list = document.querySelector('#chat-messages');
     if (list) list.scrollTop = list.scrollHeight;
   } catch (error) {
+    input.value = text;
     showToast(error.message || 'Pesan belum terkirim.');
   } finally {
     sendButton.disabled = false;
@@ -6431,17 +6455,29 @@ document.querySelector('#chat-form')?.addEventListener('submit', (event) => {
   event.preventDefault();
   void sendChatMessage();
 });
-document.querySelector('#chat-input')?.addEventListener('input', () => {
+document.querySelector('#chat-input')?.addEventListener('input', (event) => {
   const input = document.querySelector('#chat-input');
   if (!input) return;
+  // Keyboard HP tertentu tidak mengirim keydown untuk Enter — baris barunya
+  // masuk lewat input event (insertLineBreak). Selama bukan Shift+Enter
+  // (baris baru sengaja), Enter di situ berarti kirim.
+  if (event.inputType === 'insertLineBreak' && !chatEnterWasShifted && input.value.endsWith('\n')) {
+    input.value = input.value.slice(0, -1);
+    void sendChatMessage();
+    return;
+  }
+  chatEnterWasShifted = false;
   input.style.height = '';
   input.style.height = `${Math.min(input.scrollHeight, 120)}px`;
   if (input.value.trim()) void sendChatTyping(true);
 });
 document.querySelector('#chat-input')?.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter' && !event.shiftKey) {
-    event.preventDefault();
-    void sendChatMessage();
+  if (event.key === 'Enter') {
+    chatEnterWasShifted = event.shiftKey;
+    if (!event.shiftKey) {
+      event.preventDefault();
+      void sendChatMessage();
+    }
   }
 });
 document.querySelector('#chat-input')?.addEventListener('blur', () => { void sendChatTyping(false); });

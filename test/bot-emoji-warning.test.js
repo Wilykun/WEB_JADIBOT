@@ -77,13 +77,13 @@ test('gaya notifikasi mengikuti pola overlay panel dan pas di HP', () => {
   assert.ok(css.includes('@media(max-width:560px){.notice-overlay{padding:12px}.notice-card{padding:18px 16px 16px}.notice-actions{flex-direction:column}'), 'di HP tombol harus bertumpuk penuh lebar');
 });
 
-test('entri Info Update notifikasi reaksi di layar tetap ada di posisi kedua puluh dua', () => {
+test('entri Info Update notifikasi reaksi di layar tetap ada di posisi kedua puluh empat', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updates.length, 78, 'daftar harus bertambah lima entri');
+  assert.equal(data.updates.length, 80, 'daftar harus bertambah lima entri');
   const entry = data.updates.find((item) => item.title === 'Peringatan reaksi kini muncul sebagai notifikasi di layar');
   assert.ok(entry, 'entri notifikasi reaksi di layar harus tetap ada');
-  assert.equal(data.updates.indexOf(entry), 22, 'entri notifikasi reaksi di layar kini di posisi kedua puluh dua');
+  assert.equal(data.updates.indexOf(entry), 24, 'entri notifikasi reaksi di layar kini di posisi kedua puluh empat');
   assert.equal(entry.tag, 'Tampilan', 'entri notifikasi reaksi harus bertag Tampilan');
   assert.equal(entry.time, '15.15 WIB', 'waktu entri notifikasi reaksi harus cocok');
   assert.ok(html.includes('<h4>Peringatan reaksi kini muncul sebagai notifikasi di layar</h4>'), 'fallback harus memuat judul entri terbaru');

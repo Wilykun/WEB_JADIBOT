@@ -94,7 +94,7 @@ test('Obrolan: hitungan pesan baru hanya dari orang lain setelah penanda dilihat
   assert.equal(fn(messages, '2026-11-20T09:59:00.000Z'), 2, 'dua pesan orang lain setelah penanda dihitung');
   assert.equal(fn(messages, '2026-11-20T10:00:30.000Z'), 1, 'pesan sendiri tidak dihitung');
   assert.equal(fn(messages, '2026-11-20T10:02:00.000Z'), 0, 'tidak ada yang baru setelah pesan terakhir');
-  assert.equal(fn(messages, null), 0, 'tanpa penanda tidak ada yang dihitung');
+  assert.equal(fn(messages, null), 2, 'belum pernah membuka Obrolan: semua pesan orang lain belum dibaca, pesan pertama pun memunculkan notif');
 });
 
 test('Obrolan: jam pesan memakai WIB dan pembatas hari memakai Hari ini/Kemarin', () => {
@@ -137,10 +137,78 @@ test('Obrolan: badge notif di menu, hilang saat halaman dibuka, maks 99+', () =>
   assert.ok(appJs.includes('stopChatPolling();'), 'poll Obrolan berhenti saat keluar');
 });
 
+test('Obrolan: bar Balas kosong tidak boleh tampil dan kolom ketik harus selalu terlihat di HP', () => {
+  // Bar Balas dan panel emoji memakai display:flex/grid — tanpa aturan
+  // [hidden], atribut hidden di HTML kalah dan keduanya tampil padahal
+  // belum dipakai (bar Balas kosong menutupi kolom ketik di HP).
+  assert.ok(css.includes('.chat-reply-bar[hidden]'), 'bar Balas harus punya aturan [hidden]');
+  assert.ok(css.includes('.chat-emoji-panel[hidden]'), 'panel emoji harus punya aturan [hidden]');
+  assert.ok(css.includes('.chat-typing[hidden]'), 'indikator mengetik harus punya aturan [hidden]');
+  assert.match(css, /\.chat-reply-bar\[hidden\][^{]*\{[^}]*display:\s*none\s*!important/, 'aturan [hidden] harus memaksa display:none');
+  assert.ok(html.includes('<div id="chat-reply-bar" class="chat-reply-bar" hidden>'), 'bar Balas harus hidden di awal');
+  assert.ok(html.includes('<div id="chat-emoji-panel" class="chat-emoji-panel" hidden>'), 'panel emoji harus hidden di awal');
+  assert.ok(html.includes('<div id="chat-typing" class="chat-typing" aria-live="polite" hidden>'), 'indikator mengetik harus hidden di awal');
+  // Daftar pesan terlalu tinggi (62vh) mendorong kolom ketik ke bawah layar
+  // HP — kini lebih pendek supaya hero + daftar + kolom ketik muat satu layar.
+  const desktop = css.match(/\.chat-messages\{[^}]*height:clamp\((\d+)px,(\d+)vh,(\d+)px\)/);
+  assert.ok(desktop, 'tinggi daftar pesan desktop harus ada');
+  assert.ok(Number(desktop[2]) <= 55, `daftar pesan desktop maksimal 55vh, dapat ${desktop[2]}vh`);
+  const mobile = css.match(/@media\(max-width:560px\)\{[^}]*\.chat-messages\{height:clamp\((\d+)px,(\d+)vh,(\d+)px\)/);
+  assert.ok(mobile, 'tinggi daftar pesan HP harus ada');
+  assert.ok(Number(mobile[2]) <= 46, `daftar pesan HP maksimal 46vh, dapat ${mobile[2]}vh`);
+  assert.ok(Number(mobile[1]) < Number(desktop[1]), 'daftar pesan HP harus lebih pendek dari desktop');
+  // Kolom ketik menempel di bawah layar supaya selalu terjangkau.
+  assert.match(css, /\.chat-composer\{[^}]*position:\s*sticky;bottom:\s*0/, 'kolom ketik harus sticky di bawah layar');
+});
+
+test('Obrolan: scroll tidak macet — daftar hanya dirender ulang bila pesan berubah dan posisi scroll dipertahankan', () => {
+  const src = extractFunction(appJs, 'chatMessagesSignature');
+  const { chatMessagesSignature } = new Function(`${src}; return { chatMessagesSignature };`)();
+  const a = [{ id: '1', createdAt: '2026-11-20T10:00:00.000Z' }];
+  const b = [{ id: '1', createdAt: '2026-11-20T10:00:00.000Z' }];
+  const c = [...a, { id: '2', createdAt: '2026-11-20T10:01:00.000Z' }];
+  assert.equal(chatMessagesSignature(a), chatMessagesSignature(b), 'pesan yang sama harus punya tanda yang sama');
+  assert.notEqual(chatMessagesSignature(a), chatMessagesSignature(c), 'pesan baru harus mengubah tanda');
+  assert.equal(chatMessagesSignature([]), '0:none', 'daftar kosong harus punya tanda sendiri');
+  const load = sliceBetween(appJs, 'async function loadChatMessages() {', '\nfunction buildChatMessageRow(');
+  assert.ok(load.includes('chatMessagesSignature(messages)'), 'poll harus menghitung tanda daftar pesan');
+  assert.ok(load.includes('if (signature !== chatLastRenderedSignature) {'), 'poll hanya merender ulang bila tandanya berubah');
+  assert.ok(load.includes('renderChatTyping('), 'indikator mengetik tetap diperbarui walau daftar tidak berubah');
+  const render = extractFunction(appJs, 'renderChatMessages');
+  assert.ok(render.includes('const previousScrollTop = list.scrollTop;'), 'render harus menyimpan posisi scroll sebelum membangun ulang');
+  assert.ok(render.includes('else list.scrollTop = previousScrollTop;'), 'render harus mengembalikan posisi scroll bila pengguna tidak di bawah');
+  assert.ok(render.includes('if (wasAtBottom) list.scrollTop = list.scrollHeight;'), 'render tetap menggulir ke bawah bila pengguna sudah di bawah');
+});
+
+test('Obrolan: semua pesan tersimpan rapi di data/Obrolan.json, bukan di store.json', () => {
+  assert.ok(serverJs.includes("const CHAT_FILE = path.join(DATA_DIR, 'Obrolan.json');"), 'server harus memakai file Obrolan.json di folder data');
+  assert.ok(serverJs.includes('let chatStore = { messages: [] };'), 'pesan chat harus dimuat ke memori dari Obrolan.json');
+  assert.ok(serverJs.includes('function saveChatMessages()'), 'penyimpanan Obrolan.json harus berurutan lewat antrean');
+  assert.ok(serverJs.includes('atomicWriteJson(CHAT_FILE, chatStore)'), 'pesan harus ditulis atomik ke Obrolan.json');
+  assert.ok(serverJs.includes('chatStore.messages = [...chatStore.messages, message].slice(-CHAT_MAX_MESSAGES);'), 'pesan baru harus ditambahkan ke Obrolan.json dengan batas 200');
+  assert.ok(serverJs.includes('const messages = chatStore.messages.slice(-100);'), 'baca pesan harus dari Obrolan.json');
+  assert.ok(serverJs.includes('store.chatMessages'), 'migrasi harus membaca pesan lama dari store.chatMessages');
+  assert.ok(serverJs.includes('delete store.chatMessages;'), 'field lama harus dibersihkan dari store.json setelah migrasi');
+  assert.ok(!/next\.chatMessages\s*=/.test(serverJs), 'server tidak boleh lagi menulis pesan ke store.json');
+});
+
+test('Obrolan: Enter di keyboard HP dan desktop mengirim pesan, Shift+Enter baris baru', () => {
+  assert.ok(html.includes('enterkeyhint="send"'), 'kolom ketik harus memberi tahu keyboard HP untuk menampilkan tombol Kirim');
+  assert.ok(appJs.includes("if (event.key === 'Enter') {"), 'harus ada penanganan tombol Enter');
+  assert.ok(appJs.includes('chatEnterWasShifted = event.shiftKey;'), 'Enter harus mencatat apakah Shift ikut ditekan');
+  assert.ok(appJs.includes("if (!event.shiftKey) {\n      event.preventDefault();\n      void sendChatMessage();"), 'Enter tanpa Shift harus mengirim pesan');
+  assert.ok(appJs.includes("event.inputType === 'insertLineBreak'"), 'keyboard HP yang tidak mengirim keydown Enter harus tetap bisa mengirim lewat baris baru');
+  assert.ok(appJs.includes("input.value = input.value.slice(0, -1);"), 'baris baru dari Enter harus dibuang sebelum pesan dikirim');
+  const send = extractFunction(appJs, 'sendChatMessage');
+  assert.ok(send.indexOf("input.value = '';") < send.indexOf("await api('/api/chat/messages'"), 'kolom ketik harus dikosongkan sebelum menunggu server supaya Enter ganda tidak mengirim dua kali');
+  assert.ok(send.includes('input.value = text;'), 'kirim yang gagal harus mengembalikan teks ke kolom ketik');
+});
+
 test('Obrolan: kirim, balas, emoji, dan mengetik terpasang di halaman', () => {
   const send = extractFunction(appJs, 'sendChatMessage');
   assert.ok(send.includes("api('/api/chat/messages', { method: 'POST'"), 'kirim harus POST ke /api/chat/messages');
-  assert.ok(send.includes('replyToId: chatReplyTo.id'), 'kirim harus menyertakan balasan bila ada');
+  assert.ok(send.includes('const replyTo = chatReplyTo;'), 'kirim harus menangkap balasan sebelum kolom dikosongkan');
+  assert.ok(send.includes('replyToId: replyTo.id'), 'kirim harus menyertakan balasan bila ada');
   assert.ok(send.includes("showToast(error.message || 'Pesan belum terkirim.')"), 'kirim gagal harus memberi tahu');
   const reply = extractFunction(appJs, 'setChatReply');
   assert.ok(reply.includes("document.querySelector('#chat-reply-bar')"), 'balasan harus menampilkan bar balasan');
@@ -203,8 +271,14 @@ test('server Obrolan: kirim + baca + balas + mengetik + batas, hanya untuk yang 
     await mkdir(dataDir, { recursive: true });
     const admin = fixtureUser('fixtureadmin', 'fixtureadmin@example.test', 'admin', adminPassword);
     const member = fixtureUser('fixturemember', 'fixturemember@example.test', 'member', memberPassword);
+    const migratedMessage = {
+      id: randomUUID(), userId: member.id, username: 'fixturemember', displayName: 'fixturemember',
+      avatar: 'avatar-01', role: 'member', isMainAdmin: false, text: 'Pesan lama dari migrasi',
+      replyTo: null, createdAt: '2026-11-20T10:00:00.000Z',
+    };
     await writeFile(path.join(dataDir, 'store.json'), JSON.stringify({
-      users: [admin, member], pendingRegistrations: [], bots: [], sessions: [], pairingLogs: [], loginHistory: [], chatMessages: [],
+      users: [admin, member], pendingRegistrations: [], bots: [], sessions: [], pairingLogs: [], loginHistory: [],
+      chatMessages: [migratedMessage],
     }));
     const port = await unusedPort();
     const base = `http://127.0.0.1:${port}`;
@@ -238,7 +312,13 @@ test('server Obrolan: kirim + baca + balas + mengetik + batas, hanya untuk yang 
 
     const empty = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: memberCookie });
     assert.equal(empty.status, 200);
-    assert.deepEqual(empty.payload.messages, [], 'Obrolan awal harus kosong');
+    assert.equal(empty.payload.messages.length, 1, 'pesan lama dari store.json harus ikut pindah ke Obrolan.json');
+    assert.equal(empty.payload.messages[0].text, 'Pesan lama dari migrasi');
+    const chatFile = JSON.parse(await readFile(path.join(dataDir, 'Obrolan.json'), 'utf8'));
+    assert.equal(chatFile.messages.length, 1, 'Obrolan.json harus berisi pesan hasil migrasi');
+    assert.equal(chatFile.messages[0].text, 'Pesan lama dari migrasi');
+    const storeAfterStart = JSON.parse(await readFile(path.join(dataDir, 'store.json'), 'utf8'));
+    assert.equal(storeAfterStart.chatMessages, undefined, 'field chatMessages lama harus dibersihkan dari store.json');
 
     const sendEmpty = await jsonRequest(base, '/api/chat/messages', { method: 'POST', body: { text: '   ' }, cookie: memberCookie });
     assert.equal(sendEmpty.status, 400, 'pesan kosong harus ditolak');
@@ -258,8 +338,8 @@ test('server Obrolan: kirim + baca + balas + mengetik + batas, hanya untuk yang 
     assert.ok(sent.payload.message.createdAt, 'pesan harus punya waktu');
 
     const seenByAdmin = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: adminCookie });
-    assert.equal(seenByAdmin.payload.messages.length, 1, 'admin harus melihat pesan member');
-    assert.equal(seenByAdmin.payload.messages[0].text, 'Halo semua 👋');
+    assert.equal(seenByAdmin.payload.messages.length, 2, 'admin harus melihat pesan migrasi dan pesan member');
+    assert.equal(seenByAdmin.payload.messages[1].text, 'Halo semua 👋');
 
     await wait(1100);
     const reply = await jsonRequest(base, '/api/chat/messages', { method: 'POST', body: { text: 'Halo juga!', replyToId: sent.payload.message.id }, cookie: adminCookie });
@@ -287,8 +367,11 @@ test('server Obrolan: kirim + baca + balas + mengetik + batas, hanya untuk yang 
     assert.equal(typingGone.payload.typing.length, 0, 'berhenti mengetik harus menghilangkan indikator');
 
     const all = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: memberCookie });
-    assert.equal(all.payload.messages.length, 3, 'semua pesan harus tersimpan berurutan');
-    assert.equal(all.payload.messages[2].text, 'sudah boleh lagi');
+    assert.equal(all.payload.messages.length, 4, 'semua pesan harus tersimpan berurutan');
+    assert.equal(all.payload.messages[3].text, 'sudah boleh lagi');
+    const chatFileFinal = JSON.parse(await readFile(path.join(dataDir, 'Obrolan.json'), 'utf8'));
+    assert.equal(chatFileFinal.messages.length, 4, 'Obrolan.json di disk harus berisi semua pesan');
+    assert.equal(chatFileFinal.messages[3].text, 'sudah boleh lagi');
   } finally {
     if (child && child.exitCode === null) child.kill('SIGTERM');
     await rm(temp, { recursive: true, force: true });

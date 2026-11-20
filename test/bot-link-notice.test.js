@@ -72,19 +72,19 @@ test('member belum tertaut tidak bisa masuk Fitur Bot, admin tetap bisa', () => 
   assert.ok(js.includes("botLinkNoticeDismissed = false;\n  showLinkNoticeOverlay();"), 'tampilan eksplisit harus menampilkan notifikasi walau sempat ditutup dan walau belum di Fitur Bot');
 });
 
-test('entri Info Update terbaru kini soal Obrolan untuk semua akun', () => {
+test('entri Info Update terbaru kini soal notif Obrolan realtime, Obrolan.json, dan scroll', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-20T18:36:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 78, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-20T18:55:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 80, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Obrolan: ngobrol bareng semua akun di panel', 'entri terbaru harus soal Obrolan untuk semua akun');
-  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
-  assert.equal(newest.time, '18.36 WIB', 'waktu entri terbaru harus cocok');
+  assert.equal(newest.title, 'Notif Obrolan kini muncul realtime, pesan tersimpan di Obrolan.json, scroll tidak lagi macet', 'entri terbaru harus soal perbaikan kolom ketik Obrolan');
+  assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perbaikan');
+  assert.equal(newest.time, '18.55 WIB', 'waktu entri terbaru harus cocok');
   assert.ok(html.includes('<h4>Log privat kini jadi Log Bot dan ada notif story baru</h4>'), 'fallback harus memuat judul entri terbaru');
-  const rankbotEntry = data.updates[19];
-  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kesembilan belas');
+  const rankbotEntry = data.updates[21];
+  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedua puluh satu');
   const linkEntry = data.updates.find((item) => item.title === 'Pemberitahuan tautan WhatsApp kini muncul di layar');
   assert.ok(linkEntry, 'entri notifikasi tautan di layar harus tetap ada');
-  assert.equal(data.updates.indexOf(linkEntry), 21, 'entri notifikasi tautan di layar kini di posisi kedua puluh satu');
+  assert.equal(data.updates.indexOf(linkEntry), 23, 'entri notifikasi tautan di layar kini di posisi kedua puluh satu tiga');
 });

@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-11-20T18:36:00+07:00",
+  "updatedAt": "2026-11-20T18:55:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "18.55 WIB",
+      "title": "Notif Obrolan kini muncul realtime, pesan tersimpan di Obrolan.json, scroll tidak lagi macet",
+      "tag": "Perbaikan",
+      "description": "Tiga perbaikan Obrolan sekaligus. Pertama, notif pesan baru sempat tidak muncul: pengguna yang belum pernah membuka Obrolan dianggap sudah melihat semua pesan, jadi pesan pertama tidak pernah dihitung — kini semua pesan orang lain yang belum dibaca dihitung, pesan pertama pun memunculkan angka notif realtime. Kedua, semua pesan chat kini tersimpan rapi di data/Obrolan.json (bukan lagi di store.json); pesan lama dipindah otomatis saat panel dinyalakan dan field lamanya dibersihkan. Ketiga, scroll daftar pesan sempat macet karena poll tiap 5 detik membangun ulang seluruh daftar dan mereset posisi scroll — kini daftar hanya dirender ulang bila pesannya berubah, dan posisi scroll pengguna dipertahankan saat membaca pesan lama."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "18.47 WIB",
+      "title": "Kolom ketik Obrolan kini selalu terlihat di HP",
+      "tag": "Perbaikan",
+      "description": "Halaman Obrolan di HP sempat kepotong: bar Balas kosong selalu tampil menutupi layar (gaya display:flex/grid menimpa atribut hidden), dan daftar pesan terlalu tinggi (62vh) sampai kolom ketik terdorong ke bawah layar. Kini bar Balas, panel emoji, dan indikator mengetik benar-benar tersembunyi sampai dipakai; daftar pesan lebih pendek di HP (46vh) supaya judul, daftar, dan kolom ketik muat satu layar; dan kolom ketik menempel di bawah layar supaya selalu terjangkau. Tombol Enter di keyboard HP maupun desktop kini mengirim pesan (Shift+Enter untuk baris baru), termasuk keyboard HP yang tidak mengirim keydown Enter."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "18.36 WIB",

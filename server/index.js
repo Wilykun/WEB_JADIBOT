@@ -78,6 +78,8 @@ const SECRET_FILE = path.join(DATA_DIR, '.session-secret');
 const RESTORE_SECRET_FILE = path.join(DATA_DIR, '.restore-session-secret');
 const BACKUP_SNAPSHOT_DIR = path.join(DATA_DIR, 'backup-snapshots');
 const TELEGRAM_CONFIG_FILE = path.join(DATA_DIR, 'telegram.json');
+const CHAT_FILE = path.join(DATA_DIR, 'Obrolan.json');
+const CHAT_MAX_MESSAGES = 200;
 const TELEGRAM_MAX_BYTES = 50 * 1024 * 1024;
 const STALKER_DIR = path.join(ROOT, 'DATA_STALKER');
 const STALKER_FILE = path.join(STALKER_DIR, 'visitors.json');
@@ -112,6 +114,17 @@ const rateLimits = new Map();
 // tiap akun mengirim pesan (batas 1 pesan/detik supaya tidak spam).
 const chatTyping = new Map();
 const chatSendTimes = new Map();
+// Obrolan: semua pesan chat tersimpan rapi di data/Obrolan.json
+// ({ messages: [...] }), bukan di store.json. Ditulis berurutan lewat antrean.
+let chatStore = { messages: [] };
+let chatWriteQueue = Promise.resolve();
+function saveChatMessages() {
+  const operation = chatWriteQueue.then(async () => {
+    await atomicWriteJson(CHAT_FILE, chatStore);
+  });
+  chatWriteQueue = operation.then(() => undefined, () => undefined);
+  return operation;
+}
 
 function normalizeEmail(value) {
   return String(value || '').trim().toLowerCase();
@@ -593,6 +606,26 @@ async function initializeStore() {
     await fs.chmod(STORE_FILE, 0o600).catch(() => {});
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;
+    await atomicWriteJson(STORE_FILE, store);
+  }
+
+  // Obrolan: semua pesan chat tersimpan rapi di data/Obrolan.json (bukan di
+  // store.json). Migrasi sekali saat file belum ada: pesan lama dari
+  // store.chatMessages dipindah ke file ini.
+  try {
+    const rawChat = await fs.readFile(CHAT_FILE, 'utf8');
+    const parsedChat = JSON.parse(rawChat);
+    if (!parsedChat || !Array.isArray(parsedChat.messages)) throw new Error('Format Obrolan.json tidak valid.');
+    chatStore = { messages: parsedChat.messages };
+    await fs.chmod(CHAT_FILE, 0o600).catch(() => {});
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    chatStore = { messages: Array.isArray(store.chatMessages) ? store.chatMessages.slice(-CHAT_MAX_MESSAGES) : [] };
+    await atomicWriteJson(CHAT_FILE, chatStore);
+  }
+  // Bersihkan field lama dari store.json bila masih ada (pesan sudah pindah ke Obrolan.json).
+  if (Array.isArray(store.chatMessages)) {
+    delete store.chatMessages;
     await atomicWriteJson(STORE_FILE, store);
   }
 
@@ -2153,12 +2186,12 @@ async function handleApi(req, res, url) {
     return sendJson(res, 200, { logs });
   }
   // --- Obrolan: chat realtime semua akun (Admin Utama, admin, member) ---
-  // Pesan hanya teks + emoji (tanpa media). Disimpan di store.chatMessages,
+  // Pesan hanya teks + emoji (tanpa media). Disimpan rapi di data/Obrolan.json,
   // maksimal 200 pesan terakhir; GET mengembalikan 100 terakhir + siapa yang
   // sedang mengetik.
   if (route === 'GET /api/chat/messages') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
-    const messages = (store.chatMessages || []).slice(-100);
+    const messages = chatStore.messages.slice(-100);
     const now = Date.now();
     const typing = [...chatTyping.values()]
       .filter((entry) => entry.userId !== user.id && entry.until > now)
@@ -2178,7 +2211,7 @@ async function handleApi(req, res, url) {
     if (Date.now() - lastSend < 1000) return sendError(res, 429, 'Terlalu cepat, tunggu sebentar.');
     let replyTo = null;
     if (body.replyToId) {
-      const original = (store.chatMessages || []).find((item) => item.id === String(body.replyToId));
+      const original = chatStore.messages.find((item) => item.id === String(body.replyToId));
       if (!original) return sendError(res, 400, 'Pesan yang dibalas tidak ditemukan.');
       replyTo = { id: original.id, userId: original.userId, username: original.username, displayName: original.displayName, text: String(original.text || '').slice(0, 200) };
     }
@@ -2194,9 +2227,8 @@ async function handleApi(req, res, url) {
       replyTo,
       createdAt: new Date().toISOString(),
     };
-    await mutate((next) => {
-      next.chatMessages = [...(next.chatMessages || []), message].slice(-200);
-    });
+    chatStore.messages = [...chatStore.messages, message].slice(-CHAT_MAX_MESSAGES);
+    await saveChatMessages();
     chatSendTimes.set(user.id, Date.now());
     chatTyping.delete(user.id);
     return sendJson(res, 200, { message });
