@@ -1,5 +1,5 @@
 // Obrolan: chat realtime semua akun (Admin Utama, admin, member) — pesan teks
-// + emoji, balas pesan, indikator mengetik, badge notif 99+ per akun. Media
+// + emoji, balas pesan, indikator mengetik, badge notif tanpa batas per akun. Media
 // tidak bisa dikirim.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -111,11 +111,12 @@ test('Obrolan: jam pesan memakai WIB dan pembatas hari memakai Hari ini/Kemarin'
   assert.equal(formatChatDay(yesterday.toISOString()), 'Kemarin', 'pesan kemarin harus berlabel Kemarin');
 });
 
-test('Obrolan: badge notif di menu, hilang saat halaman dibuka, maks 99+', () => {
+test('Obrolan: badge notif di menu, hilang saat halaman dibuka, tanpa batas', () => {
   const badge = extractFunction(appJs, 'renderChatBadge');
   assert.ok(badge.includes("document.querySelector('#chat-nav')"), 'badge menempel di menu Obrolan');
   assert.ok(badge.includes("badge.className = 'nav-badge'"), 'badge memakai gaya nav-badge yang sama dengan Log Bot');
-  assert.ok(badge.includes("'99+'"), 'badge dibatasi 99+');
+  assert.ok(badge.includes('badge.textContent = String(chatUnreadCount);'), 'badge menampilkan angka asli tanpa batas');
+  assert.ok(!badge.includes("'99+'"), 'badge tidak lagi dibatasi 99+');
   assert.ok(badge.includes('badge?.remove()'), 'badge dihapus saat hitungan nol');
   const markSeen = extractFunction(appJs, 'markChatSeen');
   assert.ok(markSeen.includes('chatUnreadCount = 0'), 'membuka halaman mereset hitungan');
@@ -135,6 +136,14 @@ test('Obrolan: badge notif di menu, hilang saat halaman dibuka, maks 99+', () =>
   assert.ok(appJs.includes('markChatSeen: false'), 'pemulihan halaman awal setelah reload tidak boleh menghapus badge');
   assert.ok(appJs.includes('startChatPolling();\n  void loadChatMessages();'), 'poll Obrolan jalan sejak login supaya badge bertambah realtime');
   assert.ok(appJs.includes('stopChatPolling();'), 'poll Obrolan berhenti saat keluar');
+});
+
+test('Obrolan: angka badge tersimpan tanpa batas 99', () => {
+  const load = extractFunction(appJs, 'loadChatUnreadCount');
+  assert.ok(!load.includes('Math.min(99'), 'angka yang dipulihkan tidak dipotong 99');
+  const save = extractFunction(appJs, 'saveChatUnreadCount');
+  assert.ok(!save.includes('Math.min(99'), 'angka yang disimpan tidak dipotong 99');
+  assert.ok(save.includes('Math.max(0, count)'), 'angka nol ke bawah tetap disimpan sebagai nol');
 });
 
 test('Obrolan: bar Balas kosong tidak boleh tampil dan kolom ketik harus selalu terlihat di HP', () => {

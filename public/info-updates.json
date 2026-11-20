@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-20T18:55:00+07:00",
+  "updatedAt": "2026-11-20T19:44:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "19.44 WIB",
+      "title": "Angka notif Log Bot dan Obrolan kini tanpa batas",
+      "tag": "Perbaikan",
+      "description": "Angka notifikasi di menu Log Bot dan Obrolan tidak lagi berhenti di 99+: berapa pun story atau pesan yang belum dibaca, itulah yang tampil secara realtime, tanpa batas. Angka tetap tersimpan per akun di perangkat (refresh tidak menghilangkan), dan tetap hilang hanya saat halamannya dibuka."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "18.55 WIB",

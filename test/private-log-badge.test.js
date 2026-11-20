@@ -93,12 +93,12 @@ test('badge Log Bot: angka tersimpan per akun dan pulih setelah refresh', async 
   // Story bertambah: angka naik dan tetap tersimpan.
   fns.savePrivateLogUnreadCount(3);
   assert.equal(fns.loadPrivateLogUnreadCount(), 3, 'angka bertambah saat story bertambah');
-  // Maks 99+ di tampilan, tapi angka internal disimpan sampai 999 supaya
-  // setelah refresh tetap tampil 99+, bukan turun jadi 99.
+  // Tanpa batas: angka berapa pun tersimpan apa adanya supaya setelah
+  // refresh tetap tampil angka aslinya, bukan 99+.
   fns.savePrivateLogUnreadCount(150);
-  assert.equal(fns.loadPrivateLogUnreadCount(), 150, 'angka di atas 99 tetap tersimpan supaya refresh tetap tampil 99+');
+  assert.equal(fns.loadPrivateLogUnreadCount(), 150, 'angka di atas 99 tetap tersimpan apa adanya');
   fns.savePrivateLogUnreadCount(1500);
-  assert.equal(fns.loadPrivateLogUnreadCount(), 999, 'angka disimpan maksimal 999');
+  assert.equal(fns.loadPrivateLogUnreadCount(), 1500, 'angka besar tidak lagi dipotong');
   fns.savePrivateLogUnreadCount(0);
   assert.equal(fns.loadPrivateLogUnreadCount(), 0, 'angka nol setelah halaman Log Bot dibuka');
   // Penanda terakhir yang dihitung ikut tersimpan (supaya tidak dihitung dua kali).
@@ -130,7 +130,8 @@ test('badge Log Bot: tampil saat story masuk di luar halaman, hilang saat halama
   const badge = extractFunction(js, 'renderPrivateLogBadge');
   assert.ok(badge.includes("document.querySelector('#private-log-nav')"), 'badge menempel di menu Log Bot');
   assert.ok(badge.includes("badge.className = 'nav-badge'"), 'badge memakai gaya nav-badge yang sama dengan Info Update');
-  assert.ok(badge.includes("'99+'"), 'badge dibatasi 99+');
+  assert.ok(badge.includes('badge.textContent = String(privateLogUnreadStoryCount);'), 'badge menampilkan angka asli tanpa batas');
+  assert.ok(!badge.includes("'99+'"), 'badge tidak lagi dibatasi 99+');
   assert.ok(badge.includes('badge?.remove()'), 'badge dihapus saat hitungan nol');
   const markSeen = extractFunction(js, 'markPrivateLogSeen');
   assert.ok(markSeen.includes('privateLogUnreadStoryCount = 0'), 'membuka halaman mereset hitungan');

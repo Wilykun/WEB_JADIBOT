@@ -4256,11 +4256,11 @@ function privateLogCountedStorageKey() {
 function loadPrivateLogUnreadCount() {
   try {
     const value = Number(window.localStorage.getItem(privateLogUnreadStorageKey()));
-    return Number.isFinite(value) && value > 0 ? Math.min(999, Math.floor(value)) : 0;
+    return Number.isFinite(value) && value > 0 ? Math.floor(value) : 0;
   } catch { return 0; }
 }
 function savePrivateLogUnreadCount(count) {
-  try { window.localStorage.setItem(privateLogUnreadStorageKey(), String(Math.max(0, Math.min(999, count)))); } catch { /* Badge tetap jalan tanpa storage. */ }
+  try { window.localStorage.setItem(privateLogUnreadStorageKey(), String(Math.max(0, count))); } catch { /* Badge tetap jalan tanpa storage. */ }
 }
 function loadPrivateLogCountedIdentity() {
   try { return window.localStorage.getItem(privateLogCountedStorageKey()); } catch { return null; }
@@ -4305,7 +4305,9 @@ function renderPrivateLogBadge(count) {
     badge.className = 'nav-badge';
     item.append(badge);
   }
-  badge.textContent = privateLogUnreadStoryCount > 99 ? '99+' : String(privateLogUnreadStoryCount);
+  // Angka notif tampil apa adanya, tanpa batas 99+: berapa pun story yang
+  // belum dibaca, itulah yang ditampilkan secara realtime.
+  badge.textContent = String(privateLogUnreadStoryCount);
 }
 function markPrivateLogSeen() {
   // Dipanggil saat halaman Log Bot dibuka: semua yang sudah ada dianggap dibaca.
@@ -4333,11 +4335,11 @@ function chatSeenStorageKey() {
 function loadChatUnreadCount() {
   try {
     const value = Number(window.localStorage.getItem(chatUnreadStorageKey()));
-    return Number.isFinite(value) && value > 0 ? Math.min(99, Math.floor(value)) : 0;
+    return Number.isFinite(value) && value > 0 ? Math.floor(value) : 0;
   } catch { return 0; }
 }
 function saveChatUnreadCount(count) {
-  try { window.localStorage.setItem(chatUnreadStorageKey(), String(Math.max(0, Math.min(99, count)))); } catch { /* Badge tetap jalan tanpa storage. */ }
+  try { window.localStorage.setItem(chatUnreadStorageKey(), String(Math.max(0, count))); } catch { /* Badge tetap jalan tanpa storage. */ }
 }
 function loadChatSeenAt() {
   try { return window.localStorage.getItem(chatSeenStorageKey()); } catch { return null; }
@@ -4359,7 +4361,9 @@ function renderChatBadge(count) {
     badge.className = 'nav-badge';
     item.append(badge);
   }
-  badge.textContent = chatUnreadCount > 99 ? '99+' : String(chatUnreadCount);
+  // Angka notif tampil apa adanya, tanpa batas 99+: berapa pun pesan yang
+  // belum dibaca, itulah yang ditampilkan secara realtime.
+  badge.textContent = String(chatUnreadCount);
 }
 function markChatSeen() {
   // Dipanggil saat halaman Obrolan dibuka: semua pesan yang sudah ada dianggap dibaca.
@@ -4665,7 +4669,7 @@ async function loadPairingLogs() {
     lastPrivateLogCount = logs.length;
     // Badge notifikasi Log Bot: angka tersimpan per akun di perangkat, jadi
     // refresh tidak menghilangkannya — hanya masuk ke halaman Log Bot yang
-    // mereset. Story baru menambah angka (maks 99+). Muat pertama setelah
+    // mereset. Story baru menambah angka tanpa batas. Muat pertama setelah
     // refresh juga menghitung story yang masuk selagi panel tertutup.
     const shouldCountNewStories = privateLogFirstLoadAfterRestore || hasNewActivity;
     if (privateLogCountedIdentity === null) {
