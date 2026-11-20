@@ -23,6 +23,7 @@ let toastTimer;
 let pairingPollTimer;
 let pairingCountdownTimer;
 let lastPairingStatus = null;
+let lastPairing = null;
 let pairingCooldownTimer;
 let pairingCooldownUntil = 0;
 let verificationCooldownTimer;
@@ -1034,14 +1035,35 @@ function applyBot(bot) {
 // mengikuti poll status pairing. Notifikasinya tampil sebagai overlay di tengah
 // layar (komponen yang sama dengan notifikasi reaksi), bukan kartu di bawah.
 let botLinkNoticeDismissed = false;
+let botLinkNoticeVersion = null;
 function isBotLockedForMember() {
   return Boolean(currentUser) && currentUser.role !== 'admin' && document.body.dataset.whatsappLinked === 'false';
 }
+// Detail alasan + waktu sesi terputus untuk notifikasi "WhatsApp belum
+// tertaut": contoh "Logout dari WhatsApp — Jumat, 20 Nov 2026, 21.07 WIB."
+// Format tanggalnya sama dengan label waktu Aktivitas Akun (hari, tanggal,
+// bulan, tahun, pukul WIB).
+function formatUnlinkDetail(lastUnlink) {
+  if (!lastUnlink?.at) return null;
+  const when = accountActivityTimeLabel(lastUnlink.at);
+  if (!when) return null;
+  const reasonText = {
+    manual: 'Logout dari WhatsApp',
+    rejected: 'Sesi ditolak WhatsApp',
+    unreachable: 'Koneksi WhatsApp terputus berulang kali',
+  }[lastUnlink.reason] || 'Sesi WhatsApp terputus';
+  return `${reasonText} — ${when} WIB.`;
+}
 function showLinkNoticeOverlay() {
+  const detail = formatUnlinkDetail(lastPairing?.lastUnlink);
+  const version = lastPairing?.lastUnlink?.at || null;
+  botLinkNoticeVersion = version;
   showNoticeOverlay({
     title: 'WhatsApp belum tertaut',
-    text: 'Fitur bot belum aktif untuk akun ini. Tautkan WhatsApp dulu — begitu tertaut, Read Only + ReadSW dan Online 24 Jam otomatis aktif.',
-    context: { kind: 'link' },
+    text: detail
+      ? `Fitur bot belum aktif untuk akun ini. ${detail} Tautkan WhatsApp dulu — begitu tertaut, Read Only + ReadSW dan Online 24 Jam otomatis aktif.`
+      : 'Fitur bot belum aktif untuk akun ini. Tautkan WhatsApp dulu — begitu tertaut, Read Only + ReadSW dan Online 24 Jam otomatis aktif.',
+    context: { kind: 'link', version },
     addLabel: 'Buka Pairing WhatsApp',
     onAdd: () => setWorkspacePage('pairing'),
   });
@@ -1060,6 +1082,10 @@ function syncBotLinkNotice() {
     if (noticeContext?.kind === 'link') hideNoticeOverlay();
     return;
   }
+  // Sesi terputus lagi dengan kejadian baru (alasan/waktu berbeda): notifikasi
+  // yang sempat ditutup harus muncul lagi supaya alasannya terbaca realtime.
+  const unlinkVersion = lastPairing?.lastUnlink?.at || null;
+  if (unlinkVersion && unlinkVersion !== botLinkNoticeVersion) botLinkNoticeDismissed = false;
   if (botLinkNoticeDismissed) return;
   // Notifikasi hanya muncul saat member sedang berada di halaman Fitur Bot —
   // di halaman lain (misalnya dashboard setelah login) notifikasinya tidak
@@ -1567,6 +1593,7 @@ function sortAdminUsersByRuntime(users) {
 const pairingLabels = {
   linked: 'Tersambung', disconnected: 'Terputus', reconnecting: 'Menyambung', stopped: 'Dihentikan',
   awaiting_code: 'Menunggu pairing', connecting: 'Menyiapkan pairing', linking: 'Menyelesaikan tautan', failed: 'Gagal',
+  tersimpan: 'Sesi tersimpan',
 };
 
 async function loadAdminUsers() {
@@ -3765,6 +3792,7 @@ function renderLinkGate(pairing) {
     disconnected: ['WA TERPUTUS', 'TERPUTUS'],
     stopped: ['WA DIHENTIKAN', 'BERHENTI'],
     invalid: ['SESI DITOLAK', 'DITOLAK'],
+    tersimpan: ['SESI TERSIMPAN', 'TERSIMPAN'],
     awaiting_code: ['MENUNGGU KODE', 'KODE'],
     awaiting_qr: ['MENUNGGU QR', 'QR'],
     connecting: ['MENGHUBUNGKAN', 'HUBUNGKAN'],
@@ -3803,6 +3831,7 @@ function renderLinkGate(pairing) {
 function renderPairingState(pairing) {
   const previousPairingStatus = lastPairingStatus;
   lastPairingStatus = pairing?.status || null;
+  lastPairing = pairing || null;
   renderLinkGate(pairing);
   const codeCard = document.querySelector('#pairing-code-card');
   const codeElement = document.querySelector('#pairing-code');
@@ -4104,6 +4133,22 @@ function renderPairingState(pairing) {
     statusFoot.textContent = 'Bisa disambungkan ulang';
     statusDot.className = 'muted-dot';
     setPairingNotice('');
+    return;
+  }
+  if (pairing.status === 'tersimpan') {
+    controls.classList.add('hidden');
+    linkedCard.classList.remove('hidden');
+    linkedCard.classList.add('is-warning');
+    linkedCard.querySelector('.linked-mark').textContent = '…';
+    linkedCard.querySelector('strong').textContent = 'Sesi tersimpan, belum disambung';
+    linkedCard.querySelector('p').textContent = 'File session.json dan cadangannya masih bagus — tidak perlu pairing code baru. Tekan Sambungkan ulang untuk kembali online.';
+    sessionActions.classList.remove('hidden');
+    resumeButton.classList.remove('hidden');
+    statusValue.textContent = 'Sesi tersimpan';
+    statusDescription.textContent = 'Sesi WhatsApp tersimpan di panel tapi belum tersambung. Tekan Sambungkan ulang.';
+    statusFoot.textContent = 'Tekan Sambungkan ulang';
+    statusDot.className = 'muted-dot';
+    setPairingNotice('Sesi kamu masih tersimpan — jangan minta pairing code baru, tekan Sambungkan ulang saja.', false, true);
     return;
   }
   if (pairing.status === 'failed') {

@@ -1477,7 +1477,26 @@ async function resumeStoredAccounts() {
       const result = await pairingManager.resume(account.id);
       if (result && result.status !== 'stopped') attempted += 1;
     } catch (error) {
-      if (error instanceof PairingError && [404, 409].includes(error.status)) continue;
+      if (error instanceof PairingError && [404, 409].includes(error.status)) {
+        // Jangan diam-diam lewati: resume 20:39 WIB pernah melewati jeffv2
+        // tanpa jejak, padahal sesinya masih bagus. Kemungkinan lock akun
+        // masih dipegang proses panel lama yang sedang mati — coba sekali
+        // lagi setelah jeda singkat, dan catat kalau tetap dilewati.
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        try {
+          const retry = await pairingManager.resume(account.id);
+          if (retry && retry.status !== 'stopped') attempted += 1;
+          continue;
+        } catch (retryError) {
+          if (retryError instanceof PairingError && [404, 409].includes(retryError.status)) {
+            await appendPairingLog(account.id, `Sesi WhatsApp tersimpan dilewati saat resume awal (kode ${retryError.status}); tekan Sambungkan ulang untuk mencoba lagi.`).catch(() => {});
+            continue;
+          }
+          errors += 1;
+          await appendPairingLog(account.id, 'Sesi WhatsApp tersimpan belum dapat dipulihkan setelah restore.').catch(() => {});
+          continue;
+        }
+      }
       errors += 1;
       await appendPairingLog(account.id, 'Sesi WhatsApp tersimpan belum dapat dipulihkan setelah restore.').catch(() => {});
     }
@@ -2104,7 +2123,21 @@ async function handleApi(req, res, url) {
   }
   if (route === 'GET /api/pairing/status') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
-    return sendJson(res, 200, { pairing: pairingManager.getState(user.id) });
+    const pairing = await pairingManager.getStatusWithUnlink(user.id);
+    if (pairing) return sendJson(res, 200, { pairing });
+    // Tidak ada state in-memory tapi file sesi masih tersimpan di disk:
+    // bedakan dari 'belum pernah taut' supaya member tidak disuruh pairing
+    // ulang — yang benar adalah Sambungkan ulang.
+    const saved = await pairingManager.getSavedSessionInfo(user.id);
+    if (saved?.usable) {
+      const lastUnlink = await pairingManager.getLastUnlink(user.id).catch(() => null);
+      return sendJson(res, 200, { pairing: {
+        status: 'tersimpan', method: 'pairing', code: null, qrDataUrl: null,
+        maskedPhone: saved.maskedPhone, phoneNumber: null, expiresAt: null,
+        reconnectAttempts: 0, reconnectFailures: 0, lastUnlink, workerStatus: 'stopped', workerStartedAt: null,
+      } });
+    }
+    return sendJson(res, 200, { pairing: null });
   }
   if (route === 'POST /api/pairing/cancel') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');

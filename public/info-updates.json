@@ -1,6 +1,27 @@
 {
-  "updatedAt": "2026-11-20T21:02:00+07:00",
+  "updatedAt": "2026-11-20T21:32:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "21.32 WIB",
+      "title": "Alasan terputus kini tampil walau panel baru restart",
+      "tag": "Perbaikan",
+      "description": "Notifikasi belum tertaut sempat tetap polos untuk sesi yang sudah terputus sebelum panel restart: antrean resume panel baru belum sampai ke akun itu, jadi alasan dan waktunya belum kebaca. Kini status pairing mengambil catatan terputus terakhir dari file (termasuk untuk sesi yang filenya masih tersimpan tapi belum dicoba lagi), jadi alasan dan waktunya langsung tampil begitu panel dibuka — catatan poetraardnsyh (terputus 21.09 WIB) dan raptorzz (21.07 WIB) sudah diisi dari log terakhir."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "21.30 WIB",
+      "title": "Sesi WhatsApp yang sudah tertaut tidak lagi disuruh pairing ulang",
+      "tag": "Perbaikan",
+      "description": "Sesi WhatsApp sempat terlogout sendiri habis restart panel lalu minta pairing code baru padahal session.json dan cadangannya masih bagus: status pairing hanya cerminan state di memori, dan saat member minta kode baru, panel menemukan sesi sudah tertaut (kode 409) lalu menghapus state in-memory-nya — akun jatuh ke 'belum pernah tertaut'. Kini sesi yang sudah tertaut dipertahankan saat kena 409 dan pesannya mengarahkan ke Sambungkan ulang, resume menyambungkan ulang state tertaut yang socket-nya belum tersambung, dan status panel menampilkan 'Sesi tersimpan' dengan tombol Sambungkan ulang bila file sesi masih ada di disk tapi belum tersambung. Resume awal yang gagal dicoba sekali lagi sebelum dilewati, dan file sesi tanpa kunci (0 kunci, seperti raptorzz) langsung ditolak supaya panel jujur bilang pemilik akun harus pairing ulang."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "21.15 WIB",
+      "title": "Notif 'WhatsApp belum tertaut' kini sebut alasan + waktu terputus",
+      "tag": "Perbaikan",
+      "description": "Notifikasi member yang WhatsApp-nya belum tertaut kini menampilkan alasan sesi terputus (logout dari WhatsApp, sesi ditolak, atau koneksi terputus berulang kali) beserta hari, tanggal, bulan, tahun, dan pukul WIB saat kejadiannya, diperbarui realtime mengikuti status pairing; notifikasi yang sempat ditutup muncul lagi kalau ada kejadian terputus baru."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "21.02 WIB",

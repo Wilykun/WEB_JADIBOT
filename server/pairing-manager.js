@@ -250,9 +250,23 @@ function snapshotMeId(value) {
   return typeof value?.creds?.me?.id === 'string' ? value.creds.me.id : null;
 }
 
+function countAuthKeys(value) {
+  if (!value || typeof value !== 'object') return 0;
+  let total = 0;
+  for (const item of Object.values(value)) {
+    total += typeof item === 'object' && item !== null ? countAuthKeys(item) : 1;
+  }
+  return total;
+}
+
 function isUsableAuthSnapshot(value) {
+  // File sesi tanpa kunci sama sekali (mis. raptorzz: 1.223 byte, 0 kunci)
+  // lolos cek lama karena creds.registered=true, lalu pemulihan membuang
+  // waktu mencoba cadangan yang pasti ditolak WhatsApp 401. Tolak sejak awal
+  // supaya panel langsung bilang pemilik akun harus pairing ulang.
   return Boolean(value && typeof value.creds === 'object' && value.creds
-    && value.creds.registered === true && typeof value.keys === 'object' && value.keys);
+    && value.creds.registered === true && typeof value.keys === 'object' && value.keys
+    && countAuthKeys(value.keys) > 0);
 }
 
 async function readSnapshotFile(file) {
@@ -381,6 +395,37 @@ export async function restoreGoodSnapshot(authDir) {
 // Mengembalikan cadangan sesi otomatis ke session.json, menolak bila nomor perangkatnya berbeda dari sesi yang sedang dipakai.
 export async function restoreSessionBackup(authDir) {
   return restoreSnapshotFile(authDir, BACKUP_FILENAME);
+}
+
+export const UNLINK_FILENAME = 'unlink.json';
+
+// Alasan sesi terputus untuk notifikasi "WhatsApp belum tertaut": kode 401
+// berarti WhatsApp mengeluarkan sesi ini (biasanya logout dari HP), kode
+// sesi tidak valid berarti ditolak WhatsApp, tanpa kode berarti koneksi
+// terputus berulang kali sampai batas percobaan.
+function unlinkReasonForCode(code) {
+  if (code === DisconnectReason.loggedOut) return 'manual';
+  if ([DisconnectReason.badSession, DisconnectReason.forbidden, DisconnectReason.multideviceMismatch].includes(code)) return 'rejected';
+  return 'unreachable';
+}
+
+export async function saveLastUnlink(authDir, lastUnlink) {
+  if (!authDir || !lastUnlink) return false;
+  try {
+    await writeFileAtomically(path.join(authDir, UNLINK_FILENAME), JSON.stringify(lastUnlink));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export async function loadLastUnlink(authDir) {
+  if (!authDir) return null;
+  const parsed = await readSnapshotFile(path.join(authDir, UNLINK_FILENAME));
+  if (!parsed || !['manual', 'rejected', 'unreachable'].includes(parsed.reason)) return null;
+  const at = new Date(parsed.at);
+  if (Number.isNaN(at.getTime())) return null;
+  return { reason: parsed.reason, code: typeof parsed.code === 'number' ? parsed.code : null, at: at.toISOString() };
 }
 
 export function createPairingManager({ dataDir, appendLog, getAuthDir = () => null, getStorySettings = () => null, getOnline24 = () => false, getWorkerAutoStart = () => false, setWorkerAutoStart = async () => {}, ensureDefaultBot = async () => false }) {
@@ -527,6 +572,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       expiresAt: expired ? null : state.expiresAt,
       reconnectAttempts: state.reconnectAttempts || 0,
       reconnectFailures: state.consecutiveReconnectFailures || 0,
+      lastUnlink: state.lastUnlink || null,
       workerStatus: state.workerStatus || 'stopped',
       workerStartedAt: state.workerStatus === 'running' ? state.workerStartedAt || null : null,
     };
@@ -647,6 +693,11 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     state.code = null;
     state.expiresAt = null;
     state.phoneNumber = null;
+    // Catat kapan dan kenapa sesi terputus untuk notifikasi "WhatsApp belum
+    // tertaut": alasan + waktunya tampil realtime di notifikasi, dan
+    // tersimpan di unlink.json supaya tidak hilang saat panel restart.
+    state.lastUnlink = { reason: unlinkReasonForCode(code), code: code ?? null, at: new Date().toISOString() };
+    void saveLastUnlink(state.authDir, state.lastUnlink);
     state.consecutiveReconnectFailures = 0;
     state.workerDesired = false;
     state.autoStartBeforeInvalid = getWorkerAutoStart(state.userId) === true;
@@ -1237,6 +1288,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         // dari session.json.good/.bak saat pemilik akun pairing ulang.
         await fs.rm(path.join(invalidAuthDir, GOOD_SNAPSHOT_FILENAME), { force: true }).catch(() => {});
         await fs.rm(path.join(invalidAuthDir, BACKUP_FILENAME), { force: true }).catch(() => {});
+        await fs.rm(path.join(invalidAuthDir, UNLINK_FILENAME), { force: true }).catch(() => {});
       } catch (error) {
         if (acquiredLockHere) {
           try { await sessionLock.release(); } catch { /* Stale-lock recovery handles cleanup. */ }
@@ -1342,7 +1394,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         state.status = 'linked';
         state.phoneNumber = null;
         snapshotGoodSession(state);
-        throw new PairingError('Akun ini sudah memiliki sesi WhatsApp tertaut; tidak dibuat kode baru.', 409);
+        throw new PairingError('Akun ini sudah memiliki sesi WhatsApp tertaut; tekan Sambungkan ulang, tidak perlu pairing code baru.', 409);
       }
       state.waVersion = await resolveWaWebVersion();
       const attachSocket = () => {
@@ -1561,6 +1613,17 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       }, SOCKET_READY_TIMEOUT_MS);
     } catch (error) {
       if (error instanceof PairingError) {
+        if (error.status === 409 && state.status === 'linked') {
+          // Sesi sudah tertaut tapi state in-memory baru dibuat (mis. habis
+          // restart panel): JANGAN hapus state-nya. Dulu catch ini selalu
+          // sessions.delete, jadi akun yang sebenarnya masih tertaut malah
+          // jatuh ke 'belum_pernah' dan disuruh pairing ulang padahal file
+          // session.json + cadangan masih bagus (bug jeffv2, 20 Nov 2026).
+          // State dipertahankan supaya status tetap 'linked' dan tombol
+          // Sambungkan ulang bisa menyambungkan socket-nya lagi.
+          await releaseStateLock(state);
+          throw new PairingError('Akun ini sudah memiliki sesi WhatsApp tertaut; tekan Sambungkan ulang, tidak perlu pairing code baru.', 409);
+        }
         if (state.status !== 'linked') {
           state.status = 'failed';
           await removeUnregisteredAuth(state);
@@ -1581,6 +1644,58 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
 
   function getState(userId) {
     return publicState(sessions.get(userId));
+  }
+
+  // Status pairing untuk notifikasi "WhatsApp belum tertaut": kalau sesi
+  // belum sempat dicoba lagi di proses panel ini (panel baru restart dan
+  // antrean resume belum sampai ke akun ini), ambil catatan terputus
+  // terakhir dari file supaya alasan + waktunya langsung tampil.
+  async function getLastUnlink(userId) {
+    try { return await loadLastUnlink(accountAuthDir(userId)); } catch { return null; }
+  }
+
+  async function getStatusWithUnlink(userId) {
+    const pairing = publicState(sessions.get(userId));
+    if (pairing?.lastUnlink) return pairing;
+    const lastUnlink = await getLastUnlink(userId);
+    if (!lastUnlink) return pairing;
+    if (!pairing) {
+      return {
+        status: 'invalid',
+        method: 'pairing',
+        code: null,
+        qrDataUrl: null,
+        maskedPhone: null,
+        phoneNumber: null,
+        expiresAt: null,
+        reconnectAttempts: 0,
+        reconnectFailures: 0,
+        lastUnlink,
+        workerStatus: 'stopped',
+        workerStartedAt: null,
+      };
+    }
+    return { ...pairing, lastUnlink };
+  }
+
+  // Sesi tersimpan di disk tapi belum ada state in-memory (mis. habis restart
+  // panel sebelum resume jalan): laporkan sebagai 'tersimpan' supaya panel
+  // tidak menampilkan 'Belum tertaut' dan tidak menyuruh pairing ulang —
+  // yang ditawarkan adalah Sambungkan ulang, bukan kode baru.
+  async function getSavedSessionInfo(userId) {
+    try {
+      const authDir = accountAuthDir(userId);
+      for (const name of ['session.json', 'creds.json']) {
+        const snapshot = await readSnapshotFile(path.join(authDir, name));
+        if (!snapshot) continue;
+        if (!isUsableAuthSnapshot(snapshot)) return { saved: true, registered: Boolean(snapshot?.creds?.registered), usable: false, maskedPhone: null };
+        const meId = String(snapshot?.creds?.me?.id || '').split('@')[0].split(':')[0].replace(/\D/g, '');
+        return { saved: true, registered: true, usable: true, maskedPhone: meId ? maskedNumber(meId) : null };
+      }
+      return null;
+    } catch {
+      return null;
+    }
   }
 
   async function setOnline24(userId, enabled) {
@@ -1719,10 +1834,20 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       throw new PairingError('Sesi WhatsApp ditolak. Masukkan nomor dan minta pairing code baru.', 409);
     }
     const manualReconnect = !auto && state?.status === 'reconnecting';
+    const linkedWithoutSocket = state?.status === 'linked' && !state.socket;
     if (state && ['connecting', 'awaiting_code', 'linking', 'linked', 'reconnecting'].includes(state.status)
       && !(auto && state.status === 'reconnecting' && !state.socket)
-      && !manualReconnect) {
+      && !manualReconnect && !linkedWithoutSocket) {
       return publicState(state);
+    }
+    if (linkedWithoutSocket) {
+      // State 'linked' tanpa socket (mis. habis restart panel lalu minta
+      // pairing code dan kena 409 'sudah tertaut'): statusnya bohong, socket
+      // belum tersambung. Jangan langsung kembalikan 'linked' — sambungkan
+      // ulang seperti reconnecting, supaya akun benar-benar online lagi.
+      state.status = 'reconnecting';
+      state.consecutiveReconnectFailures = 0;
+      state.reconnectAttempts = 0;
     }
     if (manualReconnect) {
       // Tombol "Sambungkan ulang" ditekan member saat sesi macet di
@@ -1805,6 +1930,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       runtimeStartedAt: null,
       runtimeLoaded: false,
     };
+    if (!state.lastUnlink) state.lastUnlink = await loadLastUnlink(state.authDir);
     state.authState = authState;
     await loadRuntimeIntoState(state);
     state.waVersion = await resolveWaWebVersion();
@@ -1965,6 +2091,7 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
       await removeUserAuth(userId, authDir);
       await fs.rm(path.join(authDir, GOOD_SNAPSHOT_FILENAME), { force: true }).catch(() => {});
       await fs.rm(path.join(authDir, BACKUP_FILENAME), { force: true }).catch(() => {});
+      await fs.rm(path.join(authDir, UNLINK_FILENAME), { force: true }).catch(() => {});
       resetRuntime(state);
       sessions.delete(userId);
       cooldowns.delete(userId);
@@ -1997,5 +2124,5 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     sessions.clear();
   }
 
-  return { start, getState, setOnline24, getPublicStats, startBot, restartBot, stopBot, cancelPending, stop, resume, deleteSession, shutdown };
+  return { start, getState, getStatusWithUnlink, getLastUnlink, getSavedSessionInfo, setOnline24, getPublicStats, startBot, restartBot, stopBot, cancelPending, stop, resume, deleteSession, shutdown };
 }
