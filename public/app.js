@@ -3575,6 +3575,8 @@ let chatLoading = false;
 let chatUnreadCount = 0;
 let chatSeenAt = null;
 let chatBadgeRestoredFor = undefined;
+let chatMentionIds = [];
+let chatMentionsRestoredFor = null;
 let chatRestoredSession = false;
 let chatReplyTo = null;
 let chatLastTypingSentAt = 0;
@@ -4445,6 +4447,86 @@ function markChatSeen() {
   }
   renderChatBadge(0);
 }
+function chatMentionsStorageKey() {
+  return `readsw-chat-mentions-${currentUser?.id || 'anon'}`;
+}
+function loadChatMentionIds() {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(chatMentionsStorageKey()) || '[]');
+    return Array.isArray(parsed) ? parsed.filter((id) => typeof id === 'string') : [];
+  } catch { return []; }
+}
+function saveChatMentionIds(ids) {
+  try { window.localStorage.setItem(chatMentionsStorageKey(), JSON.stringify(ids)); } catch { /* @ tetap jalan tanpa storage. */ }
+}
+// Balasan ke pesan sendiri: replyTo menyimpan userId si pengirim pesan asli.
+function isChatMentionFor(message, userId) {
+  return Boolean(message?.replyTo?.userId) && message.replyTo.userId === userId && message.userId !== userId;
+}
+function collectChatMentions(messages) {
+  if (!currentUser) return;
+  const known = new Set(chatMentionIds);
+  let changed = false;
+  for (const message of messages) {
+    if (isChatMentionFor(message, currentUser.id) && !known.has(message.id)) {
+      known.add(message.id);
+      changed = true;
+    }
+  }
+  if (changed) {
+    chatMentionIds = [...known];
+    saveChatMentionIds(chatMentionIds);
+  }
+}
+function renderChatMentionBadge() {
+  const count = chatMentionIds.length;
+  const item = document.querySelector('#chat-nav');
+  if (item) {
+    let badge = item.querySelector('.nav-mention-badge');
+    if (!count) {
+      badge?.remove();
+    } else {
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'nav-mention-badge';
+        item.append(badge);
+      }
+      badge.textContent = `@${count}`;
+    }
+  }
+  const jump = document.querySelector('#chat-mention-jump');
+  if (jump) {
+    jump.hidden = !count;
+    const countEl = jump.querySelector('#chat-mention-count');
+    if (countEl) countEl.textContent = String(count);
+  }
+}
+function flashChatMessageRow(row) {
+  if (!row) return;
+  row.classList.remove('chat-row-flash');
+  void row.offsetWidth;
+  row.classList.add('chat-row-flash');
+  window.setTimeout(() => row.classList.remove('chat-row-flash'), 1700);
+}
+function jumpToChatMessage(messageId) {
+  const list = document.querySelector('#chat-messages');
+  if (!list) return false;
+  const row = list.querySelector(`[data-message-id="${messageId}"]`);
+  if (!row) return false;
+  row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  flashChatMessageRow(row);
+  return true;
+}
+function jumpToNextChatMention() {
+  const id = chatMentionIds[0];
+  if (!id) return;
+  const found = jumpToChatMessage(id);
+  // Satu klik menandai satu balasan sudah dilihat: angka berkurang satu.
+  chatMentionIds = chatMentionIds.slice(1);
+  saveChatMentionIds(chatMentionIds);
+  renderChatMentionBadge();
+  if (!found) showToast('Pesan yang membalasmu sudah tidak ada di daftar ini.');
+}
 function countNewChatMessages(messages, seenAt) {
   // Belum pernah membuka Obrolan: semua pesan orang lain belum dibaca —
   // pesan pertama pun harus memunculkan notif, bukan dianggap sudah dilihat.
@@ -4500,10 +4582,19 @@ async function loadChatMessages() {
     chatSeenAt = loadChatSeenAt();
     renderChatBadge(chatUnreadCount);
   }
+  // Pulihkan @ balasan dari storage (per akun): refresh tidak boleh
+  // menghilangkan angka — hanya klik tombol @ yang mengurangi satu.
+  if (chatMentionsRestoredFor !== currentUser.id) {
+    chatMentionsRestoredFor = currentUser.id;
+    chatMentionIds = loadChatMentionIds();
+    renderChatMentionBadge();
+  }
   try {
     const result = await api('/api/chat/messages');
     const messages = Array.isArray(result.messages) ? result.messages : [];
     const latest = messages.at(-1);
+    collectChatMentions(messages);
+    renderChatMentionBadge();
     if (activeWorkspacePage === 'chat') {
       const signature = chatMessagesSignature(messages);
       chatMessages = messages;
@@ -4567,13 +4658,19 @@ function buildChatMessageRow(message) {
     bubble.append(head);
   }
   if (message.replyTo) {
-    const quote = document.createElement('div');
+    const quote = document.createElement('button');
+    quote.type = 'button';
     quote.className = 'chat-reply-quote';
+    quote.setAttribute('aria-label', `Lihat pesan asli dari ${message.replyTo.displayName || message.replyTo.username}`);
+    quote.title = 'Ketuk untuk melihat pesan asli';
     const quoteName = document.createElement('strong');
     quoteName.textContent = message.replyTo.displayName || message.replyTo.username;
     const quoteText = document.createElement('span');
     quoteText.textContent = message.replyTo.text;
     quote.append(quoteName, quoteText);
+    quote.addEventListener('click', () => {
+      if (!jumpToChatMessage(message.replyTo.id)) showToast('Pesan asli sudah tidak ada di daftar ini.');
+    });
     bubble.append(quote);
   }
   const text = document.createElement('p');
@@ -4705,6 +4802,9 @@ function initChatEmojiPanel() {
       input.value = input.value.slice(0, start) + emoji + input.value.slice(end);
       input.focus();
       input.selectionStart = input.selectionEnd = start + emoji.length;
+      // Panel emoji menutup begitu satu emoji dipilih — tidak perlu ditutup manual.
+      panel.hidden = true;
+      document.querySelector('#chat-emoji-toggle')?.setAttribute('aria-expanded', 'false');
       void sendChatTyping(true);
     });
     panel.append(button);
@@ -6561,6 +6661,7 @@ document.querySelector('#chat-emoji-toggle')?.addEventListener('click', () => {
   panel.hidden = !open;
   toggle.setAttribute('aria-expanded', String(open));
 });
+document.querySelector('#chat-mention-jump')?.addEventListener('click', () => jumpToNextChatMention());
 document.querySelector('#chat-reply-cancel')?.addEventListener('click', () => setChatReply(null));
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && activeWorkspacePage === 'activity') void loadPairingLogs();
