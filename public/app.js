@@ -3576,6 +3576,7 @@ let chatUnreadCount = 0;
 let chatSeenAt = null;
 let chatBadgeRestoredFor = undefined;
 let chatMentionIds = [];
+let chatMentionsSeenIds = [];
 let chatMentionsRestoredFor = null;
 let chatRestoredSession = false;
 let chatReplyTo = null;
@@ -4459,6 +4460,20 @@ function loadChatMentionIds() {
 function saveChatMentionIds(ids) {
   try { window.localStorage.setItem(chatMentionsStorageKey(), JSON.stringify(ids)); } catch { /* @ tetap jalan tanpa storage. */ }
 }
+// Balasan yang sudah diklik tombol @-nya tidak boleh muncul lagi: poll
+// berikutnya tetap melihat pesan yang sama, jadi id-nya dicatat terpisah.
+function chatMentionsSeenStorageKey() {
+  return `readsw-chat-mentions-seen-${currentUser?.id || 'anon'}`;
+}
+function loadChatMentionSeenIds() {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(chatMentionsSeenStorageKey()) || '[]');
+    return Array.isArray(parsed) ? parsed.filter((id) => typeof id === 'string') : [];
+  } catch { return []; }
+}
+function saveChatMentionSeenIds(ids) {
+  try { window.localStorage.setItem(chatMentionsSeenStorageKey(), JSON.stringify(ids)); } catch { /* @ tetap jalan tanpa storage. */ }
+}
 // Balasan ke pesan sendiri: replyTo menyimpan userId si pengirim pesan asli.
 function isChatMentionFor(message, userId) {
   return Boolean(message?.replyTo?.userId) && message.replyTo.userId === userId && message.userId !== userId;
@@ -4466,9 +4481,10 @@ function isChatMentionFor(message, userId) {
 function collectChatMentions(messages) {
   if (!currentUser) return;
   const known = new Set(chatMentionIds);
+  const seen = new Set(chatMentionsSeenIds);
   let changed = false;
   for (const message of messages) {
-    if (isChatMentionFor(message, currentUser.id) && !known.has(message.id)) {
+    if (isChatMentionFor(message, currentUser.id) && !known.has(message.id) && !seen.has(message.id)) {
       known.add(message.id);
       changed = true;
     }
@@ -4521,11 +4537,38 @@ function jumpToNextChatMention() {
   const id = chatMentionIds[0];
   if (!id) return;
   const found = jumpToChatMessage(id);
-  // Satu klik menandai satu balasan sudah dilihat: angka berkurang satu.
+  // Satu klik menandai satu balasan sudah dilihat: angka berkurang satu,
+  // dan id-nya dicatat supaya poll berikutnya tidak menambahkannya lagi.
   chatMentionIds = chatMentionIds.slice(1);
   saveChatMentionIds(chatMentionIds);
+  if (!chatMentionsSeenIds.includes(id)) {
+    chatMentionsSeenIds = [...chatMentionsSeenIds, id];
+    saveChatMentionSeenIds(chatMentionsSeenIds);
+  }
   renderChatMentionBadge();
   if (!found) showToast('Pesan yang membalasmu sudah tidak ada di daftar ini.');
+}
+// Bar atas Obrolan bisa diciutkan supaya ruang daftar pesan lebih luas;
+// pilihannya tersimpan per akun, seperti @ balasan.
+function chatHeroCollapsedStorageKey() {
+  return `readsw-chat-hero-collapsed-${currentUser?.id || 'anon'}`;
+}
+function loadChatHeroCollapsed() {
+  try { return window.localStorage.getItem(chatHeroCollapsedStorageKey()) === '1'; } catch { return false; }
+}
+function saveChatHeroCollapsed(value) {
+  try { window.localStorage.setItem(chatHeroCollapsedStorageKey(), value ? '1' : '0'); } catch { /* bar atas tetap jalan tanpa storage. */ }
+}
+function applyChatHeroCollapsed(collapsed) {
+  document.querySelector('#chat')?.classList.toggle('is-hero-collapsed', collapsed);
+  const toggle = document.querySelector('#chat-hero-toggle');
+  toggle?.setAttribute('aria-expanded', String(!collapsed));
+  toggle?.setAttribute('aria-label', collapsed ? 'Buka bar atas Obrolan' : 'Ciutkan bar atas Obrolan');
+}
+function toggleChatHeroCollapsed() {
+  const collapsed = !document.querySelector('#chat')?.classList.contains('is-hero-collapsed');
+  applyChatHeroCollapsed(collapsed);
+  saveChatHeroCollapsed(collapsed);
 }
 function countNewChatMessages(messages, seenAt) {
   // Belum pernah membuka Obrolan: semua pesan orang lain belum dibaca —
@@ -4587,6 +4630,8 @@ async function loadChatMessages() {
   if (chatMentionsRestoredFor !== currentUser.id) {
     chatMentionsRestoredFor = currentUser.id;
     chatMentionIds = loadChatMentionIds();
+    chatMentionsSeenIds = loadChatMentionSeenIds();
+    applyChatHeroCollapsed(loadChatHeroCollapsed());
     renderChatMentionBadge();
   }
   try {
@@ -6662,6 +6707,7 @@ document.querySelector('#chat-emoji-toggle')?.addEventListener('click', () => {
   toggle.setAttribute('aria-expanded', String(open));
 });
 document.querySelector('#chat-mention-jump')?.addEventListener('click', () => jumpToNextChatMention());
+document.querySelector('#chat-hero-toggle')?.addEventListener('click', () => toggleChatHeroCollapsed());
 document.querySelector('#chat-reply-cancel')?.addEventListener('click', () => setChatReply(null));
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && activeWorkspacePage === 'activity') void loadPairingLogs();

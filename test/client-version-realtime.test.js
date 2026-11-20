@@ -127,17 +127,17 @@ test('menu tetap terbuka setelah notifikasi menu terkunci ditutup', async () => 
 test('entri Info Update terbaru kini soal sesi WhatsApp pulih dari cadangan', async () => {
   const data = JSON.parse(await readFile(path.join(sourceRoot, 'public', 'info-updates.json'), 'utf8'));
   const html = await readFile(path.join(sourceRoot, 'public', 'index.html'), 'utf8');
-  assert.equal(data.updates.length, 87, 'daftar harus 78 entri');
+  assert.equal(data.updates.length, 88, 'daftar harus 78 entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Obrolan lebih luas di HP, @ balasan, dan lompat ke pesan asli', 'entri terbaru harus soal Obrolan di HP');
-  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
+  assert.equal(newest.title, '@ tidak muncul lagi setelah diklik, tombol @ di pojok kanan bawah, bar atas bisa diciutkan', 'entri terbaru harus soal @ Obrolan');
+  assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perbaikan');
   assert.equal(newest.day, 'Sabtu, 21 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'fallback harus memakai slug fitur-baru untuk entri terbaru');
-  assert.ok(html.includes("<h4>Obrolan lebih luas di HP, @ balasan, dan lompat ke pesan asli</h4>"), 'fallback harus memuat judul entri terbaru');
+  assert.ok(html.includes('<li class="info-update-item" data-tag="perbaikan">'), 'fallback harus memakai slug perbaikan untuk entri terbaru');
+  assert.ok(html.includes("<h4>@ tidak muncul lagi setelah diklik, tombol @ di pojok kanan bawah, bar atas bisa diciutkan</h4>"), 'fallback harus memuat judul entri terbaru');
 
   // Entri notifikasi menu terkunci sebelumnya kini di posisi kedua puluh dua; deskripsinya
   // menyebut menunya tetap terbuka setelah notifikasi ditutup.
-  const locked = data.updates[25];
+  const locked = data.updates[26];
   assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi kedua puluh empat');
   assert.match(locked.description, /Menunya tetap terbuka setelah notifikasi ditutup/, 'deskripsi harus menyebut menu tetap terbuka');
 });

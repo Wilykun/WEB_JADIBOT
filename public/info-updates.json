@@ -1,6 +1,13 @@
 {
- "updatedAt": "2026-11-21T05:41:00+07:00",
+ "updatedAt": "2026-11-21T05:53:00+07:00",
  "updates": [
+  {
+   "day": "Sabtu, 21 Nov 2026",
+   "time": "05.53 WIB",
+   "title": "@ tidak muncul lagi setelah diklik, tombol @ di pojok kanan bawah, bar atas bisa diciutkan",
+   "tag": "Perbaikan",
+   "description": "@ balasan yang sudah diklik tidak muncul lagi: balasan yang sudah dilihat dicatat terpisah, jadi poll realtime tidak menambahkannya kembali. Tombol @ pindah ke pojok kanan bawah daftar pesan, mengambang ala WhatsApp. Bar atas Obrolan kini bisa diciutkan dengan tombol panah supaya ruang daftar pesan lebih luas, dan pilihannya tersimpan walau halaman di-refresh."
+  },
   {
    "day": "Sabtu, 21 Nov 2026",
    "time": "05.41 WIB",

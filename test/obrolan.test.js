@@ -158,15 +158,18 @@ test('Obrolan: bar Balas kosong tidak boleh tampil dan kolom ketik harus selalu 
   assert.ok(html.includes('<div id="chat-emoji-panel" class="chat-emoji-panel" hidden>'), 'panel emoji harus hidden di awal');
   assert.ok(html.includes('<div id="chat-typing" class="chat-typing" aria-live="polite" hidden>'), 'indikator mengetik harus hidden di awal');
   // Daftar pesan desktop tetap dibatasi supaya hero + daftar + kolom ketik muat.
-  const desktop = css.match(/\.chat-messages\{[^}]*height:clamp\((\d+)px,(\d+)vh,(\d+)px\)/);
-  assert.ok(desktop, 'tinggi daftar pesan desktop harus ada');
+  // Tingginya dipegang pembungkus (.chat-messages-wrap) supaya tombol @ bisa
+  // mengambang di pojok kanan bawah daftar, ala WhatsApp.
+  const desktop = css.match(/\.chat-messages-wrap\{[^}]*height:clamp\((\d+)px,(\d+)vh,(\d+)px\)/);
+  assert.ok(desktop, 'tinggi daftar pesan desktop harus ada di pembungkusnya');
   assert.ok(Number(desktop[2]) <= 55, `daftar pesan desktop maksimal 55vh, dapat ${desktop[2]}vh`);
+  assert.match(css, /\.chat-messages\{[^}]*height:\s*100%/, 'daftar pesan harus mengisi penuh pembungkusnya');
   // Di HP halaman Obrolan setinggi layar (topbar 60px + padding konten 24+20px
   // sudah dikurangi) dan daftar pesan mengisi sisa ruang dengan flex — luas,
   // tapi kolom ketik tetap terlihat karena daftar yang menyusut, bukan halaman
   // yang memanjang.
   assert.match(css, /@media\(max-width:560px\)\{[\s\S]*?\.chat-page\{[^}]*height:calc\(100dvh - 104px\)/, 'halaman Obrolan HP harus setinggi layar dikurangi topbar dan padding');
-  assert.match(css, /@media\(max-width:560px\)\{[\s\S]*?\.chat-messages\{[^}]*flex:\s*1 1 auto;[^}]*min-height:\s*0/, 'daftar pesan HP harus mengisi sisa ruang dengan min-height 0 supaya bisa menyusut');
+  assert.match(css, /@media\(max-width:560px\)\{[\s\S]*?\.chat-messages-wrap\{[^}]*flex:\s*1 1 auto;[^}]*min-height:\s*0/, 'pembungkus daftar pesan HP harus mengisi sisa ruang dengan min-height 0 supaya bisa menyusut');
   assert.ok(css.includes('.chat-hero-copy p{display:none}'), 'deskripsi hero disembunyikan di HP supaya daftar lebih luas');
   // Kolom ketik menempel di bawah layar supaya selalu terjangkau.
   assert.match(css, /\.chat-composer\{[^}]*position:\s*sticky;bottom:\s*0/, 'kolom ketik harus sticky di bawah layar');
@@ -240,29 +243,66 @@ test('Obrolan: @ balasan — badge di menu + tombol @ di pojok, persisten, klik 
   assert.ok(load.includes('JSON.parse'), '@ yang belum dibaca harus dimuat sebagai daftar id');
   const save = extractFunction(appJs, 'saveChatMentionIds');
   assert.ok(save.includes('JSON.stringify'), '@ yang belum dibaca harus disimpan sebagai daftar id');
-  // Badge di menu Obrolan (di luar halaman) dan tombol @ di pojok hero.
+  // Badge di menu Obrolan (di luar halaman) dan tombol @ mengambang di pojok
+  // kanan bawah daftar pesan, ala WhatsApp.
   const render = extractFunction(appJs, 'renderChatMentionBadge');
   assert.ok(render.includes("document.querySelector('#chat-nav')"), '@ di menu menempel di menu Obrolan');
   assert.ok(render.includes("badge.className = 'nav-mention-badge'"), '@ di menu memakai badge sendiri, bukan badge pesan');
   assert.ok(render.includes('badge.textContent = `@${count}`'), '@ di menu menampilkan @ dan angka');
-  assert.ok(render.includes("document.querySelector('#chat-mention-jump')"), 'tombol @ di pojok hero harus dirender');
-  assert.ok(render.includes('jump.hidden = !count'), 'tombol @ di pojok hanya tampil bila ada balasan belum dibaca');
-  assert.ok(html.includes('<button id="chat-mention-jump" class="chat-mention-jump" type="button" hidden>'), 'tombol @ harus ada di pojok hero dan tersembunyi di awal');
+  assert.ok(render.includes("document.querySelector('#chat-mention-jump')"), 'tombol @ mengambang harus dirender');
+  assert.ok(render.includes('jump.hidden = !count'), 'tombol @ hanya tampil bila ada balasan belum dibaca');
+  assert.ok(html.includes('<div class="chat-messages-wrap">'), 'daftar pesan harus dibungkus supaya tombol @ bisa mengambang di dalamnya');
+  assert.ok(html.indexOf('id="chat-mention-jump"') > html.indexOf('id="chat-messages"'), 'tombol @ harus ada di dalam pembungkus daftar pesan');
+  assert.ok(html.indexOf('id="chat-mention-jump"') < html.indexOf('id="chat-typing"'), 'tombol @ harus tetap di atas bar ketik');
+  assert.ok(html.includes('<button id="chat-mention-jump" class="chat-mention-jump" type="button" hidden>'), 'tombol @ harus tersembunyi di awal');
   assert.ok(html.includes('<span id="chat-mention-count">0</span>'), 'tombol @ harus membawa angka');
   // Satu klik menandai satu balasan sudah dilihat: angka berkurang satu.
   const next = extractFunction(appJs, 'jumpToNextChatMention');
   assert.ok(next.includes('chatMentionIds.slice(1)'), 'satu klik hanya menghapus satu balasan dari daftar');
   assert.ok(next.includes('saveChatMentionIds(chatMentionIds)'), 'satu klik harus menyimpan daftar yang sudah berkurang');
+  assert.ok(next.includes('chatMentionsSeenIds'), 'satu klik harus mencatat balasan itu ke daftar sudah-dilihat');
+  assert.ok(next.includes('saveChatMentionSeenIds(chatMentionsSeenIds)'), 'satu klik harus menyimpan daftar sudah-dilihat');
   assert.ok(next.includes('renderChatMentionBadge()'), 'satu klik harus memperbarui badge dan tombol @');
   assert.ok(next.includes('jumpToChatMessage(id)'), 'klik @ harus melompat ke balasan yang belum dibaca');
-  // Poll menghitung @ baru dan memulihkannya — membuka halaman Obrolan tidak
-  // menghapusnya (tidak seperti badge pesan biasa).
+  // Balasan yang sudah diklik tidak boleh muncul lagi: poll berikutnya tetap
+  // melihat pesan yang sama, jadi id yang sudah dilihat dicatat terpisah
+  // dan dilewati saat menghitung @ baru.
+  const collect = extractFunction(appJs, 'collectChatMentions');
+  assert.ok(collect.includes('!seen.has(message.id)'), 'poll harus melewati balasan yang sudah diklik');
+  assert.ok(collect.includes('new Set(chatMentionsSeenIds)'), 'poll harus memakai daftar sudah-dilihat');
+  const seenKey = extractFunction(appJs, 'chatMentionsSeenStorageKey');
+  assert.ok(seenKey.includes('readsw-chat-mentions-seen-'), 'kunci storage sudah-dilihat harus per akun');
   const loadMessages = sliceBetween(appJs, 'async function loadChatMessages() {', '\nfunction buildChatMessageRow(');
   assert.ok(loadMessages.includes('loadChatMentionIds()'), '@ harus dipulihkan dari storage per akun sebelum fetch');
+  assert.ok(loadMessages.includes('loadChatMentionSeenIds()'), 'daftar sudah-dilihat harus dipulihkan bersama @');
   assert.ok(loadMessages.includes('collectChatMentions(messages)'), 'poll harus menghitung balasan baru ke pesanku');
   assert.ok(loadMessages.includes('renderChatMentionBadge()'), 'poll harus memperbarui @ realtime');
   const markSeen = extractFunction(appJs, 'markChatSeen');
   assert.ok(!markSeen.includes('chatMention'), 'membuka halaman Obrolan tidak boleh menghapus @');
+});
+
+test('Obrolan: tombol @ mengambang di pojok kanan bawah daftar, ala WhatsApp', () => {
+  assert.match(css, /\.chat-messages-wrap\{[^}]*position:\s*relative/, 'pembungkus daftar harus jadi acuan posisi tombol mengambang');
+  assert.match(css, /\.chat-mention-jump\{[^}]*position:\s*absolute;[^}]*right:\s*12px;[^}]*bottom:\s*12px/, 'tombol @ harus mengambang di pojok kanan bawah daftar');
+  assert.ok(!html.includes('<div class="chat-hero-actions"><button id="chat-mention-jump"'), 'tombol @ tidak boleh lagi di bar atas hero');
+  assert.ok(css.includes('.chat-mention-jump[hidden]{display:none!important}'), 'tombol @ yang tersembunyi harus benar-benar hilang');
+});
+
+test('Obrolan: bar atas bisa diciutkan supaya ruang daftar lebih luas, tersimpan per akun', () => {
+  assert.ok(html.includes('<button id="chat-hero-toggle" class="chat-hero-toggle" type="button"'), 'bar atas harus punya tombol ciutkan');
+  assert.ok(html.includes('aria-label="Ciutkan bar atas Obrolan"'), 'tombol ciutkan harus punya label yang jelas');
+  assert.ok(css.includes('.chat-page.is-hero-collapsed .chat-hero-copy{display:none}'), 'bar atas yang diciutkan harus menyembunyikan judul dan deskripsi');
+  assert.ok(css.includes('.chat-page.is-hero-collapsed .chat-hero-toggle svg{transform:rotate(180deg)}'), 'tombol ciutkan harus membalik arah saat bar atas tertutup');
+  const apply = extractFunction(appJs, 'applyChatHeroCollapsed');
+  assert.ok(apply.includes("classList.toggle('is-hero-collapsed'"), 'ciutkan harus mengaktifkan kelas bar tertutup di halaman Obrolan');
+  assert.ok(apply.includes("setAttribute('aria-expanded'"), 'ciutkan harus memperbarui status tombol');
+  const toggle = extractFunction(appJs, 'toggleChatHeroCollapsed');
+  assert.ok(toggle.includes('saveChatHeroCollapsed(collapsed)'), 'ciutkan harus menyimpan pilihan');
+  const key = extractFunction(appJs, 'chatHeroCollapsedStorageKey');
+  assert.ok(key.includes('readsw-chat-hero-collapsed-'), 'pilihan bar atas harus tersimpan per akun');
+  const loadMessages = sliceBetween(appJs, 'async function loadChatMessages() {', '\nfunction buildChatMessageRow(');
+  assert.ok(loadMessages.includes('applyChatHeroCollapsed(loadChatHeroCollapsed())'), 'pilihan bar atas harus dipulihkan saat halaman dimuat');
+  assert.ok(appJs.includes("document.querySelector('#chat-hero-toggle')?.addEventListener('click'"), 'tombol ciutkan harus terhubung ke aksi');
 });
 
 test('Obrolan: semua pesan tersimpan rapi di data/Obrolan.json, bukan di store.json', () => {
