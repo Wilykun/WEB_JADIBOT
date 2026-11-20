@@ -97,11 +97,11 @@ test('server menyajikan aset terkompres dan ter-cache sesuai aturan', { timeout:
     assert.equal(plain.headers['content-encoding'], undefined, 'tanpa Accept-Encoding gzip, jawaban tidak boleh gzip');
     assert.equal(plain.body.length, appJs.length, 'isi tanpa gzip harus utuh');
 
-    const versioned = await rawGet('/app.js?v=member-online-dot-20261118', { 'Accept-Encoding': 'gzip' });
+    const versioned = await rawGet('/app.js?v=log-bot-badge-20261120', { 'Accept-Encoding': 'gzip' });
     assert.match(versioned.headers['cache-control'] || '', /public, max-age=31536000, immutable/, 'app.js berversi harus immutable setahun');
     assert.equal(versioned.headers['content-encoding'], 'gzip', 'app.js berversi tetap boleh gzip');
 
-    const versionedCss = await rawGet('/style.css?v=member-online-dot-20261118');
+    const versionedCss = await rawGet('/style.css?v=log-bot-badge-20261120');
     assert.match(versionedCss.headers['cache-control'] || '', /immutable/, 'style.css berversi harus immutable');
 
     const home = await rawGet('/?v=rankbotovertake-20261118', { 'Accept-Encoding': 'gzip' });
@@ -134,15 +134,15 @@ test('entri Info Update panel lebih cepat ada di posisi kelima belas', () => {
   const html = read('public/index.html');
   const entry = data.updates.find((item) => item.title === 'Panel kini memuat jauh lebih cepat');
   assert.ok(entry, 'entri panel lebih cepat harus tetap ada');
-  assert.equal(data.updates.indexOf(entry), 14, 'entri panel lebih cepat kini di posisi kelima belas');
+  assert.equal(data.updates.indexOf(entry), 16, 'entri panel lebih cepat kini di posisi kelima belas');
   assert.equal(entry.title, 'Panel kini memuat jauh lebih cepat', 'entri terbaru harus soal panel yang lebih cepat');
   assert.equal(entry.tag, 'Perbaikan', 'entri harus bertag Perbaikan');
   assert.equal(entry.time, '21.50 WIB', 'waktu entri harus 21.50 WIB');
   assert.match(entry.description, /gzip/, 'deskripsi harus menyebut gzip');
   assert.match(entry.description, /200 KB/, 'deskripsi harus menyebut unduhan awal sekitar 200 KB');
   assert.match(entry.description, /Tidak ada fitur yang berubah/, 'deskripsi harus menegaskan fitur tidak berubah');
-  assert.equal(data.updates.length, 74, 'daftar harus 74 entri');
-  assert.equal(data.updatedAt, '2026-11-20T07:35:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 76, 'daftar harus 74 entri');
+  assert.equal(data.updatedAt, '2026-11-20T08:05:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.ok(html.includes('<h4>Panel kini memuat jauh lebih cepat</h4>'), 'fallback HTML harus memuat entri panel lebih cepat');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 21.50 WIB'), 'fallback meta harus cocok dengan entri terbaru');
 });

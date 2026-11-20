@@ -280,6 +280,8 @@ function dismissNoticeOverlay() {
     botLinkNoticeDismissed = true;
   } else if (noticeContext?.kind === 'locked') {
     // Tanpa ingatan: notifikasi menu terkunci tampil lagi tiap kali menunya diketuk.
+  } else if (noticeContext?.kind === 'linked') {
+    // Tanpa ingatan: tiap tautan baru tampil lagi.
   } else if (noticeContext?.kind === 'rankovertake') {
     // Tanpa ingatan: tiap salip baru tampil lagi, dan menutup kartu ini
     // tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
@@ -1378,7 +1380,7 @@ document.querySelector('#admin-backup-restore-form')?.addEventListener('submit',
   if (file.size > 80 * 1024 * 1024) return setAdminBackupStatus('Ukuran ZIP melebihi batas 80 MiB.', true);
   if ([...passphrase].length < 12) return setAdminBackupStatus('Masukkan kata sandi backup yang benar.', true);
   if (!confirmInput?.checked) return setAdminBackupStatus('Centang konfirmasi sebelum menjalankan restore.', true);
-  const approved = await showConfirm({ title: 'Restore backup?', message: 'Restore akan mengganti data akun/data sesi saat ini, menghentikan koneksi WhatsApp yang sedang aktif, lalu mencoba menyambungkan sesi dari backup. Worker auto-start dapat mulai berjalan. Lanjutkan hanya jika Anda memahami dampaknya dan memiliki izin.', confirmLabel: 'Restore', danger: true });
+  const approved = await showConfirm({ title: 'Restore backup?', message: 'Restore akan mengganti data akun/data sesi saat ini, menghentikan koneksi WhatsApp yang sedang aktif, lalu mencoba menyambungkan sesi dari backup. Bot auto-start dapat mulai berjalan. Lanjutkan hanya jika Anda memahami dampaknya dan memiliki izin.', confirmLabel: 'Restore', danger: true });
   if (!approved) return;
   button.disabled = true;
   setAdminBackupStatus('Memvalidasi ZIP dan membuat restore point sebelum perubahan…');
@@ -1431,8 +1433,8 @@ adminUsersList?.addEventListener('click', async (event) => {
     const confirmations = {
       'bot-start': { title: `Start bot @${username}?`, message: 'Bot memakai pengaturan tersimpan dan dapat membaca status serta mengirim reaksi bila mode itu aktif. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Start bot' },
       'bot-restart': { title: `Restart bot @${username}?`, message: 'Bot berjalan kembali dengan pengaturan tersimpan. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Restart bot' },
-      'bot-stop': { title: `Matikan worker bot @${username}?`, message: 'Koneksi WhatsApp tetap tertaut. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Matikan worker', danger: true },
-      ban: { title: `Blokir @${username}?`, message: 'Sesi panel dicabut, worker/Online 24 Jam dihentikan, pairing yang belum selesai dibatalkan, dan tautan WA aktif tidak dihapus.', confirmLabel: 'Blokir', danger: true },
+      'bot-stop': { title: `Matikan bot @${username}?`, message: 'Koneksi WhatsApp tetap tertaut. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Matikan bot', danger: true },
+      ban: { title: `Blokir @${username}?`, message: 'Sesi panel dicabut, bot/Online 24 Jam dihentikan, pairing yang belum selesai dibatalkan, dan tautan WA aktif tidak dihapus.', confirmLabel: 'Blokir', danger: true },
       unban: { title: `Buka blokir @${username}?`, message: 'Agar pemilik dapat login kembali.', confirmLabel: 'Buka blokir' },
     };
     if (action === 'member-delete') {
@@ -1835,7 +1837,7 @@ async function loadAdminUsers() {
           heading.append(title, accountState);
           const note = document.createElement('p');
           note.className = 'member-admin-note';
-          note.textContent = 'Admin dapat memantau dan mengelola worker bot, tetapi tidak masuk sebagai member. Pemilik akun menautkan WhatsApp sendiri.';
+          note.textContent = 'Admin dapat memantau dan mengelola bot, tetapi tidak masuk sebagai member. Pemilik akun menautkan WhatsApp sendiri.';
           const botActions = document.createElement('div');
           botActions.className = 'member-admin-actions';
           const addAdminButton = (label, action, disabled = false, variant = '') => {
@@ -1859,7 +1861,7 @@ async function loadAdminUsers() {
           const stateNote = document.createElement('p');
           stateNote.className = `member-admin-account-state${user.banned ? ' is-banned' : ''}`;
           stateNote.textContent = user.banned
-            ? `Diblokir${user.bannedAt ? ` sejak ${prettyDateTime(user.bannedAt)}` : ''}${user.banReason ? ` · alasan: ${user.banReason}` : ''}. Worker/Online 24 Jam dimatikan; tautan WhatsApp tidak dihapus.`
+            ? `Diblokir${user.bannedAt ? ` sejak ${prettyDateTime(user.bannedAt)}` : ''}${user.banReason ? ` · alasan: ${user.banReason}` : ''}. Bot/Online 24 Jam dimatikan; tautan WhatsApp tidak dihapus.`
             : 'Akun aktif. Admin tidak melihat kata sandi, kode pairing, atau isi percakapan.';
           adminPanel.append(heading, note, botActions, controlsNote, stateNote);
           if (user.banned) {
@@ -1934,7 +1936,7 @@ async function loadAdminUsers() {
     document.querySelector('#admin-nav').classList.toggle('hidden', !visible);
     document.querySelector('#admin-title').textContent = isAdmin ? 'Pemantauan akun member' : 'Daftar member';
     document.querySelector('#admin-description').textContent = isAdmin
-      ? 'Status akun diperbarui tiap 15 detik dan runtime worker tiap detik. “Panel aktif” berarti akun masih membuka web dalam 75 detik terakhir; status panel ini berbeda dari status WhatsApp dan worker bot.'
+      ? 'Status akun diperbarui tiap 15 detik dan runtime bot tiap detik. “Panel aktif” berarti akun masih membuka web dalam 75 detik terakhir; status panel ini berbeda dari status WhatsApp dan bot.'
       : 'Daftar ini hanya untuk melihat identitas dasar akun. Member tidak dapat mengontrol, mengedit, memasangkan WhatsApp, atau membuka data akun member lain.';
     // Halaman Backup (menu + seksi) hanya untuk admin; menunya tetap terlihat tapi terkunci untuk member, isi halamannya disembunyikan total.
     const backupNav = document.querySelector('#backup-nav');
@@ -1958,7 +1960,7 @@ async function loadAdminUsers() {
   }
 }
 
-// Filter + pencarian Member ala Log privat: pil kategori berangka dan kotak pencarian di atas daftar, dengan hitungan yang dihitung ulang dari akun yang sedang tampil setiap kali daftar me-refresh (15 detik) dan filter yang sedang aktif tetap dipertahankan.
+// Filter + pencarian Member ala Log Bot: pil kategori berangka dan kotak pencarian di atas daftar, dengan hitungan yang dihitung ulang dari akun yang sedang tampil setiap kali daftar me-refresh (15 detik) dan filter yang sedang aktif tetap dipertahankan.
 let memberFilter = 'all';
 let memberQuery = '';
 function memberFilterCounts() {
@@ -2925,7 +2927,7 @@ function buildBotControlCard(user) {
     heading.append(title, accountState);
     const note = document.createElement('p');
     note.className = 'member-admin-note';
-    note.textContent = 'Admin dapat memantau dan mengelola worker bot, tetapi tidak masuk sebagai member. Pemilik akun menautkan WhatsApp sendiri.';
+    note.textContent = 'Admin dapat memantau dan mengelola bot, tetapi tidak masuk sebagai member. Pemilik akun menautkan WhatsApp sendiri.';
     const botActions = document.createElement('div');
     botActions.className = 'member-admin-actions';
     const addControlButton = (label, action, disabled = false, variant = '') => {
@@ -2950,7 +2952,7 @@ function buildBotControlCard(user) {
     const stateNote = document.createElement('p');
     stateNote.className = `member-admin-account-state${user.banned ? ' is-banned' : ''}`;
     stateNote.textContent = user.banned
-      ? `Diblokir${user.bannedAt ? ` sejak ${prettyDateTime(user.bannedAt)}` : ''}${user.banReason ? ` · alasan: ${user.banReason}` : ''}. Worker/Online 24 Jam dimatikan; tautan WhatsApp tidak dihapus.`
+      ? `Diblokir${user.bannedAt ? ` sejak ${prettyDateTime(user.bannedAt)}` : ''}${user.banReason ? ` · alasan: ${user.banReason}` : ''}. Bot/Online 24 Jam dimatikan; tautan WhatsApp tidak dihapus.`
       : 'Akun aktif. Admin tidak melihat kata sandi, kode pairing, atau isi percakapan.';
     const draft = botControlSettingsDrafts.get(userId) || normalizeBotControlSettings(user.botSettings);
     botControlSettingsDrafts.set(userId, draft);
@@ -3032,7 +3034,7 @@ botControlUsersList?.addEventListener('click', async (event) => {
     const confirmations = {
       'bot-start': { title: `Start bot @${username}?`, message: 'Bot memakai pengaturan tersimpan dan dapat membaca status serta mengirim reaksi bila mode itu aktif. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Start bot' },
       'bot-restart': { title: `Restart bot @${username}?`, message: 'Bot berjalan kembali dengan pengaturan tersimpan. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Restart bot' },
-      'bot-stop': { title: `Matikan worker bot @${username}?`, message: 'Koneksi WhatsApp tetap tertaut. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Matikan worker', danger: true },
+      'bot-stop': { title: `Matikan bot @${username}?`, message: 'Koneksi WhatsApp tetap tertaut. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Matikan bot', danger: true },
       'bot-session-delete': { title: `Hapus sesi WhatsApp @${username}?`, message: 'Koneksi WhatsApp terputus dan sesi di server dihapus. Pemilik akun harus menautkan WhatsApp lagi dari akunnya sendiri. Lanjut hanya jika kamu berwenang.', confirmLabel: 'Hapus sesi', danger: true },
     };
     if (!(await showConfirm(confirmations[action] || { title: 'Lanjutkan tindakan admin ini?', message: 'Tindakan ini akan langsung dijalankan.', confirmLabel: 'Lanjutkan' }))) return;
@@ -3478,8 +3480,8 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   detail.textContent = running
     ? workerAutoStart ? 'Mendengarkan story/status real-time; auto-start aktif saat sesi pulih.' : 'Mendengarkan event story/status real-time.'
     : workerStatus === 'waiting' ? 'Akan aktif lagi setelah WhatsApp tersambung.'
-      : online && !supportedMode ? 'Pilih mode Read Only atau Read Only + ReadSW untuk mengaktifkan worker.'
-        : online ? workerAutoStart ? 'Auto-start aktif; worker akan dijalankan otomatis.' : 'WhatsApp online; tekan Start bot untuk mulai.' : 'Tautkan WhatsApp terlebih dahulu.';
+      : online && !supportedMode ? 'Pilih mode Read Only atau Read Only + ReadSW untuk mengaktifkan bot.'
+        : online ? workerAutoStart ? 'Auto-start aktif; bot akan dijalankan otomatis.' : 'WhatsApp online; tekan Start bot untuk mulai.' : 'Tautkan WhatsApp terlebih dahulu.';
   dot.className = running ? 'green-dot' : 'muted-dot';
   start.disabled = !online || running || !supportedMode;
   restart.disabled = !online || !supportedMode;
@@ -3497,7 +3499,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   } else if (online) {
     summaryTitle.textContent = supportedMode ? 'WHATSAPP ONLINE · BOT BERHENTI' : 'WHATSAPP ONLINE · MODE BELUM SIAP';
     summaryDescription.textContent = supportedMode
-      ? workerAutoStart ? 'Sesi tersambung; worker otomatis siap berjalan.' : 'Sesi tersambung. Tekan Start bot untuk memantau event story/status.'
+      ? workerAutoStart ? 'Sesi tersambung; bot otomatis siap berjalan.' : 'Sesi tersambung. Tekan Start bot untuk memantau event story/status.'
       : 'Sesi tersambung, tetapi pilih mode Read Only atau Read Only + ReadSW terlebih dahulu.';
   } else if (connectionStatus === 'disconnected' || connectionStatus === 'stopped') {
     summaryTitle.textContent = connectionStatus === 'stopped' ? 'WHATSAPP DIHENTIKAN' : 'WHATSAPP TERPUTUS';
@@ -3507,7 +3509,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
     summaryDescription.textContent = 'Status dan tombol akan diperbarui saat koneksi siap.';
   } else if (workerStatus === 'waiting') {
     summaryTitle.textContent = 'BOT MENUNGGU KONEKSI WHATSAPP';
-    summaryDescription.textContent = 'Worker akan menyambung lagi setelah sesi WhatsApp pulih.';
+    summaryDescription.textContent = 'Bot akan menyambung lagi setelah sesi WhatsApp pulih.';
   } else {
     summaryTitle.textContent = 'BELUM TERTAUT';
     summaryDescription.textContent = 'Tautkan perangkat WhatsApp untuk mengaktifkan kontrol bot.';
@@ -3516,7 +3518,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   if (running) logPollTimer = setInterval(() => { void loadPairingLogs(); }, 4000);
 }
 
-const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log privat', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot', accountactivity: 'Aktivitas Akun' };
+const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log Bot', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot', accountactivity: 'Aktivitas Akun' };
 let activeWorkspacePage = null;
 let privateLogAutoRefreshTimer = null;
 let privateLogScrollOnNextRender = false;
@@ -3524,6 +3526,11 @@ let privateLogLoading = false;
 let privateLogSnapshotReady = false;
 let lastPrivateLogIdentity = null;
 let lastPrivateLogCount = 0;
+// Badge notifikasi Log Bot: jumlah story baru yang masuk selagi pengguna
+// tidak sedang di halaman Log Bot. Penanda "sudah dilihat" disimpan per
+// akun di perangkat, supaya tiap akun punya hitungannya sendiri.
+let privateLogUnreadStoryCount = 0;
+let privateLogCountedIdentity = null;
 
 function stopPrivateLogAutoRefresh() {
   if (privateLogAutoRefreshTimer) window.clearInterval(privateLogAutoRefreshTimer);
@@ -3588,6 +3595,7 @@ function setWorkspacePage(page, smoothScroll = true) {
   window.scrollTo({ top: 0, behavior: smoothScroll ? 'smooth' : 'auto' });
   if (page === 'activity') {
     privateLogScrollOnNextRender = true;
+    markPrivateLogSeen();
     startPrivateLogAutoRefresh();
     void loadPairingLogs();
   } else {
@@ -3783,7 +3791,7 @@ function renderPairingState(pairing) {
     statusFoot.textContent = 'Menunggu pairing';
     statusDot.className = 'muted-dot';
     runnerTitle.textContent = 'Belum ada perangkat WhatsApp tertaut';
-    runnerDescription.textContent = 'Minta pairing code untuk menautkan perangkat. Worker bot dan pembacaan story belum aktif.';
+    runnerDescription.textContent = 'Minta pairing code untuk menautkan perangkat. Bot dan pembacaan story belum aktif.';
     runnerStatus.textContent = 'BELUM TERTAUT';
     renderBotWorkerUi('stopped', null, null);
     setPairingNotice('');
@@ -3883,19 +3891,38 @@ function renderPairingState(pairing) {
     const workerRunning = pairing.workerStatus === 'running';
     runnerTitle.textContent = workerRunning ? 'Bot memantau event story/status' : 'WhatsApp terhubung real-time';
     runnerDescription.textContent = workerRunning
-      ? 'Bot worker aktif dan mencatat event status yang diterima Baileys; tanda baca otomatis tidak dikirim.'
+      ? 'Bot aktif dan mencatat event status yang diterima Baileys; tanda baca otomatis tidak dikirim.'
       : 'Koneksi WhatsApp aktif. Tekan Start bot untuk memantau event status/story.';
     runnerStatus.textContent = workerRunning ? 'BOT ONLINE' : 'WHATSAPP ONLINE';
     linkedCard.querySelector('strong').textContent = workerRunning
       ? 'WhatsApp Online · Bot berjalan'
       : 'WhatsApp Online · terhubung real-time';
     linkedCard.querySelector('p').textContent = workerRunning
-      ? 'Koneksi aktif; worker mencatat event story/status yang diterima tanpa read receipt otomatis.'
-      : 'Koneksi aktif. Worker bot bisa dinyalakan dari panel Kontrol Bot.';
+      ? 'Koneksi aktif; bot mencatat event story/status yang diterima tanpa read receipt otomatis.'
+      : 'Koneksi aktif. Bot bisa dinyalakan dari panel Kontrol Bot.';
     document.querySelector('#pairing-phone').value = '';
     document.querySelector('#pairing-confirm').checked = false;
     setPairingNotice('');
     void loadPairingLogs();
+    if (['awaiting_code', 'linking', 'connecting', 'checking_number', 'awaiting_qr'].includes(previousPairingStatus)) {
+      // Baru saja tertaut dari alur pairing: beri tahu di layar dan arahkan
+      // ke kartu Start bot supaya pengguna langsung melihat bot jalan.
+      showNoticeOverlay({
+        title: workerRunning ? 'WhatsApp tertaut — bot jalan otomatis' : 'WhatsApp tertaut',
+        text: workerRunning
+          ? 'Bot langsung jalan (npm start otomatis) dan memantau story/status realtime. Lihat statusnya di kartu Start bot.'
+          : 'WhatsApp sudah tertaut, tetapi bot belum jalan. Buka kartu Start bot untuk menyalakannya.',
+        context: { kind: 'linked' },
+        addLabel: 'Lihat Start bot',
+        onAdd: () => {
+          setWorkspacePage('dashboard');
+          setTimeout(() => {
+            document.querySelector('.bot-worker-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 150);
+        },
+        icon: '✓',
+      });
+    }
     pairingPollTimer = setInterval(() => { void refreshPairing(); }, 5000);
     return;
   }
@@ -4168,6 +4195,60 @@ function applyPrivateLogFilters() {
   if (emptyState) emptyState.hidden = !items.length || visibleCount > 0;
 }
 
+// --- Badge notifikasi Log Bot (story baru, realtime, per akun) ---
+function privateLogSeenStorageKey() {
+  return `readsw-log-bot-seen-${currentUser?.id || 'anon'}`;
+}
+function loadPrivateLogSeenIdentity() {
+  try { return window.localStorage.getItem(privateLogSeenStorageKey()); } catch { return null; }
+}
+function savePrivateLogSeenIdentity(identity) {
+  try { if (identity) window.localStorage.setItem(privateLogSeenStorageKey(), identity); } catch { /* Badge tetap jalan tanpa storage. */ }
+}
+function privateLogEntryIdentity(entry) {
+  return entry ? String(entry.id || `${entry.createdAt}:${entry.event}`) : null;
+}
+// Klasifikasi story mengikuti buildPrivateLogEntry: entri story (details.kind
+// 'story' atau teks story/status) dihitung, entri perhatian/bot/WhatsApp tidak.
+function isStoryLogEntry(entry) {
+  if (entry?.details?.kind === 'story') return true;
+  const lower = String(entry?.event || '').toLowerCase();
+  if (/gagal|terputus|kedaluwarsa|dihapus/.test(lower)) return false;
+  if (/menerima.*(story|status)|pembaruan story|pembaruan status/.test(lower)) return true;
+  if (/bot|worker/.test(lower)) return false;
+  return /story|status/.test(lower);
+}
+// Log terurut lama -> baru: hitung story yang datang setelah penanda yang
+// sudah dihitung. Penanda tidak ditemukan (log bergeser melewati 100 entri)
+// berarti semua story yang tampil dihitung sebagai baru.
+function countNewStoryEntries(logs, seenIdentity) {
+  const index = logs.findIndex((entry) => privateLogEntryIdentity(entry) === seenIdentity);
+  const fresh = index >= 0 ? logs.slice(index + 1) : logs;
+  return fresh.filter(isStoryLogEntry).length;
+}
+function renderPrivateLogBadge(count) {
+  privateLogUnreadStoryCount = count > 0 ? count : 0;
+  const item = document.querySelector('#private-log-nav');
+  if (!item) return;
+  let badge = item.querySelector('.nav-badge');
+  if (!privateLogUnreadStoryCount) {
+    badge?.remove();
+    return;
+  }
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.className = 'nav-badge';
+    item.append(badge);
+  }
+  badge.textContent = privateLogUnreadStoryCount > 99 ? '99+' : String(privateLogUnreadStoryCount);
+}
+function markPrivateLogSeen() {
+  // Dipanggil saat halaman Log Bot dibuka: semua yang sudah ada dianggap dibaca.
+  privateLogUnreadStoryCount = 0;
+  if (lastPrivateLogIdentity) savePrivateLogSeenIdentity(lastPrivateLogIdentity);
+  renderPrivateLogBadge(0);
+}
+
 async function loadPairingLogs() {
   if (privateLogLoading) return;
   privateLogLoading = true;
@@ -4183,6 +4264,24 @@ async function loadPairingLogs() {
     privateLogSnapshotReady = true;
     lastPrivateLogIdentity = latestIdentity;
     lastPrivateLogCount = logs.length;
+    // Badge notifikasi Log Bot: story baru yang masuk selagi pengguna tidak
+    // sedang di halaman Log Bot menambah angka di menu (realtime, per akun).
+    // Entri yang sudah ada saat panel pertama dibuka tidak dihitung.
+    if (privateLogCountedIdentity === null) {
+      privateLogCountedIdentity = loadPrivateLogSeenIdentity();
+      if (privateLogCountedIdentity && activeWorkspacePage !== 'activity') {
+        privateLogUnreadStoryCount += countNewStoryEntries(logs, privateLogCountedIdentity);
+        renderPrivateLogBadge(privateLogUnreadStoryCount);
+      }
+    } else if (hasNewActivity) {
+      if (activeWorkspacePage === 'activity') {
+        savePrivateLogSeenIdentity(latestIdentity);
+      } else {
+        privateLogUnreadStoryCount += countNewStoryEntries(logs, privateLogCountedIdentity);
+        renderPrivateLogBadge(privateLogUnreadStoryCount);
+      }
+    }
+    privateLogCountedIdentity = latestIdentity;
     const countText = logs.length === 100 ? '100 aktivitas terbaru dimuat' : `${logs.length.toLocaleString('id-ID')} aktivitas dimuat`;
     const latestTime = latest ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Jakarta' }).format(new Date(latest.createdAt)) : '';
     const latestText = latest ? `Terakhir: ${latestTime} WIB` : 'Belum ada aktivitas tercatat.';
@@ -5089,7 +5188,7 @@ async function callBotAction(action) {
       stop: ['Bot dimatikan', 'Listener berhenti; koneksi WhatsApp tetap online.'],
     };
     setControlFeedback('bot-feedback', 'success', messages[action][0], messages[action][1]);
-    showToast(action === 'start' ? 'Bot worker dimulai.' : action === 'restart' ? 'Bot worker dimulai ulang.' : 'Bot worker dihentikan.');
+    showToast(action === 'start' ? 'Bot dimulai.' : action === 'restart' ? 'Bot dimulai ulang.' : 'Bot dihentikan.');
   } catch (error) {
     setControlFeedback('bot-feedback', 'error', 'Aksi tidak berhasil', error.message);
     // Start/restart gagal karena sesi ditolak: muat ulang status pairing
@@ -5262,7 +5361,7 @@ document.addEventListener('click', async (event) => {
           workerStarted = started.pairing?.workerStatus === 'running';
           renderPairingState(started.pairing);
         } catch (startError) {
-          setControlFeedback('bot-feedback', 'info', 'Mode aktif', `Mode ${modeNames[mode]} sudah aktif, tetapi worker belum menyala: ${startError.message}`);
+          setControlFeedback('bot-feedback', 'info', 'Mode aktif', `Mode ${modeNames[mode]} sudah aktif, tetapi bot belum menyala: ${startError.message}`);
         }
       }
       showToast(workerStarted ? `${modeNames[mode]} aktif; bot langsung berjalan.` : mode === 'online24' ? 'Online 24 Jam aktif; runner 24/7 membutuhkan host persisten.' : `${modeNames[mode]} aktif.`);
@@ -5517,7 +5616,7 @@ async function loadInfoUpdates() {
   applyInfoUpdateFilter({ resetPage: false });
 }
 
-// Filter + pencarian Info Update ala Log privat: pil kategori berangka dan kotak pencarian di atas daftar, dengan hitungan yang dihitung ulang dari data yang sedang tampil setiap kali daftar me-refresh (60 detik) dan filter yang sedang aktif tetap dipertahankan.
+// Filter + pencarian Info Update ala Log Bot: pil kategori berangka dan kotak pencarian di atas daftar, dengan hitungan yang dihitung ulang dari data yang sedang tampil setiap kali daftar me-refresh (60 detik) dan filter yang sedang aktif tetap dipertahankan.
 let infoUpdateFilter = 'all';
 let infoUpdateQuery = '';
 function infoUpdateFilterCounts() {

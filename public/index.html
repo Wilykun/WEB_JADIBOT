@@ -18,9 +18,9 @@
   <meta name="twitter:image" content="https://readsw.my.id/og-image.png">
   <title>ReactionSw</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="stylesheet" href="/style.css?v=member-online-dot-20261118">
+  <link rel="stylesheet" href="/style.css?v=log-bot-badge-20261120">
   <script src="/footer.js" defer=""></script>
-  <script src="/app.js?v=member-online-dot-20261118" defer=""></script>
+  <script src="/app.js?v=log-bot-badge-20261120" defer=""></script>
 </head>
 <body>
   <div id="boot-screen" class="boot-screen" role="status" aria-live="polite" aria-label="Memulihkan sesi">
@@ -70,12 +70,12 @@
           <article class="feature-explainer-item is-limited">
             <span class="feature-explainer-label">MODE 03 · PERSIAPAN</span>
             <h3>Online 24 Jam</h3>
-            <p>Di versi ini, Online 24 Jam masih berupa preferensi/placeholder. Memilihnya belum membuat worker berjalan 24/7. Layanan selalu aktif memerlukan hosting persisten yang menjaga server dan worker tetap hidup.</p>
+            <p>Di versi ini, Online 24 Jam masih berupa preferensi/placeholder. Memilihnya belum membuat bot berjalan 24/7. Layanan selalu aktif memerlukan hosting persisten yang menjaga server dan bot tetap hidup.</p>
           </article>
           <section class="feature-explainer-connection" aria-label="Koneksi dan kondisi bot berjalan">
             <h3>Apakah bot tetap berjalan saat aplikasi ditutup?</h3>
-            <p>Setelah akun tertaut dan worker aktif, menutup halaman panel di browser tidak otomatis menghentikannya karena worker berjalan di server. Menutup aplikasi WhatsApp di ponsel utama juga tidak otomatis memutus perangkat tertaut; ponsel tidak harus terus online. Namun, akun utama perlu digunakan setidaknya sekali setiap 14 hari agar perangkat tertaut tetap aktif. <a href="https://faq.whatsapp.com/378279804439436" target="_blank" rel="noopener noreferrer">Baca info perangkat tertaut WhatsApp</a>.</p>
-            <p>Bot tetap membutuhkan koneksi internet pada server. Jika internet server terputus, server tidur atau berhenti, atau worker dihentikan, bot tidak dapat memproses story sampai server dan worker aktif kembali. Opsi Online 24 Jam saat ini belum mencegah hal tersebut.</p>
+            <p>Setelah akun tertaut dan bot aktif, menutup halaman panel di browser tidak otomatis menghentikannya karena bot berjalan di server. Menutup aplikasi WhatsApp di ponsel utama juga tidak otomatis memutus perangkat tertaut; ponsel tidak harus terus online. Namun, akun utama perlu digunakan setidaknya sekali setiap 14 hari agar perangkat tertaut tetap aktif. <a href="https://faq.whatsapp.com/378279804439436" target="_blank" rel="noopener noreferrer">Baca info perangkat tertaut WhatsApp</a>.</p>
+            <p>Bot tetap membutuhkan koneksi internet pada server. Jika internet server terputus, server tidur atau berhenti, atau bot dihentikan, bot tidak dapat memproses story sampai server dan bot aktif kembali. Opsi Online 24 Jam saat ini belum mencegah hal tersebut.</p>
           </section>
           <p class="feature-explainer-caution">ReadSW menggunakan library komunitas, bukan API resmi WhatsApp. Penautan melalui aplikasi pihak ketiga yang tidak resmi dapat berisiko bagi akun. Gunakan akun milik sendiri dan pahami <a href="https://faq.whatsapp.com/378279804439436" target="_blank" rel="noopener noreferrer">panduan keamanan WhatsApp</a>.</p>
         </div>
@@ -136,7 +136,7 @@
             <article class="mobile-bot-item is-featured"><span class="mobile-bot-icon">✳</span><div><strong>Read Only + ReadSW</strong><small>Membaca story dan mencoba reaksi sesuai emoji serta delay akun.</small></div><b>Siap</b></article>
             <article class="mobile-bot-item is-limited"><span class="mobile-bot-icon">◷</span><div><strong>Online 24 Jam</strong><small>Preferensi tersedia, tetapi runner 24/7 membutuhkan host persisten.</small></div><b>Persiapan</b></article>
           </div>
-          <div class="mobile-bot-live-summary"><span>Bot online <strong id="public-bot-online-count">0</strong></span><span>Worker aktif <strong id="public-worker-count">0</strong></span></div>
+          <div class="mobile-bot-live-summary"><span>Bot online <strong id="public-bot-online-count">0</strong></span><span>Bot jalan <strong id="public-worker-count">0</strong></span></div>
           <small id="mobile-bot-list-updated">Diperbarui 04.47.29 WIB</small>
           <section class="public-account-stats" aria-label="Statistik akun publik">
             <div class="public-account-stats-head"><span class="eyebrow">AKUN TERDAFTAR</span><span class="public-stats-live"><i></i> LIVE</span></div>
@@ -148,7 +148,7 @@
               <div class="public-account-stat"><strong id="public-stat-member">1</strong><span>Member</span></div>
               <div class="public-account-stat is-bot"><strong id="public-stat-bot">0</strong><span>Bot online</span></div>
               <div class="public-account-stat is-whatsapp"><strong id="public-stat-whatsapp">0</strong><span>WA tersambung</span></div>
-              <div class="public-account-stat is-worker"><strong id="public-stat-worker">0</strong><span>Worker aktif</span></div>
+              <div class="public-account-stat is-worker"><strong id="public-stat-worker">0</strong><span>Bot jalan</span></div>
             </div>
             <small id="public-stats-updated">Diperbarui 21.47.29 WIB</small>
           </section>
@@ -266,7 +266,7 @@
         <span class="side-nav-label" aria-hidden="true">Bot</span>
         <a class="nav-item hidden" href="#mode"><span class="nav-icon">◉</span>Fitur Bot</a>
         <a id="pairing-nav" class="nav-item active" href="#pairing"><span class="nav-icon">▣</span>Pairing WhatsApp</a>
-        <a id="private-log-nav" class="nav-item hidden" href="#activity"><span class="nav-icon">▣</span>Log privat</a>
+        <a id="private-log-nav" class="nav-item hidden" href="#activity"><span class="nav-icon">▣</span>Log Bot</a>
         <span class="side-nav-divider" aria-hidden="true"></span>
         <span class="side-nav-label" aria-hidden="true">Info</span>
         <a id="developer-nav" class="nav-item" href="#developer"><span class="nav-icon">⌘</span>Developer</a>
@@ -309,7 +309,7 @@
         
         <section id="panel-session-overview" class="panel-session-grid hidden" data-linked-only="" data-page-view="dashboard" aria-label="Status dan aktivitas sesi WhatsApp">
           <div class="pairing-card panel-session-card">
-            <div id="pairing-linked-card" class="pairing-linked-card hidden" role="status" aria-live="polite"><span class="linked-mark">✓</span><div><strong>WhatsApp Online · terhubung real-time</strong><p>Mode default Read Only + ReadSW aktif otomatis. Hentikan worker kapan saja dari Kontrol Bot.</p></div></div>
+            <div id="pairing-linked-card" class="pairing-linked-card hidden" role="status" aria-live="polite"><span class="linked-mark">✓</span><div><strong>WhatsApp Online · terhubung real-time</strong><p>Mode default Read Only + ReadSW aktif otomatis. Hentikan bot kapan saja dari Kontrol Bot.</p></div></div>
             
             
           </div>
@@ -382,12 +382,12 @@
         </section>
         <p class="filter-empty" id="fiturbot-filter-empty" data-page-view="mode" hidden>Tidak ada fitur yang cocok. Ubah kata pencarian atau kategori.</p>
 
-        <section class="connection-callout hidden" data-linked-only="" data-page-view="dashboard"><div class="connection-symbol"><span></span><span></span><span></span></div><div class="connection-copy"><span class="eyebrow">STATUS RUNNER</span><h3 id="runner-title">Bot siap dimulai</h3><p id="runner-description">Untuk profil baru, mode Read Only + ReadSW mulai otomatis setelah WhatsApp tertaut; hentikan kapan saja dari Kontrol Bot.</p></div><span class="connection-state"><i></i> <span id="runner-status">WORKER BERHENTI</span></span></section>
+        <section class="connection-callout hidden" data-linked-only="" data-page-view="dashboard"><div class="connection-symbol"><span></span><span></span><span></span></div><div class="connection-copy"><span class="eyebrow">STATUS RUNNER</span><h3 id="runner-title">Bot siap dimulai</h3><p id="runner-description">Untuk profil baru, mode Read Only + ReadSW mulai otomatis setelah WhatsApp tertaut; hentikan kapan saja dari Kontrol Bot.</p></div><span class="connection-state"><i></i> <span id="runner-status">BOT BERHENTI</span></span></section>
 
         
 
         <section class="bot-worker-card hidden" data-linked-only="" data-page-view="dashboard" aria-labelledby="bot-worker-title">
-          <div class="bot-worker-copy"><div class="eyebrow">KONTROL BOT</div><h2 id="bot-worker-title">Worker aktivitas</h2><p id="bot-worker-description">Saat berjalan, story ditandai dilihat sesuai mode. Read Only tidak mengirim emoji; Read Only + ReadSW dapat mengirim reaksi yang terlihat oleh pemilik story.</p><div class="bot-worker-state" id="bot-worker-state"><i id="bot-worker-dot" class="muted-dot"></i><strong id="bot-worker-status">BOT BERHENTI</strong><span id="bot-worker-detail">Mulai setelah mode dipilih dan WhatsApp online.</span></div><small id="bot-worker-runtime" class="bot-worker-runtime" data-worker-runtime="">Runtime bot: —</small></div>
+          <div class="bot-worker-copy"><div class="eyebrow">KONTROL BOT</div><h2 id="bot-worker-title">Start bot</h2><p id="bot-worker-description">Saat berjalan, story ditandai dilihat sesuai mode. Read Only tidak mengirim emoji; Read Only + ReadSW dapat mengirim reaksi yang terlihat oleh pemilik story.</p><div class="bot-worker-state" id="bot-worker-state"><i id="bot-worker-dot" class="muted-dot"></i><strong id="bot-worker-status">BOT BERHENTI</strong><span id="bot-worker-detail">Mulai setelah mode dipilih dan WhatsApp online.</span></div><small id="bot-worker-runtime" class="bot-worker-runtime" data-worker-runtime="">Runtime bot: —</small></div>
           <div><div class="bot-worker-actions" role="group" aria-label="Kontrol bot dan sesi WhatsApp"><button class="button button-primary" id="bot-start" type="button">Start bot</button><button class="button button-secondary" id="bot-restart" type="button">Restart bot</button><button class="button button-secondary" id="bot-stop" type="button">Matikan bot</button>
 <div id="session-actions" class="session-actions hidden" role="group" aria-label="Kontrol sesi WhatsApp">
                 <button class="button button-secondary" type="button" id="session-resume">Sambungkan ulang</button>
@@ -399,7 +399,7 @@
         </section>
 
         <section class="pairing-log-card private-log-preview" data-linked-only="" data-page-view="dashboard" aria-labelledby="pairing-log-title">
-              <div class="pairing-log-heading"><div><div class="eyebrow">LOG PRIVAT</div><h3 id="pairing-log-title">Aktivitas akun ini</h3></div><button class="private-log-icon-button" type="button" data-open-private-log aria-label="Buka halaman log lengkap" title="Buka halaman log lengkap"><span aria-hidden="true">↗</span></button></div>
+              <div class="pairing-log-heading"><div><div class="eyebrow">LOG BOT</div><h3 id="pairing-log-title">Aktivitas akun ini</h3></div><button class="private-log-icon-button" type="button" data-open-private-log aria-label="Buka halaman log lengkap" title="Buka halaman log lengkap"><span aria-hidden="true">↗</span></button></div>
               <p>Aktivitas terbaru tampil paling atas. Buka log lengkap untuk pembaruan otomatis.</p>
               <div class="private-log-preview-body" aria-live="polite"><div class="private-log-preview-icon">◷</div><div><strong id="private-log-count">Memeriksa aktivitas…</strong><small id="private-log-latest">Log terbaru akan tampil di atas.</small></div></div>
               <div class="private-log-preview-content"><ul id="pairing-log-list" class="pairing-log-list" aria-live="polite"><li>Memuat log…</li></ul></div>
@@ -407,7 +407,7 @@
 
         <section id="activity" class="private-log-page hidden" data-linked-only="" data-page-view="activity" aria-labelledby="private-log-page-title">
           <div class="private-log-hero">
-            <div class="private-log-hero-copy"><div class="eyebrow">LOG PRIVAT · AKTIVITAS AKUN</div><h2 id="private-log-page-title">Log Console</h2><p>Jejak aktivitas WhatsApp, bot, dan story akun ini dalam satu timeline yang mudah dipindai.</p></div>
+            <div class="private-log-hero-copy"><div class="eyebrow">LOG BOT · AKTIVITAS AKUN</div><h2 id="private-log-page-title">Log Console</h2><p>Jejak aktivitas WhatsApp, bot, dan story akun ini dalam satu timeline yang mudah dipindai.</p></div>
             <span class="private-log-private-badge"><span class="private-log-status-dot" aria-hidden="true"></span>PRIVAT · AKUN INI</span>
           </div>
           <div class="private-log-notice"><span class="log-lock" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 10V7a6 6 0 0 1 12 0v3M5 10h14v11H5zM12 14v3"/></svg></span><div><strong>Log ini hanya untuk akunmu</strong><p>Nomor kontak dan ID story ditampilkan tersamarkan. Pairing code, media, isi story, dan kredensial tidak disimpan di log.</p></div></div>
@@ -665,7 +665,7 @@
                 <input id="admin-backup-file" type="file" accept=".zip,application/zip" required>
                 <label for="admin-backup-restore-passphrase">Kata sandi backup</label>
                 <input id="admin-backup-restore-passphrase" type="password" minlength="12" maxlength="512" autocomplete="current-password" required>
-                <label class="admin-backup-confirm"><input id="admin-backup-confirm" type="checkbox" required><span>Saya paham restore mengganti data akun dan sesi saat ini, menghentikan koneksi WhatsApp yang sedang aktif, lalu mencoba menyambungkan sesi dari backup. Worker yang disetel auto-start dapat berjalan kembali.</span></label>
+                <label class="admin-backup-confirm"><input id="admin-backup-confirm" type="checkbox" required><span>Saya paham restore mengganti data akun dan sesi saat ini, menghentikan koneksi WhatsApp yang sedang aktif, lalu mencoba menyambungkan sesi dari backup. Bot yang disetel auto-start dapat berjalan kembali.</span></label>
                 <button class="button button-danger" type="submit">Pulihkan data dari ZIP</button>
               </form>
             </details>
@@ -710,7 +710,7 @@
               <details class="developer-spoiler">
                 <summary><span class="developer-spoiler-icon" aria-hidden="true">i</span><span><strong>Kenali arah pengembangan</strong><small>Buka ringkasan singkat</small></span><span class="developer-spoiler-chevron" aria-hidden="true">⌄</span></summary>
                 <div class="developer-spoiler-content">
-                  <p>ReactionSw dirapikan bertahap agar pengaturan ReadSW, status WhatsApp, dan kontrol worker mudah dipahami dari layar kecil. Masukan yang aman dan relevan membantu menentukan perbaikan berikutnya.</p>
+                  <p>ReactionSw dirapikan bertahap agar pengaturan ReadSW, status WhatsApp, dan kontrol bot mudah dipahami dari layar kecil. Masukan yang aman dan relevan membantu menentukan perbaikan berikutnya.</p>
                   <div class="developer-tags"><span>Mobile first</span><span>Kontrol jelas</span><span>Privasi</span></div>
                 </div>
               </details>
@@ -730,7 +730,7 @@
             <div class="developer-roadmap-heading"><div><div class="eyebrow">FOKUS PENGEMBANGAN</div><h3>Panel yang terus dirapikan</h3></div><span>v0.1</span></div>
             <div class="developer-roadmap-grid">
               <div><span class="developer-roadmap-icon">◌</span><div><strong>Mobile first</strong><small>Layout nyaman untuk layar sempit dan sentuh.</small></div></div>
-              <div><span class="developer-roadmap-icon">⌁</span><div><strong>Kontrol jelas</strong><small>Status worker dan WhatsApp mudah dipahami.</small></div></div>
+              <div><span class="developer-roadmap-icon">⌁</span><div><strong>Kontrol jelas</strong><small>Status bot dan WhatsApp mudah dipahami.</small></div></div>
               <div><span class="developer-roadmap-icon">✓</span><div><strong>Perbaikan bertahap</strong><small>Bug dan masukan ditangani tanpa mengganggu akun.</small></div></div>
             </div>
           </div>
@@ -765,7 +765,7 @@
                 </div></div>
               </div>
               <ul class="info-update-list">
-<li class="info-update-item" data-tag="perbaikan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span></div><div class="info-update-body"><h4>Pairing code WhatsApp kini muncul lewat jalur proxy VM</h4><p class="info-update-meta">Jumat, 20 Nov 2026 · 07.35 WIB</p><span class="info-update-tag">Perbaikan</span><div class="info-update-desc"><p>Pairing code dan QR WhatsApp tidak pernah muncul dari VM ini karena Baileys menyambung langsung ke WhatsApp tanpa lewat egress proxy VM, sementara egress langsung diblokir — semua percobaan pairing dan sambung ulang mati instan kode 408 (1689 kali sejak 19 Nov malam), dan belum pernah ada satu pun kode yang terbit. Kini koneksi WhatsApp panel berjalan lewat proxy VM (CONNECT tunnel, otomatis bila proxy tersedia, langsung bila tidak): pairing code admin utama untuk nomor 6289681007623 terbit dalam 8 detik, dan dua sesi member (ryobot, aiivyoo) akhirnya tersambung nyata dari VM ini. Sesi lama yang ditolak WhatsApp dengan kode 401 harus pairing ulang dengan kode baru — kini kodenya muncul.</p></div></div></li>
+<li class="info-update-item" data-tag="fitur-baru"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l1.9 5.4 5.6 1.6-5.6 1.9L12 17.5l-1.9-5.6-5.6-1.9 5.6-1.6z"/></svg></span></div><div class="info-update-body"><h4>Log privat kini jadi Log Bot dan ada notif story baru</h4><p class="info-update-meta">Jumat, 20 Nov 2026 · 08.05 WIB</p><span class="info-update-tag">Fitur baru</span><div class="info-update-desc"><p>Menu dan halaman Log privat berganti nama jadi Log Bot — menu sidebar, judul halaman, dan label di halaman ikut berubah, tanpa mengubah isi lognya. Kini tiap kali ada story baru yang masuk selagi pengguna tidak sedang di halaman Log Bot, muncul angka notifikasi di menu Log Bot (di HP jadi titik hijau saat sidebar tertutup), dihitung realtime per akun dari story yang belum dilihat; angkanya hilang begitu halaman Log Bot dibuka. Entri log yang sudah ada saat panel dibuka tidak dihitung sebagai baru.</p></div></div></li><li class="info-update-item" data-tag="perbaikan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span></div><div class="info-update-body"><h4>Bot jalan otomatis setelah pairing, kata worker jadi Start bot</h4><p class="info-update-meta">Jumat, 20 Nov 2026 · 08.00 WIB</p><span class="info-update-tag">Perbaikan</span><div class="info-update-desc"><p>Setelah pairing code diterima, bot sempat diam karena auto-start pernah dimatikan sistem saat sesi ditandai invalid — pengguna harus menekan Start bot sendiri (BangWily menautkan 07.43 WIB, bot baru jalan 07.52 WIB setelah tombol ditekan). Kini begitu WhatsApp tertaut dari pairing code atau QR, bot langsung jalan otomatis (npm start) tanpa perlu menekan apa pun. Kata 'worker' yang membingungkan di layar diganti 'Start bot' / 'bot' — judul kartu Kontrol Bot kini Start bot, status dan hitungannya jadi BOT BERHENTI / Bot jalan. Begitu tertaut, muncul juga notifikasi di tengah layar: kalau bot sudah jalan, tombolnya 'Lihat Start bot' dan langsung menggulir ke kartu Start bot.</p></div></div></li><li class="info-update-item" data-tag="perbaikan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span></div><div class="info-update-body"><h4>Pairing code WhatsApp kini muncul lewat jalur proxy VM</h4><p class="info-update-meta">Jumat, 20 Nov 2026 · 07.35 WIB</p><span class="info-update-tag">Perbaikan</span><div class="info-update-desc"><p>Pairing code dan QR WhatsApp tidak pernah muncul dari VM ini karena Baileys menyambung langsung ke WhatsApp tanpa lewat egress proxy VM, sementara egress langsung diblokir — semua percobaan pairing dan sambung ulang mati instan kode 408 (1689 kali sejak 19 Nov malam), dan belum pernah ada satu pun kode yang terbit. Kini koneksi WhatsApp panel berjalan lewat proxy VM (CONNECT tunnel, otomatis bila proxy tersedia, langsung bila tidak): pairing code admin utama untuk nomor 6289681007623 terbit dalam 8 detik, dan dua sesi member (ryobot, aiivyoo) akhirnya tersambung nyata dari VM ini. Sesi lama yang ditolak WhatsApp dengan kode 401 harus pairing ulang dengan kode baru — kini kodenya muncul.</p></div></div></li>
 <li class="info-update-item" data-tag="perbaikan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span></div><div class="info-update-body"><h4>Sesi ditolak kini langsung pairing ulang, tanpa kartu pemulihan</h4><p class="info-update-meta">Jumat, 20 Nov 2026 · 06.35 WIB</p><span class="info-update-tag">Perbaikan</span><div class="info-update-desc"><p>Sesi yang ditolak WhatsApp (mis. BangWily) dulu menampilkan kartu pemulihan dengan tombol Coba pulihkan sesi, padahal sesi itu sudah gagal disambung ulang 5 kali dan tidak bisa dipulihkan — dan saat nomor lama dimasukkan, panel malah terpental kembali ke kartu itu karena poll status tiap 5 detik menampilkan lagi kartu pemulihan selagi nomor diketik atau permintaan kode masih berjalan. Kini state sesi ditolak langsung menampilkan form pairing: masukkan nomor lama atau baru, minta pairing code, dan sesi lama dibersihkan sepenuhnya saat pairing baru dimulai, termasuk cadangan session.json.good dan session.json.bak yang sebelumnya masih tersimpan dan bisa membangkitkan lagi sesi yang ditolak. Tombol Coba pulihkan sesi dihapus dari alur ini, dan Sambungkan ulang pada sesi yang sudah ditolak langsung memberi pesan jujur untuk pairing ulang, bukan pemulihan yang pasti gagal.</p></div></div></li>
 <li class="info-update-item" data-tag="perbaikan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span></div><div class="info-update-body"><h4>Info Update kini memberi notifikasi realtime</h4><p class="info-update-meta">Jumat, 20 Nov 2026 · 06.24 WIB</p><span class="info-update-tag">Perbaikan</span><div class="info-update-desc"><p>Selama ini angka di menu Info Update baru diperbarui saat pindah halaman, jadi pembaruan yang masuk selagi panel dibuka tidak langsung ketahuan. Kini panel memeriksa entri terbaru tiap 60 detik: begitu ada entri baru, muncul toast Info Update baru di layar dan angka di menu ikut diperbarui, tanpa pindah halaman atau memuat ulang. Satu entri hanya diberitahukan sekali, dan entri yang sudah ada saat panel dibuka tidak memicu toast.</p></div></div></li>
 <li class="info-update-item" data-tag="perbaikan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span></div><div class="info-update-body"><h4>Hapus sesi kini tersedia di kartu Kontrol Bot</h4><p class="info-update-meta">Jumat, 20 Nov 2026 · 06.21 WIB</p><span class="info-update-tag">Perbaikan</span><div class="info-update-desc"><p>Saat Start bot gagal karena sesi WhatsApp ditolak, panel dulu tetap menampilkan status lama dan tombol Hapus sesi tidak muncul di Panel, jadi pemilik akun terjebak di kartu Kontrol Bot tanpa jalan keluar. Kini kalau aksi bot gagal karena sesi ditolak, panel langsung memuat ulang status pairing sehingga kartu dan lencana berubah ke keadaan sebenarnya, dan tombol Hapus sesi tampil di kartu Kontrol Bot walau nomornya tidak tersimpan, karena hapus memakai akun (username), bukan nomor. Hapus sesi memakai kunci yang sama dengan Hapus sesi di Pairing dan member: timer sambung ulang dimatikan, socket logout, lalu session.json, cadangan session.json.bak dan session.json.good, serta kredensial Baileys di DATA_AKUN sesuai username dihapus, tanpa bentrok dengan sambung ulang yang sedang berjalan. Setelah dihapus, minta pairing code baru untuk menautkan lagi.</p></div></div></li>
@@ -905,7 +905,7 @@
               <article class="workspace-bot-item is-featured"><span class="workspace-bot-icon">✳</span><div><strong>Read Only + ReadSW</strong><small>Membaca story dan mencoba reaksi sesuai emoji serta delay akun.</small></div><b>Siap</b></article>
               <article class="workspace-bot-item is-limited"><span class="workspace-bot-icon">◷</span><div><strong>Online 24 Jam</strong><small>Preferensi tersedia, tetapi runner 24/7 membutuhkan host persisten.</small></div><b>Persiapan</b></article>
             </div>
-            <div class="workspace-bot-live-summary"><span>Bot online <strong id="workspace-bot-online-count">0</strong></span><span>Worker aktif <strong id="workspace-worker-count">0</strong></span></div>
+            <div class="workspace-bot-live-summary"><span>Bot online <strong id="workspace-bot-online-count">0</strong></span><span>Bot jalan <strong id="workspace-worker-count">0</strong></span></div>
             <small id="workspace-bot-list-updated">Diperbarui —</small>
             <section class="workspace-account-stats" aria-label="Statistik akun publik">
               <div class="workspace-account-stats-head"><span class="eyebrow">AKUN TERDAFTAR</span><span class="workspace-stats-live"><i></i> LIVE</span></div>
@@ -917,7 +917,7 @@
                 <div class="workspace-stat"><strong id="workspace-public-stat-member">0</strong><span>Member</span></div>
                 <div class="workspace-stat is-bot"><strong id="workspace-public-stat-bot">0</strong><span>Bot online</span></div>
                 <div class="workspace-stat is-whatsapp"><strong id="workspace-public-stat-whatsapp">0</strong><span>WA tersambung</span></div>
-                <div class="workspace-stat is-worker"><strong id="workspace-public-stat-worker">0</strong><span>Worker aktif</span></div>
+                <div class="workspace-stat is-worker"><strong id="workspace-public-stat-worker">0</strong><span>Bot jalan</span></div>
               </div>
               <small id="workspace-public-stats-updated">Diperbarui —</small>
             </section>

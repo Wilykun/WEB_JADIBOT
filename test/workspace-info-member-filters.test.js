@@ -21,10 +21,10 @@ test('info update filter pills match the JSON taxonomy and count the real entrie
   const counts = { all: updates.length };
   for (const update of updates) counts[slug(update.tag)] = (counts[slug(update.tag)] || 0) + 1;
   // Hitungan pil harus akurat: Semua = total entri, tiap kategori = jumlah entri dengan tag itu.
-  assert.equal(counts.all, 74, 'Semua must equal the total number of entries');
-  assert.equal(counts['fitur-baru'], 27, 'Fitur baru count must match the JSON data');
+  assert.equal(counts.all, 76, 'Semua must equal the total number of entries');
+  assert.equal(counts['fitur-baru'], 28, 'Fitur baru count must match the JSON data');
   assert.equal(counts.perubahan, 9, 'Perubahan count must match the JSON data');
-  assert.equal(counts.perbaikan, 20, 'Perbaikan count must match the JSON data');
+  assert.equal(counts.perbaikan, 21, 'Perbaikan count must match the JSON data');
   assert.equal(counts['fitur-dihapus'] || 0, 0, 'Fitur dihapus count must match the JSON data');
   assert.equal(counts.tampilan, 18, 'Tampilan count must match the JSON data');
 
@@ -139,7 +139,7 @@ test('member filter counts refresh in realtime and the active filter survives da
   assert.ok(js.includes('renderMemberBadge(countNewMembers(users, memberListSeen))'), 'the new-member badge must still be computed from the same user list');
 });
 
-test('filter controls share the Log privat look without duplicating its scoped CSS', async () => {
+test('filter controls share the Log Bot look without duplicating its scoped CSS', async () => {
   const html = await read('public/index.html');
   const css = await read('public/style.css');
 

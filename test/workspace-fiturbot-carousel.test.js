@@ -64,7 +64,7 @@ test('fitur bot search and category pills count the real items and filter them',
   const js = await read('public/app.js');
   const css = await read('public/style.css');
 
-  // Kotak pencarian + empat pil dengan ikon dan hitungan, memakai class generik yang sama seperti Log privat.
+  // Kotak pencarian + empat pil dengan ikon dan hitungan, memakai class generik yang sama seperti Log Bot.
   assert.ok(html.includes('id="fiturbot-search"'), 'fitur bot must have a search input');
   assert.ok(html.includes('placeholder="Cari mode, delay, emoji…"'), 'the search placeholder must match the fitur bot context');
   assert.ok(html.includes('data-filter-scope="fiturbot"'), 'the filter controls must be scoped to fitur bot');

@@ -2935,7 +2935,7 @@ html[data-theme="light"] #activity .private-log-search input{color:#263a2c}
 html[data-theme="light"] #activity .private-log-search input::placeholder,html[data-theme="light"] #activity .private-log-search-hint{color:#7c8d80}
 html[data-theme="light"] #activity .private-log-filter{border-color:#dce6de;background:#fff;color:#556a5c}
 html[data-theme="light"] #activity .private-log-filter.is-active{border-color:#add8b9;background:#edf8f0;color:#237545}
-/* Filter + pencarian generik ala Log privat, dipakai Info Update dan Member: kotak pencarian di atas, pil kategori berangka di bawahnya. */
+/* Filter + pencarian generik ala Log Bot, dipakai Info Update dan Member: kotak pencarian di atas, pil kategori berangka di bawahnya. */
 .filter-controls{display:grid;gap:11px;padding:12px;border:1px solid rgba(105,143,117,.15);border-radius:14px;background:rgba(7,19,12,.52)}
 .filter-search{display:flex;align-items:center;gap:9px;min-height:42px;padding:0 11px;border:1px solid rgba(111,152,124,.2);border-radius:10px;background:rgba(232,248,237,.035);color:#7cc997}
 .filter-search:focus-within{border-color:rgba(81,215,135,.6);box-shadow:0 0 0 3px rgba(81,215,135,.08)}

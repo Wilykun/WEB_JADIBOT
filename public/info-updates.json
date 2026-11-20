@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-11-20T07:35:00+07:00",
+  "updatedAt": "2026-11-20T08:05:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "08.05 WIB",
+      "title": "Log privat kini jadi Log Bot dan ada notif story baru",
+      "tag": "Fitur baru",
+      "description": "Menu dan halaman Log privat berganti nama jadi Log Bot — menu sidebar, judul halaman, dan label di halaman ikut berubah, tanpa mengubah isi lognya. Kini tiap kali ada story baru yang masuk selagi pengguna tidak sedang di halaman Log Bot, muncul angka notifikasi di menu Log Bot (di HP jadi titik hijau saat sidebar tertutup), dihitung realtime per akun dari story yang belum dilihat; angkanya hilang begitu halaman Log Bot dibuka. Entri log yang sudah ada saat panel dibuka tidak dihitung sebagai baru."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "08.00 WIB",
+      "title": "Bot jalan otomatis setelah pairing, kata worker jadi Start bot",
+      "tag": "Perbaikan",
+      "description": "Setelah pairing code diterima, bot sempat diam karena auto-start pernah dimatikan sistem saat sesi ditandai invalid — pengguna harus menekan Start bot sendiri (BangWily menautkan 07.43 WIB, bot baru jalan 07.52 WIB setelah tombol ditekan). Kini begitu WhatsApp tertaut dari pairing code atau QR, bot langsung jalan otomatis (npm start) tanpa perlu menekan apa pun. Kata 'worker' yang membingungkan di layar diganti 'Start bot' / 'bot' — judul kartu Kontrol Bot kini Start bot, status dan hitungannya jadi BOT BERHENTI / Bot jalan. Begitu tertaut, muncul juga notifikasi di tengah layar: kalau bot sudah jalan, tombolnya 'Lihat Start bot' dan langsung menggulir ke kartu Start bot."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "07.35 WIB",

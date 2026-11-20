@@ -1447,7 +1447,14 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
               if (state.onlineDesired) enableOnlinePrivacy(state.socket);
               scheduleOnlinePresence(state);
               try { await ensureDefaultBot(userId); } catch {
-                await log(userId, 'Profil bot default belum tersimpan; worker otomatis belum dapat dimulai.');
+                await log(userId, 'Profil bot default belum tersimpan; bot otomatis belum dapat dimulai.');
+              }
+              // Tautan baru (pairing code/QR): bot langsung jalan (npm start
+              // otomatis) tanpa perlu menekan Start bot. autoStart sempat
+              // dimatikan sistem saat sesi ditandai invalid; tautan baru
+              // mengembalikannya supaya bot tidak diam setelah tertaut.
+              if (getWorkerAutoStart(userId) !== true) {
+                await setWorkerAutoStart(userId, true);
               }
               state.workerDesired = getWorkerAutoStart(userId) === true;
               if (state.workerDesired) {
@@ -1456,12 +1463,12 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
                   scheduleWorkerWatchdog(state);
                 } catch {
                   state.workerStatus = 'waiting';
-                  await log(userId, 'WhatsApp tertaut; worker default menunggu konfigurasi mode yang valid.');
+                  await log(userId, 'WhatsApp tertaut; bot menunggu konfigurasi mode yang valid.');
                 }
               }
               await log(userId, state.workerStatus === 'running'
                 ? 'WhatsApp aktif; mode Read Only + ReadSW mulai otomatis memantau event story/status.'
-                : 'Perangkat WhatsApp tertaut; bot worker masih dihentikan.');
+                : 'Perangkat WhatsApp tertaut; bot masih dihentikan.');
               if (!state.startSettled) {
                 state.startSettled = true;
                 rejectStart(new PairingError('Perangkat sudah tertaut; pairing code baru tidak diperlukan.', 409));

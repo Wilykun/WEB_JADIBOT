@@ -33,7 +33,7 @@ test('menu Backup dan Kontrol Bot yang terkunci menampilkan notifikasi di tengah
   // di-cache immutable setahun, jadi tanpa bump ini HP yang pernah buka panel
   // tetap menjalankan kode lama (toast) walau server sudah menyajikan kode baru.
   const html = await read('public/index.html');
-  assert.ok(html.includes('/app.js?v=member-online-dot-20261118'), 'index.html harus memuat app.js dengan versi realtime-20261118');
+  assert.ok(html.includes('/app.js?v=log-bot-badge-20261120'), 'index.html harus memuat app.js dengan versi realtime-20261118');
   assert.ok(!html.includes('/app.js?v=lockednotice-20261118'), 'versi app.js lama tidak boleh lagi dipakai');
 });
 
@@ -54,13 +54,13 @@ test('overlay mendukung notifikasi tanpa tombol aksi dan tidak menelan ingatan n
   assert.ok(!branchBody.includes('emojiNoticeDismissed'), 'cabang locked tidak boleh menyentuh ingatan notifikasi reaksi');
 });
 
-test('entri Info Update notifikasi menu terkunci kini di posisi ketiga belas', async () => {
+test('entri Info Update notifikasi menu terkunci kini di posisi kelima belas', async () => {
   const data = JSON.parse(await read('public/info-updates.json'));
   const html = await read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-20T07:35:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 74, 'daftar harus 74 entri');
-  const locked = data.updates[12];
-  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi ketiga belas');
+  assert.equal(data.updatedAt, '2026-11-20T08:05:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 76, 'daftar harus 74 entri');
+  const locked = data.updates[14];
+  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi kelima belas');
   assert.equal(locked.tag, 'Tampilan', 'entri notifikasi menu terkunci harus bertag Tampilan');
   assert.equal(locked.day, 'Rabu, 18 Nov 2026', 'hari entri notifikasi menu terkunci harus cocok');
   assert.equal(locked.time, '07.25 WIB', 'waktu entri notifikasi menu terkunci harus cocok');
@@ -69,9 +69,9 @@ test('entri Info Update notifikasi menu terkunci kini di posisi ketiga belas', a
   assert.ok(html.includes('<h4>Member yang mengetuk menu terkunci kini melihat notifikasi di layar</h4>'), 'fallback harus memuat judul entri notifikasi menu terkunci');
   assert.ok(html.includes('Rabu, 18 Nov 2026 · 07.25 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri notifikasi menu terkunci');
 
-  // Entri kartu Member ringkas sebelumnya kini di posisi keempat belas beserta fallback-nya.
-  const compact = data.updates[13];
-  assert.equal(compact.title, 'Tampilan Member kini lebih ringkas di HP', 'entri kartu Member ringkas kini di posisi keempat belas');
+  // Entri kartu Member ringkas sebelumnya kini di posisi keenam belas beserta fallback-nya.
+  const compact = data.updates[15];
+  assert.equal(compact.title, 'Tampilan Member kini lebih ringkas di HP', 'entri kartu Member ringkas kini di posisi keenam belas');
   assert.equal(compact.tag, 'Tampilan', 'entri kartu Member ringkas harus bertag Tampilan');
   assert.equal(compact.time, '05.50 WIB', 'waktu entri kartu Member ringkas harus cocok');
 });
