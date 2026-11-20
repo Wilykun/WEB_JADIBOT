@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-20T19:44:00+07:00",
+  "updatedAt": "2026-11-20T20:00:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "20.00 WIB",
+      "title": "Refresh tidak lagi menampilkan halaman Profil saat sedang di Rank Bot",
+      "tag": "Perbaikan",
+      "description": "Refresh di Rank Bot sempat menampilkan halaman Profil dulu (hantu): halaman terakhir baru dipulihkan setelah status pairing kembali dari server, sementara halaman Profil satu-satunya yang terlihat secara default di panel. Kini halaman terakhir (atau tautan #halaman) dipulihkan langsung saat panel dimuat, sebelum status pairing diambil — refresh di Rank Bot langsung kembali ke Rank Bot, tanpa singgah ke Profil."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "19.44 WIB",

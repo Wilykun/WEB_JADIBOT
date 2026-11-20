@@ -3703,6 +3703,30 @@ function setWorkspacePage(page, smoothScroll = true, options = {}) {
   setMenu(false);
 }
 
+// Pulihkan halaman terakhir SEBELUM fetch pairing: renderLinkGate baru
+// memulihkan halaman setelah /api/pairing/status kembali, jadi tiap refresh
+// sempat menampilkan halaman Profil — satu-satunya halaman yang terlihat
+// secara default di HTML (bagian #profile dan kartu pratinjau Log Bot tidak
+// punya class hidden) — padahal pengguna sedang di Rank Bot.
+// Halaman yang menunya masih tersembunyi (Panel/Log Bot saat WhatsApp belum
+// tertaut) tidak dipulihkan di sini: status tautannya baru ketahuan setelah
+// fetch pairing, jadi serahkan ke renderLinkGate.
+function restoreWorkspacePageBeforePairing() {
+  if (activeWorkspacePage) return;
+  const requestedPage = location.hash.slice(1);
+  const requestedNav = requestedPage ? document.querySelector(`.side-nav .nav-item[href="#${requestedPage}"]`) : null;
+  let rememberedPage = null;
+  try { rememberedPage = window.sessionStorage.getItem(LAST_PAGE_STORAGE_KEY); } catch { /* Halaman awal tetap berjalan tanpa storage. */ }
+  const rememberedNav = rememberedPage ? document.querySelector(`.side-nav .nav-item[href="#${rememberedPage}"]`) : null;
+  const initialPage = requestedNav && !requestedNav.classList.contains('hidden')
+    ? requestedPage
+    : rememberedNav && !rememberedNav.classList.contains('hidden')
+      ? rememberedPage
+      : !requestedPage && !rememberedPage && currentUser ? 'admin' : null;
+  if (!initialPage) return;
+  setWorkspacePage(initialPage, false, { markLogSeen: false, markChatSeen: false });
+}
+
 function renderLinkGate(pairing) {
   const linkedSessionStates = new Set(['linked', 'disconnected', 'reconnecting', 'stopped']);
   const hasLinkedSession = linkedSessionStates.has(pairing?.status);
@@ -4793,10 +4817,9 @@ async function showDashboard(user) {
   botControlNav?.classList.toggle('nav-item-locked', !isAdmin);
   botControlNav?.setAttribute('aria-disabled', String(!isAdmin));
   document.querySelector('#botcontrol')?.classList.toggle('hidden', !isAdmin);
-  const requestedPage = location.hash.slice(1);
-  if (requestedPage === 'profile' || requestedPage === 'admin') {
-    setWorkspacePage(requestedPage, false);
-  }
+  // Pulihkan halaman terakhir sebelum fetch pairing, supaya refresh tidak
+  // sempat menampilkan halaman Profil (lihat restoreWorkspacePageBeforePairing).
+  restoreWorkspacePageBeforePairing();
   authView.classList.add('hidden');
   appView.classList.remove('hidden');
   bootScreen?.classList.add('hidden');

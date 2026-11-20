@@ -72,19 +72,19 @@ test('member belum tertaut tidak bisa masuk Fitur Bot, admin tetap bisa', () => 
   assert.ok(js.includes("botLinkNoticeDismissed = false;\n  showLinkNoticeOverlay();"), 'tampilan eksplisit harus menampilkan notifikasi walau sempat ditutup dan walau belum di Fitur Bot');
 });
 
-test('entri Info Update terbaru kini soal angka notif tanpa batas', () => {
+test('entri Info Update terbaru kini soal refresh Rank Bot tanpa hantu Profil', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-20T19:44:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 81, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-20T20:00:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 82, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Angka notif Log Bot dan Obrolan kini tanpa batas', 'entri terbaru harus soal perbaikan kolom ketik Obrolan');
+  assert.equal(newest.title, 'Refresh tidak lagi menampilkan halaman Profil saat sedang di Rank Bot', 'entri terbaru harus soal perbaikan kolom ketik Obrolan');
   assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perbaikan');
-  assert.equal(newest.time, '19.44 WIB', 'waktu entri terbaru harus cocok');
+  assert.equal(newest.time, '20.00 WIB', 'waktu entri terbaru harus cocok');
   assert.ok(html.includes('<h4>Log privat kini jadi Log Bot dan ada notif story baru</h4>'), 'fallback harus memuat judul entri terbaru');
-  const rankbotEntry = data.updates[22];
-  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedua puluh dua');
+  const rankbotEntry = data.updates[23];
+  assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedua puluh tiga');
   const linkEntry = data.updates.find((item) => item.title === 'Pemberitahuan tautan WhatsApp kini muncul di layar');
   assert.ok(linkEntry, 'entri notifikasi tautan di layar harus tetap ada');
-  assert.equal(data.updates.indexOf(linkEntry), 24, 'entri notifikasi tautan di layar kini di posisi kedua puluh empat');
+  assert.equal(data.updates.indexOf(linkEntry), 25, 'entri notifikasi tautan di layar kini di posisi kedua puluh lima');
 });
