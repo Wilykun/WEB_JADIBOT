@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-20T09:56:00+07:00",
+  "updatedAt": "2026-11-20T18:36:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "18.36 WIB",
+      "title": "Obrolan: ngobrol bareng semua akun di panel",
+      "tag": "Fitur baru",
+      "description": "Ada halaman baru Obrolan di bawah Profil akun: Admin Utama, admin, dan member bisa ngobrol bareng realtime ala WhatsApp — pesan sendiri di kanan, pesan orang lain di kiri lengkap dengan nama dan ikon peran (mahkota untuk Admin Utama, perisai untuk admin, orang untuk member). Saat sedang mengetik, muncul tulisan 'sedang mengetik' realtime; pesan bisa dibalas (kutipan pesan asli ikut tampil) dan emoji bisa dikirim lewat panel emoji; media (foto, video, file) tidak bisa dikirim. Pesan baru dari orang lain muncul sebagai angka notif di menu Obrolan (maks 99+), bertahan walau halaman di-refresh, dan baru hilang saat halaman Obrolan dibuka."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "09.56 WIB",

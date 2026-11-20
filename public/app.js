@@ -3518,7 +3518,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   if (running) logPollTimer = setInterval(() => { void loadPairingLogs(); }, 4000);
 }
 
-const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log Bot', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot', accountactivity: 'Aktivitas Akun' };
+const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log Bot', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot', accountactivity: 'Aktivitas Akun', chat: 'Obrolan' };
 let activeWorkspacePage = null;
 let privateLogAutoRefreshTimer = null;
 let privateLogScrollOnNextRender = false;
@@ -3533,6 +3533,24 @@ let privateLogUnreadStoryCount = 0;
 let privateLogCountedIdentity = null;
 let privateLogBadgeRestoredFor = undefined;
 let privateLogFirstLoadAfterRestore = false;
+// True saat halaman Log Bot dipulihkan otomatis setelah refresh (bukan
+// karena pengguna pindah ke sana): badge harus bertahan selama sesi ini,
+// baru hilang saat pengguna keluar lalu masuk lagi ke Log Bot.
+let privateLogRestoredActivitySession = false;
+
+// --- Obrolan: chat realtime semua akun (Admin Utama, admin, member) ---
+// Badge notifikasi di menu Obrolan memakai pola yang sama seperti Log Bot:
+// angka belum dibaca + penanda terakhir yang sudah dilihat disimpan per akun
+// di perangkat, supaya refresh tidak menghilangkan angka.
+let chatMessages = [];
+let chatPollTimer = null;
+let chatLoading = false;
+let chatUnreadCount = 0;
+let chatSeenAt = null;
+let chatBadgeRestoredFor = undefined;
+let chatRestoredSession = false;
+let chatReplyTo = null;
+let chatLastTypingSentAt = 0;
 
 function stopPrivateLogAutoRefresh() {
   if (privateLogAutoRefreshTimer) window.clearInterval(privateLogAutoRefreshTimer);
@@ -3561,7 +3579,7 @@ function scrollPrivateLogToNewest(list, behavior = 'smooth') {
   });
 }
 
-function setWorkspacePage(page, smoothScroll = true) {
+function setWorkspacePage(page, smoothScroll = true, options = {}) {
   // Member biasa yang WhatsApp-nya belum tertaut TIDAK BISA masuk Fitur Bot:
   // harus tertaut dulu baru bisa masuk. Upaya masuk menampilkan notifikasi di
   // layar dan member diarahkan ke halaman Pairing. Admin (Admin Utama dan
@@ -3597,12 +3615,36 @@ function setWorkspacePage(page, smoothScroll = true) {
   window.scrollTo({ top: 0, behavior: smoothScroll ? 'smooth' : 'auto' });
   if (page === 'activity') {
     privateLogScrollOnNextRender = true;
-    markPrivateLogSeen();
+    // Refresh bukan "masuk" ke Log Bot: pemulihan halaman awal setelah
+    // reload (options.markLogSeen === false, dari renderLinkGate) tidak
+    // boleh menghapus badge — badge hanya hilang saat pengguna pindah ke
+    // Log Bot dari halaman lain.
+    if (options.markLogSeen === false) {
+      privateLogRestoredActivitySession = true;
+    } else {
+      privateLogRestoredActivitySession = false;
+      markPrivateLogSeen();
+    }
     startPrivateLogAutoRefresh();
     void loadPairingLogs();
   } else {
+    privateLogRestoredActivitySession = false;
     privateLogScrollOnNextRender = false;
     stopPrivateLogAutoRefresh();
+  }
+  // Halaman Obrolan: badge hanya hilang saat pengguna pindah ke Obrolan dari
+  // halaman lain; pemulihan halaman awal setelah reload tidak menghapusnya.
+  if (page === 'chat') {
+    if (options.markChatSeen === false) {
+      chatRestoredSession = true;
+    } else {
+      chatRestoredSession = false;
+      markChatSeen();
+    }
+    startChatPolling();
+    void loadChatMessages();
+  } else {
+    chatRestoredSession = false;
   }
   if (page === 'infoupdate') {
     void loadInfoUpdates();
@@ -3722,7 +3764,7 @@ function renderLinkGate(pairing) {
         : adminVisible
           ? 'admin'
           : hasLinkedSession ? 'dashboard' : 'pairing';
-    setWorkspacePage(initialPage, false);
+    setWorkspacePage(initialPage, false, { markLogSeen: false, markChatSeen: false });
   } else if (hasLinkedSession && activeWorkspacePage === 'pairing') {
     setWorkspacePage('dashboard');
   } else if (!hasLinkedSession && ['dashboard', 'mode'].includes(activeWorkspacePage)) {
@@ -4211,11 +4253,11 @@ function privateLogCountedStorageKey() {
 function loadPrivateLogUnreadCount() {
   try {
     const value = Number(window.localStorage.getItem(privateLogUnreadStorageKey()));
-    return Number.isFinite(value) && value > 0 ? Math.min(99, Math.floor(value)) : 0;
+    return Number.isFinite(value) && value > 0 ? Math.min(999, Math.floor(value)) : 0;
   } catch { return 0; }
 }
 function savePrivateLogUnreadCount(count) {
-  try { window.localStorage.setItem(privateLogUnreadStorageKey(), String(Math.max(0, Math.min(99, count)))); } catch { /* Badge tetap jalan tanpa storage. */ }
+  try { window.localStorage.setItem(privateLogUnreadStorageKey(), String(Math.max(0, Math.min(999, count)))); } catch { /* Badge tetap jalan tanpa storage. */ }
 }
 function loadPrivateLogCountedIdentity() {
   try { return window.localStorage.getItem(privateLogCountedStorageKey()); } catch { return null; }
@@ -4265,9 +4307,311 @@ function renderPrivateLogBadge(count) {
 function markPrivateLogSeen() {
   // Dipanggil saat halaman Log Bot dibuka: semua yang sudah ada dianggap dibaca.
   privateLogUnreadStoryCount = 0;
+  privateLogRestoredActivitySession = false;
   savePrivateLogUnreadCount(0);
   if (lastPrivateLogIdentity) savePrivateLogCountedIdentity(lastPrivateLogIdentity);
   renderPrivateLogBadge(0);
+}
+
+// --- Obrolan: chat realtime semua akun (Admin Utama, admin, member) ---
+const CHAT_EMOJIS = ['😀', '😂', '😍', '🥰', '😎', '🤔', '😢', '😡', '👍', '👎', '🙏', '👏', '💚', '❤️', '🔥', '🎉', '✨', '😅', '😭', '🤣', '😴', '🤝', '👋', '🙌'];
+function chatRoleLabel(user) {
+  return user?.isMainAdmin ? 'Admin Utama' : user?.role === 'admin' ? 'Admin' : 'Member';
+}
+function chatRoleIconName(user) {
+  return user?.isMainAdmin ? 'crown' : user?.role === 'admin' ? 'shield' : 'user';
+}
+function chatUnreadStorageKey() {
+  return `readsw-chat-unread-${currentUser?.id || 'anon'}`;
+}
+function chatSeenStorageKey() {
+  return `readsw-chat-seen-${currentUser?.id || 'anon'}`;
+}
+function loadChatUnreadCount() {
+  try {
+    const value = Number(window.localStorage.getItem(chatUnreadStorageKey()));
+    return Number.isFinite(value) && value > 0 ? Math.min(99, Math.floor(value)) : 0;
+  } catch { return 0; }
+}
+function saveChatUnreadCount(count) {
+  try { window.localStorage.setItem(chatUnreadStorageKey(), String(Math.max(0, Math.min(99, count)))); } catch { /* Badge tetap jalan tanpa storage. */ }
+}
+function loadChatSeenAt() {
+  try { return window.localStorage.getItem(chatSeenStorageKey()); } catch { return null; }
+}
+function saveChatSeenAt(value) {
+  try { if (value) window.localStorage.setItem(chatSeenStorageKey(), value); } catch { /* Badge tetap jalan tanpa storage. */ }
+}
+function renderChatBadge(count) {
+  chatUnreadCount = count > 0 ? count : 0;
+  const item = document.querySelector('#chat-nav');
+  if (!item) return;
+  let badge = item.querySelector('.nav-badge');
+  if (!chatUnreadCount) {
+    badge?.remove();
+    return;
+  }
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.className = 'nav-badge';
+    item.append(badge);
+  }
+  badge.textContent = chatUnreadCount > 99 ? '99+' : String(chatUnreadCount);
+}
+function markChatSeen() {
+  // Dipanggil saat halaman Obrolan dibuka: semua pesan yang sudah ada dianggap dibaca.
+  chatUnreadCount = 0;
+  saveChatUnreadCount(0);
+  const latest = chatMessages.at(-1);
+  if (latest?.createdAt) {
+    chatSeenAt = latest.createdAt;
+    saveChatSeenAt(chatSeenAt);
+  }
+  renderChatBadge(0);
+}
+function countNewChatMessages(messages, seenAt) {
+  if (!seenAt) return 0;
+  return messages.filter((message) => message.userId !== currentUser?.id && String(message.createdAt || '') > seenAt).length;
+}
+function formatChatTime(createdAt) {
+  try {
+    return new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date(createdAt));
+  } catch { return ''; }
+}
+function formatChatDay(createdAt) {
+  try {
+    const date = new Date(createdAt);
+    const now = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(now.getDate() - 1);
+    const sameDay = (a, b) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    if (sameDay(date, now)) return 'Hari ini';
+    if (sameDay(date, yesterday)) return 'Kemarin';
+    return new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Jakarta' }).format(date);
+  } catch { return ''; }
+}
+function chatAvatarSrc(message) {
+  if (message.avatar === 'uploaded' && currentUser?.role === 'admin') {
+    return `/api/admin/user-avatar?userId=${encodeURIComponent(message.userId)}`;
+  }
+  const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(message.avatar || '') ? message.avatar : 'avatar-01';
+  return `/avatars/${preset}.webp`;
+}
+function startChatPolling() {
+  if (chatPollTimer) return;
+  chatPollTimer = window.setInterval(() => {
+    if (currentUser && document.visibilityState === 'visible') void loadChatMessages();
+  }, 5000);
+}
+function stopChatPolling() {
+  if (chatPollTimer) window.clearInterval(chatPollTimer);
+  chatPollTimer = null;
+}
+async function loadChatMessages() {
+  if (chatLoading || !currentUser) return;
+  chatLoading = true;
+  // Pulihkan badge dari storage (per akun) sebelum fetch: refresh tidak
+  // boleh menghilangkan angka yang belum dibaca.
+  if (chatBadgeRestoredFor !== currentUser.id) {
+    chatBadgeRestoredFor = currentUser.id;
+    chatUnreadCount = loadChatUnreadCount();
+    chatSeenAt = loadChatSeenAt();
+    renderChatBadge(chatUnreadCount);
+  }
+  try {
+    const result = await api('/api/chat/messages');
+    const messages = Array.isArray(result.messages) ? result.messages : [];
+    const latest = messages.at(-1);
+    if (activeWorkspacePage === 'chat') {
+      chatMessages = messages;
+      renderChatMessages();
+      renderChatTyping(Array.isArray(result.typing) ? result.typing : []);
+      // Pesan yang tampil di layar dianggap dibaca — kecuali sesi yang
+      // dipulihkan setelah refresh, yang badge-nya bertahan sampai pengguna
+      // keluar lalu masuk lagi ke Obrolan.
+      if (!chatRestoredSession && latest?.createdAt) {
+        chatSeenAt = latest.createdAt;
+        saveChatSeenAt(chatSeenAt);
+      }
+    } else {
+      chatUnreadCount += countNewChatMessages(messages, chatSeenAt);
+      if (latest?.createdAt) {
+        chatSeenAt = latest.createdAt;
+        saveChatSeenAt(chatSeenAt);
+      }
+      renderChatBadge(chatUnreadCount);
+      saveChatUnreadCount(chatUnreadCount);
+      chatMessages = messages;
+      renderChatTyping([]);
+    }
+  } catch {
+    // Poll gagal (misalnya sesi habis): badge dan pesan lama tetap tampil.
+  } finally {
+    chatLoading = false;
+  }
+}
+function buildChatMessageRow(message) {
+  const isOwn = message.userId === currentUser?.id;
+  const row = document.createElement('div');
+  row.className = `chat-row${isOwn ? ' is-own' : ''}`;
+  row.dataset.messageId = message.id;
+  if (!isOwn) {
+    const avatar = document.createElement('img');
+    avatar.className = 'chat-avatar';
+    avatar.src = chatAvatarSrc(message);
+    avatar.alt = `Avatar ${message.displayName || message.username}`;
+    avatar.loading = 'lazy';
+    avatar.addEventListener('error', () => { avatar.src = '/avatars/avatar-01.webp'; }, { once: true });
+    row.append(avatar);
+  }
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  if (!isOwn) {
+    const head = document.createElement('div');
+    head.className = 'chat-bubble-head';
+    const name = document.createElement('span');
+    name.className = 'chat-bubble-name';
+    name.textContent = message.displayName || message.username;
+    const roleChip = document.createElement('span');
+    roleChip.className = `chat-role-chip${message.isMainAdmin ? ' is-main-admin' : message.role === 'admin' ? ' is-admin' : ''}`;
+    roleChip.append(createMemberIcon(chatRoleIconName(message)), document.createTextNode(chatRoleLabel(message)));
+    head.append(name, roleChip);
+    bubble.append(head);
+  }
+  if (message.replyTo) {
+    const quote = document.createElement('div');
+    quote.className = 'chat-reply-quote';
+    const quoteName = document.createElement('strong');
+    quoteName.textContent = message.replyTo.displayName || message.replyTo.username;
+    const quoteText = document.createElement('span');
+    quoteText.textContent = message.replyTo.text;
+    quote.append(quoteName, quoteText);
+    bubble.append(quote);
+  }
+  const text = document.createElement('p');
+  text.className = 'chat-bubble-text';
+  text.textContent = message.text;
+  bubble.append(text);
+  const meta = document.createElement('div');
+  meta.className = 'chat-bubble-meta';
+  const time = document.createElement('span');
+  time.className = 'chat-bubble-time';
+  time.textContent = formatChatTime(message.createdAt);
+  const replyButton = document.createElement('button');
+  replyButton.className = 'chat-reply-btn';
+  replyButton.type = 'button';
+  replyButton.textContent = '↩ Balas';
+  replyButton.setAttribute('aria-label', `Balas pesan ${message.displayName || message.username}`);
+  replyButton.addEventListener('click', () => setChatReply(message));
+  meta.append(time, replyButton);
+  bubble.append(meta);
+  row.append(bubble);
+  return row;
+}
+function renderChatMessages() {
+  const list = document.querySelector('#chat-messages');
+  if (!list) return;
+  const wasAtBottom = list.scrollHeight - list.scrollTop - list.clientHeight < 80;
+  list.replaceChildren();
+  if (!chatMessages.length) {
+    const empty = document.createElement('p');
+    empty.className = 'chat-empty';
+    empty.textContent = 'Belum ada obrolan. Sapa yang lain!';
+    list.append(empty);
+    return;
+  }
+  let lastDay = null;
+  for (const message of chatMessages) {
+    const day = formatChatDay(message.createdAt);
+    if (day && day !== lastDay) {
+      lastDay = day;
+      const divider = document.createElement('div');
+      divider.className = 'chat-date-divider';
+      divider.textContent = day;
+      list.append(divider);
+    }
+    list.append(buildChatMessageRow(message));
+  }
+  if (wasAtBottom) list.scrollTop = list.scrollHeight;
+}
+function renderChatTyping(typing) {
+  const bar = document.querySelector('#chat-typing');
+  if (!bar) return;
+  const names = (typing || []).map((entry) => entry.displayName || entry.username).filter(Boolean);
+  if (!names.length) {
+    bar.hidden = true;
+    bar.replaceChildren();
+    return;
+  }
+  bar.hidden = false;
+  const label = names.length === 1
+    ? `${names[0]} sedang mengetik`
+    : names.length === 2
+      ? `${names[0]} dan ${names[1]} sedang mengetik`
+      : 'Beberapa orang sedang mengetik';
+  const dots = document.createElement('span');
+  dots.className = 'chat-typing-dots';
+  bar.replaceChildren(document.createTextNode(label), dots);
+}
+function setChatReply(message) {
+  chatReplyTo = message ? { id: message.id, userId: message.userId, username: message.username, displayName: message.displayName, text: message.text } : null;
+  const bar = document.querySelector('#chat-reply-bar');
+  if (!bar) return;
+  bar.hidden = !chatReplyTo;
+  if (chatReplyTo) {
+    document.querySelector('#chat-reply-name').textContent = chatReplyTo.displayName || chatReplyTo.username;
+    document.querySelector('#chat-reply-text').textContent = chatReplyTo.text;
+    document.querySelector('#chat-input')?.focus();
+  }
+}
+async function sendChatTyping(typing) {
+  const now = Date.now();
+  if (typing && now - chatLastTypingSentAt < 2000) return;
+  if (typing) chatLastTypingSentAt = now;
+  try { await api('/api/chat/typing', { method: 'POST', body: JSON.stringify({ typing }) }); } catch { /* Indikator mengetik boleh gagal diam-diam. */ }
+}
+async function sendChatMessage() {
+  const input = document.querySelector('#chat-input');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+  const sendButton = document.querySelector('#chat-send');
+  sendButton.disabled = true;
+  try {
+    await api('/api/chat/messages', { method: 'POST', body: JSON.stringify({ text, ...(chatReplyTo ? { replyToId: chatReplyTo.id } : {}) }) });
+    input.value = '';
+    input.style.height = '';
+    setChatReply(null);
+    void sendChatTyping(false);
+    await loadChatMessages();
+    const list = document.querySelector('#chat-messages');
+    if (list) list.scrollTop = list.scrollHeight;
+  } catch (error) {
+    showToast(error.message || 'Pesan belum terkirim.');
+  } finally {
+    sendButton.disabled = false;
+  }
+}
+function initChatEmojiPanel() {
+  const panel = document.querySelector('#chat-emoji-panel');
+  if (!panel || panel.childElementCount) return;
+  for (const emoji of CHAT_EMOJIS) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = emoji;
+    button.setAttribute('aria-label', `Sisipkan emoji ${emoji}`);
+    button.addEventListener('click', () => {
+      const input = document.querySelector('#chat-input');
+      if (!input) return;
+      const start = input.selectionStart ?? input.value.length;
+      const end = input.selectionEnd ?? input.value.length;
+      input.value = input.value.slice(0, start) + emoji + input.value.slice(end);
+      input.focus();
+      input.selectionStart = input.selectionEnd = start + emoji.length;
+      void sendChatTyping(true);
+    });
+    panel.append(button);
+  }
 }
 
 async function loadPairingLogs() {
@@ -4305,7 +4649,11 @@ async function loadPairingLogs() {
       // entri yang sudah ada tidak dihitung.
       privateLogCountedIdentity = latestIdentity;
     } else if (shouldCountNewStories) {
-      if (activeWorkspacePage === 'activity') {
+      // Di halaman Log Bot yang dipulihkan setelah refresh, badge bertahan
+      // (sesi restore) dan story baru tetap menambah angka; di halaman
+      // Log Bot yang dimasuki biasa, story yang masuk sudah terlihat di
+      // daftar jadi angka direset.
+      if (activeWorkspacePage === 'activity' && !privateLogRestoredActivitySession) {
         privateLogUnreadStoryCount = 0;
       } else {
         privateLogUnreadStoryCount += countNewStoryEntries(logs, privateLogCountedIdentity);
@@ -4449,6 +4797,10 @@ async function showDashboard(user) {
   }
   await Promise.all([loadAdminUsers(), loadAdminBackupSnapshots(), loadAdminBackupTelegramStatus(), refreshPairing(), loadPairingLogs()]);
   void refreshInfoUpdateBadge();
+  // Obrolan jalan sejak login: poll 5 detik supaya badge notif di menu
+  // bertambah realtime walau sedang di halaman lain.
+  startChatPolling();
+  void loadChatMessages();
   startInfoUpdateNoticePolling();
   void refreshMemberBadge();
   await loadLoginHistory();
@@ -4543,6 +4895,7 @@ function showAuth(mode = 'login') {
   clearInterval(logPollTimer);
   clearInterval(adminUsersTimer);
   clearInterval(presenceHeartbeatTimer);
+  stopChatPolling();
   adminUsersTimer = null;
   presenceHeartbeatTimer = null;
   setControlFeedback('session-feedback', '', '', '');
@@ -6072,6 +6425,35 @@ document.querySelector('[data-private-log-filters]')?.addEventListener('click', 
   applyPrivateLogFilters();
 });
 document.querySelector('[data-refresh-private-log]')?.addEventListener('click', () => { void loadPairingLogs(); });
+
+// --- Obrolan: kirim pesan, balas, emoji, indikator mengetik ---
+document.querySelector('#chat-form')?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  void sendChatMessage();
+});
+document.querySelector('#chat-input')?.addEventListener('input', () => {
+  const input = document.querySelector('#chat-input');
+  if (!input) return;
+  input.style.height = '';
+  input.style.height = `${Math.min(input.scrollHeight, 120)}px`;
+  if (input.value.trim()) void sendChatTyping(true);
+});
+document.querySelector('#chat-input')?.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault();
+    void sendChatMessage();
+  }
+});
+document.querySelector('#chat-input')?.addEventListener('blur', () => { void sendChatTyping(false); });
+document.querySelector('#chat-emoji-toggle')?.addEventListener('click', () => {
+  initChatEmojiPanel();
+  const panel = document.querySelector('#chat-emoji-panel');
+  const toggle = document.querySelector('#chat-emoji-toggle');
+  const open = panel.hidden;
+  panel.hidden = !open;
+  toggle.setAttribute('aria-expanded', String(open));
+});
+document.querySelector('#chat-reply-cancel')?.addEventListener('click', () => setChatReply(null));
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && activeWorkspacePage === 'activity') void loadPairingLogs();
 });

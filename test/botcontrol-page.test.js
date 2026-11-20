@@ -152,6 +152,6 @@ test('entri Info Update terbaru menjelaskan halaman Kontrol Bot', () => {
   assert.match(newest.description, /Nyalakan bot|Restart bot|Matikan bot|Hapus sesi/);
   assert.match(newest.description, /Read Only, ReadSW \+ ReactionSW, Online 24 Jam/);
   assert.match(newest.description, /delay 1–20 detik serta emoji reaksi/);
-  assert.equal(infoUpdates.updatedAt, '2026-11-20T09:56:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(infoUpdates.updatedAt, '2026-11-20T18:36:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
   assert.ok(html.includes('data-tag="fitur-baru"') && html.includes('Halaman Kontrol Bot untuk admin'), 'fallback HTML Info Update harus memuat entri Kontrol Bot');
 });

@@ -93,9 +93,12 @@ test('badge Log Bot: angka tersimpan per akun dan pulih setelah refresh', async 
   // Story bertambah: angka naik dan tetap tersimpan.
   fns.savePrivateLogUnreadCount(3);
   assert.equal(fns.loadPrivateLogUnreadCount(), 3, 'angka bertambah saat story bertambah');
-  // Maks 99 saat disimpan.
+  // Maks 99+ di tampilan, tapi angka internal disimpan sampai 999 supaya
+  // setelah refresh tetap tampil 99+, bukan turun jadi 99.
   fns.savePrivateLogUnreadCount(150);
-  assert.equal(fns.loadPrivateLogUnreadCount(), 99, 'angka disimpan maksimal 99');
+  assert.equal(fns.loadPrivateLogUnreadCount(), 150, 'angka di atas 99 tetap tersimpan supaya refresh tetap tampil 99+');
+  fns.savePrivateLogUnreadCount(1500);
+  assert.equal(fns.loadPrivateLogUnreadCount(), 999, 'angka disimpan maksimal 999');
   fns.savePrivateLogUnreadCount(0);
   assert.equal(fns.loadPrivateLogUnreadCount(), 0, 'angka nol setelah halaman Log Bot dibuka');
   // Penanda terakhir yang dihitung ikut tersimpan (supaya tidak dihitung dua kali).
@@ -107,6 +110,19 @@ test('badge Log Bot: angka tersimpan per akun dan pulih setelah refresh', async 
   assert.notEqual(fns.privateLogUnreadStorageKey(), keyA, 'kunci storage berbeda per akun');
   assert.equal(fns.loadPrivateLogUnreadCount(), 0, 'akun lain mulai dari nol');
   assert.notEqual(fns.privateLogCountedStorageKey(), 'readsw-log-bot-counted-02059969-9feb-4e0f-ae09-c70c358704a7', 'kunci penanda berbeda per akun');
+});
+
+test('badge Log Bot: refresh tidak menghapus badge, hanya masuk ke Log Bot yang menghapus', async () => {
+  const js = await read('public/app.js');
+  // Pemulihan halaman awal setelah reload tidak boleh menandai sudah dilihat.
+  assert.ok(js.includes('setWorkspacePage(initialPage, false, { markLogSeen: false, markChatSeen: false })'), 'renderLinkGate harus memulihkan halaman awal tanpa menandai log sudah dilihat');
+  const page = sliceBetween(js, 'function setWorkspacePage(page', "if (page === 'infoupdate') {");
+  assert.ok(page.includes('options.markLogSeen === false'), 'masuk activity harus membedakan pemulihan setelah refresh dengan pindah halaman biasa');
+  assert.ok(page.includes('privateLogRestoredActivitySession = true'), 'pemulihan setelah refresh harus menandai sesi restore');
+  assert.ok(page.includes('markPrivateLogSeen();'), 'pindah biasa ke activity tetap menandai log sudah dilihat');
+  const load = sliceBetween(js, 'async function loadPairingLogs() {', '\ndocument.querySelector(\'.avatar-tabs\')');
+  assert.ok(load.includes('privateLogRestoredActivitySession'), 'pemuat log harus menghormati sesi restore setelah refresh');
+  assert.ok(load.includes("if (activeWorkspacePage === 'activity' && !privateLogRestoredActivitySession) {"), 'selama sesi restore, pemuat log tidak boleh mereset angka');
 });
 
 test('badge Log Bot: tampil saat story masuk di luar halaman, hilang saat halaman dibuka', async () => {
@@ -126,7 +142,7 @@ test('badge Log Bot: tampil saat story masuk di luar halaman, hilang saat halama
   assert.ok(load.includes('loadPrivateLogCountedIdentity()'), 'penanda terakhir dibaca dari storage per akun');
   assert.ok(load.includes('privateLogFirstLoadAfterRestore'), 'muat pertama setelah refresh menghitung story selagi panel tertutup');
   assert.ok(load.includes('countNewStoryEntries(logs, privateLogCountedIdentity)'), 'pemuat log menghitung story baru dari penanda terakhir');
-  assert.ok(load.includes("if (activeWorkspacePage === 'activity') {"), 'story hanya menambah angka saat pengguna tidak di halaman Log Bot');
+  assert.ok(load.includes("if (activeWorkspacePage === 'activity' && !privateLogRestoredActivitySession) {"), 'story hanya menambah angka saat pengguna tidak di halaman Log Bot, kecuali sesi restore setelah refresh');
   assert.ok(load.includes('savePrivateLogUnreadCount(privateLogUnreadStoryCount)'), 'angka baru disimpan supaya refresh tidak menghilangkan');
   assert.ok(load.includes('savePrivateLogCountedIdentity(privateLogCountedIdentity)'), 'penanda disimpan tiap pemuatan supaya tidak dihitung dua kali');
   assert.ok(load.includes('privateLogCountedIdentity = latestIdentity;'), 'penanda maju tiap pemuatan supaya tidak dihitung dua kali');

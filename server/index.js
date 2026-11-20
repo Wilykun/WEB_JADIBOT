@@ -108,6 +108,10 @@ let stalkerWriteQueue = Promise.resolve();
 let visitWriteQueue = Promise.resolve();
 let restoreInProgress = false;
 const rateLimits = new Map();
+// Obrolan: siapa sedang mengetik (userId -> { ..., until }) dan kapan terakhir
+// tiap akun mengirim pesan (batas 1 pesan/detik supaya tidak spam).
+const chatTyping = new Map();
+const chatSendTimes = new Map();
 
 function normalizeEmail(value) {
   return String(value || '').trim().toLowerCase();
@@ -2147,6 +2151,65 @@ async function handleApi(req, res, url) {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
     const logs = (store.pairingLogs || []).filter((entry) => entry.userId === user.id).slice(-100).map(({ id, event, details, createdAt }) => ({ id, event, ...(details?.kind === 'story' ? { details } : {}), createdAt }));
     return sendJson(res, 200, { logs });
+  }
+  // --- Obrolan: chat realtime semua akun (Admin Utama, admin, member) ---
+  // Pesan hanya teks + emoji (tanpa media). Disimpan di store.chatMessages,
+  // maksimal 200 pesan terakhir; GET mengembalikan 100 terakhir + siapa yang
+  // sedang mengetik.
+  if (route === 'GET /api/chat/messages') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    const messages = (store.chatMessages || []).slice(-100);
+    const now = Date.now();
+    const typing = [...chatTyping.values()]
+      .filter((entry) => entry.userId !== user.id && entry.until > now)
+      .map(({ userId, username, displayName, role, isMainAdmin }) => ({ userId, username, displayName, role, isMainAdmin }));
+    return sendJson(res, 200, { messages, typing });
+  }
+  if (route === 'POST /api/chat/messages') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    const freshUser = store.users.find((item) => item.id === user.id);
+    if (!freshUser) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (isBannedAccount(freshUser)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true });
+    const body = await readJson(req);
+    const text = String(body.text || '').trim();
+    if (!text) return sendError(res, 400, 'Tulis pesan dulu.');
+    if (text.length > 1000) return sendError(res, 400, 'Pesan maksimal 1000 karakter.');
+    const lastSend = chatSendTimes.get(user.id) || 0;
+    if (Date.now() - lastSend < 1000) return sendError(res, 429, 'Terlalu cepat, tunggu sebentar.');
+    let replyTo = null;
+    if (body.replyToId) {
+      const original = (store.chatMessages || []).find((item) => item.id === String(body.replyToId));
+      if (!original) return sendError(res, 400, 'Pesan yang dibalas tidak ditemukan.');
+      replyTo = { id: original.id, userId: original.userId, username: original.username, displayName: original.displayName, text: String(original.text || '').slice(0, 200) };
+    }
+    const message = {
+      id: randomUUID(),
+      userId: freshUser.id,
+      username: freshUser.username,
+      displayName: freshUser.displayName || freshUser.username,
+      avatar: freshUser.avatar === 'uploaded' ? 'uploaded' : (AVATAR_PRESETS.has(freshUser.avatar) ? freshUser.avatar : 'avatar-01'),
+      role: freshUser.role,
+      isMainAdmin: isMainAdmin(freshUser),
+      text,
+      replyTo,
+      createdAt: new Date().toISOString(),
+    };
+    await mutate((next) => {
+      next.chatMessages = [...(next.chatMessages || []), message].slice(-200);
+    });
+    chatSendTimes.set(user.id, Date.now());
+    chatTyping.delete(user.id);
+    return sendJson(res, 200, { message });
+  }
+  if (route === 'POST /api/chat/typing') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    const body = await readJson(req);
+    if (body.typing === true) {
+      chatTyping.set(user.id, { userId: user.id, username: user.username, displayName: user.displayName || user.username, role: user.role, isMainAdmin: isMainAdmin(user), until: Date.now() + 5000 });
+    } else {
+      chatTyping.delete(user.id);
+    }
+    return sendJson(res, 200, { ok: true });
   }
   if (route === 'POST /api/pairing/start') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
