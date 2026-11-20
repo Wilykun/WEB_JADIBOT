@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-20T06:35:00+07:00",
+  "updatedAt": "2026-11-20T07:35:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "07.35 WIB",
+      "title": "Pairing code WhatsApp kini muncul lewat jalur proxy VM",
+      "tag": "Perbaikan",
+      "description": "Pairing code dan QR WhatsApp tidak pernah muncul dari VM ini karena Baileys menyambung langsung ke WhatsApp tanpa lewat egress proxy VM, sementara egress langsung diblokir — semua percobaan pairing dan sambung ulang mati instan kode 408 (1689 kali sejak 19 Nov malam), dan belum pernah ada satu pun kode yang terbit. Kini koneksi WhatsApp panel berjalan lewat proxy VM (CONNECT tunnel, otomatis bila proxy tersedia, langsung bila tidak): pairing code admin utama untuk nomor 6289681007623 terbit dalam 8 detik, dan dua sesi member (ryobot, aiivyoo) akhirnya tersambung nyata dari VM ini. Sesi lama yang ditolak WhatsApp dengan kode 401 harus pairing ulang dengan kode baru — kini kodenya muncul."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "06.35 WIB",

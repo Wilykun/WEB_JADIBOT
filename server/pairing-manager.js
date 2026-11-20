@@ -8,6 +8,7 @@ import QRCode from 'qrcode';
 import { acquireSessionLock, SessionLockError } from './session-lock.js';
 import { useSingleFileAuthState } from './single-file-auth.js';
 import { createStoryBacklog } from './story-backlog.js';
+import { getWhatsAppProxyAgent } from './proxy-agent.js';
 
 const PAIRING_CODE_TTL_MS = 180_000;
 const PAIRING_REQUEST_DELAY_MS = 7_000;
@@ -1328,6 +1329,9 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
           const socket = makeWASocket({
             auth: state.authState.state,
             logger: baileysLogger,
+            // WhatsApp WebSocket harus lewat egress proxy VM, kalau tidak
+            // koneksi langsung diblokir dan mati instan kode 408.
+            agent: getWhatsAppProxyAgent(),
             ...(state.waVersion ? { version: state.waVersion } : {}),
             browser: Browsers.macOS('Chrome'),
             keepAliveIntervalMs: WA_KEEP_ALIVE_INTERVAL_MS,
@@ -1789,6 +1793,9 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
 	      socket = makeWASocket({
 	        auth: authState.state,
 	        logger: baileysLogger,
+	        // WhatsApp WebSocket harus lewat egress proxy VM, kalau tidak
+	        // koneksi langsung diblokir dan mati instan kode 408.
+	        agent: getWhatsAppProxyAgent(),
 	        ...(state.waVersion ? { version: state.waVersion } : {}),
 	        browser: Browsers.macOS('Chrome'),
 	        keepAliveIntervalMs: WA_KEEP_ALIVE_INTERVAL_MS,

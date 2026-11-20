@@ -69,112 +69,112 @@ test('info update newest entry and positions match the JSON and fallback', async
   const html = await read('public/index.html');
   const data = JSON.parse(await read('public/info-updates.json'));
 
-  assert.equal(data.updatedAt, '2026-11-20T06:35:00+07:00', 'updatedAt must equal the newest entry time');
+  assert.equal(data.updatedAt, '2026-11-20T07:35:00+07:00', 'updatedAt must equal the newest entry time');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Sesi ditolak kini langsung pairing ulang, tanpa kartu pemulihan', 'the newest entry must describe the rejected-session re-pairing fix');
+  assert.equal(newest.title, 'Pairing code WhatsApp kini muncul lewat jalur proxy VM', 'the newest entry must describe the WhatsApp pairing code over the VM proxy');
   assert.equal(newest.tag, 'Perbaikan', 'the newest entry must use the Perbaikan display tag');
   assert.equal(newest.day, 'Jumat, 20 Nov 2026', 'the newest entry day must match');
-  assert.equal(newest.time, '06.35 WIB', 'the newest entry time must match');
-  assert.equal(data.updates.length, 73, 'the list must grow by exactly five entries');
+  assert.equal(newest.time, '07.35 WIB', 'the newest entry time must match');
+  assert.equal(data.updates.length, 74, 'the list must grow by exactly five entries');
 
   // Fallback statis di index.html harus sama persis dengan entri JSON terbaru.
   assert.ok(html.includes('<li class="info-update-item" data-tag="perbaikan">'), 'the fallback must carry the perbaikan slug for the newest entry');
-  assert.ok(html.includes('<h4>Sesi ditolak kini langsung pairing ulang, tanpa kartu pemulihan</h4>'), 'the fallback title must match the JSON title');
-  assert.ok(html.includes('Jumat, 20 Nov 2026 · 06.35 WIB'), 'the fallback meta must match the JSON day and time');
+  assert.ok(html.includes('<h4>Pairing code WhatsApp kini muncul lewat jalur proxy VM</h4>'), 'the fallback title must match the JSON title');
+  assert.ok(html.includes('Jumat, 20 Nov 2026 · 07.35 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri notifikasi menu terkunci sebelumnya kini di posisi kedelapan beserta fallback-nya.
-  const locked = data.updates[11];
-  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'the locked-menu notice entry must stay twelfth');
+  // Entri notifikasi menu terkunci sebelumnya kini di posisi ketiga belas beserta fallback-nya.
+  const locked = data.updates[12];
+  assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'the locked-menu notice entry must stay thirteenth');
   assert.equal(locked.tag, 'Tampilan', 'the locked-menu notice entry must use the Tampilan display tag');
   assert.equal(locked.time, '07.25 WIB', 'the locked-menu notice entry time must match');
   assert.ok(html.includes('<h4>Member yang mengetuk menu terkunci kini melihat notifikasi di layar</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Rabu, 18 Nov 2026 · 07.25 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri kartu Member ringkas sebelumnya kini di posisi kesembilan beserta fallback-nya.
-  const compact = data.updates[12];
-  assert.equal(compact.title, 'Tampilan Member kini lebih ringkas di HP', 'the compact Member entry must stay thirteenth');
+  // Entri kartu Member ringkas sebelumnya kini di posisi keempat belas beserta fallback-nya.
+  const compact = data.updates[13];
+  assert.equal(compact.title, 'Tampilan Member kini lebih ringkas di HP', 'the compact Member entry must stay fourteenth');
   assert.equal(compact.tag, 'Tampilan', 'the compact Member entry must use the Tampilan display tag');
   assert.equal(compact.time, '05.50 WIB', 'the compact Member entry time must match');
   assert.ok(html.includes('<h4>Tampilan Member kini lebih ringkas di HP</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Rabu, 18 Nov 2026 · 05.50 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri panel lebih cepat sebelumnya kini di posisi kesepuluh beserta fallback-nya.
-  const perf = data.updates[13];
-  assert.equal(perf.title, 'Panel kini memuat jauh lebih cepat', 'the faster panel entry must stay fourteenth');
+  // Entri panel lebih cepat sebelumnya kini di posisi kelima belas beserta fallback-nya.
+  const perf = data.updates[14];
+  assert.equal(perf.title, 'Panel kini memuat jauh lebih cepat', 'the faster panel entry must stay fifteenth');
   assert.equal(perf.tag, 'Perbaikan', 'the faster panel entry must use the Perbaikan display tag');
   assert.equal(perf.time, '21.50 WIB', 'the faster panel entry time must match');
   assert.ok(html.includes('<h4>Panel kini memuat jauh lebih cepat</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 21.50 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri Rank Bot sebelumnya kini di posisi kesebelas beserta fallback-nya.
-  const rankbot = data.updates[14];
-  assert.equal(rankbot.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'the Rank Bot entry must stay fifteenth');
+  // Entri Rank Bot sebelumnya kini di posisi keenam belas beserta fallback-nya.
+  const rankbot = data.updates[15];
+  assert.equal(rankbot.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'the Rank Bot entry must stay sixteenth');
   assert.equal(rankbot.tag, 'Fitur baru', 'the Rank Bot entry must use the Fitur baru display tag');
   assert.equal(rankbot.time, '17.00 WIB', 'the Rank Bot entry time must match');
   assert.ok(html.includes('<h4>Halaman Rank Bot untuk melihat bot teraktif</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 17.00 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri gerbang Fitur Bot sebelumnya kini di posisi kedua belas beserta fallback-nya.
-  const gate = data.updates[15];
-  assert.equal(gate.title, 'Member belum tertaut tidak bisa masuk Fitur Bot', 'the gate entry must stay sixteenth');
+  // Entri gerbang Fitur Bot sebelumnya kini di posisi ketujuh belas beserta fallback-nya.
+  const gate = data.updates[16];
+  assert.equal(gate.title, 'Member belum tertaut tidak bisa masuk Fitur Bot', 'the gate entry must stay seventeenth');
   assert.equal(gate.tag, 'Perubahan', 'the gate entry must use the Perubahan display tag');
   assert.equal(gate.time, '16.45 WIB', 'the gate entry time must match');
   assert.ok(html.includes('<h4>Member belum tertaut tidak bisa masuk Fitur Bot</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 16.45 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri notifikasi tautan di layar sebelumnya kini di posisi ketiga belas beserta fallback-nya.
-  const linkNotice = data.updates[16];
-  assert.equal(linkNotice.title, 'Pemberitahuan tautan WhatsApp kini muncul di layar', 'the link notice entry must stay seventeenth');
+  // Entri notifikasi tautan di layar sebelumnya kini di posisi kedelapan belas beserta fallback-nya.
+  const linkNotice = data.updates[17];
+  assert.equal(linkNotice.title, 'Pemberitahuan tautan WhatsApp kini muncul di layar', 'the link notice entry must stay eighteenth');
   assert.equal(linkNotice.tag, 'Tampilan', 'the link notice entry must use the Tampilan display tag');
   assert.equal(linkNotice.time, '15.50 WIB', 'the link notice entry time must match');
   assert.ok(html.includes('<h4>Pemberitahuan tautan WhatsApp kini muncul di layar</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 15.50 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri notifikasi reaksi di layar sebelumnya kini di posisi keempat belas beserta fallback-nya.
-  const emojiNotice = data.updates[17];
-  assert.equal(emojiNotice.title, 'Peringatan reaksi kini muncul sebagai notifikasi di layar', 'the emoji notice entry must stay eighteenth');
+  // Entri notifikasi reaksi di layar sebelumnya kini di posisi kesembilan belas beserta fallback-nya.
+  const emojiNotice = data.updates[18];
+  assert.equal(emojiNotice.title, 'Peringatan reaksi kini muncul sebagai notifikasi di layar', 'the emoji notice entry must stay nineteenth');
   assert.equal(emojiNotice.tag, 'Tampilan', 'the emoji notice entry must use the Tampilan display tag');
   assert.equal(emojiNotice.time, '15.15 WIB', 'the emoji notice entry time must match');
   assert.ok(html.includes('<h4>Peringatan reaksi kini muncul sebagai notifikasi di layar</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 15.15 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri peringatan reaksi sebelumnya kini di posisi kelima belas beserta fallback-nya.
-  const emojiWarning = data.updates[18];
-  assert.equal(emojiWarning.title, 'Peringatan bila ReadSW tidak bisa mengirim reaksi emoji', 'the emoji warning entry must stay nineteenth');
+  // Entri peringatan reaksi sebelumnya kini di posisi kedua puluh beserta fallback-nya.
+  const emojiWarning = data.updates[19];
+  assert.equal(emojiWarning.title, 'Peringatan bila ReadSW tidak bisa mengirim reaksi emoji', 'the emoji warning entry must stay twentieth');
   assert.equal(emojiWarning.tag, 'Fitur baru', 'the emoji warning entry must use the Fitur baru display tag');
   assert.equal(emojiWarning.time, '14.55 WIB', 'the emoji warning entry time must match');
   assert.ok(html.includes('<h4>Peringatan bila ReadSW tidak bisa mengirim reaksi emoji</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 14.55 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri kartu pengingat member sebelumnya kini di posisi keenam belas beserta fallback-nya.
-  const memberNotice = data.updates[19];
-  assert.equal(memberNotice.title, 'Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot', 'the member notice entry must stay twentieth');
+  // Entri kartu pengingat member sebelumnya kini di posisi kedua puluh satu beserta fallback-nya.
+  const memberNotice = data.updates[20];
+  assert.equal(memberNotice.title, 'Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot', 'the member notice entry must stay twenty-first');
   assert.equal(memberNotice.tag, 'Fitur baru', 'the member notice entry must use the Fitur baru display tag');
   assert.equal(memberNotice.time, '14.35 WIB', 'the member notice entry time must match');
   assert.ok(html.includes('<h4>Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 14.35 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri pratinjau tautan sebelumnya kini di posisi ketujuh belas beserta fallback-nya.
-  const ogPreview = data.updates[20];
-  assert.equal(ogPreview.title, 'Tautan panel kini menampilkan pratinjau bergambar saat dibagikan', 'the link preview entry must stay twenty-first');
+  // Entri pratinjau tautan sebelumnya kini di posisi kedua puluh dua beserta fallback-nya.
+  const ogPreview = data.updates[21];
+  assert.equal(ogPreview.title, 'Tautan panel kini menampilkan pratinjau bergambar saat dibagikan', 'the link preview entry must stay twenty-second');
   assert.equal(ogPreview.tag, 'Tampilan', 'the link preview entry must use the Tampilan display tag');
   assert.equal(ogPreview.time, '14.15 WIB', 'the link preview entry time must match');
   assert.ok(html.includes('<li class="info-update-item" data-tag="tampilan">'), 'the fallback must carry the tampilan slug for the link preview entry');
   assert.ok(html.includes('<h4>Tautan panel kini menampilkan pratinjau bergambar saat dibagikan</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 14.15 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri Kontrol Bot sebelumnya kini di posisi kedelapan belas beserta fallback-nya.
-  const kontrolBot = data.updates[21];
-  assert.equal(kontrolBot.title, 'Halaman Kontrol Bot untuk admin', 'the Kontrol Bot entry must stay twenty-second');
+  // Entri Kontrol Bot sebelumnya kini di posisi kedua puluh tiga beserta fallback-nya.
+  const kontrolBot = data.updates[22];
+  assert.equal(kontrolBot.title, 'Halaman Kontrol Bot untuk admin', 'the Kontrol Bot entry must stay twenty-third');
   assert.equal(kontrolBot.tag, 'Fitur baru', 'the Kontrol Bot entry must use the Fitur baru display tag');
   assert.equal(kontrolBot.time, '13.30 WIB', 'the Kontrol Bot entry time must match');
   assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'the fallback must carry the fitur-baru slug for the Kontrol Bot entry');
   assert.ok(html.includes('<h4>Halaman Kontrol Bot untuk admin</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 13.30 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri presence sebelumnya kini di posisi kedua puluh satu tiga beserta fallback-nya.
-  const presence = data.updates[22];
-  assert.equal(presence.title, 'Status Pemilik kini pulih seketika saat kembali ke tab', 'the presence entry must stay twenty-third');
+  // Entri presence sebelumnya kini di posisi kedua puluh empat beserta fallback-nya.
+  const presence = data.updates[23];
+  assert.equal(presence.title, 'Status Pemilik kini pulih seketika saat kembali ke tab', 'the presence entry must stay twenty-fourth');
   assert.equal(presence.tag, 'Perbaikan', 'the presence entry must use the Perbaikan display tag');
   assert.equal(presence.day, 'Selasa, 17 Nov 2026', 'the presence entry day must match');
   assert.equal(presence.time, '12.50 WIB', 'the presence entry time must match');
@@ -185,9 +185,9 @@ test('info update newest entry and positions match the JSON and fallback', async
   assert.ok(html.includes('<h4>Status Pemilik kini pulih seketika saat kembali ke tab</h4>'), 'the fallback title must match the JSON title');
   assert.ok(html.includes('Selasa, 17 Nov 2026 · 12.50 WIB'), 'the fallback meta must match the JSON day and time');
 
-  // Entri carousel sebelumnya tetap ada di posisi kedua puluh satu tiga beserta fallback-nya.
-  assert.equal(data.updates[23].title, 'Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP', 'the carousel entry must stay twenty-fourth');
+  // Entri carousel sebelumnya tetap ada di posisi kedua puluh lima beserta fallback-nya.
+  assert.equal(data.updates[24].title, 'Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP', 'the carousel entry must stay twenty-fifth');
   assert.ok(html.includes('<h4>Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP</h4>'), 'the carousel fallback must stay');
-  assert.equal(data.updates[24].title, 'Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler', 'the badge fix entry must stay twenty-fifth');
+  assert.equal(data.updates[25].title, 'Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler', 'the badge fix entry must stay twenty-sixth');
   assert.ok(html.includes('<h4>Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler</h4>'), 'the badge fix fallback must stay');
 });
