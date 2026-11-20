@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-20T20:00:00+07:00",
+  "updatedAt": "2026-11-20T21:02:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "21.02 WIB",
+      "title": "Sesi WhatsApp pulih otomatis dari cadangan sebelum minta pairing ulang",
+      "tag": "Perbaikan",
+      "description": "Sesi WhatsApp sempat terlogout sendiri lalu minta pairing code baru padahal cadangan sesi masih ada. Penyebabnya ada tiga: pemulihan hanya mencoba salinan sehat dan berhenti kalau salinan itu ditolak (cadangan otomatis yang lebih segar tidak pernah disentuh), sesi yang 5 kali gagal sambung ulang langsung dinyatakan invalid tanpa mencoba cadangan sama sekali, dan restart panel bisa jalan dua proses sekaligus sehingga berebut sesi yang sama. Kini pemulihan mencoba cadangan satu per satu (salinan sehat lalu cadangan otomatis), sesi yang 5 kali gagal dicoba pulihkan dulu sebelum invalid, tombol Sambungkan ulang juga mencoba cadangan dulu, dan restart panel selalu mematikan panel lama dulu supaya hanya satu proses yang jalan."
+    },
     {
       "day": "Jumat, 20 Nov 2026",
       "time": "20.00 WIB",

@@ -23,8 +23,8 @@ test('pairing manager menandai sesi tidak valid setelah batas gagal tercapai', a
   const manager = await read('server/pairing-manager.js');
   assert.ok(manager.includes('function registerReconnectFailure(state)'), 'registerReconnectFailure must exist');
   assert.ok(manager.includes('state.consecutiveReconnectFailures = (state.consecutiveReconnectFailures || 0) + 1'), 'failures must be counted per session');
-  assert.ok(manager.includes('await markSessionInvalid(state, reasonCode);'), 'close handlers must invalidate after the cap');
-  assert.ok(manager.includes('void markSessionInvalid(state, null);'), 'scheduleAutoReconnect must not schedule past the cap');
+  assert.ok(manager.includes('await markSessionInvalid(state, reasonCode);'), 'close handlers must invalidate after the cap when recovery fails');
+  assert.ok(manager.includes('void attemptSessionRecovery(state, null).then(async (recovered) => {'), 'scheduleAutoReconnect must try recovery before invalidating past the cap');
   assert.ok(manager.includes('reconnectFailures: state.consecutiveReconnectFailures || 0'), 'public state must expose the failure count for the panel');
 });
 

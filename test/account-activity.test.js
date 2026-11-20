@@ -128,7 +128,7 @@ test('waktu login dilengkapi label Pagi, Siang, Sore, atau Malam sesuai jam WIB'
   assert.equal(daypart('2026-11-18T02:00:00.000Z'), 'Pagi', '09.00 WIB harus Pagi');
   assert.equal(daypart('2026-11-18T05:00:00.000Z'), 'Siang', '12.00 WIB harus Siang');
   assert.equal(daypart('2026-11-18T09:00:00.000Z'), 'Sore', '16.00 WIB harus Sore');
-  assert.equal(daypart('2026-11-18T13:00:00.000Z'), 'Malam', '20.00 WIB harus Malam');
+  assert.equal(daypart('2026-11-18T13:00:00.000Z'), 'Malam', '21.02 WIB harus Malam');
   assert.equal(daypart('2026-11-18T20:00:00.000Z'), 'Malam', '03.00 WIB harus Malam');
   assert.equal(daypart('2026-11-18T11:00:00.000Z'), 'Malam', '18.00 WIB harus Malam');
   assert.equal(daypart(null), null, 'waktu kosong harus menghasilkan null');
@@ -203,21 +203,21 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=rankbot-refresh-20261120'), 'app.js harus memakai ?v=rankbot-refresh-20261120');
-  assert.ok(html.includes('/style.css?v=rankbot-refresh-20261120'), 'style.css harus memakai ?v=rankbot-refresh-20261120');
+  assert.ok(html.includes('/app.js?v=sesi-pulih-cadangan-20261120'), 'app.js harus memakai ?v=sesi-pulih-cadangan-20261120');
+  assert.ok(html.includes('/style.css?v=sesi-pulih-cadangan-20261120'), 'style.css harus memakai ?v=sesi-pulih-cadangan-20261120');
 });
 
-test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi keenam belas', () => {
+test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi ketujuh belas', () => {
   const data = JSON.parse(read('public/info-updates.json'));
-  assert.equal(data.updatedAt, '2026-11-20T20:00:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 82, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-20T21:02:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 83, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Refresh tidak lagi menampilkan halaman Profil saat sedang di Rank Bot', 'entri terbaru harus soal perbaikan kolom ketik Obrolan');
+  assert.equal(newest.title, 'Sesi WhatsApp pulih otomatis dari cadangan sebelum minta pairing ulang', 'entri terbaru harus soal perbaikan kolom ketik Obrolan');
   assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perbaikan');
   assert.equal(newest.day, 'Jumat, 20 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '20.00 WIB', 'waktu entri terbaru harus cocok');
-  const status = data.updates[15];
-  assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi keenam belas');
+  assert.equal(newest.time, '21.02 WIB', 'waktu entri terbaru harus cocok');
+  const status = data.updates[16];
+  assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi ketujuh belas');
   assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Fitur baru');
   assert.equal(status.time, '19.46 WIB', 'waktu entri status Rank Bot harus cocok');
   assert.ok(status.description.includes('Pemilik · Aktif'), 'entri harus menjelaskan status pemilik di Rank Bot');

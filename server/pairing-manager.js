@@ -721,6 +721,11 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     if (!state || state.recoveryInProgress) return false;
     state.recoveryInProgress = true;
     const wasAutoStart = state.autoStartBeforeInvalid ?? (getWorkerAutoStart(state.userId) === true);
+    // Simpan kredensial yang sedang dipakai: kalau semua cadangan gagal,
+    // file sesi dikembalikan seperti semula, supaya pemulihan yang gagal
+    // tidak menghancurkan kredensial yang masih hidup dengan salinan lama.
+    const liveSnapshot = state.authDir ? await readSnapshotFile(path.join(state.authDir, 'session.json')) : null;
+    const liveSnapshotUsable = isUsableAuthSnapshot(liveSnapshot);
     try {
       await log(state.userId, 'Sesi WhatsApp ditolak; mencoba pulihkan otomatis dari sesi tersimpan.');
       clearTimeout(state.readyTimer);
@@ -741,30 +746,40 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
         await log(state.userId, 'Sesi WhatsApp pulih otomatis tanpa pairing ulang.');
         return true;
       }
-      const rolledBackGood = await restoreGoodSnapshot(state.authDir);
-      let rolledBack = rolledBackGood;
-      if (!rolledBack) {
-        await log(state.userId, 'Cadangan sesi terakhir yang sehat tidak dapat dipakai; mencoba cadangan sesi otomatis.');
-        rolledBack = await restoreSessionBackup(state.authDir);
+      // Coba cadangan satu per satu: salinan sehat dulu, lalu cadangan
+      // otomatis. Dulu hanya salinan sehat yang dicoba — kalau kredensial
+      // di salinan itu ikut ditolak WhatsApp, cadangan otomatis yang
+      // lebih segar tidak pernah disentuh.
+      const candidates = [
+        { restore: restoreGoodSnapshot, restoredLog: 'Cadangan sesi terakhir yang sehat dipulihkan; mencoba sambung ulang.', successLog: 'Sesi WhatsApp pulih otomatis dari cadangan terakhir yang sehat.' },
+        { restore: restoreSessionBackup, restoredLog: 'Cadangan sesi otomatis dipulihkan; mencoba sambung ulang.', successLog: 'Sesi WhatsApp pulih otomatis dari cadangan sesi otomatis.' },
+      ];
+      let triedAny = false;
+      for (const candidate of candidates) {
+        const restored = await candidate.restore(state.authDir);
+        if (!restored) continue;
+        triedAny = true;
+        await log(state.userId, candidate.restoredLog);
+        state.authState = null;
+        state.status = 'recovering';
+        clearTimeout(state.reconnectTimer);
+        state.reconnectTimer = null;
+        if (wasAutoStart) await setWorkerAutoStart(state.userId, true);
+        if (await tryResumeAndWait(state)) {
+          state.autoStartBeforeInvalid = undefined;
+          await log(state.userId, candidate.successLog);
+          return true;
+        }
       }
-      if (!rolledBack) {
+      if (!triedAny) {
         await log(state.userId, 'Tidak ada cadangan sesi untuk dipulihkan; pairing ulang diperlukan.');
-        return false;
       }
-      await log(state.userId, rolledBackGood
-        ? 'Cadangan sesi terakhir yang sehat dipulihkan; mencoba sambung ulang.'
-        : 'Cadangan sesi otomatis dipulihkan; mencoba sambung ulang.');
-      state.authState = null;
-      state.status = 'recovering';
-      clearTimeout(state.reconnectTimer);
-      state.reconnectTimer = null;
-      if (wasAutoStart) await setWorkerAutoStart(state.userId, true);
-      if (await tryResumeAndWait(state)) {
-        state.autoStartBeforeInvalid = undefined;
-        await log(state.userId, rolledBackGood
-          ? 'Sesi WhatsApp pulih otomatis dari cadangan terakhir yang sehat.'
-          : 'Sesi WhatsApp pulih otomatis dari cadangan sesi otomatis.');
-        return true;
+      // Semua cadangan gagal: kembalikan file sesi seperti semula supaya
+      // percobaan berikutnya tidak memakai salinan lama yang sudah ditolak.
+      if (liveSnapshotUsable) {
+        await writeFileAtomically(path.join(state.authDir, 'session.json'), JSON.stringify(liveSnapshot)).catch(() => {});
+        state.authState = null;
+        await log(state.userId, 'Semua cadangan sesi gagal; file sesi dikembalikan seperti semula.');
       }
       return false;
     } finally {
@@ -775,7 +790,12 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
   function scheduleAutoReconnect(state) {
     if (sessions.get(state.userId) !== state || !state.authState?.state?.creds?.registered || state.status === 'invalid') return;
     if ((state.consecutiveReconnectFailures || 0) >= MAX_CONSECUTIVE_RECONNECT_FAILURES) {
-      void markSessionInvalid(state, null);
+      // Batas tercapai bukan berarti kredensial mati: kegagalan beruntun
+      // bisa karena jaringan/proxy atau restart panel. Coba pulihkan dari
+      // cadangan dulu sebelum menyatakan sesi invalid.
+      void attemptSessionRecovery(state, null).then(async (recovered) => {
+        if (!recovered && sessions.get(state.userId) === state && state.status !== 'invalid') await markSessionInvalid(state, null);
+      }).catch(() => {});
       return;
     }
     clearTimeout(state.reconnectTimer);
@@ -1511,8 +1531,13 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
               clearTimeout(state.readyTimer);
               state.readyTimer = null;
               if (registerReconnectFailure(state)) {
-                await markSessionInvalid(state, reasonCode);
-                await log(userId, `Sesi WhatsApp tidak dapat dipulihkan setelah ${MAX_CONSECUTIVE_RECONNECT_FAILURES} kali percobaan sambung ulang gagal (kode ${reasonCode || 'timeout'}); pairing ulang diperlukan.`);
+                // Batas tercapai bukan berarti kredensial mati: coba pulihkan
+                // dari cadangan dulu sebelum menyatakan sesi invalid.
+                const recovered = await attemptSessionRecovery(state, reasonCode);
+                if (!recovered) {
+                  await markSessionInvalid(state, reasonCode);
+                  await log(userId, `Sesi WhatsApp tidak dapat dipulihkan setelah ${MAX_CONSECUTIVE_RECONNECT_FAILURES} kali percobaan sambung ulang gagal (kode ${reasonCode || 'timeout'}); pairing ulang diperlukan.`);
+                }
                 return;
               }
               state.status = 'disconnected';
@@ -1685,9 +1710,12 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     let state = sessions.get(userId);
     if (state?.status === 'invalid') {
       if (state.recoveryInProgress) return publicState(state);
-      // Sesi sudah dinyatakan mati setelah 5 kali sambung ulang gagal:
-      // memulihkan dari cadangan hanya membangkitkan lagi kredensial
-      // yang sama yang sudah ditolak WhatsApp. Langsung minta pairing ulang.
+      // Sesi invalid bisa berasal dari kegagalan sambung ulang beruntun
+      // (jaringan/proxy/restart panel), bukan penolakan WhatsApp — cadangannya
+      // mungkin masih hidup. Coba pulihkan sekali dari cadangan sebelum
+      // meminta pairing ulang; kalau semua cadangan ditolak, baru 409.
+      const recovered = await attemptSessionRecovery(state, null);
+      if (recovered) return publicState(state);
       throw new PairingError('Sesi WhatsApp ditolak. Masukkan nomor dan minta pairing code baru.', 409);
     }
     const manualReconnect = !auto && state?.status === 'reconnecting';
@@ -1879,8 +1907,13 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
           return;
         }
         if (registerReconnectFailure(state)) {
-          await markSessionInvalid(state, reasonCode);
-          await log(userId, `Sesi WhatsApp tidak dapat dipulihkan setelah ${MAX_CONSECUTIVE_RECONNECT_FAILURES} kali percobaan sambung ulang gagal (kode ${reasonCode || 'timeout'}); pairing ulang diperlukan.`);
+          // Batas tercapai bukan berarti kredensial mati: coba pulihkan
+          // dari cadangan dulu sebelum menyatakan sesi invalid.
+          const recovered = await attemptSessionRecovery(state, reasonCode);
+          if (!recovered) {
+            await markSessionInvalid(state, reasonCode);
+            await log(userId, `Sesi WhatsApp tidak dapat dipulihkan setelah ${MAX_CONSECUTIVE_RECONNECT_FAILURES} kali percobaan sambung ulang gagal (kode ${reasonCode || 'timeout'}); pairing ulang diperlukan.`);
+          }
           return;
         }
         state.status = 'disconnected';
