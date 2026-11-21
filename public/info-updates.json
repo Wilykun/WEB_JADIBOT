@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-11-21T18:21:39+07:00",
+  "updatedAt": "2026-11-21T18:35:54+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "18.35 WIB",
+      "title": "Daftar Obrolan kini memenuhi layar sampai bawah",
+      "tag": "Tampilan",
+      "description": "Daftar Obrolan sempat pendek dan menyisakan ruang kosong di bawah: tinggi halaman hanya mengikuti dvh, padahal toolbar bawah browser tidak ikut terhitung, jadi pesan lama di bawah terpotong dan tidak kelihatan. Kini tinggi halaman diperbarui setiap kali layar berubah ukuran, layar diputar, atau keyboard membuka/menutup, sehingga daftar memenuhi layar sampai bawah dan pesan sebelumnya kelihatan."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "18.32 WIB",
+      "title": "Hitungan pil Bug dan Fitur Error kini jalan",
+      "tag": "Bug",
+      "description": "Pil kategori Bug dan Fitur Error sempat selalu menampilkan 0 walau sudah ada entrinya: penghitung pil hanya mengenal lima kategori lama, jadi tag baru tidak ikut dihitung dan angkanya tidak pernah ditulis ulang. Kini penghitungnya mengenal ketujuh kategori, jadi angka Bug dan Fitur Error akurat realtime mengikuti entrinya."
+    },
     {
       "day": "Sabtu, 21 Nov 2026",
       "time": "18.21 WIB",

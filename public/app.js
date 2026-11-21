@@ -6280,7 +6280,7 @@ async function loadInfoUpdates() {
 let infoUpdateFilter = 'all';
 let infoUpdateQuery = '';
 function infoUpdateFilterCounts() {
-  const counts = { all: 0, 'fitur-baru': 0, perubahan: 0, perbaikan: 0, 'fitur-dihapus': 0, tampilan: 0 };
+  const counts = { all: 0, 'fitur-baru': 0, perubahan: 0, perbaikan: 0, bug: 0, 'fitur-error': 0, 'fitur-dihapus': 0, tampilan: 0 };
   document.querySelectorAll('#infoupdate .info-update-item').forEach((item) => {
     const tag = item.dataset.tag || '';
     counts.all += 1;
@@ -6729,7 +6729,8 @@ document.querySelector('#chat-input')?.addEventListener('keydown', (event) => {
     }
   }
 });
-document.querySelector('#chat-input')?.addEventListener('blur', () => { void sendChatTyping(false); });
+document.querySelector('#chat-input')?.addEventListener('blur', () => { void sendChatTyping(false); window.setTimeout(() => fitChatPageToVisibleViewport(), 250); });
+document.querySelector('#chat-input')?.addEventListener('focus', () => { window.setTimeout(() => fitChatPageToVisibleViewport(), 250); });
 document.querySelector('#chat-emoji-toggle')?.addEventListener('click', () => {
   initChatEmojiPanel();
   const panel = document.querySelector('#chat-emoji-panel');
@@ -6744,6 +6745,11 @@ if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', () => fitChatPageToVisibleViewport());
   window.visualViewport.addEventListener('scroll', () => fitChatPageToVisibleViewport());
 }
+// Layar HP berubah ukuran (toolbar browser muncul/hilang, putar layar):
+// tinggi Obrolan harus ikut menyesuaikan, kalau tidak daftar jadi pendek
+// dan muncul ruang kosong di bawah.
+window.addEventListener('resize', () => fitChatPageToVisibleViewport());
+window.addEventListener('orientationchange', () => window.setTimeout(() => fitChatPageToVisibleViewport(), 250));
 document.querySelector('#chat-reply-cancel')?.addEventListener('click', () => setChatReply(null));
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && activeWorkspacePage === 'activity') void loadPairingLogs();

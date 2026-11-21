@@ -394,6 +394,13 @@ test('Obrolan: halaman full layar mengikuti layar yang terlihat walau keyboard H
   assert.ok(appJs.includes('fitChatPageToVisibleViewport();'), 'pindah halaman harus menyesuaikan tinggi Obrolan');
 });
 
+test('Obrolan: tinggi halaman diperbarui saat keyboard buka/tutup dan layar berubah', () => {
+  assert.ok(appJs.includes("window.addEventListener('resize', () => fitChatPageToVisibleViewport());"), 'perubahan ukuran layar harus memicu penyesuaian tinggi Obrolan');
+  assert.ok(appJs.includes("window.addEventListener('orientationchange', () => window.setTimeout(() => fitChatPageToVisibleViewport(), 250));"), 'putar layar harus memicu penyesuaian tinggi Obrolan');
+  assert.ok(appJs.includes("addEventListener('blur', () => { void sendChatTyping(false); window.setTimeout(() => fitChatPageToVisibleViewport(), 250); })"), 'keyboard yang menutup harus memicu penyesuaian setelah animasinya selesai');
+  assert.ok(appJs.includes("addEventListener('focus', () => { window.setTimeout(() => fitChatPageToVisibleViewport(), 250); })"), 'keyboard yang membuka harus memicu penyesuaian setelah animasinya selesai');
+});
+
 test('Info Update: kategori Bug dan Fitur Error terdaftar dengan warna sendiri', () => {
   assert.ok(appJs.includes("bug: 'Bug'"), 'kategori Bug harus terdaftar di peta label Info Update');
   assert.ok(appJs.includes("'fitur-error': 'Fitur Error'"), 'kategori Fitur Error harus terdaftar di peta label Info Update');
