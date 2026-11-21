@@ -80,6 +80,7 @@ const BACKUP_SNAPSHOT_DIR = path.join(DATA_DIR, 'backup-snapshots');
 const TELEGRAM_CONFIG_FILE = path.join(DATA_DIR, 'telegram.json');
 const CHAT_FILE = path.join(DATA_DIR, 'Obrolan.json');
 const CHAT_MAX_MESSAGES = 200;
+const CHAT_TYPING_WINDOW_MS = 12000;
 const TELEGRAM_MAX_BYTES = 50 * 1024 * 1024;
 const STALKER_DIR = path.join(ROOT, 'DATA_STALKER');
 const STALKER_FILE = path.join(STALKER_DIR, 'visitors.json');
@@ -2224,9 +2225,25 @@ async function handleApi(req, res, url) {
   // sedang mengetik.
   if (route === 'GET /api/chat/messages') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
-    const messages = chatStore.messages.slice(-100);
+    // Avatar (dan nama) pengirim diambil dari data akun saat ini, bukan dari
+    // foto yang tersimpan saat pesan dikirim — kalau tidak, pesan lama tetap
+    // memakai avatar lama walau pemiliknya sudah ganti foto di Profil akun.
+    const messages = chatStore.messages.slice(-100).map((message) => {
+      const sender = store.users.find((item) => item.id === message.userId);
+      if (!sender) return message;
+      return {
+        ...message,
+        displayName: sender.displayName || sender.username,
+        avatar: sender.avatar === 'uploaded' ? 'uploaded' : (AVATAR_PRESETS.has(sender.avatar) ? sender.avatar : 'avatar-01'),
+        role: sender.role,
+        isMainAdmin: isMainAdmin(sender),
+      };
+    });
     const now = Date.now();
     const typing = [...chatTyping.values()]
+      // Selama orang terus mengetik, tiap ketikan memperbarui jendela 12
+      // detiknya, jadi indikator tampil realtime selama mengetik dan hilang
+      // sendiri 12 detik setelah berhenti (atau langsung saat pesannya terkirim).
       .filter((entry) => entry.userId !== user.id && entry.until > now)
       .map(({ userId, username, displayName, avatar, role, isMainAdmin }) => ({ userId, username, displayName, avatar, role, isMainAdmin }));
     return sendJson(res, 200, { messages, typing });
@@ -2266,6 +2283,19 @@ async function handleApi(req, res, url) {
     chatTyping.delete(user.id);
     return sendJson(res, 200, { message });
   }
+  if (route === 'POST /api/chat/messages/delete') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    const body = await readJson(req);
+    const id = String(body.id || '');
+    const index = chatStore.messages.findIndex((item) => item.id === id);
+    if (index === -1) return sendError(res, 404, 'Pesan tidak ditemukan.');
+    const target = chatStore.messages[index];
+    // Pesan sendiri boleh dihapus siapa pun; pesan orang lain hanya Admin Utama.
+    if (target.userId !== user.id && !isMainAdmin(user)) return sendError(res, 403, 'Hanya pemilik pesan atau Admin Utama yang bisa menghapus pesan ini.');
+    chatStore.messages.splice(index, 1);
+    await saveChatMessages();
+    return sendJson(res, 200, { ok: true });
+  }
   if (route === 'POST /api/chat/typing') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
     const body = await readJson(req);
@@ -2274,7 +2304,10 @@ async function handleApi(req, res, url) {
       // satu poll yang terlewat (permintaan masih jalan / panel sibuk) tidak
       // boleh menghilangkan indikator — dengan 5 detik, sekali poll kelewat
       // saja typing sudah tidak pernah terlihat walau orangnya masih mengetik.
-      chatTyping.set(user.id, { userId: user.id, username: user.username, displayName: user.displayName || user.username, avatar: user.avatar === 'uploaded' ? 'uploaded' : (AVATAR_PRESETS.has(user.avatar) ? user.avatar : 'avatar-01'), role: user.role, isMainAdmin: isMainAdmin(user), until: Date.now() + 12000 });
+      // Tiap ketikan memperbarui jendela ini, jadi indikator tampil realtime
+      // selama orang mengetik tanpa batas durasi dari mulai mengetik.
+      const now = Date.now();
+      chatTyping.set(user.id, { userId: user.id, username: user.username, displayName: user.displayName || user.username, avatar: user.avatar === 'uploaded' ? 'uploaded' : (AVATAR_PRESETS.has(user.avatar) ? user.avatar : 'avatar-01'), role: user.role, isMainAdmin: isMainAdmin(user), until: now + CHAT_TYPING_WINDOW_MS });
     } else {
       chatTyping.delete(user.id);
     }
@@ -2437,7 +2470,9 @@ async function handleApi(req, res, url) {
   }
   if (route === 'GET /api/admin/user-avatar') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
-    if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
+    // Foto unggahan boleh dilihat semua akun yang login (admin maupun
+    // member), bukan cuma admin — jadi foto profil tiap akun tampil apa
+    // adanya di Daftar Member, Aktivitas Akun, Rank Bot, dan Obrolan.
     const targetId = String(url.searchParams.get('userId') || '');
     if (!targetId) return sendError(res, 400, 'ID akun tidak valid.');
     const target = store.users.find((item) => item.id === targetId);
@@ -2788,7 +2823,8 @@ async function handleApi(req, res, url) {
         isMainAdmin: isMainAdmin(item),
         verified: item.verified !== false,
         createdAt: item.createdAt,
-        avatar: item.avatar === 'uploaded' ? 'avatar-01' : AVATAR_PRESETS.has(item.avatar) ? item.avatar : 'avatar-01',
+        avatar: item.avatar === 'uploaded' ? 'uploaded' : AVATAR_PRESETS.has(item.avatar) ? item.avatar : 'avatar-01',
+        avatarUpdatedAt: item.avatarUpdatedAt || null,
         panelActive: Boolean(activeSession),
         lastSeen: latestPanelSession?.lastSeen || null,
         lastSeenSource: latestPanelSession?.lastSeen ? 'panel' : null,

@@ -3326,6 +3326,9 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .chat-bubble-time{font-size:10px;color:var(--muted)}
 .chat-reply-btn{flex:none;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:12px;line-height:1;padding:2px 4px;border-radius:6px}
 .chat-reply-btn:hover{color:var(--text);background:rgba(255,255,255,.08)}
+.chat-bubble-actions{display:flex;align-items:center;gap:2px}
+.chat-delete-btn{flex:none;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:12px;line-height:1;padding:2px 4px;border-radius:6px}
+.chat-delete-btn:hover{color:#f87171;background:rgba(248,113,113,.12)}
 .chat-typing{display:flex;align-items:center;gap:6px;min-height:18px;font-size:12px;font-style:italic;color:var(--green2)}
 .chat-typing-avatars{display:inline-flex;flex:none}
 .chat-typing-avatar{width:18px;height:18px;border-radius:50%;object-fit:cover;border:1px solid var(--panel);margin-left:-5px}

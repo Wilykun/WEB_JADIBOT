@@ -186,6 +186,14 @@ test('Obrolan: scroll tidak macet — daftar hanya dirender ulang bila pesan ber
   assert.equal(chatMessagesSignature(a), chatMessagesSignature(b), 'pesan yang sama harus punya tanda yang sama');
   assert.notEqual(chatMessagesSignature(a), chatMessagesSignature(c), 'pesan baru harus mengubah tanda');
   assert.equal(chatMessagesSignature([]), '0:none', 'daftar kosong harus punya tanda sendiri');
+  // Ganti avatar saja (tanpa pesan baru) harus mengubah tanda supaya daftar
+  // dirender ulang dan foto baru tampil — kalau tidak, pesan lama tetap
+  // memakai avatar lama di layar walau profilnya sudah berubah.
+  const beforeAvatar = [{ id: '1', userId: 'u1', avatar: 'avatar-01', displayName: 'A', createdAt: '2026-11-20T10:00:00.000Z' }];
+  const afterAvatar = [{ id: '1', userId: 'u1', avatar: 'uploaded', displayName: 'A', createdAt: '2026-11-20T10:00:00.000Z' }];
+  assert.notEqual(chatMessagesSignature(beforeAvatar), chatMessagesSignature(afterAvatar), 'ganti avatar harus mengubah tanda supaya daftar dirender ulang');
+  const afterName = [{ id: '1', userId: 'u1', avatar: 'avatar-01', displayName: 'B', createdAt: '2026-11-20T10:00:00.000Z' }];
+  assert.notEqual(chatMessagesSignature(beforeAvatar), chatMessagesSignature(afterName), 'ganti nama tampilan harus mengubah tanda supaya daftar dirender ulang');
   const load = sliceBetween(appJs, 'async function loadChatMessages() {', '\nfunction buildChatMessageRow(');
   assert.ok(load.includes('chatMessagesSignature(messages)'), 'poll harus menghitung tanda daftar pesan');
   assert.ok(load.includes('if (signature !== chatLastRenderedSignature) {'), 'poll hanya merender ulang bila tandanya berubah');
@@ -201,6 +209,22 @@ test('Obrolan: scroll ke bawah tidak macet — daftar mengalir ke halaman dan bu
   // ujungnya: pengguna yang scroll di tengah daftar tidak bisa lanjut ke bawah.
   assert.match(css, /\.chat-messages\{[^}]*overscroll-behavior:\s*auto/, 'scroll daftar harus mengalir ke halaman saat mencapai ujung');
   assert.match(css, /@media\(max-width:560px\)\{[\s\S]*?\.chat-row\{max-width:96%/, 'bubble HP harus hampir selebar layar supaya luas');
+});
+
+test('Obrolan: avatar pesan diambil dari data akun saat ini, bukan foto lama saat pesan dikirim', () => {
+  // GET /api/chat/messages harus menyelesaikan identitas pengirim dari
+  // store.users supaya pesan lama ikut ganti foto saat pemiliknya ganti
+  // avatar di Profil akun — kalau tidak, Obrolan tetap memakai avatar lama.
+  const get = sliceBetween(serverJs, "if (route === 'GET /api/chat/messages') {", "if (route === 'POST /api/chat/messages') {");
+  assert.ok(get.includes('store.users.find((item) => item.id === message.userId)'), 'GET pesan harus mencari pengirim di data akun saat ini');
+  assert.ok(get.includes("avatar: sender.avatar === 'uploaded' ? 'uploaded'"), 'GET pesan harus memakai avatar akun saat ini');
+  assert.ok(get.includes('displayName: sender.displayName || sender.username'), 'GET pesan harus memakai nama akun saat ini');
+  // Tanda daftar harus ikut berubah saat avatar/nama berubah supaya poll
+  // merender ulang daftarnya (kalau tidak, foto baru tidak tampil di layar
+  // walau server sudah mengembalikannya).
+  const signature = extractFunction(appJs, 'chatMessagesSignature');
+  assert.ok(signature.includes('message.avatar'), 'tanda daftar harus menghitung avatar tiap pesan');
+  assert.ok(signature.includes('message.displayName'), 'tanda daftar harus menghitung nama tiap pesan');
 });
 
 test('Obrolan: avatar di atas dan jam di pojok kiri bubble, rapih di HP', () => {
@@ -335,7 +359,7 @@ test('Obrolan: semua pesan tersimpan rapi di data/Obrolan.json, bukan di store.j
   assert.ok(serverJs.includes('function saveChatMessages()'), 'penyimpanan Obrolan.json harus berurutan lewat antrean');
   assert.ok(serverJs.includes('atomicWriteJson(CHAT_FILE, chatStore)'), 'pesan harus ditulis atomik ke Obrolan.json');
   assert.ok(serverJs.includes('chatStore.messages = [...chatStore.messages, message].slice(-CHAT_MAX_MESSAGES);'), 'pesan baru harus ditambahkan ke Obrolan.json dengan batas 200');
-  assert.ok(serverJs.includes('const messages = chatStore.messages.slice(-100);'), 'baca pesan harus dari Obrolan.json');
+  assert.ok(serverJs.includes('const messages = chatStore.messages.slice(-100)'), 'baca pesan harus dari Obrolan.json');
   assert.ok(serverJs.includes('store.chatMessages'), 'migrasi harus membaca pesan lama dari store.chatMessages');
   assert.ok(serverJs.includes('delete store.chatMessages;'), 'field lama harus dibersihkan dari store.json setelah migrasi');
   assert.ok(!/next\.chatMessages\s*=/.test(serverJs), 'server tidak boleh lagi menulis pesan ke store.json');
@@ -399,6 +423,22 @@ test('Obrolan: tinggi halaman diperbarui saat keyboard buka/tutup dan layar beru
   assert.ok(appJs.includes("window.addEventListener('orientationchange', () => window.setTimeout(() => fitChatPageToVisibleViewport(), 250));"), 'putar layar harus memicu penyesuaian tinggi Obrolan');
   assert.ok(appJs.includes("addEventListener('blur', () => { void sendChatTyping(false); window.setTimeout(() => fitChatPageToVisibleViewport(), 250); })"), 'keyboard yang menutup harus memicu penyesuaian setelah animasinya selesai');
   assert.ok(appJs.includes("addEventListener('focus', () => { window.setTimeout(() => fitChatPageToVisibleViewport(), 250); })"), 'keyboard yang membuka harus memicu penyesuaian setelah animasinya selesai');
+});
+
+test('Obrolan: kembali ke tab langsung poll supaya typing tidak keburu hilang', () => {
+  assert.ok(appJs.includes("document.addEventListener('visibilitychange'"), 'kembali ke tab harus memicu poll Obrolan');
+  assert.ok(appJs.includes("if (document.visibilityState === 'visible' && currentUser) void loadChatMessages();"), 'poll saat kembali terlihat harus memuat pesan dan typing');
+});
+
+test('Obrolan: hapus pesan — sendiri boleh, orang lain hanya Admin Utama', () => {
+  const row = appJs.slice(appJs.indexOf('function buildChatMessageRow'));
+  assert.ok(row.includes("if (isOwn || currentUser?.isMainAdmin)"), 'tombol hapus hanya untuk pesan sendiri atau Admin Utama');
+  assert.ok(row.includes("deleteButton.className = 'chat-delete-btn'"), 'tombol hapus harus ada di baris pesan');
+  assert.ok(row.includes("await showConfirm({ title: 'Hapus pesan ini?'"), 'hapus pesan harus minta konfirmasi dulu');
+  assert.ok(row.includes("api('/api/chat/messages/delete', { method: 'POST'"), 'hapus pesan harus POST ke /api/chat/messages/delete');
+  assert.ok(row.includes("if (chatReplyTo?.id === message.id) setChatReply(null);"), 'balasan ke pesan yang dihapus harus dibersihkan');
+  assert.ok(css.includes('.chat-bubble-actions{display:flex;align-items:center;gap:2px}'), 'tombol Balas dan Hapus harus sebaris di kanan meta');
+  assert.ok(css.includes('.chat-delete-btn{'), 'tombol hapus harus punya gaya sendiri');
 });
 
 test('Info Update: kategori Bug dan Fitur Error terdaftar dengan warna sendiri', () => {
@@ -465,7 +505,7 @@ test('server Obrolan: kirim + baca + balas + mengetik + batas, hanya untuk yang 
     const base = `http://127.0.0.1:${port}`;
     child = spawn(process.execPath, [path.join(root, 'server/index.js')], {
       cwd: root,
-      env: { ...process.env, HOST: '127.0.0.1', PORT: String(port), PANEL_DATA_DIR: 'runtime-data', SESSION_SECRET: randomBytes(48).toString('base64url'), NODE_ENV: 'test' },
+      env: { ...process.env, HOST: '127.0.0.1', PORT: String(port), PANEL_DATA_DIR: 'runtime-data', SESSION_SECRET: randomBytes(48).toString('base64url'), NODE_ENV: 'test', BOOTSTRAP_ADMIN_USERNAME: 'fixtureadmin' },
       stdio: 'ignore',
     });
     let ready = false;
@@ -559,12 +599,57 @@ test('server Obrolan: kirim + baca + balas + mengetik + batas, hanya untuk yang 
     const typingExpired = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: adminCookie });
     assert.equal(typingExpired.payload.typing.length, 0, 'typing harus hilang setelah jendela 12 detik berlalu');
 
+    // Tanpa batas durasi: mengetik terus (POST tiap 2 detik) harus membuat
+    // indikator tetap tampil realtime walau sudah lewat 10 detik sejak mulai —
+    // tiap ketikan memperbarui jendela 12 detiknya.
+    for (let i = 0; i < 6; i += 1) {
+      const keepTyping = await jsonRequest(base, '/api/chat/typing', { method: 'POST', body: { typing: true }, cookie: memberCookie });
+      assert.equal(keepTyping.status, 200);
+      await wait(2000);
+    }
+    const typingStillThere = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: adminCookie });
+    assert.equal(typingStillThere.payload.typing.length, 1, 'typing harus tetap tampil walau mengetik lebih dari 10 detik');
+
+    // Avatar realtime: pesan lama harus ikut ganti foto saat pengirimnya
+    // ganti avatar di Profil akun — foto tidak boleh beku di avatar lama.
+    const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
+    const memberUpload = await fetch(`${base}/api/me/avatar`, { method: 'POST', body: png, headers: { Cookie: memberCookie, 'Content-Type': 'image/png' }, signal: AbortSignal.timeout(5000) });
+    assert.equal(memberUpload.status, 200, 'member harus bisa mengunggah foto profilnya sendiri');
+    const afterAvatarChange = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: adminCookie });
+    const memberMessages = afterAvatarChange.payload.messages.filter((item) => item.userId === member.id);
+    assert.ok(memberMessages.length > 0, 'harus ada pesan member untuk diperiksa avatarnya');
+    assert.ok(memberMessages.every((item) => item.avatar === 'uploaded'), 'semua pesan lama member harus memakai foto barunya, bukan avatar lama');
+    const adminMessages = afterAvatarChange.payload.messages.filter((item) => item.userId === admin.id);
+    assert.ok(adminMessages.every((item) => item.avatar === 'avatar-01'), 'pesan admin yang tidak ganti avatar harus tetap memakai avatarnya sendiri');
+
+    // Hapus pesan: pemilik boleh hapus pesannya sendiri, member tidak boleh
+    // hapus pesan orang lain, Admin Utama boleh hapus pesan siapa pun.
+    const deleteOwn = await jsonRequest(base, '/api/chat/messages/delete', { method: 'POST', body: { id: sent.payload.message.id }, cookie: memberCookie });
+    assert.equal(deleteOwn.status, 200, 'member harus bisa menghapus pesannya sendiri');
+    const deleteOther = await jsonRequest(base, '/api/chat/messages/delete', { method: 'POST', body: { id: afterWait.payload.message.id }, cookie: memberCookie });
+    assert.equal(deleteOther.status, 403, 'member tidak boleh menghapus pesan admin');
+    const deleteByMainAdmin = await jsonRequest(base, '/api/chat/messages/delete', { method: 'POST', body: { id: empty.payload.messages[0].id }, cookie: adminCookie });
+    assert.equal(deleteByMainAdmin.status, 200, 'Admin Utama harus bisa menghapus pesan member');
+    const deleteMissing = await jsonRequest(base, '/api/chat/messages/delete', { method: 'POST', body: { id: 'tidak-ada' }, cookie: adminCookie });
+    assert.equal(deleteMissing.status, 404, 'hapus pesan yang tidak ada harus 404');
+    const deleteNoAuth = await jsonRequest(base, '/api/chat/messages/delete', { method: 'POST', body: { id: afterWait.payload.message.id } });
+    assert.equal(deleteNoAuth.status, 401, 'hapus pesan tanpa login harus 401');
+    const afterDelete = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: adminCookie });
+    assert.equal(afterDelete.payload.messages.length, 2, 'dua pesan yang dihapus harus hilang dari daftar');
+    assert.equal(afterDelete.payload.messages[0].text, 'Halo juga!', 'balasan yang mengutip pesan terhapus harus tetap ada');
+
+    // Hapus pesan tidak boleh merusak typing: setelah hapus, mengetik tetap muncul.
+    const typingAfterDelete = await jsonRequest(base, '/api/chat/typing', { method: 'POST', body: { typing: true }, cookie: memberCookie });
+    assert.equal(typingAfterDelete.status, 200);
+    const typingSeenAfterDelete = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: adminCookie });
+    assert.equal(typingSeenAfterDelete.payload.typing.length, 1, 'typing harus tetap muncul setelah hapus pesan');
+
     const all = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: memberCookie });
-    assert.equal(all.payload.messages.length, 4, 'semua pesan harus tersimpan berurutan');
-    assert.equal(all.payload.messages[3].text, 'sudah boleh lagi');
+    assert.equal(all.payload.messages.length, 2, 'semua pesan harus tersimpan berurutan');
+    assert.equal(all.payload.messages[1].text, 'sudah boleh lagi');
     const chatFileFinal = JSON.parse(await readFile(path.join(dataDir, 'Obrolan.json'), 'utf8'));
-    assert.equal(chatFileFinal.messages.length, 4, 'Obrolan.json di disk harus berisi semua pesan');
-    assert.equal(chatFileFinal.messages[3].text, 'sudah boleh lagi');
+    assert.equal(chatFileFinal.messages.length, 2, 'Obrolan.json di disk harus berisi semua pesan');
+    assert.equal(chatFileFinal.messages[1].text, 'sudah boleh lagi');
   } finally {
     if (child && child.exitCode === null) child.kill('SIGTERM');
     await rm(temp, { recursive: true, force: true });

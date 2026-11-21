@@ -59,6 +59,34 @@ test('halaman Aktivitas Akun hanya menampilkan nama, avatar, dan waktu login web
   assert.ok(appJs.includes("loginLine.append(createMemberIcon('clock'));"), 'baris waktu harus memakai ikon jam SVG sesuai konteks');
 });
 
+test('foto unggahan boleh dilihat semua akun yang login, bukan cuma admin', () => {
+  // Server: endpoint foto unggahan tidak boleh lagi menolak member.
+  const userAvatarFn = serverJs.slice(serverJs.indexOf("if (route === 'GET /api/admin/user-avatar')"), serverJs.indexOf("if (route === 'POST /api/admin/users/bot')"));
+  assert.ok(userAvatarFn.includes("if (!user) return sendError(res, 401, 'Silakan masuk kembali.');"), 'foto unggahan tetap harus menolak tanpa login');
+  assert.ok(!userAvatarFn.includes("if (user.role !== 'admin')"), 'foto unggahan tidak boleh lagi menolak member');
+  // Client: semua halaman yang menampilkan avatar tidak boleh lagi
+  // memeriksa peran admin sebelum memakai foto unggahan.
+  assert.ok(!appJs.includes("selectedAvatar === 'uploaded' && currentUser?.role === 'admin'"), 'Daftar Member, Rank Bot, dan Aktivitas Akun harus memakai foto unggahan untuk semua akun');
+  assert.ok(!appJs.includes("message.avatar === 'uploaded' && currentUser?.role === 'admin'"), 'Obrolan harus memakai foto unggahan untuk semua akun');
+  // Teks profil harus jujur: foto unggahan kini terlihat semua akun yang login.
+  assert.ok(html.includes('Avatar unggahan tersimpan di folder akunmu dan terlihat oleh semua akun yang login.'), 'halaman Profil akun harus menyebut foto unggahan terlihat semua akun yang login');
+});
+
+test('foto unggahan tampil di Aktivitas Akun dan Rank Bot, bukan jatuh ke preset avatar-01', () => {
+  // Server: /api/members harus meneruskan 'uploaded' apa adanya, bukan
+  // menukarnya ke avatar-01 seperti sebelumnya — kalau tidak, klien tidak
+  // pernah tahu akun itu punya foto unggahan.
+  assert.ok(serverJs.includes("avatar: item.avatar === 'uploaded' ? 'uploaded' : AVATAR_PRESETS.has(item.avatar) ? item.avatar : 'avatar-01',"), '/api/members harus meneruskan avatar unggahan apa adanya');
+  assert.ok(serverJs.includes('avatarUpdatedAt: item.avatarUpdatedAt || null,'), '/api/members harus mengembalikan avatarUpdatedAt untuk cache-busting foto unggahan');
+  // Client: kedua halaman harus memuat foto unggahan lewat /api/admin/user-avatar.
+  const activityFn = appJs.slice(appJs.indexOf('function renderAccountActivity()'), appJs.indexOf('async function loadAccountActivity()'));
+  assert.ok(activityFn.includes("selectedAvatar === 'uploaded'"), 'Aktivitas Akun harus membedakan foto unggahan dari preset');
+  assert.ok(activityFn.includes('/api/admin/user-avatar?userId='), 'Aktivitas Akun harus memuat foto unggahan lewat /api/admin/user-avatar');
+  const rankFn = appJs.slice(appJs.indexOf('function renderRankBot()'), appJs.indexOf('async function loadRankBot()'));
+  assert.ok(rankFn.includes("selectedAvatar === 'uploaded'"), 'Rank Bot harus membedakan foto unggahan dari preset');
+  assert.ok(rankFn.includes('/api/admin/user-avatar?userId='), 'Rank Bot harus memuat foto unggahan lewat /api/admin/user-avatar');
+});
+
 test('urutan Aktivitas Akun: akun sendiri paling atas, lalu pemilik aktif, baru yang paling baru login', () => {
   assert.ok(appJs.includes("const viewer = String(currentUser?.username || '');"), 'perender harus tahu akun yang sedang login');
   assert.ok(appJs.includes("const aSelf = viewer && String(a.username || '') === viewer ? 0 : 1;"), 'baris sendiri harus diutamakan dalam urutan');
@@ -203,20 +231,20 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=obrolan-daftar-penuh-layar-20261121'), 'app.js harus memakai ?v=obrolan-daftar-penuh-layar-20261121');
-  assert.ok(html.includes('/style.css?v=obrolan-daftar-penuh-layar-20261121'), 'style.css harus memakai ?v=obrolan-daftar-penuh-layar-20261121');
+  assert.ok(html.includes('/app.js?v=avatar-obrolan-realtime-20261121'), 'app.js harus memakai ?v=avatar-obrolan-realtime-20261121');
+  assert.ok(html.includes('/style.css?v=avatar-obrolan-realtime-20261121'), 'style.css harus memakai ?v=avatar-obrolan-realtime-20261121');
 });
 
 test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
-  assert.equal(data.updatedAt, '2026-11-21T18:35:54+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 92, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-21T21:24:23+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 99, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Daftar Obrolan kini memenuhi layar sampai bawah', 'entri terbaru harus soal daftar Obrolan yang memenuhi layar');
-  assert.equal(newest.tag, 'Tampilan', 'entri terbaru harus bertag Tampilan');
+  assert.equal(newest.title, 'Avatar Obrolan kini ikut berubah realtime', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Sabtu, 21 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '18.35 WIB', 'waktu entri terbaru harus cocok');
-  const status = data.updates[25];
+  assert.equal(newest.time, '21.24 WIB', 'waktu entri terbaru harus cocok');
+  const status = data.updates[32];
   assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi kedua puluh');
   assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Fitur baru');
   assert.equal(status.time, '19.46 WIB', 'waktu entri status Rank Bot harus cocok');
@@ -319,6 +347,89 @@ test('server: /api/members mengembalikan lastLoginAt dari riwayat login dan pane
     const heartbeat = await jsonRequest(base, '/api/me/heartbeat', { method: 'POST', body: {}, cookie: adminLogin.cookie });
     assert.equal(heartbeat.status, 200, 'heartbeat harus menjawab');
     assert.equal(heartbeat.payload.latestLoginAt, '2026-11-18T06:00:00.000Z', 'heartbeat harus mengembalikan login terbaru akun lain (bukan login diri sendiri)');
+  } finally {
+    if (child && child.exitCode === null) child.kill('SIGTERM');
+    await fs.promises.rm(temp, { recursive: true, force: true });
+  }
+});
+
+test('server: /api/members meneruskan avatar unggahan dan /api/admin/user-avatar mengembalikannya', { timeout: 60_000 }, async () => {
+  const temp = await mkdtemp(path.join(os.tmpdir(), 'readsw-account-activity-avatar-test-'));
+  const root = path.join(temp, 'project');
+  const dataDir = path.join(root, 'runtime-data');
+  const adminPassword = 'FixtureAdmin-Only-Password!';
+  const memberPassword = 'FixtureMember-Only-Password!';
+  const secret = randomBytes(48).toString('base64url');
+  let child;
+  try {
+    await mkdir(root, { recursive: true });
+    await cp(path.join(repoRoot, 'server'), path.join(root, 'server'), { recursive: true });
+    await cp(path.join(repoRoot, 'public'), path.join(root, 'public'), { recursive: true });
+    await cp(path.join(repoRoot, 'package.json'), path.join(root, 'package.json'));
+    await symlink(path.join(repoRoot, 'node_modules'), path.join(root, 'node_modules'), 'dir');
+    await mkdir(dataDir, { recursive: true });
+    const admin = fixtureUser('fixtureadmin', 'fixtureadmin@example.test', 'admin', adminPassword);
+    admin.avatar = 'uploaded';
+    admin.avatarMime = 'image/png';
+    admin.avatarUpdatedAt = new Date().toISOString();
+    const member = fixtureUser('fixturemember', 'fixturemember@example.test', 'member', memberPassword);
+    await writeFile(path.join(dataDir, 'store.json'), JSON.stringify({
+      users: [admin, member], pendingRegistrations: [], bots: [], sessions: [], pairingLogs: [], loginHistory: [],
+    }));
+    // Foto unggahan admin di folder kanonis akunnya.
+    const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
+    await mkdir(path.join(root, 'DATA_AKUN', 'ADMIN', 'fixtureadmin'), { recursive: true });
+    await writeFile(path.join(root, 'DATA_AKUN', 'ADMIN', 'fixtureadmin', 'avatar.upload'), png);
+
+    const port = await unusedPort();
+    const base = `http://127.0.0.1:${port}`;
+    const env = {
+      ...process.env,
+      HOST: '127.0.0.1', PORT: String(port), PANEL_DATA_DIR: 'runtime-data', SESSION_SECRET: secret, NODE_ENV: 'test',
+    };
+    child = spawn(process.execPath, [path.join(root, 'server/index.js')], { cwd: root, env, stdio: 'ignore' });
+    let ready = false;
+    for (let attempt = 0; attempt < 100; attempt += 1) {
+      if (child.exitCode !== null) throw new Error(`fixture server exited with code ${child.exitCode}`);
+      try {
+        const response = await fetch(`${base}/api/health`, { signal: AbortSignal.timeout(500) });
+        if (response.ok) { ready = true; break; }
+      } catch { /* Wait briefly for local fixture startup. */ }
+      await wait(100);
+    }
+    assert.equal(ready, true, 'isolated fixture server should start');
+
+    const adminLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixtureadmin', password: adminPassword } });
+    assert.equal(adminLogin.status, 200, 'admin fixture harus bisa login');
+    const members = await jsonRequest(base, '/api/members', { cookie: adminLogin.cookie });
+    assert.equal(members.status, 200, 'admin harus bisa membaca /api/members');
+    const byName = Object.fromEntries(members.payload.users.map((item) => [item.username, item]));
+    assert.equal(byName.fixtureadmin.avatar, 'uploaded', '/api/members harus meneruskan avatar unggahan, bukan avatar-01');
+    assert.ok(byName.fixtureadmin.avatarUpdatedAt, '/api/members harus mengembalikan avatarUpdatedAt');
+    assert.equal(byName.fixturemember.avatar, 'avatar-01', 'member preset harus tetap avatar-01');
+
+    const avatarResponse = await fetch(`${base}/api/admin/user-avatar?userId=${encodeURIComponent(admin.id)}`, { headers: { Cookie: adminLogin.cookie }, signal: AbortSignal.timeout(5000) });
+    assert.equal(avatarResponse.status, 200, 'admin harus bisa memuat foto unggahan akun lain');
+    assert.equal(avatarResponse.headers.get('content-type'), 'image/png', 'foto unggahan harus dikembalikan sebagai PNG');
+    assert.deepEqual(Buffer.from(await avatarResponse.arrayBuffer()), png, 'isi foto unggahan harus sama dengan yang diunggah');
+
+    const memberLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: memberPassword } });
+    assert.equal(memberLogin.status, 200, 'member fixture harus bisa login');
+    const memberAvatar = await fetch(`${base}/api/admin/user-avatar?userId=${encodeURIComponent(admin.id)}`, { headers: { Cookie: memberLogin.cookie }, signal: AbortSignal.timeout(5000) });
+    assert.equal(memberAvatar.status, 200, 'member juga harus bisa memuat foto unggahan akun lain');
+    assert.equal(memberAvatar.headers.get('content-type'), 'image/png', 'member harus menerima foto unggahan sebagai PNG');
+    assert.deepEqual(Buffer.from(await memberAvatar.arrayBuffer()), png, 'member harus menerima isi foto yang sama');
+
+    // Member juga bisa mengunggah foto profilnya sendiri di akunnya.
+    const memberUpload = await fetch(`${base}/api/me/avatar`, { method: 'POST', body: png, headers: { Cookie: memberLogin.cookie, 'Content-Type': 'image/png' }, signal: AbortSignal.timeout(5000) });
+    assert.equal(memberUpload.status, 200, 'member harus bisa mengunggah foto profilnya sendiri');
+    const memberUploadPayload = await memberUpload.json();
+    assert.equal(memberUploadPayload.user.avatar, 'uploaded', 'foto member harus tercatat sebagai unggahan');
+    const membersAfterUpload = await jsonRequest(base, '/api/members', { cookie: memberLogin.cookie });
+    const byNameAfterUpload = Object.fromEntries(membersAfterUpload.payload.users.map((item) => [item.username, item]));
+    assert.equal(byNameAfterUpload.fixturemember.avatar, 'uploaded', 'foto unggahan member harus diteruskan /api/members');
+    const memberOwnAvatar = await fetch(`${base}/api/admin/user-avatar?userId=${encodeURIComponent(member.id)}`, { headers: { Cookie: adminLogin.cookie }, signal: AbortSignal.timeout(5000) });
+    assert.equal(memberOwnAvatar.status, 200, 'foto unggahan member harus bisa dimuat akun lain');
   } finally {
     if (child && child.exitCode === null) child.kill('SIGTERM');
     await fs.promises.rm(temp, { recursive: true, force: true });

@@ -1,6 +1,55 @@
 {
-  "updatedAt": "2026-11-21T18:35:54+07:00",
+  "updatedAt": "2026-11-21T21:24:23+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "21.24 WIB",
+      "title": "Avatar Obrolan kini ikut berubah realtime",
+      "tag": "Perbaikan",
+      "description": "Avatar di Obrolan sempat beku di foto lama: pesan yang sudah terkirim menyimpan foto pengirim saat itu, dan tanda daftarnya tidak menghitung avatar, jadi ganti foto di Profil akun tidak terlihat di Obrolan. Kini tiap pesan mengambil avatar dan nama pengirim dari data akun saat ini, dan tanda daftar ikut menghitung avatar supaya daftar dirender ulang — pesan lama pun langsung memakai foto baru dalam beberapa detik."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "21.24 WIB",
+      "title": "Foto profil unggahan kini terlihat semua akun",
+      "tag": "Perubahan",
+      "description": "Foto profil unggahan kini terlihat oleh semua akun yang login, bukan cuma admin: member juga bisa melihat foto unggahan akun lain di Daftar Member, Aktivitas Akun, Rank Bot, dan Obrolan, dan member memang sudah bisa mengunggah foto profilnya sendiri di Profil akun (maksimal 12 kali per jam). Teks di Profil akun juga diperbarui supaya jujur soal ini."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "21.08 WIB",
+      "title": "Foto profil unggahan kini tampil di Aktivitas Akun",
+      "tag": "Perbaikan",
+      "description": "Foto profil yang diunggah di Profil akun sempat tidak tampil di halaman Aktivitas Akun dan Rank Bot: di sana foto unggahan ditukar jadi avatar preset avatar-01. Kini foto unggahan tampil apa adanya di kedua halaman itu (untuk admin; member tetap melihat preset), sama seperti di Daftar Member dan Obrolan."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "20.56 WIB",
+      "title": "Indikator mengetik kini realtime tanpa batas 10 detik",
+      "tag": "Perbaikan",
+      "description": "Indikator mengetik sempat hilang di tengah mengetik: batas 10 detik sejak mulai mengetik membuatnya lenyap walau orangnya masih mengetik, lalu muncul lagi begitu berhenti dan mengetik ulang. Kini batas itu dicabut — selama orang terus mengetik, indikator tampil realtime tanpa putus, dan hilang sendiri 12 detik setelah berhenti atau langsung saat pesannya terkirim. Hapus pesan juga sudah dites tidak merusak typing."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "19.42 WIB",
+      "title": "Pesan Obrolan kini bisa dihapus",
+      "tag": "Fitur baru",
+      "description": "Pesan Obrolan kini bisa dihapus: tiap orang bisa menghapus pesannya sendiri, dan Admin Utama bisa menghapus pesan siapa pun. Tombol Hapus ada di bawah bubble pesan, di samping Balas, dan minta konfirmasi dulu; pesan yang dihapus langsung hilang untuk semua akun, dan balasan yang mengutipnya tetap tampil."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "18.59 WIB",
+      "title": "Obrolan langsung diperbarui saat kembali ke tab",
+      "tag": "Perbaikan",
+      "description": "Pindah aplikasi lalu kembali ke Obrolan sempat membuat indikator mengetik tidak pernah terlihat: poll 5 detik berhenti saat tab tersembunyi, dan begitu kembali, poll berikutnya baru jalan sampai 5 detik kemudian — saat itu indikator yang hidupnya 10 detik sudah hilang. Kini begitu tab kembali terlihat, Obrolan langsung poll sekali, jadi indikator mengetik langsung tampil kalau orangnya masih mengetik."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "18.55 WIB",
+      "title": "Indikator mengetik kini maksimal 10 detik",
+      "tag": "Perubahan",
+      "description": "Indikator mengetik kini tampil maksimal 10 detik sejak mulai mengetik, walau orangnya masih mengetik; kalau berhenti lalu mengetik lagi, indikator muncul lagi 10 detik. Sebelumnya indikator terus tampil selama orang mengetik tanpa batas."
+    },
     {
       "day": "Sabtu, 21 Nov 2026",
       "time": "18.35 WIB",

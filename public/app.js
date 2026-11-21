@@ -1672,7 +1672,7 @@ async function loadAdminUsers() {
         avatarImage.decoding = 'async';
         avatarImage.alt = `Avatar ${roleLabel} ${displayName}`;
         const selectedAvatar = String(user.avatar || 'avatar-01');
-        if (selectedAvatar === 'uploaded' && currentUser?.role === 'admin') {
+        if (selectedAvatar === 'uploaded') {
           const version = encodeURIComponent(user.avatarUpdatedAt || '');
           avatarImage.src = `/api/admin/user-avatar?userId=${encodeURIComponent(userId)}&v=${version}`;
         } else {
@@ -2248,8 +2248,15 @@ function renderRankBot() {
     avatarImage.decoding = 'async';
     avatarImage.alt = `Avatar ${roleLabel} ${displayName}`;
     const selectedAvatar = String(user.avatar || 'avatar-01');
-    const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
-    avatarImage.src = `/avatars/${preset}.webp`;
+    // Foto unggahan tidak boleh jatuh ke preset: tampilkan foto aslinya
+    // lewat /api/admin/user-avatar (admin saja), sama seperti Daftar Member.
+    if (selectedAvatar === 'uploaded') {
+      const version = encodeURIComponent(user.avatarUpdatedAt || '');
+      avatarImage.src = `/api/admin/user-avatar?userId=${encodeURIComponent(user.id)}&v=${version}`;
+    } else {
+      const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
+      avatarImage.src = `/avatars/${preset}.webp`;
+    }
     avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
     const identity = document.createElement('div');
     identity.className = 'rankbot-identity';
@@ -2434,8 +2441,15 @@ function renderAccountActivity() {
     avatarImage.decoding = 'async';
     avatarImage.alt = `Avatar ${displayName}`;
     const selectedAvatar = String(user.avatar || 'avatar-01');
-    const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
-    avatarImage.src = `/avatars/${preset}.webp`;
+    // Foto unggahan tidak boleh jatuh ke preset: tampilkan foto aslinya
+    // lewat /api/admin/user-avatar (admin saja), sama seperti Daftar Member.
+    if (selectedAvatar === 'uploaded') {
+      const version = encodeURIComponent(user.avatarUpdatedAt || '');
+      avatarImage.src = `/api/admin/user-avatar?userId=${encodeURIComponent(user.id)}&v=${version}`;
+    } else {
+      const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
+      avatarImage.src = `/avatars/${preset}.webp`;
+    }
     avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
     avatarWrap.append(avatarImage);
     // Titik online ala Facebook di sudut avatar: hijau bila pemilik akun
@@ -2877,7 +2891,7 @@ function buildBotControlCard(user) {
   avatarImage.decoding = 'async';
   avatarImage.alt = `Avatar ${roleLabel} ${displayName}`;
   const selectedAvatar = String(user.avatar || 'avatar-01');
-  if (selectedAvatar === 'uploaded' && currentUser?.role === 'admin') {
+  if (selectedAvatar === 'uploaded') {
     const version = encodeURIComponent(user.avatarUpdatedAt || '');
     avatarImage.src = `/api/admin/user-avatar?userId=${encodeURIComponent(userId)}&v=${version}`;
   } else {
@@ -4595,7 +4609,7 @@ function formatChatDay(createdAt) {
   } catch { return ''; }
 }
 function chatAvatarSrc(message) {
-  if (message.avatar === 'uploaded' && currentUser?.role === 'admin') {
+  if (message.avatar === 'uploaded') {
     return `/api/admin/user-avatar?userId=${encodeURIComponent(message.userId)}`;
   }
   const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(message.avatar || '') ? message.avatar : 'avatar-01';
@@ -4613,7 +4627,12 @@ function stopChatPolling() {
 }
 function chatMessagesSignature(messages) {
   const last = messages.at(-1);
-  return `${messages.length}:${last ? `${last.id}@${last.createdAt}` : 'none'}`;
+  const tail = last ? `${last.id}@${last.createdAt}` : 'none';
+  // Identitas pengirim ikut dihitung: ganti avatar/nama harus merender ulang
+  // daftarnya — kalau tidak, pesan lama tetap memakai avatar lama di layar
+  // walau server sudah mengembalikan foto baru.
+  const identities = messages.map((message) => `${message.userId || ''}:${message.avatar || ''}:${message.displayName || ''}`).join(',');
+  return `${messages.length}:${tail}${identities ? `:${identities}` : ''}`;
 }
 async function loadChatMessages() {
   if (chatLoading || !currentUser) return;
@@ -4728,13 +4747,36 @@ function buildChatMessageRow(message) {
   const time = document.createElement('span');
   time.className = 'chat-bubble-time';
   time.textContent = formatChatTime(message.createdAt);
+  const actions = document.createElement('div');
+  actions.className = 'chat-bubble-actions';
   const replyButton = document.createElement('button');
   replyButton.className = 'chat-reply-btn';
   replyButton.type = 'button';
   replyButton.textContent = '↩ Balas';
   replyButton.setAttribute('aria-label', `Balas pesan ${message.displayName || message.username}`);
   replyButton.addEventListener('click', () => setChatReply(message));
-  meta.append(time, replyButton);
+  actions.append(replyButton);
+  // Pesan sendiri bisa dihapus siapa pun; pesan orang lain hanya Admin Utama.
+  if (isOwn || currentUser?.isMainAdmin) {
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'chat-delete-btn';
+    deleteButton.type = 'button';
+    deleteButton.textContent = '🗑 Hapus';
+    deleteButton.setAttribute('aria-label', `Hapus pesan ${message.displayName || message.username}`);
+    deleteButton.addEventListener('click', async () => {
+      const approved = await showConfirm({ title: 'Hapus pesan ini?', message: 'Pesan akan hilang untuk semua akun dan tidak bisa dikembalikan.', confirmLabel: 'Hapus', danger: true });
+      if (!approved) return;
+      try {
+        await api('/api/chat/messages/delete', { method: 'POST', body: { id: message.id } });
+        if (chatReplyTo?.id === message.id) setChatReply(null);
+        await loadChatMessages();
+      } catch (error) {
+        showToast(error.message || 'Pesan belum terhapus.');
+      }
+    });
+    actions.append(deleteButton);
+  }
+  meta.append(time, actions);
   bubble.append(meta);
   row.append(bubble);
   return row;
@@ -6156,7 +6198,7 @@ document.querySelector('#avatar-upload').addEventListener('change', async (event
     const result = await api('/api/me/avatar', { method: 'POST', body: encoded, headers: { 'Content-Type': encoded.type } });
     currentUser = result.user;
     applyAvatar(currentUser);
-    setAvatarFeedback('Avatar berhasil diunggah dan disimpan privat di folder akunmu.', 'success');
+    setAvatarFeedback('Avatar berhasil diunggah dan kini terlihat oleh semua akun yang login.', 'success');
   } catch (error) {
     if (error.status === 401) showAuth();
     else setAvatarFeedback(error.message || 'Avatar belum bisa diproses. Coba PNG, JPG, WebP, GIF, atau AVIF.', 'error');
@@ -6741,6 +6783,13 @@ document.querySelector('#chat-emoji-toggle')?.addEventListener('click', () => {
 });
 document.querySelector('#chat-mention-jump')?.addEventListener('click', () => jumpToNextChatMention());
 document.querySelector('#chat-hero-toggle')?.addEventListener('click', () => toggleChatHeroCollapsed());
+// Tab/aplikasi yang kembali terlihat harus langsung poll: kalau tidak,
+// indikator mengetik (yang hidupnya cuma 10 detik) sudah hilang sebelum
+// poll 5 detik berikutnya jalan — persis yang terjadi saat pindah aplikasi
+// lalu kembali untuk mengecek.
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && currentUser) void loadChatMessages();
+});
 if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', () => fitChatPageToVisibleViewport());
   window.visualViewport.addEventListener('scroll', () => fitChatPageToVisibleViewport());
