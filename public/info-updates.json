@@ -1,628 +1,635 @@
 {
- "updatedAt": "2026-11-21T17:56:00+07:00",
- "updates": [
-  {
-   "day": "Sabtu, 21 Nov 2026",
-   "time": "17.56 WIB",
-   "title": "Bar atas ciut jadi ramping, typing ada avatar + nama, jam pesan AM/PM",
-   "tag": "Perbaikan",
-   "description": "Bar atas Obrolan yang diciutkan kini jadi bar ramping: label Obrolan di kiri dan tombol panah yang lebih lebar di pojok kanan, supaya lega dan pas. Indikator mengetik kini menampilkan avatar kecil dan nama orang yang mengetik — kalau beberapa orang mengetik, namanya digabung dan diperbarui realtime ala grup WhatsApp. Jam pesan kini 12 jam dengan AM/PM, misalnya 05.00 PM dan 08.00 AM, tetap WIB dan realtime."
-  },
-  {
-   "day": "Sabtu, 21 Nov 2026",
-   "time": "05.53 WIB",
-   "title": "@ tidak muncul lagi setelah diklik, tombol @ di pojok kanan bawah, bar atas bisa diciutkan",
-   "tag": "Perbaikan",
-   "description": "@ balasan yang sudah diklik tidak muncul lagi: balasan yang sudah dilihat dicatat terpisah, jadi poll realtime tidak menambahkannya kembali. Tombol @ pindah ke pojok kanan bawah daftar pesan, mengambang ala WhatsApp. Bar atas Obrolan kini bisa diciutkan dengan tombol panah supaya ruang daftar pesan lebih luas, dan pilihannya tersimpan walau halaman di-refresh."
-  },
-  {
-   "day": "Sabtu, 21 Nov 2026",
-   "time": "05.41 WIB",
-   "title": "Obrolan lebih luas di HP, @ balasan, dan lompat ke pesan asli",
-   "tag": "Fitur baru",
-   "description": "Obrolan di HP kini setinggi layar: daftar pesan mengisi ruang, bubble hampir selebar layar, avatar di atas dan jam di pojok kiri bubble, dan scroll mengalir sampai ke bawah tanpa macet. Panel emoji langsung menutup saat satu emoji dipilih. Kutipan balasan bisa diketuk untuk lompat ke pesan asli yang disorot hijau. Kalau ada yang membalas pesanmu, muncul @ beserta jumlahnya di menu Obrolan dan di pojok halaman — tersimpan walau halaman di-refresh, dan satu klik @ melompat ke balasan itu lalu angkanya berkurang satu."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "21.32 WIB",
-   "title": "Alasan terputus kini tampil walau panel baru restart",
-   "tag": "Perbaikan",
-   "description": "Notifikasi belum tertaut sempat tetap polos untuk sesi yang sudah terputus sebelum panel restart: antrean resume panel baru belum sampai ke akun itu, jadi alasan dan waktunya belum kebaca. Kini status pairing mengambil catatan terputus terakhir dari file (termasuk untuk sesi yang filenya masih tersimpan tapi belum dicoba lagi), jadi alasan dan waktunya langsung tampil begitu panel dibuka — catatan poetraardnsyh (terputus 21.09 WIB) dan raptorzz (21.07 WIB) sudah diisi dari log terakhir."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "21.30 WIB",
-   "title": "Sesi WhatsApp yang sudah tertaut tidak lagi disuruh pairing ulang",
-   "tag": "Perbaikan",
-   "description": "Sesi WhatsApp sempat terlogout sendiri habis restart panel lalu minta pairing code baru padahal session.json dan cadangannya masih bagus: status pairing hanya cerminan state di memori, dan saat member minta kode baru, panel menemukan sesi sudah tertaut (kode 409) lalu menghapus state in-memory-nya — akun jatuh ke 'belum pernah tertaut'. Kini sesi yang sudah tertaut dipertahankan saat kena 409 dan pesannya mengarahkan ke Sambungkan ulang, resume menyambungkan ulang state tertaut yang socket-nya belum tersambung, dan status panel menampilkan 'Sesi tersimpan' dengan tombol Sambungkan ulang bila file sesi masih ada di disk tapi belum tersambung. Resume awal yang gagal dicoba sekali lagi sebelum dilewati, dan file sesi tanpa kunci (0 kunci, seperti raptorzz) langsung ditolak supaya panel jujur bilang pemilik akun harus pairing ulang."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "21.15 WIB",
-   "title": "Notif 'WhatsApp belum tertaut' kini sebut alasan + waktu terputus",
-   "tag": "Perbaikan",
-   "description": "Notifikasi member yang WhatsApp-nya belum tertaut kini menampilkan alasan sesi terputus (logout dari WhatsApp, sesi ditolak, atau koneksi terputus berulang kali) beserta hari, tanggal, bulan, tahun, dan pukul WIB saat kejadiannya, diperbarui realtime mengikuti status pairing; notifikasi yang sempat ditutup muncul lagi kalau ada kejadian terputus baru."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "21.02 WIB",
-   "title": "Sesi WhatsApp pulih otomatis dari cadangan sebelum minta pairing ulang",
-   "tag": "Perbaikan",
-   "description": "Sesi WhatsApp sempat terlogout sendiri lalu minta pairing code baru padahal cadangan sesi masih ada. Penyebabnya ada tiga: pemulihan hanya mencoba salinan sehat dan berhenti kalau salinan itu ditolak (cadangan otomatis yang lebih segar tidak pernah disentuh), sesi yang 5 kali gagal sambung ulang langsung dinyatakan invalid tanpa mencoba cadangan sama sekali, dan restart panel bisa jalan dua proses sekaligus sehingga berebut sesi yang sama. Kini pemulihan mencoba cadangan satu per satu (salinan sehat lalu cadangan otomatis), sesi yang 5 kali gagal dicoba pulihkan dulu sebelum invalid, tombol Sambungkan ulang juga mencoba cadangan dulu, dan restart panel selalu mematikan panel lama dulu supaya hanya satu proses yang jalan."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "20.00 WIB",
-   "title": "Refresh tidak lagi menampilkan halaman Profil saat sedang di Rank Bot",
-   "tag": "Perbaikan",
-   "description": "Refresh di Rank Bot sempat menampilkan halaman Profil dulu (hantu): halaman terakhir baru dipulihkan setelah status pairing kembali dari server, sementara halaman Profil satu-satunya yang terlihat secara default di panel. Kini halaman terakhir (atau tautan #halaman) dipulihkan langsung saat panel dimuat, sebelum status pairing diambil — refresh di Rank Bot langsung kembali ke Rank Bot, tanpa singgah ke Profil."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "19.44 WIB",
-   "title": "Angka notif Log Bot dan Obrolan kini tanpa batas",
-   "tag": "Perbaikan",
-   "description": "Angka notifikasi di menu Log Bot dan Obrolan tidak lagi berhenti di 99+: berapa pun story atau pesan yang belum dibaca, itulah yang tampil secara realtime, tanpa batas. Angka tetap tersimpan per akun di perangkat (refresh tidak menghilangkan), dan tetap hilang hanya saat halamannya dibuka."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "18.55 WIB",
-   "title": "Notif Obrolan kini muncul realtime, pesan tersimpan di Obrolan.json, scroll tidak lagi macet",
-   "tag": "Perbaikan",
-   "description": "Tiga perbaikan Obrolan sekaligus. Pertama, notif pesan baru sempat tidak muncul: pengguna yang belum pernah membuka Obrolan dianggap sudah melihat semua pesan, jadi pesan pertama tidak pernah dihitung — kini semua pesan orang lain yang belum dibaca dihitung, pesan pertama pun memunculkan angka notif realtime. Kedua, semua pesan chat kini tersimpan rapi di data/Obrolan.json (bukan lagi di store.json); pesan lama dipindah otomatis saat panel dinyalakan dan field lamanya dibersihkan. Ketiga, scroll daftar pesan sempat macet karena poll tiap 5 detik membangun ulang seluruh daftar dan mereset posisi scroll — kini daftar hanya dirender ulang bila pesannya berubah, dan posisi scroll pengguna dipertahankan saat membaca pesan lama."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "18.47 WIB",
-   "title": "Kolom ketik Obrolan kini selalu terlihat di HP",
-   "tag": "Perbaikan",
-   "description": "Halaman Obrolan di HP sempat kepotong: bar Balas kosong selalu tampil menutupi layar (gaya display:flex/grid menimpa atribut hidden), dan daftar pesan terlalu tinggi (62vh) sampai kolom ketik terdorong ke bawah layar. Kini bar Balas, panel emoji, dan indikator mengetik benar-benar tersembunyi sampai dipakai; daftar pesan lebih pendek di HP (46vh) supaya judul, daftar, dan kolom ketik muat satu layar; dan kolom ketik menempel di bawah layar supaya selalu terjangkau. Tombol Enter di keyboard HP maupun desktop kini mengirim pesan (Shift+Enter untuk baris baru), termasuk keyboard HP yang tidak mengirim keydown Enter."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "18.36 WIB",
-   "title": "Obrolan: ngobrol bareng semua akun di panel",
-   "tag": "Fitur baru",
-   "description": "Ada halaman baru Obrolan di bawah Profil akun: Admin Utama, admin, dan member bisa ngobrol bareng realtime ala WhatsApp — pesan sendiri di kanan, pesan orang lain di kiri lengkap dengan nama dan ikon peran (mahkota untuk Admin Utama, perisai untuk admin, orang untuk member). Saat sedang mengetik, muncul tulisan 'sedang mengetik' realtime; pesan bisa dibalas (kutipan pesan asli ikut tampil) dan emoji bisa dikirim lewat panel emoji; media (foto, video, file) tidak bisa dikirim. Pesan baru dari orang lain muncul sebagai angka notif di menu Obrolan (maks 99+), bertahan walau halaman di-refresh, dan baru hilang saat halaman Obrolan dibuka."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "09.56 WIB",
-   "title": "Notif Log Bot tidak lagi hilang saat refresh",
-   "tag": "Perbaikan",
-   "description": "Angka notifikasi di menu Log Bot sempat hilang begitu halaman di-refresh, padahal story-nya belum dilihat — angkanya hanya tersimpan di memori dan penanda sudah-dilihatnya kosong, jadi setelah refresh story itu dianggap sudah dihitung. Kini angka dan penanda terakhir yang dihitung tersimpan di perangkat per akun: refresh tidak menghilangkan angka, story baru menambah angka (maks 99+), dan angka baru hilang saat halaman Log Bot dibuka."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "08.05 WIB",
-   "title": "Log privat kini jadi Log Bot dan ada notif story baru",
-   "tag": "Fitur baru",
-   "description": "Menu dan halaman Log privat berganti nama jadi Log Bot — menu sidebar, judul halaman, dan label di halaman ikut berubah, tanpa mengubah isi lognya. Kini tiap kali ada story baru yang masuk selagi pengguna tidak sedang di halaman Log Bot, muncul angka notifikasi di menu Log Bot (di HP jadi titik hijau saat sidebar tertutup), dihitung realtime per akun dari story yang belum dilihat; angkanya hilang begitu halaman Log Bot dibuka. Entri log yang sudah ada saat panel dibuka tidak dihitung sebagai baru."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "08.00 WIB",
-   "title": "Bot jalan otomatis setelah pairing, kata worker jadi Start bot",
-   "tag": "Perbaikan",
-   "description": "Setelah pairing code diterima, bot sempat diam karena auto-start pernah dimatikan sistem saat sesi ditandai invalid — pengguna harus menekan Start bot sendiri (BangWily menautkan 07.43 WIB, bot baru jalan 07.52 WIB setelah tombol ditekan). Kini begitu WhatsApp tertaut dari pairing code atau QR, bot langsung jalan otomatis (npm start) tanpa perlu menekan apa pun. Kata 'worker' yang membingungkan di layar diganti 'Start bot' / 'bot' — judul kartu Kontrol Bot kini Start bot, status dan hitungannya jadi BOT BERHENTI / Bot jalan. Begitu tertaut, muncul juga notifikasi di tengah layar: kalau bot sudah jalan, tombolnya 'Lihat Start bot' dan langsung menggulir ke kartu Start bot."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "07.35 WIB",
-   "title": "Pairing code WhatsApp kini muncul lewat jalur proxy VM",
-   "tag": "Perbaikan",
-   "description": "Pairing code dan QR WhatsApp tidak pernah muncul dari VM ini karena Baileys menyambung langsung ke WhatsApp tanpa lewat egress proxy VM, sementara egress langsung diblokir — semua percobaan pairing dan sambung ulang mati instan kode 408 (1689 kali sejak 19 Nov malam), dan belum pernah ada satu pun kode yang terbit. Kini koneksi WhatsApp panel berjalan lewat proxy VM (CONNECT tunnel, otomatis bila proxy tersedia, langsung bila tidak): pairing code admin utama untuk nomor 6289681007623 terbit dalam 8 detik, dan dua sesi member (ryobot, aiivyoo) akhirnya tersambung nyata dari VM ini. Sesi lama yang ditolak WhatsApp dengan kode 401 harus pairing ulang dengan kode baru — kini kodenya muncul."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "06.35 WIB",
-   "title": "Sesi ditolak kini langsung pairing ulang, tanpa kartu pemulihan",
-   "tag": "Perbaikan",
-   "description": "Sesi yang ditolak WhatsApp (mis. BangWily) dulu menampilkan kartu pemulihan dengan tombol Coba pulihkan sesi, padahal sesi itu sudah gagal disambung ulang 5 kali dan tidak bisa dipulihkan — dan saat nomor lama dimasukkan, panel malah terpental kembali ke kartu itu karena poll status tiap 5 detik menampilkan lagi kartu pemulihan selagi nomor diketik atau permintaan kode masih berjalan. Kini state sesi ditolak langsung menampilkan form pairing: masukkan nomor lama atau baru, minta pairing code, dan sesi lama dibersihkan sepenuhnya saat pairing baru dimulai, termasuk cadangan session.json.good dan session.json.bak yang sebelumnya masih tersimpan dan bisa membangkitkan lagi sesi yang ditolak. Tombol Coba pulihkan sesi dihapus dari alur ini, dan Sambungkan ulang pada sesi yang sudah ditolak langsung memberi pesan jujur untuk pairing ulang, bukan pemulihan yang pasti gagal."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "06.24 WIB",
-   "title": "Info Update kini memberi notifikasi realtime",
-   "tag": "Perbaikan",
-   "description": "Selama ini angka di menu Info Update baru diperbarui saat pindah halaman, jadi pembaruan yang masuk selagi panel dibuka tidak langsung ketahuan. Kini panel memeriksa entri terbaru tiap 60 detik: begitu ada entri baru, muncul toast Info Update baru di layar dan angka di menu ikut diperbarui, tanpa pindah halaman atau memuat ulang. Satu entri hanya diberitahukan sekali, dan entri yang sudah ada saat panel dibuka tidak memicu toast."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "06.21 WIB",
-   "title": "Hapus sesi kini tersedia di kartu Kontrol Bot",
-   "tag": "Perbaikan",
-   "description": "Saat Start bot gagal karena sesi WhatsApp ditolak, panel dulu tetap menampilkan status lama dan tombol Hapus sesi tidak muncul di Panel, jadi pemilik akun terjebak di kartu Kontrol Bot tanpa jalan keluar. Kini kalau aksi bot gagal karena sesi ditolak, panel langsung memuat ulang status pairing sehingga kartu dan lencana berubah ke keadaan sebenarnya, dan tombol Hapus sesi tampil di kartu Kontrol Bot walau nomornya tidak tersimpan, karena hapus memakai akun (username), bukan nomor. Hapus sesi memakai kunci yang sama dengan Hapus sesi di Pairing dan member: timer sambung ulang dimatikan, socket logout, lalu session.json, cadangan session.json.bak dan session.json.good, serta kredensial Baileys di DATA_AKUN sesuai username dihapus, tanpa bentrok dengan sambung ulang yang sedang berjalan. Setelah dihapus, minta pairing code baru untuk menautkan lagi."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "06.04 WIB",
-   "title": "Sesi WhatsApp yang logout kini terdeteksi otomatis",
-   "tag": "Perbaikan",
-   "description": "Akun member yang sudah logout atau unlink di WhatsApp (BangWily dan 4 akun lain) dulu tetap tampil tertaut di panel karena sesi yang mati diulang sambung tanpa henti (kode 408) dan panel menganggap menyambung ulang sama dengan tertaut. Kini setelah 5 kali gagal sambung ulang berturut-turut sesi ditandai tidak dapat dipulihkan: lencana dan kartu status jujur (MENYAMBUNG, TERPUTUS, DITOLAK), tombol Sambungkan ulang dan Hapus sesi tampil di akun member yang bermasalah, dan kode pairing baru langsung muncul di layar begitu tiba (realtime) tanpa muat ulang. Akun yang masih tertaut sehat tidak terganggu. Akun yang ditandai harus tautkan ulang dari WhatsApp-nya sendiri."
-  },
-  {
-   "day": "Jumat, 20 Nov 2026",
-   "time": "05.45 WIB",
-   "title": "Gambar pratinjau tautan readsw.my.id diperbaiki",
-   "tag": "Perbaikan",
-   "description": "Saat tautan readsw.my.id dibagikan di WhatsApp, judul dan deskripsi muncul tapi gambarnya kosong karena og:image masih mengarah ke alamat Replit lama yang sudah mati (404). Kini og:url, og:image dan twitter:image mengarah ke readsw.my.id dan gambar pratinjau 1200x630 di server sendiri, jadi kartu pratinjau tampil lengkap. WhatsApp menyimpan pratinjau lama di cache, jadi tautan yang sudah pernah dibagikan bisa perlu dibagikan ulang atau menunggu cache-nya segar."
-  },
-  {
-   "day": "Rabu, 18 Nov 2026",
-   "time": "21.07 WIB",
-   "title": "Avatar Member kini menunjukkan titik online",
-   "tag": "Fitur baru",
-   "description": "Di halaman Member, avatar tiap akun kini punya titik hijau di sudut kanannya bila pemilik akun sedang membuka web panel (ala Facebook) — titiknya hanya muncul untuk yang sedang online, dan hilang begitu pemilik menutup panel. Statusnya diperbarui realtime tiap 15 detik bersama daftar member, jadi titiknya mengikuti keadaan sebenarnya tanpa muat ulang. Akun yang sedang tidak membuka panel tidak mendapat titik, sama seperti sebelumnya. Halaman Kontrol Bot tidak ikut berubah: avatar di sana tetap tanpa titik."
-  },
-  {
-   "title": "Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun",
-   "day": "Rabu, 18 Nov 2026",
-   "time": "19.46 WIB",
-   "tag": "Fitur baru",
-   "description": "Setiap baris di halaman Rank Bot kini menunjukkan dua status realtime: \"Pemilik · Aktif\" bila pemilik akun sedang membuka web panel (terakhir terlihat kurang dari 75 detik lalu) atau \"Pemilik · Tidak Aktif\" bila tidak, dan \"Bot WhatsApp · Berjalan\" bila bot akun itu sedang jalan, \"Menunggu\" bila sedang disiapkan, atau \"Berhenti\" bila mati — keduanya diperbarui tiap 15 detik bersama peringkatnya. Menu baru Aktivitas Akun di bawah Rank Bot menampilkan kapan tiap pemilik terakhir login ke web panel: setiap baris hanya berisi nama, avatar, dan \"Pemilik Login Ke Web · hari, tanggal, bulan, tahun, jam WIB\" lengkap, diurutkan dari yang paling baru login dan diperbarui tiap 15 detik; akun yang belum pernah login tertulis \"Belum pernah login\". Baris akun sendiri kini selalu paling atas dengan lencana Kamu dan latar emas, lalu pemilik yang sedang aktif di panel, baru sisanya dari yang paling baru login — urutannya diperbarui realtime tiap 15 detik. Bila ada akun lain yang login ke web selagi halaman Aktivitas Akun dibuka, muncul kartu notifikasi di tengah layar dengan nama dan jam loginnya, dan menu Aktivitas Akun mendapat titik merah sampai halamannya dibuka — keduanya realtime, login sendiri tidak diberitahukan. Setiap baris kini menandai peran dengan warna khusus — Admin Utama emas, Admin hijau, Member biru — dan waktu login dilengkapi Pagi, Siang, Sore, atau Malam sesuai jam WIB-nya (Pagi 04.00–10.59, Siang 11.00–14.59, Sore 15.00–17.59, Malam 18.00–03.59). Jam yang tampil adalah aktivitas web terbaru akun itu — login terakhir, atau terakhir terlihat di panel selagi halamannya terbuka (heartbeat tiap 25 detik) — jadi akun yang sedang membuka panel selalu menunjukkan jam saat ini, bukan jam login autentikasinya yang sudah lama. Nama akun di baris peringkat dan Aktivitas Akun kini membungkus chip peran ke baris berikut bila ruangnya sempit, jadi nama tidak lagi terpotong menjadi 'W...' di HP. Baris Aktivitas Akun kini punya titik online hijau di sudut avatar pemilik yang sedang membuka panel (ala Facebook), dan Rank Bot kini memberi tahu dengan kartu berbeda saat akun yang login sendiri naik peringkat — roket untuk naik peringkat, mahkota untuk nomor 1 — sementara salip oleh akun lain tetap memakai kartu trofi biasa. Perbaikan notifikasi: bila entri ini diperbarui, tanda seru di tombol menu dan angka di menu Info Update kini muncul lagi — sebelumnya pembaruan tidak memunculkan notifikasi karena jam entrinya tidak berubah."
-  },
-  {
-   "title": "Rank Bot kini memberi tahu saat ada yang menyalip",
-   "day": "Rabu, 18 Nov 2026",
-   "time": "13.10 WIB",
-   "tag": "Fitur baru",
-   "description": "Saat ada akun yang menyalip akun lain di peringkat Semua pada halaman Rank Bot, kini muncul kartu notifikasi di tengah layar — ikon trofi, kata pembuka kocak yang bergilir (Wush!, Ngebut!, Salip menyalip!), nama yang menyalip dan yang kesalip beserta posisi barunya, dan waktu lengkap hari, tanggal, bulan, tahun, dan jam WIB. Kartu muncul langsung saat salip terjadi selagi halaman dibuka, dan muncul lagi begitu Rank Bot dibuka bila salip terjadi selagi halaman ditinggal — urutan terakhir yang dilihat disimpan di perangkat. Pasangan yang sama tidak diberitakan lagi dalam 10 menit supaya salip bolak-balik tidak membanjiri layar, dan menutup kartu tidak mematikan pengingat lain. Baris akun sendiri di daftar Rank Bot kini dibedakan dengan latar dan cincin avatar emas serta lencana Kamu, supaya akun yang sedang login langsung ketemu saat mencari di daftar."
-  },
-  {
-   "title": "Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup",
-   "day": "Rabu, 18 Nov 2026",
-   "time": "12.05 WIB",
-   "tag": "Fitur baru",
-   "description": "Di kartu 'Kirim ke Telegram' pada halaman Backup & pemulihan kini ada kolom Token bot dan Chat ID. Keduanya diperiksa langsung ke Telegram saat berhenti mengetik: pil Valid / Tidak valid muncul di samping tiap kolom, dan pengaturan tersimpan otomatis di server begitu token terbukti valid — tidak perlu lagi mengisi file di server. Mengubah chat ID saja kini langsung tersimpan tanpa perlu mengetik ulang token, dan tiap kolom punya pilnya sendiri saat diketik. Di kartu yang sama ada tutorial cara ambil token dari @BotFather dan Chat ID dari @getmyid_bot (tombol spoiler di bawah kolom), dan tampilan kartu di HP dirapikan supaya nama bot dan chat ID tidak terpotong di tengah baris. Tombol kirim hanya aktif bila token dan chat sama-sama valid, jadi backup terkirim ke chat Telegram yang benar. Token disimpan di data/telegram.json di server (tidak masuk GitHub), dan kolom token tidak pernah diisi ulang dari server. Pil token kini mengikuti isi kolom, bukan token tersimpan: kolom token yang kosong selalu menunjukkan Belum diperiksa, walau token tersimpan sudah valid — kevalidan token tersimpan ditunjukkan baris status dan petunjuk di bawah kolom. Placeholder kedua kolom juga diganti petunjuk pengisian, supaya kolom kosong tidak terlihat seperti sudah terisi."
-  },
-  {
-   "title": "Kotak info di menu samping dihapus; tombol kembali ke atas lebih rapih",
-   "day": "Rabu, 18 Nov 2026",
-   "time": "11.15 WIB",
-   "tag": "Tampilan",
-   "description": "Kotak info 'Pairing tersedia per akun. Worker fitur bot belum dijalankan.' di menu samping dihapus — tulisannya statis dan selalu tampil walau bot sebenarnya sedang jalan, jadi membingungkan. Tombol kembali ke atas (panah hijau di pojok kanan bawah) kini berlatar penuh sehingga tidak ada garis kartu yang terlihat menembus tombol saat tombol melayang di atas daftar."
-  },
-  {
-   "title": "Tab panel kini ikut diperbarui sendiri saat ada versi baru",
-   "day": "Rabu, 18 Nov 2026",
-   "time": "07.55 WIB",
-   "tag": "Fitur baru",
-   "description": "Tab panel yang sudah terbuka kini memeriksa versi terbaru lewat heartbeat tiap 25 detik. Bila ada versi baru dan pengguna sedang tidak mengetik atau membuka notifikasi, halaman langsung memuat ulang sendiri sehingga fitur terbaru langsung terpakai tanpa muat ulang manual. Bila pengguna sedang mengetik atau ada notifikasi terbuka, muncul kartu 'Versi baru tersedia' dengan tombol 'Muat ulang' — tawarannya hanya muncul sekali per versi. Berlaku untuk semua akun yang login. Versi dibaca dari ?v= app.js di index.html, jadi setiap perubahan app.js wajib menaikkan nomor versinya."
-  },
-  {
-   "title": "Member yang mengetuk menu terkunci kini melihat notifikasi di layar",
-   "day": "Rabu, 18 Nov 2026",
-   "time": "07.25 WIB",
-   "tag": "Tampilan",
-   "description": "Member biasa yang mengetuk menu Backup atau Kontrol Bot (yang terkunci untuk member) kini melihat notifikasi di tengah layar — kartu yang sama dengan notifikasi reaksi dan tautan WhatsApp: latar gelap, ikon peringatan, judul dan penjelasan bahwa fitur itu hanya untuk admin, serta tombol 'Tutup'; bisa juga ditutup dengan mengetuk latar atau tombol Escape. Sebelumnya hanya muncul toast kecil. Notifikasi tampil lagi tiap kali menu terkunci diketuk. Admin Utama dan admin biasa tidak melihat notifikasi ini karena mereka bisa membuka kedua halaman itu. Menunya tetap terbuka setelah notifikasi ditutup, jadi member bisa langsung mengetuk menu lain."
-  },
-  {
-   "title": "Tampilan Member kini lebih ringkas di HP",
-   "day": "Rabu, 18 Nov 2026",
-   "time": "05.50 WIB",
-   "tag": "Tampilan",
-   "description": "Kartu akun di halaman Member kini berbentuk baris ringkas di HP, seperti baris Rank Bot: foto profil mengecil dari 42px menjadi 34px dan pindah ke samping nama, bukan lagi di atas nama di tengah kartu. Nama, @akun, dan tombol 'Lihat detail' sejajar dalam satu baris, dan chip status rata kiri — kartunya jauh lebih pendek sehingga daftar akun tidak perlu banyak digulir. Tidak ada informasi yang dihilangkan: peran, status Pemilik, WA, bot, mode, dan runtime tetap tampil sama seperti sebelumnya. Kartu di halaman Kontrol Bot ikut ringkas karena memakai kartu yang sama. Versi style.css diperbarui agar kartu ringkas ini benar-benar sampai ke HP yang sudah pernah membuka panel, karena versi lama sempat tertahan di cache browser."
-  },
-  {
-   "title": "Panel kini memuat jauh lebih cepat",
-   "day": "Selasa, 17 Nov 2026",
-   "time": "21.50 WIB",
-   "tag": "Perbaikan",
-   "description": "Membuka panel terasa berat karena tiap kunjungan mengunduh ulang sekitar 1 MB tanpa kompresi dan tanpa cache. Kini file statis dikirim terkompres (gzip), aset yang sudah berversi boleh disimpan browser selama setahun, dan pustaka nomor telepon (252 KB) hanya dimuat saat halaman Pairing dibuka — bukan di halaman login. Unduhan awal turun dari sekitar 1 MB menjadi sekitar 200 KB dan form login tampil jauh lebih cepat; kunjungan berikutnya lebih ringan lagi karena asetnya sudah tersimpan. Tidak ada fitur yang berubah cara kerjanya."
-  },
-  {
-   "title": "Halaman Rank Bot untuk melihat bot teraktif",
-   "day": "Selasa, 17 Nov 2026",
-   "time": "17.00 WIB",
-   "tag": "Fitur baru",
-   "description": "Menu baru Rank Bot di posisi atas sidebar — peringkat bot teraktif yang bisa dilihat member, Admin Utama, dan admin biasa. Tiga kategori terpisah: Semua (total aktivitas), Read Only (story dibaca), dan ReadSW + ReactionSW (reaksi terkirim), dihitung dari data tiap akun (DATA_AKUN) dan diurutkan terbanyak di atas. Setiap peringkat berbentuk baris ringkas — avatar kecil di samping nama, profil, mode, jumlah aktivitas, dan level rank (Pemula, Aktif, Rajin, Master, Legenda) — agar muat di HP; ada pencarian dan pil kategori, diperbarui realtime tiap 15 detik tanpa refresh. Nama fitur dan statistik kini tampil penuh di HP tanpa terpotong: label mode dipersingkat jadi 'ReadSW + Reaksi' dan teks panjang membungkus ke baris berikut."
-  },
-  {
-   "title": "Member belum tertaut tidak bisa masuk Fitur Bot",
-   "day": "Selasa, 17 Nov 2026",
-   "time": "16.45 WIB",
-   "tag": "Perubahan",
-   "description": "Member biasa yang WhatsApp-nya belum tertaut kini tidak bisa masuk ke halaman Fitur Bot sama sekali — harus tertaut dulu baru bisa masuk. Mengetuk menu Fitur Bot menampilkan notifikasi di tengah layar dan member diarahkan ke halaman Pairing. Aturan ini hanya berlaku untuk member biasa: Admin Utama dan admin biasa tetap bisa masuk Fitur Bot walau belum tertaut."
-  },
-  {
-   "title": "Pemberitahuan tautan WhatsApp kini muncul di layar",
-   "day": "Selasa, 17 Nov 2026",
-   "time": "15.50 WIB",
-   "tag": "Tampilan",
-   "description": "Pengingat untuk member biasa yang WhatsApp-nya belum tertaut kini tampil sebagai kartu notifikasi di tengah layar — sama seperti notifikasi reaksi: latar gelap, ikon peringatan kuning, tombol 'Buka Pairing WhatsApp' yang langsung membuka halaman Pairing, dan tombol 'Tutup'. Bukan lagi kartu di bawah judul halaman dan bukan notifikasi bawaan browser. Notifikasi muncul begitu member membuka Fitur Bot selagi belum tertaut, dan muncul lagi bila tombol mode yang terkunci diketuk; sekali ditutup, tidak muncul lagi sampai keadaan berubah."
-  },
-  {
-   "title": "Peringatan reaksi kini muncul sebagai notifikasi di layar",
-   "day": "Selasa, 17 Nov 2026",
-   "time": "15.15 WIB",
-   "tag": "Tampilan",
-   "description": "Peringatan saat Read Only + ReadSW tidak bisa mengirim reaksi kini tampil sebagai kartu notifikasi di tengah layar — bukan lagi kartu di bawah pengaturan. Kartunya mengikuti desain notifikasi modern: latar gelap, ikon peringatan kuning, tombol 'Tambah emoji' yang langsung mengarahkan ke kolom emoji, dan tombol 'Tutup'; bisa juga ditutup dengan mengetuk latar atau tombol Escape. Sekali ditutup, notifikasi tidak muncul lagi sampai keadaannya hilang lalu muncul kembali."
-  },
-  {
-   "title": "Peringatan bila ReadSW tidak bisa mengirim reaksi emoji",
-   "day": "Selasa, 17 Nov 2026",
-   "time": "14.55 WIB",
-   "tag": "Fitur baru",
-   "description": "Bila mode Read Only + ReadSW aktif tetapi tidak ada emoji dan reaksi otomatis mati, kini muncul peringatan di editor — bot hanya menandai story sebagai dibaca, tanpa mengirim reaksi. Peringatan muncul di halaman Fitur Bot member sendiri dan di editor Kontrol Bot saat admin memantau member; hilang begitu emoji ditambahkan atau reaksi otomatis dinyalakan."
-  },
-  {
-   "title": "Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot",
-   "day": "Selasa, 17 Nov 2026",
-   "time": "14.35 WIB",
-   "tag": "Fitur baru",
-   "description": "Member biasa yang WhatsApp-nya belum tertaut kini melihat kartu pengingat di halaman Fitur Bot: fitur bot belum aktif sampai WhatsApp ditautkan, dan tombolnya langsung membuka halaman Pairing WhatsApp. Selama belum tertaut, tombol mode dan pengaturan story tidak bisa dipakai — mengetuknya menampilkan kartu pengingat itu lagi. Begitu WhatsApp tertaut pertama kali, Read Only + ReadSW dan Online 24 Jam otomatis aktif (sudah begitu sejak lama lewat profil default, kini juga ada tesnya). Tombol Aktifkan di semua kartu mode kini sama-sama hijau agar jelas itu tombol aksi. Admin tidak melihat kartu ini."
-  },
-  {
-   "title": "Tautan panel kini menampilkan pratinjau bergambar saat dibagikan",
-   "day": "Selasa, 17 Nov 2026",
-   "time": "14.15 WIB",
-   "tag": "Tampilan",
-   "description": "Saat tautan panel dibagikan di WhatsApp atau aplikasi lain, kini muncul kartu pratinjau dengan gambar ReactionSw (judul, deskripsi, dan thumbnail 1200×630), bukan lagi tautan polos. Gambar pratinjaunya mengikuti tema panel dan memakai ikon wajah ReactionSw."
-  },
-  {
-   "day": "Selasa, 17 Nov 2026",
-   "time": "13.30 WIB",
-   "title": "Halaman Kontrol Bot untuk admin",
-   "description": "Halaman Kontrol Bot untuk admin. Daftar akun dipisah Admin dan Member, dan di tiap kelompok bot yang jalan dengan runtime terbaru selalu di atas — urutannya diperbarui realtime tiap 15 detik. Admin Utama kini bisa mengelola botnya sendiri dari halaman ini (admin biasa tetap tidak bisa mengelola Admin Utama, tetapi bisa mengelola sesama admin biasa dan member). Admin Utama dan admin biasa bisa memilih akun lalu mengontrol botnya — Nyalakan bot, Restart bot, Matikan bot, dan Hapus sesi WhatsApp — dengan konfirmasi sebelum setiap aksi. Di dalam tiap kartu, admin juga mengatur mode bot akun itu (Read Only, ReadSW + ReactionSW, Online 24 Jam) dan preferensi story-nya (delay 1–20 detik serta emoji reaksi); setiap perubahan tersimpan langsung ke DATA_AKUN akun yang diubah.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Selasa, 17 Nov 2026",
-   "time": "12.50 WIB",
-   "title": "Status Pemilik kini pulih seketika saat kembali ke tab",
-   "description": "Sebelumnya, pemilik akun yang pindah tab atau mengunci HP lebih dari 75 detik langsung terlihat 'Pemilik · Tidak aktif' dan statusnya baru pulih sampai 40 detik setelah kembali — terasa seperti harus refresh. Kini begitu tab kembali dibuka atau jendela kembali fokus, heartbeat dan daftar member langsung dimuat ulang, dan setiap heartbeat yang berhasil langsung diikuti pemuatan ulang daftar member, jadi status Pemilik serta angka Online, Stalker, dan Kunjungan di footer pulih seketika tanpa muat ulang. Catatan: 'Pemilik · Tidak aktif' berarti pemilik akun sedang tidak membuka web panel — bukan botnya berhenti; bot yang berjalan tetap tampil 'Bot WhatsApp · Berjalan'.",
-   "tag": "Perbaikan"
-  },
-  {
-   "day": "Selasa, 17 Nov 2026",
-   "time": "07.50 WIB",
-   "title": "Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP",
-   "description": "Tiga kartu mode di halaman Fitur Bot kini bisa digeser ke samping di HP seperti carousel, lengkap dengan titik indikator yang mengikuti kartu yang terlihat dan kartu yang terbuka mengikuti kartu yang terlihat. Halaman Fitur Bot juga punya kotak pencarian dan pil kategori seperti Log privat — Semua 6, Mode 3, Delay 2, Emoji 1 — yang memfilter kartu mode serta pengaturan delay dan emoji secara realtime.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Selasa, 17 Nov 2026",
-   "time": "07.33 WIB",
-   "title": "Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler",
-   "description": "Lencana WHATSAPP ONLINE di header sempat hilang di HP layar 360px karena aturan CSS menyembunyikannya di lebar itu — kini lencana tetap tampil dengan label ringkas WA Online dan ikut berubah realtime mengikuti status koneksi. Halaman Fitur Bot juga dirapikan: tiga kartu mode (Read Only, Read Only + ReadSW, Online 24 Jam) kini berupa spoiler yang hanya membuka satu kartu dalam satu waktu, dengan penanda Aktif atau Tidak aktif yang akurat di header tiap kartu.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Selasa, 17 Nov 2026",
-   "time": "05.24 WIB",
-   "title": "Info Update dan Member kini punya pencarian + filter kategori",
-   "description": "Halaman Info Update dan Member kini punya kotak pencarian dan pil kategori berangka dengan tampilan yang sama seperti Log privat — Info Update bisa dicari berdasarkan judul, deskripsi, dan kategori serta difilter ke Fitur baru, Perubahan, Perbaikan, Fitur dihapus, atau Tampilan, sedangkan Member bisa dicari berdasarkan akun, nama, dan email serta difilter ke Admin, Member, Bot jalan, WA tertaut, atau Belum aktif — dengan angka hitungan yang diperbarui realtime setiap daftar me-refresh sendiri tanpa muat ulang dan filter yang sedang aktif tetap dipertahankan.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "19.51 WIB",
-   "title": "Menu Backup kini terlihat untuk member, tapi terkunci",
-   "description": "Menu Backup kini terlihat di sidebar member, dengan lencana Terkunci di sampingnya. Member tidak bisa membukanya — diketuk pun muncul pesan 'Backup hanya untuk admin.' Hanya Admin Utama dan admin biasa yang bisa membuka halaman Backup & pemulihan.",
-   "tag": "Perubahan"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "19.51 WIB",
-   "title": "Menu Member pindah ke kategori Info",
-   "description": "Menu Member kini berada di kategori Info (setelah List Bot), bukan lagi di kategori Admin. Kategori Admin kini hanya berisi Backup. Susunan menu jadi lebih sesuai konteks untuk admin maupun member.",
-   "tag": "Tampilan"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "19.51 WIB",
-   "title": "Pesan gagal login kini menyebut akunnya dengan akurat",
-   "description": "Saat gagal masuk, pesannya kini jelas menyebut akun yang diketik: kalau akunnya tidak ditemukan, pesannya 'Akun ... tidak ditemukan. Periksa ejaan atau daftar dulu.'; kalau akunnya ditemukan tapi kata sandinya salah, pesannya 'Akun ... ditemukan, tapi kata sandi salah. Coba lagi.'",
-   "tag": "Perbaikan"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "19.14 WIB",
-   "title": "Menu sidebar kini dikelompokkan dengan garis pemisah",
-   "description": "Menu sidebar kini terbagi jadi 4 kategori — Utama (Panel, Profil akun), Bot (Fitur Bot, Pairing WhatsApp, Log privat), Info (Developer, Info Update, Server, List Bot), dan Admin (Member, Backup) — masing-masing dengan label kecil dan garis pemisah tipis, supaya lebih rapi dan mudah dicari di HP. Di rel ikon yang tertutup, label disembunyikan dan garisnya jadi garis pendek di tengah.",
-   "tag": "Tampilan"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "19.01 WIB",
-   "title": "Backup & pemulihan kini punya halaman sendiri",
-   "description": "Bagian Backup & pemulihan pindah dari halaman Member ke halaman sendiri di menu sidebar, dengan ikon unduh dan judul rata tengah di HP. Halaman ini hanya untuk Admin Utama dan admin biasa — member tidak melihat menunya dan tidak bisa membukanya lewat tautan langsung.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "19.01 WIB",
-   "title": "ZIP backup langsung kini lebih kecil",
-   "description": "Unduhan langsung kini memakai kompresi DEFLATE level 9 (paling kuat), jadi file ZIP-nya sedikit lebih kecil. Formatnya tetap ZIP biasa, jadi tetap bisa dibuka langsung pakai aplikasi bawaan HP tanpa aplikasi tambahan.",
-   "tag": "Perbaikan"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "17.06 WIB",
-   "title": "Menu garis tiga kini muncul di tempat saat diketuk setelah scroll",
-   "description": "Menu dropdown garis tiga dulu menempel di atas halaman, jadi kalau halaman sudah di-scroll ke bawah, menu terbuka di luar layar dan harus scroll balik ke atas untuk melihatnya. Kini menu nempel di layar tepat di bawah topbar, jadi muncul di tempat di mana pun posisi scroll — di desktop maupun di HP.",
-   "tag": "Perbaikan"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "16.40 WIB",
-   "title": "Tombol garis tiga kini menunjukkan tanda seru saat ada notifikasi",
-   "description": "Tanda seru merah muncul di tombol garis tiga selama masih ada Info Update yang belum dibaca atau akun baru di Member. Tandanya hilang begitu semuanya sudah dilihat, dan diperbarui realtime tanpa muat ulang halaman.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "16.30 WIB",
-   "title": "Backup kini bisa diunduh langsung tanpa sandi atau dikirim ke Telegram",
-   "description": "Di halaman Backup & pemulihan ada dua pilihan baru khusus admin: Unduh langsung tanpa sandi (ZIP biasa yang lebih kecil, langsung diunduh browser) dan Kirim ke Telegram (bot mengirim ZIP ke chat Telegram kamu). Unduh terenkripsi dengan kata sandi tetap tersedia.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "15.42 WIB",
-   "tag": "Perbaikan",
-   "title": "Unduh backup terenkripsi kini berfungsi untuk semua akun",
-   "description": "Tombol Unduh backup terenkripsi sebelumnya selalu gagal begitu ada akun yang pernah tersambung WhatsApp, karena file pemulihan sesi (session.json.good dan session.json.bak) tidak ada dalam daftar file yang boleh di-backup. Sekarang kedua file itu ikut ter-backup, jadi ZIP berisi data akun, sesi WhatsApp beserta pemulihannya, DATA_KUNJUNGAN, dan DATA_STALKER — dibuat dari isi disk saat tombol diklik, tanpa perlu muat ulang. Catatan: Restore point otomatis hanya dibuat tepat sebelum restore (maksimal 3 tersimpan), bukan berkala."
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "14.20 WIB",
-   "tag": "Perbaikan",
-   "title": "Angka footer kini langsung diperbarui saat tab kembali dibuka",
-   "description": "Angka Online, Stalker, dan Kunjungan di footer memang sudah diperbarui otomatis tiap 10 detik tanpa muat ulang — tapi saat tab sempat ditinggal, angkanya bisa tertinggal sampai interval berikutnya. Sekarang begitu tab kembali dibuka, angkanya langsung diambil ulang dari server, jadi yang terlihat selalu angka terbaru."
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "13.42 WIB",
-   "tag": "Fitur baru",
-   "title": "Menu Member kini punya notif akun baru",
-   "description": "Menu Member di sidebar kini menampilkan angka hijau seperti di Info Update, tapi isinya berbeda: jumlah akun baru — member maupun admin — yang belum kamu lihat. Angkanya dihitung per akun, jadi yang dilihat admin dan member bisa berbeda. Begitu halaman Member dibuka dengan sengaja, angkanya hilang. Perbaikan: angka tidak lagi hilang begitu login — penanda hanya maju saat halaman Member diklik, bukan saat aplikasi mendarat di sana otomatis setelah login, jadi angka sempat terlihat; akun baru yang daftar setelah itu muncul lagi sebagai angka baru, dan diperbarui otomatis tiap 15 detik tanpa perlu muat ulang."
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "10.25 WIB",
-   "tag": "Fitur baru",
-   "title": "Info Update kini bisa dibuka sebelum login",
-   "description": "Menu informasi sebelum login dulu hanya punya Info, Developer, Server, dan List Bot — daftar pembaruan panel hanya bisa dilihat setelah masuk. Kini ada kartu Info Update selebar penuh di menu itu: daftar perubahan, fitur baru, dan perbaikan terbaru bisa dibaca sebelum login, dengan paginasi yang sama seperti di dalam panel."
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "10.24 WIB",
-   "tag": "Tampilan",
-   "title": "Kesalahan pairing kini muncul sebagai gelembung di kolomnya",
-   "description": "Saat menekan Gasss tanpa mencentang dua persetujuan atau dengan nomor yang tidak valid, pesannya dulu tampil sebagai kotak notif di bawah tombol. Kini pesannya muncul sebagai gelembung bawaan browser yang menempel di kolom yang salah dan menyebut persis apa yang kurang — sama seperti gelembung validasi email di halaman daftar. Pemilih metode juga tidak lagi hilang saat nomor tidak valid: dulu nomor seperti itu membuat pemilih tersembunyi sementara tombol terkunci, jadi pengguna mentok; kini pemilih tetap tampil karena QR tidak butuh nomor dan Pairing Code memvalidasi nomor di Gasss kedua."
-  },
-  {
-   "day": "Senin, 16 Nov 2026",
-   "time": "08.42 WIB",
-   "tag": "Perbaikan",
-   "title": "Penjelasan halaman pairing saat sesi ditolak kini lebih jelas dan akurat",
-   "description": "Halaman Pairing WhatsApp saat sesi ditolak dulu menulis perangkat masih tertaut dan menyuruh coba pulihkan dulu, padahal sesi yang sudah dicabut WhatsApp tidak bisa dipulihkan lagi. Kini halamannya menjelaskan dengan jujur: coba pulihkan dulu, tapi kalau gagal terus berarti sesi sudah dicabut — hapus perangkat lama di WhatsApp > Perangkat tertaut, lalu pairing ulang dengan nomor baru."
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "21.23 WIB",
-   "tag": "Perubahan",
-   "title": "URL panel kini bersih tanpa #halaman dan halaman terakhir tetap diingat",
-   "description": "Saat pindah halaman di dalam panel, address bar dulu menampilkan alamat dengan #mode, #server, dan sejenisnya. Kini alamatnya selalu tampil bersih sebagai https://readsw.24h.sh/ saja. Tautan dalam seperti readsw.24h.sh/#server tetap bisa dibuka — halamannya langsung terbuka lalu alamatnya dibersihkan sendiri. Halaman terakhir yang dibuka juga tetap diingat di tab yang sama, jadi habis refresh kembali ke halaman itu, bukan ke halaman awal; tab baru tetap mulai dari halaman awal."
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "19.44 WIB",
-   "tag": "Perubahan",
-   "title": "Halaman Developer sebelum login kini sama dengan di dalam panel",
-   "description": "Tab Developer di halaman info sebelum login dulu menampilkan ringkasan singkat yang isinya berbeda dengan halaman Developer di dalam panel. Kini keduanya memakai isi yang sama — judul Ruang Developer, kartu tentang pembuat, kanal bantuan WhatsApp, Telegram, dan Facebook, serta fokus pengembangan — jadi tidak ada lagi dua versi yang berbeda. Isi panel sebelum login disalin langsung dari halaman Developer, jadi perubahan di halaman itu otomatis ikut tampil di halaman masuk."
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "18.54 WIB",
-   "tag": "Fitur baru",
-   "title": "Menu Info Update kini punya badge jumlah update belum dibaca",
-   "description": "Di menu samping kini muncul angka kecil di samping Info Update yang menunjukkan berapa pembaruan yang belum kamu baca — muncul untuk admin dan member. Begitu halaman Info Update dibuka, angkanya hilang karena semua pembaruan dianggap sudah dibaca. Status dibaca disimpan per akun di folder DATA_AKUN masing-masing, jadi akun lain tidak ikut terpengaruh."
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "18.36 WIB",
-   "tag": "Tampilan",
-   "title": "Konfirmasi blokir dan hapus kini pakai dialog panel, bukan bawaan browser",
-   "description": "Konfirmasi tindakan penting — blokir/buka blokir member, hapus akun permanen, restore backup, batalkan pairing code, hapus sesi WhatsApp, dan matikan bot — dulu memakai dialog bawaan browser yang tampilannya kaku dan tidak mengikuti tema panel. Kini semuanya memakai dialog buatan panel sendiri: kartu gelap senada tema, tombol Batal dan aksi yang besar dan mudah ditekan, pas di layar HP, dan bisa ditutup dengan ketuk latar atau tombol Escape."
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "18.26 WIB",
-   "tag": "Tampilan",
-   "title": "Paginasi Info Update kini rapi dan bisa lompat ke awal/akhir",
-   "description": "Tombol nomor halaman 1–9 yang dulu meluber ke kanan di layar HP kini hanya menampilkan jendela 5 halaman di sekitar halaman aktif, dengan penanda … di antara halaman yang tersembunyi. Tombol dibuat lebih kecil di HP dan baris paginasi bisa membungkus, jadi tidak ada lagi overflow horizontal. Kini ada juga tombol « untuk lompat ke halaman pertama dan » untuk lompat ke halaman terakhir, jadi tidak perlu klik satu-satu untuk sampai ke ujung."
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "16.29 WIB",
-   "title": "Folder akun Admin dan Member kini terpisah",
-   "description": "Di dalam folder DATA_AKUN kini ada dua subfolder peran: ADMIN untuk akun admin (DATA_AKUN/ADMIN) dan MEMBER untuk akun member (DATA_AKUN/MEMBER) — tiap user punya foldernya sendiri, jadi admin dan member tidak bentrok walau namanya sama. Akun lama yang masih di susunan folder lama tetap terbaca otomatis (fallback), jadi sesi dan bot tidak putus. Backup dan pemulihan ikut mencakup susunan baru ini.",
-   "tag": "Perubahan"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "16.06 WIB",
-   "title": "Daftar kini bisa pilih Member atau Admin",
-   "description": "Formulir daftar kini punya pilihan Member atau Admin (dua kartu berikon, pas di HP). Member tetap cuma verifikasi; daftar Admin berbeda — setelah verifikasi wajib memasukkan kode akses, dan akun admin baru dibuat bila kodenya benar. Kode salah 5 kali membatalkan pendaftaran.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "16.06 WIB",
-   "title": "Admin Utama kini ditandai di daftar member",
-   "description": "WILYKUN — admin dari config.json — kini ditandai jelas sebagai Admin Utama di daftar member: lencana mahkota emas + bingkai kartu emas, berbeda dari admin biasa yang cuma berlabel Admin. Admin Utama juga satu-satunya yang bisa mengelola admin biasa (blokir/hapus/kelola bot); admin biasa tidak bisa menyentuh Admin Utama atau admin lain.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "15.24 WIB",
-   "title": "Bar atas panel kini menempel saat di-scroll",
-   "description": "Bar atas (tombol menu, judul halaman, dan avatar) kini mengikuti saat halaman di-scroll ke bawah, jadi menu dan judul selalu terlihat tanpa harus scroll balik ke atas. Berlaku di semua halaman panel, HP maupun desktop.",
-   "tag": "Tampilan"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "14.15 WIB",
-   "title": "Halaman Server kini berikon SVG",
-   "description": "Tiap sel di halaman Server — di dalam panel maupun preview di halaman masuk — kini berikon SVG sesuai konteksnya: centang untuk status, jam untuk uptime, chip untuk CPU, database untuk RAM, hard disk untuk disk, dan kalender untuk waktu server.",
-   "tag": "Tampilan"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "13.58 WIB",
-   "title": "Kategori Info Update kini akurat + ikon baru",
-   "description": "Tiap entri kini berkategori jelas — Fitur baru, Perubahan, Perbaikan, Fitur dihapus, atau Tampilan — dengan ikon SVG dan warna poster sendiri per kategori, jadi jenis perubahannya langsung kelihatan tanpa baca dulu. Semua entri lama ikut dikategorikan ulang.",
-   "tag": "Tampilan"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "13.58 WIB",
-   "title": "Data server di dalam panel kini lebih lengkap",
-   "description": "Halaman Server di dalam panel kini menampilkan model CPU, load 1/5/15 menit, RAM bebas dan terpakai, heap proses, disk total/terpakai/bebas, jam server mulai, dan uptime sistem — diperbarui tiap 5 detik selama halamannya dibuka. Alamat IP tidak pernah ditampilkan.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "13.58 WIB",
-   "title": "Jumlah 'Belum aktif' kini ikut status bot realtime",
-   "description": "Angka Aktif/Belum aktif di statistik akun sebelumnya dihitung dari verifikasi email, jadi selalu 7/0 walau ada bot yang berhenti. Kini dihitung dari status bot tiap akun yang sedang berjalan (saat dipasang: Aktif 4, Belum aktif 3 — admin, bot_botak01, dan dlyzn yang sesinya ditolak WhatsApp).",
-   "tag": "Perbaikan"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "13.47 WIB",
-   "title": "Server & List Bot kini ada di menu dalam panel",
-   "description": "Halaman Server (status realtime) dan List Bot (mode bot + statistik akun) kini ada juga di dalam panel, lewat menu garis tiga di kiri atas — isinya sama seperti di halaman masuk, dan bisa dibuka admin maupun member. Status server diperbarui tiap 5 detik selama halamannya dibuka; statistik akun ikut polling 15 detik.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "13.32 WIB",
-   "title": "Tombol garis tiga desktop kini membuka halaman info",
-   "description": "Tombol garis tiga di halaman masuk desktop kini membuka halaman info yang sama seperti di HP (Info, Developer, Server realtime, dan List Bot) dengan tata letak lebar yang rapi di kolom kiri, jadi kolomnya tidak lagi kosong saat diklik; tombol tetap di tempatnya dan form tidak bergeser. Ketuk × untuk kembali ke panel info awal. Di HP, tab info kini benar-benar sembunyi saat menu tampil.",
-   "tag": "Perubahan"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "12.35 WIB",
-   "title": "Avatar kini 48 pilihan: 24 cowok + 24 cewek",
-   "description": "Galeri avatar bertambah dari 28 menjadi 48 ilustrasi anime 2D — 24 cowok dan 24 cewek. Enam cewek yang selama ini tersimpan tapi belum tampil (Yui, Noa, Sakura, Yukina, Aya, Runa) kini bisa dipilih, ditambah 14 gambar baru (cowok: Akira, Kazuki, Daiki, Taichi, Hikaru, Kenta, Sho, Renji, Hiro, Yuya; cewek: Kaede, Mei, Natsuki, Suzu) — semuanya di bawah 100 KB dari sumber bebas lisensi. Tab dan Acak avatar ikut menyesuaikan jumlah baru.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "06.24 WIB",
-   "title": "Hapus akun permanen & layar akun diblokir/dihapus",
-   "description": "Admin kini bisa menghapus akun member secara permanen dari detail member (hanya admin, konfirmasi dua lapis): akun hilang dari registry, sesi panel dan bot dihentikan, folder DATA_AKUN terhapus, dan orang itu tetap mendapat penjelasan bila coba login lagi. Akun yang diblokir atau dihapus kini melihat layar khusus saat login — judul, alasan, dan tombol WhatsApp/Telegram admin untuk pengajuan buka blokir atau pertanyaan.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "05.56 WIB",
-   "title": "Info Update kini ala MyAnimeList: poster + scroll manual",
-   "description": "Tiap entri kini tampil seperti kartu MyAnimeList: poster di kiri, judul, tanggal, dan tag kategori — teks deskripsi ada di kotak yang digeser manual (bukan berjalan otomatis), jadi kartu tetap rapih di HP dan kamu yang atur sendiri seberapa jauh membacanya.",
-   "tag": "Tampilan"
-  },
-  {
-   "day": "Minggu, 15 Nov 2026",
-   "time": "05.05 WIB",
-   "title": "Aktivitas panel kini menampilkan terakhir online",
-   "description": "Kartu Aktivitas panel di detail member kini menampilkan kapan pemilik akun terakhir online di web (mis. “Terakhir online di web 5 menit yang lalu”), dihitung dari heartbeat sesi panel terakhir dan diperbarui tiap polling; kalau sedang online tertulis “Sedang online di web sekarang.” Kini semua teks detail member juga rata tengah di layar HP — label, nilai, dan catatan di setiap kartu (email, status akun, WhatsApp, nomor, bot, runtime, terakhir terlihat, bergabung).",
-   "tag": "Perubahan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "time": "23.26 WIB",
-   "title": "Sesi WhatsApp kini dicadangkan otomatis",
-   "description": "session.json tiap akun kini disalin otomatis ke session.json.bak saat tersambung dan berkala tiap 15 menit (hanya bila sesi valid); kalau file sesi hilang atau rusak, pemulihan otomatis mencoba cadangan ini setelah salinan .good. Cadangan berisi kredensial yang sama, jadi tidak menyelamatkan bila WhatsApp mencabut kredensial — untuk itu tetap perlu pairing ulang.",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "time": "21.17 WIB",
-   "title": "Tombol info login kini ada juga di desktop",
-   "description": "Tombol tiga titik di halaman masuk kini jadi garis tiga (☰) di kiri atas sebelum logo ReactionSw, tampil di HP maupun layar lebar. Di HP diketuk untuk membuka panel info; di desktop diketuk untuk menyembunyikan atau menampilkan panel info di kiri.",
-   "tag": "Perubahan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "time": "20.38 WIB",
-   "title": "Runtime bot tidak lagi reset saat restart",
-   "description": "Waktu jalan bot kini tersimpan per akun dan lanjut terus setelah server restart atau WhatsApp menyambung ulang — hanya kembali ke nol kalau perangkat ditautkan ulang atau sesi dihapus.",
-   "tag": "Perbaikan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "time": "20.38 WIB",
-   "title": "Kartu member kini di tengah di HP",
-   "description": "Di layar HP, foto, nama, tombol Lihat detail, dan chip status di setiap kartu member/admin kini tersusun rapi di tengah — pas dengan lebar layar, tidak lagi rata kiri.",
-   "tag": "Tampilan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "description": "Kalau WhatsApp menolak sesi, panel kini mencoba sambung ulang sendiri dulu dari cadangan sesi terakhir yang sehat — halaman pairing tidak lagi langsung meminta nomor. Kalau pemulihan gagal, baru muncul pilihan pairing ulang.",
-   "time": "19.09 WIB",
-   "title": "Sesi ditolak WhatsApp kini dipulihkan otomatis",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "description": "Item detail kini berdampingan dua kolom di HP (Email + Status, WhatsApp + Nomor, dst) — pas dengan ukuran layar, tidak lagi satu baris penuh ke bawah.",
-   "time": "15.10 WIB",
-   "title": "Detail member 2 kolom di mobile",
-   "tag": "Tampilan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "description": "Tiga kartu fitur (ReadSW, ReactionSW, Online 24 Jam) kini tampil berdampingan tiga kolom di HP, bukan lagi menumpuk ke bawah.",
-   "time": "15.02 WIB",
-   "title": "Kartu Fitur Akun berdampingan di mobile",
-   "tag": "Tampilan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "description": "Daftar pembaruan kini dibaca langsung dari file — entri baru langsung tampil di halaman tanpa deploy ulang.",
-   "time": "14.54 WIB",
-   "title": "Daftar Info Update kini realtime",
-   "tag": "Perubahan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "description": "Setiap kartu member kini menampilkan mode bot yang aktif, tepat di antara chip Bot WhatsApp dan Runtime bot.",
-   "time": "14.00 WIB",
-   "title": "Chip Mode aktif di daftar member",
-   "tag": "Fitur baru"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "description": "Member yang baru jalan atau baru restart di atas, runtime terlama di bawah, dan yang botnya tidak berjalan di paling bawah. Judul seksi berubah jadi “Member”.",
-   "time": "13.34 WIB",
-   "title": "Daftar member diurutkan ikut runtime bot",
-   "tag": "Perbaikan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "description": "Detail member menampilkan email yang disensor (contoh bang****@gmail.com) dan nomor tersamarkan, bukan lagi “—” atau “Belum aktif”.",
-   "time": "12.28 WIB",
-   "title": "Detail member kini lengkap",
-   "tag": "Perbaikan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "description": "Member yang WhatsApp-nya belum tertaut tetap bisa membuka Fitur Bot dan mengatur mode dulu; worker berjalan otomatis setelah akun tertaut.",
-   "time": "12.19 WIB",
-   "title": "Menu Fitur Bot selalu tampil",
-   "tag": "Perbaikan"
-  },
-  {
-   "day": "Sabtu, 14 Nov 2026",
-   "description": "Nomor tampil seperti 62896****8411 — akhiran selalu 4 digit — dan diperbarui otomatis begitu WhatsApp tersambung.",
-   "time": "12.03 WIB",
-   "title": "Nomor tersamarkan format baru",
-   "tag": "Perbaikan"
-  }
- ]
+  "updatedAt": "2026-11-21T18:21:39+07:00",
+  "updates": [
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "18.21 WIB",
+      "title": "Balas tidak lagi lompat ke bawah, Obrolan full layar, typing muncul",
+      "tag": "Bug",
+      "description": "Tiga perbaikan Obrolan sekaligus. Pertama, menekan Balas sempat membuat daftar pesan lompat sendiri ke bawah karena kolom ketik langsung difokuskan: kini fokusnya tanpa menggulir dan posisi scroll daftar dipertahankan, jadi tampilan tetap di pesan yang dibalas. Kedua, Obrolan kini benar-benar full layar: tinggi halaman mengikuti tinggi layar yang terlihat walau keyboard HP terbuka, jadi kolom ketik tetap terlihat di atas keyboard tanpa ruang kosong. Ketiga, indikator mengetik sempat tidak pernah muncul karena jendelanya hanya 5 detik, sama dengan interval poll 5 detik — sekali poll terlewat, typing langsung hilang: kini jendelanya 12 detik, jadi indikator tetap terlihat walau satu poll terlewat dan hilang sendiri setelah 12 detik. Info Update juga punya dua kategori baru, Bug dan Fitur Error, supaya jenis perubahannya akurat sesuai konteks."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "17.56 WIB",
+      "title": "Bar atas ciut jadi ramping, typing ada avatar + nama, jam pesan AM/PM",
+      "tag": "Perbaikan",
+      "description": "Bar atas Obrolan yang diciutkan kini jadi bar ramping: label Obrolan di kiri dan tombol panah yang lebih lebar di pojok kanan, supaya lega dan pas. Indikator mengetik kini menampilkan avatar kecil dan nama orang yang mengetik — kalau beberapa orang mengetik, namanya digabung dan diperbarui realtime ala grup WhatsApp. Jam pesan kini 12 jam dengan AM/PM, misalnya 05.00 PM dan 08.00 AM, tetap WIB dan realtime."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "05.53 WIB",
+      "title": "@ tidak muncul lagi setelah diklik, tombol @ di pojok kanan bawah, bar atas bisa diciutkan",
+      "tag": "Perbaikan",
+      "description": "@ balasan yang sudah diklik tidak muncul lagi: balasan yang sudah dilihat dicatat terpisah, jadi poll realtime tidak menambahkannya kembali. Tombol @ pindah ke pojok kanan bawah daftar pesan, mengambang ala WhatsApp. Bar atas Obrolan kini bisa diciutkan dengan tombol panah supaya ruang daftar pesan lebih luas, dan pilihannya tersimpan walau halaman di-refresh."
+    },
+    {
+      "day": "Sabtu, 21 Nov 2026",
+      "time": "05.41 WIB",
+      "title": "Obrolan lebih luas di HP, @ balasan, dan lompat ke pesan asli",
+      "tag": "Fitur baru",
+      "description": "Obrolan di HP kini setinggi layar: daftar pesan mengisi ruang, bubble hampir selebar layar, avatar di atas dan jam di pojok kiri bubble, dan scroll mengalir sampai ke bawah tanpa macet. Panel emoji langsung menutup saat satu emoji dipilih. Kutipan balasan bisa diketuk untuk lompat ke pesan asli yang disorot hijau. Kalau ada yang membalas pesanmu, muncul @ beserta jumlahnya di menu Obrolan dan di pojok halaman — tersimpan walau halaman di-refresh, dan satu klik @ melompat ke balasan itu lalu angkanya berkurang satu."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "21.32 WIB",
+      "title": "Alasan terputus kini tampil walau panel baru restart",
+      "tag": "Perbaikan",
+      "description": "Notifikasi belum tertaut sempat tetap polos untuk sesi yang sudah terputus sebelum panel restart: antrean resume panel baru belum sampai ke akun itu, jadi alasan dan waktunya belum kebaca. Kini status pairing mengambil catatan terputus terakhir dari file (termasuk untuk sesi yang filenya masih tersimpan tapi belum dicoba lagi), jadi alasan dan waktunya langsung tampil begitu panel dibuka — catatan poetraardnsyh (terputus 21.09 WIB) dan raptorzz (21.07 WIB) sudah diisi dari log terakhir."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "21.30 WIB",
+      "title": "Sesi WhatsApp yang sudah tertaut tidak lagi disuruh pairing ulang",
+      "tag": "Perbaikan",
+      "description": "Sesi WhatsApp sempat terlogout sendiri habis restart panel lalu minta pairing code baru padahal session.json dan cadangannya masih bagus: status pairing hanya cerminan state di memori, dan saat member minta kode baru, panel menemukan sesi sudah tertaut (kode 409) lalu menghapus state in-memory-nya — akun jatuh ke 'belum pernah tertaut'. Kini sesi yang sudah tertaut dipertahankan saat kena 409 dan pesannya mengarahkan ke Sambungkan ulang, resume menyambungkan ulang state tertaut yang socket-nya belum tersambung, dan status panel menampilkan 'Sesi tersimpan' dengan tombol Sambungkan ulang bila file sesi masih ada di disk tapi belum tersambung. Resume awal yang gagal dicoba sekali lagi sebelum dilewati, dan file sesi tanpa kunci (0 kunci, seperti raptorzz) langsung ditolak supaya panel jujur bilang pemilik akun harus pairing ulang."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "21.15 WIB",
+      "title": "Notif 'WhatsApp belum tertaut' kini sebut alasan + waktu terputus",
+      "tag": "Perbaikan",
+      "description": "Notifikasi member yang WhatsApp-nya belum tertaut kini menampilkan alasan sesi terputus (logout dari WhatsApp, sesi ditolak, atau koneksi terputus berulang kali) beserta hari, tanggal, bulan, tahun, dan pukul WIB saat kejadiannya, diperbarui realtime mengikuti status pairing; notifikasi yang sempat ditutup muncul lagi kalau ada kejadian terputus baru."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "21.02 WIB",
+      "title": "Sesi WhatsApp pulih otomatis dari cadangan sebelum minta pairing ulang",
+      "tag": "Perbaikan",
+      "description": "Sesi WhatsApp sempat terlogout sendiri lalu minta pairing code baru padahal cadangan sesi masih ada. Penyebabnya ada tiga: pemulihan hanya mencoba salinan sehat dan berhenti kalau salinan itu ditolak (cadangan otomatis yang lebih segar tidak pernah disentuh), sesi yang 5 kali gagal sambung ulang langsung dinyatakan invalid tanpa mencoba cadangan sama sekali, dan restart panel bisa jalan dua proses sekaligus sehingga berebut sesi yang sama. Kini pemulihan mencoba cadangan satu per satu (salinan sehat lalu cadangan otomatis), sesi yang 5 kali gagal dicoba pulihkan dulu sebelum invalid, tombol Sambungkan ulang juga mencoba cadangan dulu, dan restart panel selalu mematikan panel lama dulu supaya hanya satu proses yang jalan."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "20.00 WIB",
+      "title": "Refresh tidak lagi menampilkan halaman Profil saat sedang di Rank Bot",
+      "tag": "Perbaikan",
+      "description": "Refresh di Rank Bot sempat menampilkan halaman Profil dulu (hantu): halaman terakhir baru dipulihkan setelah status pairing kembali dari server, sementara halaman Profil satu-satunya yang terlihat secara default di panel. Kini halaman terakhir (atau tautan #halaman) dipulihkan langsung saat panel dimuat, sebelum status pairing diambil — refresh di Rank Bot langsung kembali ke Rank Bot, tanpa singgah ke Profil."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "19.44 WIB",
+      "title": "Angka notif Log Bot dan Obrolan kini tanpa batas",
+      "tag": "Perbaikan",
+      "description": "Angka notifikasi di menu Log Bot dan Obrolan tidak lagi berhenti di 99+: berapa pun story atau pesan yang belum dibaca, itulah yang tampil secara realtime, tanpa batas. Angka tetap tersimpan per akun di perangkat (refresh tidak menghilangkan), dan tetap hilang hanya saat halamannya dibuka."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "18.55 WIB",
+      "title": "Notif Obrolan kini muncul realtime, pesan tersimpan di Obrolan.json, scroll tidak lagi macet",
+      "tag": "Perbaikan",
+      "description": "Tiga perbaikan Obrolan sekaligus. Pertama, notif pesan baru sempat tidak muncul: pengguna yang belum pernah membuka Obrolan dianggap sudah melihat semua pesan, jadi pesan pertama tidak pernah dihitung — kini semua pesan orang lain yang belum dibaca dihitung, pesan pertama pun memunculkan angka notif realtime. Kedua, semua pesan chat kini tersimpan rapi di data/Obrolan.json (bukan lagi di store.json); pesan lama dipindah otomatis saat panel dinyalakan dan field lamanya dibersihkan. Ketiga, scroll daftar pesan sempat macet karena poll tiap 5 detik membangun ulang seluruh daftar dan mereset posisi scroll — kini daftar hanya dirender ulang bila pesannya berubah, dan posisi scroll pengguna dipertahankan saat membaca pesan lama."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "18.47 WIB",
+      "title": "Kolom ketik Obrolan kini selalu terlihat di HP",
+      "tag": "Perbaikan",
+      "description": "Halaman Obrolan di HP sempat kepotong: bar Balas kosong selalu tampil menutupi layar (gaya display:flex/grid menimpa atribut hidden), dan daftar pesan terlalu tinggi (62vh) sampai kolom ketik terdorong ke bawah layar. Kini bar Balas, panel emoji, dan indikator mengetik benar-benar tersembunyi sampai dipakai; daftar pesan lebih pendek di HP (46vh) supaya judul, daftar, dan kolom ketik muat satu layar; dan kolom ketik menempel di bawah layar supaya selalu terjangkau. Tombol Enter di keyboard HP maupun desktop kini mengirim pesan (Shift+Enter untuk baris baru), termasuk keyboard HP yang tidak mengirim keydown Enter."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "18.36 WIB",
+      "title": "Obrolan: ngobrol bareng semua akun di panel",
+      "tag": "Fitur baru",
+      "description": "Ada halaman baru Obrolan di bawah Profil akun: Admin Utama, admin, dan member bisa ngobrol bareng realtime ala WhatsApp — pesan sendiri di kanan, pesan orang lain di kiri lengkap dengan nama dan ikon peran (mahkota untuk Admin Utama, perisai untuk admin, orang untuk member). Saat sedang mengetik, muncul tulisan 'sedang mengetik' realtime; pesan bisa dibalas (kutipan pesan asli ikut tampil) dan emoji bisa dikirim lewat panel emoji; media (foto, video, file) tidak bisa dikirim. Pesan baru dari orang lain muncul sebagai angka notif di menu Obrolan (maks 99+), bertahan walau halaman di-refresh, dan baru hilang saat halaman Obrolan dibuka."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "09.56 WIB",
+      "title": "Notif Log Bot tidak lagi hilang saat refresh",
+      "tag": "Perbaikan",
+      "description": "Angka notifikasi di menu Log Bot sempat hilang begitu halaman di-refresh, padahal story-nya belum dilihat — angkanya hanya tersimpan di memori dan penanda sudah-dilihatnya kosong, jadi setelah refresh story itu dianggap sudah dihitung. Kini angka dan penanda terakhir yang dihitung tersimpan di perangkat per akun: refresh tidak menghilangkan angka, story baru menambah angka (maks 99+), dan angka baru hilang saat halaman Log Bot dibuka."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "08.05 WIB",
+      "title": "Log privat kini jadi Log Bot dan ada notif story baru",
+      "tag": "Fitur baru",
+      "description": "Menu dan halaman Log privat berganti nama jadi Log Bot — menu sidebar, judul halaman, dan label di halaman ikut berubah, tanpa mengubah isi lognya. Kini tiap kali ada story baru yang masuk selagi pengguna tidak sedang di halaman Log Bot, muncul angka notifikasi di menu Log Bot (di HP jadi titik hijau saat sidebar tertutup), dihitung realtime per akun dari story yang belum dilihat; angkanya hilang begitu halaman Log Bot dibuka. Entri log yang sudah ada saat panel dibuka tidak dihitung sebagai baru."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "08.00 WIB",
+      "title": "Bot jalan otomatis setelah pairing, kata worker jadi Start bot",
+      "tag": "Perbaikan",
+      "description": "Setelah pairing code diterima, bot sempat diam karena auto-start pernah dimatikan sistem saat sesi ditandai invalid — pengguna harus menekan Start bot sendiri (BangWily menautkan 07.43 WIB, bot baru jalan 07.52 WIB setelah tombol ditekan). Kini begitu WhatsApp tertaut dari pairing code atau QR, bot langsung jalan otomatis (npm start) tanpa perlu menekan apa pun. Kata 'worker' yang membingungkan di layar diganti 'Start bot' / 'bot' — judul kartu Kontrol Bot kini Start bot, status dan hitungannya jadi BOT BERHENTI / Bot jalan. Begitu tertaut, muncul juga notifikasi di tengah layar: kalau bot sudah jalan, tombolnya 'Lihat Start bot' dan langsung menggulir ke kartu Start bot."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "07.35 WIB",
+      "title": "Pairing code WhatsApp kini muncul lewat jalur proxy VM",
+      "tag": "Perbaikan",
+      "description": "Pairing code dan QR WhatsApp tidak pernah muncul dari VM ini karena Baileys menyambung langsung ke WhatsApp tanpa lewat egress proxy VM, sementara egress langsung diblokir — semua percobaan pairing dan sambung ulang mati instan kode 408 (1689 kali sejak 19 Nov malam), dan belum pernah ada satu pun kode yang terbit. Kini koneksi WhatsApp panel berjalan lewat proxy VM (CONNECT tunnel, otomatis bila proxy tersedia, langsung bila tidak): pairing code admin utama untuk nomor 6289681007623 terbit dalam 8 detik, dan dua sesi member (ryobot, aiivyoo) akhirnya tersambung nyata dari VM ini. Sesi lama yang ditolak WhatsApp dengan kode 401 harus pairing ulang dengan kode baru — kini kodenya muncul."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "06.35 WIB",
+      "title": "Sesi ditolak kini langsung pairing ulang, tanpa kartu pemulihan",
+      "tag": "Perbaikan",
+      "description": "Sesi yang ditolak WhatsApp (mis. BangWily) dulu menampilkan kartu pemulihan dengan tombol Coba pulihkan sesi, padahal sesi itu sudah gagal disambung ulang 5 kali dan tidak bisa dipulihkan — dan saat nomor lama dimasukkan, panel malah terpental kembali ke kartu itu karena poll status tiap 5 detik menampilkan lagi kartu pemulihan selagi nomor diketik atau permintaan kode masih berjalan. Kini state sesi ditolak langsung menampilkan form pairing: masukkan nomor lama atau baru, minta pairing code, dan sesi lama dibersihkan sepenuhnya saat pairing baru dimulai, termasuk cadangan session.json.good dan session.json.bak yang sebelumnya masih tersimpan dan bisa membangkitkan lagi sesi yang ditolak. Tombol Coba pulihkan sesi dihapus dari alur ini, dan Sambungkan ulang pada sesi yang sudah ditolak langsung memberi pesan jujur untuk pairing ulang, bukan pemulihan yang pasti gagal."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "06.24 WIB",
+      "title": "Info Update kini memberi notifikasi realtime",
+      "tag": "Perbaikan",
+      "description": "Selama ini angka di menu Info Update baru diperbarui saat pindah halaman, jadi pembaruan yang masuk selagi panel dibuka tidak langsung ketahuan. Kini panel memeriksa entri terbaru tiap 60 detik: begitu ada entri baru, muncul toast Info Update baru di layar dan angka di menu ikut diperbarui, tanpa pindah halaman atau memuat ulang. Satu entri hanya diberitahukan sekali, dan entri yang sudah ada saat panel dibuka tidak memicu toast."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "06.21 WIB",
+      "title": "Hapus sesi kini tersedia di kartu Kontrol Bot",
+      "tag": "Perbaikan",
+      "description": "Saat Start bot gagal karena sesi WhatsApp ditolak, panel dulu tetap menampilkan status lama dan tombol Hapus sesi tidak muncul di Panel, jadi pemilik akun terjebak di kartu Kontrol Bot tanpa jalan keluar. Kini kalau aksi bot gagal karena sesi ditolak, panel langsung memuat ulang status pairing sehingga kartu dan lencana berubah ke keadaan sebenarnya, dan tombol Hapus sesi tampil di kartu Kontrol Bot walau nomornya tidak tersimpan, karena hapus memakai akun (username), bukan nomor. Hapus sesi memakai kunci yang sama dengan Hapus sesi di Pairing dan member: timer sambung ulang dimatikan, socket logout, lalu session.json, cadangan session.json.bak dan session.json.good, serta kredensial Baileys di DATA_AKUN sesuai username dihapus, tanpa bentrok dengan sambung ulang yang sedang berjalan. Setelah dihapus, minta pairing code baru untuk menautkan lagi."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "06.04 WIB",
+      "title": "Sesi WhatsApp yang logout kini terdeteksi otomatis",
+      "tag": "Perbaikan",
+      "description": "Akun member yang sudah logout atau unlink di WhatsApp (BangWily dan 4 akun lain) dulu tetap tampil tertaut di panel karena sesi yang mati diulang sambung tanpa henti (kode 408) dan panel menganggap menyambung ulang sama dengan tertaut. Kini setelah 5 kali gagal sambung ulang berturut-turut sesi ditandai tidak dapat dipulihkan: lencana dan kartu status jujur (MENYAMBUNG, TERPUTUS, DITOLAK), tombol Sambungkan ulang dan Hapus sesi tampil di akun member yang bermasalah, dan kode pairing baru langsung muncul di layar begitu tiba (realtime) tanpa muat ulang. Akun yang masih tertaut sehat tidak terganggu. Akun yang ditandai harus tautkan ulang dari WhatsApp-nya sendiri."
+    },
+    {
+      "day": "Jumat, 20 Nov 2026",
+      "time": "05.45 WIB",
+      "title": "Gambar pratinjau tautan readsw.my.id diperbaiki",
+      "tag": "Perbaikan",
+      "description": "Saat tautan readsw.my.id dibagikan di WhatsApp, judul dan deskripsi muncul tapi gambarnya kosong karena og:image masih mengarah ke alamat Replit lama yang sudah mati (404). Kini og:url, og:image dan twitter:image mengarah ke readsw.my.id dan gambar pratinjau 1200x630 di server sendiri, jadi kartu pratinjau tampil lengkap. WhatsApp menyimpan pratinjau lama di cache, jadi tautan yang sudah pernah dibagikan bisa perlu dibagikan ulang atau menunggu cache-nya segar."
+    },
+    {
+      "day": "Rabu, 18 Nov 2026",
+      "time": "21.07 WIB",
+      "title": "Avatar Member kini menunjukkan titik online",
+      "tag": "Fitur baru",
+      "description": "Di halaman Member, avatar tiap akun kini punya titik hijau di sudut kanannya bila pemilik akun sedang membuka web panel (ala Facebook) — titiknya hanya muncul untuk yang sedang online, dan hilang begitu pemilik menutup panel. Statusnya diperbarui realtime tiap 15 detik bersama daftar member, jadi titiknya mengikuti keadaan sebenarnya tanpa muat ulang. Akun yang sedang tidak membuka panel tidak mendapat titik, sama seperti sebelumnya. Halaman Kontrol Bot tidak ikut berubah: avatar di sana tetap tanpa titik."
+    },
+    {
+      "title": "Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "19.46 WIB",
+      "tag": "Fitur baru",
+      "description": "Setiap baris di halaman Rank Bot kini menunjukkan dua status realtime: \"Pemilik · Aktif\" bila pemilik akun sedang membuka web panel (terakhir terlihat kurang dari 75 detik lalu) atau \"Pemilik · Tidak Aktif\" bila tidak, dan \"Bot WhatsApp · Berjalan\" bila bot akun itu sedang jalan, \"Menunggu\" bila sedang disiapkan, atau \"Berhenti\" bila mati — keduanya diperbarui tiap 15 detik bersama peringkatnya. Menu baru Aktivitas Akun di bawah Rank Bot menampilkan kapan tiap pemilik terakhir login ke web panel: setiap baris hanya berisi nama, avatar, dan \"Pemilik Login Ke Web · hari, tanggal, bulan, tahun, jam WIB\" lengkap, diurutkan dari yang paling baru login dan diperbarui tiap 15 detik; akun yang belum pernah login tertulis \"Belum pernah login\". Baris akun sendiri kini selalu paling atas dengan lencana Kamu dan latar emas, lalu pemilik yang sedang aktif di panel, baru sisanya dari yang paling baru login — urutannya diperbarui realtime tiap 15 detik. Bila ada akun lain yang login ke web selagi halaman Aktivitas Akun dibuka, muncul kartu notifikasi di tengah layar dengan nama dan jam loginnya, dan menu Aktivitas Akun mendapat titik merah sampai halamannya dibuka — keduanya realtime, login sendiri tidak diberitahukan. Setiap baris kini menandai peran dengan warna khusus — Admin Utama emas, Admin hijau, Member biru — dan waktu login dilengkapi Pagi, Siang, Sore, atau Malam sesuai jam WIB-nya (Pagi 04.00–10.59, Siang 11.00–14.59, Sore 15.00–17.59, Malam 18.00–03.59). Jam yang tampil adalah aktivitas web terbaru akun itu — login terakhir, atau terakhir terlihat di panel selagi halamannya terbuka (heartbeat tiap 25 detik) — jadi akun yang sedang membuka panel selalu menunjukkan jam saat ini, bukan jam login autentikasinya yang sudah lama. Nama akun di baris peringkat dan Aktivitas Akun kini membungkus chip peran ke baris berikut bila ruangnya sempit, jadi nama tidak lagi terpotong menjadi 'W...' di HP. Baris Aktivitas Akun kini punya titik online hijau di sudut avatar pemilik yang sedang membuka panel (ala Facebook), dan Rank Bot kini memberi tahu dengan kartu berbeda saat akun yang login sendiri naik peringkat — roket untuk naik peringkat, mahkota untuk nomor 1 — sementara salip oleh akun lain tetap memakai kartu trofi biasa. Perbaikan notifikasi: bila entri ini diperbarui, tanda seru di tombol menu dan angka di menu Info Update kini muncul lagi — sebelumnya pembaruan tidak memunculkan notifikasi karena jam entrinya tidak berubah."
+    },
+    {
+      "title": "Rank Bot kini memberi tahu saat ada yang menyalip",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "13.10 WIB",
+      "tag": "Fitur baru",
+      "description": "Saat ada akun yang menyalip akun lain di peringkat Semua pada halaman Rank Bot, kini muncul kartu notifikasi di tengah layar — ikon trofi, kata pembuka kocak yang bergilir (Wush!, Ngebut!, Salip menyalip!), nama yang menyalip dan yang kesalip beserta posisi barunya, dan waktu lengkap hari, tanggal, bulan, tahun, dan jam WIB. Kartu muncul langsung saat salip terjadi selagi halaman dibuka, dan muncul lagi begitu Rank Bot dibuka bila salip terjadi selagi halaman ditinggal — urutan terakhir yang dilihat disimpan di perangkat. Pasangan yang sama tidak diberitakan lagi dalam 10 menit supaya salip bolak-balik tidak membanjiri layar, dan menutup kartu tidak mematikan pengingat lain. Baris akun sendiri di daftar Rank Bot kini dibedakan dengan latar dan cincin avatar emas serta lencana Kamu, supaya akun yang sedang login langsung ketemu saat mencari di daftar."
+    },
+    {
+      "title": "Token dan chat ID Telegram kini bisa diisi langsung di halaman Backup",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "12.05 WIB",
+      "tag": "Fitur baru",
+      "description": "Di kartu 'Kirim ke Telegram' pada halaman Backup & pemulihan kini ada kolom Token bot dan Chat ID. Keduanya diperiksa langsung ke Telegram saat berhenti mengetik: pil Valid / Tidak valid muncul di samping tiap kolom, dan pengaturan tersimpan otomatis di server begitu token terbukti valid — tidak perlu lagi mengisi file di server. Mengubah chat ID saja kini langsung tersimpan tanpa perlu mengetik ulang token, dan tiap kolom punya pilnya sendiri saat diketik. Di kartu yang sama ada tutorial cara ambil token dari @BotFather dan Chat ID dari @getmyid_bot (tombol spoiler di bawah kolom), dan tampilan kartu di HP dirapikan supaya nama bot dan chat ID tidak terpotong di tengah baris. Tombol kirim hanya aktif bila token dan chat sama-sama valid, jadi backup terkirim ke chat Telegram yang benar. Token disimpan di data/telegram.json di server (tidak masuk GitHub), dan kolom token tidak pernah diisi ulang dari server. Pil token kini mengikuti isi kolom, bukan token tersimpan: kolom token yang kosong selalu menunjukkan Belum diperiksa, walau token tersimpan sudah valid — kevalidan token tersimpan ditunjukkan baris status dan petunjuk di bawah kolom. Placeholder kedua kolom juga diganti petunjuk pengisian, supaya kolom kosong tidak terlihat seperti sudah terisi."
+    },
+    {
+      "title": "Kotak info di menu samping dihapus; tombol kembali ke atas lebih rapih",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "11.15 WIB",
+      "tag": "Tampilan",
+      "description": "Kotak info 'Pairing tersedia per akun. Worker fitur bot belum dijalankan.' di menu samping dihapus — tulisannya statis dan selalu tampil walau bot sebenarnya sedang jalan, jadi membingungkan. Tombol kembali ke atas (panah hijau di pojok kanan bawah) kini berlatar penuh sehingga tidak ada garis kartu yang terlihat menembus tombol saat tombol melayang di atas daftar."
+    },
+    {
+      "title": "Tab panel kini ikut diperbarui sendiri saat ada versi baru",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "07.55 WIB",
+      "tag": "Fitur baru",
+      "description": "Tab panel yang sudah terbuka kini memeriksa versi terbaru lewat heartbeat tiap 25 detik. Bila ada versi baru dan pengguna sedang tidak mengetik atau membuka notifikasi, halaman langsung memuat ulang sendiri sehingga fitur terbaru langsung terpakai tanpa muat ulang manual. Bila pengguna sedang mengetik atau ada notifikasi terbuka, muncul kartu 'Versi baru tersedia' dengan tombol 'Muat ulang' — tawarannya hanya muncul sekali per versi. Berlaku untuk semua akun yang login. Versi dibaca dari ?v= app.js di index.html, jadi setiap perubahan app.js wajib menaikkan nomor versinya."
+    },
+    {
+      "title": "Member yang mengetuk menu terkunci kini melihat notifikasi di layar",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "07.25 WIB",
+      "tag": "Tampilan",
+      "description": "Member biasa yang mengetuk menu Backup atau Kontrol Bot (yang terkunci untuk member) kini melihat notifikasi di tengah layar — kartu yang sama dengan notifikasi reaksi dan tautan WhatsApp: latar gelap, ikon peringatan, judul dan penjelasan bahwa fitur itu hanya untuk admin, serta tombol 'Tutup'; bisa juga ditutup dengan mengetuk latar atau tombol Escape. Sebelumnya hanya muncul toast kecil. Notifikasi tampil lagi tiap kali menu terkunci diketuk. Admin Utama dan admin biasa tidak melihat notifikasi ini karena mereka bisa membuka kedua halaman itu. Menunya tetap terbuka setelah notifikasi ditutup, jadi member bisa langsung mengetuk menu lain."
+    },
+    {
+      "title": "Tampilan Member kini lebih ringkas di HP",
+      "day": "Rabu, 18 Nov 2026",
+      "time": "05.50 WIB",
+      "tag": "Tampilan",
+      "description": "Kartu akun di halaman Member kini berbentuk baris ringkas di HP, seperti baris Rank Bot: foto profil mengecil dari 42px menjadi 34px dan pindah ke samping nama, bukan lagi di atas nama di tengah kartu. Nama, @akun, dan tombol 'Lihat detail' sejajar dalam satu baris, dan chip status rata kiri — kartunya jauh lebih pendek sehingga daftar akun tidak perlu banyak digulir. Tidak ada informasi yang dihilangkan: peran, status Pemilik, WA, bot, mode, dan runtime tetap tampil sama seperti sebelumnya. Kartu di halaman Kontrol Bot ikut ringkas karena memakai kartu yang sama. Versi style.css diperbarui agar kartu ringkas ini benar-benar sampai ke HP yang sudah pernah membuka panel, karena versi lama sempat tertahan di cache browser."
+    },
+    {
+      "title": "Panel kini memuat jauh lebih cepat",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "21.50 WIB",
+      "tag": "Perbaikan",
+      "description": "Membuka panel terasa berat karena tiap kunjungan mengunduh ulang sekitar 1 MB tanpa kompresi dan tanpa cache. Kini file statis dikirim terkompres (gzip), aset yang sudah berversi boleh disimpan browser selama setahun, dan pustaka nomor telepon (252 KB) hanya dimuat saat halaman Pairing dibuka — bukan di halaman login. Unduhan awal turun dari sekitar 1 MB menjadi sekitar 200 KB dan form login tampil jauh lebih cepat; kunjungan berikutnya lebih ringan lagi karena asetnya sudah tersimpan. Tidak ada fitur yang berubah cara kerjanya."
+    },
+    {
+      "title": "Halaman Rank Bot untuk melihat bot teraktif",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "17.00 WIB",
+      "tag": "Fitur baru",
+      "description": "Menu baru Rank Bot di posisi atas sidebar — peringkat bot teraktif yang bisa dilihat member, Admin Utama, dan admin biasa. Tiga kategori terpisah: Semua (total aktivitas), Read Only (story dibaca), dan ReadSW + ReactionSW (reaksi terkirim), dihitung dari data tiap akun (DATA_AKUN) dan diurutkan terbanyak di atas. Setiap peringkat berbentuk baris ringkas — avatar kecil di samping nama, profil, mode, jumlah aktivitas, dan level rank (Pemula, Aktif, Rajin, Master, Legenda) — agar muat di HP; ada pencarian dan pil kategori, diperbarui realtime tiap 15 detik tanpa refresh. Nama fitur dan statistik kini tampil penuh di HP tanpa terpotong: label mode dipersingkat jadi 'ReadSW + Reaksi' dan teks panjang membungkus ke baris berikut."
+    },
+    {
+      "title": "Member belum tertaut tidak bisa masuk Fitur Bot",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "16.45 WIB",
+      "tag": "Perubahan",
+      "description": "Member biasa yang WhatsApp-nya belum tertaut kini tidak bisa masuk ke halaman Fitur Bot sama sekali — harus tertaut dulu baru bisa masuk. Mengetuk menu Fitur Bot menampilkan notifikasi di tengah layar dan member diarahkan ke halaman Pairing. Aturan ini hanya berlaku untuk member biasa: Admin Utama dan admin biasa tetap bisa masuk Fitur Bot walau belum tertaut."
+    },
+    {
+      "title": "Pemberitahuan tautan WhatsApp kini muncul di layar",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "15.50 WIB",
+      "tag": "Tampilan",
+      "description": "Pengingat untuk member biasa yang WhatsApp-nya belum tertaut kini tampil sebagai kartu notifikasi di tengah layar — sama seperti notifikasi reaksi: latar gelap, ikon peringatan kuning, tombol 'Buka Pairing WhatsApp' yang langsung membuka halaman Pairing, dan tombol 'Tutup'. Bukan lagi kartu di bawah judul halaman dan bukan notifikasi bawaan browser. Notifikasi muncul begitu member membuka Fitur Bot selagi belum tertaut, dan muncul lagi bila tombol mode yang terkunci diketuk; sekali ditutup, tidak muncul lagi sampai keadaan berubah."
+    },
+    {
+      "title": "Peringatan reaksi kini muncul sebagai notifikasi di layar",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "15.15 WIB",
+      "tag": "Tampilan",
+      "description": "Peringatan saat Read Only + ReadSW tidak bisa mengirim reaksi kini tampil sebagai kartu notifikasi di tengah layar — bukan lagi kartu di bawah pengaturan. Kartunya mengikuti desain notifikasi modern: latar gelap, ikon peringatan kuning, tombol 'Tambah emoji' yang langsung mengarahkan ke kolom emoji, dan tombol 'Tutup'; bisa juga ditutup dengan mengetuk latar atau tombol Escape. Sekali ditutup, notifikasi tidak muncul lagi sampai keadaannya hilang lalu muncul kembali."
+    },
+    {
+      "title": "Peringatan bila ReadSW tidak bisa mengirim reaksi emoji",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "14.55 WIB",
+      "tag": "Fitur baru",
+      "description": "Bila mode Read Only + ReadSW aktif tetapi tidak ada emoji dan reaksi otomatis mati, kini muncul peringatan di editor — bot hanya menandai story sebagai dibaca, tanpa mengirim reaksi. Peringatan muncul di halaman Fitur Bot member sendiri dan di editor Kontrol Bot saat admin memantau member; hilang begitu emoji ditambahkan atau reaksi otomatis dinyalakan."
+    },
+    {
+      "title": "Member yang belum tertaut kini diarahkan ke Pairing dari Fitur Bot",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "14.35 WIB",
+      "tag": "Fitur baru",
+      "description": "Member biasa yang WhatsApp-nya belum tertaut kini melihat kartu pengingat di halaman Fitur Bot: fitur bot belum aktif sampai WhatsApp ditautkan, dan tombolnya langsung membuka halaman Pairing WhatsApp. Selama belum tertaut, tombol mode dan pengaturan story tidak bisa dipakai — mengetuknya menampilkan kartu pengingat itu lagi. Begitu WhatsApp tertaut pertama kali, Read Only + ReadSW dan Online 24 Jam otomatis aktif (sudah begitu sejak lama lewat profil default, kini juga ada tesnya). Tombol Aktifkan di semua kartu mode kini sama-sama hijau agar jelas itu tombol aksi. Admin tidak melihat kartu ini."
+    },
+    {
+      "title": "Tautan panel kini menampilkan pratinjau bergambar saat dibagikan",
+      "day": "Selasa, 17 Nov 2026",
+      "time": "14.15 WIB",
+      "tag": "Tampilan",
+      "description": "Saat tautan panel dibagikan di WhatsApp atau aplikasi lain, kini muncul kartu pratinjau dengan gambar ReactionSw (judul, deskripsi, dan thumbnail 1200×630), bukan lagi tautan polos. Gambar pratinjaunya mengikuti tema panel dan memakai ikon wajah ReactionSw."
+    },
+    {
+      "day": "Selasa, 17 Nov 2026",
+      "time": "13.30 WIB",
+      "title": "Halaman Kontrol Bot untuk admin",
+      "description": "Halaman Kontrol Bot untuk admin. Daftar akun dipisah Admin dan Member, dan di tiap kelompok bot yang jalan dengan runtime terbaru selalu di atas — urutannya diperbarui realtime tiap 15 detik. Admin Utama kini bisa mengelola botnya sendiri dari halaman ini (admin biasa tetap tidak bisa mengelola Admin Utama, tetapi bisa mengelola sesama admin biasa dan member). Admin Utama dan admin biasa bisa memilih akun lalu mengontrol botnya — Nyalakan bot, Restart bot, Matikan bot, dan Hapus sesi WhatsApp — dengan konfirmasi sebelum setiap aksi. Di dalam tiap kartu, admin juga mengatur mode bot akun itu (Read Only, ReadSW + ReactionSW, Online 24 Jam) dan preferensi story-nya (delay 1–20 detik serta emoji reaksi); setiap perubahan tersimpan langsung ke DATA_AKUN akun yang diubah.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Selasa, 17 Nov 2026",
+      "time": "12.50 WIB",
+      "title": "Status Pemilik kini pulih seketika saat kembali ke tab",
+      "description": "Sebelumnya, pemilik akun yang pindah tab atau mengunci HP lebih dari 75 detik langsung terlihat 'Pemilik · Tidak aktif' dan statusnya baru pulih sampai 40 detik setelah kembali — terasa seperti harus refresh. Kini begitu tab kembali dibuka atau jendela kembali fokus, heartbeat dan daftar member langsung dimuat ulang, dan setiap heartbeat yang berhasil langsung diikuti pemuatan ulang daftar member, jadi status Pemilik serta angka Online, Stalker, dan Kunjungan di footer pulih seketika tanpa muat ulang. Catatan: 'Pemilik · Tidak aktif' berarti pemilik akun sedang tidak membuka web panel — bukan botnya berhenti; bot yang berjalan tetap tampil 'Bot WhatsApp · Berjalan'.",
+      "tag": "Perbaikan"
+    },
+    {
+      "day": "Selasa, 17 Nov 2026",
+      "time": "07.50 WIB",
+      "title": "Kartu mode Fitur Bot bisa digeser ke samping dan dicari di HP",
+      "description": "Tiga kartu mode di halaman Fitur Bot kini bisa digeser ke samping di HP seperti carousel, lengkap dengan titik indikator yang mengikuti kartu yang terlihat dan kartu yang terbuka mengikuti kartu yang terlihat. Halaman Fitur Bot juga punya kotak pencarian dan pil kategori seperti Log privat — Semua 6, Mode 3, Delay 2, Emoji 1 — yang memfilter kartu mode serta pengaturan delay dan emoji secara realtime.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Selasa, 17 Nov 2026",
+      "time": "07.33 WIB",
+      "title": "Lencana WhatsApp Online kembali tampil di HP dan kartu mode jadi spoiler",
+      "description": "Lencana WHATSAPP ONLINE di header sempat hilang di HP layar 360px karena aturan CSS menyembunyikannya di lebar itu — kini lencana tetap tampil dengan label ringkas WA Online dan ikut berubah realtime mengikuti status koneksi. Halaman Fitur Bot juga dirapikan: tiga kartu mode (Read Only, Read Only + ReadSW, Online 24 Jam) kini berupa spoiler yang hanya membuka satu kartu dalam satu waktu, dengan penanda Aktif atau Tidak aktif yang akurat di header tiap kartu.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Selasa, 17 Nov 2026",
+      "time": "05.24 WIB",
+      "title": "Info Update dan Member kini punya pencarian + filter kategori",
+      "description": "Halaman Info Update dan Member kini punya kotak pencarian dan pil kategori berangka dengan tampilan yang sama seperti Log privat — Info Update bisa dicari berdasarkan judul, deskripsi, dan kategori serta difilter ke Fitur baru, Perubahan, Perbaikan, Fitur dihapus, atau Tampilan, sedangkan Member bisa dicari berdasarkan akun, nama, dan email serta difilter ke Admin, Member, Bot jalan, WA tertaut, atau Belum aktif — dengan angka hitungan yang diperbarui realtime setiap daftar me-refresh sendiri tanpa muat ulang dan filter yang sedang aktif tetap dipertahankan.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.51 WIB",
+      "title": "Menu Backup kini terlihat untuk member, tapi terkunci",
+      "description": "Menu Backup kini terlihat di sidebar member, dengan lencana Terkunci di sampingnya. Member tidak bisa membukanya — diketuk pun muncul pesan 'Backup hanya untuk admin.' Hanya Admin Utama dan admin biasa yang bisa membuka halaman Backup & pemulihan.",
+      "tag": "Perubahan"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.51 WIB",
+      "title": "Menu Member pindah ke kategori Info",
+      "description": "Menu Member kini berada di kategori Info (setelah List Bot), bukan lagi di kategori Admin. Kategori Admin kini hanya berisi Backup. Susunan menu jadi lebih sesuai konteks untuk admin maupun member.",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.51 WIB",
+      "title": "Pesan gagal login kini menyebut akunnya dengan akurat",
+      "description": "Saat gagal masuk, pesannya kini jelas menyebut akun yang diketik: kalau akunnya tidak ditemukan, pesannya 'Akun ... tidak ditemukan. Periksa ejaan atau daftar dulu.'; kalau akunnya ditemukan tapi kata sandinya salah, pesannya 'Akun ... ditemukan, tapi kata sandi salah. Coba lagi.'",
+      "tag": "Perbaikan"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.14 WIB",
+      "title": "Menu sidebar kini dikelompokkan dengan garis pemisah",
+      "description": "Menu sidebar kini terbagi jadi 4 kategori — Utama (Panel, Profil akun), Bot (Fitur Bot, Pairing WhatsApp, Log privat), Info (Developer, Info Update, Server, List Bot), dan Admin (Member, Backup) — masing-masing dengan label kecil dan garis pemisah tipis, supaya lebih rapi dan mudah dicari di HP. Di rel ikon yang tertutup, label disembunyikan dan garisnya jadi garis pendek di tengah.",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.01 WIB",
+      "title": "Backup & pemulihan kini punya halaman sendiri",
+      "description": "Bagian Backup & pemulihan pindah dari halaman Member ke halaman sendiri di menu sidebar, dengan ikon unduh dan judul rata tengah di HP. Halaman ini hanya untuk Admin Utama dan admin biasa — member tidak melihat menunya dan tidak bisa membukanya lewat tautan langsung.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "19.01 WIB",
+      "title": "ZIP backup langsung kini lebih kecil",
+      "description": "Unduhan langsung kini memakai kompresi DEFLATE level 9 (paling kuat), jadi file ZIP-nya sedikit lebih kecil. Formatnya tetap ZIP biasa, jadi tetap bisa dibuka langsung pakai aplikasi bawaan HP tanpa aplikasi tambahan.",
+      "tag": "Perbaikan"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "17.06 WIB",
+      "title": "Menu garis tiga kini muncul di tempat saat diketuk setelah scroll",
+      "description": "Menu dropdown garis tiga dulu menempel di atas halaman, jadi kalau halaman sudah di-scroll ke bawah, menu terbuka di luar layar dan harus scroll balik ke atas untuk melihatnya. Kini menu nempel di layar tepat di bawah topbar, jadi muncul di tempat di mana pun posisi scroll — di desktop maupun di HP.",
+      "tag": "Perbaikan"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "16.40 WIB",
+      "title": "Tombol garis tiga kini menunjukkan tanda seru saat ada notifikasi",
+      "description": "Tanda seru merah muncul di tombol garis tiga selama masih ada Info Update yang belum dibaca atau akun baru di Member. Tandanya hilang begitu semuanya sudah dilihat, dan diperbarui realtime tanpa muat ulang halaman.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "16.30 WIB",
+      "title": "Backup kini bisa diunduh langsung tanpa sandi atau dikirim ke Telegram",
+      "description": "Di halaman Backup & pemulihan ada dua pilihan baru khusus admin: Unduh langsung tanpa sandi (ZIP biasa yang lebih kecil, langsung diunduh browser) dan Kirim ke Telegram (bot mengirim ZIP ke chat Telegram kamu). Unduh terenkripsi dengan kata sandi tetap tersedia.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "15.42 WIB",
+      "tag": "Perbaikan",
+      "title": "Unduh backup terenkripsi kini berfungsi untuk semua akun",
+      "description": "Tombol Unduh backup terenkripsi sebelumnya selalu gagal begitu ada akun yang pernah tersambung WhatsApp, karena file pemulihan sesi (session.json.good dan session.json.bak) tidak ada dalam daftar file yang boleh di-backup. Sekarang kedua file itu ikut ter-backup, jadi ZIP berisi data akun, sesi WhatsApp beserta pemulihannya, DATA_KUNJUNGAN, dan DATA_STALKER — dibuat dari isi disk saat tombol diklik, tanpa perlu muat ulang. Catatan: Restore point otomatis hanya dibuat tepat sebelum restore (maksimal 3 tersimpan), bukan berkala."
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "14.20 WIB",
+      "tag": "Perbaikan",
+      "title": "Angka footer kini langsung diperbarui saat tab kembali dibuka",
+      "description": "Angka Online, Stalker, dan Kunjungan di footer memang sudah diperbarui otomatis tiap 10 detik tanpa muat ulang — tapi saat tab sempat ditinggal, angkanya bisa tertinggal sampai interval berikutnya. Sekarang begitu tab kembali dibuka, angkanya langsung diambil ulang dari server, jadi yang terlihat selalu angka terbaru."
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "13.42 WIB",
+      "tag": "Fitur baru",
+      "title": "Menu Member kini punya notif akun baru",
+      "description": "Menu Member di sidebar kini menampilkan angka hijau seperti di Info Update, tapi isinya berbeda: jumlah akun baru — member maupun admin — yang belum kamu lihat. Angkanya dihitung per akun, jadi yang dilihat admin dan member bisa berbeda. Begitu halaman Member dibuka dengan sengaja, angkanya hilang. Perbaikan: angka tidak lagi hilang begitu login — penanda hanya maju saat halaman Member diklik, bukan saat aplikasi mendarat di sana otomatis setelah login, jadi angka sempat terlihat; akun baru yang daftar setelah itu muncul lagi sebagai angka baru, dan diperbarui otomatis tiap 15 detik tanpa perlu muat ulang."
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "10.25 WIB",
+      "tag": "Fitur baru",
+      "title": "Info Update kini bisa dibuka sebelum login",
+      "description": "Menu informasi sebelum login dulu hanya punya Info, Developer, Server, dan List Bot — daftar pembaruan panel hanya bisa dilihat setelah masuk. Kini ada kartu Info Update selebar penuh di menu itu: daftar perubahan, fitur baru, dan perbaikan terbaru bisa dibaca sebelum login, dengan paginasi yang sama seperti di dalam panel."
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "10.24 WIB",
+      "tag": "Tampilan",
+      "title": "Kesalahan pairing kini muncul sebagai gelembung di kolomnya",
+      "description": "Saat menekan Gasss tanpa mencentang dua persetujuan atau dengan nomor yang tidak valid, pesannya dulu tampil sebagai kotak notif di bawah tombol. Kini pesannya muncul sebagai gelembung bawaan browser yang menempel di kolom yang salah dan menyebut persis apa yang kurang — sama seperti gelembung validasi email di halaman daftar. Pemilih metode juga tidak lagi hilang saat nomor tidak valid: dulu nomor seperti itu membuat pemilih tersembunyi sementara tombol terkunci, jadi pengguna mentok; kini pemilih tetap tampil karena QR tidak butuh nomor dan Pairing Code memvalidasi nomor di Gasss kedua."
+    },
+    {
+      "day": "Senin, 16 Nov 2026",
+      "time": "08.42 WIB",
+      "tag": "Perbaikan",
+      "title": "Penjelasan halaman pairing saat sesi ditolak kini lebih jelas dan akurat",
+      "description": "Halaman Pairing WhatsApp saat sesi ditolak dulu menulis perangkat masih tertaut dan menyuruh coba pulihkan dulu, padahal sesi yang sudah dicabut WhatsApp tidak bisa dipulihkan lagi. Kini halamannya menjelaskan dengan jujur: coba pulihkan dulu, tapi kalau gagal terus berarti sesi sudah dicabut — hapus perangkat lama di WhatsApp > Perangkat tertaut, lalu pairing ulang dengan nomor baru."
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "21.23 WIB",
+      "tag": "Perubahan",
+      "title": "URL panel kini bersih tanpa #halaman dan halaman terakhir tetap diingat",
+      "description": "Saat pindah halaman di dalam panel, address bar dulu menampilkan alamat dengan #mode, #server, dan sejenisnya. Kini alamatnya selalu tampil bersih sebagai https://readsw.24h.sh/ saja. Tautan dalam seperti readsw.24h.sh/#server tetap bisa dibuka — halamannya langsung terbuka lalu alamatnya dibersihkan sendiri. Halaman terakhir yang dibuka juga tetap diingat di tab yang sama, jadi habis refresh kembali ke halaman itu, bukan ke halaman awal; tab baru tetap mulai dari halaman awal."
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "19.44 WIB",
+      "tag": "Perubahan",
+      "title": "Halaman Developer sebelum login kini sama dengan di dalam panel",
+      "description": "Tab Developer di halaman info sebelum login dulu menampilkan ringkasan singkat yang isinya berbeda dengan halaman Developer di dalam panel. Kini keduanya memakai isi yang sama — judul Ruang Developer, kartu tentang pembuat, kanal bantuan WhatsApp, Telegram, dan Facebook, serta fokus pengembangan — jadi tidak ada lagi dua versi yang berbeda. Isi panel sebelum login disalin langsung dari halaman Developer, jadi perubahan di halaman itu otomatis ikut tampil di halaman masuk."
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "18.54 WIB",
+      "tag": "Fitur baru",
+      "title": "Menu Info Update kini punya badge jumlah update belum dibaca",
+      "description": "Di menu samping kini muncul angka kecil di samping Info Update yang menunjukkan berapa pembaruan yang belum kamu baca — muncul untuk admin dan member. Begitu halaman Info Update dibuka, angkanya hilang karena semua pembaruan dianggap sudah dibaca. Status dibaca disimpan per akun di folder DATA_AKUN masing-masing, jadi akun lain tidak ikut terpengaruh."
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "18.36 WIB",
+      "tag": "Tampilan",
+      "title": "Konfirmasi blokir dan hapus kini pakai dialog panel, bukan bawaan browser",
+      "description": "Konfirmasi tindakan penting — blokir/buka blokir member, hapus akun permanen, restore backup, batalkan pairing code, hapus sesi WhatsApp, dan matikan bot — dulu memakai dialog bawaan browser yang tampilannya kaku dan tidak mengikuti tema panel. Kini semuanya memakai dialog buatan panel sendiri: kartu gelap senada tema, tombol Batal dan aksi yang besar dan mudah ditekan, pas di layar HP, dan bisa ditutup dengan ketuk latar atau tombol Escape."
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "18.26 WIB",
+      "tag": "Tampilan",
+      "title": "Paginasi Info Update kini rapi dan bisa lompat ke awal/akhir",
+      "description": "Tombol nomor halaman 1–9 yang dulu meluber ke kanan di layar HP kini hanya menampilkan jendela 5 halaman di sekitar halaman aktif, dengan penanda … di antara halaman yang tersembunyi. Tombol dibuat lebih kecil di HP dan baris paginasi bisa membungkus, jadi tidak ada lagi overflow horizontal. Kini ada juga tombol « untuk lompat ke halaman pertama dan » untuk lompat ke halaman terakhir, jadi tidak perlu klik satu-satu untuk sampai ke ujung."
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "16.29 WIB",
+      "title": "Folder akun Admin dan Member kini terpisah",
+      "description": "Di dalam folder DATA_AKUN kini ada dua subfolder peran: ADMIN untuk akun admin (DATA_AKUN/ADMIN) dan MEMBER untuk akun member (DATA_AKUN/MEMBER) — tiap user punya foldernya sendiri, jadi admin dan member tidak bentrok walau namanya sama. Akun lama yang masih di susunan folder lama tetap terbaca otomatis (fallback), jadi sesi dan bot tidak putus. Backup dan pemulihan ikut mencakup susunan baru ini.",
+      "tag": "Perubahan"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "16.06 WIB",
+      "title": "Daftar kini bisa pilih Member atau Admin",
+      "description": "Formulir daftar kini punya pilihan Member atau Admin (dua kartu berikon, pas di HP). Member tetap cuma verifikasi; daftar Admin berbeda — setelah verifikasi wajib memasukkan kode akses, dan akun admin baru dibuat bila kodenya benar. Kode salah 5 kali membatalkan pendaftaran.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "16.06 WIB",
+      "title": "Admin Utama kini ditandai di daftar member",
+      "description": "WILYKUN — admin dari config.json — kini ditandai jelas sebagai Admin Utama di daftar member: lencana mahkota emas + bingkai kartu emas, berbeda dari admin biasa yang cuma berlabel Admin. Admin Utama juga satu-satunya yang bisa mengelola admin biasa (blokir/hapus/kelola bot); admin biasa tidak bisa menyentuh Admin Utama atau admin lain.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "15.24 WIB",
+      "title": "Bar atas panel kini menempel saat di-scroll",
+      "description": "Bar atas (tombol menu, judul halaman, dan avatar) kini mengikuti saat halaman di-scroll ke bawah, jadi menu dan judul selalu terlihat tanpa harus scroll balik ke atas. Berlaku di semua halaman panel, HP maupun desktop.",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "14.15 WIB",
+      "title": "Halaman Server kini berikon SVG",
+      "description": "Tiap sel di halaman Server — di dalam panel maupun preview di halaman masuk — kini berikon SVG sesuai konteksnya: centang untuk status, jam untuk uptime, chip untuk CPU, database untuk RAM, hard disk untuk disk, dan kalender untuk waktu server.",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "13.58 WIB",
+      "title": "Kategori Info Update kini akurat + ikon baru",
+      "description": "Tiap entri kini berkategori jelas — Fitur baru, Perubahan, Perbaikan, Fitur dihapus, atau Tampilan — dengan ikon SVG dan warna poster sendiri per kategori, jadi jenis perubahannya langsung kelihatan tanpa baca dulu. Semua entri lama ikut dikategorikan ulang.",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "13.58 WIB",
+      "title": "Data server di dalam panel kini lebih lengkap",
+      "description": "Halaman Server di dalam panel kini menampilkan model CPU, load 1/5/15 menit, RAM bebas dan terpakai, heap proses, disk total/terpakai/bebas, jam server mulai, dan uptime sistem — diperbarui tiap 5 detik selama halamannya dibuka. Alamat IP tidak pernah ditampilkan.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "13.58 WIB",
+      "title": "Jumlah 'Belum aktif' kini ikut status bot realtime",
+      "description": "Angka Aktif/Belum aktif di statistik akun sebelumnya dihitung dari verifikasi email, jadi selalu 7/0 walau ada bot yang berhenti. Kini dihitung dari status bot tiap akun yang sedang berjalan (saat dipasang: Aktif 4, Belum aktif 3 — admin, bot_botak01, dan dlyzn yang sesinya ditolak WhatsApp).",
+      "tag": "Perbaikan"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "13.47 WIB",
+      "title": "Server & List Bot kini ada di menu dalam panel",
+      "description": "Halaman Server (status realtime) dan List Bot (mode bot + statistik akun) kini ada juga di dalam panel, lewat menu garis tiga di kiri atas — isinya sama seperti di halaman masuk, dan bisa dibuka admin maupun member. Status server diperbarui tiap 5 detik selama halamannya dibuka; statistik akun ikut polling 15 detik.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "13.32 WIB",
+      "title": "Tombol garis tiga desktop kini membuka halaman info",
+      "description": "Tombol garis tiga di halaman masuk desktop kini membuka halaman info yang sama seperti di HP (Info, Developer, Server realtime, dan List Bot) dengan tata letak lebar yang rapi di kolom kiri, jadi kolomnya tidak lagi kosong saat diklik; tombol tetap di tempatnya dan form tidak bergeser. Ketuk × untuk kembali ke panel info awal. Di HP, tab info kini benar-benar sembunyi saat menu tampil.",
+      "tag": "Perubahan"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "12.35 WIB",
+      "title": "Avatar kini 48 pilihan: 24 cowok + 24 cewek",
+      "description": "Galeri avatar bertambah dari 28 menjadi 48 ilustrasi anime 2D — 24 cowok dan 24 cewek. Enam cewek yang selama ini tersimpan tapi belum tampil (Yui, Noa, Sakura, Yukina, Aya, Runa) kini bisa dipilih, ditambah 14 gambar baru (cowok: Akira, Kazuki, Daiki, Taichi, Hikaru, Kenta, Sho, Renji, Hiro, Yuya; cewek: Kaede, Mei, Natsuki, Suzu) — semuanya di bawah 100 KB dari sumber bebas lisensi. Tab dan Acak avatar ikut menyesuaikan jumlah baru.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "06.24 WIB",
+      "title": "Hapus akun permanen & layar akun diblokir/dihapus",
+      "description": "Admin kini bisa menghapus akun member secara permanen dari detail member (hanya admin, konfirmasi dua lapis): akun hilang dari registry, sesi panel dan bot dihentikan, folder DATA_AKUN terhapus, dan orang itu tetap mendapat penjelasan bila coba login lagi. Akun yang diblokir atau dihapus kini melihat layar khusus saat login — judul, alasan, dan tombol WhatsApp/Telegram admin untuk pengajuan buka blokir atau pertanyaan.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "05.56 WIB",
+      "title": "Info Update kini ala MyAnimeList: poster + scroll manual",
+      "description": "Tiap entri kini tampil seperti kartu MyAnimeList: poster di kiri, judul, tanggal, dan tag kategori — teks deskripsi ada di kotak yang digeser manual (bukan berjalan otomatis), jadi kartu tetap rapih di HP dan kamu yang atur sendiri seberapa jauh membacanya.",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Minggu, 15 Nov 2026",
+      "time": "05.05 WIB",
+      "title": "Aktivitas panel kini menampilkan terakhir online",
+      "description": "Kartu Aktivitas panel di detail member kini menampilkan kapan pemilik akun terakhir online di web (mis. “Terakhir online di web 5 menit yang lalu”), dihitung dari heartbeat sesi panel terakhir dan diperbarui tiap polling; kalau sedang online tertulis “Sedang online di web sekarang.” Kini semua teks detail member juga rata tengah di layar HP — label, nilai, dan catatan di setiap kartu (email, status akun, WhatsApp, nomor, bot, runtime, terakhir terlihat, bergabung).",
+      "tag": "Perubahan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "time": "23.26 WIB",
+      "title": "Sesi WhatsApp kini dicadangkan otomatis",
+      "description": "session.json tiap akun kini disalin otomatis ke session.json.bak saat tersambung dan berkala tiap 15 menit (hanya bila sesi valid); kalau file sesi hilang atau rusak, pemulihan otomatis mencoba cadangan ini setelah salinan .good. Cadangan berisi kredensial yang sama, jadi tidak menyelamatkan bila WhatsApp mencabut kredensial — untuk itu tetap perlu pairing ulang.",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "time": "21.17 WIB",
+      "title": "Tombol info login kini ada juga di desktop",
+      "description": "Tombol tiga titik di halaman masuk kini jadi garis tiga (☰) di kiri atas sebelum logo ReactionSw, tampil di HP maupun layar lebar. Di HP diketuk untuk membuka panel info; di desktop diketuk untuk menyembunyikan atau menampilkan panel info di kiri.",
+      "tag": "Perubahan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "time": "20.38 WIB",
+      "title": "Runtime bot tidak lagi reset saat restart",
+      "description": "Waktu jalan bot kini tersimpan per akun dan lanjut terus setelah server restart atau WhatsApp menyambung ulang — hanya kembali ke nol kalau perangkat ditautkan ulang atau sesi dihapus.",
+      "tag": "Perbaikan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "time": "20.38 WIB",
+      "title": "Kartu member kini di tengah di HP",
+      "description": "Di layar HP, foto, nama, tombol Lihat detail, dan chip status di setiap kartu member/admin kini tersusun rapi di tengah — pas dengan lebar layar, tidak lagi rata kiri.",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "description": "Kalau WhatsApp menolak sesi, panel kini mencoba sambung ulang sendiri dulu dari cadangan sesi terakhir yang sehat — halaman pairing tidak lagi langsung meminta nomor. Kalau pemulihan gagal, baru muncul pilihan pairing ulang.",
+      "time": "19.09 WIB",
+      "title": "Sesi ditolak WhatsApp kini dipulihkan otomatis",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "description": "Item detail kini berdampingan dua kolom di HP (Email + Status, WhatsApp + Nomor, dst) — pas dengan ukuran layar, tidak lagi satu baris penuh ke bawah.",
+      "time": "15.10 WIB",
+      "title": "Detail member 2 kolom di mobile",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "description": "Tiga kartu fitur (ReadSW, ReactionSW, Online 24 Jam) kini tampil berdampingan tiga kolom di HP, bukan lagi menumpuk ke bawah.",
+      "time": "15.02 WIB",
+      "title": "Kartu Fitur Akun berdampingan di mobile",
+      "tag": "Tampilan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "description": "Daftar pembaruan kini dibaca langsung dari file — entri baru langsung tampil di halaman tanpa deploy ulang.",
+      "time": "14.54 WIB",
+      "title": "Daftar Info Update kini realtime",
+      "tag": "Perubahan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "description": "Setiap kartu member kini menampilkan mode bot yang aktif, tepat di antara chip Bot WhatsApp dan Runtime bot.",
+      "time": "14.00 WIB",
+      "title": "Chip Mode aktif di daftar member",
+      "tag": "Fitur baru"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "description": "Member yang baru jalan atau baru restart di atas, runtime terlama di bawah, dan yang botnya tidak berjalan di paling bawah. Judul seksi berubah jadi “Member”.",
+      "time": "13.34 WIB",
+      "title": "Daftar member diurutkan ikut runtime bot",
+      "tag": "Perbaikan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "description": "Detail member menampilkan email yang disensor (contoh bang****@gmail.com) dan nomor tersamarkan, bukan lagi “—” atau “Belum aktif”.",
+      "time": "12.28 WIB",
+      "title": "Detail member kini lengkap",
+      "tag": "Perbaikan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "description": "Member yang WhatsApp-nya belum tertaut tetap bisa membuka Fitur Bot dan mengatur mode dulu; worker berjalan otomatis setelah akun tertaut.",
+      "time": "12.19 WIB",
+      "title": "Menu Fitur Bot selalu tampil",
+      "tag": "Perbaikan"
+    },
+    {
+      "day": "Sabtu, 14 Nov 2026",
+      "description": "Nomor tampil seperti 62896****8411 — akhiran selalu 4 digit — dan diperbarui otomatis begitu WhatsApp tersambung.",
+      "time": "12.03 WIB",
+      "title": "Nomor tersamarkan format baru",
+      "tag": "Perbaikan"
+    }
+  ]
 }

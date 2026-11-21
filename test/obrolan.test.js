@@ -376,6 +376,31 @@ test('Obrolan: kirim, balas, emoji, dan mengetik terpasang di halaman', () => {
   assert.ok(row.includes('↩ Balas'), 'setiap bubble harus punya tombol Balas');
 });
 
+
+test('Obrolan: menekan Balas tidak boleh menggulir daftar ke bawah', () => {
+  const reply = extractFunction(appJs, 'setChatReply');
+  assert.ok(reply.includes("document.querySelector('#chat-input')?.focus({ preventScroll: true })"), 'fokus kolom ketik saat membalas harus tanpa menggulir');
+  assert.ok(reply.includes('previousScrollTop'), 'posisi scroll daftar harus disimpan sebelum bar Balas muncul');
+  assert.ok(reply.includes('list.scrollTop = previousScrollTop'), 'posisi scroll daftar harus dikembalikan setelah fokus');
+});
+
+test('Obrolan: halaman full layar mengikuti layar yang terlihat walau keyboard HP terbuka', () => {
+  assert.ok(appJs.includes('function fitChatPageToVisibleViewport()'), 'harus ada penyesuai tinggi halaman Obrolan ke layar yang terlihat');
+  const fit = extractFunction(appJs, 'fitChatPageToVisibleViewport');
+  assert.ok(fit.includes('window.visualViewport'), 'tinggi halaman harus mengikuti visualViewport');
+  assert.ok(fit.includes("window.matchMedia('(max-width: 560px)')"), 'penyesuai hanya berlaku di HP');
+  assert.ok(fit.includes('visible - 104'), 'tinggi halaman harus dikurangi topbar dan padding');
+  assert.ok(appJs.includes("window.visualViewport.addEventListener('resize'"), 'keyboard yang membuka/menutup harus memicu penyesuaian');
+  assert.ok(appJs.includes('fitChatPageToVisibleViewport();'), 'pindah halaman harus menyesuaikan tinggi Obrolan');
+});
+
+test('Info Update: kategori Bug dan Fitur Error terdaftar dengan warna sendiri', () => {
+  assert.ok(appJs.includes("bug: 'Bug'"), 'kategori Bug harus terdaftar di peta label Info Update');
+  assert.ok(appJs.includes("'fitur-error': 'Fitur Error'"), 'kategori Fitur Error harus terdaftar di peta label Info Update');
+  assert.ok(css.includes('.info-update-item[data-tag="bug"]'), 'kategori Bug harus punya warna poster/tag sendiri');
+  assert.ok(css.includes('.info-update-item[data-tag="fitur-error"]'), 'kategori Fitur Error harus punya warna poster/tag sendiri');
+});
+
 function fixtureUser(username, email, role, password) {
   const salt = randomBytes(16).toString('hex');
   const passwordHash = scryptSync(password, salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 }).toString('hex');
@@ -514,6 +539,18 @@ test('server Obrolan: kirim + baca + balas + mengetik + batas, hanya untuk yang 
     assert.equal(typingOff.status, 200);
     const typingGone = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: adminCookie });
     assert.equal(typingGone.payload.typing.length, 0, 'berhenti mengetik harus menghilangkan indikator');
+
+    // Regresi: jendela typing 12 detik — satu poll penerima yang terlewat
+    // (6 detik tanpa poll) tidak boleh menghilangkan indikator; setelah
+    // 12 detik berlalu indikator harus hilang sendiri.
+    const typingAgain = await jsonRequest(base, '/api/chat/typing', { method: 'POST', body: { typing: true }, cookie: memberCookie });
+    assert.equal(typingAgain.status, 200);
+    await wait(6000);
+    const typingAfterMissedPoll = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: adminCookie });
+    assert.equal(typingAfterMissedPoll.payload.typing.length, 1, 'typing harus tetap terlihat setelah satu poll terlewat (6 detik)');
+    await wait(7000);
+    const typingExpired = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: adminCookie });
+    assert.equal(typingExpired.payload.typing.length, 0, 'typing harus hilang setelah jendela 12 detik berlalu');
 
     const all = await jsonRequest(base, '/api/chat/messages', { method: 'GET', cookie: memberCookie });
     assert.equal(all.payload.messages.length, 4, 'semua pesan harus tersimpan berurutan');

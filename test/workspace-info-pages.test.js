@@ -33,7 +33,7 @@ test('workspace Server and List Bot pages exist in the sidebar for admin and mem
   assert.ok(!js.includes("href=\"#bots\"]')?.classList.add('hidden'"), 'no code may hide the bots nav item');
 });
 
-test('workspace server page shows the full detail set, and info updates use the accurate five-category taxonomy with SVG posters', async () => {
+test('workspace server page shows the full detail set, and info updates use the accurate seven-category taxonomy with SVG posters', async () => {
   const html = await fs.readFile(path.join(ROOT, 'public/index.html'), 'utf8');
   const js = await fs.readFile(path.join(ROOT, 'public/app.js'), 'utf8');
   const css = await fs.readFile(path.join(ROOT, 'public/style.css'), 'utf8');
@@ -46,7 +46,7 @@ test('workspace server page shows the full detail set, and info updates use the 
   assert.match(css, /\.workspace-server-subhead/);
   assert.match(css, /\.workspace-server-grid > div\.is-wide\s*\{\s*grid-column:\s*1 \/ -1/);
 
-  const allowedTags = ['Fitur baru', 'Perubahan', 'Perbaikan', 'Fitur dihapus', 'Tampilan'];
+  const allowedTags = ['Fitur baru', 'Perubahan', 'Perbaikan', 'Bug', 'Fitur Error', 'Fitur dihapus', 'Tampilan'];
   const slug = (tag) => tag.toLowerCase().replace(/\s+/g, '-');
   assert.ok(Array.isArray(updates.updates) && updates.updates.length > 0, 'info updates must not be empty');
   for (const update of updates.updates) {
@@ -60,7 +60,7 @@ test('workspace server page shows the full detail set, and info updates use the 
     assert.match(match[2], /<svg[^>]*>/, `fallback item ${index + 1} poster must contain an SVG icon, not a text glyph`);
     assert.equal(match[3].replace(/&amp;/g, '&'), update.title, `fallback item ${index + 1} title must match the JSON title`);
   });
-  for (const tagSlug of ['perubahan', 'perbaikan', 'fitur-dihapus', 'tampilan']) {
+  for (const tagSlug of ['perubahan', 'perbaikan', 'bug', 'fitur-error', 'fitur-dihapus', 'tampilan']) {
     assert.ok(css.includes(`[data-tag="${tagSlug}"]`), `style.css must style the ${tagSlug} poster and tag pill`);
     assert.ok(js.includes(tagSlug), `app.js must know the ${tagSlug} tag icon`);
   }

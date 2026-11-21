@@ -3646,6 +3646,7 @@ function setWorkspacePage(page, smoothScroll = true, options = {}) {
   // URL panel selalu tampil bersih tanpa #halaman. Tautan dalam dengan #halaman tetap dibaca sekali saat halaman dimuat (renderLinkGate / showDashboard), lalu dibersihkan di sini.
   if (location.hash) history.replaceState(null, '', location.pathname + location.search);
   window.scrollTo({ top: 0, behavior: smoothScroll ? 'smooth' : 'auto' });
+  fitChatPageToVisibleViewport();
   if (page === 'activity') {
     privateLogScrollOnNextRender = true;
     // Refresh bukan "masuk" ke Log Bot: pemulihan halaman awal setelah
@@ -4803,12 +4804,29 @@ function setChatReply(message) {
   chatReplyTo = message ? { id: message.id, userId: message.userId, username: message.username, displayName: message.displayName, text: message.text } : null;
   const bar = document.querySelector('#chat-reply-bar');
   if (!bar) return;
+  // Bar Balas yang muncul mengubah tinggi daftar: simpan posisi scroll dulu
+  // supaya tampilan tetap di tempat, tidak lompat ke bawah (footer).
+  const list = document.querySelector('#chat-messages');
+  const previousScrollTop = list ? list.scrollTop : 0;
   bar.hidden = !chatReplyTo;
   if (chatReplyTo) {
     document.querySelector('#chat-reply-name').textContent = chatReplyTo.displayName || chatReplyTo.username;
     document.querySelector('#chat-reply-text').textContent = chatReplyTo.text;
-    document.querySelector('#chat-input')?.focus();
+    // Fokus tanpa menggulir: keyboard tetap terbuka, daftar tetap di tempat.
+    document.querySelector('#chat-input')?.focus({ preventScroll: true });
+    if (list) list.scrollTop = previousScrollTop;
   }
+}
+// Obrolan harus pas satu layar walau keyboard HP terbuka: tinggi halaman
+// mengikuti tinggi layar yang terlihat (visualViewport), bukan hanya dvh —
+// kalau tidak, kolom ketik ketutup keyboard atau muncul ruang kosong.
+function fitChatPageToVisibleViewport() {
+  const page = document.querySelector('#chat');
+  if (!page) return;
+  const isMobileChat = activeWorkspacePage === 'chat' && window.visualViewport && window.matchMedia('(max-width: 560px)').matches;
+  if (!isMobileChat) { page.style.height = ''; return; }
+  const visible = Math.round(window.visualViewport.height);
+  page.style.height = `${Math.max(240, visible - 104)}px`;
 }
 async function sendChatTyping(typing) {
   const now = Date.now();
@@ -6196,12 +6214,14 @@ function stopWorkspaceServerAutoRefresh() {
   workspaceServerRefreshTimer = null;
 }
 // Info Update ala MyAnimeList: tiap entri kartu poster + judul + meta + tag, teks deskripsi di kotak scroll manual (bukan auto-scroll).
-// Kategori akurat: Fitur baru (hal baru yang belum ada), Perubahan (yang sudah ada berubah perilaku/tampilannya), Perbaikan (bug dibetulkan), Fitur dihapus (yang dicabut), Tampilan (hanya tampilan).
-const INFO_UPDATE_TAG_LABELS = { 'fitur-baru': 'Fitur baru', perubahan: 'Perubahan', perbaikan: 'Perbaikan', 'fitur-dihapus': 'Fitur dihapus', tampilan: 'Tampilan' };
+// Kategori akurat: Fitur baru (hal baru yang belum ada), Perubahan (yang sudah ada berubah perilaku/tampilannya), Perbaikan (bug dibetulkan), Bug (bug yang ditemukan/dibetulkan), Fitur Error (fitur yang error/tidak jalan), Fitur dihapus (yang dicabut), Tampilan (hanya tampilan).
+const INFO_UPDATE_TAG_LABELS = { 'fitur-baru': 'Fitur baru', perubahan: 'Perubahan', perbaikan: 'Perbaikan', bug: 'Bug', 'fitur-error': 'Fitur Error', 'fitur-dihapus': 'Fitur dihapus', tampilan: 'Tampilan' };
 const INFO_UPDATE_TAG_ICONS = {
   'fitur-baru': '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l1.9 5.4 5.6 1.6-5.6 1.9L12 17.5l-1.9-5.6-5.6-1.9 5.6-1.6z"/></svg>',
   perubahan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v6h-6"/></svg>',
   perbaikan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>',
+  bug: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="7" width="8" height="12" rx="4"/><path d="M12 7V4M8.5 4.5 10 7M15.5 4.5 14 7M8 11H3M8 15H3M21 11h-5M21 15h-5M9 19l-2 2M15 19l2 2"/></svg>',
+  'fitur-error': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2.5 20h19L12 3z"/><path d="M12 10v4.5M12 17.5v.5"/></svg>',
   'fitur-dihapus': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>',
   tampilan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>',
 };
@@ -6720,6 +6740,10 @@ document.querySelector('#chat-emoji-toggle')?.addEventListener('click', () => {
 });
 document.querySelector('#chat-mention-jump')?.addEventListener('click', () => jumpToNextChatMention());
 document.querySelector('#chat-hero-toggle')?.addEventListener('click', () => toggleChatHeroCollapsed());
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => fitChatPageToVisibleViewport());
+  window.visualViewport.addEventListener('scroll', () => fitChatPageToVisibleViewport());
+}
 document.querySelector('#chat-reply-cancel')?.addEventListener('click', () => setChatReply(null));
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && activeWorkspacePage === 'activity') void loadPairingLogs();

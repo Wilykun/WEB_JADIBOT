@@ -2270,7 +2270,11 @@ async function handleApi(req, res, url) {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
     const body = await readJson(req);
     if (body.typing === true) {
-      chatTyping.set(user.id, { userId: user.id, username: user.username, displayName: user.displayName || user.username, avatar: user.avatar === 'uploaded' ? 'uploaded' : (AVATAR_PRESETS.has(user.avatar) ? user.avatar : 'avatar-01'), role: user.role, isMainAdmin: isMainAdmin(user), until: Date.now() + 5000 });
+      // Jendela typing 12 detik, bukan 5: poll penerima tiap 5 detik dan
+      // satu poll yang terlewat (permintaan masih jalan / panel sibuk) tidak
+      // boleh menghilangkan indikator — dengan 5 detik, sekali poll kelewat
+      // saja typing sudah tidak pernah terlihat walau orangnya masih mengetik.
+      chatTyping.set(user.id, { userId: user.id, username: user.username, displayName: user.displayName || user.username, avatar: user.avatar === 'uploaded' ? 'uploaded' : (AVATAR_PRESETS.has(user.avatar) ? user.avatar : 'avatar-01'), role: user.role, isMainAdmin: isMainAdmin(user), until: Date.now() + 12000 });
     } else {
       chatTyping.delete(user.id);
     }
