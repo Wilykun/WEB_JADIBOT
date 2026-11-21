@@ -4578,7 +4578,7 @@ function countNewChatMessages(messages, seenAt) {
 }
 function formatChatTime(createdAt) {
   try {
-    return new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date(createdAt));
+    return new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Jakarta' }).format(new Date(createdAt));
   } catch { return ''; }
 }
 function formatChatDay(createdAt) {
@@ -4771,21 +4771,33 @@ function renderChatMessages() {
 function renderChatTyping(typing) {
   const bar = document.querySelector('#chat-typing');
   if (!bar) return;
-  const names = (typing || []).map((entry) => entry.displayName || entry.username).filter(Boolean);
-  if (!names.length) {
+  const entries = (typing || []).filter((entry) => entry.displayName || entry.username);
+  if (!entries.length) {
     bar.hidden = true;
     bar.replaceChildren();
     return;
   }
   bar.hidden = false;
+  const names = entries.map((entry) => entry.displayName || entry.username);
   const label = names.length === 1
     ? `${names[0]} sedang mengetik`
     : names.length === 2
       ? `${names[0]} dan ${names[1]} sedang mengetik`
-      : 'Beberapa orang sedang mengetik';
+      : `${names[0]}, ${names[1]} dan ${names.length - 2} lainnya sedang mengetik`;
+  const avatars = document.createElement('span');
+  avatars.className = 'chat-typing-avatars';
+  for (const entry of entries.slice(0, 3)) {
+    const avatar = document.createElement('img');
+    avatar.className = 'chat-typing-avatar';
+    avatar.src = chatAvatarSrc(entry);
+    avatar.alt = `Avatar ${entry.displayName || entry.username}`;
+    avatar.loading = 'lazy';
+    avatar.addEventListener('error', () => { avatar.src = '/avatars/avatar-01.webp'; }, { once: true });
+    avatars.append(avatar);
+  }
   const dots = document.createElement('span');
   dots.className = 'chat-typing-dots';
-  bar.replaceChildren(document.createTextNode(label), dots);
+  bar.replaceChildren(avatars, document.createTextNode(label), dots);
 }
 function setChatReply(message) {
   chatReplyTo = message ? { id: message.id, userId: message.userId, username: message.username, displayName: message.displayName, text: message.text } : null;

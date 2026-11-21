@@ -2228,7 +2228,7 @@ async function handleApi(req, res, url) {
     const now = Date.now();
     const typing = [...chatTyping.values()]
       .filter((entry) => entry.userId !== user.id && entry.until > now)
-      .map(({ userId, username, displayName, role, isMainAdmin }) => ({ userId, username, displayName, role, isMainAdmin }));
+      .map(({ userId, username, displayName, avatar, role, isMainAdmin }) => ({ userId, username, displayName, avatar, role, isMainAdmin }));
     return sendJson(res, 200, { messages, typing });
   }
   if (route === 'POST /api/chat/messages') {
@@ -2270,7 +2270,7 @@ async function handleApi(req, res, url) {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
     const body = await readJson(req);
     if (body.typing === true) {
-      chatTyping.set(user.id, { userId: user.id, username: user.username, displayName: user.displayName || user.username, role: user.role, isMainAdmin: isMainAdmin(user), until: Date.now() + 5000 });
+      chatTyping.set(user.id, { userId: user.id, username: user.username, displayName: user.displayName || user.username, avatar: user.avatar === 'uploaded' ? 'uploaded' : (AVATAR_PRESETS.has(user.avatar) ? user.avatar : 'avatar-01'), role: user.role, isMainAdmin: isMainAdmin(user), until: Date.now() + 5000 });
     } else {
       chatTyping.delete(user.id);
     }

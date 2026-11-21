@@ -203,20 +203,20 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=obrolan-mention-realtime-20261121'), 'app.js harus memakai ?v=obrolan-mention-realtime-20261121');
-  assert.ok(html.includes('/style.css?v=obrolan-mention-realtime-20261121'), 'style.css harus memakai ?v=obrolan-mention-realtime-20261121');
+  assert.ok(html.includes('/app.js?v=obrolan-jam-ampm-typing-20261121'), 'app.js harus memakai ?v=obrolan-jam-ampm-typing-20261121');
+  assert.ok(html.includes('/style.css?v=obrolan-jam-ampm-typing-20261121'), 'style.css harus memakai ?v=obrolan-jam-ampm-typing-20261121');
 });
 
 test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
-  assert.equal(data.updatedAt, '2026-11-21T05:53:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 88, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-21T17:56:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 89, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, '@ tidak muncul lagi setelah diklik, tombol @ di pojok kanan bawah, bar atas bisa diciutkan', 'entri terbaru harus soal @ Obrolan');
+  assert.equal(newest.title, 'Bar atas ciut jadi ramping, typing ada avatar + nama, jam pesan AM/PM', 'entri terbaru harus soal bar atas dan typing Obrolan');
   assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perbaikan');
   assert.equal(newest.day, 'Sabtu, 21 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '05.53 WIB', 'waktu entri terbaru harus cocok');
-  const status = data.updates[21];
+  assert.equal(newest.time, '17.56 WIB', 'waktu entri terbaru harus cocok');
+  const status = data.updates[22];
   assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi kedua puluh');
   assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Fitur baru');
   assert.equal(status.time, '19.46 WIB', 'waktu entri status Rank Bot harus cocok');

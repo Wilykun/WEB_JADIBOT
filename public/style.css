@@ -3286,6 +3286,10 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .chat-hero-toggle:hover{color:var(--text);border-color:var(--muted)}
 .chat-hero-toggle svg{width:16px;height:16px;transition:transform .2s ease}
 .chat-page.is-hero-collapsed .chat-hero-copy{display:none}
+.chat-page.is-hero-collapsed .chat-hero{align-items:center}
+.chat-hero-collapsed-label{display:none;font-size:14px;font-weight:700}
+.chat-page.is-hero-collapsed .chat-hero-collapsed-label{display:block}
+.chat-page.is-hero-collapsed .chat-hero-toggle{width:44px}
 .chat-page.is-hero-collapsed .chat-hero-toggle svg{transform:rotate(180deg)}
 .chat-mention-jump{position:absolute;right:12px;bottom:12px;z-index:5;border:0;border-radius:999px;padding:5px 12px;background:linear-gradient(135deg,#3ee69a,#22bd78);color:#062115;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(24,183,111,.35)}
 .chat-mention-jump:hover{filter:brightness(1.08)}
@@ -3318,7 +3322,10 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .chat-bubble-time{font-size:10px;color:var(--muted)}
 .chat-reply-btn{flex:none;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:12px;line-height:1;padding:2px 4px;border-radius:6px}
 .chat-reply-btn:hover{color:var(--text);background:rgba(255,255,255,.08)}
-.chat-typing{min-height:18px;font-size:12px;font-style:italic;color:var(--green2)}
+.chat-typing{display:flex;align-items:center;gap:6px;min-height:18px;font-size:12px;font-style:italic;color:var(--green2)}
+.chat-typing-avatars{display:inline-flex;flex:none}
+.chat-typing-avatar{width:18px;height:18px;border-radius:50%;object-fit:cover;border:1px solid var(--panel);margin-left:-5px}
+.chat-typing-avatars .chat-typing-avatar:first-child{margin-left:0}
 /* Atribut hidden kalah melawan display:flex/grid di atas, jadi bar Balas dan
    panel emoji sempat tampil padahal seharusnya tersembunyi (bar Balas kosong
    menutupi kolom ketik di HP). Aturan ini memaksa hidden benar-benar hilang. */

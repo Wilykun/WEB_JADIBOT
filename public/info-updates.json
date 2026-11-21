@@ -1,6 +1,13 @@
 {
- "updatedAt": "2026-11-21T05:53:00+07:00",
+ "updatedAt": "2026-11-21T17:56:00+07:00",
  "updates": [
+  {
+   "day": "Sabtu, 21 Nov 2026",
+   "time": "17.56 WIB",
+   "title": "Bar atas ciut jadi ramping, typing ada avatar + nama, jam pesan AM/PM",
+   "tag": "Perbaikan",
+   "description": "Bar atas Obrolan yang diciutkan kini jadi bar ramping: label Obrolan di kiri dan tombol panah yang lebih lebar di pojok kanan, supaya lega dan pas. Indikator mengetik kini menampilkan avatar kecil dan nama orang yang mengetik — kalau beberapa orang mengetik, namanya digabung dan diperbarui realtime ala grup WhatsApp. Jam pesan kini 12 jam dengan AM/PM, misalnya 05.00 PM dan 08.00 AM, tetap WIB dan realtime."
+  },
   {
    "day": "Sabtu, 21 Nov 2026",
    "time": "05.53 WIB",

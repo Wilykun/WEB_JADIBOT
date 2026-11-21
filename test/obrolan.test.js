@@ -103,7 +103,9 @@ test('Obrolan: jam pesan memakai WIB dan pembatas hari memakai Hari ini/Kemarin'
     extractFunction(appJs, 'formatChatDay'),
   ].join('\n');
   const { formatChatTime, formatChatDay } = new Function(`${src}; return { formatChatTime, formatChatDay };`)();
-  assert.equal(formatChatTime('2026-11-20T10:00:00.000Z'), '17.00', '10.00 UTC harus tampil 17.00 WIB');
+  assert.equal(formatChatTime('2026-11-20T10:00:00.000Z'), '05.00 PM', '10.00 UTC harus tampil 05.00 PM WIB');
+  assert.equal(formatChatTime('2026-11-20T01:00:00.000Z'), '08.00 AM', '01.00 UTC harus tampil 08.00 AM WIB');
+  assert.equal(formatChatTime('2026-11-20T17:00:00.000Z'), '12.00 AM', '17.00 UTC harus tampil 12.00 AM WIB');
   const now = new Date();
   assert.equal(formatChatDay(now.toISOString()), 'Hari ini', 'pesan hari ini harus berlabel Hari ini');
   const yesterday = new Date(now);
@@ -303,6 +305,28 @@ test('Obrolan: bar atas bisa diciutkan supaya ruang daftar lebih luas, tersimpan
   const loadMessages = sliceBetween(appJs, 'async function loadChatMessages() {', '\nfunction buildChatMessageRow(');
   assert.ok(loadMessages.includes('applyChatHeroCollapsed(loadChatHeroCollapsed())'), 'pilihan bar atas harus dipulihkan saat halaman dimuat');
   assert.ok(appJs.includes("document.querySelector('#chat-hero-toggle')?.addEventListener('click'"), 'tombol ciutkan harus terhubung ke aksi');
+});
+
+test('Obrolan: bar atas yang diciutkan jadi bar ramping — label Obrolan kiri, tombol panah lebar di kanan', () => {
+  assert.ok(html.includes('<span class="chat-hero-collapsed-label">Obrolan</span>'), 'bar atas yang diciutkan harus punya label Obrolan');
+  assert.ok(css.includes('.chat-hero-collapsed-label{display:none'), 'label bar ciut harus tersembunyi saat bar atas terbuka');
+  assert.ok(css.includes('.chat-page.is-hero-collapsed .chat-hero-collapsed-label{display:block}'), 'label bar ciut harus tampil saat bar atas tertutup');
+  assert.ok(css.includes('.chat-page.is-hero-collapsed .chat-hero{align-items:center}'), 'bar atas yang diciutkan harus jadi bar ramping sejajar tengah');
+  assert.ok(css.includes('.chat-page.is-hero-collapsed .chat-hero-toggle{width:44px}'), 'tombol panah harus lebih lebar saat bar atas tertutup supaya pas, tidak kecil');
+});
+
+test('Obrolan: indikator mengetik menampilkan avatar + nama kecil, banyak orang digabung realtime', () => {
+  const render = extractFunction(appJs, 'renderChatTyping');
+  assert.ok(render.includes("avatars.className = 'chat-typing-avatars'"), 'indikator mengetik harus punya wadah avatar');
+  assert.ok(render.includes("avatar.className = 'chat-typing-avatar'"), 'setiap orang yang mengetik harus tampil avatar kecilnya');
+  assert.ok(render.includes('chatAvatarSrc(entry)'), 'avatar mengetik harus memakai sumber avatar yang sama dengan bubble pesan');
+  assert.ok(render.includes("entries.slice(0, 3)"), 'avatar mengetik dibatasi tiga supaya bar tetap kecil');
+  assert.ok(render.includes("`${names[0]}, ${names[1]} dan ${names.length - 2} lainnya sedang mengetik`"), 'tiga orang atau lebih harus disebut namanya, bukan cuma "beberapa orang"');
+  assert.ok(render.includes('bar.replaceChildren(avatars,'), 'avatar, nama, dan titik harus dirender bersamaan tiap poll supaya realtime');
+  assert.ok(css.includes('.chat-typing{display:flex;align-items:center;gap:6px'), 'indikator mengetik harus sebaris kecil di bawah daftar');
+  assert.ok(css.includes('.chat-typing-avatar{width:18px;height:18px;border-radius:50%'), 'avatar mengetik harus kecil dan bulat');
+  assert.ok(serverJs.includes("avatar: user.avatar === 'uploaded' ? 'uploaded' : (AVATAR_PRESETS.has(user.avatar) ? user.avatar : 'avatar-01')"), 'server harus menyimpan avatar orang yang mengetik');
+  assert.ok(serverJs.includes('displayName, avatar, role, isMainAdmin'), 'server harus mengirim avatar lewat daftar mengetik');
 });
 
 test('Obrolan: semua pesan tersimpan rapi di data/Obrolan.json, bukan di store.json', () => {
