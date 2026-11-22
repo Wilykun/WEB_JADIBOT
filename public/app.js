@@ -2174,6 +2174,16 @@ function openRankOvertakeDetail(event, isClimb) {
     modal.querySelector(`#rank-overtake-detail-${prefix}-handle`).textContent = `@${username}`;
     modal.querySelector(`#rank-overtake-detail-${prefix}-rank`).textContent = `#${newPosition}`;
     modal.querySelector(`#rank-overtake-detail-${prefix}-from`).textContent = `dari #${oldPosition}`;
+    // Skor total aktivitas dibaca langsung dari data Rank Bot terbaru saat
+    // layar dibuka, jadi angkanya realtime: totalnya skor peringkat yang
+    // sama dengan yang menentukan salip, rinciannya story yang dibaca dan
+    // reaksi yang diberikan.
+    const reads = Math.max(0, Number(user?.featureStats?.storyReadCount) || 0);
+    const reactions = Math.max(0, Number(user?.featureStats?.reactionCount) || 0);
+    const fmt = (value) => value.toLocaleString('id-ID');
+    modal.querySelector(`#rank-overtake-detail-${prefix}-score`).textContent = fmt(rankScoreOf(user, 'all'));
+    modal.querySelector(`#rank-overtake-detail-${prefix}-reads`).textContent = fmt(reads);
+    modal.querySelector(`#rank-overtake-detail-${prefix}-reactions`).textContent = fmt(reactions);
   };
   fillSide('overtaker', overtaker, event.overtaker, event.newPosition, event.oldPosition);
   fillSide('overtaken', overtaken, event.overtaken, event.overtakenNewPosition, event.overtakenOldPosition ?? (event.overtakenNewPosition - 1));

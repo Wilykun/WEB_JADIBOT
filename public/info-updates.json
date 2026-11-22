@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-22T16:43:32+07:00",
+  "updatedAt": "2026-11-22T18:11:16+07:00",
   "updates": [
+    {
+      "day": "Minggu, 22 Nov 2026",
+      "time": "18.11 WIB",
+      "title": "Layar detail salip kini menampilkan skor total aktivitas",
+      "tag": "Fitur baru",
+      "description": "Layar detail salip kini menampilkan skor total aktivitas tiap akun, supaya jelas kenapa salip itu terjadi: di bawah nama dan peringkat tiap akun kini ada skor total aktivitas dengan ikon bintang, beserta rinciannya — jumlah story yang dibaca dengan ikon mata dan jumlah reaksi dengan ikon hati. Angkanya dibaca langsung dari data Rank Bot terbaru saat layar dibuka, jadi selalu realtime, dan totalnya memakai skor peringkat yang sama dengan yang menentukan salip. Skor tampil besar dan tebal di tengah, rinciannya rapi di bawahnya, dan semuanya pas di layar HP."
+    },
     {
       "day": "Minggu, 22 Nov 2026",
       "time": "16.43 WIB",

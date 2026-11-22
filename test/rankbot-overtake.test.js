@@ -186,12 +186,47 @@ test('layar detail salip menampilkan avatar, nama, dan peringkat lama ke baru ke
   assert.ok(css.includes('@media(max-width:560px){.rank-overtake-detail-row{gap:8px'), 'detail harus dirapikan untuk layar HP');
 });
 
+test('layar detail salip menampilkan skor total aktivitas tiap akun, realtime', () => {
+  const js = read('public/app.js');
+  const html = read('public/index.html');
+  const css = read('public/style.css');
+  // Tiap sisi detail punya skor total + rincian story dibaca dan reaksi.
+  for (const side of ['overtaker', 'overtaken']) {
+    assert.ok(html.includes(`id="rank-overtake-detail-${side}-score"`), `detail harus punya skor total yang ${side}`);
+    assert.ok(html.includes(`id="rank-overtake-detail-${side}-reads"`), `detail harus punya jumlah story dibaca yang ${side}`);
+    assert.ok(html.includes(`id="rank-overtake-detail-${side}-reactions"`), `detail harus punya jumlah reaksi yang ${side}`);
+  }
+  assert.ok(html.includes('skor total aktivitas'), 'detail harus melabeli skor total aktivitas');
+  assert.ok(html.includes('story dibaca'), 'detail harus melabeli jumlah story yang dibaca');
+  // Ikon SVG sesuai konteks: bintang untuk skor total, mata untuk story dibaca, hati untuk reaksi.
+  assert.ok(html.includes('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'), 'skor total harus memakai ikon bintang');
+  assert.ok(html.includes('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>'), 'story dibaca harus memakai ikon mata');
+  assert.ok(html.includes('<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>'), 'reaksi harus memakai ikon hati');
+  // Skor diisi dari data Rank Bot terbaru saat layar dibuka (realtime), totalnya
+  // skor peringkat yang sama dengan yang menentukan salip.
+  const open = js.slice(js.indexOf('function openRankOvertakeDetail(event, isClimb)'), js.indexOf('function closeRankOvertakeDetail()'));
+  assert.ok(open.includes("rankScoreOf(user, 'all')"), 'skor total harus memakai skor peringkat yang sama dengan Rank Bot');
+  assert.ok(open.includes('storyReadCount'), 'skor harus membaca jumlah story yang dibaca dari data akun');
+  assert.ok(open.includes('reactionCount'), 'skor harus membaca jumlah reaksi dari data akun');
+  assert.ok(open.includes("toLocaleString('id-ID')"), 'skor harus diformat dengan pemisah ribuan Indonesia');
+  for (const key of ['score', 'reads', 'reactions']) {
+    assert.ok(open.includes(`#rank-overtake-detail-\${prefix}-${key}`), `skor ${key} harus diisi lewat fillSide saat layar dibuka`);
+  }
+  // Gaya skor: blok tengah di bawah identitas, angka besar, rapih di HP.
+  assert.ok(css.includes('.rank-overtake-detail-row{display:flex;flex-wrap:wrap'), 'baris detail harus membungkus supaya skor turun ke baris sendiri');
+  assert.ok(css.includes('.rank-overtake-detail-score{flex:1 1 100%'), 'skor harus selebar baris supaya teksnya bisa di tengah');
+  assert.ok(css.includes('.rank-overtake-detail-score-total b{font-size:20px'), 'skor total harus tampil besar dan tebal');
+  assert.ok(css.includes('.rank-overtake-detail-score-total svg{width:16px;height:16px;color:#f5c542'), 'ikon bintang skor total harus berwarna emas');
+  assert.ok(css.includes('.rank-overtake-detail-score-parts{display:flex;flex-wrap:wrap;justify-content:center'), 'rincian skor harus di tengah dan membungkus di HP');
+  assert.ok(css.includes('.rank-overtake-detail-score-total b{font-size:18px}'), 'skor total harus sedikit lebih kecil di HP');
+});
+
 test('entri Info Update notifikasi salip Rank Bot kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-22T16:43:32+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 101, 'daftar harus bertambah lima entri');
-  const newest = data.updates[35];
+  assert.equal(data.updatedAt, '2026-11-22T18:11:16+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 102, 'daftar harus bertambah lima entri');
+  const newest = data.updates[36];
   assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');

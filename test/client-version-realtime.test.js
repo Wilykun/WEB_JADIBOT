@@ -127,17 +127,17 @@ test('menu tetap terbuka setelah notifikasi menu terkunci ditutup', async () => 
 test('entri Info Update terbaru kini soal sesi WhatsApp pulih dari cadangan', async () => {
   const data = JSON.parse(await readFile(path.join(sourceRoot, 'public', 'info-updates.json'), 'utf8'));
   const html = await readFile(path.join(sourceRoot, 'public', 'index.html'), 'utf8');
-  assert.equal(data.updates.length, 101, 'daftar harus 78 entri');
+  assert.equal(data.updates.length, 102, 'daftar harus 78 entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Tanda seru garis tiga kini nyala untuk semua kategori notifikasi', 'entri terbaru harus soal batas 10 detik indikator mengetik');
-  assert.equal(newest.tag, 'Bug', 'entri terbaru harus bertag Fitur baru');
+  assert.equal(newest.title, 'Layar detail salip kini menampilkan skor total aktivitas', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Minggu, 22 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.ok(html.includes('<li class="info-update-item" data-tag="bug">'), 'fallback harus memakai slug bug untuk entri terbaru');
+  assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'fallback harus memakai slug fitur-baru untuk entri terbaru');
   assert.ok(html.includes("<h4>Bar atas ciut jadi ramping, typing ada avatar + nama, jam pesan AM/PM</h4>"), 'fallback harus memuat judul entri terbaru');
 
   // Entri notifikasi menu terkunci sebelumnya kini di posisi kedua puluh dua; deskripsinya
   // menyebut menunya tetap terbuka setelah notifikasi ditutup.
-  const locked = data.updates[39];
+  const locked = data.updates[40];
   assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi kedua puluh empat');
   assert.match(locked.description, /Menunya tetap terbuka setelah notifikasi ditutup/, 'deskripsi harus menyebut menu tetap terbuka');
 });
