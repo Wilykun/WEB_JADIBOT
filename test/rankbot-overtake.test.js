@@ -82,10 +82,11 @@ test('kartu salip menampilkan siapa menyalip siapa, posisi, dan waktu WIB', () =
   assert.ok(render.includes('formatRankOvertakeWhen(item.createdAt)'), 'waktu kartu harus waktu salip itu sendiri, bukan waktu kartu dibuka');
   assert.ok(js.includes("weekday: 'long', day: 'numeric', month: 'short', year: 'numeric'"), 'waktu kartu harus memuat hari, tanggal, bulan, dan tahun');
   assert.ok(js.includes("hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta'"), 'waktu kartu harus jam WIB');
-  // Tombol Lihat membuka layar detail salip.
+  // Tombol Lihat langsung membuka halaman Rank Bot.
   assert.ok(js.includes('function viewRankOvertakeNoticeCurrent()'), 'harus ada viewRankOvertakeNoticeCurrent');
   const view = js.slice(js.indexOf('function viewRankOvertakeNoticeCurrent()'), js.indexOf('function stepRankOvertakeNotice(delta)'));
-  assert.ok(view.includes('openRankOvertakeDetail(item.event, item.isClimb)'), 'tombol Lihat kartu salip harus membuka layar detail');
+  assert.ok(view.includes("setWorkspacePage('rankbot')"), 'tombol Lihat kartu salip harus membuka halaman Rank Bot');
+  assert.ok(!view.includes('openRankOvertakeDetail'), 'tombol Lihat tidak boleh lagi membuka layar detail');
 });
 
 test('kartu salip memakai ikon sendiri dan menutupnya tidak mematikan pengingat lain', () => {
@@ -110,17 +111,18 @@ test('notifikasi naik peringkat: kartunya beda dari kartu salip (judul, ikon)', 
   assert.ok(render.includes("'Kamu menyalip!'"), 'judul kartu harus merayakan naik peringkat');
   assert.ok(render.includes("'👑'"), 'ikon kartu harus mahkota untuk nomor 1');
   assert.ok(render.includes("'🚀'"), 'ikon kartu harus roket untuk naik peringkat');
-  // Kartu naik peringkat juga punya tombol Lihat ke layar detail yang sama.
-  assert.ok(js.includes('function viewRankOvertakeNoticeCurrent()'), 'kartu naik peringkat harus bisa dibuka ke layar detail');
+  // Kartu naik peringkat juga punya tombol Lihat ke halaman Rank Bot.
+  assert.ok(js.includes('function viewRankOvertakeNoticeCurrent()'), 'kartu naik peringkat harus bisa dibuka ke halaman Rank Bot');
 });
 
 test('naik peringkat sendiri didahulukan dari salip orang lain dan semua salip baru masuk antrean', () => {
   const js = read('public/app.js');
   const checker = js.slice(js.indexOf('function checkRankBotOvertakes()'), js.indexOf('function renderRankBot()'));
-  assert.ok(checker.includes("const climbs = viewer ? fresh.filter((item) => item.overtaker === viewer) : [];"), 'salip oleh yang login harus dikenali sebagai naik peringkat sendiri');
-  assert.ok(checker.includes("const others = fresh.filter((item) => !viewer || item.overtaker !== viewer);"), 'salip orang lain harus dipisah dari naik peringkat sendiri');
+  assert.ok(checker.includes("const involved = viewer ? fresh.filter((item) => item.overtaker === viewer || item.overtaken === viewer) : [];"), 'hanya salip yang melibatkan akun yang login yang boleh diberitakan');
+  assert.ok(checker.includes("const climbs = involved.filter((item) => item.overtaker === viewer);"), 'salip oleh yang login harus dikenali sebagai naik peringkat sendiri');
+  assert.ok(checker.includes("const others = involved.filter((item) => item.overtaker !== viewer);"), 'salip yang menimpa yang login harus dipisah dari naik peringkat sendiri');
   assert.ok(checker.includes('for (const item of climbs) notifyRankBotClimb(item);'), 'naik peringkat sendiri harus didahulukan');
-  assert.ok(checker.includes('for (const item of others) notifyRankBotOvertake(item);'), 'semua salip orang lain harus masuk antrean, bukan cuma satu');
+  assert.ok(checker.includes('for (const item of others) notifyRankBotOvertake(item);'), 'semua salip yang melibatkan yang login harus masuk antrean, bukan cuma satu');
   assert.ok(!checker.includes('fresh[0]'), 'tidak boleh lagi cuma satu kartu per muat ulang');
 });
 
@@ -194,7 +196,7 @@ test('layar detail salip menampilkan avatar, nama, dan peringkat lama ke baru ke
   // Gaya detail: baris avatar + nama, rapih di HP.
   assert.ok(css.includes('.rank-overtake-detail-row{display:flex'), 'baris detail harus sejajar avatar dan nama');
   assert.ok(css.includes('.rank-overtake-detail-avatar{'), 'avatar detail harus punya gaya sendiri');
-  assert.ok(css.includes('@media(max-width:560px){.rank-overtake-detail-row{gap:8px'), 'detail harus dirapikan untuk layar HP');
+  assert.ok(css.includes('.rank-overtake-detail-row{gap:8px;padding:8px 10px}'), 'detail harus dirapikan untuk layar HP');
 });
 
 test('layar detail salip menampilkan skor total aktivitas tiap akun, realtime', () => {
@@ -235,9 +237,9 @@ test('layar detail salip menampilkan skor total aktivitas tiap akun, realtime', 
 test('entri Info Update notifikasi salip Rank Bot kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-22T20:04:01+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 103, 'daftar harus bertambah lima entri');
-  const newest = data.updates[37];
+  assert.equal(data.updatedAt, '2026-11-22T22:00:30+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 104, 'daftar harus bertambah lima entri');
+  const newest = data.updates[38];
   assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');

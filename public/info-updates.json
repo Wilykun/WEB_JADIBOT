@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-22T20:04:01+07:00",
+  "updatedAt": "2026-11-22T22:00:30+07:00",
   "updates": [
+    {
+      "day": "Minggu, 22 Nov 2026",
+      "time": "22.00 WIB",
+      "title": "Notifikasi salip kini hanya untuk yang terlibat, tombol Lihat buka Rank Bot",
+      "tag": "Perubahan",
+      "description": "Notifikasi salip kini hanya muncul untuk salip yang melibatkan akun yang sedang login: kita menyalip orang, atau orang menyalip kita. Salip antar dua akun lain tidak lagi diberitakan ke akun ini, supaya notifikasi tidak membanjiri. Tombol Lihat pada kartu salip kini langsung membuka halaman Rank Bot, dan salip yang dilihat langsung ditandai sudah dibaca. Baris tombol Sebelumnya, Berikutnya, dan Terbaru hanya muncul bila ada salip lain di antrean, dan tombol yang tidak aktif kini terlihat jelas redup. Kartu notifikasi dan layar detail salip juga dibatasi setinggi layar HP dan bisa di-scroll, jadi tidak kepotong lagi."
+    },
     {
       "day": "Minggu, 22 Nov 2026",
       "time": "20.04 WIB",

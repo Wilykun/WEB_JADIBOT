@@ -2253,6 +2253,11 @@ function renderRankOvertakeNotice() {
   if (prev) prev.disabled = rankOvertakeNoticeIndex <= 0;
   if (next) next.disabled = rankOvertakeNoticeIndex >= rankOvertakeQueue.length - 1;
   if (latest) latest.disabled = rankOvertakeNoticeIndex >= rankOvertakeQueue.length - 1;
+  // Baris navigasi hanya muncul bila ada salip lain yang bisa dilihat
+  // (lebih dari satu di antrean); kalau cuma satu, tombolnya tidak berguna
+  // dan mengetuknya tidak terjadi apa-apa.
+  const nav = modal.querySelector('.rank-overtake-notice-nav');
+  if (nav) nav.classList.toggle('hidden', rankOvertakeQueue.length <= 1);
   return true;
 }
 
@@ -2371,9 +2376,13 @@ function dismissAllRankOvertakes() {
 function viewRankOvertakeNoticeCurrent() {
   const item = rankOvertakeNoticeItem();
   if (!item) return;
+  // "Lihat" menandai salip ini sudah dilihat, lalu langsung membuka halaman
+  // Rank Bot (peringkat dihitung ulang dari data live saat halaman dibuka),
+  // bukan layar detail lagi.
+  rankOvertakeQueue = rankOvertakeQueue.filter((entry) => entry.id !== item.id);
+  void dismissRankOvertakesOnServer([item.id], false);
   hideRankOvertakeNotice();
-  rankOvertakeDetailReturnToNotice = true;
-  openRankOvertakeDetail(item.event, item.isClimb);
+  setWorkspacePage('rankbot');
 }
 
 function stepRankOvertakeNotice(delta) {
@@ -2418,10 +2427,14 @@ function checkRankBotOvertakes() {
     // supaya yang lain tidak hilang. Pasangan yang sama tidak diberitakan
     // lagi dalam 10 menit supaya salip bolak-balik tidak membanjiri layar.
     const fresh = events.filter((item) => (Date.now() - (rankOvertakeNotified.get(`${item.overtaker}>${item.overtaken}`) || 0)) > 10 * 60 * 1000);
-    // Naik peringkat sendiri didahulukan, lalu salip orang lain.
+    // Notifikasi salip hanya untuk salip yang melibatkan akun yang sedang
+    // login: kita menyalip orang, atau orang menyalip kita. Salip antar dua
+    // akun lain tidak diberitakan ke akun ini supaya tidak membanjiri.
     const viewer = String(currentUser?.username || '');
-    const climbs = viewer ? fresh.filter((item) => item.overtaker === viewer) : [];
-    const others = fresh.filter((item) => !viewer || item.overtaker !== viewer);
+    const involved = viewer ? fresh.filter((item) => item.overtaker === viewer || item.overtaken === viewer) : [];
+    // Naik peringkat sendiri didahulukan, lalu salip yang menimpa kita.
+    const climbs = involved.filter((item) => item.overtaker === viewer);
+    const others = involved.filter((item) => item.overtaker !== viewer);
     for (const item of climbs) notifyRankBotClimb(item);
     for (const item of others) notifyRankBotOvertake(item);
   }

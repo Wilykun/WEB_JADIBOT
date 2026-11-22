@@ -138,13 +138,72 @@ test('Tutup menutup satu salip, Tutup semua mengosongkan antrean', () => {
   assert.ok(dismissAll.includes('hideRankOvertakeNotice();'), 'Tutup semua harus menutup kartu');
 });
 
-test('Lihat membuka layar detail dan kembali ke antrean saat detail ditutup', () => {
+test('Lihat membuka halaman Rank Bot dan menandai salip sudah dilihat', () => {
   const js = read('public/app.js');
   const view = js.slice(js.indexOf('function viewRankOvertakeNoticeCurrent()'), js.indexOf('function stepRankOvertakeNotice(delta)'));
   assert.ok(view.includes('hideRankOvertakeNotice();'), 'Lihat harus menyembunyikan kartu salip dulu');
-  assert.ok(view.includes('rankOvertakeDetailReturnToNotice = true;'), 'Lihat harus menandai detail dibuka dari kartu salip');
-  assert.ok(view.includes('openRankOvertakeDetail(item.event, item.isClimb)'), 'Lihat harus membuka layar detail salip itu');
-  const close = js.slice(js.indexOf('function closeRankOvertakeDetail()'), js.indexOf("document.querySelector('#rank-overtake-detail')?.addEventListener"));
-  assert.ok(close.includes('if (rankOvertakeDetailReturnToNotice) {'), 'menutup detail harus kembali ke kartu salip bila dibuka dari sana');
-  assert.ok(close.includes('if (rankOvertakeQueue.length) showRankOvertakeNotice();'), 'kartu salip harus muncul lagi bila antrean masih ada');
+  assert.ok(view.includes("setWorkspacePage('rankbot')"), 'Lihat harus membuka halaman Rank Bot');
+  assert.ok(view.includes('rankOvertakeQueue = rankOvertakeQueue.filter((entry) => entry.id !== item.id);'), 'Lihat harus membuang salip yang dilihat dari antrean');
+  assert.ok(view.includes('void dismissRankOvertakesOnServer([item.id], false);'), 'Lihat harus menghapus salip itu dari DATA_AKUN');
+  assert.ok(!view.includes('openRankOvertakeDetail'), 'Lihat tidak boleh lagi membuka layar detail');
+});
+
+test('salip hanya diberitakan bila melibatkan akun yang login (kita menyalip / kita disalip)', () => {
+  const js = read('public/app.js');
+  const checker = js.slice(js.indexOf('function checkRankBotOvertakes()'), js.indexOf('function renderRankBot()'));
+  const match = checker.match(/const involved = viewer \? fresh\.filter\(\(item\) => item\.overtaker === viewer \|\| item\.overtaken === viewer\) : \[\];/);
+  assert.ok(match, 'filter salip yang melibatkan akun login harus ada di checkRankBotOvertakes');
+  // Jalankan filter yang diekstrak dari kode asli terhadap tiga salip.
+  const viewer = 'wilykun';
+  const fresh = [
+    { overtaker: 'wilykun', overtaken: 'ryobot' },
+    { overtaker: 'jeffv2', overtaken: 'wilykun' },
+    { overtaker: 'jeffv2', overtaken: 'ryobot' },
+  ];
+  const involved = eval(match[0].replace('const involved = ', ''));
+  assert.equal(involved.length, 2, 'hanya dua salip yang melibatkan wilykun yang boleh masuk antrean');
+  assert.ok(involved.some((item) => item.overtaker === 'wilykun'), 'kita menyalip orang harus diberitakan ke kita');
+  assert.ok(involved.some((item) => item.overtaken === 'wilykun'), 'orang menyalip kita harus diberitakan ke kita');
+  assert.ok(!involved.some((item) => item.overtaker === 'jeffv2' && item.overtaken === 'ryobot'), 'salip antar dua akun lain tidak boleh diberitakan ke kita');
+});
+
+test('navigasi Sebelumnya/Berikutnya benar-benar berpindah bila ada salip lain', () => {
+  const js = read('public/app.js');
+  const match = js.match(/function stepRankOvertakeNotice\(delta\) \{[\s\S]*?\n\}/);
+  assert.ok(match, 'fungsi stepRankOvertakeNotice harus bisa diekstrak dari public/app.js');
+  let rankOvertakeQueue = [{ id: 'a' }, { id: 'b' }, { id: 'c' }];
+  let rankOvertakeNoticeIndex = 0;
+  let rendered = 0;
+  const renderRankOvertakeNotice = () => { rendered += 1; };
+  const step = eval(`(${match[0].replace('function stepRankOvertakeNotice', 'function')})`);
+  step(1);
+  assert.equal(rankOvertakeNoticeIndex, 1, 'Berikutnya harus pindah dari 1 ke 2');
+  step(1);
+  assert.equal(rankOvertakeNoticeIndex, 2, 'Berikutnya harus pindah dari 2 ke 3');
+  step(1);
+  assert.equal(rankOvertakeNoticeIndex, 2, 'Berikutnya di ujung tidak boleh lewat dari salip terakhir');
+  step(-1);
+  assert.equal(rankOvertakeNoticeIndex, 1, 'Sebelumnya harus kembali dari 3 ke 2');
+  step(-5);
+  assert.equal(rankOvertakeNoticeIndex, 0, 'Sebelumnya di awal tidak boleh lewat dari salip pertama');
+  assert.ok(rendered >= 5, 'setiap langkah harus merender ulang kartu');
+});
+
+test('baris navigasi hanya muncul bila ada salip lain (lebih dari satu di antrean)', () => {
+  const js = read('public/app.js');
+  const render = js.slice(js.indexOf('function renderRankOvertakeNotice()'), js.indexOf('function showRankOvertakeNotice()'));
+  assert.ok(render.includes("nav.classList.toggle('hidden', rankOvertakeQueue.length <= 1);"), 'baris navigasi harus disembunyikan bila cuma satu salip di antrean');
+  assert.ok(render.includes("modal.querySelector('.rank-overtake-notice-nav')"), 'baris navigasi harus dicari dari kartunya');
+});
+
+test('tombol yang tidak aktif terlihat jelas tidak bisa ditekan', () => {
+  const css = read('public/style.css');
+  assert.ok(css.includes('.button:disabled{opacity:.45;cursor:not-allowed;transform:none}'), 'tombol disabled harus redup dan kursornya not-allowed');
+});
+
+test('kartu notifikasi tidak kepotong di HP (tinggi dibatasi dan bisa di-scroll)', () => {
+  const css = read('public/style.css');
+  assert.ok(css.includes('.notice-card{position:relative;width:min(400px,100%);max-height:calc(100dvh - 32px);overflow-y:auto;'), 'kartu notifikasi harus dibatasi setinggi layar dan bisa di-scroll bila isinya panjang');
+  assert.ok(css.includes('.rank-overtake-detail-score{padding-top:6px;gap:2px}'), 'skor di layar detail harus lebih rapat di HP');
+  assert.ok(css.includes('.notice-icon{width:38px;height:38px;font-size:19px;margin-bottom:8px}'), 'ikon kartu harus lebih kecil di HP');
 });
