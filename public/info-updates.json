@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-23T05:05:44+07:00",
+  "updatedAt": "2026-11-23T05:08:52+07:00",
   "updates": [
+    {
+      "day": "Senin, 23 Nov 2026",
+      "time": "05.08 WIB",
+      "title": "Kartu salip kini bilang Kamu tersalip bila kamu yang disalip",
+      "tag": "Perubahan",
+      "description": "Judul kartu notifikasi salip kini membedakan kamu dan orang lain: kalau akun yang login yang menyalip, judulnya Kamu menyalip!; kalau akun yang login yang disalip, judulnya Kamu tersalip! dengan ikon panah bawah. Sebelumnya yang disalip hanya melihat judul umum Ada yang menyalip di Rank Bot!, sehingga tidak jelas siapa yang kesalip. Layar detail salip memakai judul yang sama."
+    },
     {
       "day": "Senin, 23 Nov 2026",
       "time": "05.05 WIB",

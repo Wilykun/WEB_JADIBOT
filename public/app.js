@@ -2192,7 +2192,10 @@ function openRankOvertakeDetail(event, isClimb) {
   // sama seperti kartu notifikasi (bukan dari penanda isClimb yang disimpan).
   const viewer = String(currentUser?.username || '');
   const viewerIsOvertaker = Boolean(viewer) && event.overtaker === viewer;
-  modal.querySelector('#rank-overtake-detail-title').textContent = viewerIsOvertaker ? 'Kamu menyalip!' : 'Ada yang menyalip!';
+  const viewerIsOvertaken = Boolean(viewer) && event.overtaken === viewer;
+  modal.querySelector('#rank-overtake-detail-title').textContent = viewerIsOvertaker
+    ? 'Kamu menyalip!'
+    : viewerIsOvertaken ? 'Kamu tersalip!' : 'Ada yang menyalip!';
   fillRankOvertakeSides(modal, 'rank-overtake-detail', event);
   modal.querySelector('#rank-overtake-detail-when').textContent = `${when} WIB`;
   modal.classList.remove('hidden');
@@ -2250,11 +2253,14 @@ function renderRankOvertakeNotice() {
   // tertukar (misalnya "Kamu menyalip!" padahal akun itu yang disalip).
   const viewer = String(currentUser?.username || '');
   const viewerIsOvertaker = Boolean(viewer) && event.overtaker === viewer;
+  const viewerIsOvertaken = Boolean(viewer) && event.overtaken === viewer;
   const isTop = viewerIsOvertaker && event.newPosition === 1;
-  modal.querySelector('#rank-overtake-notice-icon').textContent = viewerIsOvertaker ? (isTop ? '👑' : '🚀') : '🏆';
+  modal.querySelector('#rank-overtake-notice-icon').textContent = viewerIsOvertaker
+    ? (isTop ? '👑' : '🚀')
+    : viewerIsOvertaken ? '⬇️' : '🏆';
   modal.querySelector('#rank-overtake-notice-title').textContent = viewerIsOvertaker
     ? (isTop ? 'Kamu nomor 1 di Rank Bot!' : 'Kamu menyalip!')
-    : 'Ada yang menyalip di Rank Bot!';
+    : viewerIsOvertaken ? 'Kamu tersalip!' : 'Ada yang menyalip di Rank Bot!';
   modal.querySelector('#rank-overtake-notice-counter').textContent = `${rankOvertakeNoticeIndex + 1} dari ${rankOvertakeQueue.length}`;
   fillRankOvertakeSides(modal, 'rank-overtake-notice', event);
   modal.querySelector('#rank-overtake-notice-when').textContent = formatRankOvertakeWhen(item.createdAt);
