@@ -42,3 +42,32 @@ test('menu garis tiga muncul di viewport saat diketuk setelah scroll (bukan di a
   const zIndex = Number(rule.match(/z-index:\s*(\d+)/)?.[1]);
   assert.ok(Number.isFinite(zIndex) && zIndex > 25, `menu dropdown z-index (${zIndex}) must stay above the sticky topbar (25)`);
 });
+
+test('tanda seru garis tiga nyala bila ada notifikasi di kategori mana pun, mati bila semua dibaca', async () => {
+  const js = await fs.readFile(path.join(ROOT, 'public', 'app.js'), 'utf8');
+  const css = await fs.readFile(path.join(ROOT, 'public', 'style.css'), 'utf8');
+  const html = await fs.readFile(path.join(ROOT, 'public', 'index.html'), 'utf8');
+  // Tombol garis tiga sudah punya ikon tanda seru yang tampil saat has-alert.
+  assert.ok(html.includes('class="menu-toggle-alert"'), 'tombol garis tiga harus punya elemen tanda seru');
+  assert.ok(css.includes('#menu-toggle.has-alert .menu-toggle-alert{display:block}'), 'tanda seru harus tampil saat tombol punya has-alert');
+  // updateMenuToggleAlert harus menggabungkan SEMUA kategori badge menu,
+  // bukan cuma Info Update dan Member — Log Bot dan Obrolan juga.
+  const fn = js.slice(js.indexOf('function updateMenuToggleAlert()'), js.indexOf('function renderInfoUpdateBadge(count)'));
+  assert.ok(fn.includes('infoUpdateUnreadCount'), 'tanda seru harus menghitung Info Update belum dibaca');
+  assert.ok(fn.includes('memberNewCount'), 'tanda seru harus menghitung akun baru di Member');
+  assert.ok(fn.includes('chatUnreadCount'), 'tanda seru harus menghitung pesan Obrolan belum dibaca');
+  assert.ok(fn.includes('privateLogUnreadStoryCount'), 'tanda seru harus menghitung story Log Bot belum dibaca');
+  assert.ok(fn.includes("button.classList.toggle('has-alert', hasAlert)"), 'tanda seru harus dipasang lewat kelas has-alert');
+  assert.ok(fn.includes("button.setAttribute('aria-label', hasAlert ? 'Buka menu (ada notifikasi)' : 'Buka menu')"), 'label tombol harus menyebut ada notifikasi saat tanda seru nyala');
+  // Badge Obrolan dan Log Bot harus memicu pembaruan tanda seru tiap berubah,
+  // supaya titiknya nyala realtime saat notif masuk dan mati saat dibaca.
+  const chatFn = js.slice(js.indexOf('function renderChatBadge(count)'), js.indexOf('function markChatSeen()'));
+  assert.ok(chatFn.includes('updateMenuToggleAlert();'), 'renderChatBadge harus memperbarui tanda seru garis tiga');
+  const logFn = js.slice(js.indexOf('function renderPrivateLogBadge(count)'), js.indexOf('function markPrivateLogSeen()'));
+  assert.ok(logFn.includes('updateMenuToggleAlert();'), 'renderPrivateLogBadge harus memperbarui tanda seru garis tiga');
+  // Kategori yang sudah benar sejak lama tetap memicu pembaruan tanda seru.
+  const infoFn = js.slice(js.indexOf('function renderInfoUpdateBadge(count)'), js.indexOf('async function refreshInfoUpdateBadge'));
+  assert.ok(infoFn.includes('updateMenuToggleAlert();'), 'renderInfoUpdateBadge harus memperbarui tanda seru garis tiga');
+  const memberFn = js.slice(js.indexOf('function renderMemberBadge(count)'), js.indexOf('async function refreshMemberBadge()'));
+  assert.ok(memberFn.includes('updateMenuToggleAlert();'), 'renderMemberBadge harus memperbarui tanda seru garis tiga');
+});

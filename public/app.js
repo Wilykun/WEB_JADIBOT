@@ -4436,6 +4436,7 @@ function countNewStoryEntries(logs, seenIdentity) {
 }
 function renderPrivateLogBadge(count) {
   privateLogUnreadStoryCount = count > 0 ? count : 0;
+  updateMenuToggleAlert();
   const item = document.querySelector('#private-log-nav');
   if (!item) return;
   let badge = item.querySelector('.nav-badge');
@@ -4492,6 +4493,7 @@ function saveChatSeenAt(value) {
 }
 function renderChatBadge(count) {
   chatUnreadCount = count > 0 ? count : 0;
+  updateMenuToggleAlert();
   const item = document.querySelector('#chat-nav');
   if (!item) return;
   let badge = item.querySelector('.nav-badge');
@@ -6451,13 +6453,14 @@ function countUnreadInfoUpdates(updates, seen) {
 let infoUpdateUnreadCount = 0;
 let memberNewCount = 0;
 // Tanda seru di tombol garis tiga: muncul selama masih ada notifikasi
-// yang belum dilihat (Info Update belum dibaca atau akun baru di Member),
-// hilang begitu semuanya sudah dilihat. Angkanya mengikuti badge yang
-// sama, jadi tidak ada sumber hitungan baru.
+// yang belum dilihat di kategori mana pun — Info Update belum dibaca,
+// akun baru di Member, pesan Obrolan belum dibaca, atau story Log Bot
+// belum dibaca — hilang begitu semuanya sudah dilihat. Angkanya mengikuti
+// badge yang sama, jadi tidak ada sumber hitungan baru.
 function updateMenuToggleAlert() {
   const button = document.querySelector('#menu-toggle');
   if (!button) return;
-  const hasAlert = infoUpdateUnreadCount + memberNewCount > 0;
+  const hasAlert = infoUpdateUnreadCount + memberNewCount + chatUnreadCount + privateLogUnreadStoryCount > 0;
   button.classList.toggle('has-alert', hasAlert);
   button.setAttribute('aria-label', hasAlert ? 'Buka menu (ada notifikasi)' : 'Buka menu');
 }

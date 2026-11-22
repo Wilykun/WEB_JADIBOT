@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-22T15:50:45+07:00",
+  "updatedAt": "2026-11-22T16:43:32+07:00",
   "updates": [
+    {
+      "day": "Minggu, 22 Nov 2026",
+      "time": "16.43 WIB",
+      "title": "Tanda seru garis tiga kini nyala untuk semua kategori notifikasi",
+      "tag": "Bug",
+      "description": "Tombol garis tiga di pojok kiri atas sempat tidak menunjukkan tanda seru walau ada notifikasi: tanda itu hanya menghitung Info Update yang belum dibaca dan akun baru di Member, jadi Log Bot yang punya 110 story belum dibaca atau Obrolan yang punya pesan belum dibaca tidak menyalakan tanda apa pun — pengguna harus membuka dulu menunya baru ketahuan ada notifikasi. Kini tanda seru di garis tiga menghitung semua kategori yang punya badge di menu — Info Update, Member, Obrolan, dan Log Bot — jadi begitu ada notifikasi di kategori mana pun, tanda seru merah langsung nyala di tombol garis tiga sebelum menunya dibuka, dan hilang begitu semua notifikasi sudah dibaca. Badge tiap kategori tetap tampil seperti biasa di dalam menu, dan angkanya tetap akurat tanpa batas."
+    },
     {
       "day": "Minggu, 22 Nov 2026",
       "time": "15.50 WIB",
