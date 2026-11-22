@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-23T04:20:42+07:00",
+  "updatedAt": "2026-11-23T05:05:44+07:00",
   "updates": [
+    {
+      "day": "Senin, 23 Nov 2026",
+      "time": "05.05 WIB",
+      "title": "Kartu salip kini lebih rapih: avatar di tengah, teks sejajar",
+      "tag": "Tampilan",
+      "description": "Tata letak kartu notifikasi salip dan layar detailnya kini lebih rapih di HP: avatar kini di tengah di atas nama (lebih besar, 48px di HP), nama, handle, dan peringkat sejajar di tengah, dan skor tetap di tengah di bawah garis pemisah. Sebelumnya avatar menggantung di kiri sementara teksnya di tengah, sehingga tampilannya tidak seimbang."
+    },
     {
       "day": "Senin, 23 Nov 2026",
       "time": "04.20 WIB",

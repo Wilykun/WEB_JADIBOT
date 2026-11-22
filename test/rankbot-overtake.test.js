@@ -193,10 +193,12 @@ test('layar detail salip menampilkan avatar, nama, dan peringkat lama ke baru ke
   assert.ok(fill.includes('event.overtakenOldPosition'), 'detail harus memakai peringkat lama yang kesalip dari kejadian');
   assert.ok(js.includes('function closeRankOvertakeDetail()'), 'harus ada closeRankOvertakeDetail');
   assert.ok(js.includes('function rankBotAvatarSrc(user)'), 'harus ada helper URL avatar Rank Bot');
-  // Gaya detail: baris avatar + nama, rapih di HP.
-  assert.ok(css.includes('.rank-overtake-detail-row{display:flex'), 'baris detail harus sejajar avatar dan nama');
+  // Gaya detail: avatar di tengah di atas nama, teks rapi di tengah, rapih di HP.
+  assert.ok(css.includes('.rank-overtake-detail-row{display:flex;flex-direction:column;align-items:center'), 'baris detail harus kolom di tengah: avatar di atas, nama dan teks di bawahnya');
   assert.ok(css.includes('.rank-overtake-detail-avatar{'), 'avatar detail harus punya gaya sendiri');
-  assert.ok(css.includes('.rank-overtake-detail-row{gap:8px;padding:8px 10px}'), 'detail harus dirapikan untuk layar HP');
+  assert.ok(css.includes('.rank-overtake-detail-avatar{flex:0 0 auto;width:52px;height:52px'), 'avatar detail harus cukup besar dan di tengah');
+  assert.ok(css.includes('.rank-overtake-detail-identity{flex:0 0 auto;width:100%;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center}'), 'nama, handle, dan peringkat harus di tengah di bawah avatar');
+  assert.ok(css.includes('.rank-overtake-detail-row{gap:4px;padding:10px}'), 'detail harus dirapikan untuk layar HP');
 });
 
 test('layar detail salip menampilkan skor total aktivitas tiap akun, realtime', () => {
@@ -226,8 +228,8 @@ test('layar detail salip menampilkan skor total aktivitas tiap akun, realtime', 
     assert.ok(fill.includes(`#\${idPrefix}-\${prefix}-${key}`), `skor ${key} harus diisi lewat fillSide saat layar dibuka`);
   }
   // Gaya skor: blok tengah di bawah identitas, angka besar, rapih di HP.
-  assert.ok(css.includes('.rank-overtake-detail-row{display:flex;flex-wrap:wrap'), 'baris detail harus membungkus supaya skor turun ke baris sendiri');
-  assert.ok(css.includes('.rank-overtake-detail-score{flex:1 1 100%'), 'skor harus selebar baris supaya teksnya bisa di tengah');
+  assert.ok(css.includes('.rank-overtake-detail-row{display:flex;flex-direction:column;align-items:center'), 'baris detail harus kolom di tengah supaya avatar, nama, dan skor tersusun rapi ke bawah');
+  assert.ok(css.includes('.rank-overtake-detail-score{flex:0 0 auto;width:100%'), 'skor harus selebar baris supaya teksnya bisa di tengah');
   assert.ok(css.includes('.rank-overtake-detail-score-total b{font-size:20px'), 'skor total harus tampil besar dan tebal');
   assert.ok(css.includes('.rank-overtake-detail-score-total svg{width:16px;height:16px;color:#f5c542'), 'ikon bintang skor total harus berwarna emas');
   assert.ok(css.includes('.rank-overtake-detail-score-parts{display:flex;flex-wrap:wrap;justify-content:center'), 'rincian skor harus di tengah dan membungkus di HP');
@@ -237,9 +239,9 @@ test('layar detail salip menampilkan skor total aktivitas tiap akun, realtime', 
 test('entri Info Update notifikasi salip Rank Bot kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-23T04:20:42+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 106, 'daftar harus bertambah lima entri');
-  const newest = data.updates[40];
+  assert.equal(data.updatedAt, '2026-11-23T05:05:44+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 107, 'daftar harus bertambah lima entri');
+  const newest = data.updates[41];
   assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
