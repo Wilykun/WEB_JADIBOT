@@ -400,6 +400,64 @@ async function writeMemberListSeen(user, seen) {
   return seen;
 }
 
+const RANK_OVERTAKES_FILE = 'rank-overtakes.json';
+const RANK_OVERTAKES_MAX = 50;
+
+// Notifikasi salip Rank Bot: daftar salip yang belum ditutup, disimpan per
+// akun di folder DATA_AKUN masing-masing, jadi tiap akun (Admin Utama, admin
+// biasa, member) punya antrean sendiri yang tidak hilang saat halaman
+// dimuat ulang atau ganti perangkat. Antrean diurutkan dari yang paling lama
+// ke yang terbaru; bila melebihi batas, yang paling lama dibuang.
+function sanitizeRankOvertake(item) {
+  if (!item || typeof item !== 'object') return null;
+  const username = (value) => String(value || '').trim().slice(0, 24);
+  const overtaker = username(item.overtaker);
+  const overtaken = username(item.overtaken);
+  const position = (value) => {
+    const n = Math.floor(Number(value));
+    return Number.isFinite(n) && n >= 1 && n <= 10000 ? n : null;
+  };
+  const newPosition = position(item.newPosition);
+  const oldPosition = position(item.oldPosition);
+  const overtakenNewPosition = position(item.overtakenNewPosition);
+  const overtakenOldPosition = position(item.overtakenOldPosition);
+  const createdAt = String(item.createdAt || '').trim();
+  const id = String(item.id || '').trim().slice(0, 120);
+  if (!overtaker || !overtaken || overtaker === overtaken) return null;
+  if (!newPosition || !oldPosition || !overtakenNewPosition || !overtakenOldPosition) return null;
+  if (!createdAt || Number.isNaN(Date.parse(createdAt)) || !id) return null;
+  return {
+    id,
+    overtaker,
+    overtaken,
+    newPosition,
+    oldPosition,
+    overtakenNewPosition,
+    overtakenOldPosition,
+    isClimb: item.isClimb === true,
+    createdAt,
+  };
+}
+
+async function readRankOvertakes(user) {
+  const dir = canonicalAccountFolder(user);
+  if (!dir) return [];
+  try {
+    const parsed = JSON.parse(await fs.readFile(path.join(dir, RANK_OVERTAKES_FILE), 'utf8'));
+    const items = Array.isArray(parsed) ? parsed : (Array.isArray(parsed?.items) ? parsed.items : []);
+    return items.map(sanitizeRankOvertake).filter(Boolean);
+  } catch { return []; }
+}
+
+async function writeRankOvertakes(user, items) {
+  const dir = canonicalAccountFolder(user);
+  if (!dir) throw new Error('Folder akun tidak valid.');
+  const clean = items.map(sanitizeRankOvertake).filter(Boolean).slice(-RANK_OVERTAKES_MAX);
+  await fs.mkdir(dir, { recursive: true });
+  await atomicWriteJson(path.join(dir, RANK_OVERTAKES_FILE), { items: clean, updatedAt: new Date().toISOString() });
+  return clean;
+}
+
 function buildAccountFiles(snapshot, user) {
   const userId = user.id;
   const logins = (snapshot.loginHistory || []).filter((entry) => entry.userId === userId);
@@ -1952,6 +2010,49 @@ async function handleApi(req, res, url) {
     if (!createdAt || Number.isNaN(Date.parse(createdAt)) || !username) return sendError(res, 400, 'Penanda daftar member tidak lengkap.');
     const seen = await writeMemberListSeen(user, { createdAt, username });
     return sendJson(res, 200, { seen });
+  }
+  // Notifikasi salip Rank Bot: antrean per akun di DATA_AKUN. Salip baru
+  // ditambah klien saat terdeteksi; menutup satu atau semua menghapusnya
+  // dari antrean akun itu saja.
+  if (route === 'GET /api/rank-overtakes') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    const items = await readRankOvertakes(user);
+    return sendJson(res, 200, { items });
+  }
+  if (route === 'POST /api/rank-overtakes') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (!allowRateLimit(`rank-overtakes:${user.id}`, 30, 60 * 1000)) return sendError(res, 429, 'Terlalu sering. Coba lagi sebentar.');
+    const body = await readJson(req);
+    const incoming = Array.isArray(body?.items) ? body.items : [];
+    if (!incoming.length) return sendError(res, 400, 'Tidak ada notifikasi salip yang dikirim.');
+    const clean = incoming.map(sanitizeRankOvertake).filter(Boolean);
+    if (!clean.length) return sendError(res, 400, 'Notifikasi salip tidak lengkap.');
+    const current = await readRankOvertakes(user);
+    const seen = new Set(current.map((item) => item.id));
+    const merged = [...current];
+    for (const item of clean) {
+      if (seen.has(item.id)) continue;
+      seen.add(item.id);
+      merged.push(item);
+    }
+    const items = await writeRankOvertakes(user, merged);
+    return sendJson(res, 200, { items });
+  }
+  if (route === 'POST /api/rank-overtakes/dismiss') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (!allowRateLimit(`rank-overtakes-dismiss:${user.id}`, 30, 60 * 1000)) return sendError(res, 429, 'Terlalu sering. Coba lagi sebentar.');
+    const body = await readJson(req);
+    const current = await readRankOvertakes(user);
+    let items;
+    if (body?.all === true) {
+      items = [];
+    } else {
+      const ids = new Set((Array.isArray(body?.ids) ? body.ids : []).map((id) => String(id || '').trim()).filter(Boolean));
+      if (!ids.size) return sendError(res, 400, 'Tidak ada notifikasi salip yang ditutup.');
+      items = current.filter((item) => !ids.has(item.id));
+    }
+    items = await writeRankOvertakes(user, items);
+    return sendJson(res, 200, { items });
   }
   if (route === 'POST /api/admin/backup/export') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');

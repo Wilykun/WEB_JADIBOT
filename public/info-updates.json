@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-22T18:11:16+07:00",
+  "updatedAt": "2026-11-22T20:04:01+07:00",
   "updates": [
+    {
+      "day": "Minggu, 22 Nov 2026",
+      "time": "20.04 WIB",
+      "title": "Notifikasi salip kini punya riwayat dan tersimpan per akun",
+      "tag": "Perubahan",
+      "description": "Kartu notifikasi salip kini dipercantik seperti layar detailnya: di bawah nama dan peringkat tiap akun ada foto, nama, peringkat lama ke baru, dan skor total aktivitas dengan ikon bintang, mata, dan hati, semuanya di tengah dan pas di layar HP. Semua salip baru kini masuk antrean, bukan cuma satu: kartunya punya tombol Sebelumnya, Berikutnya, dan Terbaru beserta penghitung seperti 1 dari 3, jadi salip yang lama tetap bisa dilihat lagi. Ada juga tombol Tutup semua supaya notifikasi tidak menumpuk. Antrean tiap akun tersimpan di folder DATA_AKUN masing-masing, jadi tetap ada walau halaman dimuat ulang atau ganti perangkat, dan Admin Utama, admin biasa, serta member masing-masing punya antrean sendiri."
+    },
     {
       "day": "Minggu, 22 Nov 2026",
       "time": "18.11 WIB",

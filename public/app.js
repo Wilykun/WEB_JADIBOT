@@ -283,12 +283,6 @@ function dismissNoticeOverlay() {
     // Tanpa ingatan: notifikasi menu terkunci tampil lagi tiap kali menunya diketuk.
   } else if (noticeContext?.kind === 'linked') {
     // Tanpa ingatan: tiap tautan baru tampil lagi.
-  } else if (noticeContext?.kind === 'rankovertake') {
-    // Tanpa ingatan: tiap salip baru tampil lagi, dan menutup kartu ini
-    // tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
-  } else if (noticeContext?.kind === 'rankclimb') {
-    // Tanpa ingatan: tiap naik peringkat baru tampil lagi, dan menutup kartu
-    // ini tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
   } else if (noticeContext?.kind === 'accountactivitylogin') {
     // Tanpa ingatan: tiap login baru tampil lagi, dan menutup kartu ini
     // tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
@@ -2155,25 +2149,20 @@ function rankBotAvatarSrc(user) {
   const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
   return `/avatars/${preset}.webp`;
 }
-// Layar detail salip: dibuka dari tombol Lihat di kartu notifikasi salip /
-// naik peringkat. Menampilkan siapa menyalip siapa, peringkat lama ke baru
-// keduanya, dan waktunya — avatar + nama tiap akun, rapih di HP.
-let rankOvertakeDetailEvent = null;
-function openRankOvertakeDetail(event, isClimb) {
-  const modal = document.querySelector('#rank-overtake-detail');
-  if (!modal || !event) return;
-  rankOvertakeDetailEvent = event;
+// Mengisi kedua sisi (yang menyalip + yang kesalip) untuk layar salip:
+// avatar, nama, peringkat lama ke baru, dan skor total aktivitas.
+// Dipakai layar detail salip dan kartu notifikasi salip, supaya keduanya
+// menampilkan data yang sama dan akurat.
+function fillRankOvertakeSides(modal, idPrefix, event) {
   const overtaker = rankBotUsers.find((item) => String(item.username || '') === event.overtaker);
   const overtaken = rankBotUsers.find((item) => String(item.username || '') === event.overtaken);
-  const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date());
-  modal.querySelector('#rank-overtake-detail-title').textContent = isClimb ? 'Kamu menyalip!' : 'Ada yang menyalip!';
   const fillSide = (prefix, user, username, newPosition, oldPosition) => {
-    const avatar = modal.querySelector(`#rank-overtake-detail-${prefix}-avatar`);
+    const avatar = modal.querySelector(`#${idPrefix}-${prefix}-avatar`);
     if (avatar) { avatar.src = rankBotAvatarSrc(user); avatar.alt = `Avatar ${rankOvertakeDisplayName(username)}`; }
-    modal.querySelector(`#rank-overtake-detail-${prefix}-name`).textContent = rankOvertakeDisplayName(username);
-    modal.querySelector(`#rank-overtake-detail-${prefix}-handle`).textContent = `@${username}`;
-    modal.querySelector(`#rank-overtake-detail-${prefix}-rank`).textContent = `#${newPosition}`;
-    modal.querySelector(`#rank-overtake-detail-${prefix}-from`).textContent = `dari #${oldPosition}`;
+    modal.querySelector(`#${idPrefix}-${prefix}-name`).textContent = rankOvertakeDisplayName(username);
+    modal.querySelector(`#${idPrefix}-${prefix}-handle`).textContent = `@${username}`;
+    modal.querySelector(`#${idPrefix}-${prefix}-rank`).textContent = `#${newPosition}`;
+    modal.querySelector(`#${idPrefix}-${prefix}-from`).textContent = `dari #${oldPosition}`;
     // Skor total aktivitas dibaca langsung dari data Rank Bot terbaru saat
     // layar dibuka, jadi angkanya realtime: totalnya skor peringkat yang
     // sama dengan yang menentukan salip, rinciannya story yang dibaca dan
@@ -2181,12 +2170,26 @@ function openRankOvertakeDetail(event, isClimb) {
     const reads = Math.max(0, Number(user?.featureStats?.storyReadCount) || 0);
     const reactions = Math.max(0, Number(user?.featureStats?.reactionCount) || 0);
     const fmt = (value) => value.toLocaleString('id-ID');
-    modal.querySelector(`#rank-overtake-detail-${prefix}-score`).textContent = fmt(rankScoreOf(user, 'all'));
-    modal.querySelector(`#rank-overtake-detail-${prefix}-reads`).textContent = fmt(reads);
-    modal.querySelector(`#rank-overtake-detail-${prefix}-reactions`).textContent = fmt(reactions);
+    modal.querySelector(`#${idPrefix}-${prefix}-score`).textContent = fmt(rankScoreOf(user, 'all'));
+    modal.querySelector(`#${idPrefix}-${prefix}-reads`).textContent = fmt(reads);
+    modal.querySelector(`#${idPrefix}-${prefix}-reactions`).textContent = fmt(reactions);
   };
   fillSide('overtaker', overtaker, event.overtaker, event.newPosition, event.oldPosition);
   fillSide('overtaken', overtaken, event.overtaken, event.overtakenNewPosition, event.overtakenOldPosition ?? (event.overtakenNewPosition - 1));
+}
+// Layar detail salip: dibuka dari tombol Lihat di kartu notifikasi salip /
+// naik peringkat. Menampilkan siapa menyalip siapa, peringkat lama ke baru
+// keduanya, skor total aktivitas, dan waktunya — avatar + nama tiap akun,
+// rapih di HP.
+let rankOvertakeDetailEvent = null;
+let rankOvertakeDetailReturnToNotice = false;
+function openRankOvertakeDetail(event, isClimb) {
+  const modal = document.querySelector('#rank-overtake-detail');
+  if (!modal || !event) return;
+  rankOvertakeDetailEvent = event;
+  const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date());
+  modal.querySelector('#rank-overtake-detail-title').textContent = isClimb ? 'Kamu menyalip!' : 'Ada yang menyalip!';
+  fillRankOvertakeSides(modal, 'rank-overtake-detail', event);
   modal.querySelector('#rank-overtake-detail-when').textContent = `${when} WIB`;
   modal.classList.remove('hidden');
   modal.querySelector('[data-rank-overtake-detail-close]')?.focus();
@@ -2194,6 +2197,12 @@ function openRankOvertakeDetail(event, isClimb) {
 function closeRankOvertakeDetail() {
   document.querySelector('#rank-overtake-detail')?.classList.add('hidden');
   rankOvertakeDetailEvent = null;
+  // Detail dibuka dari kartu notifikasi salip: kembali ke antrean notifikasi
+  // supaya yang belum ditutup bisa dilihat lagi atau ditutup semua.
+  if (rankOvertakeDetailReturnToNotice) {
+    rankOvertakeDetailReturnToNotice = false;
+    if (rankOvertakeQueue.length) showRankOvertakeNotice();
+  }
 }
 document.querySelector('#rank-overtake-detail')?.addEventListener('click', (event) => {
   if (event.target === event.currentTarget) closeRankOvertakeDetail();
@@ -2202,47 +2211,202 @@ document.querySelector('#rank-overtake-detail')?.addEventListener('click', (even
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && !document.querySelector('#rank-overtake-detail')?.classList.contains('hidden')) closeRankOvertakeDetail();
 });
-function notifyRankBotOvertake(event, live) {
-  const overtakerName = rankOvertakeDisplayName(event.overtaker);
-  const overtakenName = rankOvertakeDisplayName(event.overtaken);
-  const openers = ['Wush!', 'Ngebut!', 'Salip menyalip!'];
-  const opener = openers[(event.overtaker.length + event.newPosition) % openers.length];
-  const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date());
-  const text = live
-    ? `${opener} ${overtakerName} menyalip ${overtakenName} dan kini #${event.newPosition} — ${overtakenName} turun ke #${event.overtakenNewPosition}. ${when} WIB.`
-    : `Sejak terakhir kamu lihat, ${overtakerName} menyalip ${overtakenName} dan kini #${event.newPosition} — ${overtakenName} turun ke #${event.overtakenNewPosition}. ${when} WIB.`;
-  const overtaker = rankBotUsers.find((item) => String(item.username || '') === event.overtaker);
-  const overtaken = rankBotUsers.find((item) => String(item.username || '') === event.overtaken);
-  showNoticeOverlay({
-    title: 'Ada yang menyalip di Rank Bot!',
-    text,
-    context: { kind: 'rankovertake', userId: overtaker?.id || event.overtaker, feature: overtaken?.id || event.overtaken },
-    addLabel: 'Lihat',
-    onAdd: () => openRankOvertakeDetail(event, false),
-    icon: '🏆',
-  });
-  rankOvertakeNotified.set(`${event.overtaker}>${event.overtaken}`, Date.now());
+
+// Antrean notifikasi salip: semua salip baru masuk antrean per akun yang
+// disimpan di server (DATA_AKUN masing-masing), bukan cuma satu kartu.
+// Kartu notifikasi salip punya layar sendiri dengan tombol Sebelumnya /
+// Berikutnya / Terbaru dan Tutup semua, jadi notifikasi tidak menumpuk
+// dan yang lama tetap bisa dilihat lagi walau halaman dimuat ulang.
+let rankOvertakeQueue = [];
+let rankOvertakeNoticeIndex = 0;
+
+function rankOvertakeNoticeItem() {
+  if (!rankOvertakeQueue.length) return null;
+  const index = Math.min(Math.max(0, rankOvertakeNoticeIndex), rankOvertakeQueue.length - 1);
+  rankOvertakeNoticeIndex = index;
+  return rankOvertakeQueue[index];
 }
-function notifyRankBotClimb(event, live) {
-  const overtakenName = rankOvertakeDisplayName(event.overtaken);
-  const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date());
-  const isTop = event.newPosition === 1;
-  const openers = isTop ? ['Puncak!', 'Juara!', 'Nomor satu!'] : ['Gas!', 'Naik terus!', 'Makin dekat ke puncak!'];
-  const opener = openers[(event.overtaker.length + event.newPosition) % openers.length];
-  const text = live
-    ? `${opener} Kamu menyalip ${overtakenName} dan kini #${event.newPosition} (dari #${event.oldPosition}). ${when} WIB.`
-    : `Sejak terakhir kamu lihat, kamu menyalip ${overtakenName} dan kini #${event.newPosition} (dari #${event.oldPosition}). ${when} WIB.`;
-  const overtaken = rankBotUsers.find((item) => String(item.username || '') === event.overtaken);
-  const viewer = rankBotUsers.find((item) => String(item.username || '') === event.overtaker);
-  showNoticeOverlay({
-    title: isTop ? 'Kamu nomor 1 di Rank Bot!' : 'Kamu naik peringkat!',
-    text,
-    context: { kind: 'rankclimb', userId: viewer?.id || event.overtaker, feature: overtaken?.id || event.overtaken },
-    addLabel: 'Lihat',
-    onAdd: () => openRankOvertakeDetail(event, true),
-    icon: isTop ? '👑' : '🚀',
-  });
+
+function formatRankOvertakeWhen(iso) {
+  try {
+    const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date(iso));
+    return `${when} WIB`;
+  } catch { return ''; }
+}
+
+function renderRankOvertakeNotice() {
+  const modal = document.querySelector('#rank-overtake-notice');
+  const item = rankOvertakeNoticeItem();
+  if (!modal || !item) return false;
+  const { event, isClimb } = item;
+  const isTop = isClimb && event.newPosition === 1;
+  modal.querySelector('#rank-overtake-notice-icon').textContent = isClimb ? (isTop ? '👑' : '🚀') : '🏆';
+  modal.querySelector('#rank-overtake-notice-title').textContent = isClimb
+    ? (isTop ? 'Kamu nomor 1 di Rank Bot!' : 'Kamu menyalip!')
+    : 'Ada yang menyalip di Rank Bot!';
+  modal.querySelector('#rank-overtake-notice-counter').textContent = `${rankOvertakeNoticeIndex + 1} dari ${rankOvertakeQueue.length}`;
+  fillRankOvertakeSides(modal, 'rank-overtake-notice', event);
+  modal.querySelector('#rank-overtake-notice-when').textContent = formatRankOvertakeWhen(item.createdAt);
+  const prev = modal.querySelector('[data-rank-overtake-notice-prev]');
+  const next = modal.querySelector('[data-rank-overtake-notice-next]');
+  const latest = modal.querySelector('[data-rank-overtake-notice-latest]');
+  if (prev) prev.disabled = rankOvertakeNoticeIndex <= 0;
+  if (next) next.disabled = rankOvertakeNoticeIndex >= rankOvertakeQueue.length - 1;
+  if (latest) latest.disabled = rankOvertakeNoticeIndex >= rankOvertakeQueue.length - 1;
+  return true;
+}
+
+function showRankOvertakeNotice() {
+  const modal = document.querySelector('#rank-overtake-notice');
+  if (!modal || !rankOvertakeQueue.length) return;
+  renderRankOvertakeNotice();
+  modal.classList.remove('hidden');
+  modal.querySelector('[data-rank-overtake-notice-view]')?.focus();
+}
+
+function hideRankOvertakeNotice() {
+  document.querySelector('#rank-overtake-notice')?.classList.add('hidden');
+}
+
+async function refreshRankOvertakeQueue() {
+  try {
+    const response = await fetch('/api/rank-overtakes', { credentials: 'same-origin' });
+    if (!response.ok) return;
+    const data = await response.json().catch(() => ({}));
+    const items = Array.isArray(data?.items) ? data.items : [];
+    const wasHidden = document.querySelector('#rank-overtake-notice')?.classList.contains('hidden');
+    rankOvertakeQueue = items.map((item) => ({ ...item, event: item }));
+    if (!rankOvertakeQueue.length) { hideRankOvertakeNotice(); return; }
+    if (wasHidden) {
+      // Antrean muncul (misalnya setelah login): mulai dari yang terbaru.
+      rankOvertakeNoticeIndex = rankOvertakeQueue.length - 1;
+      showRankOvertakeNotice();
+    } else {
+      renderRankOvertakeNotice();
+    }
+  } catch { /* Antrean tetap dari memori bila server tidak terjangkau. */ }
+}
+
+async function saveRankOvertakesToServer(items) {
+  try {
+    const response = await fetch('/api/rank-overtakes', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items }),
+    });
+    if (!response.ok) return null;
+    const data = await response.json().catch(() => ({}));
+    return Array.isArray(data?.items) ? data.items : null;
+  } catch { return null; }
+}
+
+async function dismissRankOvertakesOnServer(ids, all) {
+  try {
+    const response = await fetch('/api/rank-overtakes/dismiss', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(all ? { all: true } : { ids }),
+    });
+    if (!response.ok) return null;
+    const data = await response.json().catch(() => ({}));
+    return Array.isArray(data?.items) ? data.items : null;
+  } catch { return null; }
+}
+
+function rankOvertakeEventId(event, createdAt) {
+  return `${event.overtaker}>${event.overtaken}@${createdAt}`;
+}
+
+function enqueueRankOvertake(event, isClimb) {
+  const createdAt = new Date().toISOString();
+  const item = {
+    id: rankOvertakeEventId(event, createdAt),
+    overtaker: event.overtaker,
+    overtaken: event.overtaken,
+    newPosition: event.newPosition,
+    oldPosition: event.oldPosition,
+    overtakenNewPosition: event.overtakenNewPosition,
+    overtakenOldPosition: event.overtakenOldPosition,
+    isClimb: isClimb === true,
+    createdAt,
+    event,
+  };
+  if (rankOvertakeQueue.some((entry) => entry.id === item.id)) return;
+  rankOvertakeQueue.push(item);
   rankOvertakeNotified.set(`${event.overtaker}>${event.overtaken}`, Date.now());
+  // Simpan ke DATA_AKUN akun ini (fire-and-forget): antrean tetap tampil
+  // walau server belum menjawab; antrean dimuat ulang dari server saat login.
+  const { event: _event, ...stored } = item;
+  void saveRankOvertakesToServer([stored]);
+  // Notifikasi baru: tampilkan dari yang terbaru bila layar sedang tertutup.
+  if (document.querySelector('#rank-overtake-notice')?.classList.contains('hidden')) {
+    rankOvertakeNoticeIndex = rankOvertakeQueue.length - 1;
+    showRankOvertakeNotice();
+  } else {
+    renderRankOvertakeNotice();
+  }
+}
+
+function dismissRankOvertakeCurrent() {
+  const item = rankOvertakeNoticeItem();
+  if (!item) { hideRankOvertakeNotice(); return; }
+  const id = item.id;
+  rankOvertakeQueue = rankOvertakeQueue.filter((entry) => entry.id !== id);
+  void dismissRankOvertakesOnServer([id], false);
+  if (!rankOvertakeQueue.length) { hideRankOvertakeNotice(); return; }
+  // Tetap di posisi yang sama: yang tadinya "berikutnya" kini tampil.
+  rankOvertakeNoticeIndex = Math.min(rankOvertakeNoticeIndex, rankOvertakeQueue.length - 1);
+  renderRankOvertakeNotice();
+}
+
+function dismissAllRankOvertakes() {
+  rankOvertakeQueue = [];
+  rankOvertakeNoticeIndex = 0;
+  void dismissRankOvertakesOnServer([], true);
+  hideRankOvertakeNotice();
+}
+
+function viewRankOvertakeNoticeCurrent() {
+  const item = rankOvertakeNoticeItem();
+  if (!item) return;
+  hideRankOvertakeNotice();
+  rankOvertakeDetailReturnToNotice = true;
+  openRankOvertakeDetail(item.event, item.isClimb);
+}
+
+function stepRankOvertakeNotice(delta) {
+  if (!rankOvertakeQueue.length) return;
+  rankOvertakeNoticeIndex = Math.min(Math.max(0, rankOvertakeNoticeIndex + delta), rankOvertakeQueue.length - 1);
+  renderRankOvertakeNotice();
+}
+
+function latestRankOvertakeNotice() {
+  if (!rankOvertakeQueue.length) return;
+  rankOvertakeNoticeIndex = rankOvertakeQueue.length - 1;
+  renderRankOvertakeNotice();
+}
+
+document.querySelector('#rank-overtake-notice')?.addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) { dismissRankOvertakeCurrent(); return; }
+  if (event.target.closest('[data-rank-overtake-notice-close]')) { dismissRankOvertakeCurrent(); return; }
+  if (event.target.closest('[data-rank-overtake-notice-close-all]')) { dismissAllRankOvertakes(); return; }
+  if (event.target.closest('[data-rank-overtake-notice-prev]')) { stepRankOvertakeNotice(-1); return; }
+  if (event.target.closest('[data-rank-overtake-notice-next]')) { stepRankOvertakeNotice(1); return; }
+  if (event.target.closest('[data-rank-overtake-notice-latest]')) { latestRankOvertakeNotice(); return; }
+  if (event.target.closest('[data-rank-overtake-notice-view]')) { viewRankOvertakeNoticeCurrent(); }
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape') return;
+  if (!document.querySelector('#rank-overtake-detail')?.classList.contains('hidden')) return;
+  if (!document.querySelector('#rank-overtake-notice')?.classList.contains('hidden')) dismissRankOvertakeCurrent();
+});
+function notifyRankBotOvertake(event) {
+  enqueueRankOvertake(event, false);
+}
+function notifyRankBotClimb(event) {
+  enqueueRankOvertake(event, true);
 }
 function checkRankBotOvertakes() {
   const current = rankBotOrderUsernames(rankBotUsers);
@@ -2250,16 +2414,16 @@ function checkRankBotOvertakes() {
   const previous = rankOvertakeSeen ? rankOvertakeSnapshot : readRankBotLastSeenOrder();
   if (previous && previous.length) {
     const events = findRankBotOvertakes(previous, current);
-    // Satu kartu per muat ulang (yang paling dekat ke puncak), dan pasangan
-    // yang sama tidak diberitakan lagi dalam 10 menit supaya salip bolak-balik
-    // tidak membanjiri layar.
+    // Semua salip baru masuk antrean (bukan cuma satu kartu per muat ulang),
+    // supaya yang lain tidak hilang. Pasangan yang sama tidak diberitakan
+    // lagi dalam 10 menit supaya salip bolak-balik tidak membanjiri layar.
     const fresh = events.filter((item) => (Date.now() - (rankOvertakeNotified.get(`${item.overtaker}>${item.overtaken}`) || 0)) > 10 * 60 * 1000);
-    // Naik peringkat sendiri didahulukan dan kartunya beda dari kartu salip
-    // biasa: judul, ikon, dan kata pembukanya khusus untuk yang login.
+    // Naik peringkat sendiri didahulukan, lalu salip orang lain.
     const viewer = String(currentUser?.username || '');
-    const climb = viewer ? fresh.find((item) => item.overtaker === viewer) : null;
-    if (climb) notifyRankBotClimb(climb, rankOvertakeSeen);
-    else if (fresh[0]) notifyRankBotOvertake(fresh[0], rankOvertakeSeen);
+    const climbs = viewer ? fresh.filter((item) => item.overtaker === viewer) : [];
+    const others = fresh.filter((item) => !viewer || item.overtaker !== viewer);
+    for (const item of climbs) notifyRankBotClimb(item);
+    for (const item of others) notifyRankBotOvertake(item);
   }
   rankOvertakeSnapshot = current;
   rankOvertakeSeen = true;
@@ -5186,6 +5350,9 @@ async function showDashboard(user) {
   // muncul realtime walau sedang di halaman lain, bukan hanya saat Rank Bot dibuka.
   startRankBotOvertakeWatch();
   void refreshRankBotData();
+  // Antrean salip yang belum ditutup dimuat dari DATA_AKUN akun ini,
+  // supaya notifikasi lama tetap bisa dilihat lagi setelah login ulang.
+  void refreshRankOvertakeQueue();
   startInfoUpdateNoticePolling();
   void refreshMemberBadge();
   await loadLoginHistory();

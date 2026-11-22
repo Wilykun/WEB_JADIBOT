@@ -82,6 +82,6 @@ test('baru tertaut dari pairing: notif di layar mengarahkan ke kartu Start bot',
   // Menutup notif ini tidak boleh mematikan pengingat emoji.
   const dismiss = sliceBetween(js, 'function dismissNoticeOverlay() {', '\nfunction syncStoryEmojiNotice() {');
   assert.ok(dismiss.includes("noticeContext?.kind === 'linked'"), 'dismiss harus kenal kind linked');
-  const linkedBranch = sliceBetween(dismiss, "kind === 'linked'", "kind === 'rankovertake'");
+  const linkedBranch = sliceBetween(dismiss, "kind === 'linked'", "kind === 'accountactivitylogin'");
   assert.ok(!linkedBranch.includes('emojiNoticeDismissed'), 'menutup notif tautan tidak boleh mematikan pengingat emoji');
 });

@@ -61,7 +61,7 @@ test('badge member: mendarat otomatis di Member setelah login tidak memajukan pe
 });
 
 test('badge member: dimuat setelah login dan diperbarui realtime dari daftar yang sama', () => {
-  assert.match(appJs, /void refreshInfoUpdateBadge\(\);\n  \/\/ Obrolan jalan sejak login: poll 5 detik supaya badge notif di menu\n  \/\/ bertambah realtime walau sedang di halaman lain\.\n  startChatPolling\(\);\n  void loadChatMessages\(\);\n  \/\/ Rank Bot juga dipantau sejak login: poll 15 detik supaya kartu salip\n  \/\/ muncul realtime walau sedang di halaman lain, bukan hanya saat Rank Bot dibuka\.\n  startRankBotOvertakeWatch\(\);\n  void refreshRankBotData\(\);\n  startInfoUpdateNoticePolling\(\);\n  void refreshMemberBadge\(\);/);
+  assert.match(appJs, /void refreshInfoUpdateBadge\(\);\n  \/\/ Obrolan jalan sejak login: poll 5 detik supaya badge notif di menu\n  \/\/ bertambah realtime walau sedang di halaman lain\.\n  startChatPolling\(\);\n  void loadChatMessages\(\);\n  \/\/ Rank Bot juga dipantau sejak login: poll 15 detik supaya kartu salip\n  \/\/ muncul realtime walau sedang di halaman lain, bukan hanya saat Rank Bot dibuka\.\n  startRankBotOvertakeWatch\(\);\n  void refreshRankBotData\(\);\n  \/\/ Antrean salip yang belum ditutup dimuat dari DATA_AKUN akun ini,\n  \/\/ supaya notifikasi lama tetap bisa dilihat lagi setelah login ulang\.\n  void refreshRankOvertakeQueue\(\);\n  startInfoUpdateNoticePolling\(\);\n  void refreshMemberBadge\(\);/);
   assert.match(appJs, /if \(memberListSeenLoaded\) renderMemberBadge\(countNewMembers\(users, memberListSeen\)\);/);
   assert.doesNotMatch(appJs, /if \(activeWorkspacePage === 'admin'\) void markMemberListSeen\(users\);/);
 });
