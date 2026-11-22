@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-22T22:46:45+07:00",
+  "updatedAt": "2026-11-23T04:20:42+07:00",
   "updates": [
+    {
+      "day": "Senin, 23 Nov 2026",
+      "time": "04.20 WIB",
+      "title": "Judul kartu salip tidak lagi tertukar antara menyalip dan disalip",
+      "tag": "Bug",
+      "description": "Judul kartu notifikasi salip kini ditentukan dari sudut pandang akun yang sedang login saat itu: kalau akun itu yang menyalip, judulnya Kamu menyalip!; kalau akun itu yang disalip, judulnya Ada yang menyalip di Rank Bot!. Sebelumnya judul memakai penanda lama yang tersimpan, sehingga akun yang disalip bisa melihat Kamu menyalip! padahal dia yang kesalip. Layar detail salip memakai logika yang sama."
+    },
     {
       "day": "Minggu, 22 Nov 2026",
       "time": "22.46 WIB",

@@ -2188,7 +2188,11 @@ function openRankOvertakeDetail(event, isClimb) {
   if (!modal || !event) return;
   rankOvertakeDetailEvent = event;
   const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date());
-  modal.querySelector('#rank-overtake-detail-title').textContent = isClimb ? 'Kamu menyalip!' : 'Ada yang menyalip!';
+  // Judul ditentukan dari sudut pandang akun yang sedang login saat ini,
+  // sama seperti kartu notifikasi (bukan dari penanda isClimb yang disimpan).
+  const viewer = String(currentUser?.username || '');
+  const viewerIsOvertaker = Boolean(viewer) && event.overtaker === viewer;
+  modal.querySelector('#rank-overtake-detail-title').textContent = viewerIsOvertaker ? 'Kamu menyalip!' : 'Ada yang menyalip!';
   fillRankOvertakeSides(modal, 'rank-overtake-detail', event);
   modal.querySelector('#rank-overtake-detail-when').textContent = `${when} WIB`;
   modal.classList.remove('hidden');
@@ -2238,10 +2242,17 @@ function renderRankOvertakeNotice() {
   const modal = document.querySelector('#rank-overtake-notice');
   const item = rankOvertakeNoticeItem();
   if (!modal || !item) return false;
-  const { event, isClimb } = item;
-  const isTop = isClimb && event.newPosition === 1;
-  modal.querySelector('#rank-overtake-notice-icon').textContent = isClimb ? (isTop ? '👑' : '🚀') : '🏆';
-  modal.querySelector('#rank-overtake-notice-title').textContent = isClimb
+  const { event } = item;
+  // Judul dan ikon ditentukan dari sudut pandang akun yang sedang login SAAT
+  // INI, bukan dari penanda isClimb yang tersimpan: kalau yang login adalah
+  // yang menyalip, judulnya "Kamu menyalip!"; kalau yang login adalah yang
+  // disalip, judulnya "Ada yang menyalip di Rank Bot!". Ini mencegah judul
+  // tertukar (misalnya "Kamu menyalip!" padahal akun itu yang disalip).
+  const viewer = String(currentUser?.username || '');
+  const viewerIsOvertaker = Boolean(viewer) && event.overtaker === viewer;
+  const isTop = viewerIsOvertaker && event.newPosition === 1;
+  modal.querySelector('#rank-overtake-notice-icon').textContent = viewerIsOvertaker ? (isTop ? '👑' : '🚀') : '🏆';
+  modal.querySelector('#rank-overtake-notice-title').textContent = viewerIsOvertaker
     ? (isTop ? 'Kamu nomor 1 di Rank Bot!' : 'Kamu menyalip!')
     : 'Ada yang menyalip di Rank Bot!';
   modal.querySelector('#rank-overtake-notice-counter').textContent = `${rankOvertakeNoticeIndex + 1} dari ${rankOvertakeQueue.length}`;

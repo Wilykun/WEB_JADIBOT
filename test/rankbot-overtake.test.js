@@ -92,7 +92,7 @@ test('kartu salip menampilkan siapa menyalip siapa, posisi, dan waktu WIB', () =
 test('kartu salip memakai ikon sendiri dan menutupnya tidak mematikan pengingat lain', () => {
   const js = read('public/app.js');
   const render = js.slice(js.indexOf('function renderRankOvertakeNotice()'), js.indexOf('function showRankOvertakeNotice()'));
-  assert.ok(render.includes("textContent = isClimb ? (isTop ? '👑' : '🚀') : '🏆'"), 'ikon kartu harus mahkota untuk nomor 1, roket untuk naik peringkat, dan trofi untuk salip orang lain');
+  assert.ok(render.includes("textContent = viewerIsOvertaker ? (isTop ? '👑' : '🚀') : '🏆'"), 'ikon kartu harus mahkota untuk nomor 1, roket untuk naik peringkat, dan trofi untuk salip orang lain');
   // Menutup kartu salip memakai fungsi sendiri, bukan dismissNoticeOverlay:
   // tidak menyentuh pengingat reaksi emoji.
   assert.ok(js.includes('function dismissRankOvertakeCurrent()'), 'harus ada dismissRankOvertakeCurrent');
@@ -237,9 +237,9 @@ test('layar detail salip menampilkan skor total aktivitas tiap akun, realtime', 
 test('entri Info Update notifikasi salip Rank Bot kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-22T22:00:30+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 104, 'daftar harus bertambah lima entri');
-  const newest = data.updates[38];
+  assert.equal(data.updatedAt, '2026-11-23T04:20:42+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 106, 'daftar harus bertambah lima entri');
+  const newest = data.updates[40];
   assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');
@@ -250,4 +250,33 @@ test('entri Info Update notifikasi salip Rank Bot kini di posisi kedua puluh', (
   assert.ok(html.includes('<h4>Rank Bot kini memberi tahu saat ada yang menyalip</h4>'), 'fallback harus memuat judul entri salip');
   assert.ok(html.includes('Rabu, 18 Nov 2026 · 13.10 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri salip');
   assert.ok(html.includes('kartu notifikasi di tengah layar'), 'fallback harus memuat penjelasan kartu notifikasi salip');
+});
+
+test('judul kartu salip ditentukan dari akun yang login saat ini, bukan penanda tersimpan', () => {
+  const js = read('public/app.js');
+  const render = js.slice(js.indexOf('function renderRankOvertakeNotice()'), js.indexOf('function showRankOvertakeNotice()'));
+  // Judul harus dihitung dari event + akun yang login saat render, supaya
+  // tidak tertukar: yang disalip tidak boleh melihat "Kamu menyalip!".
+  assert.ok(render.includes('const viewerIsOvertaker = Boolean(viewer) && event.overtaker === viewer;'), 'judul harus dihitung dari apakah yang login adalah yang menyalip');
+  assert.ok(render.includes("textContent = viewerIsOvertaker"), 'judul kartu harus memakai sudut pandang akun yang login saat ini');
+  assert.ok(!render.includes('const { event, isClimb } = item;'), 'judul kartu tidak boleh lagi memakai penanda isClimb yang tersimpan');
+  // Simulasi logika judul untuk dua sudut pandang pada kejadian yang sama
+  // (bangwily menyalip ryupler kuda ke #3): yang menyalip melihat
+  // "Kamu menyalip!", yang disalip melihat "Ada yang menyalip di Rank Bot!".
+  const titleFor = (viewerUsername, event) => {
+    const viewer = String(viewerUsername || '');
+    const viewerIsOvertaker = Boolean(viewer) && event.overtaker === viewer;
+    const isTop = viewerIsOvertaker && event.newPosition === 1;
+    return viewerIsOvertaker
+      ? (isTop ? 'Kamu nomor 1 di Rank Bot!' : 'Kamu menyalip!')
+      : 'Ada yang menyalip di Rank Bot!';
+  };
+  const event = { overtaker: 'bangwily', overtaken: 'ryuplerkuda', newPosition: 3, oldPosition: 4 };
+  assert.equal(titleFor('bangwily', event), 'Kamu menyalip!', 'yang menyalip harus melihat "Kamu menyalip!"');
+  assert.equal(titleFor('ryuplerkuda', event), 'Ada yang menyalip di Rank Bot!', 'yang disalip harus melihat "Ada yang menyalip di Rank Bot!", bukan "Kamu menyalip!"');
+  assert.equal(titleFor('wilykun', event), 'Ada yang menyalip di Rank Bot!', 'akun lain yang tidak terlibat tidak boleh melihat "Kamu menyalip!"');
+  // Layar detail memakai logika yang sama.
+  const open = js.slice(js.indexOf('function openRankOvertakeDetail(event, isClimb)'), js.indexOf('function closeRankOvertakeDetail()'));
+  assert.ok(open.includes('const viewerIsOvertaker = Boolean(viewer) && event.overtaker === viewer;'), 'judul layar detail harus dihitung dari akun yang login saat ini');
+  assert.ok(open.includes("textContent = viewerIsOvertaker ? 'Kamu menyalip!' : 'Ada yang menyalip!';"), 'judul layar detail harus "Kamu menyalip!" hanya bila yang login yang menyalip');
 });
