@@ -207,3 +207,16 @@ test('kartu notifikasi tidak kepotong di HP (tinggi dibatasi dan bisa di-scroll)
   assert.ok(css.includes('.rank-overtake-detail-score{padding-top:6px;gap:2px}'), 'skor di layar detail harus lebih rapat di HP');
   assert.ok(css.includes('.notice-icon{width:38px;height:38px;font-size:19px;margin-bottom:8px}'), 'ikon kartu harus lebih kecil di HP');
 });
+
+test('tombol Lihat, Tutup, dan Tutup semua berdampingan dan kecil di HP', () => {
+  const css = read('public/style.css');
+  // Di HP tombol aksi kartu notifikasi harus sebaris (bukan menumpuk ke bawah),
+  // supaya kartunya tidak kepotong: tiga tombol dalam satu baris, kecil.
+  assert.ok(css.includes('.notice-actions{flex-direction:row;gap:8px;margin-top:14px}'), 'tombol aksi kartu harus sebaris di HP');
+  assert.ok(css.includes('.notice-actions button{width:auto;padding:10px 6px;font-size:12px}'), 'tombol aksi kartu harus kecil dan tidak selebar kartu di HP');
+  assert.ok(!css.includes('.notice-actions{flex-direction:column}'), 'tombol aksi kartu tidak boleh lagi menumpuk ke bawah di HP');
+  const html = read('public/index.html');
+  assert.ok(html.includes('data-rank-overtake-notice-view'), 'kartu salip harus punya tombol Lihat');
+  assert.ok(html.includes('data-rank-overtake-notice-close'), 'kartu salip harus punya tombol Tutup');
+  assert.ok(html.includes('data-rank-overtake-notice-close-all'), 'kartu salip harus punya tombol Tutup semua');
+});

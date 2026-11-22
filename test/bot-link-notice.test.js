@@ -75,16 +75,16 @@ test('member belum tertaut tidak bisa masuk Fitur Bot, admin tetap bisa', () => 
 test('entri Info Update terbaru kini soal sesi WhatsApp pulih dari cadangan', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-22T22:00:30+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 104, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-22T22:46:45+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 105, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Notifikasi salip kini hanya untuk yang terlibat, tombol Lihat buka Rank Bot', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.title, 'Tombol kartu salip kini berdampingan dan kecil di HP', 'entri terbaru harus soal batas 10 detik indikator mengetik');
   assert.equal(newest.tag, 'Perubahan', 'entri terbaru harus bertag Perubahan');
-  assert.equal(newest.time, '22.00 WIB', 'waktu entri terbaru harus cocok');
+  assert.equal(newest.time, '22.46 WIB', 'waktu entri terbaru harus cocok');
   assert.ok(html.includes('<h4>Log privat kini jadi Log Bot dan ada notif story baru</h4>'), 'fallback harus memuat judul entri terbaru');
-  const rankbotEntry = data.updates[45];
+  const rankbotEntry = data.updates[46];
   assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedua puluh delapan');
   const linkEntry = data.updates.find((item) => item.title === 'Pemberitahuan tautan WhatsApp kini muncul di layar');
   assert.ok(linkEntry, 'entri notifikasi tautan di layar harus tetap ada');
-  assert.equal(data.updates.indexOf(linkEntry), 47, 'entri notifikasi tautan di layar kini di posisi kedua puluh delapan');
+  assert.equal(data.updates.indexOf(linkEntry), 48, 'entri notifikasi tautan di layar kini di posisi kedua puluh delapan');
 });
