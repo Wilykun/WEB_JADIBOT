@@ -2120,7 +2120,7 @@ function findRankBotOvertakes(previousOrder, currentOrder) {
       const overtakenNow = currentPosition.get(overtaken);
       if (overtakenBefore === undefined || overtakenNow === undefined) continue;
       if (overtakenBefore < before && overtakenNow > now) {
-        events.push({ overtaker, overtaken, newPosition: now, oldPosition: before, overtakenNewPosition: overtakenNow });
+        events.push({ overtaker, overtaken, newPosition: now, oldPosition: before, overtakenNewPosition: overtakenNow, overtakenOldPosition: overtakenBefore });
       }
     }
   }
@@ -2144,6 +2144,54 @@ function rankOvertakeDisplayName(username) {
   const user = rankBotUsers.find((item) => String(item.username || '') === username);
   return String(user?.displayName || username);
 }
+// URL avatar Rank Bot: foto unggahan lewat /api/admin/user-avatar, preset
+// lewat /avatars. Dipakai baris peringkat dan layar detail salip.
+function rankBotAvatarSrc(user) {
+  const selectedAvatar = String(user?.avatar || 'avatar-01');
+  if (selectedAvatar === 'uploaded') {
+    const version = encodeURIComponent(user?.avatarUpdatedAt || '');
+    return `/api/admin/user-avatar?userId=${encodeURIComponent(user?.id || '')}&v=${version}`;
+  }
+  const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
+  return `/avatars/${preset}.webp`;
+}
+// Layar detail salip: dibuka dari tombol Lihat di kartu notifikasi salip /
+// naik peringkat. Menampilkan siapa menyalip siapa, peringkat lama ke baru
+// keduanya, dan waktunya — avatar + nama tiap akun, rapih di HP.
+let rankOvertakeDetailEvent = null;
+function openRankOvertakeDetail(event, isClimb) {
+  const modal = document.querySelector('#rank-overtake-detail');
+  if (!modal || !event) return;
+  rankOvertakeDetailEvent = event;
+  const overtaker = rankBotUsers.find((item) => String(item.username || '') === event.overtaker);
+  const overtaken = rankBotUsers.find((item) => String(item.username || '') === event.overtaken);
+  const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date());
+  modal.querySelector('#rank-overtake-detail-title').textContent = isClimb ? 'Kamu menyalip!' : 'Ada yang menyalip!';
+  const fillSide = (prefix, user, username, newPosition, oldPosition) => {
+    const avatar = modal.querySelector(`#rank-overtake-detail-${prefix}-avatar`);
+    if (avatar) { avatar.src = rankBotAvatarSrc(user); avatar.alt = `Avatar ${rankOvertakeDisplayName(username)}`; }
+    modal.querySelector(`#rank-overtake-detail-${prefix}-name`).textContent = rankOvertakeDisplayName(username);
+    modal.querySelector(`#rank-overtake-detail-${prefix}-handle`).textContent = `@${username}`;
+    modal.querySelector(`#rank-overtake-detail-${prefix}-rank`).textContent = `#${newPosition}`;
+    modal.querySelector(`#rank-overtake-detail-${prefix}-from`).textContent = `dari #${oldPosition}`;
+  };
+  fillSide('overtaker', overtaker, event.overtaker, event.newPosition, event.oldPosition);
+  fillSide('overtaken', overtaken, event.overtaken, event.overtakenNewPosition, event.overtakenOldPosition ?? (event.overtakenNewPosition - 1));
+  modal.querySelector('#rank-overtake-detail-when').textContent = `${when} WIB`;
+  modal.classList.remove('hidden');
+  modal.querySelector('[data-rank-overtake-detail-close]')?.focus();
+}
+function closeRankOvertakeDetail() {
+  document.querySelector('#rank-overtake-detail')?.classList.add('hidden');
+  rankOvertakeDetailEvent = null;
+}
+document.querySelector('#rank-overtake-detail')?.addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) closeRankOvertakeDetail();
+  if (event.target.closest('[data-rank-overtake-detail-close]')) closeRankOvertakeDetail();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !document.querySelector('#rank-overtake-detail')?.classList.contains('hidden')) closeRankOvertakeDetail();
+});
 function notifyRankBotOvertake(event, live) {
   const overtakerName = rankOvertakeDisplayName(event.overtaker);
   const overtakenName = rankOvertakeDisplayName(event.overtaken);
@@ -2159,7 +2207,8 @@ function notifyRankBotOvertake(event, live) {
     title: 'Ada yang menyalip di Rank Bot!',
     text,
     context: { kind: 'rankovertake', userId: overtaker?.id || event.overtaker, feature: overtaken?.id || event.overtaken },
-    addLabel: null,
+    addLabel: 'Lihat',
+    onAdd: () => openRankOvertakeDetail(event, false),
     icon: '🏆',
   });
   rankOvertakeNotified.set(`${event.overtaker}>${event.overtaken}`, Date.now());
@@ -2179,7 +2228,8 @@ function notifyRankBotClimb(event, live) {
     title: isTop ? 'Kamu nomor 1 di Rank Bot!' : 'Kamu naik peringkat!',
     text,
     context: { kind: 'rankclimb', userId: viewer?.id || event.overtaker, feature: overtaken?.id || event.overtaken },
-    addLabel: null,
+    addLabel: 'Lihat',
+    onAdd: () => openRankOvertakeDetail(event, true),
     icon: isTop ? '👑' : '🚀',
   });
   rankOvertakeNotified.set(`${event.overtaker}>${event.overtaken}`, Date.now());
@@ -2247,16 +2297,9 @@ function renderRankBot() {
     avatarImage.loading = 'lazy';
     avatarImage.decoding = 'async';
     avatarImage.alt = `Avatar ${roleLabel} ${displayName}`;
-    const selectedAvatar = String(user.avatar || 'avatar-01');
     // Foto unggahan tidak boleh jatuh ke preset: tampilkan foto aslinya
     // lewat /api/admin/user-avatar (admin saja), sama seperti Daftar Member.
-    if (selectedAvatar === 'uploaded') {
-      const version = encodeURIComponent(user.avatarUpdatedAt || '');
-      avatarImage.src = `/api/admin/user-avatar?userId=${encodeURIComponent(user.id)}&v=${version}`;
-    } else {
-      const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(selectedAvatar) ? selectedAvatar : 'avatar-01';
-      avatarImage.src = `/avatars/${preset}.webp`;
-    }
+    avatarImage.src = rankBotAvatarSrc(user);
     avatarImage.addEventListener('error', () => { avatarImage.src = '/avatars/avatar-01.webp'; }, { once: true });
     const identity = document.createElement('div');
     identity.className = 'rankbot-identity';
@@ -2328,22 +2371,35 @@ function renderRankBot() {
     if (Object.hasOwn(counts, key)) countEl.textContent = String(counts[key]);
   });
 }
-async function loadRankBot() {
+async function refreshRankBotData() {
   try {
     const result = await api('/api/members');
     rankBotUsers = Array.isArray(result.users) ? result.users : [];
-    renderRankBot();
+    // Render hanya bila sedang di halaman Rank Bot; cek salip selalu jalan
+    // supaya notifikasi muncul realtime walau sedang di halaman lain.
+    if (activeWorkspacePage === 'rankbot') {
+      renderRankBot();
+      document.querySelector('#rankbot-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
+    }
     checkRankBotOvertakes();
-    document.querySelector('#rankbot-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
   } catch (error) {
     if (error.status === 401) showAuth();
   }
 }
-function startRankBotPolling() {
+async function loadRankBot() {
+  await refreshRankBotData();
+}
+// Pantau salip Rank Bot sejak login, bukan hanya saat halaman Rank Bot
+// dibuka: poll 15 detik tiap tab terlihat, sama seperti Obrolan yang
+// poll 5 detik sejak login supaya badge-nya realtime di halaman lain.
+function startRankBotOvertakeWatch() {
   if (rankBotTimer) return;
   rankBotTimer = window.setInterval(() => {
-    if (activeWorkspacePage === 'rankbot' && document.visibilityState === 'visible') void loadRankBot();
+    if (document.visibilityState === 'visible') void refreshRankBotData();
   }, 15000);
+}
+function startRankBotPolling() {
+  startRankBotOvertakeWatch();
 }
 document.querySelector('#rankbot-search')?.addEventListener('input', (event) => {
   rankBotQuery = String(event.target.value || '').trim().toLowerCase();
@@ -5114,6 +5170,10 @@ async function showDashboard(user) {
   // bertambah realtime walau sedang di halaman lain.
   startChatPolling();
   void loadChatMessages();
+  // Rank Bot juga dipantau sejak login: poll 15 detik supaya kartu salip
+  // muncul realtime walau sedang di halaman lain, bukan hanya saat Rank Bot dibuka.
+  startRankBotOvertakeWatch();
+  void refreshRankBotData();
   startInfoUpdateNoticePolling();
   void refreshMemberBadge();
   await loadLoginHistory();

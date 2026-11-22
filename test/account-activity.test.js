@@ -83,8 +83,10 @@ test('foto unggahan tampil di Aktivitas Akun dan Rank Bot, bukan jatuh ke preset
   assert.ok(activityFn.includes("selectedAvatar === 'uploaded'"), 'Aktivitas Akun harus membedakan foto unggahan dari preset');
   assert.ok(activityFn.includes('/api/admin/user-avatar?userId='), 'Aktivitas Akun harus memuat foto unggahan lewat /api/admin/user-avatar');
   const rankFn = appJs.slice(appJs.indexOf('function renderRankBot()'), appJs.indexOf('async function loadRankBot()'));
-  assert.ok(rankFn.includes("selectedAvatar === 'uploaded'"), 'Rank Bot harus membedakan foto unggahan dari preset');
-  assert.ok(rankFn.includes('/api/admin/user-avatar?userId='), 'Rank Bot harus memuat foto unggahan lewat /api/admin/user-avatar');
+  assert.ok(rankFn.includes('avatarImage.src = rankBotAvatarSrc(user);'), 'Rank Bot harus memakai helper avatar yang sama dengan layar detail salip');
+  const avatarSrc = appJs.slice(appJs.indexOf('function rankBotAvatarSrc(user)'), appJs.indexOf('function openRankOvertakeDetail'));
+  assert.ok(avatarSrc.includes("selectedAvatar === 'uploaded'"), 'helper avatar Rank Bot harus membedakan foto unggahan dari preset');
+  assert.ok(avatarSrc.includes('/api/admin/user-avatar?userId='), 'helper avatar Rank Bot harus memuat foto unggahan lewat /api/admin/user-avatar');
 });
 
 test('urutan Aktivitas Akun: akun sendiri paling atas, lalu pemilik aktif, baru yang paling baru login', () => {
@@ -231,20 +233,20 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=avatar-obrolan-realtime-20261121'), 'app.js harus memakai ?v=avatar-obrolan-realtime-20261121');
-  assert.ok(html.includes('/style.css?v=avatar-obrolan-realtime-20261121'), 'style.css harus memakai ?v=avatar-obrolan-realtime-20261121');
+  assert.ok(html.includes('/app.js?v=rankbot-salip-realtime-20261122'), 'app.js harus memakai ?v=rankbot-salip-realtime-20261122');
+  assert.ok(html.includes('/style.css?v=rankbot-salip-realtime-20261122'), 'style.css harus memakai ?v=rankbot-salip-realtime-20261122');
 });
 
 test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
-  assert.equal(data.updatedAt, '2026-11-21T21:24:23+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 99, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-22T15:50:45+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 100, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Avatar Obrolan kini ikut berubah realtime', 'entri terbaru harus soal batas 10 detik indikator mengetik');
-  assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Fitur baru');
-  assert.equal(newest.day, 'Sabtu, 21 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '21.24 WIB', 'waktu entri terbaru harus cocok');
-  const status = data.updates[32];
+  assert.equal(newest.title, 'Salip Rank Bot kini realtime di semua halaman, plus layar detailnya', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
+  assert.equal(newest.day, 'Minggu, 22 Nov 2026', 'hari entri terbaru harus cocok');
+  assert.equal(newest.time, '15.50 WIB', 'waktu entri terbaru harus cocok');
+  const status = data.updates[33];
   assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi kedua puluh');
   assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Fitur baru');
   assert.equal(status.time, '19.46 WIB', 'waktu entri status Rank Bot harus cocok');

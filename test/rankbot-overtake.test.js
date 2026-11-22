@@ -71,7 +71,11 @@ test('kartu salip menampilkan nama, posisi, dan waktu WIB dengan kata kocak', ()
   assert.ok(js.includes("hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta'"), 'waktu kartu harus jam WIB');
   assert.ok(js.includes('${when} WIB.'), 'waktu kartu harus diakhiri WIB');
   assert.ok(js.includes("const openers = ['Wush!', 'Ngebut!', 'Salip menyalip!'];"), 'kartu salip harus punya kata pembuka kocak yang bergilir');
-  assert.ok(js.includes("addLabel: null,"), 'kartu salip tidak perlu tombol aksi, cukup Tutup');
+  // Kartu salip kini punya tombol Lihat yang membuka layar detail salip
+  // (siapa menyalip siapa, peringkat lama ke baru, avatar + nama).
+  const notify = js.slice(js.indexOf('function notifyRankBotOvertake(event, live)'), js.indexOf('function notifyRankBotClimb(event, live)'));
+  assert.ok(notify.includes("addLabel: 'Lihat',"), 'kartu salip harus punya tombol Lihat');
+  assert.ok(notify.includes('onAdd: () => openRankOvertakeDetail(event, false),'), 'tombol Lihat kartu salip harus membuka layar detail');
   assert.ok(js.includes("icon: '🏆',"), 'kartu salip harus memakai ikon trofi di atas judul');
 });
 
@@ -94,7 +98,10 @@ test('notifikasi naik peringkat: kartunya beda dari kartu salip (judul, ikon, ka
   assert.ok(js.includes("const openers = isTop ? ['Puncak!', 'Juara!', 'Nomor satu!'] : ['Gas!', 'Naik terus!', 'Makin dekat ke puncak!'];"), 'kata pembuka kartu harus beda dari kata kocak kartu salip');
   assert.ok(js.includes('Kamu menyalip ${overtakenName} dan kini #${event.newPosition} (dari #${event.oldPosition})'), 'teks kartu harus menyebut siapa yang disalip dan posisi lama ke baru');
   assert.ok(js.includes('Sejak terakhir kamu lihat, kamu menyalip'), 'naik peringkat selagi halaman ditinggal harus dijelaskan begitu');
-  assert.ok(js.includes("addLabel: null,"), 'kartu naik peringkat tidak perlu tombol aksi, cukup Tutup');
+  // Kartu naik peringkat juga punya tombol Lihat ke layar detail yang sama.
+  const notify = js.slice(js.indexOf('function notifyRankBotClimb(event, live)'), js.indexOf('function checkRankBotOvertakes()'));
+  assert.ok(notify.includes("addLabel: 'Lihat',"), 'kartu naik peringkat harus punya tombol Lihat');
+  assert.ok(notify.includes('onAdd: () => openRankOvertakeDetail(event, true),'), 'tombol Lihat kartu naik peringkat harus membuka layar detail');
 });
 
 test('naik peringkat sendiri didahulukan dari salip orang lain dan menutupnya tidak mematikan pengingat lain', () => {
@@ -122,12 +129,69 @@ test('baris akun sendiri dibedakan warna emas dan lencana Kamu di Rank Bot', () 
   assert.ok(css.includes('background:linear-gradient(135deg,#f5c542,#d99a1f)'), 'lencana Kamu harus berwarna emas seperti lencana peringkat pertama');
 });
 
+test('salip dipantau realtime sejak login, bukan hanya saat halaman Rank Bot dibuka', () => {
+  const js = read('public/app.js');
+  // Pemisah data dan render: refreshRankBotData mengambil /api/members,
+  // merender hanya bila sedang di halaman Rank Bot, tapi selalu memeriksa salip.
+  assert.ok(js.includes('async function refreshRankBotData()'), 'harus ada refreshRankBotData yang memisahkan ambil data dari render');
+  const refresh = js.slice(js.indexOf('async function refreshRankBotData()'), js.indexOf('async function loadRankBot()'));
+  assert.ok(refresh.includes("await api('/api/members')"), 'refresh harus mengambil peringkat dari /api/members');
+  assert.ok(refresh.includes("if (activeWorkspacePage === 'rankbot')"), 'render dan jam diperbarui hanya bila sedang di halaman Rank Bot');
+  assert.ok(refresh.includes('checkRankBotOvertakes();'), 'cek salip harus jalan di tiap refresh, di halaman mana pun');
+  // Pantau global: interval 15 detik sejak login, tanpa syarat halaman Rank Bot.
+  assert.ok(js.includes('function startRankBotOvertakeWatch()'), 'harus ada startRankBotOvertakeWatch global');
+  const watch = js.slice(js.indexOf('function startRankBotOvertakeWatch()'), js.indexOf('function startRankBotPolling()'));
+  assert.ok(watch.includes('window.setInterval'), 'pantau global harus memakai interval');
+  assert.ok(watch.includes('15000'), 'pantau global harus tiap 15 detik');
+  assert.ok(watch.includes("if (document.visibilityState === 'visible') void refreshRankBotData();"), 'pantau global harus refresh tiap tab terlihat');
+  assert.ok(!watch.includes("activeWorkspacePage === 'rankbot'"), 'pantau global tidak boleh mensyaratkan halaman Rank Bot');
+  assert.ok(js.includes('startRankBotOvertakeWatch();'), 'pantau global harus dijalankan');
+  // Dijalankan sejak login, sejajar dengan Obrolan yang poll sejak login.
+  const init = js.slice(js.indexOf('startChatPolling();'), js.indexOf('startInfoUpdateNoticePolling();'));
+  assert.ok(init.includes('startRankBotOvertakeWatch();'), 'pantau salip harus dimulai sejak login, sejajar Obrolan');
+  assert.ok(init.includes('void refreshRankBotData();'), 'peringkat harus langsung diambil sekali saat login');
+});
+
+test('layar detail salip menampilkan avatar, nama, dan peringkat lama ke baru keduanya', () => {
+  const js = read('public/app.js');
+  const html = read('public/index.html');
+  const css = read('public/style.css');
+  // Kejadian salip kini membawa peringkat lama yang kesalip (akurat, bukan tebakan).
+  const find = findRankBotOvertakes();
+  const events = find(['dlyzn', 'ryobot', 'bangwily'], ['ryobot', 'dlyzn', 'bangwily']);
+  assert.equal(events[0].overtakenOldPosition, 1, 'dlyzn sebelumnya di peringkat 1');
+  assert.equal(events[0].overtakenNewPosition, 2, 'dlyzn kini di peringkat 2');
+  // Modal detail ada di halaman dengan kolom avatar + nama + peringkat tiap sisi.
+  assert.ok(html.includes('id="rank-overtake-detail"'), 'harus ada modal layar detail salip');
+  for (const side of ['overtaker', 'overtaken']) {
+    assert.ok(html.includes(`id="rank-overtake-detail-${side}-avatar"`), `detail harus punya avatar yang ${side}`);
+    assert.ok(html.includes(`id="rank-overtake-detail-${side}-name"`), `detail harus punya nama yang ${side}`);
+    assert.ok(html.includes(`id="rank-overtake-detail-${side}-handle"`), `detail harus punya @akun yang ${side}`);
+    assert.ok(html.includes(`id="rank-overtake-detail-${side}-rank"`), `detail harus punya peringkat baru yang ${side}`);
+    assert.ok(html.includes(`id="rank-overtake-detail-${side}-from"`), `detail harus punya peringkat lama yang ${side}`);
+  }
+  assert.ok(html.includes('id="rank-overtake-detail-when"'), 'detail harus punya waktu salip');
+  assert.ok(html.includes('data-rank-overtake-detail-close'), 'detail harus bisa ditutup');
+  // openRankOvertakeDetail mengisi modal dan menampilkannya.
+  assert.ok(js.includes('function openRankOvertakeDetail(event, isClimb)'), 'harus ada openRankOvertakeDetail');
+  const open = js.slice(js.indexOf('function openRankOvertakeDetail(event, isClimb)'), js.indexOf('function closeRankOvertakeDetail()'));
+  assert.ok(open.includes("modal.classList.remove('hidden')"), 'membuka detail harus menampilkan modal');
+  assert.ok(open.includes('rankBotAvatarSrc(user)'), 'avatar detail harus memakai helper yang sama dengan baris peringkat');
+  assert.ok(open.includes('event.overtakenOldPosition'), 'detail harus memakai peringkat lama yang kesalip dari kejadian');
+  assert.ok(js.includes('function closeRankOvertakeDetail()'), 'harus ada closeRankOvertakeDetail');
+  assert.ok(js.includes('function rankBotAvatarSrc(user)'), 'harus ada helper URL avatar Rank Bot');
+  // Gaya detail: baris avatar + nama, rapih di HP.
+  assert.ok(css.includes('.rank-overtake-detail-row{display:flex'), 'baris detail harus sejajar avatar dan nama');
+  assert.ok(css.includes('.rank-overtake-detail-avatar{'), 'avatar detail harus punya gaya sendiri');
+  assert.ok(css.includes('@media(max-width:560px){.rank-overtake-detail-row{gap:8px'), 'detail harus dirapikan untuk layar HP');
+});
+
 test('entri Info Update notifikasi salip Rank Bot kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-21T21:24:23+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 99, 'daftar harus bertambah lima entri');
-  const newest = data.updates[33];
+  assert.equal(data.updatedAt, '2026-11-22T15:50:45+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 100, 'daftar harus bertambah lima entri');
+  const newest = data.updates[34];
   assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');

@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-21T21:24:23+07:00",
+  "updatedAt": "2026-11-22T15:50:45+07:00",
   "updates": [
+    {
+      "day": "Minggu, 22 Nov 2026",
+      "time": "15.50 WIB",
+      "title": "Salip Rank Bot kini realtime di semua halaman, plus layar detailnya",
+      "tag": "Fitur baru",
+      "description": "Notifikasi salip Rank Bot kini muncul realtime di halaman mana pun, bukan hanya saat halaman Rank Bot dibuka: peringkat dipantau tiap 15 detik sejak login, jadi begitu ada yang menyalip — entah kamu atau orang lain — kartunya langsung muncul di layar, dengan kata kocak, nama yang menyalip dan yang kesalip, serta posisi barunya. Kartu kini punya tombol Lihat yang membuka layar detail salip: foto dan nama yang menyalip beserta peringkat lama ke barunya, lalu foto dan nama yang kesalip beserta peringkatnya yang turun, dan waktu lengkap WIB — tampilannya rapih dan pas di layar HP. Peringkat lama yang kesalip kini dibaca langsung dari data, bukan tebakan, supaya angkanya akurat."
+    },
     {
       "day": "Sabtu, 21 Nov 2026",
       "time": "21.24 WIB",
