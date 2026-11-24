@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-23T05:08:52+07:00",
+  "updatedAt": "2026-11-24T11:09:00+07:00",
   "updates": [
+    {
+      "day": "Selasa, 24 Nov 2026",
+      "time": "11.09 WIB",
+      "title": "Uptime panel kini tersimpan dan kanal Developer pakai spoiler",
+      "tag": "Perubahan",
+      "description": "Uptime panel kini tersimpan di data/uptime.json dan terus bertambah walau panel restart, jadi tidak lagi kembali ke nol; tampilannya juga diperbaiki, detik kini memakai dtk bukan d. Di halaman Developer, tiap kanal (WhatsApp, Telegram, Facebook) kini dibuka dulu sebagai spoiler berisi penjelasan singkat, lalu ada tombol untuk membuka kanalnya — pas di layar HP."
+    },
     {
       "day": "Senin, 23 Nov 2026",
       "time": "05.08 WIB",

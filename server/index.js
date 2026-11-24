@@ -79,6 +79,7 @@ const RESTORE_SECRET_FILE = path.join(DATA_DIR, '.restore-session-secret');
 const BACKUP_SNAPSHOT_DIR = path.join(DATA_DIR, 'backup-snapshots');
 const TELEGRAM_CONFIG_FILE = path.join(DATA_DIR, 'telegram.json');
 const CHAT_FILE = path.join(DATA_DIR, 'Obrolan.json');
+const UPTIME_FILE = path.join(DATA_DIR, 'uptime.json');
 const CHAT_MAX_MESSAGES = 200;
 const CHAT_TYPING_WINDOW_MS = 12000;
 const TELEGRAM_MAX_BYTES = 50 * 1024 * 1024;
@@ -192,6 +193,49 @@ async function atomicWriteJson(file, value) {
   await fs.writeFile(temp, `${JSON.stringify(value, null, 2)}\n`, { mode: 0o600 });
   await fs.rename(temp, file);
   await fs.chmod(file, 0o600).catch(() => {});
+}
+
+// Uptime panel yang tidak reset saat restart: total detik berjalan disimpan
+// di data/uptime.json lalu ditambah waktu proses ini berjalan. Disimpan
+// berkala (tiap 60 dtk) dan saat shutdown, jadi kalaupun VM mati mendadak
+// paling banyak ~60 dtk yang hilang.
+let uptimeBaseSeconds = 0;
+let uptimeProcessStartedAt = Date.now();
+let uptimeFirstStartedAt = null;
+let uptimeSaveTimer = null;
+
+function currentUptimeSeconds() {
+  return uptimeBaseSeconds + Math.max(0, Math.floor((Date.now() - uptimeProcessStartedAt) / 1000));
+}
+
+async function loadUptimeState() {
+  try {
+    const parsed = JSON.parse(await fs.readFile(UPTIME_FILE, 'utf8'));
+    if (parsed && typeof parsed === 'object') {
+      uptimeBaseSeconds = Math.max(0, Math.floor(Number(parsed.accumulatedSeconds) || 0));
+      if (typeof parsed.firstStartedAt === 'string' && !Number.isNaN(Date.parse(parsed.firstStartedAt))) uptimeFirstStartedAt = parsed.firstStartedAt;
+    }
+  } catch (error) {
+    if (error?.code !== 'ENOENT') console.warn('[panel] Gagal membaca uptime.json, mulai dari nol:', error?.message || error);
+  }
+  if (!uptimeFirstStartedAt) uptimeFirstStartedAt = new Date().toISOString();
+  uptimeProcessStartedAt = Date.now();
+}
+
+async function saveUptimeState() {
+  try {
+    await atomicWriteJson(UPTIME_FILE, {
+      accumulatedSeconds: currentUptimeSeconds(),
+      firstStartedAt: uptimeFirstStartedAt,
+      updatedAt: new Date().toISOString(),
+    });
+  } catch { /* Gagal menyimpan uptime bukan alasan panel berhenti. */ }
+}
+
+function startUptimeSaver() {
+  if (uptimeSaveTimer) return;
+  uptimeSaveTimer = setInterval(() => { void saveUptimeState(); }, 60 * 1000);
+  uptimeSaveTimer.unref();
 }
 
 function mutate(fn, { requireAccountSync = false } = {}) {
@@ -1627,9 +1671,9 @@ async function handleApi(req, res, url) {
     } catch { /* Disk tidak terbaca di host ini; kolom tampil strip. */ }
     return sendJson(res, 200, {
       status: 'online',
-      uptimeSeconds: Math.floor(process.uptime()),
+      uptimeSeconds: currentUptimeSeconds(),
       systemUptimeSeconds: Math.floor(os.uptime()),
-      serverStartedAt: new Date(Date.now() - process.uptime() * 1000).toISOString(),
+      serverStartedAt: uptimeFirstStartedAt || new Date(Date.now() - process.uptime() * 1000).toISOString(),
       processMemoryBytes: processMemory.rss,
       processHeapUsedBytes: processMemory.heapUsed,
       processHeapTotalBytes: processMemory.heapTotal,
@@ -3012,6 +3056,8 @@ async function handle(req, res) {
 }
 
 await initializeStore();
+await loadUptimeState();
+startUptimeSaver();
 for (const account of store.users) {
   try {
     await pairingManager.resume(account.id);
@@ -3043,6 +3089,7 @@ let shutdownStarted = false;
 async function shutdown() {
   if (shutdownStarted) return;
   shutdownStarted = true;
+  try { await saveUptimeState(); } catch { /* Simpan uptime terakhir sebelum mati. */ }
   try { await pairingManager.shutdown(); } catch { /* Close the panel even if a socket shutdown fails. */ }
   server.close(() => process.exit(0));
   setTimeout(() => process.exit(1), 5000).unref();

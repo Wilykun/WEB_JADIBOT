@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { randomBytes, randomUUID, scryptSync } from 'node:crypto';
-import { cp, mkdtemp, mkdir, rm, symlink, writeFile } from 'node:fs/promises';
+import { cp, mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import net from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
@@ -10,6 +10,8 @@ import { fileURLToPath } from 'node:url';
 
 const sourceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const appJs = await readFile(path.join(sourceRoot, 'public', 'app.js'), 'utf8');
 
 function fixtureUser(username, email, role, password) {
   const salt = randomBytes(16).toString('hex');
@@ -25,25 +27,28 @@ async function unusedPort() {
   return port;
 }
 
-test('account stats count active from running bots, and server status exposes full detail without any IP or host field', { timeout: 30_000 }, async () => {
+test('formatServerUptime memakai dtk untuk detik, bukan d yang terbaca seperti hari', () => {
+  assert.match(appJs, /seconds % 60\}dtk`/, 'detik harus memakai dtk');
+  assert.doesNotMatch(appJs, /seconds % 60\}d`/, 'detik tidak boleh memakai d saja');
+});
+
+test('account stats count active from running bots, and server status exposes full detail without any IP or host field', { timeout: 60_000 }, async () => {
   const temp = await mkdtemp(path.join(os.tmpdir(), 'readsw-server-status-test-'));
   const root = path.join(temp, 'project');
   const dataDir = path.join(root, 'runtime-data');
   const secret = randomBytes(48).toString('base64url');
-  let child;
-  try {
-    await mkdir(root, { recursive: true });
-    await cp(path.join(sourceRoot, 'server'), path.join(root, 'server'), { recursive: true });
-    await cp(path.join(sourceRoot, 'public'), path.join(root, 'public'), { recursive: true });
-    await cp(path.join(sourceRoot, 'package.json'), path.join(root, 'package.json'));
-    await symlink(path.join(sourceRoot, 'node_modules'), path.join(root, 'node_modules'), 'dir');
-    await mkdir(dataDir, { recursive: true });
-    const admin = fixtureUser('fixtureadmin', 'fixtureadmin@example.test', 'admin', 'FixtureAdmin-Only-Password!');
-    const member = fixtureUser('fixturemember', 'fixturemember@example.test', 'member', 'FixtureMember-Only-Password!');
-    await writeFile(path.join(dataDir, 'store.json'), JSON.stringify({
-      users: [admin, member], pendingRegistrations: [], bots: [], sessions: [], pairingLogs: [], loginHistory: [],
-    }));
+  let child = null;
 
+  const stopServer = async () => {
+    if (!child || child.exitCode !== null) return;
+    const target = child;
+    child = null;
+    target.kill('SIGTERM');
+    const deadline = Date.now() + 10_000;
+    while (target.exitCode === null && Date.now() < deadline) await wait(100);
+  };
+
+  const startServer = async () => {
     const port = await unusedPort();
     const base = `http://127.0.0.1:${port}`;
     const env = {
@@ -61,8 +66,31 @@ test('account stats count active from running bots, and server status exposes fu
       await wait(100);
     }
     assert.equal(ready, true, 'isolated fixture server should start');
+    return base;
+  };
 
-    const statsResponse = await fetch(`${base}/api/public/account-stats`, { signal: AbortSignal.timeout(5000) });
+  const fetchStatus = async (base) => {
+    const response = await fetch(`${base}/api/public/server-status`, { signal: AbortSignal.timeout(5000) });
+    assert.equal(response.status, 200);
+    return response.json();
+  };
+
+  try {
+    await mkdir(root, { recursive: true });
+    await cp(path.join(sourceRoot, 'server'), path.join(root, 'server'), { recursive: true });
+    await cp(path.join(sourceRoot, 'public'), path.join(root, 'public'), { recursive: true });
+    await cp(path.join(sourceRoot, 'package.json'), path.join(root, 'package.json'));
+    await symlink(path.join(sourceRoot, 'node_modules'), path.join(root, 'node_modules'), 'dir');
+    await mkdir(dataDir, { recursive: true });
+    const admin = fixtureUser('fixtureadmin', 'fixtureadmin@example.test', 'admin', 'FixtureAdmin-Only-Password!');
+    const member = fixtureUser('fixturemember', 'fixturemember@example.test', 'member', 'FixtureMember-Only-Password!');
+    await writeFile(path.join(dataDir, 'store.json'), JSON.stringify({
+      users: [admin, member], pendingRegistrations: [], bots: [], sessions: [], pairingLogs: [], loginHistory: [],
+    }));
+
+    const base1 = await startServer();
+
+    const statsResponse = await fetch(`${base1}/api/public/account-stats`, { signal: AbortSignal.timeout(5000) });
     assert.equal(statsResponse.status, 200);
     const stats = await statsResponse.json();
     assert.equal(stats.total, 2);
@@ -74,9 +102,7 @@ test('account stats count active from running bots, and server status exposes fu
     assert.equal(stats.whatsappConnected, 0);
     assert.equal(stats.workersRunning, 0);
 
-    const statusResponse = await fetch(`${base}/api/public/server-status`, { signal: AbortSignal.timeout(5000) });
-    assert.equal(statusResponse.status, 200);
-    const status = await statusResponse.json();
+    const status = await fetchStatus(base1);
     assert.equal(status.status, 'online');
     assert.equal(typeof status.uptimeSeconds, 'number');
     assert.equal(typeof status.systemUptimeSeconds, 'number');
@@ -92,8 +118,26 @@ test('account stats count active from running bots, and server status exposes fu
     for (const key of Object.keys(status)) {
       assert.doesNotMatch(key, /ip|host/i, `server status must never expose an IP or host field (found ${key})`);
     }
+
+    // Uptime realtime: nilainya terus bertambah antar pembaruan.
+    const statusLater = await wait(2500).then(() => fetchStatus(base1));
+    assert.ok(statusLater.uptimeSeconds > status.uptimeSeconds, 'uptime harus terus bertambah realtime');
+    const uptimeBeforeRestart = statusLater.uptimeSeconds;
+    const startedBeforeRestart = statusLater.serverStartedAt;
+
+    // Uptime tersimpan di data/uptime.json saat shutdown, lalu tidak reset setelah restart.
+    await stopServer();
+    const uptimeFile = JSON.parse(await readFile(path.join(dataDir, 'uptime.json'), 'utf8'));
+    assert.equal(typeof uptimeFile.accumulatedSeconds, 'number');
+    assert.ok(uptimeFile.accumulatedSeconds >= uptimeBeforeRestart, 'uptime.json harus menyimpan akumulasi sampai shutdown');
+    assert.ok(!Number.isNaN(Date.parse(uptimeFile.firstStartedAt)), 'uptime.json firstStartedAt harus tanggal ISO valid');
+
+    const base2 = await startServer();
+    const statusAfterRestart = await fetchStatus(base2);
+    assert.ok(statusAfterRestart.uptimeSeconds >= uptimeBeforeRestart, 'uptime tidak boleh reset setelah restart panel');
+    assert.equal(statusAfterRestart.serverStartedAt, startedBeforeRestart, 'serverStartedAt harus tetap tanggal pertama kali panel jalan');
   } finally {
-    if (child && child.exitCode === null) child.kill('SIGTERM');
+    await stopServer();
     await rm(temp, { recursive: true, force: true });
   }
 });

@@ -5530,7 +5530,7 @@ function formatServerUptime(value) {
   const minutes = Math.floor((seconds % 3600) / 60);
   if (days) return `${days}h ${hours}j`;
   if (hours) return `${hours}j ${minutes}m`;
-  return `${minutes}m ${seconds % 60}d`;
+  return `${minutes}m ${seconds % 60}dtk`;
 }
 
 function formatServerSize(value) {
