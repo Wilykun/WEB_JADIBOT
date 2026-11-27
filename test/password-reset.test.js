@@ -207,8 +207,17 @@ test('server Lupa sandi: email saja, sandi sementara, wajib ganti, log admin', {
     const newLoginDirect = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: 'SandiBaruLangsung!' } });
     assert.equal(newLoginDirect.status, 200, 'login dengan sandi baru harus berhasil');
     assert.equal(newLoginDirect.payload.user.mustChangePassword, false, 'setelah reset langsung, tidak ada lagi kewajiban ganti sandi');
-    const tempLoginDead = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: tempPassword } });
-    assert.equal(tempLoginDead.status, 401, 'sandi sementara harus mati setelah sandi baru disimpan');
+    // RONDE 39: sandi sementara TETAP berlaku sebagai cadangan setelah sandi
+    // baru disimpan — masuk bisa pakai keduanya supaya tidak terkunci lagi.
+    const tempLoginAlive = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: tempPassword } });
+    assert.equal(tempLoginAlive.status, 200, 'sandi sementara harus TETAP berlaku setelah sandi baru disimpan');
+    assert.equal(tempLoginAlive.payload.user.mustChangePassword, false, 'sandi sementara yang dipakai setelah reset tidak memaksa ganti lagi');
+    // RONDE 39: sandi sementara tercatat per akun di DATA_AKUN masing-masing.
+    const accountRecord = JSON.parse(await readFile(path.join(root, 'DATA_AKUN', 'MEMBER', 'fixturemember', 'password-reset.json'), 'utf8'));
+    assert.equal(accountRecord.tempPassword, tempPassword, 'catatan per akun harus menyimpan sandi sementara');
+    assert.equal(accountRecord.status, 'done', 'catatan per akun harus berstatus done setelah sandi baru disimpan');
+    assert.ok(accountRecord.resetAt, 'catatan per akun harus mencatat waktu sandi baru disimpan');
+    assert.ok(accountRecord.tempPasswordAt, 'catatan per akun harus mencatat waktu sandi sementara dibuat');
 
     // Minta sandi sementara kedua untuk menguji alur login + wajib ganti.
     const reset2 = await jsonRequest(base, '/api/auth/forgot-password', { method: 'POST', body: { email: 'fixturemember@example.test' } });
@@ -216,10 +225,10 @@ test('server Lupa sandi: email saja, sandi sementara, wajib ganti, log admin', {
     const tempPassword2 = reset2.payload.tempPassword;
     assert.ok(typeof tempPassword2 === 'string' && tempPassword2.length >= 10, 'reset kedua harus mengembalikan sandi sementara baru');
 
-    // Sandi lama sudah tidak berlaku; sandi sementara berlaku dan menandai
-    // wajib ganti sandi.
+    // RONDE 39: minta sandi sementara TIDAK lagi menimpa sandi utama — sandi
+    // utama tetap berlaku, sandi sementara berlaku dan menandai wajib ganti.
     const oldLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: 'SandiBaruLangsung!' } });
-    assert.equal(oldLogin.status, 401, 'sandi lama harus ditolak setelah reset');
+    assert.equal(oldLogin.status, 200, 'sandi utama harus TETAP berlaku setelah minta sandi sementara');
     const tempLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: tempPassword2 } });
     assert.equal(tempLogin.status, 200, 'login dengan sandi sementara harus berhasil');
     assert.equal(tempLogin.payload.user.mustChangePassword, true, 'login sandi sementara harus menandai wajib ganti sandi');
@@ -233,10 +242,10 @@ test('server Lupa sandi: email saja, sandi sementara, wajib ganti, log admin', {
     const changed = await jsonRequest(base, '/api/auth/change-password', { method: 'POST', body: { currentPassword: tempPassword2, newPassword: 'SandiBaruYangPanjang!1' }, cookie: memberCookie });
     assert.equal(changed.status, 200, 'ganti sandi dengan data benar harus 200');
 
-    // Setelah ganti sandi, sandi sementara mati dan sandi baru berlaku tanpa
-    // penanda wajib ganti.
-    const tempDead = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: tempPassword2 } });
-    assert.equal(tempDead.status, 401, 'sandi sementara harus mati setelah diganti');
+    // RONDE 39: setelah ganti sandi, sandi sementara TETAP berlaku sebagai
+    // cadangan dan sandi baru berlaku tanpa penanda wajib ganti.
+    const tempAlive = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: tempPassword2 } });
+    assert.equal(tempAlive.status, 200, 'sandi sementara harus TETAP berlaku setelah diganti');
     const newLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember@example.test', password: 'SandiBaruYangPanjang!1' } });
     assert.equal(newLogin.status, 200, 'login dengan sandi baru harus berhasil');
     assert.equal(newLogin.payload.user.mustChangePassword, false, 'setelah ganti sandi, penanda wajib ganti harus hilang');
@@ -395,4 +404,50 @@ test('api(): gagal jaringan coba lagi 1x, lalu pesan ramah', async () => {
   assert.equal(out.httpMessage, 'Email tidak terdaftar.', 'kesalahan HTTP harus tetap menampilkan pesan server');
   assert.equal(out.httpStatus, 404, 'kesalahan HTTP harus tetap membawa status');
   assert.deepEqual(out.okPayload, { ok: true }, 'respons sukses harus tetap dikembalikan');
+});
+
+test('konfirmasi kode sementara muncul sebelum form sandi baru (ronde 39)', () => {
+  assert.ok(html.includes('id="forgot-confirm"'), 'blok konfirmasi kode harus ada');
+  assert.ok(html.includes('id="forgot-confirm-code"'), 'kolom kode sementara harus ada');
+  assert.ok(html.includes('Masukkan kode sementara di sini untuk melanjutkan'), 'label konfirmasi harus sesuai permintaan');
+  assert.ok(html.includes('id="forgot-confirm-submit"'), 'tombol Lanjutkan harus ada');
+  assert.ok(html.includes('id="forgot-confirm-loading"'), 'animasi loading konfirmasi harus ada');
+  assert.ok(html.includes('Memeriksa kode sementara...'), 'teks loading konfirmasi harus ada');
+  assert.ok(html.includes('id="forgot-confirm-error"'), 'pesan salah kode harus ada');
+  assert.ok(css.includes('.forgot-confirm-error'), 'CSS pesan salah kode harus ada');
+  assert.ok(css.includes('.forgot-confirm-loading'), 'CSS loading konfirmasi harus ada');
+  assert.ok(css.includes('.forgot-confirm-spinner'), 'CSS spinner loading harus ada');
+  assert.ok(css.includes('@keyframes forgot-confirm-spin'), 'animasi putar spinner harus ada');
+  assert.ok(appJs.includes('forgotConfirmCodeMatches'), 'fungsi pencocokan kode harus ada');
+  assert.ok(appJs.includes("const confirmBox = document.querySelector('#forgot-confirm');"), 'sukses lupa sandi harus menyiapkan blok konfirmasi');
+  assert.ok(appJs.includes("confirmBox?.classList.remove('hidden')"), 'sukses lupa sandi harus menampilkan blok konfirmasi');
+  assert.ok(appJs.includes("document.querySelector('#forgot-confirm')?.classList.add('hidden')"), 'konfirmasi yang lolos harus menyembunyikan blok konfirmasi');
+  assert.ok(appJs.includes('setTimeout(resolve, 900)'), 'konfirmasi harus menampilkan loading sebentar sebelum lanjut');
+  assert.ok(appJs.includes('Kode sementara tidak cocok. Periksa lagi kode di atas.'), 'kode salah harus menampilkan pesan yang jelas');
+});
+
+test('server: masuk bisa pakai sandi baru maupun sandi sementara (ronde 39)', () => {
+  assert.ok(serverJs.includes('target.tempPasswordSalt = salt;'), 'lupa sandi harus menyimpan hash sementara terpisah');
+  assert.ok(serverJs.includes('target.tempPasswordHash = passwordHash;'), 'lupa sandi harus menyimpan hash sementara terpisah');
+  assert.ok(!serverJs.includes('target.salt = salt;\n      target.passwordHash = passwordHash;\n      target.mustChangePassword = true;'), 'lupa sandi TIDAK boleh lagi menimpa sandi utama');
+  assert.ok(serverJs.includes('user.tempPasswordHash && user.tempPasswordSalt'), 'login harus memeriksa hash sementara sebagai cadangan');
+  assert.ok(serverJs.includes('const tempSalt = user.tempPasswordSalt || user.salt;'), 'reset sandi harus memakai garam sementara (dengan fallback akun lama)');
+  assert.ok(serverJs.includes('const tempHash = user.tempPasswordHash || user.passwordHash;'), 'reset sandi harus memakai hash sementara (dengan fallback akun lama)');
+  assert.ok(serverJs.includes("writeAccountPasswordReset(user, { tempPassword, tempPasswordAt, status: 'shown' })"), 'lupa sandi harus mencatat sandi sementara per akun di DATA_AKUN');
+  assert.ok(serverJs.includes("writeAccountPasswordReset(user, { status: 'done', resetAt:"), 'reset sandi harus memperbarui catatan per akun di DATA_AKUN');
+  assert.ok(serverJs.includes('password-reset.json'), 'catatan per akun harus bernama password-reset.json');
+  assert.ok(serverJs.includes('Kamu bisa masuk dengan sandi baru maupun sandi sementara.'), 'pesan sukses reset harus menyebut kedua sandi bisa dipakai masuk');
+  const publicUserFn = serverJs.match(/function publicUser\(user\) \{[\s\S]*?\n\}/);
+  assert.ok(publicUserFn, 'fungsi publicUser harus bisa diekstrak');
+  assert.ok(!publicUserFn[0].includes('tempPasswordHash'), 'publicUser TIDAK boleh membocorkan hash sementara');
+  assert.ok(!publicUserFn[0].includes('tempPasswordSalt'), 'publicUser TIDAK boleh membocorkan garam sementara');
+});
+
+test('forgotConfirmCodeMatches: cocok persis, salah, kosong', async () => {
+  const m = appJs.match(/function forgotConfirmCodeMatches\(entered, expected\) \{[\s\S]*?\n\}/);
+  assert.ok(m, 'fungsi forgotConfirmCodeMatches harus bisa diekstrak');
+  const fn = m[0].replace('function forgotConfirmCodeMatches', 'function f');
+  const out = await eval(`${fn}
+[f('7cFWLM6G5z', '7cFWLM6G5z'), f(' 7cFWLM6G5z ', '7cFWLM6G5z'), f('7cfwlm6g5z', '7cFWLM6G5z'), f('7cFWLM6G5y', '7cFWLM6G5z'), f('', '7cFWLM6G5z'), f('7cFWLM6G5z', ''), f('', '')]`);
+  assert.deepEqual(out, [true, true, false, false, false, false, false], 'kode harus cocok persis (huruf besar-kecil berpengaruh), spasi di ujung dimaafkan, kosong selalu salah');
 });

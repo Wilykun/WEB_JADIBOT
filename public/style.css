@@ -3497,3 +3497,10 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .forgot-temp-note{text-align:center}
 .forgot-reset-done{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;text-align:center}
 .forgot-reset-done-icon{width:17px;height:17px;flex:none}
+
+/* Ronde 39: konfirmasi kode sementara di halaman Lupa sandi. */
+.forgot-confirm{margin-top:14px}
+.forgot-confirm-error{margin:10px 0;padding:10px 12px;border-radius:10px;background:rgba(255,77,77,.12);color:#ff8a8a;font-size:13px}
+.forgot-confirm-loading{display:flex;align-items:center;justify-content:center;gap:9px;margin:12px 0 0;font-size:13px;color:var(--soft)}
+.forgot-confirm-spinner{width:18px;height:18px;border-radius:50%;border:2px solid rgba(62,230,154,.25);border-top-color:#3ee69a;animation:forgot-confirm-spin .8s linear infinite}
+@keyframes forgot-confirm-spin{to{transform:rotate(360deg)}}

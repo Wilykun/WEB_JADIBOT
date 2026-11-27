@@ -627,6 +627,9 @@ function showForgotForm() {
   document.querySelector('#forgot-account')?.classList.add('hidden');
   document.querySelector('#forgot-notfound')?.classList.add('hidden');
   document.querySelector('#forgot-temp')?.classList.add('hidden');
+  document.querySelector('#forgot-confirm')?.classList.add('hidden');
+  document.querySelector('#forgot-confirm-error')?.classList.add('hidden');
+  document.querySelector('#forgot-confirm-loading')?.classList.add('hidden');
   document.querySelector('#forgot-reset')?.classList.add('hidden');
   document.querySelector('#forgot-reset-done')?.classList.add('hidden');
   document.querySelector('#forgot-reset-match')?.classList.add('hidden');
@@ -5896,15 +5899,22 @@ forgotForm?.addEventListener('submit', async (event) => {
       statusEl.classList.remove('is-failed');
       accountCard?.classList.remove('hidden');
     }
-    // Sandi sementara tampil di web + form buat sandi baru langsung.
+    // Sandi sementara tampil di web + langkah konfirmasi kode (RONDE 39):
+    // form sandi baru baru muncul setelah kode sementara dikonfirmasi.
     const tempBox = document.querySelector('#forgot-temp');
-    const resetBox = document.querySelector('#forgot-reset');
+    const confirmBox = document.querySelector('#forgot-confirm');
     if (result.tempPassword) {
       document.querySelector('#forgot-temp-code').textContent = result.tempPassword;
       tempBox?.classList.remove('hidden');
-      resetBox?.classList.remove('hidden');
+      confirmBox?.classList.remove('hidden');
+      document.querySelector('#forgot-reset')?.classList.add('hidden');
       document.querySelector('#forgot-reset-message')?.classList.add('hidden');
       document.querySelector('#forgot-reset-done')?.classList.add('hidden');
+      const confirmInput = document.querySelector('#forgot-confirm-code');
+      if (confirmInput) confirmInput.value = '';
+      document.querySelector('#forgot-confirm-error')?.classList.add('hidden');
+      document.querySelector('#forgot-confirm-loading')?.classList.add('hidden');
+      document.querySelector('#forgot-confirm-submit')?.removeAttribute('disabled');
       forgotTempPassword = result.tempPassword;
       forgotResetEmail = String(data.email || '').trim().toLowerCase();
     }
@@ -5991,6 +6001,43 @@ function updateForgotResetMatch() {
 }
 document.querySelector('#forgot-new-password')?.addEventListener('input', updateForgotResetMatch);
 document.querySelector('#forgot-confirm-password')?.addEventListener('input', updateForgotResetMatch);
+// RONDE 39: konfirmasi kode sementara sebelum form sandi baru muncul.
+// Kode yang diketik harus sama persis dengan kode yang ditampilkan di atas
+// (huruf besar-kecil berpengaruh). Pemeriksaan server yang sebenarnya tetap
+// terjadi saat menyimpan sandi baru.
+function forgotConfirmCodeMatches(entered, expected) {
+  const code = String(entered || '').trim();
+  const want = String(expected || '').trim();
+  return code !== '' && want !== '' && code === want;
+}
+document.querySelector('#forgot-confirm-submit')?.addEventListener('click', async () => {
+  const input = document.querySelector('#forgot-confirm-code');
+  const error = document.querySelector('#forgot-confirm-error');
+  const loading = document.querySelector('#forgot-confirm-loading');
+  const submit = document.querySelector('#forgot-confirm-submit');
+  const showError = (text) => {
+    error.textContent = text;
+    error?.classList.remove('hidden');
+    input?.classList.remove('forgot-shake');
+    void input?.offsetWidth;
+    input?.classList.add('forgot-shake');
+    input?.focus();
+  };
+  if (!forgotTempPassword) { showError('Minta sandi sementara dulu.'); return; }
+  if (!forgotConfirmCodeMatches(input?.value || '', forgotTempPassword)) {
+    showError('Kode sementara tidak cocok. Periksa lagi kode di atas.');
+    return;
+  }
+  error?.classList.add('hidden');
+  submit.disabled = true;
+  loading?.classList.remove('hidden');
+  await new Promise((resolve) => setTimeout(resolve, 900));
+  loading?.classList.add('hidden');
+  submit.disabled = false;
+  document.querySelector('#forgot-confirm')?.classList.add('hidden');
+  document.querySelector('#forgot-reset')?.classList.remove('hidden');
+  document.querySelector('#forgot-new-password')?.focus();
+});
 document.querySelector('#forgot-reset-submit')?.addEventListener('click', async () => {
   const message = document.querySelector('#forgot-reset-message');
   const newPassword = document.querySelector('#forgot-new-password')?.value || '';

@@ -2010,6 +2010,19 @@ async function handleApi(req, res, url) {
     return list;
   }
 
+  // RONDE 39: sandi sementara dicatat per akun di folder DATA_AKUN masing-masing
+  // (password-reset.json), jadi tiap akun punya catatannya sendiri.
+  const PASSWORD_RESET_ACCOUNT_FILE = 'password-reset.json';
+  async function writeAccountPasswordReset(user, patch) {
+    const dir = canonicalAccountFolder(user);
+    if (!dir) return;
+    const file = path.join(dir, PASSWORD_RESET_ACCOUNT_FILE);
+    let current = {};
+    try { current = JSON.parse(await fs.readFile(file, 'utf8')); } catch { current = {}; }
+    if (!current || typeof current !== 'object') current = {};
+    await atomicWriteJson(file, { ...current, ...patch });
+  }
+
   if (route === 'POST /api/auth/login') {
     const body = await readJson(req);
     const rawIdentifier = String(body.identifier || '').trim().slice(0, 254);
@@ -2023,6 +2036,12 @@ async function handleApi(req, res, url) {
     if (user) {
       const attempt = (await scrypt(String(body.password || '').slice(0, 128), user.salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
       valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(attempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.passwordHash).digest('hex'));
+      // RONDE 39: masuk bisa pakai sandi baru maupun sandi sementara — sandi
+      // sementara adalah cadangan supaya tidak terkunci lagi kalau lupa sandi.
+      if (!valid && user.tempPasswordHash && user.tempPasswordSalt) {
+        const tempAttempt = (await scrypt(String(body.password || '').slice(0, 128), user.tempPasswordSalt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+        valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(tempAttempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.tempPasswordHash).digest('hex'));
+      }
     } else {
       // Pekerjaan scrypt tiruan mengurangi perbedaan waktu untuk identifier yang tidak terdaftar.
       await scrypt(String(body.password || '').slice(0, 128), 'readsw-console-dummy-salt', 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 });
@@ -2068,13 +2087,17 @@ async function handleApi(req, res, url) {
     const tempPassword = generateTempPassword();
     const salt = randomBytes(16).toString('hex');
     const passwordHash = (await scrypt(tempPassword, salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+    const tempPasswordAt = new Date().toISOString();
+    // RONDE 39: sandi sementara TIDAK lagi menimpa sandi utama — sandi utama
+    // tetap berlaku, sandi sementara disimpan sebagai hash terpisah supaya
+    // masuk bisa pakai keduanya.
     await mutate((next) => {
       const target = next.users.find((item) => item.id === user.id);
       if (!target) return;
-      target.salt = salt;
-      target.passwordHash = passwordHash;
+      target.tempPasswordSalt = salt;
+      target.tempPasswordHash = passwordHash;
       target.mustChangePassword = true;
-      target.tempPasswordAt = new Date().toISOString();
+      target.tempPasswordAt = tempPasswordAt;
     });
     // Sandi sementara TIDAK dikirim lewat WhatsApp lagi — akun yang WA-nya
     // belum tertaut tidak akan pernah menerimanya. Sandi sementara ditampilkan
@@ -2092,6 +2115,7 @@ async function handleApi(req, res, url) {
       reason: null,
       createdAt: new Date().toISOString(),
     });
+    await writeAccountPasswordReset(user, { tempPassword, tempPasswordAt, status: 'shown' });
     // Kartu status akun di halaman login hanya menampilkan avatar, nama,
     // @username, dan peran — email TIDAK disertakan (email hanya tampil di
     // halaman Profil pemilik akun itu sendiri).
@@ -2118,8 +2142,12 @@ async function handleApi(req, res, url) {
     if (user.mustChangePassword !== true) {
       return sendError(res, 400, 'Tidak ada sandi sementara aktif untuk akun ini. Minta sandi sementara dulu.');
     }
-    const currentHash = (await scrypt(tempPassword, user.salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
-    const tempValid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(currentHash).digest('hex'), createHmac('sha256', sessionSecret).update(user.passwordHash).digest('hex'));
+    // RONDE 39: sandi sementara diverifikasi ke hash terpisahnya; akun lama
+    // (sebelum ronde 39) yang hash utamanya masih hash sementara tetap didukung.
+    const tempSalt = user.tempPasswordSalt || user.salt;
+    const tempHash = user.tempPasswordHash || user.passwordHash;
+    const currentHash = (await scrypt(tempPassword, tempSalt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+    const tempValid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(currentHash).digest('hex'), createHmac('sha256', sessionSecret).update(tempHash).digest('hex'));
     if (!tempValid) {
       return sendError(res, 401, 'Sandi sementara salah. Periksa lagi atau minta sandi sementara yang baru.');
     }
@@ -2135,8 +2163,11 @@ async function handleApi(req, res, url) {
       target.passwordHash = passwordHash;
       target.mustChangePassword = false;
       delete target.tempPasswordAt;
+      // RONDE 39: hash sandi sementara SENGAJA dipertahankan — sandi sementara
+      // tetap bisa dipakai masuk sebagai cadangan setelah sandi baru disimpan.
     });
-    return sendJson(res, 200, { ok: true, message: 'Sandi baru sudah disimpan. Silakan masuk dengan sandi barumu.' });
+    await writeAccountPasswordReset(user, { status: 'done', resetAt: new Date().toISOString() });
+    return sendJson(res, 200, { ok: true, message: 'Sandi baru sudah disimpan. Kamu bisa masuk dengan sandi baru maupun sandi sementara.' });
   }
 
   const user = await authenticatedUser(req);
@@ -2150,7 +2181,12 @@ async function handleApi(req, res, url) {
     if (newPassword.length < 12) return sendError(res, 400, 'Sandi baru minimal 12 karakter.');
     if (newPassword === currentPassword) return sendError(res, 400, 'Sandi baru harus berbeda dari sandi lama.');
     const attempt = (await scrypt(currentPassword, user.salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
-    const valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(attempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.passwordHash).digest('hex'));
+    let valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(attempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.passwordHash).digest('hex'));
+    // RONDE 39: sandi sementara juga sah sebagai "sandi lama" saat ganti sandi.
+    if (!valid && user.tempPasswordHash && user.tempPasswordSalt) {
+      const tempAttempt = (await scrypt(currentPassword, user.tempPasswordSalt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+      valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(tempAttempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.tempPasswordHash).digest('hex'));
+    }
     if (!valid) return sendError(res, 401, 'Sandi lama salah. Coba lagi.');
     const salt = randomBytes(16).toString('hex');
     const passwordHash = (await scrypt(newPassword, salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
