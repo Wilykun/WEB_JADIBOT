@@ -1,0 +1,242 @@
+{
+  "ACB14E9494389FD3CC9FCF5DF2D63529": {
+    "id": "ACB14E9494389FD3CC9FCF5DF2D63529",
+    "sender": "62881012187560@s.whatsapp.net",
+    "number": "62881012187560",
+    "storyJid": "62881012187560@s.whatsapp.net",
+    "resolvedPn": "62881012187560@s.whatsapp.net",
+    "name": "orang keren",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB14E9494389FD3CC9FCF5DF2D63529",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB14E9494389FD3CC9FCF5DF2D63529",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "14242581364781@lid",
+      "62881012187560@s.whatsapp.net"
+    ],
+    "contactHash": "9c28fa486be49032132c052c47ff12380cfcde32ac581e0e92fb2b495a024b43",
+    "arrivedAt": "2026-11-27T12:20:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:20:08.932Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:20:11.731Z",
+    "readAt": "2026-11-27T12:20:11.715Z",
+    "emoji": "👀",
+    "reactedAt": "2026-11-27T12:20:11.715Z"
+  },
+  "AC675794EC1189D3CC0C2AB0C6DF5D92": {
+    "id": "AC675794EC1189D3CC0C2AB0C6DF5D92",
+    "sender": "62881012187560@s.whatsapp.net",
+    "number": "62881012187560",
+    "storyJid": "62881012187560@s.whatsapp.net",
+    "resolvedPn": "62881012187560@s.whatsapp.net",
+    "name": "orang keren",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC675794EC1189D3CC0C2AB0C6DF5D92",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC675794EC1189D3CC0C2AB0C6DF5D92",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "14242581364781@lid",
+      "62881012187560@s.whatsapp.net"
+    ],
+    "contactHash": "9c28fa486be49032132c052c47ff12380cfcde32ac581e0e92fb2b495a024b43",
+    "arrivedAt": "2026-11-27T14:49:25.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:49:25.170Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:49:29.583Z",
+    "readAt": "2026-11-27T14:49:29.581Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-27T14:49:29.581Z"
+  },
+  "AC61C47585833F8C81CBAFA0A4B3D5E7": {
+    "id": "AC61C47585833F8C81CBAFA0A4B3D5E7",
+    "sender": "62881012187560@s.whatsapp.net",
+    "number": "62881012187560",
+    "storyJid": "62881012187560@s.whatsapp.net",
+    "resolvedPn": "62881012187560@s.whatsapp.net",
+    "name": "orang keren",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC61C47585833F8C81CBAFA0A4B3D5E7",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC61C47585833F8C81CBAFA0A4B3D5E7",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "14242581364781@lid",
+      "62881012187560@s.whatsapp.net"
+    ],
+    "contactHash": "9c28fa486be49032132c052c47ff12380cfcde32ac581e0e92fb2b495a024b43",
+    "arrivedAt": "2026-11-27T14:50:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:50:37.600Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:50:47.551Z",
+    "readAt": "2026-11-27T14:50:47.550Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T14:50:47.550Z"
+  },
+  "AC27544BDD510632846CB30BF84A952D": {
+    "id": "AC27544BDD510632846CB30BF84A952D",
+    "sender": "62881012187560@s.whatsapp.net",
+    "number": "62881012187560",
+    "storyJid": "62881012187560@s.whatsapp.net",
+    "resolvedPn": "62881012187560@s.whatsapp.net",
+    "name": "orang keren",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC27544BDD510632846CB30BF84A952D",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC27544BDD510632846CB30BF84A952D",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "14242581364781@lid",
+      "62881012187560@s.whatsapp.net"
+    ],
+    "contactHash": "9c28fa486be49032132c052c47ff12380cfcde32ac581e0e92fb2b495a024b43",
+    "arrivedAt": "2026-11-27T14:53:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:53:09.897Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:53:18.953Z",
+    "readAt": "2026-11-27T14:53:18.952Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-27T14:53:18.952Z"
+  },
+  "AC945886BF8596E2532180F960E754AA": {
+    "id": "AC945886BF8596E2532180F960E754AA",
+    "sender": "62881012187560@s.whatsapp.net",
+    "number": "62881012187560",
+    "storyJid": "62881012187560@s.whatsapp.net",
+    "resolvedPn": "62881012187560@s.whatsapp.net",
+    "name": "orang keren",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC945886BF8596E2532180F960E754AA",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC945886BF8596E2532180F960E754AA",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "14242581364781@lid",
+      "62881012187560@s.whatsapp.net"
+    ],
+    "contactHash": "9c28fa486be49032132c052c47ff12380cfcde32ac581e0e92fb2b495a024b43",
+    "arrivedAt": "2026-11-27T16:48:20.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T16:48:20.879Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T16:48:27.372Z",
+    "readAt": "2026-11-27T16:48:27.371Z",
+    "emoji": "☕️",
+    "reactedAt": "2026-11-27T16:48:27.371Z"
+  },
+  "AC0737A731B337E4DF18C7855D31B884": {
+    "id": "AC0737A731B337E4DF18C7855D31B884",
+    "sender": "62881012187560@s.whatsapp.net",
+    "number": "62881012187560",
+    "storyJid": "62881012187560@s.whatsapp.net",
+    "resolvedPn": "62881012187560@s.whatsapp.net",
+    "name": "orang keren",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0737A731B337E4DF18C7855D31B884",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0737A731B337E4DF18C7855D31B884",
+      "participant": "14242581364781@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "14242581364781@lid",
+      "62881012187560@s.whatsapp.net"
+    ],
+    "contactHash": "9c28fa486be49032132c052c47ff12380cfcde32ac581e0e92fb2b495a024b43",
+    "arrivedAt": "2026-11-27T17:55:33.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T17:55:33.407Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T17:55:41.894Z",
+    "readAt": "2026-11-27T17:55:41.887Z",
+    "emoji": "☕️",
+    "reactedAt": "2026-11-27T17:55:41.887Z"
+  }
+}

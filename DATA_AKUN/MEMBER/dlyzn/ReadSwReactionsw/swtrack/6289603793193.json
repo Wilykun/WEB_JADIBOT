@@ -1,1 +1,242 @@
-{}
+{
+  "AC9CAFBB13DBD99CDDE0ACCDE99F0EE4": {
+    "id": "AC9CAFBB13DBD99CDDE0ACCDE99F0EE4",
+    "sender": "6289603793193@s.whatsapp.net",
+    "number": "6289603793193",
+    "storyJid": "6289603793193@s.whatsapp.net",
+    "resolvedPn": "6289603793193@s.whatsapp.net",
+    "name": "Khusus stok",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9CAFBB13DBD99CDDE0ACCDE99F0EE4",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9CAFBB13DBD99CDDE0ACCDE99F0EE4",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "68118751764596@lid",
+      "6289603793193@s.whatsapp.net"
+    ],
+    "contactHash": "f6c1a4ae4ea5b51aefb80f2d2e543e19bbdc195a61d92920fc037bd52e67531e",
+    "arrivedAt": "2026-11-27T00:25:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:25:04.634Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:25:10.091Z",
+    "readAt": "2026-11-27T00:25:10.085Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-27T00:25:10.085Z"
+  },
+  "ACDDB2D10690EC2AF2482055993E8065": {
+    "id": "ACDDB2D10690EC2AF2482055993E8065",
+    "sender": "6289603793193@s.whatsapp.net",
+    "number": "6289603793193",
+    "storyJid": "6289603793193@s.whatsapp.net",
+    "resolvedPn": "6289603793193@s.whatsapp.net",
+    "name": "Khusus stok",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDDB2D10690EC2AF2482055993E8065",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDDB2D10690EC2AF2482055993E8065",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "68118751764596@lid",
+      "6289603793193@s.whatsapp.net"
+    ],
+    "contactHash": "f6c1a4ae4ea5b51aefb80f2d2e543e19bbdc195a61d92920fc037bd52e67531e",
+    "arrivedAt": "2026-11-27T01:30:04.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:30:05.111Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:30:15.365Z",
+    "readAt": "2026-11-27T01:30:15.364Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-27T01:30:15.364Z"
+  },
+  "AC38DC8FD8669A5810CBB7DD76038FE8": {
+    "id": "AC38DC8FD8669A5810CBB7DD76038FE8",
+    "sender": "6289603793193@s.whatsapp.net",
+    "number": "6289603793193",
+    "storyJid": "6289603793193@s.whatsapp.net",
+    "resolvedPn": "6289603793193@s.whatsapp.net",
+    "name": "Khusus stok",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC38DC8FD8669A5810CBB7DD76038FE8",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC38DC8FD8669A5810CBB7DD76038FE8",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "68118751764596@lid",
+      "6289603793193@s.whatsapp.net"
+    ],
+    "contactHash": "f6c1a4ae4ea5b51aefb80f2d2e543e19bbdc195a61d92920fc037bd52e67531e",
+    "arrivedAt": "2026-11-27T01:58:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:58:28.044Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:58:37.035Z",
+    "readAt": "2026-11-27T01:58:37.028Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T01:58:37.028Z"
+  },
+  "ACEFEA1764636C4DB5C0637711820919": {
+    "id": "ACEFEA1764636C4DB5C0637711820919",
+    "sender": "6289603793193@s.whatsapp.net",
+    "number": "6289603793193",
+    "storyJid": "6289603793193@s.whatsapp.net",
+    "resolvedPn": "6289603793193@s.whatsapp.net",
+    "name": "Khusus stok",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEFEA1764636C4DB5C0637711820919",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEFEA1764636C4DB5C0637711820919",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "68118751764596@lid",
+      "6289603793193@s.whatsapp.net"
+    ],
+    "contactHash": "f6c1a4ae4ea5b51aefb80f2d2e543e19bbdc195a61d92920fc037bd52e67531e",
+    "arrivedAt": "2026-11-27T07:22:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:22:24.037Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:22:28.223Z",
+    "readAt": "2026-11-27T07:22:28.207Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T07:22:28.207Z"
+  },
+  "ACC73C1FCA51ECF1D60ED18ECE7E9AD4": {
+    "id": "ACC73C1FCA51ECF1D60ED18ECE7E9AD4",
+    "sender": "6289603793193@s.whatsapp.net",
+    "number": "6289603793193",
+    "storyJid": "6289603793193@s.whatsapp.net",
+    "resolvedPn": "6289603793193@s.whatsapp.net",
+    "name": "Khusus stok",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC73C1FCA51ECF1D60ED18ECE7E9AD4",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC73C1FCA51ECF1D60ED18ECE7E9AD4",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "68118751764596@lid",
+      "6289603793193@s.whatsapp.net"
+    ],
+    "contactHash": "f6c1a4ae4ea5b51aefb80f2d2e543e19bbdc195a61d92920fc037bd52e67531e",
+    "arrivedAt": "2026-11-27T08:29:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:29:53.232Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:29:55.082Z",
+    "readAt": "2026-11-27T08:29:55.081Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T08:29:55.081Z"
+  },
+  "ACB215349EBF4ADF8D93F8D185A3B298": {
+    "id": "ACB215349EBF4ADF8D93F8D185A3B298",
+    "sender": "6289603793193@s.whatsapp.net",
+    "number": "6289603793193",
+    "storyJid": "6289603793193@s.whatsapp.net",
+    "resolvedPn": "6289603793193@s.whatsapp.net",
+    "name": "Khusus stok",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB215349EBF4ADF8D93F8D185A3B298",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB215349EBF4ADF8D93F8D185A3B298",
+      "participant": "68118751764596@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "68118751764596@lid",
+      "6289603793193@s.whatsapp.net"
+    ],
+    "contactHash": "f6c1a4ae4ea5b51aefb80f2d2e543e19bbdc195a61d92920fc037bd52e67531e",
+    "arrivedAt": "2026-11-27T11:25:15.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:25:17.688Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:25:21.271Z",
+    "readAt": "2026-11-27T11:25:21.269Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T11:25:21.269Z"
+  }
+}

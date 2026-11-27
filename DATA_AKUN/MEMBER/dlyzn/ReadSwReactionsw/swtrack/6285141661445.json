@@ -1,1 +1,282 @@
-{}
+{
+  "ACBEF35308A05A91EA65D6E6C9C34F29": {
+    "id": "ACBEF35308A05A91EA65D6E6C9C34F29",
+    "sender": "6285141661445@s.whatsapp.net",
+    "number": "6285141661445",
+    "storyJid": "6285141661445@s.whatsapp.net",
+    "resolvedPn": "6285141661445@s.whatsapp.net",
+    "name": "𝙽𝚎𝚜𝚢𝚊-𝙲𝚑𝚊𝚗",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBEF35308A05A91EA65D6E6C9C34F29",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBEF35308A05A91EA65D6E6C9C34F29",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "271433812946947@lid",
+      "6285141661445@s.whatsapp.net"
+    ],
+    "contactHash": "1cc9c3e71f4df5367060e4950abf2ed09d30ebeda71207c447f0a46803c69d61",
+    "arrivedAt": "2026-11-26T23:31:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:31:17.151Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:31:20.451Z",
+    "readAt": "2026-11-26T23:31:20.450Z",
+    "emoji": "🥀",
+    "reactedAt": "2026-11-26T23:31:20.450Z"
+  },
+  "ACA9EAF73F0646F86A2F8E382121A1BA": {
+    "id": "ACA9EAF73F0646F86A2F8E382121A1BA",
+    "sender": "6285141661445@s.whatsapp.net",
+    "number": "6285141661445",
+    "storyJid": "6285141661445@s.whatsapp.net",
+    "resolvedPn": "6285141661445@s.whatsapp.net",
+    "name": "𝙽𝚎𝚜𝚢𝚊-𝙲𝚑𝚊𝚗",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA9EAF73F0646F86A2F8E382121A1BA",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA9EAF73F0646F86A2F8E382121A1BA",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "271433812946947@lid",
+      "6285141661445@s.whatsapp.net"
+    ],
+    "contactHash": "1cc9c3e71f4df5367060e4950abf2ed09d30ebeda71207c447f0a46803c69d61",
+    "arrivedAt": "2026-11-26T23:33:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:33:45.431Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:33:49.150Z",
+    "readAt": "2026-11-26T23:33:49.147Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-26T23:33:49.147Z"
+  },
+  "AC026C6FF69CB599AA6CD4D9AC6159E3": {
+    "id": "AC026C6FF69CB599AA6CD4D9AC6159E3",
+    "sender": "6285141661445@s.whatsapp.net",
+    "number": "6285141661445",
+    "storyJid": "6285141661445@s.whatsapp.net",
+    "resolvedPn": "6285141661445@s.whatsapp.net",
+    "name": "𝙲𝚑𝚎𝚜𝚜.𝚌𝚘𝚖",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC026C6FF69CB599AA6CD4D9AC6159E3",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC026C6FF69CB599AA6CD4D9AC6159E3",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "271433812946947@lid",
+      "6285141661445@s.whatsapp.net"
+    ],
+    "contactHash": "1cc9c3e71f4df5367060e4950abf2ed09d30ebeda71207c447f0a46803c69d61",
+    "arrivedAt": "2026-11-27T07:18:25.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:18:25.891Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:18:36.014Z",
+    "readAt": "2026-11-27T07:18:35.952Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T07:18:35.952Z"
+  },
+  "AC36AEAA7AFD3CAF57901EBC896D04FF": {
+    "id": "AC36AEAA7AFD3CAF57901EBC896D04FF",
+    "sender": "6285141661445@s.whatsapp.net",
+    "number": "6285141661445",
+    "storyJid": "6285141661445@s.whatsapp.net",
+    "resolvedPn": "6285141661445@s.whatsapp.net",
+    "name": "𝙲𝚑𝚎𝚜𝚜.𝚌𝚘𝚖",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC36AEAA7AFD3CAF57901EBC896D04FF",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC36AEAA7AFD3CAF57901EBC896D04FF",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "271433812946947@lid",
+      "6285141661445@s.whatsapp.net"
+    ],
+    "contactHash": "1cc9c3e71f4df5367060e4950abf2ed09d30ebeda71207c447f0a46803c69d61",
+    "arrivedAt": "2026-11-27T07:19:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:19:22.616Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:19:25.287Z",
+    "readAt": "2026-11-27T07:19:25.243Z",
+    "emoji": "💤",
+    "reactedAt": "2026-11-27T07:19:25.243Z"
+  },
+  "AC7A3430FF0591D37989E63E731A959F": {
+    "id": "AC7A3430FF0591D37989E63E731A959F",
+    "sender": "6285141661445@s.whatsapp.net",
+    "number": "6285141661445",
+    "storyJid": "6285141661445@s.whatsapp.net",
+    "resolvedPn": "6285141661445@s.whatsapp.net",
+    "name": "𝙲𝚑𝚎𝚜𝚜.𝚌𝚘𝚖",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7A3430FF0591D37989E63E731A959F",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7A3430FF0591D37989E63E731A959F",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "271433812946947@lid",
+      "6285141661445@s.whatsapp.net"
+    ],
+    "contactHash": "1cc9c3e71f4df5367060e4950abf2ed09d30ebeda71207c447f0a46803c69d61",
+    "arrivedAt": "2026-11-27T10:32:37.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:32:38.735Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:32:46.725Z",
+    "readAt": "2026-11-27T10:32:46.709Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-27T10:32:46.709Z"
+  },
+  "ACBBAA5768ABE1071809DD21641C2060": {
+    "id": "ACBBAA5768ABE1071809DD21641C2060",
+    "sender": "6285141661445@s.whatsapp.net",
+    "number": "6285141661445",
+    "storyJid": "6285141661445@s.whatsapp.net",
+    "resolvedPn": "6285141661445@s.whatsapp.net",
+    "name": "𝙲𝚑𝚎𝚜𝚜.𝚌𝚘𝚖",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBBAA5768ABE1071809DD21641C2060",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBBAA5768ABE1071809DD21641C2060",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "271433812946947@lid",
+      "6285141661445@s.whatsapp.net"
+    ],
+    "contactHash": "1cc9c3e71f4df5367060e4950abf2ed09d30ebeda71207c447f0a46803c69d61",
+    "arrivedAt": "2026-11-27T11:40:14.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:40:14.227Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:40:19.193Z",
+    "readAt": "2026-11-27T11:40:19.192Z",
+    "emoji": "☕️",
+    "reactedAt": "2026-11-27T11:40:19.192Z"
+  },
+  "AC91DC2B6897AB43DFDF49E9B9EDF33A": {
+    "id": "AC91DC2B6897AB43DFDF49E9B9EDF33A",
+    "sender": "6285141661445@s.whatsapp.net",
+    "number": "6285141661445",
+    "storyJid": "6285141661445@s.whatsapp.net",
+    "resolvedPn": "6285141661445@s.whatsapp.net",
+    "name": "𝙲𝚑𝚎𝚜𝚜.𝚌𝚘𝚖",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC91DC2B6897AB43DFDF49E9B9EDF33A",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC91DC2B6897AB43DFDF49E9B9EDF33A",
+      "participant": "271433812946947@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "271433812946947@lid",
+      "6285141661445@s.whatsapp.net"
+    ],
+    "contactHash": "1cc9c3e71f4df5367060e4950abf2ed09d30ebeda71207c447f0a46803c69d61",
+    "arrivedAt": "2026-11-27T11:49:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:49:51.312Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:49:59.851Z",
+    "readAt": "2026-11-27T11:49:59.851Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-27T11:49:59.851Z"
+  }
+}

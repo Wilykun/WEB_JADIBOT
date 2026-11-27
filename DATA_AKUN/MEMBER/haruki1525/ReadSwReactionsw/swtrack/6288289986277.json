@@ -1,0 +1,230 @@
+{
+  "ACB930D87559878C179CE6301550F81F": {
+    "id": "ACB930D87559878C179CE6301550F81F",
+    "sender": "6288289986277@s.whatsapp.net",
+    "number": "6288289986277",
+    "storyJid": "6288289986277@s.whatsapp.net",
+    "resolvedPn": "6288289986277@s.whatsapp.net",
+    "name": "Ирфан Фадила",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB930D87559878C179CE6301550F81F",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB930D87559878C179CE6301550F81F",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "274998501625901@lid",
+      "6288289986277@s.whatsapp.net"
+    ],
+    "contactHash": "31dfa0a68a7e78ef62af4b80d6d2b5a12fc48082b00cc31e14178ba704a617dc",
+    "arrivedAt": "2026-11-21T17:01:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-21T17:01:47.590Z",
+    "lastError": null,
+    "updatedAt": "2026-11-21T17:02:03.196Z",
+    "readAt": "2026-11-21T17:02:03.195Z"
+  },
+  "AC07487DB130EBDD4C605DB9CCA7DB4B": {
+    "id": "AC07487DB130EBDD4C605DB9CCA7DB4B",
+    "sender": "6288289986277@s.whatsapp.net",
+    "number": "6288289986277",
+    "storyJid": "6288289986277@s.whatsapp.net",
+    "resolvedPn": "6288289986277@s.whatsapp.net",
+    "name": "Ирфан Фадила",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC07487DB130EBDD4C605DB9CCA7DB4B",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC07487DB130EBDD4C605DB9CCA7DB4B",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "274998501625901@lid",
+      "6288289986277@s.whatsapp.net"
+    ],
+    "contactHash": "31dfa0a68a7e78ef62af4b80d6d2b5a12fc48082b00cc31e14178ba704a617dc",
+    "arrivedAt": "2026-11-21T17:12:34.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-21T17:12:34.268Z",
+    "lastError": null,
+    "updatedAt": "2026-11-21T17:12:38.973Z",
+    "readAt": "2026-11-21T17:12:38.973Z"
+  },
+  "AC36C4B4B92010AED1B8E4A75A3DB436": {
+    "id": "AC36C4B4B92010AED1B8E4A75A3DB436",
+    "sender": "6288289986277@s.whatsapp.net",
+    "number": "6288289986277",
+    "storyJid": "6288289986277@s.whatsapp.net",
+    "resolvedPn": "6288289986277@s.whatsapp.net",
+    "name": "Ирфан Фадила",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC36C4B4B92010AED1B8E4A75A3DB436",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC36C4B4B92010AED1B8E4A75A3DB436",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "274998501625901@lid",
+      "6288289986277@s.whatsapp.net"
+    ],
+    "contactHash": "31dfa0a68a7e78ef62af4b80d6d2b5a12fc48082b00cc31e14178ba704a617dc",
+    "arrivedAt": "2026-11-21T19:42:57.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-21T19:42:56.820Z",
+    "lastError": null,
+    "updatedAt": "2026-11-21T19:43:15.172Z",
+    "readAt": "2026-11-21T19:43:15.171Z"
+  },
+  "ACEF846311847D7E3D6B8A5A03FD9CC6": {
+    "id": "ACEF846311847D7E3D6B8A5A03FD9CC6",
+    "sender": "6288289986277@s.whatsapp.net",
+    "number": "6288289986277",
+    "storyJid": "6288289986277@s.whatsapp.net",
+    "resolvedPn": "6288289986277@s.whatsapp.net",
+    "name": "Ирфан Фадила",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEF846311847D7E3D6B8A5A03FD9CC6",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEF846311847D7E3D6B8A5A03FD9CC6",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "274998501625901@lid",
+      "6288289986277@s.whatsapp.net"
+    ],
+    "contactHash": "31dfa0a68a7e78ef62af4b80d6d2b5a12fc48082b00cc31e14178ba704a617dc",
+    "arrivedAt": "2026-11-21T19:46:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-21T19:46:10.236Z",
+    "lastError": null,
+    "updatedAt": "2026-11-21T19:46:22.777Z",
+    "readAt": "2026-11-21T19:46:22.775Z"
+  },
+  "ACB415CED5B22FCBB7619AF065755DD7": {
+    "id": "ACB415CED5B22FCBB7619AF065755DD7",
+    "sender": "6288289986277@s.whatsapp.net",
+    "number": "6288289986277",
+    "storyJid": "6288289986277@s.whatsapp.net",
+    "resolvedPn": "6288289986277@s.whatsapp.net",
+    "name": "Ирфан Фадила",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB415CED5B22FCBB7619AF065755DD7",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB415CED5B22FCBB7619AF065755DD7",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "274998501625901@lid",
+      "6288289986277@s.whatsapp.net"
+    ],
+    "contactHash": "31dfa0a68a7e78ef62af4b80d6d2b5a12fc48082b00cc31e14178ba704a617dc",
+    "arrivedAt": "2026-11-21T19:46:20.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-21T19:46:20.138Z",
+    "lastError": null,
+    "updatedAt": "2026-11-21T19:46:31.355Z",
+    "readAt": "2026-11-21T19:46:31.346Z"
+  },
+  "ACD832BC8F59AB28D4736F713CDA319C": {
+    "id": "ACD832BC8F59AB28D4736F713CDA319C",
+    "sender": "6288289986277@s.whatsapp.net",
+    "number": "6288289986277",
+    "storyJid": "6288289986277@s.whatsapp.net",
+    "resolvedPn": "6288289986277@s.whatsapp.net",
+    "name": "Ирфан Фадила",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD832BC8F59AB28D4736F713CDA319C",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD832BC8F59AB28D4736F713CDA319C",
+      "participant": "274998501625901@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "274998501625901@lid",
+      "6288289986277@s.whatsapp.net"
+    ],
+    "contactHash": "31dfa0a68a7e78ef62af4b80d6d2b5a12fc48082b00cc31e14178ba704a617dc",
+    "arrivedAt": "2026-11-21T19:46:55.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-21T19:46:54.854Z",
+    "lastError": null,
+    "updatedAt": "2026-11-21T19:47:03.449Z",
+    "readAt": "2026-11-21T19:47:03.439Z"
+  }
+}

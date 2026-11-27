@@ -1,0 +1,242 @@
+{
+  "AC623C29469FE4D4C763DB4AC2F0B460": {
+    "id": "AC623C29469FE4D4C763DB4AC2F0B460",
+    "sender": "6288991586906@s.whatsapp.net",
+    "number": "6288991586906",
+    "storyJid": "6288991586906@s.whatsapp.net",
+    "resolvedPn": "6288991586906@s.whatsapp.net",
+    "name": "GUGUGAGA",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC623C29469FE4D4C763DB4AC2F0B460",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC623C29469FE4D4C763DB4AC2F0B460",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "139149021565040@lid",
+      "6288991586906@s.whatsapp.net"
+    ],
+    "contactHash": "d7dd5b45ad62a2daf15d25e1b7e2a5960e0c36aaac65ef8f44714f39d9c3f144",
+    "arrivedAt": "2026-11-26T22:34:33.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:34:35.112Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:34:40.522Z",
+    "readAt": "2026-11-26T22:34:40.521Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-26T22:34:40.521Z"
+  },
+  "ACD3CF1DE8D6AA754C6BEB423348726D": {
+    "id": "ACD3CF1DE8D6AA754C6BEB423348726D",
+    "sender": "6288991586906@s.whatsapp.net",
+    "number": "6288991586906",
+    "storyJid": "6288991586906@s.whatsapp.net",
+    "resolvedPn": "6288991586906@s.whatsapp.net",
+    "name": "GUGUGAGA",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD3CF1DE8D6AA754C6BEB423348726D",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD3CF1DE8D6AA754C6BEB423348726D",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "139149021565040@lid",
+      "6288991586906@s.whatsapp.net"
+    ],
+    "contactHash": "d7dd5b45ad62a2daf15d25e1b7e2a5960e0c36aaac65ef8f44714f39d9c3f144",
+    "arrivedAt": "2026-11-26T22:54:46.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:54:47.751Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:54:58.234Z",
+    "readAt": "2026-11-26T22:54:58.233Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-26T22:54:58.233Z"
+  },
+  "ACB3CDA85F5F8BAE36C8AD3ED944D1B3": {
+    "id": "ACB3CDA85F5F8BAE36C8AD3ED944D1B3",
+    "sender": "6288991586906@s.whatsapp.net",
+    "number": "6288991586906",
+    "storyJid": "6288991586906@s.whatsapp.net",
+    "resolvedPn": "6288991586906@s.whatsapp.net",
+    "name": "GUGUGAGA",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB3CDA85F5F8BAE36C8AD3ED944D1B3",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB3CDA85F5F8BAE36C8AD3ED944D1B3",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "139149021565040@lid",
+      "6288991586906@s.whatsapp.net"
+    ],
+    "contactHash": "d7dd5b45ad62a2daf15d25e1b7e2a5960e0c36aaac65ef8f44714f39d9c3f144",
+    "arrivedAt": "2026-11-26T23:13:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:13:46.694Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:14:04.067Z",
+    "readAt": "2026-11-26T23:14:04.060Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-26T23:14:04.060Z"
+  },
+  "ACF4DC46575A6C7E2C578D8106C2CD30": {
+    "id": "ACF4DC46575A6C7E2C578D8106C2CD30",
+    "sender": "6288991586906@s.whatsapp.net",
+    "number": "6288991586906",
+    "storyJid": "6288991586906@s.whatsapp.net",
+    "resolvedPn": "6288991586906@s.whatsapp.net",
+    "name": "GUGUGAGA",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF4DC46575A6C7E2C578D8106C2CD30",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF4DC46575A6C7E2C578D8106C2CD30",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "139149021565040@lid",
+      "6288991586906@s.whatsapp.net"
+    ],
+    "contactHash": "d7dd5b45ad62a2daf15d25e1b7e2a5960e0c36aaac65ef8f44714f39d9c3f144",
+    "arrivedAt": "2026-11-26T23:19:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:19:40.749Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:19:49.748Z",
+    "readAt": "2026-11-26T23:19:49.747Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-26T23:19:49.747Z"
+  },
+  "ACC3C44221BA7FE5E36053823871304A": {
+    "id": "ACC3C44221BA7FE5E36053823871304A",
+    "sender": "6288991586906@s.whatsapp.net",
+    "number": "6288991586906",
+    "storyJid": "6288991586906@s.whatsapp.net",
+    "resolvedPn": "6288991586906@s.whatsapp.net",
+    "name": "GUGUGAGA",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC3C44221BA7FE5E36053823871304A",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC3C44221BA7FE5E36053823871304A",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "139149021565040@lid",
+      "6288991586906@s.whatsapp.net"
+    ],
+    "contactHash": "d7dd5b45ad62a2daf15d25e1b7e2a5960e0c36aaac65ef8f44714f39d9c3f144",
+    "arrivedAt": "2026-11-27T05:32:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:32:22.230Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:32:33.371Z",
+    "readAt": "2026-11-27T05:32:33.368Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T05:32:33.368Z"
+  },
+  "AC0CF04C6BC695D79CB5D554223B618C": {
+    "id": "AC0CF04C6BC695D79CB5D554223B618C",
+    "sender": "6288991586906@s.whatsapp.net",
+    "number": "6288991586906",
+    "storyJid": "6288991586906@s.whatsapp.net",
+    "resolvedPn": "6288991586906@s.whatsapp.net",
+    "name": "GUGUGAGA",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0CF04C6BC695D79CB5D554223B618C",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0CF04C6BC695D79CB5D554223B618C",
+      "participant": "139149021565040@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "139149021565040@lid",
+      "6288991586906@s.whatsapp.net"
+    ],
+    "contactHash": "d7dd5b45ad62a2daf15d25e1b7e2a5960e0c36aaac65ef8f44714f39d9c3f144",
+    "arrivedAt": "2026-11-27T07:00:25.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:00:27.644Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:00:45.312Z",
+    "readAt": "2026-11-27T07:00:45.305Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T07:00:45.305Z"
+  }
+}

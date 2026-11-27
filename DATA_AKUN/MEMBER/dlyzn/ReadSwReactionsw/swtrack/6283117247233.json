@@ -1,0 +1,242 @@
+{
+  "ACFCB8CC74219550CC5033D9630B5350": {
+    "id": "ACFCB8CC74219550CC5033D9630B5350",
+    "sender": "6283117247233@s.whatsapp.net",
+    "number": "6283117247233",
+    "storyJid": "6283117247233@s.whatsapp.net",
+    "resolvedPn": "6283117247233@s.whatsapp.net",
+    "name": "SMOGA KITA AHLI TAQWA",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFCB8CC74219550CC5033D9630B5350",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFCB8CC74219550CC5033D9630B5350",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "133736725270740@lid",
+      "6283117247233@s.whatsapp.net"
+    ],
+    "contactHash": "5cc867b747814cc73cf79dd57af86b275a67e600b1d614df15aae40dca3f7273",
+    "arrivedAt": "2026-11-26T20:53:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T20:53:28.432Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T20:53:31.067Z",
+    "readAt": "2026-11-26T20:53:31.064Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-26T20:53:31.064Z"
+  },
+  "AC42D29A33874FB67FF97629A706783E": {
+    "id": "AC42D29A33874FB67FF97629A706783E",
+    "sender": "6283117247233@s.whatsapp.net",
+    "number": "6283117247233",
+    "storyJid": "6283117247233@s.whatsapp.net",
+    "resolvedPn": "6283117247233@s.whatsapp.net",
+    "name": "SMOGA KITA AHLI TAQWA",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC42D29A33874FB67FF97629A706783E",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC42D29A33874FB67FF97629A706783E",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "133736725270740@lid",
+      "6283117247233@s.whatsapp.net"
+    ],
+    "contactHash": "5cc867b747814cc73cf79dd57af86b275a67e600b1d614df15aae40dca3f7273",
+    "arrivedAt": "2026-11-26T23:15:37.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:15:36.968Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:15:39.322Z",
+    "readAt": "2026-11-26T23:15:39.321Z",
+    "emoji": "☕️",
+    "reactedAt": "2026-11-26T23:15:39.321Z"
+  },
+  "AC33D837CA0D472C0A35ED3FB00EE3DB": {
+    "id": "AC33D837CA0D472C0A35ED3FB00EE3DB",
+    "sender": "6283117247233@s.whatsapp.net",
+    "number": "6283117247233",
+    "storyJid": "6283117247233@s.whatsapp.net",
+    "resolvedPn": "6283117247233@s.whatsapp.net",
+    "name": "SMOGA KITA AHLI TAQWA",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC33D837CA0D472C0A35ED3FB00EE3DB",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC33D837CA0D472C0A35ED3FB00EE3DB",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "133736725270740@lid",
+      "6283117247233@s.whatsapp.net"
+    ],
+    "contactHash": "5cc867b747814cc73cf79dd57af86b275a67e600b1d614df15aae40dca3f7273",
+    "arrivedAt": "2026-11-26T23:23:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:23:45.361Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:23:53.697Z",
+    "readAt": "2026-11-26T23:23:53.693Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-26T23:23:53.693Z"
+  },
+  "ACA4C7B8EB20C78AB5E2CA110B8DFC72": {
+    "id": "ACA4C7B8EB20C78AB5E2CA110B8DFC72",
+    "sender": "6283117247233@s.whatsapp.net",
+    "number": "6283117247233",
+    "storyJid": "6283117247233@s.whatsapp.net",
+    "resolvedPn": "6283117247233@s.whatsapp.net",
+    "name": "SMOGA KITA AHLI TAQWA",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA4C7B8EB20C78AB5E2CA110B8DFC72",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA4C7B8EB20C78AB5E2CA110B8DFC72",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "133736725270740@lid",
+      "6283117247233@s.whatsapp.net"
+    ],
+    "contactHash": "5cc867b747814cc73cf79dd57af86b275a67e600b1d614df15aae40dca3f7273",
+    "arrivedAt": "2026-11-26T23:45:48.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:45:48.275Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:45:54.967Z",
+    "readAt": "2026-11-26T23:45:54.960Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-26T23:45:54.960Z"
+  },
+  "AC1D4F0931E238D5406FD4D79B9512F5": {
+    "id": "AC1D4F0931E238D5406FD4D79B9512F5",
+    "sender": "6283117247233@s.whatsapp.net",
+    "number": "6283117247233",
+    "storyJid": "6283117247233@s.whatsapp.net",
+    "resolvedPn": "6283117247233@s.whatsapp.net",
+    "name": "SMOGA KITA AHLI TAQWA",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1D4F0931E238D5406FD4D79B9512F5",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1D4F0931E238D5406FD4D79B9512F5",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "133736725270740@lid",
+      "6283117247233@s.whatsapp.net"
+    ],
+    "contactHash": "5cc867b747814cc73cf79dd57af86b275a67e600b1d614df15aae40dca3f7273",
+    "arrivedAt": "2026-11-27T04:43:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:43:01.499Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:43:10.303Z",
+    "readAt": "2026-11-27T04:43:10.300Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-27T04:43:10.300Z"
+  },
+  "ACB631860E5BEE3C632CAF125FC62050": {
+    "id": "ACB631860E5BEE3C632CAF125FC62050",
+    "sender": "6283117247233@s.whatsapp.net",
+    "number": "6283117247233",
+    "storyJid": "6283117247233@s.whatsapp.net",
+    "resolvedPn": "6283117247233@s.whatsapp.net",
+    "name": "SMOGA KITA AHLI TAQWA",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB631860E5BEE3C632CAF125FC62050",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB631860E5BEE3C632CAF125FC62050",
+      "participant": "133736725270740@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "133736725270740@lid",
+      "6283117247233@s.whatsapp.net"
+    ],
+    "contactHash": "5cc867b747814cc73cf79dd57af86b275a67e600b1d614df15aae40dca3f7273",
+    "arrivedAt": "2026-11-27T21:50:14.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T21:50:14.436Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T21:50:16.547Z",
+    "readAt": "2026-11-27T21:50:16.546Z",
+    "emoji": "👀",
+    "reactedAt": "2026-11-27T21:50:16.546Z"
+  }
+}
