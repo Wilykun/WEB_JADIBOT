@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-27T23:39:00+07:00",
+  "updatedAt": "2026-11-28T00:04:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "00.04 WIB",
+      "title": "Kolom sandi baru kini ada ikon mata dan cek kecocokan realtime",
+      "tag": "Fitur baru",
+      "description": "Halaman lupa sandi kini lebih nyaman dipakai. Kolom Sandi baru dan Ulangi sandi baru kini punya tombol ikon mata (SVG) di kanan: ketuk untuk melihat sandi yang diketik, ketuk lagi untuk menyembunyikannya. Sambil mengetik, petunjuk di bawah kolom langsung memberi tahu realtime — kurang dari 12 karakter, ulangi yang masih kosong, sandi belum cocok (merah dengan goyangan ringan), sampai sandi baru cocok (hijau). Tampilan halamannya juga dirapikan: teks petunjuk, status akun, dan catatan sandi sementara kini rata tengah sesuai konteks, kolom email punya ikon amplop, kolom sandi punya ikon gembok, label sandi sementara punya ikon kunci, dan pesan berhasil punya ikon centang — semuanya pas di layar HP."
+    },
     {
       "day": "Jumat, 27 Nov 2026",
       "time": "23.39 WIB",

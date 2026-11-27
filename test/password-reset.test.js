@@ -41,6 +41,27 @@ test('Lupa sandi: form hanya minta email, ada tautan Lupa sandi, dan modal ganti
   assert.ok(html.includes('id="forgot-temp-copy"'), 'harus ada tombol Salin untuk sandi sementara');
   assert.ok(html.includes('id="forgot-reset"'), 'harus ada form buat sandi baru langsung di halaman lupa sandi');
   assert.ok(html.includes('id="forgot-reset-submit"'), 'form buat sandi baru harus ada tombol simpan');
+  // RONDE 35: ikon mata di kolom sandi + cek cocok realtime + ikon SVG konteks.
+  assert.ok(html.includes('id="forgot-new-password-toggle"'), 'kolom sandi baru harus punya tombol ikon mata');
+  assert.ok(html.includes('id="forgot-confirm-password-toggle"'), 'kolom ulangi sandi baru harus punya tombol ikon mata');
+  assert.ok(html.includes('password-toggle-eye'), 'tombol mata harus punya ikon mata (SVG)');
+  assert.ok(html.includes('password-toggle-eye-off'), 'tombol mata harus punya ikon mata tertutup (SVG) saat sandi terlihat');
+  assert.ok(html.includes('id="forgot-reset-match"'), 'harus ada petunjuk cocok/tidak cocok sandi baru realtime');
+  assert.ok(html.includes('field-with-icon'), 'kolom lupa sandi harus memakai wrapper ikon');
+  assert.ok(html.includes('forgot-temp-label-icon'), 'label sandi sementara harus punya ikon kunci (SVG)');
+  assert.ok(html.includes('forgot-reset-done-icon'), 'pesan sandi tersimpan harus punya ikon centang (SVG)');
+  assert.ok(css.includes('.field-with-icon'), 'wrapper ikon kolom harus punya gaya');
+  assert.ok(css.includes('.password-toggle'), 'tombol ikon mata harus punya gaya');
+  assert.ok(css.includes('.forgot-reset-match'), 'petunjuk cocok sandi harus punya gaya');
+  assert.ok(css.includes('.forgot-reset-match.is-ok'), 'petunjuk sandi cocok harus hijau');
+  assert.ok(css.includes('.forgot-reset-match.is-bad'), 'petunjuk sandi belum cocok harus merah');
+  assert.ok(css.includes('@keyframes forgot-match-shake'), 'sandi belum cocok harus bergoyang ringan');
+  assert.ok(css.includes('.forgot-hint{text-align:center}'), 'petunjuk email harus rata tengah');
+  assert.ok(css.includes('.forgot-account-status{text-align:center}'), 'status akun harus rata tengah');
+  assert.ok(css.includes('.forgot-temp-note{text-align:center}'), 'catatan sandi sementara harus rata tengah');
+  assert.ok(appJs.includes('bindForgotPasswordToggle'), 'harus ada fungsi pasang tombol ikon mata');
+  assert.ok(appJs.includes('function updateForgotResetMatch'), 'harus ada fungsi cek cocok sandi realtime');
+  assert.ok(appJs.includes("addEventListener('input', updateForgotResetMatch)"), 'cek cocok harus jalan saat mengetik');
   // REGRESI (27 Nov 2026): input sandi baru di dalam #forgot-form TIDAK boleh
   // required — kolom required yang tersembunyi (display:none) memblokir submit
   // form di Chrome sehingga tombol "Tampilkan sandi sementara" diam total
@@ -236,4 +257,81 @@ test('server Lupa sandi: email saja, sandi sementara, wajib ganti, log admin', {
     if (child && child.exitCode === null) child.kill('SIGTERM');
     await rm(temp, { recursive: true, force: true });
   }
+});
+
+test('ikon mata + cek cocok sandi baru realtime di halaman lupa sandi', () => {
+  const pick = (re, msg) => {
+    const m = appJs.match(re);
+    assert.ok(m, msg);
+    return m[0];
+  };
+  const toggleFn = pick(/function bindForgotPasswordToggle\(toggleId, inputId, label\) \{[\s\S]*?\n\}/, 'fungsi bindForgotPasswordToggle harus bisa diekstrak');
+  const matchFn = pick(/function updateForgotResetMatch\(\) \{[\s\S]*?\n\}/, 'fungsi updateForgotResetMatch harus bisa diekstrak');
+  const program = `
+    function makeEl() {
+      const el = {
+        classList: { _s: new Set(['hidden']), contains(c) { return this._s.has(c); }, add(c) { this._s.add(c); }, remove(...cs) { for (const c of cs) this._s.delete(c); }, toggle(c, f) { if (f) this._s.add(c); else this._s.delete(c); } },
+        textContent: '', value: '', type: 'password',
+        listeners: {},
+        addEventListener(name, fn) { this.listeners[name] = fn; },
+        setAttribute() {}, focus() {},
+      };
+      return el;
+    }
+    const matchEl = makeEl();
+    const newInput = makeEl();
+    const confirmInput = makeEl();
+    const newToggle = makeEl();
+    const confirmToggle = makeEl();
+    const document = { querySelector(sel) {
+      if (sel === '#forgot-reset-match') return matchEl;
+      if (sel === '#forgot-new-password') return newInput;
+      if (sel === '#forgot-confirm-password') return confirmInput;
+      if (sel === '#forgot-new-password-toggle') return newToggle;
+      if (sel === '#forgot-confirm-password-toggle') return confirmToggle;
+      return null;
+    } };
+    ${toggleFn}
+    ${matchFn}
+    const out = {};
+    bindForgotPasswordToggle('#forgot-new-password-toggle', '#forgot-new-password', 'sandi baru');
+    newToggle.listeners.click();
+    out.afterFirstClickType = newInput.type;
+    out.afterFirstClickShowing = newToggle.classList.contains('is-showing');
+    newToggle.listeners.click();
+    out.afterSecondClickType = newInput.type;
+    out.afterSecondClickShowing = newToggle.classList.contains('is-showing');
+    updateForgotResetMatch();
+    out.emptyHidden = matchEl.classList.contains('hidden');
+    newInput.value = 'abc';
+    updateForgotResetMatch();
+    out.shortWarn = matchEl.classList.contains('is-warn');
+    out.shortText = matchEl.textContent;
+    newInput.value = 'sandi-baru-yang-panjang';
+    confirmInput.value = '';
+    updateForgotResetMatch();
+    out.confirmEmptyWarn = matchEl.classList.contains('is-warn');
+    confirmInput.value = 'sandi-baru-yang-salah';
+    updateForgotResetMatch();
+    out.mismatchBad = matchEl.classList.contains('is-bad');
+    out.mismatchText = matchEl.textContent;
+    confirmInput.value = 'sandi-baru-yang-panjang';
+    updateForgotResetMatch();
+    out.matchOk = matchEl.classList.contains('is-ok');
+    out.matchText = matchEl.textContent;
+    out;
+  `;
+  const out = eval(program);
+  assert.equal(out.afterFirstClickType, 'text', 'klik pertama ikon mata harus menampilkan sandi');
+  assert.equal(out.afterFirstClickShowing, true, 'klik pertama harus menandai ikon mata aktif');
+  assert.equal(out.afterSecondClickType, 'password', 'klik kedua ikon mata harus menyembunyikan sandi lagi');
+  assert.equal(out.afterSecondClickShowing, false, 'klik kedua harus melepas tanda ikon mata aktif');
+  assert.equal(out.emptyHidden, true, 'petunjuk harus tersembunyi saat kedua kolom kosong');
+  assert.equal(out.shortWarn, true, 'sandi baru kurang dari 12 karakter harus memberi peringatan');
+  assert.ok(out.shortText.includes('12 karakter'), 'peringatan harus menyebut minimal 12 karakter');
+  assert.equal(out.confirmEmptyWarn, true, 'ulangi yang masih kosong harus memberi peringatan');
+  assert.equal(out.mismatchBad, true, 'sandi yang belum cocok harus merah');
+  assert.equal(out.mismatchText, 'Sandi baru belum cocok.', 'teks belum cocok harus tepat');
+  assert.equal(out.matchOk, true, 'sandi yang cocok harus hijau');
+  assert.equal(out.matchText, 'Sandi baru cocok.', 'teks cocok harus tepat');
 });

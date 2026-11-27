@@ -606,6 +606,8 @@ function showForgotForm() {
   document.querySelector('#forgot-temp')?.classList.add('hidden');
   document.querySelector('#forgot-reset')?.classList.add('hidden');
   document.querySelector('#forgot-reset-done')?.classList.add('hidden');
+  document.querySelector('#forgot-reset-match')?.classList.add('hidden');
+  document.querySelector('#forgot-reset-message')?.classList.add('hidden');
   forgotTempPassword = '';
   forgotResetEmail = '';
   setAuthMessage('');
@@ -5929,6 +5931,52 @@ document.querySelector('#forgot-temp-copy')?.addEventListener('click', async () 
   }
   setTimeout(() => { copyBtn.textContent = 'Salin'; }, 2000);
 });
+// Ikon mata di kolom sandi baru: ketuk untuk melihat/menyembunyikan sandi.
+function bindForgotPasswordToggle(toggleId, inputId, label) {
+  const toggle = document.querySelector(toggleId);
+  const input = document.querySelector(inputId);
+  if (!toggle || !input) return;
+  toggle.addEventListener('click', () => {
+    const showing = input.type === 'text';
+    input.type = showing ? 'password' : 'text';
+    toggle.classList.toggle('is-showing', !showing);
+    toggle.setAttribute('aria-label', showing ? `Tampilkan ${label}` : `Sembunyikan ${label}`);
+    input.focus();
+  });
+}
+bindForgotPasswordToggle('#forgot-new-password-toggle', '#forgot-new-password', 'sandi baru');
+bindForgotPasswordToggle('#forgot-confirm-password-toggle', '#forgot-confirm-password', 'ulangi sandi baru');
+
+// Cek kecocokan sandi baru realtime saat mengetik: kurang dari 12 karakter,
+// belum cocok (goyang ringan), atau cocok.
+function updateForgotResetMatch() {
+  const match = document.querySelector('#forgot-reset-match');
+  const newPassword = document.querySelector('#forgot-new-password')?.value || '';
+  const confirmPassword = document.querySelector('#forgot-confirm-password')?.value || '';
+  if (!match) return;
+  match.classList.remove('is-ok', 'is-bad', 'is-warn');
+  if (!newPassword && !confirmPassword) { match.classList.add('hidden'); return; }
+  match.classList.remove('hidden');
+  if (newPassword.length > 0 && newPassword.length < 12) {
+    match.textContent = `Sandi baru minimal 12 karakter (baru ${newPassword.length}).`;
+    match.classList.add('is-warn');
+    return;
+  }
+  if (!confirmPassword) {
+    match.textContent = 'Ulangi sandi barumu di bawah untuk memastikan.';
+    match.classList.add('is-warn');
+    return;
+  }
+  if (newPassword !== confirmPassword) {
+    match.textContent = 'Sandi baru belum cocok.';
+    match.classList.add('is-bad');
+    return;
+  }
+  match.textContent = 'Sandi baru cocok.';
+  match.classList.add('is-ok');
+}
+document.querySelector('#forgot-new-password')?.addEventListener('input', updateForgotResetMatch);
+document.querySelector('#forgot-confirm-password')?.addEventListener('input', updateForgotResetMatch);
 document.querySelector('#forgot-reset-submit')?.addEventListener('click', async () => {
   const message = document.querySelector('#forgot-reset-message');
   const newPassword = document.querySelector('#forgot-new-password')?.value || '';

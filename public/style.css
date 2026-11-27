@@ -3475,3 +3475,27 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .forgot-reset-done{margin:12px 0 0;font-size:13px;color:#3ee69a}
 .forgot-reset-done button{background:none;border:0;color:#3ee69a;font:inherit;cursor:pointer;text-decoration:underline;padding:0}
 @media(max-width:560px){.forgot-temp-row{flex-direction:column;align-items:stretch}.forgot-temp-row code{font-size:16px}.forgot-temp-row .button{width:100%}}
+
+/* Ronde 35 — ikon mata di kolom sandi + teks tengah halaman lupa sandi. */
+.field-with-icon{position:relative;display:block}
+.field-with-icon input{padding-left:38px}
+.field-with-icon.has-toggle input{padding-right:44px}
+.field-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
+.password-toggle{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:none;border:0;border-radius:8px;color:var(--muted);cursor:pointer}
+.password-toggle:hover{color:var(--text);background:rgba(231,250,238,.06)}
+.password-toggle svg{width:19px;height:19px}
+.password-toggle .password-toggle-eye-off{display:none}
+.password-toggle.is-showing .password-toggle-eye{display:none}
+.password-toggle.is-showing .password-toggle-eye-off{display:block}
+.forgot-reset-match{margin:10px 0 0;padding:10px 12px;border-radius:10px;font-size:13px;line-height:1.5;text-align:center;animation:forgot-account-in .25s ease both}
+.forgot-reset-match.is-ok{background:rgba(62,230,154,.12);color:#3ee69a}
+.forgot-reset-match.is-bad{background:rgba(255,77,77,.12);color:#ff8a8a;animation:forgot-match-shake .3s ease}
+.forgot-reset-match.is-warn{background:rgba(245,197,66,.1);color:#f5c542}
+@keyframes forgot-match-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.forgot-hint{text-align:center}
+.forgot-account-status{text-align:center}
+.forgot-temp-label{display:flex;align-items:center;justify-content:center;gap:7px}
+.forgot-temp-label-icon{width:15px;height:15px}
+.forgot-temp-note{text-align:center}
+.forgot-reset-done{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;text-align:center}
+.forgot-reset-done-icon{width:17px;height:17px;flex:none}
