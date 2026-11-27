@@ -233,8 +233,8 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=obrolan-ala-grup-wa-20261127'), 'app.js harus memakai ?v=obrolan-ala-grup-wa-20261127');
-  assert.ok(html.includes('/style.css?v=obrolan-ala-grup-wa-20261127'), 'style.css harus memakai ?v=obrolan-ala-grup-wa-20261127');
+  assert.ok(html.includes('/app.js?v=obrolan-wa-avatar-nama-20261127'), 'app.js harus memakai ?v=obrolan-wa-avatar-nama-20261127');
+  assert.ok(html.includes('/style.css?v=obrolan-wa-avatar-nama-20261127'), 'style.css harus memakai ?v=obrolan-wa-avatar-nama-20261127');
 });
 
 test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi kedua puluh', () => {
