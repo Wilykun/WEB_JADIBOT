@@ -599,8 +599,15 @@ function showForgotForm() {
   forgotForm?.classList.remove('hidden');
   document.querySelector('#auth-eyebrow').textContent = 'LUPA SANDI';
   document.querySelector('#auth-title').textContent = 'Reset kata sandi';
-  document.querySelector('#auth-subtitle').textContent = 'Sandi sementara dikirim bot ke WhatsApp kamu.';
+  document.querySelector('#auth-subtitle').textContent = 'Sandi sementara langsung tampil di halaman ini, lalu buat sandi barumu.';
   document.querySelector('#auth-switch').innerHTML = 'Ingat sandimu? <button type="button" data-action="show-login">Masuk</button>';
+  document.querySelector('#forgot-account')?.classList.add('hidden');
+  document.querySelector('#forgot-notfound')?.classList.add('hidden');
+  document.querySelector('#forgot-temp')?.classList.add('hidden');
+  document.querySelector('#forgot-reset')?.classList.add('hidden');
+  document.querySelector('#forgot-reset-done')?.classList.add('hidden');
+  forgotTempPassword = '';
+  forgotResetEmail = '';
   setAuthMessage('');
 }
 
@@ -3742,7 +3749,10 @@ async function loadPasswordResetLog() {
         const when = new Date(entry.createdAt);
         const timeLabel = Number.isNaN(when.getTime()) ? '' : when.toLocaleString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
         const sent = entry.status === 'sent';
-        item.innerHTML = `<div class="password-reset-log-head"><strong></strong><span class="password-reset-log-status ${sent ? 'is-sent' : 'is-failed'}">${sent ? 'Terkirim' : 'Gagal'}</span><span class="password-reset-log-time"></span></div><p class="password-reset-log-meta"></p>`;
+        const shown = entry.status === 'shown';
+        const statusLabel = sent ? 'Terkirim' : shown ? 'Tampil di web' : 'Gagal';
+        const statusClass = sent || shown ? 'is-sent' : 'is-failed';
+        item.innerHTML = `<div class="password-reset-log-head"><strong></strong><span class="password-reset-log-status ${statusClass}">${statusLabel}</span><span class="password-reset-log-time"></span></div><p class="password-reset-log-meta"></p>`;
         item.querySelector('strong').textContent = entry.displayName || entry.username || '—';
         item.querySelector('.password-reset-log-time').textContent = timeLabel;
         const meta = item.querySelector('.password-reset-log-meta');
@@ -5849,7 +5859,7 @@ forgotForm?.addEventListener('submit', async (event) => {
   try {
     const data = Object.fromEntries(new FormData(forgotForm));
     const result = await api('/api/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email: data.email }) });
-    setAuthMessage(result.message || 'Kata sandi sementara sudah dikirim ke WhatsApp kamu.', true);
+    setAuthMessage(result.message || 'Sandi sementara sudah dibuat dan tampil di bawah.', true);
     if (result.account) {
       const account = result.account;
       const avatar = document.querySelector('#forgot-account-avatar');
@@ -5866,11 +5876,21 @@ forgotForm?.addEventListener('submit', async (event) => {
       roleEl.classList.toggle('is-main-admin', Boolean(account.isMainAdmin));
       roleEl.classList.toggle('is-admin', !account.isMainAdmin && account.role === 'admin');
       const statusEl = document.querySelector('#forgot-account-status');
-      statusEl.textContent = result.sent
-        ? 'Sandi sementara terkirim ke WhatsApp yang tertaut ke akun ini. Buka WhatsApp lalu masuk dengan sandi itu.'
-        : 'Sandi sementara sudah dibuat, tapi WhatsApp belum tertaut sehingga bot tidak bisa mengirimnya. Hubungi admin untuk meminta sandi sementaramu.';
-      statusEl.classList.toggle('is-failed', !result.sent);
+      statusEl.textContent = 'Sandi sementara tampil di bawah. Salin, lalu buat sandi barumu — tidak perlu login dulu.';
+      statusEl.classList.remove('is-failed');
       accountCard?.classList.remove('hidden');
+    }
+    // Sandi sementara tampil di web + form buat sandi baru langsung.
+    const tempBox = document.querySelector('#forgot-temp');
+    const resetBox = document.querySelector('#forgot-reset');
+    if (result.tempPassword) {
+      document.querySelector('#forgot-temp-code').textContent = result.tempPassword;
+      tempBox?.classList.remove('hidden');
+      resetBox?.classList.remove('hidden');
+      document.querySelector('#forgot-reset-message')?.classList.add('hidden');
+      document.querySelector('#forgot-reset-done')?.classList.add('hidden');
+      forgotTempPassword = result.tempPassword;
+      forgotResetEmail = String(data.email || '').trim().toLowerCase();
     }
     forgotForm.reset();
   } catch (error) {
@@ -5886,6 +5906,51 @@ forgotForm?.addEventListener('submit', async (event) => {
     }
   } finally {
     setAuthSubmitLoading(button, 'login', false);
+  }
+});
+
+// Sandi sementara + email untuk form buat sandi baru di halaman lupa sandi.
+let forgotTempPassword = '';
+let forgotResetEmail = '';
+document.querySelector('#forgot-temp-copy')?.addEventListener('click', async () => {
+  const copyBtn = document.querySelector('#forgot-temp-copy');
+  const code = forgotTempPassword || document.querySelector('#forgot-temp-code')?.textContent || '';
+  if (!code) return;
+  try {
+    await navigator.clipboard.writeText(code);
+    copyBtn.textContent = 'Disalin ✓';
+  } catch {
+    const range = document.createRange();
+    range.selectNodeContents(document.querySelector('#forgot-temp-code'));
+    const selection = window.getSelection();
+    selection?.removeAllRanges();
+    selection?.addRange(range);
+    copyBtn.textContent = 'Disalin ✓';
+  }
+  setTimeout(() => { copyBtn.textContent = 'Salin'; }, 2000);
+});
+document.querySelector('#forgot-reset-submit')?.addEventListener('click', async () => {
+  const message = document.querySelector('#forgot-reset-message');
+  const newPassword = document.querySelector('#forgot-new-password')?.value || '';
+  const confirmPassword = document.querySelector('#forgot-confirm-password')?.value || '';
+  const showMsg = (text, ok) => {
+    message.textContent = text;
+    message.classList.remove('hidden');
+    message.classList.toggle('is-ok', Boolean(ok));
+  };
+  if (!forgotTempPassword || !forgotResetEmail) { showMsg('Minta sandi sementara dulu.'); return; }
+  if (newPassword.length < 12) { showMsg('Sandi baru minimal 12 karakter.'); return; }
+  if (newPassword !== confirmPassword) { showMsg('Konfirmasi sandi baru belum cocok.'); return; }
+  if (newPassword === forgotTempPassword) { showMsg('Sandi baru tidak boleh sama dengan sandi sementara.'); return; }
+  try {
+    const result = await api('/api/auth/reset-password', { method: 'POST', body: JSON.stringify({ email: forgotResetEmail, tempPassword: forgotTempPassword, newPassword }) });
+    showMsg(result.message || 'Sandi baru sudah disimpan.', true);
+    document.querySelector('#forgot-reset-done')?.classList.remove('hidden');
+    document.querySelector('#forgot-temp')?.classList.add('hidden');
+    document.querySelector('#forgot-reset')?.classList.add('hidden');
+    forgotTempPassword = '';
+  } catch (error) {
+    showMsg(error.message || 'Gagal menyimpan sandi baru.');
   }
 });
 

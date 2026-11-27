@@ -2076,10 +2076,10 @@ async function handleApi(req, res, url) {
       target.mustChangePassword = true;
       target.tempPasswordAt = new Date().toISOString();
     });
-    const sendResult = await pairingManager.sendDirectMessage(user.id,
-      `Halo ${user.displayName || user.username},\n\nKata sandi sementara akun ReactionSw kamu: ${tempPassword}\n\nMasuk dengan sandi ini, lalu segera ganti ke sandi baru. Jangan bagikan sandi ini ke siapa pun.`);
-    const status = sendResult.ok ? 'sent' : 'failed';
-    const reason = sendResult.ok ? null : (sendResult.reason === 'not_linked' ? 'WhatsApp belum tertaut atau bot belum jalan' : sendResult.reason === 'no_number' ? 'Nomor WhatsApp tidak ditemukan' : 'Gagal mengirim pesan WhatsApp');
+    // Sandi sementara TIDAK dikirim lewat WhatsApp lagi — akun yang WA-nya
+    // belum tertaut tidak akan pernah menerimanya. Sandi sementara ditampilkan
+    // langsung di web (dengan tombol Salin) supaya semua akun bisa memakainya.
+    const status = 'shown';
     await appendPasswordReset({
       id: randomUUID(),
       userId: user.id,
@@ -2089,17 +2089,54 @@ async function handleApi(req, res, url) {
       role: user.role,
       tempPassword,
       status,
-      reason,
+      reason: null,
       createdAt: new Date().toISOString(),
     });
     // Kartu status akun di halaman login hanya menampilkan avatar, nama,
     // @username, dan peran — email TIDAK disertakan (email hanya tampil di
     // halaman Profil pemilik akun itu sendiri).
     const { email: _forgotEmail, ...accountForCard } = publicUser(user);
-    if (!sendResult.ok) {
-      return sendJson(res, 200, { ok: true, sent: false, account: accountForCard, message: 'Sandi sementara sudah dibuat, tapi WhatsApp belum tertaut sehingga bot tidak bisa mengirimnya. Hubungi admin untuk meminta sandi sementaramu.' });
+    return sendJson(res, 200, { ok: true, sent: false, tempPassword, account: accountForCard, message: 'Sandi sementara sudah dibuat dan tampil di bawah. Salin, lalu buat sandi barumu.' });
+  }
+
+  // Buat sandi baru langsung dari halaman lupa sandi (tanpa login dulu).
+  // Dipakai setelah sandi sementara ditampilkan di web.
+  if (route === 'POST /api/auth/reset-password') {
+    const body = await readJson(req);
+    const email = String(body.email || '').trim().toLowerCase().slice(0, 254);
+    const tempPassword = String(body.tempPassword || '');
+    const newPassword = String(body.newPassword || '');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return sendError(res, 400, 'Masukkan alamat email yang benar.');
     }
-    return sendJson(res, 200, { ok: true, sent: true, account: accountForCard, message: 'Kata sandi sementara sudah dikirim ke WhatsApp kamu. Masuk dengan sandi itu, lalu segera ganti ke sandi baru.' });
+    if (!tempPassword) return sendError(res, 400, 'Masukkan sandi sementara.');
+    if (!newPassword || newPassword.length < 12) {
+      return sendError(res, 400, 'Sandi baru minimal 12 karakter.');
+    }
+    const user = store.users.find((item) => item.email === email);
+    if (!user) return sendError(res, 404, 'Email tidak terdaftar. Periksa ejaan atau daftar dulu.');
+    if (user.mustChangePassword !== true) {
+      return sendError(res, 400, 'Tidak ada sandi sementara aktif untuk akun ini. Minta sandi sementara dulu.');
+    }
+    const currentHash = (await scrypt(tempPassword, user.salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+    const tempValid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(currentHash).digest('hex'), createHmac('sha256', sessionSecret).update(user.passwordHash).digest('hex'));
+    if (!tempValid) {
+      return sendError(res, 401, 'Sandi sementara salah. Periksa lagi atau minta sandi sementara yang baru.');
+    }
+    if (newPassword === tempPassword) {
+      return sendError(res, 400, 'Sandi baru tidak boleh sama dengan sandi sementara.');
+    }
+    const salt = randomBytes(16).toString('hex');
+    const passwordHash = (await scrypt(newPassword, salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+    await mutate((next) => {
+      const target = next.users.find((item) => item.id === user.id);
+      if (!target) return;
+      target.salt = salt;
+      target.passwordHash = passwordHash;
+      target.mustChangePassword = false;
+      delete target.tempPasswordAt;
+    });
+    return sendJson(res, 200, { ok: true, message: 'Sandi baru sudah disimpan. Silakan masuk dengan sandi barumu.' });
   }
 
   const user = await authenticatedUser(req);
