@@ -3399,6 +3399,7 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
   .chat-messages-wrap{flex:1 1 auto;min-height:0;height:auto}
   .chat-messages{height:100%;padding:12px 8px 8px}
   .chat-row{max-width:96%}
+  .chat-bubble-head{flex-wrap:wrap}
   .chat-bubble-text{font-size:13px}
   .chat-emoji-panel{grid-template-columns:repeat(6,1fr)}
   .chat-hero-copy p{display:none}

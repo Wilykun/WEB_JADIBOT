@@ -283,8 +283,8 @@ test('gaya tutorial Telegram dan anti-potong status ada dan muat di HP', () => {
 });
 
 test('versi aset baru terpasang supaya form ini benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=chip-admin-utama-rapi-20261127'), 'app.js harus memakai ?v=chip-admin-utama-rapi-20261127');
-  assert.ok(html.includes('/style.css?v=chip-admin-utama-rapi-20261127'), 'style.css harus memakai ?v=chip-admin-utama-rapi-20261127');
+  assert.ok(html.includes('/app.js?v=chip-peran-hp-rapi-20261127'), 'app.js harus memakai ?v=chip-peran-hp-rapi-20261127');
+  assert.ok(html.includes('/style.css?v=chip-peran-hp-rapi-20261127'), 'style.css harus memakai ?v=chip-peran-hp-rapi-20261127');
 });
 
 test('server: endpoint PUT telegram-config terdaftar dengan batas rate dan auth admin', () => {

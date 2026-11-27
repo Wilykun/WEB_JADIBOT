@@ -209,6 +209,7 @@ test('Obrolan: scroll ke bawah tidak macet — daftar mengalir ke halaman dan bu
   // ujungnya: pengguna yang scroll di tengah daftar tidak bisa lanjut ke bawah.
   assert.match(css, /\.chat-messages\{[^}]*overscroll-behavior:\s*auto/, 'scroll daftar harus mengalir ke halaman saat mencapai ujung');
   assert.match(css, /@media\(max-width:560px\)\{[\s\S]*?\.chat-row\{max-width:96%/, 'bubble HP harus hampir selebar layar supaya luas');
+  assert.match(css, /@media\(max-width:560px\)\{[\s\S]*?\.chat-bubble-head\{flex-wrap:wrap/, 'baris nama+chip di HP harus bisa membungkus supaya chip peran tidak terpotong di layar sempit');
 });
 
 test('Obrolan: avatar pesan diambil dari data akun saat ini, bukan foto lama saat pesan dikirim', () => {
