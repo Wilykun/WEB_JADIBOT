@@ -108,15 +108,15 @@ test('peringkat diperbarui realtime dan mengikuti pencarian serta pil kategori',
 test('entri Info Update terbaru dan halaman Rank Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-27T22:32:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 119, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-27T23:39:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 120, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Lupa sandi kini pakai email, bot kirim sandi sementara lewat WhatsApp', 'entri terbaru harus soal batas 10 detik indikator mengetik');
-  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Perubahan');
-  assert.equal(newest.time, '22.32 WIB', 'waktu entri terbaru harus cocok');
-  const rankbotEntry = data.updates[60];
+  assert.equal(newest.title, 'Tombol Tampilkan sandi sementara kini bisa diklik', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.tag, 'Bug', 'entri terbaru harus bertag Perubahan');
+  assert.equal(newest.time, '23.39 WIB', 'waktu entri terbaru harus cocok');
+  const rankbotEntry = data.updates[61];
   assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedua puluh tujuh');
-  assert.equal(rankbotEntry.tag, 'Fitur baru', 'entri Rank Bot harus bertag Fitur baru');
+  assert.equal(rankbotEntry.tag, 'Fitur baru', 'entri Rank Bot harus bertag Bug');
   assert.equal(rankbotEntry.time, '17.00 WIB', 'waktu entri Rank Bot harus cocok');
   assert.ok(rankbotEntry.description.includes("label mode dipersingkat jadi 'ReadSW + Reaksi'"), 'entri Rank Bot harus menjelaskan perbaikan nama fitur yang terpotong');
   assert.ok(html.includes("label mode dipersingkat jadi 'ReadSW + Reaksi'"), 'fallback harus memuat perbaikan nama fitur yang terpotong');

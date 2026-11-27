@@ -41,6 +41,14 @@ test('Lupa sandi: form hanya minta email, ada tautan Lupa sandi, dan modal ganti
   assert.ok(html.includes('id="forgot-temp-copy"'), 'harus ada tombol Salin untuk sandi sementara');
   assert.ok(html.includes('id="forgot-reset"'), 'harus ada form buat sandi baru langsung di halaman lupa sandi');
   assert.ok(html.includes('id="forgot-reset-submit"'), 'form buat sandi baru harus ada tombol simpan');
+  // REGRESI (27 Nov 2026): input sandi baru di dalam #forgot-form TIDAK boleh
+  // required — kolom required yang tersembunyi (display:none) memblokir submit
+  // form di Chrome sehingga tombol "Tampilkan sandi sementara" diam total
+  // (tanpa loading, tanpa pesan, tanpa error). Validasi sudah ditangani JS.
+  const resetStart = html.indexOf('id="forgot-reset"');
+  const resetEnd = html.indexOf('</form>', resetStart);
+  const resetSection = html.slice(resetStart, resetEnd);
+  assert.ok(!/id="forgot-(new|confirm)-password"[^>]*required/.test(resetSection), 'input sandi baru TIDAK boleh required (memblokir submit form saat tersembunyi)');
   assert.ok(html.includes('id="profile-email-label"'), 'email harus tampil di kepala halaman Profil, di bawah @username');
   assert.ok(css.includes('.profile-email-line'), 'email di kepala Profil harus punya gaya sendiri');
   assert.ok(css.includes('.forgot-temp'), 'kotak sandi sementara harus punya gaya sendiri');

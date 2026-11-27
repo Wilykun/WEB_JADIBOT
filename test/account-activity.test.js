@@ -239,16 +239,16 @@ test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', 
 
 test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
-  assert.equal(data.updatedAt, '2026-11-27T22:32:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 119, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-27T23:39:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 120, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Lupa sandi kini pakai email, bot kirim sandi sementara lewat WhatsApp', 'entri terbaru harus soal batas 10 detik indikator mengetik');
-  assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Perubahan');
+  assert.equal(newest.title, 'Tombol Tampilkan sandi sementara kini bisa diklik', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.tag, 'Bug', 'entri terbaru harus bertag Perubahan');
   assert.equal(newest.day, 'Jumat, 27 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '22.32 WIB', 'waktu entri terbaru harus cocok');
-  const status = data.updates[52];
+  assert.equal(newest.time, '23.39 WIB', 'waktu entri terbaru harus cocok');
+  const status = data.updates[53];
   assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi kedua puluh');
-  assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Fitur baru');
+  assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Bug');
   assert.equal(status.time, '19.46 WIB', 'waktu entri status Rank Bot harus cocok');
   assert.ok(status.description.includes('Pemilik · Aktif'), 'entri harus menjelaskan status pemilik di Rank Bot');
   assert.ok(status.description.includes('Bot WhatsApp · Berjalan'), 'entri harus menjelaskan status bot di Rank Bot');

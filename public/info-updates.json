@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-27T22:32:00+07:00",
+  "updatedAt": "2026-11-27T23:39:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 27 Nov 2026",
+      "time": "23.39 WIB",
+      "title": "Tombol Tampilkan sandi sementara kini bisa diklik",
+      "tag": "Bug",
+      "description": "Tombol Tampilkan sandi sementara di halaman lupa sandi sempat mati total saat ditekan: tidak muncul loading, tidak ada pesan, dan sandi sementara tidak pernah tampil. Penyebabnya dua kolom sandi baru yang masih tersembunyi di dalam form lupa sandi memakai atribut required — browser memblokir pengiriman form selama kolom required yang tersembunyi itu kosong, jadi event submit tidak pernah jalan. Kini atribut required dihapus dari kedua kolom itu (validasi minimal 12 karakter dan kecocokan sandi tetap dijaga JavaScript), jadi tombolnya langsung merespons: email yang tidak terdaftar menampilkan animasi pemberitahuan, email yang terdaftar menampilkan kartu status akun beserta sandi sementara dan form buat sandi baru."
+    },
     {
       "day": "Jumat, 27 Nov 2026",
       "time": "22.32 WIB",
