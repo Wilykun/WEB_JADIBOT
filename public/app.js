@@ -4677,15 +4677,11 @@ function chatRoleIconName(user) {
 // Warna nama pengirim ala grup WhatsApp: member biasa pakai warna hash dari
 // namanya (normal), tapi admin utama dan admin dibedakan — admin utama emas
 // dan admin hijau — supaya warnanya pas sama chip perannya, kuat dan beda.
-const CHAT_NAME_COLORS = ['#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffc107', '#ff9800', '#ff5722', '#f44336', '#795548', '#607d8b'];
 const CHAT_ROLE_NAME_COLORS = { mainAdmin: '#f5c542', admin: '#3ee69a' };
 function chatNameColor(name, message) {
   if (message?.isMainAdmin) return CHAT_ROLE_NAME_COLORS.mainAdmin;
   if (message?.role === 'admin') return CHAT_ROLE_NAME_COLORS.admin;
-  const key = String(name || '');
-  let hash = 0;
-  for (let i = 0; i < key.length; i += 1) hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
-  return CHAT_NAME_COLORS[hash % CHAT_NAME_COLORS.length];
+  return '#e9edef';
 }
 let chatLastTyping = [];
 function chatWaSubtitleNames() {
