@@ -398,14 +398,22 @@ function parseEmojiBatch(value) {
 applyStorySettings(DEFAULT_STORY_SETTINGS, null);
 
 async function api(url, options = {}) {
-  const response = await fetch(url, {
-    credentials: 'same-origin',
-    ...options,
-    headers: {
-      ...(options.body ? { 'Content-Type': 'application/json' } : {}),
-      ...(options.headers || {}),
-    },
-  });
+  let response;
+  try {
+    response = await fetch(url, {
+      credentials: 'same-origin',
+      ...options,
+      headers: {
+        ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+        ...(options.headers || {}),
+      },
+    });
+  } catch {
+    // RONDE 37: fetch gagal di level jaringan (HP tanpa internet / mode pesawat)
+    // melempar TypeError 'Failed to fetch' — tampilkan pesan yang dimengerti
+    // pengguna, bukan pesan mentah browser.
+    throw new Error('Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.');
+  }
   let payload = {};
   try { payload = await response.json(); } catch { /* API errors are rendered generically */ }
   if (!response.ok) {
@@ -5193,15 +5201,6 @@ function buildChatMessageRow(message, isFirstInGroup = true) {
   }
   meta.append(actions, time);
   bubble.append(meta);
-  // Ketuk bubble untuk menampilkan tombol Balas/Hapus (ala menu WA); di desktop
-  // tombol muncul saat hover. Ketuk tombol di dalam bubble tidak ikut
-  // membuka/menutup.
-  bubble.addEventListener('click', (event) => {
-    if (event.target.closest('button')) return;
-    const wasOpen = row.classList.contains('is-actions-open');
-    document.querySelectorAll('.chat-row.is-actions-open').forEach((item) => item.classList.remove('is-actions-open'));
-    if (!wasOpen) row.classList.add('is-actions-open');
-  });
   row.append(bubble);
   return row;
 }

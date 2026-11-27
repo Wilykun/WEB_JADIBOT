@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-11-28T00:04:00+07:00",
+  "updatedAt": "2026-11-28T05:17:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "05.17 WIB",
+      "title": "Pesan gagal jaringan di Lupa sandi kini ramah dan jelas",
+      "tag": "Perbaikan",
+      "description": "Kalau HP tidak ada internet saat menekan tombol di halaman Lupa sandi — misalnya mode pesawat menyala atau sinyal putus — pesannya kini jelas: \"Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.\" Sebelumnya yang muncul hanya tulisan mentah browser \"Failed to fetch\" yang membingungkan dan terkesan seperti situs yang rusak, padahal server dan situsnya sehat. Pesan ramah ini berlaku untuk semua permintaan ke server (lupa sandi, buat sandi baru, masuk), sementara pesan kesalahan dari server sendiri — seperti \"Email tidak terdaftar\" — tetap tampil seperti biasa."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "00.18 WIB",
+      "title": "Tombol Balas dan Hapus di Obrolan kini selalu terlihat",
+      "tag": "Perbaikan",
+      "description": "Tombol Balas dan Hapus di Obrolan kini tampil terus di setiap pesan — tidak lagi hilang lalu muncul hanya saat bubble diketuk. Sebelumnya tombol itu disembunyikan (opacity 0) dan baru muncul saat hover di komputer atau saat bubble diketuk di HP, sehingga di HP sering terlihat hilang dan kedua fitur itu seolah tidak ada. Sekarang tombolnya selalu terlihat di baris meta setiap pesan, di samping jam kirim, tanpa perlu mengetuk apa pun. Aturan hapus tetap sama: pesan sendiri boleh dihapus siapa pun, pesan orang lain hanya Admin Utama."
+    },
     {
       "day": "Sabtu, 28 Nov 2026",
       "time": "00.04 WIB",

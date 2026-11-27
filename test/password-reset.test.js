@@ -335,3 +335,37 @@ test('ikon mata + cek cocok sandi baru realtime di halaman lupa sandi', () => {
   assert.equal(out.matchOk, true, 'sandi yang cocok harus hijau');
   assert.equal(out.matchText, 'Sandi baru cocok.', 'teks cocok harus tepat');
 });
+test('api(): gagal jaringan menampilkan pesan ramah, bukan Failed to fetch', async () => {
+  const pick = (re, msg) => {
+    const m = appJs.match(re);
+    assert.ok(m, msg);
+    return m[0];
+  };
+  const apiFn = pick(/async function api\(url, options = \{\}\) \{[\s\S]*?\n\}/, 'fungsi api harus bisa diekstrak');
+  assert.ok(apiFn.includes('Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.'), 'api harus menerjemahkan gagal jaringan ke pesan ramah');
+  const program = `
+    let fetch;
+    ${apiFn}
+    (async () => {
+      const out = {};
+      // fetch melempar (tanpa internet / mode pesawat) -> pesan ramah.
+      fetch = async () => { throw new TypeError('Failed to fetch'); };
+      try { await api('/api/auth/forgot-password', { method: 'POST' }); out.networkMessage = 'TIDAK MELEMPAR'; }
+      catch (e) { out.networkMessage = e.message; out.networkIsTypeError = e instanceof TypeError; }
+      // fetch berhasil + HTTP 404 -> error tetap membawa status.
+      fetch = async () => ({ ok: false, status: 404, json: async () => ({ error: 'Email tidak terdaftar.' }) });
+      try { await api('/api/auth/forgot-password', { method: 'POST' }); out.httpMessage = 'TIDAK MELEMPAR'; }
+      catch (e) { out.httpMessage = e.message; out.httpStatus = e.status; }
+      // fetch berhasil + HTTP 200 -> payload dikembalikan.
+      fetch = async () => ({ ok: true, status: 200, json: async () => ({ ok: true }) });
+      out.okPayload = await api('/api/auth/forgot-password', { method: 'POST' });
+      return out;
+    })()
+  `;
+  const out = await eval(program);
+  assert.equal(out.networkMessage, 'Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.', 'gagal jaringan harus menampilkan pesan ramah');
+  assert.equal(out.networkIsTypeError, false, 'pesan ramah harus Error biasa, bukan TypeError mentah browser');
+  assert.equal(out.httpMessage, 'Email tidak terdaftar.', 'kesalahan HTTP harus tetap menampilkan pesan server');
+  assert.equal(out.httpStatus, 404, 'kesalahan HTTP harus tetap membawa status');
+  assert.deepEqual(out.okPayload, { ok: true }, 'respons sukses harus tetap dikembalikan');
+});
