@@ -1,0 +1,362 @@
+{
+  "AC628860D33F524D2FA87CFEB1E63B9D": {
+    "id": "AC628860D33F524D2FA87CFEB1E63B9D",
+    "sender": "6285811415792@s.whatsapp.net",
+    "number": "6285811415792",
+    "storyJid": "6285811415792@s.whatsapp.net",
+    "resolvedPn": "6285811415792@s.whatsapp.net",
+    "name": "Fahri SH (Suaminya Hutao)",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC628860D33F524D2FA87CFEB1E63B9D",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC628860D33F524D2FA87CFEB1E63B9D",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "206163413057731@lid",
+      "6285811415792@s.whatsapp.net"
+    ],
+    "contactHash": "525c3dceb6726f6c62de950ffc6b3fd75d114f0f51d4a0fb07071219471cc26c",
+    "arrivedAt": "2026-11-27T04:14:41.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:14:42.726Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:14:47.863Z",
+    "readAt": "2026-11-27T04:14:47.862Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T04:14:47.862Z"
+  },
+  "AC071287499C74973C7D4D93EE2B3ABB": {
+    "id": "AC071287499C74973C7D4D93EE2B3ABB",
+    "sender": "6285811415792@s.whatsapp.net",
+    "number": "6285811415792",
+    "storyJid": "6285811415792@s.whatsapp.net",
+    "resolvedPn": "6285811415792@s.whatsapp.net",
+    "name": "Fahri SH (Suaminya Hutao)",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC071287499C74973C7D4D93EE2B3ABB",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC071287499C74973C7D4D93EE2B3ABB",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "206163413057731@lid",
+      "6285811415792@s.whatsapp.net"
+    ],
+    "contactHash": "525c3dceb6726f6c62de950ffc6b3fd75d114f0f51d4a0fb07071219471cc26c",
+    "arrivedAt": "2026-11-27T04:14:43.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:14:43.546Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:14:48.819Z",
+    "readAt": "2026-11-27T04:14:48.818Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T04:14:48.818Z"
+  },
+  "ACD37A940BDAD038193896E767A30016": {
+    "id": "ACD37A940BDAD038193896E767A30016",
+    "sender": "6285811415792@s.whatsapp.net",
+    "number": "6285811415792",
+    "storyJid": "6285811415792@s.whatsapp.net",
+    "resolvedPn": "6285811415792@s.whatsapp.net",
+    "name": "Fahri SH (Suaminya Hutao)",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD37A940BDAD038193896E767A30016",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD37A940BDAD038193896E767A30016",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "206163413057731@lid",
+      "6285811415792@s.whatsapp.net"
+    ],
+    "contactHash": "525c3dceb6726f6c62de950ffc6b3fd75d114f0f51d4a0fb07071219471cc26c",
+    "arrivedAt": "2026-11-27T04:14:44.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:14:44.457Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:14:53.356Z",
+    "readAt": "2026-11-27T04:14:53.349Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T04:14:53.349Z"
+  },
+  "AC213FDF25BD151462971C7D68B69B1B": {
+    "id": "AC213FDF25BD151462971C7D68B69B1B",
+    "sender": "6285811415792@s.whatsapp.net",
+    "number": "6285811415792",
+    "storyJid": "6285811415792@s.whatsapp.net",
+    "resolvedPn": "6285811415792@s.whatsapp.net",
+    "name": "Fahri SH (Suaminya Hutao)",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC213FDF25BD151462971C7D68B69B1B",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC213FDF25BD151462971C7D68B69B1B",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "206163413057731@lid",
+      "6285811415792@s.whatsapp.net"
+    ],
+    "contactHash": "525c3dceb6726f6c62de950ffc6b3fd75d114f0f51d4a0fb07071219471cc26c",
+    "arrivedAt": "2026-11-27T04:14:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:14:45.448Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:14:59.156Z",
+    "readAt": "2026-11-27T04:14:59.154Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T04:14:59.154Z"
+  },
+  "ACF9CB29B024321B9F48B03204BD4CFE": {
+    "id": "ACF9CB29B024321B9F48B03204BD4CFE",
+    "sender": "6285811415792@s.whatsapp.net",
+    "number": "6285811415792",
+    "storyJid": "6285811415792@s.whatsapp.net",
+    "resolvedPn": "6285811415792@s.whatsapp.net",
+    "name": "Fahri SH (Suaminya Hutao)",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF9CB29B024321B9F48B03204BD4CFE",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF9CB29B024321B9F48B03204BD4CFE",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "206163413057731@lid",
+      "6285811415792@s.whatsapp.net"
+    ],
+    "contactHash": "525c3dceb6726f6c62de950ffc6b3fd75d114f0f51d4a0fb07071219471cc26c",
+    "arrivedAt": "2026-11-27T04:14:46.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:14:46.293Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:15:05.237Z",
+    "readAt": "2026-11-27T04:15:05.236Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T04:15:05.236Z"
+  },
+  "AC034C08FF7E38D6153EA44ED482A730": {
+    "id": "AC034C08FF7E38D6153EA44ED482A730",
+    "sender": "6285811415792@s.whatsapp.net",
+    "number": "6285811415792",
+    "storyJid": "6285811415792@s.whatsapp.net",
+    "resolvedPn": "6285811415792@s.whatsapp.net",
+    "name": "Fahri SH (Suaminya Hutao)",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC034C08FF7E38D6153EA44ED482A730",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC034C08FF7E38D6153EA44ED482A730",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "206163413057731@lid",
+      "6285811415792@s.whatsapp.net"
+    ],
+    "contactHash": "525c3dceb6726f6c62de950ffc6b3fd75d114f0f51d4a0fb07071219471cc26c",
+    "arrivedAt": "2026-11-27T04:14:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:14:47.807Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:15:07.205Z",
+    "readAt": "2026-11-27T04:15:07.204Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T04:15:07.204Z"
+  },
+  "ACAAEF7C9641401FDC9643CC33E47E6D": {
+    "id": "ACAAEF7C9641401FDC9643CC33E47E6D",
+    "sender": "6285811415792@s.whatsapp.net",
+    "number": "6285811415792",
+    "storyJid": "6285811415792@s.whatsapp.net",
+    "resolvedPn": "6285811415792@s.whatsapp.net",
+    "name": "Fahri SH (Suaminya Hutao)",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAAEF7C9641401FDC9643CC33E47E6D",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAAEF7C9641401FDC9643CC33E47E6D",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "206163413057731@lid",
+      "6285811415792@s.whatsapp.net"
+    ],
+    "contactHash": "525c3dceb6726f6c62de950ffc6b3fd75d114f0f51d4a0fb07071219471cc26c",
+    "arrivedAt": "2026-11-27T10:28:24.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:28:25.274Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:28:37.675Z",
+    "readAt": "2026-11-27T10:28:37.675Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T10:28:37.675Z"
+  },
+  "AC8FA1CFFCEED4BE9618BBDAEB77DBA6": {
+    "id": "AC8FA1CFFCEED4BE9618BBDAEB77DBA6",
+    "sender": "6285811415792@s.whatsapp.net",
+    "number": "6285811415792",
+    "storyJid": "6285811415792@s.whatsapp.net",
+    "resolvedPn": "6285811415792@s.whatsapp.net",
+    "name": "Fahri SH (Suaminya Hutao)",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8FA1CFFCEED4BE9618BBDAEB77DBA6",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8FA1CFFCEED4BE9618BBDAEB77DBA6",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "206163413057731@lid",
+      "6285811415792@s.whatsapp.net"
+    ],
+    "contactHash": "525c3dceb6726f6c62de950ffc6b3fd75d114f0f51d4a0fb07071219471cc26c",
+    "arrivedAt": "2026-11-27T10:28:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:28:27.258Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:28:39.807Z",
+    "readAt": "2026-11-27T10:28:39.806Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T10:28:39.806Z"
+  },
+  "ACD1261FE80B35833C8DFAD6967212EB": {
+    "id": "ACD1261FE80B35833C8DFAD6967212EB",
+    "sender": "6285811415792@s.whatsapp.net",
+    "number": "6285811415792",
+    "storyJid": "6285811415792@s.whatsapp.net",
+    "resolvedPn": "6285811415792@s.whatsapp.net",
+    "name": "Fahri SH (Suaminya Hutao)",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD1261FE80B35833C8DFAD6967212EB",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD1261FE80B35833C8DFAD6967212EB",
+      "participant": "206163413057731@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "206163413057731@lid",
+      "6285811415792@s.whatsapp.net"
+    ],
+    "contactHash": "525c3dceb6726f6c62de950ffc6b3fd75d114f0f51d4a0fb07071219471cc26c",
+    "arrivedAt": "2026-11-27T12:46:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:46:41.098Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:46:57.034Z",
+    "readAt": "2026-11-27T12:46:57.020Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T12:46:57.020Z"
+  }
+}

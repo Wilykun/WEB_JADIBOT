@@ -1,6 +1,6 @@
 {
-  "AC0959F48ACB19AFC46E2FEB344CDADE": {
-    "id": "AC0959F48ACB19AFC46E2FEB344CDADE",
+  "AC62ECBB18C7AB07A536BBF97C370898": {
+    "id": "AC62ECBB18C7AB07A536BBF97C370898",
     "sender": "6285251941310@s.whatsapp.net",
     "number": "6285251941310",
     "storyJid": "6285251941310@s.whatsapp.net",
@@ -11,13 +11,13 @@
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "AC0959F48ACB19AFC46E2FEB344CDADE",
+      "id": "AC62ECBB18C7AB07A536BBF97C370898",
       "participant": "162964162248752@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "AC0959F48ACB19AFC46E2FEB344CDADE",
+      "id": "AC62ECBB18C7AB07A536BBF97C370898",
       "participant": "162964162248752@lid",
       "fromMe": false
     },
@@ -26,17 +26,377 @@
       "6285251941310@s.whatsapp.net"
     ],
     "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
-    "arrivedAt": "2026-11-17T02:29:48.000Z",
+    "arrivedAt": "2026-11-27T05:23:59.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-17T03:40:36.751Z",
+    "lastAttemptAt": "2026-11-27T05:23:59.881Z",
     "lastError": null,
-    "updatedAt": "2026-11-17T03:40:40.340Z",
-    "readAt": "2026-11-17T03:40:40.280Z",
+    "updatedAt": "2026-11-27T05:24:03.270Z",
+    "readAt": "2026-11-27T05:24:03.259Z",
     "emoji": "👻",
-    "reactedAt": "2026-11-17T03:40:40.280Z"
+    "reactedAt": "2026-11-27T05:24:03.259Z"
+  },
+  "AC29943CA74F31D57AA79EA5BE74AB50": {
+    "id": "AC29943CA74F31D57AA79EA5BE74AB50",
+    "sender": "6285251941310@s.whatsapp.net",
+    "number": "6285251941310",
+    "storyJid": "6285251941310@s.whatsapp.net",
+    "resolvedPn": "6285251941310@s.whatsapp.net",
+    "name": "firawati olshop 🎀",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC29943CA74F31D57AA79EA5BE74AB50",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC29943CA74F31D57AA79EA5BE74AB50",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162964162248752@lid",
+      "6285251941310@s.whatsapp.net"
+    ],
+    "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
+    "arrivedAt": "2026-11-27T05:24:04.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:24:03.731Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:24:11.698Z",
+    "readAt": "2026-11-27T05:24:11.697Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-27T05:24:11.697Z"
+  },
+  "ACCC055536A825FE17CFD46CB0DA04F8": {
+    "id": "ACCC055536A825FE17CFD46CB0DA04F8",
+    "sender": "6285251941310@s.whatsapp.net",
+    "number": "6285251941310",
+    "storyJid": "6285251941310@s.whatsapp.net",
+    "resolvedPn": "6285251941310@s.whatsapp.net",
+    "name": "firawati olshop 🎀",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCC055536A825FE17CFD46CB0DA04F8",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCC055536A825FE17CFD46CB0DA04F8",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162964162248752@lid",
+      "6285251941310@s.whatsapp.net"
+    ],
+    "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
+    "arrivedAt": "2026-11-27T05:24:05.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:24:04.613Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:24:07.084Z",
+    "readAt": "2026-11-27T05:24:07.082Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-27T05:24:07.083Z"
+  },
+  "AC3A383EFDE7E95D4CA42C77B0404599": {
+    "id": "AC3A383EFDE7E95D4CA42C77B0404599",
+    "sender": "6285251941310@s.whatsapp.net",
+    "number": "6285251941310",
+    "storyJid": "6285251941310@s.whatsapp.net",
+    "resolvedPn": "6285251941310@s.whatsapp.net",
+    "name": "firawati olshop 🎀",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3A383EFDE7E95D4CA42C77B0404599",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3A383EFDE7E95D4CA42C77B0404599",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162964162248752@lid",
+      "6285251941310@s.whatsapp.net"
+    ],
+    "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
+    "arrivedAt": "2026-11-27T05:24:06.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:24:05.822Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:24:09.378Z",
+    "readAt": "2026-11-27T05:24:09.376Z",
+    "emoji": "👀",
+    "reactedAt": "2026-11-27T05:24:09.376Z"
+  },
+  "ACA2C94D5B07B43173CA0ACF0924097E": {
+    "id": "ACA2C94D5B07B43173CA0ACF0924097E",
+    "sender": "6285251941310@s.whatsapp.net",
+    "number": "6285251941310",
+    "storyJid": "6285251941310@s.whatsapp.net",
+    "resolvedPn": "6285251941310@s.whatsapp.net",
+    "name": "firawati olshop 🎀",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA2C94D5B07B43173CA0ACF0924097E",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA2C94D5B07B43173CA0ACF0924097E",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162964162248752@lid",
+      "6285251941310@s.whatsapp.net"
+    ],
+    "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
+    "arrivedAt": "2026-11-27T05:24:07.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:24:07.486Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:24:16.882Z",
+    "readAt": "2026-11-27T05:24:16.881Z",
+    "emoji": "🛐",
+    "reactedAt": "2026-11-27T05:24:16.881Z"
+  },
+  "ACF9743801323E3B9127ED9E21795BDD": {
+    "id": "ACF9743801323E3B9127ED9E21795BDD",
+    "sender": "6285251941310@s.whatsapp.net",
+    "number": "6285251941310",
+    "storyJid": "6285251941310@s.whatsapp.net",
+    "resolvedPn": "6285251941310@s.whatsapp.net",
+    "name": "firawati olshop 🎀",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF9743801323E3B9127ED9E21795BDD",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF9743801323E3B9127ED9E21795BDD",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162964162248752@lid",
+      "6285251941310@s.whatsapp.net"
+    ],
+    "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
+    "arrivedAt": "2026-11-27T05:24:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:24:08.404Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:24:13.103Z",
+    "readAt": "2026-11-27T05:24:13.102Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-27T05:24:13.102Z"
+  },
+  "ACA57C9092541141BF022BA4DEE56759": {
+    "id": "ACA57C9092541141BF022BA4DEE56759",
+    "sender": "6285251941310@s.whatsapp.net",
+    "number": "6285251941310",
+    "storyJid": "6285251941310@s.whatsapp.net",
+    "resolvedPn": "6285251941310@s.whatsapp.net",
+    "name": "firawati olshop 🎀",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA57C9092541141BF022BA4DEE56759",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA57C9092541141BF022BA4DEE56759",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162964162248752@lid",
+      "6285251941310@s.whatsapp.net"
+    ],
+    "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
+    "arrivedAt": "2026-11-27T05:24:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:24:09.830Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:24:15.764Z",
+    "readAt": "2026-11-27T05:24:15.750Z",
+    "emoji": "👀",
+    "reactedAt": "2026-11-27T05:24:15.750Z"
+  },
+  "ACFD04A61B6F8519C9BB3FF56B08CA0B": {
+    "id": "ACFD04A61B6F8519C9BB3FF56B08CA0B",
+    "sender": "6285251941310@s.whatsapp.net",
+    "number": "6285251941310",
+    "storyJid": "6285251941310@s.whatsapp.net",
+    "resolvedPn": "6285251941310@s.whatsapp.net",
+    "name": "firawati olshop 🎀",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFD04A61B6F8519C9BB3FF56B08CA0B",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFD04A61B6F8519C9BB3FF56B08CA0B",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162964162248752@lid",
+      "6285251941310@s.whatsapp.net"
+    ],
+    "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
+    "arrivedAt": "2026-11-27T05:24:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:24:11.188Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:24:20.205Z",
+    "readAt": "2026-11-27T05:24:20.204Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-27T05:24:20.204Z"
+  },
+  "AC3D7ABBF6C6C3FE885C77E538602E5F": {
+    "id": "AC3D7ABBF6C6C3FE885C77E538602E5F",
+    "sender": "6285251941310@s.whatsapp.net",
+    "number": "6285251941310",
+    "storyJid": "6285251941310@s.whatsapp.net",
+    "resolvedPn": "6285251941310@s.whatsapp.net",
+    "name": "firawati olshop 🎀",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3D7ABBF6C6C3FE885C77E538602E5F",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3D7ABBF6C6C3FE885C77E538602E5F",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162964162248752@lid",
+      "6285251941310@s.whatsapp.net"
+    ],
+    "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
+    "arrivedAt": "2026-11-27T05:24:12.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:24:12.550Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:24:22.194Z",
+    "readAt": "2026-11-27T05:24:22.193Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-27T05:24:22.193Z"
+  },
+  "AC828D7F421F00DF675970702918612B": {
+    "id": "AC828D7F421F00DF675970702918612B",
+    "sender": "6285251941310@s.whatsapp.net",
+    "number": "6285251941310",
+    "storyJid": "6285251941310@s.whatsapp.net",
+    "resolvedPn": "6285251941310@s.whatsapp.net",
+    "name": "firawati olshop 🎀",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC828D7F421F00DF675970702918612B",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC828D7F421F00DF675970702918612B",
+      "participant": "162964162248752@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "162964162248752@lid",
+      "6285251941310@s.whatsapp.net"
+    ],
+    "contactHash": "9634c4d4943e422bcac78002f6c904a47ecedba13f6b449803d3650d1ffd5bc7",
+    "arrivedAt": "2026-11-27T11:31:55.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:31:57.524Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:32:02.428Z",
+    "readAt": "2026-11-27T11:32:02.402Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-27T11:32:02.402Z"
   }
 }

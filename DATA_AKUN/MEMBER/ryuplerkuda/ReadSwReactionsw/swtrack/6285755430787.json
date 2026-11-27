@@ -1,0 +1,402 @@
+{
+  "AC5C5266469BAE52F3E2500B98657AB7": {
+    "id": "AC5C5266469BAE52F3E2500B98657AB7",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5C5266469BAE52F3E2500B98657AB7",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5C5266469BAE52F3E2500B98657AB7",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T04:41:03.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:41:03.601Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:41:05.633Z",
+    "readAt": "2026-11-27T04:41:05.632Z",
+    "emoji": "😖",
+    "reactedAt": "2026-11-27T04:41:05.632Z"
+  },
+  "AC834BC88F97F292222DB4B9798B8CFE": {
+    "id": "AC834BC88F97F292222DB4B9798B8CFE",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC834BC88F97F292222DB4B9798B8CFE",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC834BC88F97F292222DB4B9798B8CFE",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T06:54:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T06:54:03.834Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T06:54:07.073Z",
+    "readAt": "2026-11-27T06:54:07.072Z",
+    "emoji": "😏",
+    "reactedAt": "2026-11-27T06:54:07.072Z"
+  },
+  "AC4DDD63A9C26C343E4A199DB75F23BE": {
+    "id": "AC4DDD63A9C26C343E4A199DB75F23BE",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4DDD63A9C26C343E4A199DB75F23BE",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4DDD63A9C26C343E4A199DB75F23BE",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T06:54:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T06:54:21.707Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T06:54:25.642Z",
+    "readAt": "2026-11-27T06:54:25.635Z",
+    "emoji": "🗿",
+    "reactedAt": "2026-11-27T06:54:25.635Z"
+  },
+  "AC4DBB84BE9ACF5668E22A313BBDDC48": {
+    "id": "AC4DBB84BE9ACF5668E22A313BBDDC48",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4DBB84BE9ACF5668E22A313BBDDC48",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4DBB84BE9ACF5668E22A313BBDDC48",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T10:59:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:59:08.529Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:59:13.174Z",
+    "readAt": "2026-11-27T10:59:13.173Z",
+    "emoji": "😋",
+    "reactedAt": "2026-11-27T10:59:13.173Z"
+  },
+  "AC5BB384CFA460E76F119E571CA74874": {
+    "id": "AC5BB384CFA460E76F119E571CA74874",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5BB384CFA460E76F119E571CA74874",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5BB384CFA460E76F119E571CA74874",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T11:18:09.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:18:09.614Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:18:15.436Z",
+    "readAt": "2026-11-27T11:18:15.423Z",
+    "emoji": "🤓",
+    "reactedAt": "2026-11-27T11:18:15.423Z"
+  },
+  "AC8A8F1E886EED640C057DB09D20FE21": {
+    "id": "AC8A8F1E886EED640C057DB09D20FE21",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8A8F1E886EED640C057DB09D20FE21",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8A8F1E886EED640C057DB09D20FE21",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T11:20:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:20:01.909Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:20:04.163Z",
+    "readAt": "2026-11-27T11:20:04.163Z",
+    "emoji": "🤓",
+    "reactedAt": "2026-11-27T11:20:04.163Z"
+  },
+  "AC2897B30AC8DB61B87A6D591F05B83B": {
+    "id": "AC2897B30AC8DB61B87A6D591F05B83B",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2897B30AC8DB61B87A6D591F05B83B",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2897B30AC8DB61B87A6D591F05B83B",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T11:35:15.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:35:15.736Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:35:18.840Z",
+    "readAt": "2026-11-27T11:35:18.831Z",
+    "emoji": "😝",
+    "reactedAt": "2026-11-27T11:35:18.831Z"
+  },
+  "ACB9E6D367B11D0BCBCA956C3ABA03EA": {
+    "id": "ACB9E6D367B11D0BCBCA956C3ABA03EA",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB9E6D367B11D0BCBCA956C3ABA03EA",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB9E6D367B11D0BCBCA956C3ABA03EA",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T11:48:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:48:02.362Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:48:05.246Z",
+    "readAt": "2026-11-27T11:48:05.245Z",
+    "emoji": "⁉️",
+    "reactedAt": "2026-11-27T11:48:05.245Z"
+  },
+  "AC848B08808191AD473697A9FFC63D3E": {
+    "id": "AC848B08808191AD473697A9FFC63D3E",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC848B08808191AD473697A9FFC63D3E",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC848B08808191AD473697A9FFC63D3E",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T11:48:49.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:48:49.664Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:48:51.398Z",
+    "readAt": "2026-11-27T11:48:51.396Z",
+    "emoji": "😣",
+    "reactedAt": "2026-11-27T11:48:51.396Z"
+  },
+  "AC4CA61862E3A3FCA02BD36576043752": {
+    "id": "AC4CA61862E3A3FCA02BD36576043752",
+    "sender": "6285755430787@s.whatsapp.net",
+    "number": "6285755430787",
+    "storyJid": "6285755430787@s.whatsapp.net",
+    "resolvedPn": "6285755430787@s.whatsapp.net",
+    "name": "who's yashiro?",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4CA61862E3A3FCA02BD36576043752",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4CA61862E3A3FCA02BD36576043752",
+      "participant": "60610628853915@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "60610628853915@lid",
+      "6285755430787@s.whatsapp.net"
+    ],
+    "contactHash": "60e0ddf7baf233086bc3b45767a372fe8c57c846b608bcd954ef133a43f5c240",
+    "arrivedAt": "2026-11-27T11:56:24.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:56:23.630Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:56:29.323Z",
+    "readAt": "2026-11-27T11:56:29.322Z",
+    "emoji": "⁉️",
+    "reactedAt": "2026-11-27T11:56:29.322Z"
+  }
+}

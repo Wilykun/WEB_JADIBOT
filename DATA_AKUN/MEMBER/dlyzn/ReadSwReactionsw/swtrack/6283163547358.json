@@ -1,1 +1,402 @@
-{}
+{
+  "AC781A70EFDF7D379FE828E8401D190B": {
+    "id": "AC781A70EFDF7D379FE828E8401D190B",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC781A70EFDF7D379FE828E8401D190B",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC781A70EFDF7D379FE828E8401D190B",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-26T22:15:29.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:15:29.430Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:15:36.418Z",
+    "readAt": "2026-11-26T22:15:36.410Z",
+    "emoji": "☕️",
+    "reactedAt": "2026-11-26T22:15:36.410Z"
+  },
+  "AC39D8F1108DE02C01CC40E681551AF6": {
+    "id": "AC39D8F1108DE02C01CC40E681551AF6",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC39D8F1108DE02C01CC40E681551AF6",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC39D8F1108DE02C01CC40E681551AF6",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-27T00:47:13.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:47:12.933Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:47:15.778Z",
+    "readAt": "2026-11-27T00:47:15.777Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T00:47:15.777Z"
+  },
+  "AC51476BFE681725C6B7AB2DED75277C": {
+    "id": "AC51476BFE681725C6B7AB2DED75277C",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC51476BFE681725C6B7AB2DED75277C",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC51476BFE681725C6B7AB2DED75277C",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-27T07:25:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:25:22.432Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:25:26.304Z",
+    "readAt": "2026-11-27T07:25:26.303Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-27T07:25:26.303Z"
+  },
+  "ACC0CCB03D08789A75830975BDBA53AE": {
+    "id": "ACC0CCB03D08789A75830975BDBA53AE",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC0CCB03D08789A75830975BDBA53AE",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC0CCB03D08789A75830975BDBA53AE",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-27T07:57:37.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:57:37.328Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:57:45.395Z",
+    "readAt": "2026-11-27T07:57:45.390Z",
+    "emoji": "🥀",
+    "reactedAt": "2026-11-27T07:57:45.390Z"
+  },
+  "AC4D4F80086B40C96672ABDC57718B78": {
+    "id": "AC4D4F80086B40C96672ABDC57718B78",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4D4F80086B40C96672ABDC57718B78",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4D4F80086B40C96672ABDC57718B78",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-27T08:32:50.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:32:51.279Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:32:59.708Z",
+    "readAt": "2026-11-27T08:32:59.692Z",
+    "emoji": "🥀",
+    "reactedAt": "2026-11-27T08:32:59.693Z"
+  },
+  "ACFBFFA2C881F2C5457315B57104145F": {
+    "id": "ACFBFFA2C881F2C5457315B57104145F",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFBFFA2C881F2C5457315B57104145F",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFBFFA2C881F2C5457315B57104145F",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-27T09:38:54.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:38:54.275Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:39:02.303Z",
+    "readAt": "2026-11-27T09:39:02.302Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-27T09:39:02.302Z"
+  },
+  "ACA7AFBACCD537C28EAAC89CE346279D": {
+    "id": "ACA7AFBACCD537C28EAAC89CE346279D",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA7AFBACCD537C28EAAC89CE346279D",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA7AFBACCD537C28EAAC89CE346279D",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-27T09:44:44.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:44:44.801Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:44:52.675Z",
+    "readAt": "2026-11-27T09:44:52.674Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-27T09:44:52.674Z"
+  },
+  "ACE50AFE5F8CCCF4886CDFE0BBA6EF52": {
+    "id": "ACE50AFE5F8CCCF4886CDFE0BBA6EF52",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE50AFE5F8CCCF4886CDFE0BBA6EF52",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE50AFE5F8CCCF4886CDFE0BBA6EF52",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-27T09:46:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:46:41.219Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:46:43.936Z",
+    "readAt": "2026-11-27T09:46:43.935Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-27T09:46:43.936Z"
+  },
+  "AC8FD54D716DC1CA035B799D9DC36AEF": {
+    "id": "AC8FD54D716DC1CA035B799D9DC36AEF",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8FD54D716DC1CA035B799D9DC36AEF",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8FD54D716DC1CA035B799D9DC36AEF",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-27T10:55:48.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:55:48.246Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:55:51.653Z",
+    "readAt": "2026-11-27T10:55:51.652Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-27T10:55:51.652Z"
+  },
+  "AC39218888FAFC02B33FEA8995C8D369": {
+    "id": "AC39218888FAFC02B33FEA8995C8D369",
+    "sender": "6283163547358@s.whatsapp.net",
+    "number": "6283163547358",
+    "storyJid": "6283163547358@s.whatsapp.net",
+    "resolvedPn": "6283163547358@s.whatsapp.net",
+    "name": "DWI RAHMAWATI X-J",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC39218888FAFC02B33FEA8995C8D369",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC39218888FAFC02B33FEA8995C8D369",
+      "participant": "94498658992276@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "94498658992276@lid",
+      "6283163547358@s.whatsapp.net"
+    ],
+    "contactHash": "64ad93e1883352f5347cca34317d97e58bba3e31083a340fa1d2438b6ab947f1",
+    "arrivedAt": "2026-11-27T12:34:55.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:34:54.758Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:35:02.695Z",
+    "readAt": "2026-11-27T12:35:02.693Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-27T12:35:02.693Z"
+  }
+}
