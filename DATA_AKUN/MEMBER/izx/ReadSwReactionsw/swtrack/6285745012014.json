@@ -1,0 +1,534 @@
+{
+  "A5AD6BB8E6B7064452823724DABAF78D": {
+    "id": "A5AD6BB8E6B7064452823724DABAF78D",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5AD6BB8E6B7064452823724DABAF78D",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5AD6BB8E6B7064452823724DABAF78D",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-26T22:09:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:09:03.360Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:09:04.990Z",
+    "readAt": "2026-11-26T22:09:04.989Z"
+  },
+  "A52FE6E32F043D2B650C0F78F34E966B": {
+    "id": "A52FE6E32F043D2B650C0F78F34E966B",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A52FE6E32F043D2B650C0F78F34E966B",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A52FE6E32F043D2B650C0F78F34E966B",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-26T22:12:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:12:28.683Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:12:34.588Z",
+    "readAt": "2026-11-26T22:12:34.588Z"
+  },
+  "A50ECC0B91E09DCF6DB59136EE4174F9": {
+    "id": "A50ECC0B91E09DCF6DB59136EE4174F9",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A50ECC0B91E09DCF6DB59136EE4174F9",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A50ECC0B91E09DCF6DB59136EE4174F9",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-26T22:13:31.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:13:31.860Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:13:38.870Z",
+    "readAt": "2026-11-26T22:13:38.869Z"
+  },
+  "A597CE0783053032A3E90D9FA04E5E42": {
+    "id": "A597CE0783053032A3E90D9FA04E5E42",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A597CE0783053032A3E90D9FA04E5E42",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A597CE0783053032A3E90D9FA04E5E42",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-26T22:18:25.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:18:26.088Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:18:29.199Z",
+    "readAt": "2026-11-26T22:18:29.193Z"
+  },
+  "A58D4F5F81E6B28555D6560AD6B94EE8": {
+    "id": "A58D4F5F81E6B28555D6560AD6B94EE8",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A58D4F5F81E6B28555D6560AD6B94EE8",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A58D4F5F81E6B28555D6560AD6B94EE8",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-26T23:38:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:38:27.812Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:38:34.302Z",
+    "readAt": "2026-11-26T23:38:34.299Z"
+  },
+  "A5B4B714D794E074FCD795FC4FDC46AF": {
+    "id": "A5B4B714D794E074FCD795FC4FDC46AF",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5B4B714D794E074FCD795FC4FDC46AF",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5B4B714D794E074FCD795FC4FDC46AF",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-26T23:38:31.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:38:31.375Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:38:34.300Z",
+    "readAt": "2026-11-26T23:38:34.298Z"
+  },
+  "A517F278AF2E87679D527AA884BBE3BA": {
+    "id": "A517F278AF2E87679D527AA884BBE3BA",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A517F278AF2E87679D527AA884BBE3BA",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A517F278AF2E87679D527AA884BBE3BA",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-27T00:13:59.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:13:59.856Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:14:06.968Z",
+    "readAt": "2026-11-27T00:14:06.965Z"
+  },
+  "A53801B7EBBA89F126A88D74C073EF07": {
+    "id": "A53801B7EBBA89F126A88D74C073EF07",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A53801B7EBBA89F126A88D74C073EF07",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A53801B7EBBA89F126A88D74C073EF07",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-27T03:38:32.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T03:38:33.056Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T03:38:39.867Z",
+    "readAt": "2026-11-27T03:38:39.859Z"
+  },
+  "A5E31ED44701C09A35E46B84693825D9": {
+    "id": "A5E31ED44701C09A35E46B84693825D9",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5E31ED44701C09A35E46B84693825D9",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5E31ED44701C09A35E46B84693825D9",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-27T13:10:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:10:53.828Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:10:56.067Z",
+    "readAt": "2026-11-27T13:10:56.055Z"
+  },
+  "A50C1B994A7ECA8D43E80634DC5C8A2E": {
+    "id": "A50C1B994A7ECA8D43E80634DC5C8A2E",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A50C1B994A7ECA8D43E80634DC5C8A2E",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A50C1B994A7ECA8D43E80634DC5C8A2E",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-27T22:32:12.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T22:32:12.646Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T22:32:17.258Z",
+    "readAt": "2026-11-27T22:32:17.257Z"
+  },
+  "A539074140BFE868C0B744F0A29EF56A": {
+    "id": "A539074140BFE868C0B744F0A29EF56A",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A539074140BFE868C0B744F0A29EF56A",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A539074140BFE868C0B744F0A29EF56A",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-27T22:33:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T22:33:36.854Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T22:33:39.463Z",
+    "readAt": "2026-11-27T22:33:39.462Z"
+  },
+  "A566082F2A38A33F24462EF59788D206": {
+    "id": "A566082F2A38A33F24462EF59788D206",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A566082F2A38A33F24462EF59788D206",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A566082F2A38A33F24462EF59788D206",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-27T22:36:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T22:36:36.459Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T22:36:40.669Z",
+    "readAt": "2026-11-27T22:36:40.668Z"
+  },
+  "A50620ABE73DD8792F5D58F414491D0B": {
+    "id": "A50620ABE73DD8792F5D58F414491D0B",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A50620ABE73DD8792F5D58F414491D0B",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A50620ABE73DD8792F5D58F414491D0B",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-27T22:38:44.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T22:38:43.524Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T22:38:46.137Z",
+    "readAt": "2026-11-27T22:38:46.137Z"
+  },
+  "A50373B1C908BDDC8D43D937AA6397F3": {
+    "id": "A50373B1C908BDDC8D43D937AA6397F3",
+    "sender": "6285745012014@s.whatsapp.net",
+    "number": "6285745012014",
+    "storyJid": "6285745012014@s.whatsapp.net",
+    "resolvedPn": "6285745012014@s.whatsapp.net",
+    "name": "Rizkistore",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A50373B1C908BDDC8D43D937AA6397F3",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A50373B1C908BDDC8D43D937AA6397F3",
+      "participant": "281432329072838@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "281432329072838@lid",
+      "6285745012014@s.whatsapp.net"
+    ],
+    "contactHash": "244d57a80d67e4e429ffaeb1637e0a2b912937204cb3989f9af5cc951a654e53",
+    "arrivedAt": "2026-11-27T22:39:32.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T22:39:32.083Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T22:39:33.188Z",
+    "readAt": "2026-11-27T22:39:33.187Z"
+  }
+}

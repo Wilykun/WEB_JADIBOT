@@ -1,0 +1,722 @@
+{
+  "ACB3A4B0C98117F11DD5DDE28CE01F55": {
+    "id": "ACB3A4B0C98117F11DD5DDE28CE01F55",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB3A4B0C98117F11DD5DDE28CE01F55",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB3A4B0C98117F11DD5DDE28CE01F55",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-26T22:55:46.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:55:46.539Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:55:49.217Z",
+    "readAt": "2026-11-26T22:55:49.214Z",
+    "emoji": "😋",
+    "reactedAt": "2026-11-26T22:55:49.214Z"
+  },
+  "ACAC435413FC55B526F518538DDE0EBE": {
+    "id": "ACAC435413FC55B526F518538DDE0EBE",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAC435413FC55B526F518538DDE0EBE",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAC435413FC55B526F518538DDE0EBE",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-26T23:07:55.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:07:56.259Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:08:02.174Z",
+    "readAt": "2026-11-26T23:08:02.172Z",
+    "emoji": "😣",
+    "reactedAt": "2026-11-26T23:08:02.172Z"
+  },
+  "AC228DAF30A64EC240E0BAACBAE83B72": {
+    "id": "AC228DAF30A64EC240E0BAACBAE83B72",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC228DAF30A64EC240E0BAACBAE83B72",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC228DAF30A64EC240E0BAACBAE83B72",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-26T23:20:16.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:20:15.725Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:20:21.321Z",
+    "readAt": "2026-11-26T23:20:21.316Z",
+    "emoji": "⁉️",
+    "reactedAt": "2026-11-26T23:20:21.316Z"
+  },
+  "AC56A304F8CA8AAC937D4A2D02E5DED7": {
+    "id": "AC56A304F8CA8AAC937D4A2D02E5DED7",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC56A304F8CA8AAC937D4A2D02E5DED7",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC56A304F8CA8AAC937D4A2D02E5DED7",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T00:54:44.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:54:44.752Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:54:48.803Z",
+    "readAt": "2026-11-27T00:54:48.801Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-27T00:54:48.801Z"
+  },
+  "ACDD5A6F1B485ED896C401E764D13AD9": {
+    "id": "ACDD5A6F1B485ED896C401E764D13AD9",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDD5A6F1B485ED896C401E764D13AD9",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDD5A6F1B485ED896C401E764D13AD9",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T00:57:20.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:57:20.342Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:57:21.890Z",
+    "readAt": "2026-11-27T00:57:21.889Z",
+    "emoji": "😣",
+    "reactedAt": "2026-11-27T00:57:21.889Z"
+  },
+  "ACBCE916D6038B72B6121788C871A2C5": {
+    "id": "ACBCE916D6038B72B6121788C871A2C5",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBCE916D6038B72B6121788C871A2C5",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBCE916D6038B72B6121788C871A2C5",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T01:01:53.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:01:52.704Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:01:58.499Z",
+    "readAt": "2026-11-27T01:01:58.470Z",
+    "emoji": "😏",
+    "reactedAt": "2026-11-27T01:01:58.470Z"
+  },
+  "AC764771B96B3F14AB02F96058A79C56": {
+    "id": "AC764771B96B3F14AB02F96058A79C56",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC764771B96B3F14AB02F96058A79C56",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC764771B96B3F14AB02F96058A79C56",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T02:56:44.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:56:44.220Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:56:46.551Z",
+    "readAt": "2026-11-27T02:56:46.550Z",
+    "emoji": "😜",
+    "reactedAt": "2026-11-27T02:56:46.550Z"
+  },
+  "AC579ED3BD0479F1CF1DB896077440D8": {
+    "id": "AC579ED3BD0479F1CF1DB896077440D8",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC579ED3BD0479F1CF1DB896077440D8",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC579ED3BD0479F1CF1DB896077440D8",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T11:08:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:08:44.989Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:08:49.454Z",
+    "readAt": "2026-11-27T11:08:49.451Z",
+    "emoji": "😏",
+    "reactedAt": "2026-11-27T11:08:49.451Z"
+  },
+  "ACDD29D283002D994013C6243DB9741C": {
+    "id": "ACDD29D283002D994013C6243DB9741C",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDD29D283002D994013C6243DB9741C",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDD29D283002D994013C6243DB9741C",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T11:35:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:35:21.054Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:35:25.445Z",
+    "readAt": "2026-11-27T11:35:25.438Z",
+    "emoji": "🤓",
+    "reactedAt": "2026-11-27T11:35:25.438Z"
+  },
+  "AC015CAC4886B6E5D03470295FDB6EA9": {
+    "id": "AC015CAC4886B6E5D03470295FDB6EA9",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC015CAC4886B6E5D03470295FDB6EA9",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC015CAC4886B6E5D03470295FDB6EA9",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T11:35:33.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:35:33.558Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:35:37.069Z",
+    "readAt": "2026-11-27T11:35:37.050Z",
+    "emoji": "😣",
+    "reactedAt": "2026-11-27T11:35:37.050Z"
+  },
+  "AC64520AF1DC8C3EC1F65150BE72CDEF": {
+    "id": "AC64520AF1DC8C3EC1F65150BE72CDEF",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC64520AF1DC8C3EC1F65150BE72CDEF",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC64520AF1DC8C3EC1F65150BE72CDEF",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T11:46:04.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:46:04.599Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:46:09.555Z",
+    "readAt": "2026-11-27T11:46:09.554Z",
+    "emoji": "🥵",
+    "reactedAt": "2026-11-27T11:46:09.554Z"
+  },
+  "AC3B8EFBDB5684052BF75C06CDFD3C55": {
+    "id": "AC3B8EFBDB5684052BF75C06CDFD3C55",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3B8EFBDB5684052BF75C06CDFD3C55",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3B8EFBDB5684052BF75C06CDFD3C55",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T11:46:05.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:46:05.003Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:46:09.177Z",
+    "readAt": "2026-11-27T11:46:09.176Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-27T11:46:09.176Z"
+  },
+  "AC7F0C160DE49C8660A3E903131FE68E": {
+    "id": "AC7F0C160DE49C8660A3E903131FE68E",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7F0C160DE49C8660A3E903131FE68E",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7F0C160DE49C8660A3E903131FE68E",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T12:35:16.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:35:16.351Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:35:21.267Z",
+    "readAt": "2026-11-27T12:35:21.264Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-27T12:35:21.264Z"
+  },
+  "AC220311CD6D54468CFC2109FB06C580": {
+    "id": "AC220311CD6D54468CFC2109FB06C580",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC220311CD6D54468CFC2109FB06C580",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC220311CD6D54468CFC2109FB06C580",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T12:37:40.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:37:39.713Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:37:44.338Z",
+    "readAt": "2026-11-27T12:37:44.337Z",
+    "emoji": "🥵",
+    "reactedAt": "2026-11-27T12:37:44.337Z"
+  },
+  "AC12E8C7B8D4869BC2B40F40435D7B09": {
+    "id": "AC12E8C7B8D4869BC2B40F40435D7B09",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC12E8C7B8D4869BC2B40F40435D7B09",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC12E8C7B8D4869BC2B40F40435D7B09",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T12:44:49.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:44:48.810Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:44:53.401Z",
+    "readAt": "2026-11-27T12:44:53.399Z",
+    "emoji": "😋",
+    "reactedAt": "2026-11-27T12:44:53.399Z"
+  },
+  "AC39BE5D0C2D857E7A6B8FE11D92A42A": {
+    "id": "AC39BE5D0C2D857E7A6B8FE11D92A42A",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC39BE5D0C2D857E7A6B8FE11D92A42A",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC39BE5D0C2D857E7A6B8FE11D92A42A",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T15:41:30.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:41:30.681Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:41:35.237Z",
+    "readAt": "2026-11-27T15:41:35.236Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-27T15:41:35.236Z"
+  },
+  "AC9A6DDC518D0909150524E9639AB686": {
+    "id": "AC9A6DDC518D0909150524E9639AB686",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9A6DDC518D0909150524E9639AB686",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9A6DDC518D0909150524E9639AB686",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T15:49:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:49:28.378Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:49:32.216Z",
+    "readAt": "2026-11-27T15:49:32.215Z",
+    "emoji": "🥵",
+    "reactedAt": "2026-11-27T15:49:32.215Z"
+  },
+  "ACD1542D14AF60EC0E08066C58EDD03C": {
+    "id": "ACD1542D14AF60EC0E08066C58EDD03C",
+    "sender": "6281998885893@s.whatsapp.net",
+    "number": "6281998885893",
+    "storyJid": "6281998885893@s.whatsapp.net",
+    "resolvedPn": "6281998885893@s.whatsapp.net",
+    "name": "THE COUNCIL💀||투어스",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD1542D14AF60EC0E08066C58EDD03C",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD1542D14AF60EC0E08066C58EDD03C",
+      "participant": "178172758864063@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "178172758864063@lid",
+      "6281998885893@s.whatsapp.net"
+    ],
+    "contactHash": "6eeb935d1d68ba3a58dbd3e9ed4bf09e56925ccad633cccf4c48955928365e49",
+    "arrivedAt": "2026-11-27T17:04:49.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T17:04:49.309Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T17:04:54.792Z",
+    "readAt": "2026-11-27T17:04:54.785Z",
+    "emoji": "🥵",
+    "reactedAt": "2026-11-27T17:04:54.785Z"
+  }
+}
