@@ -1646,6 +1646,24 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     return publicState(sessions.get(userId));
   }
 
+  // Kirim pesan teks langsung ke nomor WhatsApp akun itu sendiri (self-message)
+  // — dipakai untuk mengirim kata sandi sementara saat lupa sandi. Hanya bisa
+  // bila sesi WhatsApp akun itu sedang tertaut dan soketnya aktif.
+  async function sendDirectMessage(userId, text) {
+    const state = sessions.get(userId);
+    if (!state || state.status !== 'linked') return { ok: false, reason: 'not_linked' };
+    const socket = state.socket;
+    if (!socket || typeof socket.sendMessage !== 'function') return { ok: false, reason: 'not_linked' };
+    const selfJid = normalizeJid(socket.user?.id) || normalizeJid(state.authState?.state?.creds?.me?.id);
+    if (!selfJid) return { ok: false, reason: 'no_number' };
+    try {
+      await socket.sendMessage(selfJid, { text: String(text || '') });
+      return { ok: true };
+    } catch {
+      return { ok: false, reason: 'send_failed' };
+    }
+  }
+
   // Status pairing untuk notifikasi "WhatsApp belum tertaut": kalau sesi
   // belum sempat dicoba lagi di proses panel ini (panel baru restart dan
   // antrean resume belum sampai ke akun ini), ambil catatan terputus
@@ -2124,5 +2142,5 @@ export function createPairingManager({ dataDir, appendLog, getAuthDir = () => nu
     sessions.clear();
   }
 
-  return { start, getState, getStatusWithUnlink, getLastUnlink, getSavedSessionInfo, setOnline24, getPublicStats, startBot, restartBot, stopBot, cancelPending, stop, resume, deleteSession, shutdown };
+  return { start, getState, sendDirectMessage, getStatusWithUnlink, getLastUnlink, getSavedSessionInfo, setOnline24, getPublicStats, startBot, restartBot, stopBot, cancelPending, stop, resume, deleteSession, shutdown };
 }

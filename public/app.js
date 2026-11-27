@@ -3,6 +3,7 @@ const appView = document.querySelector('#app-view');
 const bootScreen = document.querySelector('#boot-screen');
 const loginForm = document.querySelector('#login-form');
 const registerForm = document.querySelector('#register-form');
+const forgotForm = document.querySelector('#forgot-form');
 const verificationForm = document.querySelector('#verification-form');
 const adminAccessForm = document.querySelector('#admin-access-form');
 const authMessage = document.querySelector('#auth-message');
@@ -566,6 +567,7 @@ function setAuthMode(mode) {
   authView.classList.toggle('is-registering', registering);
   loginForm.classList.toggle('hidden', registering);
   registerForm.classList.toggle('hidden', !registering);
+  forgotForm?.classList.add('hidden');
   verificationForm.classList.add('hidden');
   adminAccessForm?.classList.add('hidden');
   document.querySelector('#auth-eyebrow').textContent = registering ? 'MULAI DARI SINI' : 'SELAMAT DATANG KEMBALI';
@@ -584,6 +586,22 @@ function setAuthMode(mode) {
     updatePasswordStrength();
     updatePasswordConfirmation();
   }
+}
+
+// Lupa sandi (ronde 33, email saja): tampilkan formulir lupa sandi dan
+// sembunyikan formulir login/daftar; kembali lewat setAuthMode('login').
+function showForgotForm() {
+  hideAccountNotice();
+  loginForm.classList.add('hidden');
+  registerForm.classList.add('hidden');
+  verificationForm.classList.add('hidden');
+  adminAccessForm?.classList.add('hidden');
+  forgotForm?.classList.remove('hidden');
+  document.querySelector('#auth-eyebrow').textContent = 'LUPA SANDI';
+  document.querySelector('#auth-title').textContent = 'Reset kata sandi';
+  document.querySelector('#auth-subtitle').textContent = 'Sandi sementara dikirim bot ke WhatsApp kamu.';
+  document.querySelector('#auth-switch').innerHTML = 'Ingat sandimu? <button type="button" data-action="show-login">Masuk</button>';
+  setAuthMessage('');
 }
 
 function showVerificationForm(payload) {
@@ -3699,6 +3717,63 @@ function startAdminUsersPolling() {
   }, 15000);
 }
 
+// Log Reset Sandi (ronde 33, admin saja): tampilkan percobaan lupa sandi
+// realtime — sandi sementara, status pengiriman WA, dan info akun.
+async function loadPasswordResetLog() {
+  const list = document.querySelector('#password-reset-log-list');
+  const updated = document.querySelector('#password-reset-log-updated');
+  if (!list || currentUser?.role !== 'admin') return;
+  try {
+    const result = await api('/api/admin/password-resets');
+    const resets = Array.isArray(result.resets) ? result.resets : [];
+    list.replaceChildren();
+    if (!resets.length) {
+      const empty = document.createElement('li');
+      empty.className = 'password-reset-log-empty';
+      empty.textContent = 'Belum ada permintaan lupa sandi.';
+      list.append(empty);
+    } else {
+      for (const entry of resets) {
+        const item = document.createElement('li');
+        item.className = 'password-reset-log-item';
+        const when = new Date(entry.createdAt);
+        const timeLabel = Number.isNaN(when.getTime()) ? '' : when.toLocaleString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const sent = entry.status === 'sent';
+        item.innerHTML = `<div class="password-reset-log-head"><strong></strong><span class="password-reset-log-status ${sent ? 'is-sent' : 'is-failed'}">${sent ? 'Terkirim' : 'Gagal'}</span><span class="password-reset-log-time"></span></div><p class="password-reset-log-meta"></p>`;
+        item.querySelector('strong').textContent = entry.displayName || entry.username || '—';
+        item.querySelector('.password-reset-log-time').textContent = timeLabel;
+        const meta = item.querySelector('.password-reset-log-meta');
+        const userLine = document.createElement('span');
+        userLine.textContent = `@${entry.username || '—'} · ${entry.email || '—'} · ${entry.role === 'admin' ? 'Admin' : 'Member'}`;
+        meta.append(userLine);
+        meta.append(document.createElement('br'));
+        const tempLabel = document.createElement('span');
+        tempLabel.textContent = 'Sandi sementara: ';
+        const tempCode = document.createElement('code');
+        tempCode.textContent = entry.tempPassword || '—';
+        meta.append(tempLabel, tempCode);
+        if (!sent && entry.reason) {
+          const reason = document.createElement('span');
+          reason.className = 'password-reset-log-reason';
+          reason.textContent = ` — ${entry.reason}`;
+          meta.append(reason);
+        }
+        list.append(item);
+      }
+    }
+    if (updated) updated.textContent = `Diperbarui ${new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}`;
+  } catch {
+    // Log tidak tersedia; dashboard tetap jalan.
+  }
+}
+let passwordResetLogTimer = null;
+function startPasswordResetLogPolling() {
+  if (passwordResetLogTimer) return;
+  passwordResetLogTimer = setInterval(() => {
+    if (document.visibilityState === 'visible' && currentUser && !appView.classList.contains('hidden')) void loadPasswordResetLog();
+  }, 15000);
+}
+
 function setPairingNotice(text, success = false, info = false) {
   const notice = document.querySelector('#pairing-notice');
   if (!notice) return;
@@ -5433,6 +5508,7 @@ async function showDashboard(user) {
   document.querySelector('#top-user-name').textContent = displayName;
   document.querySelector('#profile-display-title').textContent = displayName;
   document.querySelector('#profile-username-label').textContent = user.username;
+  document.querySelector('#profile-email-label').textContent = user.email || '';
   document.querySelector('#sidebar-account-role').textContent = user.role === 'admin' ? 'ADMIN' : 'MEMBER';
   document.querySelector('#sidebar-account-username').textContent = `@${user.username}`;
   applyAvatar(user);
@@ -5469,6 +5545,8 @@ async function showDashboard(user) {
   await loadLoginHistory();
   startLoginHistoryPolling();
   startAdminUsersPolling();
+  void loadPasswordResetLog();
+  startPasswordResetLogPolling();
   startBotControlUsersPolling();
   startPresenceHeartbeat();
 }
@@ -5740,12 +5818,110 @@ loginForm.addEventListener('submit', async (event) => {
     const data = Object.fromEntries(new FormData(loginForm));
     const result = await waitForAuthAnimation(api('/api/auth/login', { method: 'POST', body: JSON.stringify(data) }));
     await showDashboard(result.user);
+    if (result.user?.mustChangePassword) showChangePasswordModal();
   } catch (error) {
     if (error.payload?.banned === true) showAccountNotice('banned', error.payload.banReason);
     else if (error.payload?.deleted === true) showAccountNotice('deleted', error.payload.reason);
     else setAuthMessage(error.message);
   } finally {
     setAuthSubmitLoading(button, 'login', false);
+  }
+});
+
+// Lupa sandi (ronde 33): kirim email saja; server membuat sandi sementara
+// dan bot mengirimnya ke WhatsApp yang tertaut ke akun itu. Bila email cocok,
+// tampilkan kartu status akun (avatar, nama, peran) di bawah form; bila tidak
+// ditemukan, goyangkan kolom email dan tampilkan animasi pemberitahuan.
+forgotForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  setAuthMessage('');
+  const emailInput = forgotForm.querySelector('input[name="email"]');
+  const notFound = document.querySelector('#forgot-notfound');
+  const notFoundText = document.querySelector('#forgot-notfound-text');
+  const accountCard = document.querySelector('#forgot-account');
+  notFound?.classList.add('hidden');
+  accountCard?.classList.add('hidden');
+  const button = forgotForm.querySelector('button[type="submit"]');
+  setAuthSubmitLoading(button, 'login', true);
+  try {
+    const data = Object.fromEntries(new FormData(forgotForm));
+    const result = await api('/api/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email: data.email }) });
+    setAuthMessage(result.message || 'Kata sandi sementara sudah dikirim ke WhatsApp kamu.', true);
+    if (result.account) {
+      const account = result.account;
+      const avatar = document.querySelector('#forgot-account-avatar');
+      if (avatar) {
+        avatar.src = account.avatar === 'uploaded'
+          ? `/api/admin/user-avatar?userId=${encodeURIComponent(account.id)}`
+          : `/avatars/${/^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(account.avatar || '') ? account.avatar : 'avatar-01'}.webp`;
+        avatar.alt = account.displayName || account.username || '';
+      }
+      document.querySelector('#forgot-account-name').textContent = account.displayName || account.username || '';
+      document.querySelector('#forgot-account-username').textContent = `@${account.username || ''} · ${account.email || ''}`;
+      const roleEl = document.querySelector('#forgot-account-role');
+      roleEl.textContent = account.isMainAdmin ? 'ADMIN UTAMA' : account.role === 'admin' ? 'ADMIN' : 'MEMBER';
+      roleEl.classList.toggle('is-main-admin', Boolean(account.isMainAdmin));
+      roleEl.classList.toggle('is-admin', !account.isMainAdmin && account.role === 'admin');
+      const statusEl = document.querySelector('#forgot-account-status');
+      statusEl.textContent = result.sent
+        ? 'Sandi sementara terkirim ke WhatsApp yang tertaut ke akun ini. Buka WhatsApp lalu masuk dengan sandi itu.'
+        : 'Sandi sementara sudah dibuat, tapi WhatsApp belum tertaut sehingga bot tidak bisa mengirimnya. Hubungi admin untuk meminta sandi sementaramu.';
+      statusEl.classList.toggle('is-failed', !result.sent);
+      accountCard?.classList.remove('hidden');
+    }
+    forgotForm.reset();
+  } catch (error) {
+    if (error.status === 404) {
+      notFoundText.textContent = 'Email tidak ditemukan. Periksa lagi ejaannya — email harus sama persis dengan yang terdaftar di akunmu.';
+      notFound?.classList.remove('hidden');
+      emailInput?.classList.remove('forgot-shake');
+      void emailInput?.offsetWidth;
+      emailInput?.classList.add('forgot-shake');
+      emailInput?.focus();
+    } else {
+      setAuthMessage(error.message);
+    }
+  } finally {
+    setAuthSubmitLoading(button, 'login', false);
+  }
+});
+
+// Wajib ganti sandi setelah login pakai sandi sementara: modal ini tidak bisa
+// ditutup sebelum sandi baru tersimpan.
+function showChangePasswordModal() {
+  document.querySelector('#change-password-overlay')?.classList.remove('hidden');
+  document.querySelector('#change-password-form input[name="currentPassword"]')?.focus();
+}
+function hideChangePasswordModal() {
+  document.querySelector('#change-password-overlay')?.classList.add('hidden');
+}
+document.querySelector('#change-password-form')?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const message = document.querySelector('#change-password-message');
+  const data = Object.fromEntries(new FormData(form));
+  if (data.newPassword !== data.confirmPassword) {
+    message.textContent = 'Konfirmasi sandi baru belum cocok.';
+    message.classList.remove('hidden', 'is-ok');
+    message.classList.add('is-error');
+    return;
+  }
+  const button = form.querySelector('button[type="submit"]');
+  button.disabled = true;
+  try {
+    await api('/api/auth/change-password', { method: 'POST', body: JSON.stringify({ currentPassword: data.currentPassword, newPassword: data.newPassword }) });
+    message.textContent = 'Kata sandi berhasil diganti. Akunmu aman sekarang.';
+    message.classList.remove('hidden', 'is-error');
+    message.classList.add('is-ok');
+    if (currentUser) currentUser.mustChangePassword = false;
+    form.reset();
+    setTimeout(hideChangePasswordModal, 1200);
+  } catch (error) {
+    message.textContent = error.message;
+    message.classList.remove('hidden', 'is-ok');
+    message.classList.add('is-error');
+  } finally {
+    button.disabled = false;
   }
 });
 
@@ -6345,6 +6521,7 @@ document.addEventListener('click', async (event) => {
   const action = event.target.closest('[data-action]')?.dataset.action;
   if (action === 'show-register') return setAuthMode('register');
   if (action === 'show-login') return setAuthMode('login');
+  if (action === 'show-forgot') return showForgotForm();
   if (action === 'logout') {
     const logoutButton = event.target.closest('[data-action="logout"]');
     if (logoutButton?.disabled) return;

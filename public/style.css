@@ -3411,3 +3411,53 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
   .chat-send{width:48px;height:48px}
   .chat-hero{padding:6px 8px}
 }
+
+/* Lupa sandi (ronde 33): tautan + petunjuk di halaman login. */
+.auth-forgot{margin:10px 0 0;text-align:center}
+.auth-forgot button{background:none;border:0;padding:4px 8px;font-size:13px;font-weight:600;color:var(--green2);cursor:pointer}
+.auth-forgot button:hover{text-decoration:underline}
+.forgot-hint{margin:0;font-size:12px;line-height:1.6;color:var(--muted)}
+/* Modal wajib ganti sandi setelah login pakai sandi sementara. */
+.change-password-card{width:min(460px,100%);text-align:left}
+.change-password-copy{margin:0 0 14px;font-size:13px;line-height:1.6;color:var(--soft)}
+.change-password-message{margin:0 0 10px;padding:9px 11px;border-radius:9px;font-size:12px;line-height:1.5}
+.change-password-message.is-error{background:rgba(244,67,54,.12);color:#ff9d97}
+.change-password-message.is-ok{background:rgba(49,213,139,.12);color:#7be3ae}
+/* Log Reset Sandi admin (ronde 33): daftar realtime di halaman Daftar member. */
+.password-reset-log-card{margin-top:14px}
+.password-reset-log-list{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto}
+.password-reset-log-empty{font-size:13px;color:var(--muted);padding:10px 2px}
+.password-reset-log-item{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:rgba(231,250,238,.02)}
+.password-reset-log-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.password-reset-log-head strong{font-size:13px}
+.password-reset-log-status{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px}
+.password-reset-log-status.is-sent{background:rgba(49,213,139,.14);color:#7be3ae}
+.password-reset-log-status.is-failed{background:rgba(244,67,54,.14);color:#ff9d97}
+.password-reset-log-time{margin-left:auto;font-size:11px;color:var(--muted)}
+.password-reset-log-meta{margin:6px 0 0;font-size:12px;color:var(--soft);line-height:1.6;word-break:break-word}
+.password-reset-log-meta code{background:rgba(231,250,238,.07);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:12px;font-weight:700;color:var(--text);letter-spacing:.4px}
+.password-reset-log-reason{color:#ff9d97}
+@media(max-width:560px){.password-reset-log-list{max-height:360px}.password-reset-log-time{margin-left:0}}
+
+/* Kartu status akun setelah email lupa sandi ditemukan (ronde 33b). */
+.forgot-account{margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:rgba(49,213,139,.06);display:flex;flex-wrap:wrap;align-items:center;gap:12px;animation:forgot-account-in .35s ease both}
+@keyframes forgot-account-in{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.forgot-account-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:0 0 auto;border:2px solid rgba(49,213,139,.45)}
+.forgot-account-copy{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1 1 120px}
+.forgot-account-copy strong{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.forgot-account-copy span{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.forgot-account-role{font-weight:700}
+.forgot-account-role.is-main-admin{color:#f5c542}
+.forgot-account-role.is-admin{color:#3ee69a}
+.forgot-account-status{flex:1 1 100%;margin:0;font-size:12px;line-height:1.6;color:var(--soft)}
+.forgot-account-status.is-failed{color:#ff9d97}
+/* Goyang saat email tidak ditemukan (ronde 33b). */
+@keyframes forgot-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.forgot-shake{animation:forgot-shake .45s ease}
+.forgot-notfound{display:flex;align-items:flex-start;gap:9px;margin:12px 0 0;padding:11px 12px;border-radius:12px;border:1px solid rgba(244,67,54,.4);background:rgba(244,67,54,.1);font-size:13px;line-height:1.55;color:#ffc4c0;animation:forgot-account-in .3s ease both}
+.forgot-notfound svg{flex:0 0 auto;width:19px;height:19px;margin-top:1px}
+@media(max-width:560px){.forgot-account-avatar{width:48px;height:48px}.forgot-account-copy strong{font-size:14px}}
+
+/* Email di kepala Profil (ronde 33c): tampil di bawah @username, rapi di HP. */
+.profile-email-line{margin-top:2px!important;font-size:12px!important;color:var(--soft)!important;word-break:break-all;overflow-wrap:anywhere}
+@media(max-width:560px){.profile-identity{gap:12px}.profile-identity h3{font-size:18px}.profile-email-line{font-size:11px!important}}

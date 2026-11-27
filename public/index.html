@@ -18,9 +18,9 @@
   <meta name="twitter:image" content="https://readsw.my.id/og-image.png?v=2">
   <title>ReactionSw</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="stylesheet" href="/style.css?v=notifikasi-pembaruan-baru-20261127">
+  <link rel="stylesheet" href="/style.css?v=lupa-sandi-email-bot-wa-20261127">
   <script src="/footer.js" defer=""></script>
-  <script src="/app.js?v=notifikasi-pembaruan-baru-20261127" defer=""></script>
+  <script src="/app.js?v=lupa-sandi-email-bot-wa-20261127" defer=""></script>
 </head>
 <body>
   <div id="boot-screen" class="boot-screen" role="status" aria-live="polite" aria-label="Memulihkan sesi">
@@ -183,6 +183,23 @@
           <label class="field"><span>Email atau username</span><input name="identifier" autocomplete="username" required="" maxlength="254" placeholder="nama atau email@contoh.com"></label>
           <div class="field password-field"><label class="password-label" for="login-password"><span>Kata sandi</span></label><div class="password-control"><input id="login-password" name="password" type="password" autocomplete="current-password" required="" maxlength="128" placeholder="Masukkan kata sandi"><button class="password-toggle" type="button" data-password-toggle="" data-password-label="kata sandi" aria-label="Tampilkan kata sandi" aria-controls="login-password" aria-pressed="false" title="Tampilkan kata sandi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle><path class="password-eye-slash" d="m4 4 16 16"></path></svg></button></div></div>
           <button class="button button-primary button-wide" type="submit">Masuk <span>→</span></button>
+          <p class="auth-forgot"><button type="button" data-action="show-forgot">Lupa sandi?</button></p>
+        </form>
+        <form id="forgot-form" class="form-stack hidden" autocomplete="on">
+          <label class="field"><span>Email akun</span><input name="email" type="email" autocomplete="email" required="" maxlength="254" placeholder="email@contoh.com"></label>
+          <p class="forgot-hint">Masukkan email yang terdaftar di akunmu. Kata sandi sementara akan dikirim bot ke WhatsApp yang tertaut ke akun itu.</p>
+          <button class="button button-primary button-wide" type="submit">Kirim sandi sementara <span>→</span></button>
+          <p class="forgot-notfound hidden" id="forgot-notfound" role="alert" aria-live="polite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.5h.01"/></svg><span id="forgot-notfound-text"></span></p>
+          <div class="forgot-account hidden" id="forgot-account" aria-live="polite">
+            <img class="forgot-account-avatar" id="forgot-account-avatar" alt="" width="56" height="56">
+            <div class="forgot-account-copy">
+              <strong id="forgot-account-name"></strong>
+              <span id="forgot-account-username"></span>
+              <span class="forgot-account-role" id="forgot-account-role"></span>
+            </div>
+            <p class="forgot-account-status" id="forgot-account-status"></p>
+          </div>
+          <p class="auth-forgot"><button type="button" data-action="show-login">Kembali ke Masuk</button></p>
         </form>
         <form id="register-form" class="form-stack hidden" autocomplete="on">
           <div class="register-role-picker" role="radiogroup" aria-label="Pilih jenis akun">
@@ -442,7 +459,7 @@
             </fieldset>
           </div>
           <div class="profile-card profile-card-rich">
-            <div class="profile-identity"><img class="profile-avatar-image" id="profile-avatar-image" src="/avatars/avatar-01.webp" alt="Avatar profil"><div><span class="eyebrow">IDENTITAS AKUN</span><h3 id="profile-display-title">Akun</h3><p>@<span id="profile-username-label">username</span></p></div></div>
+            <div class="profile-identity"><img class="profile-avatar-image" id="profile-avatar-image" src="/avatars/avatar-01.webp" alt="Avatar profil"><div><span class="eyebrow">IDENTITAS AKUN</span><h3 id="profile-display-title">Akun</h3><p>@<span id="profile-username-label">username</span></p><p class="profile-email-line" id="profile-email-label"></p></div></div>
             <div class="profile-avatar-picker"><div class="avatar-picker-heading"><div><strong>Pilih avatar</strong><small>48 ilustrasi anime 2D · 24 cowok dan 24 cewek</small></div><button class="avatar-random-button" id="avatar-random" type="button">Acak avatar <span aria-hidden="true">⤨</span></button></div><div class="avatar-selection-note" id="avatar-selection-note" aria-live="polite">Avatar aktif akan tampil di profil dan menu akun.</div>
 <div class="avatar-picker-row"><div class="avatar-browser">
 <div class="avatar-tabs" role="tablist" aria-label="Kategori avatar"><button class="avatar-tab is-active" type="button" role="tab" aria-selected="true" data-avatar-filter="all"><span>Semua</span><b>48</b></button><button class="avatar-tab" type="button" role="tab" aria-selected="false" data-avatar-filter="male"><span>Cowok</span><b>24</b></button><button class="avatar-tab" type="button" role="tab" aria-selected="false" data-avatar-filter="female"><span>Cewek</span><b>24</b></button></div>
@@ -614,6 +631,10 @@
             </div></div>
           </div>
           <div class="admin-card"><div id="admin-users" class="member-accordion-list" role="region" aria-label="Daftar akun admin dan member"><p class="member-list-loading">Memuat daftar akun…</p></div><p class="filter-empty" id="member-filter-empty" hidden>Tidak ada akun yang cocok. Ubah kata pencarian atau kategori.</p></div>
+          <div class="admin-card password-reset-log-card" id="password-reset-log-card">
+            <div class="section-heading compact"><div><div class="eyebrow">ADMIN · LOG CONSOLE</div><h2 id="password-reset-log-title">Log Reset Sandi</h2><p>Permintaan lupa sandi member — sandi sementara, status pengiriman WhatsApp, dan info akun. Hanya admin yang bisa melihat. Diperbarui otomatis setiap 15 detik.</p></div><span class="section-counter" id="password-reset-log-updated">Memuat…</span></div>
+            <ul class="password-reset-log-list" id="password-reset-log-list" aria-live="polite"><li class="password-reset-log-empty">Memuat log reset sandi…</li></ul>
+          </div>
         </section>
 
         <section id="rankbot" class="profile-section member-page hidden" data-page-view="rankbot" aria-labelledby="rankbot-title">
@@ -790,6 +811,7 @@
                 </div></div>
               </div>
               <ul class="info-update-list">
+          <li class="info-update-item" data-tag="fitur-baru"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg></span></div><div class="info-update-body"><h4>Lupa sandi kini pakai email, bot kirim sandi sementara lewat WhatsApp</h4><p class="info-update-meta">Jumat, 27 Nov 2026 · 22.32 WIB</p><span class="info-update-tag">Fitur baru</span><div class="info-update-desc"><p>Lupa sandi kini cukup isi email yang terdaftar di akun — username sengaja tidak dipakai supaya orang lain tidak bisa memicu reset akunmu. Bot mengirim kata sandi sementara ke WhatsApp yang tertaut ke akun itu; masuk dengan sandi itu lalu wajib ganti ke sandi baru minimal 12 karakter. Kalau email cocok, kartu status akun (avatar, nama, peran) langsung muncul di bawah form; kalau email tidak ditemukan, kolom email bergoyang dan muncul animasi pemberitahuan. Email tiap akun kini juga tampil di kepala halaman Profil, di bawah @username. Admin memantau semua permintaan reset lewat Log Reset Sandi realtime di halaman Daftar member, lengkap dengan sandi sementara, status pengiriman WhatsApp, dan info akun.</p></div></div></li>
                         <li class="info-update-item" data-tag="fitur-baru"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l1.9 5.4 5.6 1.6-5.6 1.9L12 17.5l-1.9-5.6-5.6-1.9 5.6-1.6z"/></svg></span></div><div class="info-update-body"><h4>Notifikasi Pembaruan baru kini menampilkan isi update realtime</h4><p class="info-update-meta">Jumat, 27 Nov 2026 · 21.55 WIB</p><span class="info-update-tag">Fitur baru</span><div class="info-update-desc"><p>Saat ada pembaruan baru, kini muncul kartu notifikasi Pembaruan baru di tengah layar untuk semua akun yang login, lengkap dengan isi update-nya — judul, hari dan jam, kategori beserta ikonnya, dan deskripsi yang bisa digulir — bukan lagi sekadar toast. Kalau ada beberapa update yang belum dibaca (misalnya karena jarang membuka panel), semuanya tampil sekaligus beserta hitungannya yang akurat. Tombol Muat ulang memakai versi terbaru, Tutup semua menandai semua update sebagai dibaca, Tutup hanya menutup kartu, dan Lihat update sebelumnya membuka halaman Info Update.</p></div></div></li>
 <li class="info-update-item" data-tag="tampilan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div><div class="info-update-body"><h4>Nama member di Obrolan kini putih bawaan, hanya admin yang berwarna</h4><p class="info-update-meta">Jumat, 27 Nov 2026 · 21.47 WIB</p><span class="info-update-tag">Tampilan</span><div class="info-update-desc"><p>Nama member biasa di Obrolan kini putih bawaan, tidak lagi berwarna-warni per nama; hanya nama ADMIN UTAMA yang emas dan ADMIN yang hijau.</p></div></div></li>
 <li class="info-update-item" data-tag="tampilan"><div class="info-update-poster"><span class="info-update-poster-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span></div><div class="info-update-body"><h4>Animasi listrik chip peran diperjelas dengan cincin energi berputar</h4><p class="info-update-meta">Jumat, 27 Nov 2026 · 21.37 WIB</p><span class="info-update-tag">Tampilan</span><div class="info-update-desc"><p>Animasi listrik chip ADMIN UTAMA dan ADMIN diperjelas dari riset terbaru: cincin energi conic-gradient berputar mengelilingi chip plus kilat yang lebih kuat, supaya efek listriknya jelas terlihat di HP dan desktop.</p></div></div></li>
@@ -987,6 +1009,20 @@
         <ul class="info-update-list info-update-notice-list" id="info-update-notice-list"></ul>
         <button class="info-update-notice-more" type="button" data-info-update-notice-more>Lihat update sebelumnya →</button>
         <div class="notice-actions info-update-notice-actions"><button class="button button-primary" type="button" data-info-update-notice-reload>Muat ulang</button><button class="button button-secondary" type="button" data-info-update-notice-dismiss-all>Tutup semua</button><button class="button button-secondary" type="button" data-info-update-notice-close>Tutup</button></div>
+      </div>
+    </div>
+    <div id="change-password-overlay" class="notice-overlay hidden" role="alertdialog" aria-modal="true" aria-labelledby="change-password-title">
+      <div class="notice-card change-password-card">
+        <span class="notice-icon" aria-hidden="true">🔑</span>
+        <h3 id="change-password-title">Ganti kata sandi</h3>
+        <p class="change-password-copy">Kamu masuk memakai kata sandi sementara. Buat kata sandi baru (minimal 12 karakter) untuk mengamankan akunmu.</p>
+        <form id="change-password-form" class="form-stack" autocomplete="on">
+          <label class="field"><span>Sandi sementara</span><input name="currentPassword" type="password" autocomplete="current-password" required="" maxlength="128" placeholder="Sandi sementara dari WhatsApp"></label>
+          <label class="field"><span>Sandi baru</span><input name="newPassword" type="password" autocomplete="new-password" required="" minlength="12" maxlength="128" placeholder="Minimal 12 karakter"></label>
+          <label class="field"><span>Ulangi sandi baru</span><input name="confirmPassword" type="password" autocomplete="new-password" required="" minlength="12" maxlength="128" placeholder="Ketik ulang sandi baru"></label>
+          <p class="change-password-message hidden" id="change-password-message" role="alert" aria-live="polite"></p>
+          <button class="button button-primary button-wide" type="submit">Simpan sandi baru</button>
+        </form>
       </div>
     </div>
     <div id="rank-overtake-detail" class="notice-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="rank-overtake-detail-title">

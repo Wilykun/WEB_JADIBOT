@@ -147,6 +147,7 @@ function publicUser(user) {
     avatarMime: user.avatar === 'uploaded' ? (user.avatarMime || null) : null,
     role: user.role,
     isMainAdmin: isMainAdmin(user),
+    mustChangePassword: Boolean(user.mustChangePassword),
     createdAt: user.createdAt,
   };
 }
@@ -1978,6 +1979,37 @@ async function handleApi(req, res, url) {
     return sendJson(res, 200, { user: publicUser(verifiedUser) }, { 'Set-Cookie': cookieHeader(token, SESSION_TTL_MS / 1000, req) });
   }
 
+  // Lupa sandi (email saja, bukan username): kata sandi member tersimpan
+  // sebagai hash scrypt sehingga kata sandi aslinya tidak bisa diambil atau
+  // dikirim; bot mengirim kata sandi SEMENTARA lewat WhatsApp ke nomor yang
+  // tertaut ke akun itu, lalu member wajib menggantinya saat login. Username
+  // sengaja tidak diterima — username terlihat di daftar member sehingga
+  // siapa pun bisa memicu reset akun orang lain; email hanya diketahui
+  // pemilik akunnya. Setiap percobaan dicatat ke data/password-resets.json
+  // supaya admin bisa memantau realtime (termasuk sandi sementaranya, agar
+  // admin bisa membantu bila pengiriman WA gagal).
+  const PASSWORD_RESETS_FILE = path.join(DATA_DIR, 'password-resets.json');
+  const TEMP_PASSWORD_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+  function generateTempPassword() {
+    const bytes = randomBytes(10);
+    let out = '';
+    for (const b of bytes) out += TEMP_PASSWORD_CHARS[b % TEMP_PASSWORD_CHARS.length];
+    return out;
+  }
+  async function readPasswordResets() {
+    try {
+      const raw = await fs.readFile(PASSWORD_RESETS_FILE, 'utf8');
+      const data = JSON.parse(raw);
+      return Array.isArray(data) ? data : [];
+    } catch { return []; }
+  }
+  async function appendPasswordReset(entry) {
+    const list = await readPasswordResets();
+    list.unshift(entry);
+    await atomicWriteJson(PASSWORD_RESETS_FILE, list.slice(0, 100));
+    return list;
+  }
+
   if (route === 'POST /api/auth/login') {
     const body = await readJson(req);
     const rawIdentifier = String(body.identifier || '').trim().slice(0, 254);
@@ -2019,7 +2051,85 @@ async function handleApi(req, res, url) {
     return sendJson(res, 200, { ok: true }, { 'Set-Cookie': cookieHeader('', 0, req) });
   }
 
+  if (route === 'POST /api/auth/forgot-password') {
+    const body = await readJson(req);
+    const email = String(body.email || '').trim().toLowerCase().slice(0, 254);
+    const ip = clientKey(req);
+    if (!allowRateLimit(`forgot-ip:${ip}`, 10, 15 * 60 * 1000) || !allowRateLimit(`forgot-email:${email}`, 5, 15 * 60 * 1000)) {
+      return sendError(res, 429, 'Terlalu banyak percobaan. Tunggu beberapa menit.');
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return sendError(res, 400, 'Masukkan alamat email yang benar.');
+    }
+    const user = store.users.find((item) => item.email === email);
+    if (!user) return sendError(res, 404, 'Email tidak terdaftar. Periksa ejaan atau daftar dulu.');
+    if (isBannedAccount(user)) return sendError(res, 403, 'Akun ini diblokir. Hubungi admin.');
+    if (user.verified === false) return sendError(res, 403, 'Akun belum diverifikasi. Selesaikan verifikasi dulu.');
+    const tempPassword = generateTempPassword();
+    const salt = randomBytes(16).toString('hex');
+    const passwordHash = (await scrypt(tempPassword, salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+    await mutate((next) => {
+      const target = next.users.find((item) => item.id === user.id);
+      if (!target) return;
+      target.salt = salt;
+      target.passwordHash = passwordHash;
+      target.mustChangePassword = true;
+      target.tempPasswordAt = new Date().toISOString();
+    });
+    const sendResult = await pairingManager.sendDirectMessage(user.id,
+      `Halo ${user.displayName || user.username},\n\nKata sandi sementara akun ReactionSw kamu: ${tempPassword}\n\nMasuk dengan sandi ini, lalu segera ganti ke sandi baru. Jangan bagikan sandi ini ke siapa pun.`);
+    const status = sendResult.ok ? 'sent' : 'failed';
+    const reason = sendResult.ok ? null : (sendResult.reason === 'not_linked' ? 'WhatsApp belum tertaut atau bot belum jalan' : sendResult.reason === 'no_number' ? 'Nomor WhatsApp tidak ditemukan' : 'Gagal mengirim pesan WhatsApp');
+    await appendPasswordReset({
+      id: randomUUID(),
+      userId: user.id,
+      username: user.username,
+      displayName: user.displayName,
+      email: user.email,
+      role: user.role,
+      tempPassword,
+      status,
+      reason,
+      createdAt: new Date().toISOString(),
+    });
+    if (!sendResult.ok) {
+      return sendJson(res, 200, { ok: true, sent: false, account: publicUser(user), message: 'Sandi sementara sudah dibuat, tapi WhatsApp belum tertaut sehingga bot tidak bisa mengirimnya. Hubungi admin untuk meminta sandi sementaramu.' });
+    }
+    return sendJson(res, 200, { ok: true, sent: true, account: publicUser(user), message: 'Kata sandi sementara sudah dikirim ke WhatsApp kamu. Masuk dengan sandi itu, lalu segera ganti ke sandi baru.' });
+  }
+
   const user = await authenticatedUser(req);
+  // Ganti sandi (wajib setelah login pakai sandi sementara).
+  if (route === 'POST /api/auth/change-password') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    const body = await readJson(req);
+    const currentPassword = String(body.currentPassword || '').slice(0, 128);
+    const newPassword = String(body.newPassword || '').slice(0, 128);
+    if (!currentPassword || !newPassword) return sendError(res, 400, 'Isi sandi lama dan sandi baru.');
+    if (newPassword.length < 12) return sendError(res, 400, 'Sandi baru minimal 12 karakter.');
+    if (newPassword === currentPassword) return sendError(res, 400, 'Sandi baru harus berbeda dari sandi lama.');
+    const attempt = (await scrypt(currentPassword, user.salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+    const valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(attempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.passwordHash).digest('hex'));
+    if (!valid) return sendError(res, 401, 'Sandi lama salah. Coba lagi.');
+    const salt = randomBytes(16).toString('hex');
+    const passwordHash = (await scrypt(newPassword, salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+    await mutate((next) => {
+      const target = next.users.find((item) => item.id === user.id);
+      if (!target) return;
+      target.salt = salt;
+      target.passwordHash = passwordHash;
+      target.mustChangePassword = false;
+      delete target.tempPasswordAt;
+    });
+    return sendJson(res, 200, { ok: true, message: 'Kata sandi berhasil diganti.' });
+  }
+  // Log reset sandi (admin saja): daftar percobaan lupa sandi realtime.
+  if (route === 'GET /api/admin/password-resets') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (user.role !== 'admin') return sendError(res, 403, 'Hanya admin yang bisa melihat log ini.');
+    const resets = await readPasswordResets();
+    return sendJson(res, 200, { resets });
+  }
   // Badge Info Update: baca dan simpan penanda terakhir dibaca untuk akun yang sedang login.
   if (route === 'GET /api/info-updates/seen') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
