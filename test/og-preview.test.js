@@ -21,7 +21,7 @@ test('halaman utama memakai tag Open Graph dan Twitter Card untuk pratinjau taut
   const ogUrl = ogProperty('og:url');
   assert.ok(ogUrl && ogUrl.startsWith('https://') && ogUrl.endsWith('/'), 'og:url harus alamat absolut panel');
   const ogImage = ogProperty('og:image');
-  assert.ok(ogImage && ogImage.startsWith('https://') && ogImage.endsWith('/og-image.png'), 'og:image harus alamat absolut ke gambar pratinjau');
+  assert.ok(ogImage && ogImage.startsWith('https://') && /\/og-image\.png(\?.*)?$/.test(ogImage), 'og:image harus alamat absolut ke gambar pratinjau');
   // Gambar pratinjau harus satu origin dengan alamat panel, kalau tidak
   // WhatsApp tidak bisa memuatnya saat tautan dibagikan.
   assert.equal(new URL(ogImage).origin, new URL(ogUrl).origin, 'og:image harus satu origin dengan og:url');
@@ -29,7 +29,7 @@ test('halaman utama memakai tag Open Graph dan Twitter Card untuk pratinjau taut
   assert.equal(ogProperty('og:image:height'), '630');
   assert.ok(ogProperty('og:image:alt'), 'og:image:alt harus ada');
   assert.match(html, /<meta name="twitter:card" content="summary_large_image">/, 'Twitter Card harus summary_large_image supaya gambarnya besar');
-  assert.match(html, /<meta name="twitter:image" content="https:\/\/[^"]+\/og-image\.png">/, 'twitter:image harus menunjuk gambar pratinjau yang sama');
+  assert.match(html, /<meta name="twitter:image" content="https:\/\/[^"]+\/og-image\.png(\?[^"]*)?">/, 'twitter:image harus menunjuk gambar pratinjau yang sama');
 });
 
 test('gambar pratinjau og-image.png ada dan berukuran 1200x630', () => {
@@ -99,7 +99,7 @@ test('server menyajikan /og-image.png sebagai image/png (bukan 404)', { timeout:
 test('entri Info Update pratinjau tautan bergambar tetap ada di posisi ketiga puluh empat', () => {
   const entry = infoUpdates.updates.find((item) => item.title === 'Tautan panel kini menampilkan pratinjau bergambar saat dibagikan');
   assert.ok(entry, 'entri pratinjau tautan harus tetap ada');
-  assert.equal(infoUpdates.updates.indexOf(entry), 55, 'entri pratinjau tautan kini di posisi ketiga puluh empat');
+  assert.equal(infoUpdates.updates.indexOf(entry), 57, 'entri pratinjau tautan kini di posisi ketiga puluh empat');
   assert.equal(entry.tag, 'Tampilan');
   assert.match(entry.description, /thumbnail 1200×630/);
   assert.ok(html.includes('data-tag="tampilan"') && html.includes('Tautan panel kini menampilkan pratinjau bergambar saat dibagikan'), 'fallback HTML Info Update harus memuat entri pratinjau tautan');

@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-24T11:09:00+07:00",
+  "updatedAt": "2026-11-27T13:25:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 27 Nov 2026",
+      "time": "13.25 WIB",
+      "title": "Thumbnail WhatsApp diperbarui agar muncul lagi saat tautan dibagikan",
+      "tag": "Perbaikan",
+      "description": "Gambar pratinjau tautan kini diberi ?v=2 supaya WhatsApp mengambil gambar yang baru, bukan cache lama tanpa gambar. Thumbnail sempat hilang saat tautan dibagikan karena WhatsApp menyimpan pratinjau lama; tag og:image dan twitter:image diperbarui, gambarnya tetap 1200x630 di server sendiri."
+    },
     {
       "day": "Selasa, 24 Nov 2026",
       "time": "11.09 WIB",

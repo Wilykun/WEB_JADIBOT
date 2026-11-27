@@ -75,16 +75,16 @@ test('member belum tertaut tidak bisa masuk Fitur Bot, admin tetap bisa', () => 
 test('entri Info Update terbaru kini soal sesi WhatsApp pulih dari cadangan', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-23T05:08:52+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 108, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-27T13:25:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 110, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Kartu salip kini bilang Kamu tersalip bila kamu yang disalip', 'entri terbaru harus soal batas 10 detik indikator mengetik');
-  assert.equal(newest.tag, 'Perubahan', 'entri terbaru harus bertag Perubahan');
-  assert.equal(newest.time, '05.08 WIB', 'waktu entri terbaru harus cocok');
+  assert.equal(newest.title, 'Thumbnail WhatsApp diperbarui agar muncul lagi saat tautan dibagikan', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perubahan');
+  assert.equal(newest.time, '13.25 WIB', 'waktu entri terbaru harus cocok');
   assert.ok(html.includes('<h4>Log privat kini jadi Log Bot dan ada notif story baru</h4>'), 'fallback harus memuat judul entri terbaru');
-  const rankbotEntry = data.updates[49];
+  const rankbotEntry = data.updates[51];
   assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedua puluh delapan');
   const linkEntry = data.updates.find((item) => item.title === 'Pemberitahuan tautan WhatsApp kini muncul di layar');
   assert.ok(linkEntry, 'entri notifikasi tautan di layar harus tetap ada');
-  assert.equal(data.updates.indexOf(linkEntry), 51, 'entri notifikasi tautan di layar kini di posisi kedua puluh delapan');
+  assert.equal(data.updates.indexOf(linkEntry), 53, 'entri notifikasi tautan di layar kini di posisi kedua puluh delapan');
 });
