@@ -210,6 +210,7 @@ test('Obrolan: scroll ke bawah tidak macet — daftar mengalir ke halaman dan bu
   assert.match(css, /\.chat-messages\{[^}]*overscroll-behavior:\s*auto/, 'scroll daftar harus mengalir ke halaman saat mencapai ujung');
   assert.match(css, /@media\(max-width:560px\)\{[\s\S]*?\.chat-row\{max-width:96%/, 'bubble HP harus hampir selebar layar supaya luas');
   assert.match(css, /@media\(max-width:560px\)\{[\s\S]*?\.chat-bubble-head\{flex-wrap:wrap/, 'baris nama+chip di HP harus bisa membungkus supaya chip peran tidak terpotong di layar sempit');
+  assert.match(css, /@media\(max-width:560px\)\{[\s\S]*?\.chat-wa-subtitle\{[^}]*-webkit-line-clamp:\s*2/, 'subjudul grup di HP harus membungkus sampai 2 baris supaya nama anggota tidak terpotong');
 });
 
 test('Obrolan: avatar pesan diambil dari data akun saat ini, bukan foto lama saat pesan dikirim', () => {
@@ -244,10 +245,11 @@ test('Obrolan: bubble ala grup WA — nama warna, jam di dalam bubble kanan bawa
   assert.ok(appJs.includes('message?.isMainAdmin'), 'admin utama dikenali dari isMainAdmin');
   assert.ok(appJs.includes("message?.role === 'admin'"), 'admin biasa dikenali dari role admin');
   assert.ok(css.includes('color:#8696a0'), 'chip member biasa harus abu normal');
-  assert.ok(css.includes('@keyframes chat-chip-shimmer'), 'chip admin utama harus punya animasi shimmer emas');
-  assert.ok(css.includes('@keyframes chat-chip-pulse'), 'chip admin biasa harus punya animasi pulse hijau');
-  assert.ok(css.includes('.chat-role-chip.is-main-admin{') && css.includes('animation:chat-chip-shimmer'), 'animasi shimmer harus menempel di chip admin utama');
-  assert.ok(css.includes('.chat-role-chip.is-admin{') && css.includes('animation:chat-chip-pulse'), 'animasi pulse harus menempel di chip admin biasa');
+  assert.ok(css.includes('@keyframes chat-chip-electric-gold'), 'chip admin utama harus punya animasi listrik emas');
+  assert.ok(css.includes('@keyframes chat-chip-electric-green'), 'chip admin biasa harus punya animasi listrik hijau');
+  assert.ok(css.includes('.chat-role-chip.is-main-admin{') && css.includes('animation:chat-chip-electric-gold'), 'animasi listrik harus menempel di chip admin utama');
+  assert.ok(css.includes('.chat-role-chip.is-admin{') && css.includes('animation:chat-chip-electric-green'), 'animasi listrik harus menempel di chip admin biasa');
+  assert.ok(!css.includes('.chat-role-chip.is-admin,.chat-role-chip.is-main-admin{animation:none}'), 'animasi chip tidak boleh dimatikan supaya tetap jalan di HP');
 });
 
 test('Obrolan: panel emoji menutup begitu satu emoji dipilih', () => {
