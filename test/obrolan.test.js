@@ -250,6 +250,9 @@ test('Obrolan: bubble ala grup WA — nama warna, jam di dalam bubble kanan bawa
   assert.ok(css.includes('.chat-role-chip.is-main-admin{') && css.includes('animation:chat-chip-electric-gold'), 'animasi listrik harus menempel di chip admin utama');
   assert.ok(css.includes('.chat-role-chip.is-admin{') && css.includes('animation:chat-chip-electric-green'), 'animasi listrik harus menempel di chip admin biasa');
   assert.ok(!css.includes('.chat-role-chip.is-admin,.chat-role-chip.is-main-admin{animation:none}'), 'animasi chip tidak boleh dimatikan supaya tetap jalan di HP');
+  assert.ok(css.includes('@property --chip-angle'), 'sudut putar cincin listrik harus terdaftar supaya animasi conic-gradient jalan');
+  assert.ok(css.includes('@keyframes chat-chip-spin'), 'cincin listrik harus punya animasi putar');
+  assert.ok(css.includes('conic-gradient(from var(--chip-angle)'), 'cincin listrik harus pakai conic-gradient yang berputar mengelilingi chip');
 });
 
 test('Obrolan: panel emoji menutup begitu satu emoji dipilih', () => {
