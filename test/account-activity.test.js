@@ -233,8 +233,8 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=lupa-sandi-email-bot-wa-20261127'), 'app.js harus memakai ?v=lupa-sandi-email-bot-wa-20261127');
-  assert.ok(html.includes('/style.css?v=lupa-sandi-email-bot-wa-20261127'), 'style.css harus memakai ?v=lupa-sandi-email-bot-wa-20261127');
+  assert.ok(html.includes('/app.js?v=sandi-sementara-web-20261127'), 'app.js harus memakai ?v=sandi-sementara-web-20261127');
+  assert.ok(html.includes('/style.css?v=sandi-sementara-web-20261127'), 'style.css harus memakai ?v=sandi-sementara-web-20261127');
 });
 
 test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi kedua puluh', () => {
