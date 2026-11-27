@@ -1,0 +1,722 @@
+{
+  "A575A621FA8EEEE0B92821EFEA3759E5": {
+    "id": "A575A621FA8EEEE0B92821EFEA3759E5",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A575A621FA8EEEE0B92821EFEA3759E5",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A575A621FA8EEEE0B92821EFEA3759E5",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T01:58:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:58:39.550Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:58:42.472Z",
+    "readAt": "2026-11-27T01:58:42.471Z",
+    "emoji": "🦁",
+    "reactedAt": "2026-11-27T01:58:42.471Z"
+  },
+  "A54DBDA4BAC439AA16280788312BB849": {
+    "id": "A54DBDA4BAC439AA16280788312BB849",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A54DBDA4BAC439AA16280788312BB849",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A54DBDA4BAC439AA16280788312BB849",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T01:58:43.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:58:43.032Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:58:52.358Z",
+    "readAt": "2026-11-27T01:58:52.357Z",
+    "emoji": "🐨",
+    "reactedAt": "2026-11-27T01:58:52.357Z"
+  },
+  "A58DC3AFE7FEE7D2418B7A70152E1859": {
+    "id": "A58DC3AFE7FEE7D2418B7A70152E1859",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A58DC3AFE7FEE7D2418B7A70152E1859",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A58DC3AFE7FEE7D2418B7A70152E1859",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T01:58:44.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:58:43.687Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:58:50.552Z",
+    "readAt": "2026-11-27T01:58:50.551Z",
+    "emoji": "🌸",
+    "reactedAt": "2026-11-27T01:58:50.551Z"
+  },
+  "A505FC58F7753EB8BC9C771F68E4AF8D": {
+    "id": "A505FC58F7753EB8BC9C771F68E4AF8D",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A505FC58F7753EB8BC9C771F68E4AF8D",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A505FC58F7753EB8BC9C771F68E4AF8D",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T01:58:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:58:46.787Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:58:55.520Z",
+    "readAt": "2026-11-27T01:58:55.518Z",
+    "emoji": "🦋",
+    "reactedAt": "2026-11-27T01:58:55.518Z"
+  },
+  "A5328C68D7161939E245F6D6666D2BED": {
+    "id": "A5328C68D7161939E245F6D6666D2BED",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5328C68D7161939E245F6D6666D2BED",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5328C68D7161939E245F6D6666D2BED",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T01:59:04.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:59:04.059Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:59:10.065Z",
+    "readAt": "2026-11-27T01:59:10.064Z",
+    "emoji": "🌹",
+    "reactedAt": "2026-11-27T01:59:10.064Z"
+  },
+  "A53E6A90C387FCE8911D82950E2414C1": {
+    "id": "A53E6A90C387FCE8911D82950E2414C1",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A53E6A90C387FCE8911D82950E2414C1",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A53E6A90C387FCE8911D82950E2414C1",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T01:59:06.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:59:05.820Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:59:15.240Z",
+    "readAt": "2026-11-27T01:59:15.230Z",
+    "emoji": "🦁",
+    "reactedAt": "2026-11-27T01:59:15.230Z"
+  },
+  "A506A4B31311D8B44680EB44FE604FA4": {
+    "id": "A506A4B31311D8B44680EB44FE604FA4",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A506A4B31311D8B44680EB44FE604FA4",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A506A4B31311D8B44680EB44FE604FA4",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T01:59:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:59:09.940Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:59:19.771Z",
+    "readAt": "2026-11-27T01:59:19.770Z",
+    "emoji": "🦊",
+    "reactedAt": "2026-11-27T01:59:19.770Z"
+  },
+  "A5352CB2016E204E13DDC379EA46FEC7": {
+    "id": "A5352CB2016E204E13DDC379EA46FEC7",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5352CB2016E204E13DDC379EA46FEC7",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5352CB2016E204E13DDC379EA46FEC7",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T01:59:15.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:59:15.248Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:59:19.483Z",
+    "readAt": "2026-11-27T01:59:19.475Z",
+    "emoji": "🐱",
+    "reactedAt": "2026-11-27T01:59:19.475Z"
+  },
+  "A56A485BD645472E0B105F809F8F9B24": {
+    "id": "A56A485BD645472E0B105F809F8F9B24",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A56A485BD645472E0B105F809F8F9B24",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A56A485BD645472E0B105F809F8F9B24",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T02:01:13.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:01:12.911Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:01:18.552Z",
+    "readAt": "2026-11-27T02:01:18.544Z",
+    "emoji": "🌹",
+    "reactedAt": "2026-11-27T02:01:18.544Z"
+  },
+  "A546E69671B916D6E4D84CF092FBABDF": {
+    "id": "A546E69671B916D6E4D84CF092FBABDF",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A546E69671B916D6E4D84CF092FBABDF",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A546E69671B916D6E4D84CF092FBABDF",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T02:01:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:01:27.818Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:01:37.495Z",
+    "readAt": "2026-11-27T02:01:37.436Z",
+    "emoji": "🐰",
+    "reactedAt": "2026-11-27T02:01:37.436Z"
+  },
+  "A5011C3F75FC4A5D342ACF19AF76D7FB": {
+    "id": "A5011C3F75FC4A5D342ACF19AF76D7FB",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5011C3F75FC4A5D342ACF19AF76D7FB",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5011C3F75FC4A5D342ACF19AF76D7FB",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T02:07:07.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:07:07.327Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:07:17.402Z",
+    "readAt": "2026-11-27T02:07:17.394Z",
+    "emoji": "🦁",
+    "reactedAt": "2026-11-27T02:07:17.394Z"
+  },
+  "A50314B13B664775FAB9E93F24251773": {
+    "id": "A50314B13B664775FAB9E93F24251773",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A50314B13B664775FAB9E93F24251773",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A50314B13B664775FAB9E93F24251773",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T02:12:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:12:17.512Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:12:27.497Z",
+    "readAt": "2026-11-27T02:12:27.489Z",
+    "emoji": "🦋",
+    "reactedAt": "2026-11-27T02:12:27.489Z"
+  },
+  "A51B74F9C324D39975901562CB299FD5": {
+    "id": "A51B74F9C324D39975901562CB299FD5",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A51B74F9C324D39975901562CB299FD5",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A51B74F9C324D39975901562CB299FD5",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T02:27:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:27:36.905Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:27:41.147Z",
+    "readAt": "2026-11-27T02:27:41.143Z",
+    "emoji": "🐱",
+    "reactedAt": "2026-11-27T02:27:41.143Z"
+  },
+  "A51D5C873FF428B58D4F2BB101FAF089": {
+    "id": "A51D5C873FF428B58D4F2BB101FAF089",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A51D5C873FF428B58D4F2BB101FAF089",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A51D5C873FF428B58D4F2BB101FAF089",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T02:29:54.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:29:53.751Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:29:56.053Z",
+    "readAt": "2026-11-27T02:29:56.052Z",
+    "emoji": "🐶",
+    "reactedAt": "2026-11-27T02:29:56.052Z"
+  },
+  "A5633C824921F17AB5D58BDCDE9BF354": {
+    "id": "A5633C824921F17AB5D58BDCDE9BF354",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5633C824921F17AB5D58BDCDE9BF354",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5633C824921F17AB5D58BDCDE9BF354",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T04:50:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:50:02.084Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:50:08.297Z",
+    "readAt": "2026-11-27T04:50:08.294Z",
+    "emoji": "🐨",
+    "reactedAt": "2026-11-27T04:50:08.294Z"
+  },
+  "A5502CAC74A281E04AA29AC5AE36DC5A": {
+    "id": "A5502CAC74A281E04AA29AC5AE36DC5A",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5502CAC74A281E04AA29AC5AE36DC5A",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5502CAC74A281E04AA29AC5AE36DC5A",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T09:02:14.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:02:14.923Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:02:20.665Z",
+    "readAt": "2026-11-27T09:02:20.661Z",
+    "emoji": "🐸",
+    "reactedAt": "2026-11-27T09:02:20.661Z"
+  },
+  "A5ED009FF5B63A3BBBA4CB3C4DB00619": {
+    "id": "A5ED009FF5B63A3BBBA4CB3C4DB00619",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5ED009FF5B63A3BBBA4CB3C4DB00619",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5ED009FF5B63A3BBBA4CB3C4DB00619",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T10:18:59.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:19:00.518Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:19:03.705Z",
+    "readAt": "2026-11-27T10:19:03.675Z",
+    "emoji": "🌸",
+    "reactedAt": "2026-11-27T10:19:03.675Z"
+  },
+  "A5E56412B347322FBDD3C8E545C008DF": {
+    "id": "A5E56412B347322FBDD3C8E545C008DF",
+    "sender": "6281378509596@s.whatsapp.net",
+    "number": "6281378509596",
+    "storyJid": "6281378509596@s.whatsapp.net",
+    "resolvedPn": "6281378509596@s.whatsapp.net",
+    "name": "niyasalonperawang",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5E56412B347322FBDD3C8E545C008DF",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5E56412B347322FBDD3C8E545C008DF",
+      "participant": "123055342878844@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "123055342878844@lid",
+      "6281378509596@s.whatsapp.net"
+    ],
+    "contactHash": "ae99fa1f45d17bef0f41985ad82176af409c5cc6a75a2aa15ca4e7cfd81cd9a2",
+    "arrivedAt": "2026-11-27T11:00:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:00:11.548Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:00:19.561Z",
+    "readAt": "2026-11-27T11:00:19.283Z",
+    "emoji": "🌸",
+    "reactedAt": "2026-11-27T11:00:19.283Z"
+  }
+}
