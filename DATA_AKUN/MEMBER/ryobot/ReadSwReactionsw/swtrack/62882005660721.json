@@ -1,1 +1,42 @@
-{}
+{
+  "AC1DB342EA395A465C71570CDE8E1CDB": {
+    "id": "AC1DB342EA395A465C71570CDE8E1CDB",
+    "sender": "62882005660721@s.whatsapp.net",
+    "number": "62882005660721",
+    "storyJid": "62882005660721@s.whatsapp.net",
+    "resolvedPn": "62882005660721@s.whatsapp.net",
+    "name": "🦢Octaa gwen`|",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1DB342EA395A465C71570CDE8E1CDB",
+      "participant": "241403720372464@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1DB342EA395A465C71570CDE8E1CDB",
+      "participant": "241403720372464@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "241403720372464@lid",
+      "62882005660721@s.whatsapp.net"
+    ],
+    "contactHash": "a268cfaa4f55e030c32bd9fb2f9f27058206c16d2200c61ec56174e0972ccb1d",
+    "arrivedAt": "2026-11-27T04:30:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:30:04.626Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:30:18.986Z",
+    "readAt": "2026-11-27T04:30:18.985Z",
+    "emoji": "😡",
+    "reactedAt": "2026-11-27T04:30:18.985Z"
+  }
+}

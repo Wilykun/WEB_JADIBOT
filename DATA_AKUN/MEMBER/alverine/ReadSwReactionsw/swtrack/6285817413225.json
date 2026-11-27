@@ -1,0 +1,42 @@
+{
+  "A5DA7BE145649443F6CCFBCDBF1EE7B6": {
+    "id": "A5DA7BE145649443F6CCFBCDBF1EE7B6",
+    "sender": "6285817413225@s.whatsapp.net",
+    "number": "6285817413225",
+    "storyJid": "6285817413225@s.whatsapp.net",
+    "resolvedPn": "6285817413225@s.whatsapp.net",
+    "name": "𝕬𝖐𝖎𝖗𝖆⁶⁷ ғт ずっと一緒に",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5DA7BE145649443F6CCFBCDBF1EE7B6",
+      "participant": "250289957421175@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5DA7BE145649443F6CCFBCDBF1EE7B6",
+      "participant": "250289957421175@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "250289957421175@lid",
+      "6285817413225@s.whatsapp.net"
+    ],
+    "contactHash": "c5c49ce26d95b9dc79bde1f433a452c425249122386516d7ee1dbde7c9efc6f1",
+    "arrivedAt": "2026-11-27T12:26:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:26:08.560Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:26:15.413Z",
+    "readAt": "2026-11-27T12:26:15.413Z",
+    "emoji": "🦊",
+    "reactedAt": "2026-11-27T12:26:15.413Z"
+  }
+}

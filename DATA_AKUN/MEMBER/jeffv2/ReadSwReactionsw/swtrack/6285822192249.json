@@ -1,0 +1,42 @@
+{
+  "ACFB795A2E3CC7BF2A2C20BB935BECCE": {
+    "id": "ACFB795A2E3CC7BF2A2C20BB935BECCE",
+    "sender": "6285822192249@s.whatsapp.net",
+    "number": "6285822192249",
+    "storyJid": "6285822192249@s.whatsapp.net",
+    "resolvedPn": "6285822192249@s.whatsapp.net",
+    "name": "𝑰𝒕𝒔𝒖𝒌𝒊 𝑵𝒂𝒌𝒂𝒏𝒐",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFB795A2E3CC7BF2A2C20BB935BECCE",
+      "participant": "200816027815982@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFB795A2E3CC7BF2A2C20BB935BECCE",
+      "participant": "200816027815982@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "200816027815982@lid",
+      "6285822192249@s.whatsapp.net"
+    ],
+    "contactHash": "5d96563ddd2f7cd695df09f75156dce19fd277bf2d08ba2e9b2539163d66855e",
+    "arrivedAt": "2026-11-27T13:09:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:09:23.117Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:09:32.077Z",
+    "readAt": "2026-11-27T13:09:32.076Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T13:09:32.076Z"
+  }
+}

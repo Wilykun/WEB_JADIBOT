@@ -1,0 +1,42 @@
+{
+  "AC5BBB73E2A48C1E3774BB65CC26C753": {
+    "id": "AC5BBB73E2A48C1E3774BB65CC26C753",
+    "sender": "6285187395739@s.whatsapp.net",
+    "number": "6285187395739",
+    "storyJid": "6285187395739@s.whatsapp.net",
+    "resolvedPn": "6285187395739@s.whatsapp.net",
+    "name": "FAN Marin kitagawa 𝟑𝟔𝟒✞",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5BBB73E2A48C1E3774BB65CC26C753",
+      "participant": "137211924205718@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5BBB73E2A48C1E3774BB65CC26C753",
+      "participant": "137211924205718@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137211924205718@lid",
+      "6285187395739@s.whatsapp.net"
+    ],
+    "contactHash": "e90c9cb2f8a181936e45e14635d56c187bdbc57c1fecde1e780a327ca17cb4bb",
+    "arrivedAt": "2026-11-27T12:29:14.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:29:16.281Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:29:20.676Z",
+    "readAt": "2026-11-27T12:29:20.674Z",
+    "emoji": "😳",
+    "reactedAt": "2026-11-27T12:29:20.674Z"
+  }
+}

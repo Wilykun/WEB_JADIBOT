@@ -1,0 +1,42 @@
+{
+  "AC25CCD0F26726F2527A5471ACC83725": {
+    "id": "AC25CCD0F26726F2527A5471ACC83725",
+    "sender": "6285340434480@s.whatsapp.net",
+    "number": "6285340434480",
+    "storyJid": "6285340434480@s.whatsapp.net",
+    "resolvedPn": "6285340434480@s.whatsapp.net",
+    "name": "NAFISAH.N.Shafirah",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC25CCD0F26726F2527A5471ACC83725",
+      "participant": "113606213521519@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC25CCD0F26726F2527A5471ACC83725",
+      "participant": "113606213521519@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "113606213521519@lid",
+      "6285340434480@s.whatsapp.net"
+    ],
+    "contactHash": "d8b9c1f436a941647e2b900b8ef2e1f6a4cab4d5b2634b6a1669507f6c97426a",
+    "arrivedAt": "2026-11-26T23:30:53.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:30:53.520Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:31:02.829Z",
+    "readAt": "2026-11-26T23:31:02.828Z",
+    "emoji": "🐨",
+    "reactedAt": "2026-11-26T23:31:02.828Z"
+  }
+}

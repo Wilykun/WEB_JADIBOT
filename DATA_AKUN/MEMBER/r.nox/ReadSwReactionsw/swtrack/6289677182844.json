@@ -1,0 +1,42 @@
+{
+  "AC5A88CFFD4ADB7DAA2A5D7CE7C7893A": {
+    "id": "AC5A88CFFD4ADB7DAA2A5D7CE7C7893A",
+    "sender": "6289677182844@s.whatsapp.net",
+    "number": "6289677182844",
+    "storyJid": "6289677182844@s.whatsapp.net",
+    "resolvedPn": "6289677182844@s.whatsapp.net",
+    "name": "Xyinn - The Weeknd",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5A88CFFD4ADB7DAA2A5D7CE7C7893A",
+      "participant": "270617718874135@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5A88CFFD4ADB7DAA2A5D7CE7C7893A",
+      "participant": "270617718874135@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "270617718874135@lid",
+      "6289677182844@s.whatsapp.net"
+    ],
+    "contactHash": "379a865e123673fd4874357d78d6cea9b15a8e709bce644a82fe59608269ffbc",
+    "arrivedAt": "2026-11-27T04:36:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:36:40.233Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:36:42.474Z",
+    "readAt": "2026-11-27T04:36:42.473Z",
+    "emoji": "😱",
+    "reactedAt": "2026-11-27T04:36:42.473Z"
+  }
+}

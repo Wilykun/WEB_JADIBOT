@@ -1,0 +1,42 @@
+{
+  "AC21B49EE9A92FEB33FE3472C443FF96": {
+    "id": "AC21B49EE9A92FEB33FE3472C443FF96",
+    "sender": "6285954745105@s.whatsapp.net",
+    "number": "6285954745105",
+    "storyJid": "6285954745105@s.whatsapp.net",
+    "resolvedPn": "6285954745105@s.whatsapp.net",
+    "name": "Airlangga Satria Pratama",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC21B49EE9A92FEB33FE3472C443FF96",
+      "participant": "145436467830940@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC21B49EE9A92FEB33FE3472C443FF96",
+      "participant": "145436467830940@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "145436467830940@lid",
+      "6285954745105@s.whatsapp.net"
+    ],
+    "contactHash": "3cf5f2e86c1e96a265a0b7973a0925cc3db6cdeb4a02e9ce36bd3bca1df0e57c",
+    "arrivedAt": "2026-11-27T10:32:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:32:22.729Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:32:35.547Z",
+    "readAt": "2026-11-27T10:32:35.546Z",
+    "emoji": "🌭",
+    "reactedAt": "2026-11-27T10:32:35.546Z"
+  }
+}

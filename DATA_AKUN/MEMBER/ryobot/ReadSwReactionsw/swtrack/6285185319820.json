@@ -1,1 +1,42 @@
-{}
+{
+  "AC21D0C93B4F4A5E156F9E3291A6C8F7": {
+    "id": "AC21D0C93B4F4A5E156F9E3291A6C8F7",
+    "sender": "6285185319820@s.whatsapp.net",
+    "number": "6285185319820",
+    "storyJid": "6285185319820@s.whatsapp.net",
+    "resolvedPn": "6285185319820@s.whatsapp.net",
+    "name": "ren kunci inggris",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC21D0C93B4F4A5E156F9E3291A6C8F7",
+      "participant": "247579782697038@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC21D0C93B4F4A5E156F9E3291A6C8F7",
+      "participant": "247579782697038@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "247579782697038@lid",
+      "6285185319820@s.whatsapp.net"
+    ],
+    "contactHash": "c7a83d43acaf18845f8e76ef0849aff962c1309c9273ae78526eddd65248aed5",
+    "arrivedAt": "2026-11-27T09:25:33.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:25:34.454Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:25:38.610Z",
+    "readAt": "2026-11-27T09:25:38.610Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T09:25:38.610Z"
+  }
+}

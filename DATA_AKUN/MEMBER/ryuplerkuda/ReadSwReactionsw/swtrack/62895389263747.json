@@ -1,0 +1,42 @@
+{
+  "AC1FEFF69A79DEE194C814461711AA0A": {
+    "id": "AC1FEFF69A79DEE194C814461711AA0A",
+    "sender": "62895389263747@s.whatsapp.net",
+    "number": "62895389263747",
+    "storyJid": "62895389263747@s.whatsapp.net",
+    "resolvedPn": "62895389263747@s.whatsapp.net",
+    "name": "Fitria Nurul Hidayati",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1FEFF69A79DEE194C814461711AA0A",
+      "participant": "151565117698213@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1FEFF69A79DEE194C814461711AA0A",
+      "participant": "151565117698213@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "151565117698213@lid",
+      "62895389263747@s.whatsapp.net"
+    ],
+    "contactHash": "017ad6fcf35c9b9cb902954ab72b300ea2a9b1e838da9012e8e64a369639cb67",
+    "arrivedAt": "2026-11-27T14:30:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:30:47.323Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:30:49.928Z",
+    "readAt": "2026-11-27T14:30:49.924Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-27T14:30:49.924Z"
+  }
+}

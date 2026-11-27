@@ -1,0 +1,42 @@
+{
+  "A5C80518554C17A170F5C7C63B80B32B": {
+    "id": "A5C80518554C17A170F5C7C63B80B32B",
+    "sender": "6287891539108@s.whatsapp.net",
+    "number": "6287891539108",
+    "storyJid": "6287891539108@s.whatsapp.net",
+    "resolvedPn": "6287891539108@s.whatsapp.net",
+    "name": "Danil Nova Ramandhani Larper | The Tenth Of The Eleven Fatui Harbingers",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5C80518554C17A170F5C7C63B80B32B",
+      "participant": "96044796903537@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5C80518554C17A170F5C7C63B80B32B",
+      "participant": "96044796903537@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "96044796903537@lid",
+      "6287891539108@s.whatsapp.net"
+    ],
+    "contactHash": "1526f3f6bb49fc5772bef61dfe6d28a711628e7d42d3924573e3b1c9577a38fc",
+    "arrivedAt": "2026-11-27T10:44:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:44:02.765Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:44:04.928Z",
+    "readAt": "2026-11-27T10:44:04.926Z",
+    "emoji": "🤓",
+    "reactedAt": "2026-11-27T10:44:04.926Z"
+  }
+}

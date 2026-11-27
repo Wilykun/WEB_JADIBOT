@@ -1,0 +1,122 @@
+{
+  "ACE8BCCB8C236FCF11E2B6C675DED853": {
+    "id": "ACE8BCCB8C236FCF11E2B6C675DED853",
+    "sender": "6285198380604@s.whatsapp.net",
+    "number": "6285198380604",
+    "storyJid": "6285198380604@s.whatsapp.net",
+    "resolvedPn": "6285198380604@s.whatsapp.net",
+    "name": "No",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE8BCCB8C236FCF11E2B6C675DED853",
+      "participant": "226091876802804@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE8BCCB8C236FCF11E2B6C675DED853",
+      "participant": "226091876802804@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "226091876802804@lid",
+      "6285198380604@s.whatsapp.net"
+    ],
+    "contactHash": "2e6a165e9bf17fa3e8590304d3ec4f2f6d135a9acf0e27964beda82fd46321f3",
+    "arrivedAt": "2026-11-27T12:16:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:16:00.719Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:16:02.651Z",
+    "readAt": "2026-11-27T12:16:02.650Z",
+    "emoji": "👍",
+    "reactedAt": "2026-11-27T12:16:02.650Z"
+  },
+  "ACAEA6792EFF3C881F3EE80953EE97AC": {
+    "id": "ACAEA6792EFF3C881F3EE80953EE97AC",
+    "sender": "6285198380604@s.whatsapp.net",
+    "number": "6285198380604",
+    "storyJid": "6285198380604@s.whatsapp.net",
+    "resolvedPn": "6285198380604@s.whatsapp.net",
+    "name": "No",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAEA6792EFF3C881F3EE80953EE97AC",
+      "participant": "226091876802804@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAEA6792EFF3C881F3EE80953EE97AC",
+      "participant": "226091876802804@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "226091876802804@lid",
+      "6285198380604@s.whatsapp.net"
+    ],
+    "contactHash": "2e6a165e9bf17fa3e8590304d3ec4f2f6d135a9acf0e27964beda82fd46321f3",
+    "arrivedAt": "2026-11-27T15:20:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:20:52.210Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:20:54.328Z",
+    "readAt": "2026-11-27T15:20:54.327Z",
+    "emoji": "🕊️",
+    "reactedAt": "2026-11-27T15:20:54.327Z"
+  },
+  "AC80ECAC20B2C857DCCDC3D8081F18B3": {
+    "id": "AC80ECAC20B2C857DCCDC3D8081F18B3",
+    "sender": "6285198380604@s.whatsapp.net",
+    "number": "6285198380604",
+    "storyJid": "6285198380604@s.whatsapp.net",
+    "resolvedPn": "6285198380604@s.whatsapp.net",
+    "name": "No",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC80ECAC20B2C857DCCDC3D8081F18B3",
+      "participant": "226091876802804@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC80ECAC20B2C857DCCDC3D8081F18B3",
+      "participant": "226091876802804@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "226091876802804@lid",
+      "6285198380604@s.whatsapp.net"
+    ],
+    "contactHash": "2e6a165e9bf17fa3e8590304d3ec4f2f6d135a9acf0e27964beda82fd46321f3",
+    "arrivedAt": "2026-11-27T23:03:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T23:03:44.651Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T23:03:53.129Z",
+    "readAt": "2026-11-27T23:03:53.128Z",
+    "emoji": "☁️",
+    "reactedAt": "2026-11-27T23:03:53.128Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "AC65B30E00E9538BC9674D8D68A99569": {
+    "id": "AC65B30E00E9538BC9674D8D68A99569",
+    "sender": "6285725401813@s.whatsapp.net",
+    "number": "6285725401813",
+    "storyJid": "6285725401813@s.whatsapp.net",
+    "resolvedPn": "6285725401813@s.whatsapp.net",
+    "name": "Ahmad Faiz Khoirul I. X-E",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC65B30E00E9538BC9674D8D68A99569",
+      "participant": "212373398917361@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC65B30E00E9538BC9674D8D68A99569",
+      "participant": "212373398917361@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "212373398917361@lid",
+      "6285725401813@s.whatsapp.net"
+    ],
+    "contactHash": "aedef6a082169cdd137fcd3e2c08356f40f2c7e3ab7d063c9e92be67b9078c80",
+    "arrivedAt": "2026-11-27T09:46:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:46:32.546Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:46:40.799Z",
+    "readAt": "2026-11-27T09:46:40.793Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-27T09:46:40.793Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "ACA0DF9AA6C4A802211BA945946B8F4B": {
+    "id": "ACA0DF9AA6C4A802211BA945946B8F4B",
+    "sender": "62882006918863@s.whatsapp.net",
+    "number": "62882006918863",
+    "storyJid": "62882006918863@s.whatsapp.net",
+    "resolvedPn": "62882006918863@s.whatsapp.net",
+    "name": "||opcom||zulfi(hiatus)",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA0DF9AA6C4A802211BA945946B8F4B",
+      "participant": "122287063851201@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA0DF9AA6C4A802211BA945946B8F4B",
+      "participant": "122287063851201@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "122287063851201@lid",
+      "62882006918863@s.whatsapp.net"
+    ],
+    "contactHash": "d04939af1b454441d16868618be262cee9b88dc03a72484d050028e068d63281",
+    "arrivedAt": "2026-11-27T13:38:12.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:38:13.230Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:38:21.934Z",
+    "readAt": "2026-11-27T13:38:21.924Z",
+    "emoji": "☁️",
+    "reactedAt": "2026-11-27T13:38:21.924Z"
+  }
+}

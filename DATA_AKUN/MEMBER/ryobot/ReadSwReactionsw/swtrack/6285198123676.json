@@ -1,0 +1,42 @@
+{
+  "A591182DE4E7454BF9D45BE035AB50FF": {
+    "id": "A591182DE4E7454BF9D45BE035AB50FF",
+    "sender": "6285198123676@s.whatsapp.net",
+    "number": "6285198123676",
+    "storyJid": "6285198123676@s.whatsapp.net",
+    "resolvedPn": "6285198123676@s.whatsapp.net",
+    "name": "『𝑆𝐺𝑇』ᴢᴀᴍɴᴢ ꜱᴇɴᴘᴀɪ",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A591182DE4E7454BF9D45BE035AB50FF",
+      "participant": "197732308398301@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A591182DE4E7454BF9D45BE035AB50FF",
+      "participant": "197732308398301@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "197732308398301@lid",
+      "6285198123676@s.whatsapp.net"
+    ],
+    "contactHash": "43faa7140b8d48b880b7379048c8273a2761773439f38279c7230b45c056e973",
+    "arrivedAt": "2026-11-27T13:23:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:23:04.290Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:23:13.584Z",
+    "readAt": "2026-11-27T13:23:13.584Z",
+    "emoji": "😡",
+    "reactedAt": "2026-11-27T13:23:13.584Z"
+  }
+}

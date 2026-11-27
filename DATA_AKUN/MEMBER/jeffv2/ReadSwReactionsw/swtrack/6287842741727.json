@@ -1,0 +1,42 @@
+{
+  "AC1268F9FE66CAA7B85E66AA26E0B281": {
+    "id": "AC1268F9FE66CAA7B85E66AA26E0B281",
+    "sender": "6287842741727@s.whatsapp.net",
+    "number": "6287842741727",
+    "storyJid": "6287842741727@s.whatsapp.net",
+    "resolvedPn": "6287842741727@s.whatsapp.net",
+    "name": "Ryuuki the sloth",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1268F9FE66CAA7B85E66AA26E0B281",
+      "participant": "215109863501864@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1268F9FE66CAA7B85E66AA26E0B281",
+      "participant": "215109863501864@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215109863501864@lid",
+      "6287842741727@s.whatsapp.net"
+    ],
+    "contactHash": "25125522331e3a9a33374cee44dcea89008fcfc4421225ebccb4af2cdcd60411",
+    "arrivedAt": "2026-11-27T00:59:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:59:50.188Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:00:03.572Z",
+    "readAt": "2026-11-27T01:00:03.571Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T01:00:03.571Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "AC86AFC8DC670E7EB1CDF7A61A79D735": {
+    "id": "AC86AFC8DC670E7EB1CDF7A61A79D735",
+    "sender": "62882021860701@s.whatsapp.net",
+    "number": "62882021860701",
+    "storyJid": "62882021860701@s.whatsapp.net",
+    "resolvedPn": "62882021860701@s.whatsapp.net",
+    "name": "tanpa tujuan",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC86AFC8DC670E7EB1CDF7A61A79D735",
+      "participant": "275479907053717@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC86AFC8DC670E7EB1CDF7A61A79D735",
+      "participant": "275479907053717@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "275479907053717@lid",
+      "62882021860701@s.whatsapp.net"
+    ],
+    "contactHash": "9e81a08810cba544ac4d8f7e6a3a9e596abbcd311a27697c3608d2d7607b89ca",
+    "arrivedAt": "2026-11-27T03:05:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T03:05:40.798Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T03:05:58.974Z",
+    "readAt": "2026-11-27T03:05:58.973Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T03:05:58.973Z"
+  }
+}

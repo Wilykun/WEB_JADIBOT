@@ -1,1 +1,42 @@
-{}
+{
+  "ACBE7593CBCFB131B58A89A1B51F77BC": {
+    "id": "ACBE7593CBCFB131B58A89A1B51F77BC",
+    "sender": "6283132810939@s.whatsapp.net",
+    "number": "6283132810939",
+    "storyJid": "6283132810939@s.whatsapp.net",
+    "resolvedPn": "6283132810939@s.whatsapp.net",
+    "name": "•©KrizNoit¶•",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBE7593CBCFB131B58A89A1B51F77BC",
+      "participant": "221981324640333@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBE7593CBCFB131B58A89A1B51F77BC",
+      "participant": "221981324640333@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "221981324640333@lid",
+      "6283132810939@s.whatsapp.net"
+    ],
+    "contactHash": "649d737837376c1473f0329b2413228396559e7af2777ddb97d6a610d8637fae",
+    "arrivedAt": "2026-11-27T10:55:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:55:47.918Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:55:50.713Z",
+    "readAt": "2026-11-27T10:55:50.713Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T10:55:50.713Z"
+  }
+}

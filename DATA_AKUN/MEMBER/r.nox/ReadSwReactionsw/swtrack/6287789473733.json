@@ -1,0 +1,42 @@
+{
+  "AC6FA2DF26F28275CEEB6DFE8519E4C3": {
+    "id": "AC6FA2DF26F28275CEEB6DFE8519E4C3",
+    "sender": "6287789473733@s.whatsapp.net",
+    "number": "6287789473733",
+    "storyJid": "6287789473733@s.whatsapp.net",
+    "resolvedPn": "6287789473733@s.whatsapp.net",
+    "name": "𝙆𝙖𝙠𝙖𝙥",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6FA2DF26F28275CEEB6DFE8519E4C3",
+      "participant": "173568419750008@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6FA2DF26F28275CEEB6DFE8519E4C3",
+      "participant": "173568419750008@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "173568419750008@lid",
+      "6287789473733@s.whatsapp.net"
+    ],
+    "contactHash": "cfd6eb141273103a8a5ef16164b0f245bb6776df49c667c0de34e8ca2e725441",
+    "arrivedAt": "2026-11-27T04:44:40.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:44:40.743Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:44:45.657Z",
+    "readAt": "2026-11-27T04:44:45.656Z",
+    "emoji": "😳",
+    "reactedAt": "2026-11-27T04:44:45.656Z"
+  }
+}

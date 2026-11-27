@@ -1,0 +1,42 @@
+{
+  "ACF53DF8FFD8502850157D0552292546": {
+    "id": "ACF53DF8FFD8502850157D0552292546",
+    "sender": "62895401083906@s.whatsapp.net",
+    "number": "62895401083906",
+    "storyJid": "62895401083906@s.whatsapp.net",
+    "resolvedPn": "62895401083906@s.whatsapp.net",
+    "name": "XYROO VOLDIGOAD",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF53DF8FFD8502850157D0552292546",
+      "participant": "113027064025335@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF53DF8FFD8502850157D0552292546",
+      "participant": "113027064025335@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "113027064025335@lid",
+      "62895401083906@s.whatsapp.net"
+    ],
+    "contactHash": "3c0878913fb7e402dd5e1228946007287716942f027ebbb7a15eb4404069405a",
+    "arrivedAt": "2026-11-27T15:01:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:01:21.235Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:01:27.190Z",
+    "readAt": "2026-11-27T15:01:27.190Z",
+    "emoji": "🕊️",
+    "reactedAt": "2026-11-27T15:01:27.190Z"
+  }
+}

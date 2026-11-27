@@ -1,0 +1,42 @@
+{
+  "ACF2FE5074BA2B09392583FA5D9DCAB2": {
+    "id": "ACF2FE5074BA2B09392583FA5D9DCAB2",
+    "sender": "6287730553183@s.whatsapp.net",
+    "number": "6287730553183",
+    "storyJid": "6287730553183@s.whatsapp.net",
+    "resolvedPn": "6287730553183@s.whatsapp.net",
+    "name": "⚚Dante⚔Devil⚔Hunter⚚",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF2FE5074BA2B09392583FA5D9DCAB2",
+      "participant": "25615805743161@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF2FE5074BA2B09392583FA5D9DCAB2",
+      "participant": "25615805743161@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "25615805743161@lid",
+      "6287730553183@s.whatsapp.net"
+    ],
+    "contactHash": "7a1927af98f695915d3b9ebd470c68f68a9b810c1ba59e2c34be15f4fd8b93ad",
+    "arrivedAt": "2026-11-27T11:32:29.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:32:29.519Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:32:32.864Z",
+    "readAt": "2026-11-27T11:32:32.863Z",
+    "emoji": "☁️",
+    "reactedAt": "2026-11-27T11:32:32.863Z"
+  }
+}

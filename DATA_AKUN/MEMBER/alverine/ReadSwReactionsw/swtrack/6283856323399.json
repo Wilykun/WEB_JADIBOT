@@ -1,0 +1,42 @@
+{
+  "AC212966DDB3303B628C1D2F535D57E9": {
+    "id": "AC212966DDB3303B628C1D2F535D57E9",
+    "sender": "6283856323399@s.whatsapp.net",
+    "number": "6283856323399",
+    "storyJid": "6283856323399@s.whatsapp.net",
+    "resolvedPn": "6283856323399@s.whatsapp.net",
+    "name": "𝗠𝗜𝗞𝗔 𝗔𝗟𝗗𝗥𝗜𝗖𝗛",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC212966DDB3303B628C1D2F535D57E9",
+      "participant": "134355854819394@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC212966DDB3303B628C1D2F535D57E9",
+      "participant": "134355854819394@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "134355854819394@lid",
+      "6283856323399@s.whatsapp.net"
+    ],
+    "contactHash": "cea372d8a6d5eec6a7cba1ebc4292d38f7b7d28684cc03e66c73ae23209e88d6",
+    "arrivedAt": "2026-11-27T05:08:09.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:08:10.122Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:08:15.975Z",
+    "readAt": "2026-11-27T05:08:15.974Z",
+    "emoji": "🦋",
+    "reactedAt": "2026-11-27T05:08:15.974Z"
+  }
+}

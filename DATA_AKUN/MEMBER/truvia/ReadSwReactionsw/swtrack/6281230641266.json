@@ -1,0 +1,42 @@
+{
+  "ACF427AEB59524170081AFFA02538A43": {
+    "id": "ACF427AEB59524170081AFFA02538A43",
+    "sender": "6281230641266@s.whatsapp.net",
+    "number": "6281230641266",
+    "storyJid": "6281230641266@s.whatsapp.net",
+    "resolvedPn": "6281230641266@s.whatsapp.net",
+    "name": "Daryanta wanakarsa",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF427AEB59524170081AFFA02538A43",
+      "participant": "122733019058210@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF427AEB59524170081AFFA02538A43",
+      "participant": "122733019058210@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "122733019058210@lid",
+      "6281230641266@s.whatsapp.net"
+    ],
+    "contactHash": "3af60c0f862a3e1216dc67660d537fefb2f4cd5ad7ce656aadf4b39f5f48c097",
+    "arrivedAt": "2026-11-27T13:15:26.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:15:26.083Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:15:34.994Z",
+    "readAt": "2026-11-27T13:15:34.993Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-27T13:15:34.993Z"
+  }
+}

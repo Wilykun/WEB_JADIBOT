@@ -1,0 +1,42 @@
+{
+  "AC0FA09F173CD1D43677B7C32F832946": {
+    "id": "AC0FA09F173CD1D43677B7C32F832946",
+    "sender": "628813381583@s.whatsapp.net",
+    "number": "628813381583",
+    "storyJid": "628813381583@s.whatsapp.net",
+    "resolvedPn": "628813381583@s.whatsapp.net",
+    "name": "`LELE_RADIO_AKTIF_|^-^|`",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0FA09F173CD1D43677B7C32F832946",
+      "participant": "223412035281037@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0FA09F173CD1D43677B7C32F832946",
+      "participant": "223412035281037@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "223412035281037@lid",
+      "628813381583@s.whatsapp.net"
+    ],
+    "contactHash": "16f471eda37a4c994dcd0dbb428b79a45f2b46f9d1a754979b4c8d057eaf3ce9",
+    "arrivedAt": "2026-11-27T05:55:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:55:45.882Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:55:51.731Z",
+    "readAt": "2026-11-27T05:55:51.729Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-27T05:55:51.729Z"
+  }
+}

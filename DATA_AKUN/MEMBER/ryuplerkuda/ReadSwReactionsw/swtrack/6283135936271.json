@@ -1,0 +1,42 @@
+{
+  "AC34AA3FF53E8B453AF5EFD02784262C": {
+    "id": "AC34AA3FF53E8B453AF5EFD02784262C",
+    "sender": "6283135936271@s.whatsapp.net",
+    "number": "6283135936271",
+    "storyJid": "6283135936271@s.whatsapp.net",
+    "resolvedPn": "6283135936271@s.whatsapp.net",
+    "name": "Anna|Am Prem Ready",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC34AA3FF53E8B453AF5EFD02784262C",
+      "participant": "252862391177277@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC34AA3FF53E8B453AF5EFD02784262C",
+      "participant": "252862391177277@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "252862391177277@lid",
+      "6283135936271@s.whatsapp.net"
+    ],
+    "contactHash": "022d5561e28e793811944efe13ac234873bab9a4603c6cc4ff75a574dca2f291",
+    "arrivedAt": "2026-11-27T00:14:06.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:14:05.847Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:14:09.444Z",
+    "readAt": "2026-11-27T00:14:09.437Z",
+    "emoji": "😣",
+    "reactedAt": "2026-11-27T00:14:09.437Z"
+  }
+}

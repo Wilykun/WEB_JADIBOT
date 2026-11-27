@@ -1,0 +1,42 @@
+{
+  "AC2C01D156332A6AED9FD41648B382E6": {
+    "id": "AC2C01D156332A6AED9FD41648B382E6",
+    "sender": "6282141069084@s.whatsapp.net",
+    "number": "6282141069084",
+    "storyJid": "6282141069084@s.whatsapp.net",
+    "resolvedPn": "6282141069084@s.whatsapp.net",
+    "name": "Eka Hoover-sama`☆⋆˚ᯓᡣ𐭩",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2C01D156332A6AED9FD41648B382E6",
+      "participant": "242313683071181@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2C01D156332A6AED9FD41648B382E6",
+      "participant": "242313683071181@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "242313683071181@lid",
+      "6282141069084@s.whatsapp.net"
+    ],
+    "contactHash": "23d706573f847c067fc7bc1020670bb8be012bf1f43bd28cf61f212cb0d8425e",
+    "arrivedAt": "2026-11-27T11:39:50.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:39:50.982Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:39:53.829Z",
+    "readAt": "2026-11-27T11:39:53.828Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T11:39:53.828Z"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "AC78B3443AC6EA2B21B9D5CF00F7677C": {
+    "id": "AC78B3443AC6EA2B21B9D5CF00F7677C",
+    "sender": "62895615270206@s.whatsapp.net",
+    "number": "62895615270206",
+    "storyJid": "62895615270206@s.whatsapp.net",
+    "resolvedPn": "62895615270206@s.whatsapp.net",
+    "name": "🐱milla llyn saputri🦈",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC78B3443AC6EA2B21B9D5CF00F7677C",
+      "participant": "174156880547881@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC78B3443AC6EA2B21B9D5CF00F7677C",
+      "participant": "174156880547881@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "174156880547881@lid",
+      "62895615270206@s.whatsapp.net"
+    ],
+    "contactHash": "43445e35cc8cfe2c9db18711cfd10f5838e08d37b025d59366482e1feb1ad27c",
+    "arrivedAt": "2026-11-27T13:10:05.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:10:05.221Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:10:09.788Z",
+    "readAt": "2026-11-27T13:10:09.555Z",
+    "emoji": "📷",
+    "reactedAt": "2026-11-27T13:10:09.555Z"
+  }
+}

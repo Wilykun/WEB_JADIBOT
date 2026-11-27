@@ -1,0 +1,42 @@
+{
+  "AC93C15695E01BE913C65831A7774F9A": {
+    "id": "AC93C15695E01BE913C65831A7774F9A",
+    "sender": "6288985472469@s.whatsapp.net",
+    "number": "6288985472469",
+    "storyJid": "6288985472469@s.whatsapp.net",
+    "resolvedPn": "6288985472469@s.whatsapp.net",
+    "name": "yosepヴィアル` | 𝗗𝗠𝗦",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC93C15695E01BE913C65831A7774F9A",
+      "participant": "88361100423387@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC93C15695E01BE913C65831A7774F9A",
+      "participant": "88361100423387@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "88361100423387@lid",
+      "6288985472469@s.whatsapp.net"
+    ],
+    "contactHash": "0fe7a84976f7db4a9fb0e73c8fada2c4d2b147b89b358fb0328dfdf63f9acb6d",
+    "arrivedAt": "2026-11-27T16:01:00.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T16:01:00.603Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T16:01:04.381Z",
+    "readAt": "2026-11-27T16:01:04.380Z",
+    "emoji": "🗿",
+    "reactedAt": "2026-11-27T16:01:04.380Z"
+  }
+}

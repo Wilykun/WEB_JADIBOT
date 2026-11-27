@@ -1,0 +1,42 @@
+{
+  "AC3A0A54714AE373EABC94372D4C0D64": {
+    "id": "AC3A0A54714AE373EABC94372D4C0D64",
+    "sender": "6285762655064@s.whatsapp.net",
+    "number": "6285762655064",
+    "storyJid": "6285762655064@s.whatsapp.net",
+    "resolvedPn": "6285762655064@s.whatsapp.net",
+    "name": "SHIENA MIKHAILA 🙇🏻‍♀️✨🇯🇵",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3A0A54714AE373EABC94372D4C0D64",
+      "participant": "190662322438302@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3A0A54714AE373EABC94372D4C0D64",
+      "participant": "190662322438302@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "190662322438302@lid",
+      "6285762655064@s.whatsapp.net"
+    ],
+    "contactHash": "6b9e8860fad295c93fd7957bf688ee3689dc6326dc9f9fb59ff2b68cef27609d",
+    "arrivedAt": "2026-11-27T17:23:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T17:23:36.468Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T17:23:39.287Z",
+    "readAt": "2026-11-27T17:23:39.286Z",
+    "emoji": "✨",
+    "reactedAt": "2026-11-27T17:23:39.286Z"
+  }
+}

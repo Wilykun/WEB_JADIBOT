@@ -1,0 +1,42 @@
+{
+  "AC8482C1FA16DE959F879292C98BA9F3": {
+    "id": "AC8482C1FA16DE959F879292C98BA9F3",
+    "sender": "6285194407342@s.whatsapp.net",
+    "number": "6285194407342",
+    "storyJid": "6285194407342@s.whatsapp.net",
+    "resolvedPn": "6285194407342@s.whatsapp.net",
+    "name": "𝚁𝙴𝙸𝙽𝚉𝚉",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8482C1FA16DE959F879292C98BA9F3",
+      "participant": "40021142802606@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8482C1FA16DE959F879292C98BA9F3",
+      "participant": "40021142802606@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "40021142802606@lid",
+      "6285194407342@s.whatsapp.net"
+    ],
+    "contactHash": "f8f59e24d328fd47ff060b9c621907d2a9225fd008ff76a84de0bc87899948d9",
+    "arrivedAt": "2026-11-27T00:56:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:56:48.990Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:57:08.683Z",
+    "readAt": "2026-11-27T00:57:08.669Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T00:57:08.669Z"
+  }
+}

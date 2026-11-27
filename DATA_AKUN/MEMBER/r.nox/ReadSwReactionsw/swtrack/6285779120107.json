@@ -1,0 +1,42 @@
+{
+  "A50E749502C012ED5DE8D72ED5CC0F00__part__zx0qnysa": {
+    "id": "A50E749502C012ED5DE8D72ED5CC0F00__part__zx0qnysa",
+    "sender": "6285779120107@s.whatsapp.net",
+    "number": "6285779120107",
+    "storyJid": "6285779120107@s.whatsapp.net",
+    "resolvedPn": "6285779120107@s.whatsapp.net",
+    "name": "Moon str.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A50E749502C012ED5DE8D72ED5CC0F00__part__zx0qnysa",
+      "participant": "41232390697076@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A50E749502C012ED5DE8D72ED5CC0F00__part__zx0qnysa",
+      "participant": "41232390697076@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "41232390697076@lid",
+      "6285779120107@s.whatsapp.net"
+    ],
+    "contactHash": "3cd3640d6a32a9da2803c1a4aa5cd856ba851591f1b09d0a7b8a8b8f9745104e",
+    "arrivedAt": "2026-11-27T14:33:59.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:34:44.704Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:34:47.097Z",
+    "readAt": "2026-11-27T14:34:47.094Z",
+    "emoji": "🤓",
+    "reactedAt": "2026-11-27T14:34:47.094Z"
+  }
+}

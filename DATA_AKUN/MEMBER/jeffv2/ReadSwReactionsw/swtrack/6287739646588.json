@@ -1,0 +1,42 @@
+{
+  "A588A8DE325CF395051F89451F5DB8BB": {
+    "id": "A588A8DE325CF395051F89451F5DB8BB",
+    "sender": "6287739646588@s.whatsapp.net",
+    "number": "6287739646588",
+    "storyJid": "6287739646588@s.whatsapp.net",
+    "resolvedPn": "6287739646588@s.whatsapp.net",
+    "name": "only belongs tom marvolo riddle.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A588A8DE325CF395051F89451F5DB8BB",
+      "participant": "99596500005109@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A588A8DE325CF395051F89451F5DB8BB",
+      "participant": "99596500005109@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "99596500005109@lid",
+      "6287739646588@s.whatsapp.net"
+    ],
+    "contactHash": "5bd226dcb97ce48567ffc3da8b395af9a0b277ab80febbdb48e941e120b77228",
+    "arrivedAt": "2026-11-27T08:20:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:20:31.222Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:20:38.594Z",
+    "readAt": "2026-11-27T08:20:37.751Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T08:20:37.751Z"
+  }
+}

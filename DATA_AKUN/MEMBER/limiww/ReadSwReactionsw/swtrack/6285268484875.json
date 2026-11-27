@@ -1,0 +1,42 @@
+{
+  "AC60759FBC6FC6F2E17F1EBF25981927": {
+    "id": "AC60759FBC6FC6F2E17F1EBF25981927",
+    "sender": "6285268484875@s.whatsapp.net",
+    "number": "6285268484875",
+    "storyJid": "6285268484875@s.whatsapp.net",
+    "resolvedPn": "6285268484875@s.whatsapp.net",
+    "name": "Suami Sah Nihilux",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC60759FBC6FC6F2E17F1EBF25981927",
+      "participant": "144843913359444@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC60759FBC6FC6F2E17F1EBF25981927",
+      "participant": "144843913359444@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "144843913359444@lid",
+      "6285268484875@s.whatsapp.net"
+    ],
+    "contactHash": "282a02520a07333b48adf626799f77c356b5a5ae6138ab99d70fc3d477f54d81",
+    "arrivedAt": "2026-11-27T13:04:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:04:47.593Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:04:56.322Z",
+    "readAt": "2026-11-27T13:04:56.322Z",
+    "emoji": "😭",
+    "reactedAt": "2026-11-27T13:04:56.322Z"
+  }
+}

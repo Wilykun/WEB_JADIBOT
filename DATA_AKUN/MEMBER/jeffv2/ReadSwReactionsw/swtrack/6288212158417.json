@@ -1,0 +1,42 @@
+{
+  "ACA22D49C7CDA44E1B0954FE46A9753A": {
+    "id": "ACA22D49C7CDA44E1B0954FE46A9753A",
+    "sender": "6288212158417@s.whatsapp.net",
+    "number": "6288212158417",
+    "storyJid": "6288212158417@s.whatsapp.net",
+    "resolvedPn": "6288212158417@s.whatsapp.net",
+    "name": "⚔️Lucifer morningstar⚔️",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA22D49C7CDA44E1B0954FE46A9753A",
+      "participant": "10824156487748@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA22D49C7CDA44E1B0954FE46A9753A",
+      "participant": "10824156487748@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "10824156487748@lid",
+      "6288212158417@s.whatsapp.net"
+    ],
+    "contactHash": "bf22e6c0a5d874126317bd461128e10c0b16b40b0bf6a8bc5ced2f30093b2e82",
+    "arrivedAt": "2026-11-27T05:26:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:26:46.737Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:26:51.925Z",
+    "readAt": "2026-11-27T05:26:51.894Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T05:26:51.894Z"
+  }
+}

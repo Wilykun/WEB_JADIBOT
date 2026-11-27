@@ -1,0 +1,42 @@
+{
+  "AC1F1117AB3D5EC35BECBA17009EA220": {
+    "id": "AC1F1117AB3D5EC35BECBA17009EA220",
+    "sender": "6282348569441@s.whatsapp.net",
+    "number": "6282348569441",
+    "storyJid": "6282348569441@s.whatsapp.net",
+    "resolvedPn": "6282348569441@s.whatsapp.net",
+    "name": "Mantasia novita sari.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1F1117AB3D5EC35BECBA17009EA220",
+      "participant": "141098802520183@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1F1117AB3D5EC35BECBA17009EA220",
+      "participant": "141098802520183@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "141098802520183@lid",
+      "6282348569441@s.whatsapp.net"
+    ],
+    "contactHash": "27561362cfcd2315c767d0fef43771ba6485c040f783f171b51852ae3c473888",
+    "arrivedAt": "2026-11-27T11:54:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:54:17.812Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:54:29.525Z",
+    "readAt": "2026-11-27T11:54:29.511Z",
+    "emoji": "😰",
+    "reactedAt": "2026-11-27T11:54:29.511Z"
+  }
+}

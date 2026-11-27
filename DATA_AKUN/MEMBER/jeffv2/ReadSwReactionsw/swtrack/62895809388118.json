@@ -1,0 +1,42 @@
+{
+  "AC0E56AE555F621FC837CFC138B3CB1E": {
+    "id": "AC0E56AE555F621FC837CFC138B3CB1E",
+    "sender": "62895809388118@s.whatsapp.net",
+    "number": "62895809388118",
+    "storyJid": "62895809388118@s.whatsapp.net",
+    "resolvedPn": "62895809388118@s.whatsapp.net",
+    "name": "itsuki ~ muzenn",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0E56AE555F621FC837CFC138B3CB1E",
+      "participant": "128075975143558@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0E56AE555F621FC837CFC138B3CB1E",
+      "participant": "128075975143558@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "128075975143558@lid",
+      "62895809388118@s.whatsapp.net"
+    ],
+    "contactHash": "2e7656ab1b064e5cce3a3e4c0d982da3d2796761c4ce2b521d396785057d3410",
+    "arrivedAt": "2026-11-27T07:53:18.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:53:24.652Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:53:43.892Z",
+    "readAt": "2026-11-27T07:53:43.891Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T07:53:43.891Z"
+  }
+}

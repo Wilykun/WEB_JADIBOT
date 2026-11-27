@@ -1,1 +1,42 @@
-{}
+{
+  "AC97C4CCB3F9B455B4F6E0D771BAC7D8": {
+    "id": "AC97C4CCB3F9B455B4F6E0D771BAC7D8",
+    "sender": "6281332487789@s.whatsapp.net",
+    "number": "6281332487789",
+    "storyJid": "6281332487789@s.whatsapp.net",
+    "resolvedPn": "6281332487789@s.whatsapp.net",
+    "name": "Mann A6 SENDIRI 🗿",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC97C4CCB3F9B455B4F6E0D771BAC7D8",
+      "participant": "220465134071982@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC97C4CCB3F9B455B4F6E0D771BAC7D8",
+      "participant": "220465134071982@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "220465134071982@lid",
+      "6281332487789@s.whatsapp.net"
+    ],
+    "contactHash": "61666e448fcdd036dbdc523484e0a67c961d0759ca24a664ec4f49969d907fba",
+    "arrivedAt": "2026-11-27T01:12:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:12:19.373Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:12:28.879Z",
+    "readAt": "2026-11-27T01:12:28.868Z",
+    "emoji": "🐔",
+    "reactedAt": "2026-11-27T01:12:28.868Z"
+  }
+}

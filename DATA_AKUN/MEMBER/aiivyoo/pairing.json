@@ -1,12 +1,12 @@
 {
   "username": "aiivyoo",
-  "status": "linked",
+  "status": "stopped",
   "nomorTertaut": "62838****8873",
-  "workerStatus": "running",
-  "terakhirUpdate": "2026-11-17T05:01:49.564Z",
+  "workerStatus": "stopped",
+  "terakhirUpdate": "2026-11-26T20:47:42.320Z",
   "logTerakhir": {
-    "event": "Koneksi WhatsApp aktif kembali dari panel akun.",
-    "waktu": "2026-11-17T05:01:49.564Z",
-    "waktuWIB": "Selasa, 17 November 2026 pukul 12.01.49 WIB"
+    "event": "WhatsApp menolak sesi tersimpan (kode 401); tautkan ulang diperlukan.",
+    "waktu": "2026-11-26T20:47:42.320Z",
+    "waktuWIB": "Jumat, 27 November 2026 pukul 03.47.42 WIB"
   }
 }

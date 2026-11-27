@@ -1,0 +1,42 @@
+{
+  "ACF01C964B919A68FFD7A0D92D15AA36": {
+    "id": "ACF01C964B919A68FFD7A0D92D15AA36",
+    "sender": "6281918821211@s.whatsapp.net",
+    "number": "6281918821211",
+    "storyJid": "6281918821211@s.whatsapp.net",
+    "resolvedPn": "6281918821211@s.whatsapp.net",
+    "name": "$the whited death (TFMC)",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF01C964B919A68FFD7A0D92D15AA36",
+      "participant": "96168998617316@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF01C964B919A68FFD7A0D92D15AA36",
+      "participant": "96168998617316@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "96168998617316@lid",
+      "6281918821211@s.whatsapp.net"
+    ],
+    "contactHash": "b670bf71132a07f45b136fb36148bc6659a49171cf48211ab5ec46ee63c7a70e",
+    "arrivedAt": "2026-11-27T01:12:30.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:12:31.552Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:12:33.558Z",
+    "readAt": "2026-11-27T01:12:33.556Z",
+    "emoji": "🔥",
+    "reactedAt": "2026-11-27T01:12:33.556Z"
+  }
+}

@@ -1,1 +1,42 @@
-{}
+{
+  "AC5AC08A8844EE91F00F733090AA1BC8": {
+    "id": "AC5AC08A8844EE91F00F733090AA1BC8",
+    "sender": "6285717126936@s.whatsapp.net",
+    "number": "6285717126936",
+    "storyJid": "6285717126936@s.whatsapp.net",
+    "resolvedPn": "6285717126936@s.whatsapp.net",
+    "name": "ℒauna ℒova𝓁ace",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5AC08A8844EE91F00F733090AA1BC8",
+      "participant": "260198195322910@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5AC08A8844EE91F00F733090AA1BC8",
+      "participant": "260198195322910@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "260198195322910@lid",
+      "6285717126936@s.whatsapp.net"
+    ],
+    "contactHash": "e4923c9441f068cc60f0bb7f413bc2a00d96940e37af3b67b78e770b7155b8d5",
+    "arrivedAt": "2026-11-27T12:38:57.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:38:58.345Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:39:05.313Z",
+    "readAt": "2026-11-27T12:39:05.299Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-27T12:39:05.299Z"
+  }
+}

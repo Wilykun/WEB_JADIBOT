@@ -1,1 +1,42 @@
-{}
+{
+  "AC40EC27029D46ABEF6B5E98B04F5503": {
+    "id": "AC40EC27029D46ABEF6B5E98B04F5503",
+    "sender": "6289529183031@s.whatsapp.net",
+    "number": "6289529183031",
+    "storyJid": "6289529183031@s.whatsapp.net",
+    "resolvedPn": "6289529183031@s.whatsapp.net",
+    "name": "°•♥️🐹🦊🍀Chubby Candy🍀🦊🐹♥️•°",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC40EC27029D46ABEF6B5E98B04F5503",
+      "participant": "70923449278638@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC40EC27029D46ABEF6B5E98B04F5503",
+      "participant": "70923449278638@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "70923449278638@lid",
+      "6289529183031@s.whatsapp.net"
+    ],
+    "contactHash": "532cc4cffc724d71ed8c2de443c67f20519528d8893256a46e80ea94fac21469",
+    "arrivedAt": "2026-11-27T10:01:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:01:18.064Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:01:23.817Z",
+    "readAt": "2026-11-27T10:01:23.816Z",
+    "emoji": "😡",
+    "reactedAt": "2026-11-27T10:01:23.816Z"
+  }
+}

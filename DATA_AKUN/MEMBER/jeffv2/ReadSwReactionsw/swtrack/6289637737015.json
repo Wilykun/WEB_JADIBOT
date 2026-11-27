@@ -1,0 +1,42 @@
+{
+  "AC2E2A60C6076A0EA691493E0AF32CED": {
+    "id": "AC2E2A60C6076A0EA691493E0AF32CED",
+    "sender": "6289637737015@s.whatsapp.net",
+    "number": "6289637737015",
+    "storyJid": "6289637737015@s.whatsapp.net",
+    "resolvedPn": "6289637737015@s.whatsapp.net",
+    "name": "Свободная Палестина",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2E2A60C6076A0EA691493E0AF32CED",
+      "participant": "36112336699427@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2E2A60C6076A0EA691493E0AF32CED",
+      "participant": "36112336699427@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "36112336699427@lid",
+      "6289637737015@s.whatsapp.net"
+    ],
+    "contactHash": "aaa9e699cdbabab9b239db197544bb20fee15f4a50e927cea27e3c00c20e8f02",
+    "arrivedAt": "2026-11-27T13:00:05.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:00:07.810Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:00:19.573Z",
+    "readAt": "2026-11-27T13:00:19.572Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T13:00:19.572Z"
+  }
+}

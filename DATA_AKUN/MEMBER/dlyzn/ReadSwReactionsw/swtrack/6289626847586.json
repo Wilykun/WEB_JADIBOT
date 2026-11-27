@@ -1,0 +1,42 @@
+{
+  "AC9202B2F952D24762382702CB74F7F1": {
+    "id": "AC9202B2F952D24762382702CB74F7F1",
+    "sender": "6289626847586@s.whatsapp.net",
+    "number": "6289626847586",
+    "storyJid": "6289626847586@s.whatsapp.net",
+    "resolvedPn": "6289626847586@s.whatsapp.net",
+    "name": "『アルク』ZAMM",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9202B2F952D24762382702CB74F7F1",
+      "participant": "134626202882082@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9202B2F952D24762382702CB74F7F1",
+      "participant": "134626202882082@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "134626202882082@lid",
+      "6289626847586@s.whatsapp.net"
+    ],
+    "contactHash": "0abc799dc6bba53625faf500e336e38c3f1d20cf8465d00ea564c525a6498bac",
+    "arrivedAt": "2026-11-27T12:39:33.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:39:33.906Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:39:38.982Z",
+    "readAt": "2026-11-27T12:39:38.981Z",
+    "emoji": "👀",
+    "reactedAt": "2026-11-27T12:39:38.981Z"
+  }
+}

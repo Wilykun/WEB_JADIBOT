@@ -1,0 +1,42 @@
+{
+  "A59F454F80617A6E83289E6765ED273D": {
+    "id": "A59F454F80617A6E83289E6765ED273D",
+    "sender": "6281238007400@s.whatsapp.net",
+    "number": "6281238007400",
+    "storyJid": "6281238007400@s.whatsapp.net",
+    "resolvedPn": "6281238007400@s.whatsapp.net",
+    "name": "ユミエラ 𝚂нιяιιιѕ 〆 Xeon",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A59F454F80617A6E83289E6765ED273D",
+      "participant": "276518668390643@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A59F454F80617A6E83289E6765ED273D",
+      "participant": "276518668390643@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "276518668390643@lid",
+      "6281238007400@s.whatsapp.net"
+    ],
+    "contactHash": "de2d275c7dec0379bc4345390b18bfdb6e8021d4c3c821a410279dfa1fdda0cf",
+    "arrivedAt": "2026-11-27T00:11:29.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:11:29.859Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:11:35.880Z",
+    "readAt": "2026-11-27T00:11:35.879Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T00:11:35.879Z"
+  }
+}

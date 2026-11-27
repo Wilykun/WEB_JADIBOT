@@ -1,0 +1,42 @@
+{
+  "ACD2BDEC8A03B6A838DA308C1D240187": {
+    "id": "ACD2BDEC8A03B6A838DA308C1D240187",
+    "sender": "6285773094423@s.whatsapp.net",
+    "number": "6285773094423",
+    "storyJid": "6285773094423@s.whatsapp.net",
+    "resolvedPn": "6285773094423@s.whatsapp.net",
+    "name": "【.青と夏.】> 𝗘𝘆𝘆𝗬𝘆 𝘆𝗢𝗼𝗨𝘂𝘂𝘂𝗨𝘂",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD2BDEC8A03B6A838DA308C1D240187",
+      "participant": "161233189744675@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD2BDEC8A03B6A838DA308C1D240187",
+      "participant": "161233189744675@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "161233189744675@lid",
+      "6285773094423@s.whatsapp.net"
+    ],
+    "contactHash": "77f5ca1c99cbe293c12f1e2ddb3eb01384bda2f2cedc7f7fbc39f54aa94faa97",
+    "arrivedAt": "2026-11-27T04:51:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:51:10.120Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:51:14.270Z",
+    "readAt": "2026-11-27T04:51:14.243Z",
+    "emoji": "🤓",
+    "reactedAt": "2026-11-27T04:51:14.243Z"
+  }
+}

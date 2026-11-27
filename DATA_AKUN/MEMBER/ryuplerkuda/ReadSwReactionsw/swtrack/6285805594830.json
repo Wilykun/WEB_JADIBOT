@@ -1,0 +1,42 @@
+{
+  "AC7EDDE453E2A85BC4849836CC5F5A18": {
+    "id": "AC7EDDE453E2A85BC4849836CC5F5A18",
+    "sender": "6285805594830@s.whatsapp.net",
+    "number": "6285805594830",
+    "storyJid": "6285805594830@s.whatsapp.net",
+    "resolvedPn": "6285805594830@s.whatsapp.net",
+    "name": "艾 - 𝙑𝙞𝙣𝙯𝙮𝙋𝙧𝙨𝙩' 𝙂𝙋",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7EDDE453E2A85BC4849836CC5F5A18",
+      "participant": "143078899904728@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7EDDE453E2A85BC4849836CC5F5A18",
+      "participant": "143078899904728@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "143078899904728@lid",
+      "6285805594830@s.whatsapp.net"
+    ],
+    "contactHash": "6b8551253add9fbc67c4e1783690da234d2195adf4e2749e96b27aca83de9dbe",
+    "arrivedAt": "2026-11-27T04:10:42.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:10:43.133Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:10:46.059Z",
+    "readAt": "2026-11-27T04:10:46.058Z",
+    "emoji": "🥀",
+    "reactedAt": "2026-11-27T04:10:46.058Z"
+  }
+}

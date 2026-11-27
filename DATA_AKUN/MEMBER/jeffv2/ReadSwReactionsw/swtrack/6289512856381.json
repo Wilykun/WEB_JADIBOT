@@ -1,0 +1,42 @@
+{
+  "A5A965AD17FB0B5BAF08A51EF4AEC8F4": {
+    "id": "A5A965AD17FB0B5BAF08A51EF4AEC8F4",
+    "sender": "6289512856381@s.whatsapp.net",
+    "number": "6289512856381",
+    "storyJid": "6289512856381@s.whatsapp.net",
+    "resolvedPn": "6289512856381@s.whatsapp.net",
+    "name": "Rafa Syah Francisco",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5A965AD17FB0B5BAF08A51EF4AEC8F4",
+      "participant": "137812632445133@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5A965AD17FB0B5BAF08A51EF4AEC8F4",
+      "participant": "137812632445133@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137812632445133@lid",
+      "6289512856381@s.whatsapp.net"
+    ],
+    "contactHash": "c60a018c8d881e597ca5aa9b812673b25c265dfd9376ebe8d30aad9dd77bfb1f",
+    "arrivedAt": "2026-11-27T13:48:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:48:53.863Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:48:56.352Z",
+    "readAt": "2026-11-27T13:48:56.352Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T13:48:56.352Z"
+  }
+}

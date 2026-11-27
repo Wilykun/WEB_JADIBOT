@@ -1,0 +1,42 @@
+{
+  "AC38CFEBA205A6BD5EBE267A423C86AD": {
+    "id": "AC38CFEBA205A6BD5EBE267A423C86AD",
+    "sender": "62895355886300@s.whatsapp.net",
+    "number": "62895355886300",
+    "storyJid": "62895355886300@s.whatsapp.net",
+    "resolvedPn": "62895355886300@s.whatsapp.net",
+    "name": "🄳🄰🄽🅉 • 🅅🄰🄽",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC38CFEBA205A6BD5EBE267A423C86AD",
+      "participant": "260442907738357@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC38CFEBA205A6BD5EBE267A423C86AD",
+      "participant": "260442907738357@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "260442907738357@lid",
+      "62895355886300@s.whatsapp.net"
+    ],
+    "contactHash": "a3d106936de72b91e6345995db0871d0540ae627459beba1c120d893299df606",
+    "arrivedAt": "2026-11-27T17:29:23.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T17:29:24.415Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T17:29:39.169Z",
+    "readAt": "2026-11-27T17:29:39.168Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T17:29:39.168Z"
+  }
+}
