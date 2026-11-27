@@ -1,0 +1,282 @@
+{
+  "ACF1501DAAA37A14A6CB5A191F288528": {
+    "id": "ACF1501DAAA37A14A6CB5A191F288528",
+    "sender": "6282314803267@s.whatsapp.net",
+    "number": "6282314803267",
+    "storyJid": "6282314803267@s.whatsapp.net",
+    "resolvedPn": "6282314803267@s.whatsapp.net",
+    "name": "𝗧𝗧: 『𝙍𝘼𝘾』𝗔𝗟 𝗧𝗲𝗻𝗱𝗼𝘂 𝙎𝙆❼",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF1501DAAA37A14A6CB5A191F288528",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF1501DAAA37A14A6CB5A191F288528",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137829812285443@lid",
+      "6282314803267@s.whatsapp.net"
+    ],
+    "contactHash": "dade8e33e8ad554114a2f1536a28b80ffbf7a258e27d5b4798c04213d646a571",
+    "arrivedAt": "2026-11-26T22:20:16.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:20:16.132Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:20:20.632Z",
+    "readAt": "2026-11-26T22:20:20.607Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-26T22:20:20.607Z"
+  },
+  "ACC9D8D21765545C7C10064C6CB614CA": {
+    "id": "ACC9D8D21765545C7C10064C6CB614CA",
+    "sender": "6282314803267@s.whatsapp.net",
+    "number": "6282314803267",
+    "storyJid": "6282314803267@s.whatsapp.net",
+    "resolvedPn": "6282314803267@s.whatsapp.net",
+    "name": "𝗧𝗧: 『𝙍𝘼𝘾』𝗔𝗟 𝗧𝗲𝗻𝗱𝗼𝘂 𝙎𝙆❼",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC9D8D21765545C7C10064C6CB614CA",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC9D8D21765545C7C10064C6CB614CA",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137829812285443@lid",
+      "6282314803267@s.whatsapp.net"
+    ],
+    "contactHash": "dade8e33e8ad554114a2f1536a28b80ffbf7a258e27d5b4798c04213d646a571",
+    "arrivedAt": "2026-11-26T22:53:29.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:53:29.054Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:53:31.846Z",
+    "readAt": "2026-11-26T22:53:31.843Z",
+    "emoji": "⁉️",
+    "reactedAt": "2026-11-26T22:53:31.843Z"
+  },
+  "AC29124C7EB6B3D9ADB2D2BEC7722541": {
+    "id": "AC29124C7EB6B3D9ADB2D2BEC7722541",
+    "sender": "6282314803267@s.whatsapp.net",
+    "number": "6282314803267",
+    "storyJid": "6282314803267@s.whatsapp.net",
+    "resolvedPn": "6282314803267@s.whatsapp.net",
+    "name": "𝗧𝗧: 『𝙍𝘼𝘾』𝗔𝗟 𝗧𝗲𝗻𝗱𝗼𝘂 𝙎𝙆❼",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC29124C7EB6B3D9ADB2D2BEC7722541",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC29124C7EB6B3D9ADB2D2BEC7722541",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137829812285443@lid",
+      "6282314803267@s.whatsapp.net"
+    ],
+    "contactHash": "dade8e33e8ad554114a2f1536a28b80ffbf7a258e27d5b4798c04213d646a571",
+    "arrivedAt": "2026-11-26T23:52:07.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:52:07.694Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:52:11.389Z",
+    "readAt": "2026-11-26T23:52:11.387Z",
+    "emoji": "😹",
+    "reactedAt": "2026-11-26T23:52:11.387Z"
+  },
+  "AC7D48F96A4E6236C771FD83E736AFC6": {
+    "id": "AC7D48F96A4E6236C771FD83E736AFC6",
+    "sender": "6282314803267@s.whatsapp.net",
+    "number": "6282314803267",
+    "storyJid": "6282314803267@s.whatsapp.net",
+    "resolvedPn": "6282314803267@s.whatsapp.net",
+    "name": "𝗧𝗧: 『𝙍𝘼𝘾』𝗔𝗟 𝗧𝗲𝗻𝗱𝗼𝘂 𝙎𝙆❼",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7D48F96A4E6236C771FD83E736AFC6",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7D48F96A4E6236C771FD83E736AFC6",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137829812285443@lid",
+      "6282314803267@s.whatsapp.net"
+    ],
+    "contactHash": "dade8e33e8ad554114a2f1536a28b80ffbf7a258e27d5b4798c04213d646a571",
+    "arrivedAt": "2026-11-27T02:42:58.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:42:58.226Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:43:03.091Z",
+    "readAt": "2026-11-27T02:43:03.087Z",
+    "emoji": "😣",
+    "reactedAt": "2026-11-27T02:43:03.087Z"
+  },
+  "AC133DA17D1F8FE6313A082411FF607E": {
+    "id": "AC133DA17D1F8FE6313A082411FF607E",
+    "sender": "6282314803267@s.whatsapp.net",
+    "number": "6282314803267",
+    "storyJid": "6282314803267@s.whatsapp.net",
+    "resolvedPn": "6282314803267@s.whatsapp.net",
+    "name": "𝗧𝗧: 『𝙍𝘼𝘾』𝗔𝗟 𝗧𝗲𝗻𝗱𝗼𝘂 𝙎𝙆❼",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC133DA17D1F8FE6313A082411FF607E",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC133DA17D1F8FE6313A082411FF607E",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137829812285443@lid",
+      "6282314803267@s.whatsapp.net"
+    ],
+    "contactHash": "dade8e33e8ad554114a2f1536a28b80ffbf7a258e27d5b4798c04213d646a571",
+    "arrivedAt": "2026-11-27T04:18:48.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:18:47.752Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:18:51.785Z",
+    "readAt": "2026-11-27T04:18:51.784Z",
+    "emoji": "🗿",
+    "reactedAt": "2026-11-27T04:18:51.784Z"
+  },
+  "AC11F44F8228B6AABB819D3797E1F25E": {
+    "id": "AC11F44F8228B6AABB819D3797E1F25E",
+    "sender": "6282314803267@s.whatsapp.net",
+    "number": "6282314803267",
+    "storyJid": "6282314803267@s.whatsapp.net",
+    "resolvedPn": "6282314803267@s.whatsapp.net",
+    "name": "𝗧𝗧: 『𝙍𝘼𝘾』𝗔𝗟 𝗧𝗲𝗻𝗱𝗼𝘂 𝙎𝙆❼",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC11F44F8228B6AABB819D3797E1F25E",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC11F44F8228B6AABB819D3797E1F25E",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137829812285443@lid",
+      "6282314803267@s.whatsapp.net"
+    ],
+    "contactHash": "dade8e33e8ad554114a2f1536a28b80ffbf7a258e27d5b4798c04213d646a571",
+    "arrivedAt": "2026-11-27T11:02:14.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:02:14.273Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:02:19.257Z",
+    "readAt": "2026-11-27T11:02:19.256Z",
+    "emoji": "😖",
+    "reactedAt": "2026-11-27T11:02:19.256Z"
+  },
+  "AC5E9380599FDC86778C8A322418D342": {
+    "id": "AC5E9380599FDC86778C8A322418D342",
+    "sender": "6282314803267@s.whatsapp.net",
+    "number": "6282314803267",
+    "storyJid": "6282314803267@s.whatsapp.net",
+    "resolvedPn": "6282314803267@s.whatsapp.net",
+    "name": "𝗧𝗧: 『𝙍𝘼𝘾』𝗔𝗟 𝗧𝗲𝗻𝗱𝗼𝘂 𝙎𝙆❼",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5E9380599FDC86778C8A322418D342",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5E9380599FDC86778C8A322418D342",
+      "participant": "137829812285443@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "137829812285443@lid",
+      "6282314803267@s.whatsapp.net"
+    ],
+    "contactHash": "dade8e33e8ad554114a2f1536a28b80ffbf7a258e27d5b4798c04213d646a571",
+    "arrivedAt": "2026-11-27T11:06:23.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:06:24.184Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:06:29.007Z",
+    "readAt": "2026-11-27T11:06:28.999Z",
+    "emoji": "😏",
+    "reactedAt": "2026-11-27T11:06:28.999Z"
+  }
+}
