@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-27T21:47:00+07:00",
+  "updatedAt": "2026-11-27T21:55:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 27 Nov 2026",
+      "time": "21.55 WIB",
+      "title": "Notifikasi Pembaruan baru kini menampilkan isi update realtime",
+      "tag": "Fitur baru",
+      "description": "Saat ada pembaruan baru, kini muncul kartu notifikasi Pembaruan baru di tengah layar untuk semua akun yang login, lengkap dengan isi update-nya — judul, hari dan jam, kategori beserta ikonnya, dan deskripsi yang bisa digulir — bukan lagi sekadar toast. Kalau ada beberapa update yang belum dibaca (misalnya karena jarang membuka panel), semuanya tampil sekaligus beserta hitungannya yang akurat. Tombol Muat ulang memakai versi terbaru, Tutup semua menandai semua update sebagai dibaca, Tutup hanya menutup kartu, dan Lihat update sebelumnya membuka halaman Info Update."
+    },
     {
       "day": "Jumat, 27 Nov 2026",
       "time": "21.47 WIB",

@@ -353,8 +353,19 @@ document.querySelector('#emoji-notice-overlay')?.addEventListener('click', (even
     }
   }
 });
+document.querySelector('#info-update-notice-overlay')?.addEventListener('click', (event) => {
+  if (event.target === event.currentTarget) { hideInfoUpdateNoticeModal(); return; }
+  if (event.target.closest('[data-info-update-notice-close]')) { hideInfoUpdateNoticeModal(); return; }
+  if (event.target.closest('[data-info-update-notice-dismiss-all]')) { void dismissAllInfoUpdateNotice(); return; }
+  if (event.target.closest('[data-info-update-notice-reload]')) { location.reload(); return; }
+  if (event.target.closest('[data-info-update-notice-more]')) {
+    hideInfoUpdateNoticeModal();
+    setWorkspacePage('infoupdate');
+  }
+});
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && !document.querySelector('#emoji-notice-overlay')?.classList.contains('hidden')) dismissNoticeOverlay();
+  if (event.key === 'Escape' && !document.querySelector('#info-update-notice-overlay')?.classList.contains('hidden')) hideInfoUpdateNoticeModal();
 });
 
 function isSingleEmoji(value) {
@@ -3509,6 +3520,7 @@ const loadedClientVersion = (() => {
 // overlay terbuka dan tidak sedang mengetik di kolom apa pun.
 function isClientIdleForReload() {
   if (!document.querySelector('#emoji-notice-overlay')?.classList.contains('hidden')) return false;
+  if (!document.querySelector('#info-update-notice-overlay')?.classList.contains('hidden')) return false;
   if (document.querySelector('.confirm-overlay')) return false;
   const active = document.activeElement;
   if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT' || active.isContentEditable)) return false;
@@ -6795,22 +6807,83 @@ let infoUpdateNoticeTimer = null;
 function infoUpdateMarker(update) {
   return update?.day && update?.time && update?.title ? `${update.day}|${update.time}|${update.title}` : null;
 }
-function notifyNewInfoUpdate(updates) {
+// Modal notifikasi Pembaruan baru: muncul realtime untuk semua akun saat ada
+// entri Info Update baru, menampilkan semua update yang belum dibaca (bukan
+// hanya yang terbaru) — jadi pengguna yang jarang membuka panel melihat
+// tumpukan update-nya sekaligus, lengkap dengan ikon SVG sesuai kategori.
+// "Tutup semua" menandai semua update sebagai dibaca; "Tutup" hanya menutup
+// modal (badge tetap, tapi modal tidak muncul lagi untuk entri terbaru yang
+// sama sampai ada update yang lebih baru).
+let infoUpdateNoticeDismissedMarker = null;
+let infoUpdateNoticeShownMarker = null;
+let infoUpdateNoticeUnseen = [];
+function unseenInfoUpdates(updates, seen) {
+  const count = countUnreadInfoUpdates(updates, seen);
+  return count > 0 ? updates.slice(0, count) : [];
+}
+function showInfoUpdateNoticeModal(unseen) {
+  const overlay = document.querySelector('#info-update-notice-overlay');
+  const list = document.querySelector('#info-update-notice-list');
+  const countEl = document.querySelector('#info-update-notice-count');
+  if (!overlay || !list || !countEl || !Array.isArray(unseen) || !unseen.length) return;
+  const marker = infoUpdateMarker(unseen[0]);
+  if (!marker || marker === infoUpdateNoticeShownMarker) return;
+  infoUpdateNoticeUnseen = unseen;
+  infoUpdateNoticeShownMarker = marker;
+  countEl.textContent = unseen.length === 1
+    ? '1 pembaruan baru belum dibaca.'
+    : `${unseen.length} pembaruan baru belum dibaca.`;
+  list.replaceChildren();
+  unseen.forEach((update) => list.append(createInfoUpdateItem(update)));
+  overlay.classList.remove('hidden');
+  overlay.querySelector('[data-info-update-notice-reload]')?.focus();
+}
+function hideInfoUpdateNoticeModal() {
+  const overlay = document.querySelector('#info-update-notice-overlay');
+  if (!overlay || overlay.classList.contains('hidden')) return;
+  infoUpdateNoticeDismissedMarker = infoUpdateNoticeShownMarker;
+  infoUpdateNoticeShownMarker = null;
+  overlay.classList.add('hidden');
+}
+async function dismissAllInfoUpdateNotice() {
+  const unseen = infoUpdateNoticeUnseen;
+  infoUpdateNoticeUnseen = [];
+  infoUpdateNoticeDismissedMarker = infoUpdateNoticeShownMarker;
+  infoUpdateNoticeShownMarker = null;
+  document.querySelector('#info-update-notice-overlay')?.classList.add('hidden');
+  if (Array.isArray(unseen) && unseen.length) {
+    await markInfoUpdatesSeen(unseen);
+    void refreshInfoUpdateBadge(unseen);
+  }
+}
+function notifyNewInfoUpdate(updates, seen) {
   const newest = Array.isArray(updates) ? updates[0] : null;
   const marker = infoUpdateMarker(newest);
   if (!marker) return;
-  const isNew = lastNotifiedInfoUpdateMarker !== null && marker !== lastNotifiedInfoUpdateMarker;
   lastNotifiedInfoUpdateMarker = marker;
-  if (isNew) showToast(`Info Update baru: ${newest.title}`);
+  const unseen = unseenInfoUpdates(updates, seen);
+  if (!unseen.length) return;
+  // Modal hanya muncul sekali per entri terbaru: yang sudah ditutup dengan
+  // "Tutup" tidak muncul lagi sampai ada update yang lebih baru.
+  if (marker === infoUpdateNoticeDismissedMarker) return;
+  showInfoUpdateNoticeModal(unseen);
 }
 async function checkInfoUpdateNotice() {
   try {
-    const response = await fetch('/info-updates.json', { cache: 'no-store' });
-    if (!response.ok) return;
-    const data = await response.json();
+    const [updatesResponse, seenResponse] = await Promise.all([
+      fetch('/info-updates.json', { cache: 'no-store' }),
+      fetch('/api/info-updates/seen', { credentials: 'same-origin' }),
+    ]);
+    if (!updatesResponse.ok) return;
+    const data = await updatesResponse.json();
     const updates = Array.isArray(data?.updates) ? data.updates : [];
     if (!updates.length) return;
-    notifyNewInfoUpdate(updates);
+    let seen = null;
+    if (seenResponse?.ok) {
+      const seenData = await seenResponse.json().catch(() => ({}));
+      seen = seenData?.seen || null;
+    }
+    notifyNewInfoUpdate(updates, seen);
     void refreshInfoUpdateBadge(updates);
   } catch { /* Notifikasi gagal diperiksa: badge tetap diperbarui saat navigasi. */ }
 }
