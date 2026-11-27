@@ -1,0 +1,154 @@
+{
+  "3ADAB3280DA3470FB3277E5593F9EAE9": {
+    "id": "3ADAB3280DA3470FB3277E5593F9EAE9",
+    "sender": "6282296175321@s.whatsapp.net",
+    "number": "6282296175321",
+    "storyJid": "6282296175321@s.whatsapp.net",
+    "resolvedPn": "6282296175321@s.whatsapp.net",
+    "name": "rakz",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3ADAB3280DA3470FB3277E5593F9EAE9",
+      "participant": "148936715190376@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3ADAB3280DA3470FB3277E5593F9EAE9",
+      "participant": "148936715190376@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "148936715190376@lid",
+      "6282296175321@s.whatsapp.net"
+    ],
+    "contactHash": "25cbbe8c5d7dd9642809000d74b04cdc640f1486957bc839ab7e1f919338d667",
+    "arrivedAt": "2026-11-27T10:32:34.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:32:34.331Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:32:39.735Z",
+    "readAt": "2026-11-27T10:32:39.734Z"
+  },
+  "3A07EC1C2F3B488D80C6BD6143680B01": {
+    "id": "3A07EC1C2F3B488D80C6BD6143680B01",
+    "sender": "6282296175321@s.whatsapp.net",
+    "number": "6282296175321",
+    "storyJid": "6282296175321@s.whatsapp.net",
+    "resolvedPn": "6282296175321@s.whatsapp.net",
+    "name": "rakz",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3A07EC1C2F3B488D80C6BD6143680B01",
+      "participant": "148936715190376@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3A07EC1C2F3B488D80C6BD6143680B01",
+      "participant": "148936715190376@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "148936715190376@lid",
+      "6282296175321@s.whatsapp.net"
+    ],
+    "contactHash": "25cbbe8c5d7dd9642809000d74b04cdc640f1486957bc839ab7e1f919338d667",
+    "arrivedAt": "2026-11-27T12:31:15.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:31:15.235Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:31:20.840Z",
+    "readAt": "2026-11-27T12:31:20.839Z"
+  },
+  "3AED46A6491C4D02BF4E10DA846525D2": {
+    "id": "3AED46A6491C4D02BF4E10DA846525D2",
+    "sender": "6282296175321@s.whatsapp.net",
+    "number": "6282296175321",
+    "storyJid": "6282296175321@s.whatsapp.net",
+    "resolvedPn": "6282296175321@s.whatsapp.net",
+    "name": "rakz",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3AED46A6491C4D02BF4E10DA846525D2",
+      "participant": "148936715190376@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3AED46A6491C4D02BF4E10DA846525D2",
+      "participant": "148936715190376@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "148936715190376@lid",
+      "6282296175321@s.whatsapp.net"
+    ],
+    "contactHash": "25cbbe8c5d7dd9642809000d74b04cdc640f1486957bc839ab7e1f919338d667",
+    "arrivedAt": "2026-11-27T13:45:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:45:03.659Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:45:09.414Z",
+    "readAt": "2026-11-27T13:45:09.409Z"
+  },
+  "3A50C511EE9E477B830A7AC765DD7D4D": {
+    "id": "3A50C511EE9E477B830A7AC765DD7D4D",
+    "sender": "6282296175321@s.whatsapp.net",
+    "number": "6282296175321",
+    "storyJid": "6282296175321@s.whatsapp.net",
+    "resolvedPn": "6282296175321@s.whatsapp.net",
+    "name": "rakz",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3A50C511EE9E477B830A7AC765DD7D4D",
+      "participant": "148936715190376@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3A50C511EE9E477B830A7AC765DD7D4D",
+      "participant": "148936715190376@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "148936715190376@lid",
+      "6282296175321@s.whatsapp.net"
+    ],
+    "contactHash": "25cbbe8c5d7dd9642809000d74b04cdc640f1486957bc839ab7e1f919338d667",
+    "arrivedAt": "2026-11-27T15:40:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:40:21.104Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:40:23.671Z",
+    "readAt": "2026-11-27T15:40:23.669Z"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "AC676B60EE9F9960BA44535232E2575D": {
+    "id": "AC676B60EE9F9960BA44535232E2575D",
+    "sender": "6282287750128@s.whatsapp.net",
+    "number": "6282287750128",
+    "storyJid": "6282287750128@s.whatsapp.net",
+    "resolvedPn": "6282287750128@s.whatsapp.net",
+    "name": "Revita Sri Wahyuni",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC676B60EE9F9960BA44535232E2575D",
+      "participant": "273056975065315@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC676B60EE9F9960BA44535232E2575D",
+      "participant": "273056975065315@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "273056975065315@lid",
+      "6282287750128@s.whatsapp.net"
+    ],
+    "contactHash": "61ff4a20a167078cabe3d4d4303967e70fab3fb35a9c7f0533e189308a3bf9fd",
+    "arrivedAt": "2026-11-27T12:49:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:49:02.019Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:49:06.181Z",
+    "readAt": "2026-11-27T12:49:06.178Z",
+    "emoji": "😳",
+    "reactedAt": "2026-11-27T12:49:06.178Z"
+  },
+  "AC681D63409D640C3C68BA486169DFEC": {
+    "id": "AC681D63409D640C3C68BA486169DFEC",
+    "sender": "6282287750128@s.whatsapp.net",
+    "number": "6282287750128",
+    "storyJid": "6282287750128@s.whatsapp.net",
+    "resolvedPn": "6282287750128@s.whatsapp.net",
+    "name": "Revita Sri Wahyuni",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC681D63409D640C3C68BA486169DFEC",
+      "participant": "273056975065315@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC681D63409D640C3C68BA486169DFEC",
+      "participant": "273056975065315@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "273056975065315@lid",
+      "6282287750128@s.whatsapp.net"
+    ],
+    "contactHash": "61ff4a20a167078cabe3d4d4303967e70fab3fb35a9c7f0533e189308a3bf9fd",
+    "arrivedAt": "2026-11-27T14:26:50.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:26:50.890Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:26:55.396Z",
+    "readAt": "2026-11-27T14:26:55.395Z",
+    "emoji": "😴",
+    "reactedAt": "2026-11-27T14:26:55.395Z"
+  },
+  "ACBC06AC999D1CE7A61BB03040F6A19B": {
+    "id": "ACBC06AC999D1CE7A61BB03040F6A19B",
+    "sender": "6282287750128@s.whatsapp.net",
+    "number": "6282287750128",
+    "storyJid": "6282287750128@s.whatsapp.net",
+    "resolvedPn": "6282287750128@s.whatsapp.net",
+    "name": "Revita Sri Wahyuni",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBC06AC999D1CE7A61BB03040F6A19B",
+      "participant": "273056975065315@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBC06AC999D1CE7A61BB03040F6A19B",
+      "participant": "273056975065315@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "273056975065315@lid",
+      "6282287750128@s.whatsapp.net"
+    ],
+    "contactHash": "61ff4a20a167078cabe3d4d4303967e70fab3fb35a9c7f0533e189308a3bf9fd",
+    "arrivedAt": "2026-11-27T15:36:07.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:36:09.282Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:36:15.059Z",
+    "readAt": "2026-11-27T15:36:15.056Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T15:36:15.056Z"
+  }
+}

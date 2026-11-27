@@ -1,0 +1,116 @@
+{
+  "AC15FE3181B0767018547DB4CE4B9544": {
+    "id": "AC15FE3181B0767018547DB4CE4B9544",
+    "sender": "6285624823762@s.whatsapp.net",
+    "number": "6285624823762",
+    "storyJid": "6285624823762@s.whatsapp.net",
+    "resolvedPn": "6285624823762@s.whatsapp.net",
+    "name": "Himuro Taka",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC15FE3181B0767018547DB4CE4B9544",
+      "participant": "78997752926230@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC15FE3181B0767018547DB4CE4B9544",
+      "participant": "78997752926230@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "78997752926230@lid",
+      "6285624823762@s.whatsapp.net"
+    ],
+    "contactHash": "e945e3f4283d6d6a210358907684007b757116bcd012e05274cdec541a94e5c4",
+    "arrivedAt": "2026-11-21T21:30:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-21T21:30:09.814Z",
+    "lastError": null,
+    "updatedAt": "2026-11-21T21:30:16.239Z",
+    "readAt": "2026-11-21T21:30:16.237Z"
+  },
+  "AC17321F522915B79AA540D0206269E1": {
+    "id": "AC17321F522915B79AA540D0206269E1",
+    "sender": "6285624823762@s.whatsapp.net",
+    "number": "6285624823762",
+    "storyJid": "6285624823762@s.whatsapp.net",
+    "resolvedPn": "6285624823762@s.whatsapp.net",
+    "name": "Himuro Taka",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC17321F522915B79AA540D0206269E1",
+      "participant": "78997752926230@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC17321F522915B79AA540D0206269E1",
+      "participant": "78997752926230@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "78997752926230@lid",
+      "6285624823762@s.whatsapp.net"
+    ],
+    "contactHash": "e945e3f4283d6d6a210358907684007b757116bcd012e05274cdec541a94e5c4",
+    "arrivedAt": "2026-11-21T23:00:43.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 2,
+    "lastAttemptAt": "2026-11-21T23:02:21.742Z",
+    "lastError": null,
+    "updatedAt": "2026-11-21T23:02:32.221Z",
+    "readAt": "2026-11-21T23:02:32.217Z"
+  },
+  "AC568940AB10DBCE99A1A2A8B3415401": {
+    "id": "AC568940AB10DBCE99A1A2A8B3415401",
+    "sender": "6285624823762@s.whatsapp.net",
+    "number": "6285624823762",
+    "storyJid": "6285624823762@s.whatsapp.net",
+    "resolvedPn": "6285624823762@s.whatsapp.net",
+    "name": "Himuro Taka",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC568940AB10DBCE99A1A2A8B3415401",
+      "participant": "78997752926230@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC568940AB10DBCE99A1A2A8B3415401",
+      "participant": "78997752926230@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "78997752926230@lid",
+      "6285624823762@s.whatsapp.net"
+    ],
+    "contactHash": "e945e3f4283d6d6a210358907684007b757116bcd012e05274cdec541a94e5c4",
+    "arrivedAt": "2026-11-21T23:00:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-21T23:00:51.363Z",
+    "lastError": null,
+    "updatedAt": "2026-11-21T23:00:57.979Z",
+    "readAt": "2026-11-21T23:00:57.957Z"
+  }
+}

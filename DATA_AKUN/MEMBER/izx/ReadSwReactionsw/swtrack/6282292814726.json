@@ -1,0 +1,154 @@
+{
+  "AC18EBED009CA7B1EFB697C28B8EACB7": {
+    "id": "AC18EBED009CA7B1EFB697C28B8EACB7",
+    "sender": "6282292814726@s.whatsapp.net",
+    "number": "6282292814726",
+    "storyJid": "6282292814726@s.whatsapp.net",
+    "resolvedPn": "6282292814726@s.whatsapp.net",
+    "name": "Khun Kun",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC18EBED009CA7B1EFB697C28B8EACB7",
+      "participant": "12730836775080@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC18EBED009CA7B1EFB697C28B8EACB7",
+      "participant": "12730836775080@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "12730836775080@lid",
+      "6282292814726@s.whatsapp.net"
+    ],
+    "contactHash": "2241f37bd5b3a5b18bb6e312cef90608b454134ff75e20a5977022a5c6fe0c3c",
+    "arrivedAt": "2026-11-27T02:23:04.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:23:04.811Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:23:07.347Z",
+    "readAt": "2026-11-27T02:23:07.346Z"
+  },
+  "AC98A0832F536A4B77F2F401D41E8228": {
+    "id": "AC98A0832F536A4B77F2F401D41E8228",
+    "sender": "6282292814726@s.whatsapp.net",
+    "number": "6282292814726",
+    "storyJid": "6282292814726@s.whatsapp.net",
+    "resolvedPn": "6282292814726@s.whatsapp.net",
+    "name": "Khun Kun",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC98A0832F536A4B77F2F401D41E8228",
+      "participant": "12730836775080@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC98A0832F536A4B77F2F401D41E8228",
+      "participant": "12730836775080@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "12730836775080@lid",
+      "6282292814726@s.whatsapp.net"
+    ],
+    "contactHash": "2241f37bd5b3a5b18bb6e312cef90608b454134ff75e20a5977022a5c6fe0c3c",
+    "arrivedAt": "2026-11-27T08:00:53.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:00:53.965Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:00:57.849Z",
+    "readAt": "2026-11-27T08:00:57.848Z"
+  },
+  "ACC61E593975D5C145F02F3AA09EC7ED": {
+    "id": "ACC61E593975D5C145F02F3AA09EC7ED",
+    "sender": "6282292814726@s.whatsapp.net",
+    "number": "6282292814726",
+    "storyJid": "6282292814726@s.whatsapp.net",
+    "resolvedPn": "6282292814726@s.whatsapp.net",
+    "name": "Khun Kun",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC61E593975D5C145F02F3AA09EC7ED",
+      "participant": "12730836775080@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC61E593975D5C145F02F3AA09EC7ED",
+      "participant": "12730836775080@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "12730836775080@lid",
+      "6282292814726@s.whatsapp.net"
+    ],
+    "contactHash": "2241f37bd5b3a5b18bb6e312cef90608b454134ff75e20a5977022a5c6fe0c3c",
+    "arrivedAt": "2026-11-27T08:16:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:16:22.668Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:16:28.475Z",
+    "readAt": "2026-11-27T08:16:28.472Z"
+  },
+  "AC386127CC19EA602CA45F99443A7ABC": {
+    "id": "AC386127CC19EA602CA45F99443A7ABC",
+    "sender": "6282292814726@s.whatsapp.net",
+    "number": "6282292814726",
+    "storyJid": "6282292814726@s.whatsapp.net",
+    "resolvedPn": "6282292814726@s.whatsapp.net",
+    "name": "Khun Kun",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC386127CC19EA602CA45F99443A7ABC",
+      "participant": "12730836775080@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC386127CC19EA602CA45F99443A7ABC",
+      "participant": "12730836775080@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "12730836775080@lid",
+      "6282292814726@s.whatsapp.net"
+    ],
+    "contactHash": "2241f37bd5b3a5b18bb6e312cef90608b454134ff75e20a5977022a5c6fe0c3c",
+    "arrivedAt": "2026-11-27T14:03:43.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:03:44.014Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:03:45.319Z",
+    "readAt": "2026-11-27T14:03:45.318Z"
+  }
+}

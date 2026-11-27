@@ -1,0 +1,122 @@
+{
+  "AC6B38BA8FC172F33E8A1594DFBAB898": {
+    "id": "AC6B38BA8FC172F33E8A1594DFBAB898",
+    "sender": "6282329194007@s.whatsapp.net",
+    "number": "6282329194007",
+    "storyJid": "6282329194007@s.whatsapp.net",
+    "resolvedPn": "6282329194007@s.whatsapp.net",
+    "name": "yan",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6B38BA8FC172F33E8A1594DFBAB898",
+      "participant": "218678712889504@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6B38BA8FC172F33E8A1594DFBAB898",
+      "participant": "218678712889504@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "218678712889504@lid",
+      "6282329194007@s.whatsapp.net"
+    ],
+    "contactHash": "f6234b78b7234392bb8865d8b3053de2738da6b836f492f0212aa7501a8ff4fd",
+    "arrivedAt": "2026-11-26T23:17:32.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:17:33.465Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:17:38.553Z",
+    "readAt": "2026-11-26T23:17:38.480Z",
+    "emoji": "🥸",
+    "reactedAt": "2026-11-26T23:17:38.480Z"
+  },
+  "ACC02652266D5EB6637C56D7E1459FBC": {
+    "id": "ACC02652266D5EB6637C56D7E1459FBC",
+    "sender": "6282329194007@s.whatsapp.net",
+    "number": "6282329194007",
+    "storyJid": "6282329194007@s.whatsapp.net",
+    "resolvedPn": "6282329194007@s.whatsapp.net",
+    "name": "yan",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC02652266D5EB6637C56D7E1459FBC",
+      "participant": "218678712889504@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC02652266D5EB6637C56D7E1459FBC",
+      "participant": "218678712889504@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "218678712889504@lid",
+      "6282329194007@s.whatsapp.net"
+    ],
+    "contactHash": "f6234b78b7234392bb8865d8b3053de2738da6b836f492f0212aa7501a8ff4fd",
+    "arrivedAt": "2026-11-27T10:57:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:57:29.751Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:57:33.153Z",
+    "readAt": "2026-11-27T10:57:33.150Z",
+    "emoji": "😳",
+    "reactedAt": "2026-11-27T10:57:33.150Z"
+  },
+  "AC653827C893A6C9D22FC583BB0B6967": {
+    "id": "AC653827C893A6C9D22FC583BB0B6967",
+    "sender": "6282329194007@s.whatsapp.net",
+    "number": "6282329194007",
+    "storyJid": "6282329194007@s.whatsapp.net",
+    "resolvedPn": "6282329194007@s.whatsapp.net",
+    "name": "yan",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC653827C893A6C9D22FC583BB0B6967",
+      "participant": "218678712889504@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC653827C893A6C9D22FC583BB0B6967",
+      "participant": "218678712889504@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "218678712889504@lid",
+      "6282329194007@s.whatsapp.net"
+    ],
+    "contactHash": "f6234b78b7234392bb8865d8b3053de2738da6b836f492f0212aa7501a8ff4fd",
+    "arrivedAt": "2026-11-27T14:41:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:41:00.956Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:41:05.853Z",
+    "readAt": "2026-11-27T14:41:05.852Z",
+    "emoji": "🗿",
+    "reactedAt": "2026-11-27T14:41:05.852Z"
+  }
+}

@@ -1,1 +1,122 @@
-{}
+{
+  "ACA35C340E6CEA1BF230248330CB9323": {
+    "id": "ACA35C340E6CEA1BF230248330CB9323",
+    "sender": "6281216296465@s.whatsapp.net",
+    "number": "6281216296465",
+    "storyJid": "6281216296465@s.whatsapp.net",
+    "resolvedPn": "6281216296465@s.whatsapp.net",
+    "name": "naii naiyy",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA35C340E6CEA1BF230248330CB9323",
+      "participant": "278829411094673@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA35C340E6CEA1BF230248330CB9323",
+      "participant": "278829411094673@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "278829411094673@lid",
+      "6281216296465@s.whatsapp.net"
+    ],
+    "contactHash": "18239302aa4574497ef20913f3e4ff401bdaa3c09095f86b95340cec039d4cd3",
+    "arrivedAt": "2026-11-27T15:12:25.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:12:27.165Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:12:44.411Z",
+    "readAt": "2026-11-27T15:12:44.410Z",
+    "emoji": "🤭",
+    "reactedAt": "2026-11-27T15:12:44.410Z"
+  },
+  "AC246E74FB84597BD931988F036E1FEE": {
+    "id": "AC246E74FB84597BD931988F036E1FEE",
+    "sender": "6281216296465@s.whatsapp.net",
+    "number": "6281216296465",
+    "storyJid": "6281216296465@s.whatsapp.net",
+    "resolvedPn": "6281216296465@s.whatsapp.net",
+    "name": "naii naiyy",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC246E74FB84597BD931988F036E1FEE",
+      "participant": "278829411094673@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC246E74FB84597BD931988F036E1FEE",
+      "participant": "278829411094673@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "278829411094673@lid",
+      "6281216296465@s.whatsapp.net"
+    ],
+    "contactHash": "18239302aa4574497ef20913f3e4ff401bdaa3c09095f86b95340cec039d4cd3",
+    "arrivedAt": "2026-11-27T15:34:32.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:34:31.888Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:34:48.196Z",
+    "readAt": "2026-11-27T15:34:48.195Z",
+    "emoji": "🐔",
+    "reactedAt": "2026-11-27T15:34:48.195Z"
+  },
+  "ACD5D2473EFEC4E923FCA99A56687B90": {
+    "id": "ACD5D2473EFEC4E923FCA99A56687B90",
+    "sender": "6281216296465@s.whatsapp.net",
+    "number": "6281216296465",
+    "storyJid": "6281216296465@s.whatsapp.net",
+    "resolvedPn": "6281216296465@s.whatsapp.net",
+    "name": "naii naiyy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD5D2473EFEC4E923FCA99A56687B90",
+      "participant": "278829411094673@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD5D2473EFEC4E923FCA99A56687B90",
+      "participant": "278829411094673@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "278829411094673@lid",
+      "6281216296465@s.whatsapp.net"
+    ],
+    "contactHash": "18239302aa4574497ef20913f3e4ff401bdaa3c09095f86b95340cec039d4cd3",
+    "arrivedAt": "2026-11-27T15:47:20.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:47:20.205Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:47:24.962Z",
+    "readAt": "2026-11-27T15:47:24.961Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T15:47:24.961Z"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "AC21CBA6B0C2CB643DA9A86365ECBC41": {
+    "id": "AC21CBA6B0C2CB643DA9A86365ECBC41",
+    "sender": "6288902912384@s.whatsapp.net",
+    "number": "6288902912384",
+    "storyJid": "6288902912384@s.whatsapp.net",
+    "resolvedPn": "6288902912384@s.whatsapp.net",
+    "name": "dapp",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC21CBA6B0C2CB643DA9A86365ECBC41",
+      "participant": "259219160834292@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC21CBA6B0C2CB643DA9A86365ECBC41",
+      "participant": "259219160834292@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "259219160834292@lid",
+      "6288902912384@s.whatsapp.net"
+    ],
+    "contactHash": "1d6097e6c11da5275166f5dcdfda13d5b2f65af2ab139b01674e32837d46d5c5",
+    "arrivedAt": "2026-11-27T01:05:29.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:05:29.460Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:05:33.581Z",
+    "readAt": "2026-11-27T01:05:33.580Z",
+    "emoji": "💤",
+    "reactedAt": "2026-11-27T01:05:33.580Z"
+  },
+  "ACAB305EEC5F2573C7AA018387DF016D": {
+    "id": "ACAB305EEC5F2573C7AA018387DF016D",
+    "sender": "6288902912384@s.whatsapp.net",
+    "number": "6288902912384",
+    "storyJid": "6288902912384@s.whatsapp.net",
+    "resolvedPn": "6288902912384@s.whatsapp.net",
+    "name": "dapp",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAB305EEC5F2573C7AA018387DF016D",
+      "participant": "259219160834292@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAB305EEC5F2573C7AA018387DF016D",
+      "participant": "259219160834292@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "259219160834292@lid",
+      "6288902912384@s.whatsapp.net"
+    ],
+    "contactHash": "1d6097e6c11da5275166f5dcdfda13d5b2f65af2ab139b01674e32837d46d5c5",
+    "arrivedAt": "2026-11-27T02:39:04.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:39:04.837Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:39:13.026Z",
+    "readAt": "2026-11-27T02:39:13.025Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-27T02:39:13.025Z"
+  },
+  "AC6E5DABBE5FD8D256BCDAFCAE54445E": {
+    "id": "AC6E5DABBE5FD8D256BCDAFCAE54445E",
+    "sender": "6288902912384@s.whatsapp.net",
+    "number": "6288902912384",
+    "storyJid": "6288902912384@s.whatsapp.net",
+    "resolvedPn": "6288902912384@s.whatsapp.net",
+    "name": "dapp",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6E5DABBE5FD8D256BCDAFCAE54445E",
+      "participant": "259219160834292@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6E5DABBE5FD8D256BCDAFCAE54445E",
+      "participant": "259219160834292@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "259219160834292@lid",
+      "6288902912384@s.whatsapp.net"
+    ],
+    "contactHash": "1d6097e6c11da5275166f5dcdfda13d5b2f65af2ab139b01674e32837d46d5c5",
+    "arrivedAt": "2026-11-27T04:00:12.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:00:12.964Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:00:21.420Z",
+    "readAt": "2026-11-27T04:00:21.387Z",
+    "emoji": "🛐",
+    "reactedAt": "2026-11-27T04:00:21.387Z"
+  }
+}

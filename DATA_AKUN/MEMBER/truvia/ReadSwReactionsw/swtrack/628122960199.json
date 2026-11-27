@@ -1,0 +1,122 @@
+{
+  "ACF58C4D485827D2C809C9B152B49859": {
+    "id": "ACF58C4D485827D2C809C9B152B49859",
+    "sender": "628122960199@s.whatsapp.net",
+    "number": "628122960199",
+    "storyJid": "628122960199@s.whatsapp.net",
+    "resolvedPn": "628122960199@s.whatsapp.net",
+    "name": "TAUFIQ",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF58C4D485827D2C809C9B152B49859",
+      "participant": "201129291952128@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF58C4D485827D2C809C9B152B49859",
+      "participant": "201129291952128@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "201129291952128@lid",
+      "628122960199@s.whatsapp.net"
+    ],
+    "contactHash": "aa4457c6fd35a8cfdb85a4d7939593a39f3fe34249ae2e7bddcbe1ed38199587",
+    "arrivedAt": "2026-11-27T07:50:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:50:07.998Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:50:11.015Z",
+    "readAt": "2026-11-27T07:50:11.014Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-27T07:50:11.014Z"
+  },
+  "ACE5C283B6C3F348F8B0EBFEB8B96A0E": {
+    "id": "ACE5C283B6C3F348F8B0EBFEB8B96A0E",
+    "sender": "628122960199@s.whatsapp.net",
+    "number": "628122960199",
+    "storyJid": "628122960199@s.whatsapp.net",
+    "resolvedPn": "628122960199@s.whatsapp.net",
+    "name": "TAUFIQ",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE5C283B6C3F348F8B0EBFEB8B96A0E",
+      "participant": "201129291952128@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE5C283B6C3F348F8B0EBFEB8B96A0E",
+      "participant": "201129291952128@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "201129291952128@lid",
+      "628122960199@s.whatsapp.net"
+    ],
+    "contactHash": "aa4457c6fd35a8cfdb85a4d7939593a39f3fe34249ae2e7bddcbe1ed38199587",
+    "arrivedAt": "2026-11-27T07:58:04.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:58:04.043Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:58:21.307Z",
+    "readAt": "2026-11-27T07:58:21.300Z",
+    "emoji": "⚓",
+    "reactedAt": "2026-11-27T07:58:21.300Z"
+  },
+  "AC705FAD7F911BABFC4BD8FA3A284BC5": {
+    "id": "AC705FAD7F911BABFC4BD8FA3A284BC5",
+    "sender": "628122960199@s.whatsapp.net",
+    "number": "628122960199",
+    "storyJid": "628122960199@s.whatsapp.net",
+    "resolvedPn": "628122960199@s.whatsapp.net",
+    "name": "TAUFIQ",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC705FAD7F911BABFC4BD8FA3A284BC5",
+      "participant": "201129291952128@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC705FAD7F911BABFC4BD8FA3A284BC5",
+      "participant": "201129291952128@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "201129291952128@lid",
+      "628122960199@s.whatsapp.net"
+    ],
+    "contactHash": "aa4457c6fd35a8cfdb85a4d7939593a39f3fe34249ae2e7bddcbe1ed38199587",
+    "arrivedAt": "2026-11-27T07:58:05.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:58:04.653Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:58:20.382Z",
+    "readAt": "2026-11-27T07:58:20.353Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-27T07:58:20.353Z"
+  }
+}

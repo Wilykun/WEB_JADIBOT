@@ -1,1 +1,122 @@
-{}
+{
+  "ACE7EC0B0E7FBC4E2DCC98036CC36C6C": {
+    "id": "ACE7EC0B0E7FBC4E2DCC98036CC36C6C",
+    "sender": "601117813109@s.whatsapp.net",
+    "number": "601117813109",
+    "storyJid": "601117813109@s.whatsapp.net",
+    "resolvedPn": "601117813109@s.whatsapp.net",
+    "name": "𝓪𝓷𝓷𝓪.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE7EC0B0E7FBC4E2DCC98036CC36C6C",
+      "participant": "156010559860946@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE7EC0B0E7FBC4E2DCC98036CC36C6C",
+      "participant": "156010559860946@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "156010559860946@lid",
+      "601117813109@s.whatsapp.net"
+    ],
+    "contactHash": "a6786d0bf96f725786a1af9064185ccbd815b0172d4feb832fb4ca4e1adee3fa",
+    "arrivedAt": "2026-11-27T21:33:48.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T21:33:48.198Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T21:33:52.541Z",
+    "readAt": "2026-11-27T21:33:52.540Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T21:33:52.540Z"
+  },
+  "AC8E6252E42A20E09AF58800A570A845": {
+    "id": "AC8E6252E42A20E09AF58800A570A845",
+    "sender": "601117813109@s.whatsapp.net",
+    "number": "601117813109",
+    "storyJid": "601117813109@s.whatsapp.net",
+    "resolvedPn": "601117813109@s.whatsapp.net",
+    "name": "𝓪𝓷𝓷𝓪.",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8E6252E42A20E09AF58800A570A845",
+      "participant": "156010559860946@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8E6252E42A20E09AF58800A570A845",
+      "participant": "156010559860946@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "156010559860946@lid",
+      "601117813109@s.whatsapp.net"
+    ],
+    "contactHash": "a6786d0bf96f725786a1af9064185ccbd815b0172d4feb832fb4ca4e1adee3fa",
+    "arrivedAt": "2026-11-27T22:08:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T22:08:38.710Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T22:08:42.645Z",
+    "readAt": "2026-11-27T22:08:42.640Z",
+    "emoji": "❤️‍🔥",
+    "reactedAt": "2026-11-27T22:08:42.640Z"
+  },
+  "AC7F881EB69EE0798FBD399EE722B436": {
+    "id": "AC7F881EB69EE0798FBD399EE722B436",
+    "sender": "601117813109@s.whatsapp.net",
+    "number": "601117813109",
+    "storyJid": "601117813109@s.whatsapp.net",
+    "resolvedPn": "601117813109@s.whatsapp.net",
+    "name": "𝓪𝓷𝓷𝓪.",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7F881EB69EE0798FBD399EE722B436",
+      "participant": "156010559860946@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7F881EB69EE0798FBD399EE722B436",
+      "participant": "156010559860946@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "156010559860946@lid",
+      "601117813109@s.whatsapp.net"
+    ],
+    "contactHash": "a6786d0bf96f725786a1af9064185ccbd815b0172d4feb832fb4ca4e1adee3fa",
+    "arrivedAt": "2026-11-27T23:02:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T23:02:50.788Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T23:02:52.812Z",
+    "readAt": "2026-11-27T23:02:52.811Z",
+    "emoji": "🫟",
+    "reactedAt": "2026-11-27T23:02:52.811Z"
+  }
+}

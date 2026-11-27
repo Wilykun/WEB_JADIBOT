@@ -1,0 +1,122 @@
+{
+  "AC4906C230CCC29F1E546E162C95FB13": {
+    "id": "AC4906C230CCC29F1E546E162C95FB13",
+    "sender": "62895390010055@s.whatsapp.net",
+    "number": "62895390010055",
+    "storyJid": "62895390010055@s.whatsapp.net",
+    "resolvedPn": "62895390010055@s.whatsapp.net",
+    "name": "paris",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4906C230CCC29F1E546E162C95FB13",
+      "participant": "57183463047191@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4906C230CCC29F1E546E162C95FB13",
+      "participant": "57183463047191@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "57183463047191@lid",
+      "62895390010055@s.whatsapp.net"
+    ],
+    "contactHash": "6bfb87cd66ee787089d3b4d9d1713fddb4deeb766d9fa376b61c7243337a6a01",
+    "arrivedAt": "2026-11-27T15:42:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:42:02.288Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:42:08.677Z",
+    "readAt": "2026-11-27T15:42:08.670Z",
+    "emoji": "🥀",
+    "reactedAt": "2026-11-27T15:42:08.670Z"
+  },
+  "AC00C3D96ED56377224082EF3A775064": {
+    "id": "AC00C3D96ED56377224082EF3A775064",
+    "sender": "62895390010055@s.whatsapp.net",
+    "number": "62895390010055",
+    "storyJid": "62895390010055@s.whatsapp.net",
+    "resolvedPn": "62895390010055@s.whatsapp.net",
+    "name": "paris",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC00C3D96ED56377224082EF3A775064",
+      "participant": "57183463047191@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC00C3D96ED56377224082EF3A775064",
+      "participant": "57183463047191@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "57183463047191@lid",
+      "62895390010055@s.whatsapp.net"
+    ],
+    "contactHash": "6bfb87cd66ee787089d3b4d9d1713fddb4deeb766d9fa376b61c7243337a6a01",
+    "arrivedAt": "2026-11-27T16:34:05.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T16:34:05.636Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T16:34:08.618Z",
+    "readAt": "2026-11-27T16:34:08.617Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-27T16:34:08.617Z"
+  },
+  "AC6397E035BB9D30183720DF7892E0FD": {
+    "id": "AC6397E035BB9D30183720DF7892E0FD",
+    "sender": "62895390010055@s.whatsapp.net",
+    "number": "62895390010055",
+    "storyJid": "62895390010055@s.whatsapp.net",
+    "resolvedPn": "62895390010055@s.whatsapp.net",
+    "name": "paris",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6397E035BB9D30183720DF7892E0FD",
+      "participant": "57183463047191@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6397E035BB9D30183720DF7892E0FD",
+      "participant": "57183463047191@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "57183463047191@lid",
+      "62895390010055@s.whatsapp.net"
+    ],
+    "contactHash": "6bfb87cd66ee787089d3b4d9d1713fddb4deeb766d9fa376b61c7243337a6a01",
+    "arrivedAt": "2026-11-27T16:35:23.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T16:35:23.109Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T16:35:31.284Z",
+    "readAt": "2026-11-27T16:35:30.056Z",
+    "emoji": "🛐",
+    "reactedAt": "2026-11-27T16:35:30.056Z"
+  }
+}

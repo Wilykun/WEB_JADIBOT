@@ -1,0 +1,122 @@
+{
+  "AC989E999DEF70A2F911D2BE434D68FD": {
+    "id": "AC989E999DEF70A2F911D2BE434D68FD",
+    "sender": "6282254156945@s.whatsapp.net",
+    "number": "6282254156945",
+    "storyJid": "6282254156945@s.whatsapp.net",
+    "resolvedPn": "6282254156945@s.whatsapp.net",
+    "name": "🌘",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC989E999DEF70A2F911D2BE434D68FD",
+      "participant": "227801273786612@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC989E999DEF70A2F911D2BE434D68FD",
+      "participant": "227801273786612@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "227801273786612@lid",
+      "6282254156945@s.whatsapp.net"
+    ],
+    "contactHash": "bc8caff5b1866833bec141ffb217fe8dc1153b6fe49c39740007ed180e1a45f4",
+    "arrivedAt": "2026-11-27T00:45:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:45:11.552Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:45:16.370Z",
+    "readAt": "2026-11-27T00:45:16.367Z",
+    "emoji": "⁉️",
+    "reactedAt": "2026-11-27T00:45:16.367Z"
+  },
+  "ACB579B8AD08BD7D283AA23CABFD2C06": {
+    "id": "ACB579B8AD08BD7D283AA23CABFD2C06",
+    "sender": "6282254156945@s.whatsapp.net",
+    "number": "6282254156945",
+    "storyJid": "6282254156945@s.whatsapp.net",
+    "resolvedPn": "6282254156945@s.whatsapp.net",
+    "name": "🌘",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB579B8AD08BD7D283AA23CABFD2C06",
+      "participant": "227801273786612@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB579B8AD08BD7D283AA23CABFD2C06",
+      "participant": "227801273786612@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "227801273786612@lid",
+      "6282254156945@s.whatsapp.net"
+    ],
+    "contactHash": "bc8caff5b1866833bec141ffb217fe8dc1153b6fe49c39740007ed180e1a45f4",
+    "arrivedAt": "2026-11-27T00:58:32.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:58:33.323Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:58:39.438Z",
+    "readAt": "2026-11-27T00:58:39.424Z",
+    "emoji": "😖",
+    "reactedAt": "2026-11-27T00:58:39.424Z"
+  },
+  "AC90620CF7E08A3A06D8C849BA89E557": {
+    "id": "AC90620CF7E08A3A06D8C849BA89E557",
+    "sender": "6282254156945@s.whatsapp.net",
+    "number": "6282254156945",
+    "storyJid": "6282254156945@s.whatsapp.net",
+    "resolvedPn": "6282254156945@s.whatsapp.net",
+    "name": "🌘",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC90620CF7E08A3A06D8C849BA89E557",
+      "participant": "227801273786612@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC90620CF7E08A3A06D8C849BA89E557",
+      "participant": "227801273786612@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "227801273786612@lid",
+      "6282254156945@s.whatsapp.net"
+    ],
+    "contactHash": "bc8caff5b1866833bec141ffb217fe8dc1153b6fe49c39740007ed180e1a45f4",
+    "arrivedAt": "2026-11-27T04:01:49.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:01:48.890Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:01:51.806Z",
+    "readAt": "2026-11-27T04:01:51.805Z",
+    "emoji": "😜",
+    "reactedAt": "2026-11-27T04:01:51.805Z"
+  }
+}

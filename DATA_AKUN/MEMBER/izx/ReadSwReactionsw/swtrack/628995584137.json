@@ -1,0 +1,116 @@
+{
+  "AC285EE534A883D2503566C53555A89C": {
+    "id": "AC285EE534A883D2503566C53555A89C",
+    "sender": "628995584137@s.whatsapp.net",
+    "number": "628995584137",
+    "storyJid": "628995584137@s.whatsapp.net",
+    "resolvedPn": "628995584137@s.whatsapp.net",
+    "name": "Sufyan Kristianto",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC285EE534A883D2503566C53555A89C",
+      "participant": "50612112752868@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC285EE534A883D2503566C53555A89C",
+      "participant": "50612112752868@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "50612112752868@lid",
+      "628995584137@s.whatsapp.net"
+    ],
+    "contactHash": "e6cdfdb3482b58746d97d89278ffd7cc80d5f1c9970f77cc6f4b29b1c51916d9",
+    "arrivedAt": "2026-11-27T07:30:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:30:46.007Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:30:51.812Z",
+    "readAt": "2026-11-27T07:30:51.811Z"
+  },
+  "ACCB5CF411BDE08E79C75494941E22CE": {
+    "id": "ACCB5CF411BDE08E79C75494941E22CE",
+    "sender": "628995584137@s.whatsapp.net",
+    "number": "628995584137",
+    "storyJid": "628995584137@s.whatsapp.net",
+    "resolvedPn": "628995584137@s.whatsapp.net",
+    "name": "Sufyan Kristianto",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCB5CF411BDE08E79C75494941E22CE",
+      "participant": "50612112752868@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCB5CF411BDE08E79C75494941E22CE",
+      "participant": "50612112752868@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "50612112752868@lid",
+      "628995584137@s.whatsapp.net"
+    ],
+    "contactHash": "e6cdfdb3482b58746d97d89278ffd7cc80d5f1c9970f77cc6f4b29b1c51916d9",
+    "arrivedAt": "2026-11-27T07:35:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:35:10.328Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:35:13.918Z",
+    "readAt": "2026-11-27T07:35:13.914Z"
+  },
+  "ACE7B38789ADC21A9D1B04D70BA403B9": {
+    "id": "ACE7B38789ADC21A9D1B04D70BA403B9",
+    "sender": "628995584137@s.whatsapp.net",
+    "number": "628995584137",
+    "storyJid": "628995584137@s.whatsapp.net",
+    "resolvedPn": "628995584137@s.whatsapp.net",
+    "name": "Sufyan Kristianto",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE7B38789ADC21A9D1B04D70BA403B9",
+      "participant": "50612112752868@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE7B38789ADC21A9D1B04D70BA403B9",
+      "participant": "50612112752868@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "50612112752868@lid",
+      "628995584137@s.whatsapp.net"
+    ],
+    "contactHash": "e6cdfdb3482b58746d97d89278ffd7cc80d5f1c9970f77cc6f4b29b1c51916d9",
+    "arrivedAt": "2026-11-27T11:30:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:30:45.998Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:30:50.559Z",
+    "readAt": "2026-11-27T11:30:50.558Z"
+  }
+}

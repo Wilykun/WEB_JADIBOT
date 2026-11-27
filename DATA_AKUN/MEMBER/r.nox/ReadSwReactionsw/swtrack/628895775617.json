@@ -1,0 +1,122 @@
+{
+  "AC0A29B6E99574483A48A98783B408FD": {
+    "id": "AC0A29B6E99574483A48A98783B408FD",
+    "sender": "628895775617@s.whatsapp.net",
+    "number": "628895775617",
+    "storyJid": "628895775617@s.whatsapp.net",
+    "resolvedPn": "628895775617@s.whatsapp.net",
+    "name": "~『♔ Loli ✦ Empress乂 』",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0A29B6E99574483A48A98783B408FD",
+      "participant": "8156562337953@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0A29B6E99574483A48A98783B408FD",
+      "participant": "8156562337953@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "8156562337953@lid",
+      "628895775617@s.whatsapp.net"
+    ],
+    "contactHash": "5a369e1ab38b899699181727195bd03eb43516dad9dacdc5ab64a13d346c343c",
+    "arrivedAt": "2026-11-27T06:19:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T06:19:51.612Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T06:19:54.771Z",
+    "readAt": "2026-11-27T06:19:54.770Z",
+    "emoji": "🥸",
+    "reactedAt": "2026-11-27T06:19:54.770Z"
+  },
+  "AC3FB848BB0695F93E332881D1A4D07C": {
+    "id": "AC3FB848BB0695F93E332881D1A4D07C",
+    "sender": "628895775617@s.whatsapp.net",
+    "number": "628895775617",
+    "storyJid": "628895775617@s.whatsapp.net",
+    "resolvedPn": "628895775617@s.whatsapp.net",
+    "name": "~『♔ Loli ✦ Empress乂 』",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3FB848BB0695F93E332881D1A4D07C",
+      "participant": "8156562337953@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3FB848BB0695F93E332881D1A4D07C",
+      "participant": "8156562337953@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "8156562337953@lid",
+      "628895775617@s.whatsapp.net"
+    ],
+    "contactHash": "5a369e1ab38b899699181727195bd03eb43516dad9dacdc5ab64a13d346c343c",
+    "arrivedAt": "2026-11-27T11:51:42.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:51:42.115Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:51:47.531Z",
+    "readAt": "2026-11-27T11:51:47.530Z",
+    "emoji": "🔥",
+    "reactedAt": "2026-11-27T11:51:47.530Z"
+  },
+  "ACF8E2549B8A60C80B40F15AD7CE733B": {
+    "id": "ACF8E2549B8A60C80B40F15AD7CE733B",
+    "sender": "628895775617@s.whatsapp.net",
+    "number": "628895775617",
+    "storyJid": "628895775617@s.whatsapp.net",
+    "resolvedPn": "628895775617@s.whatsapp.net",
+    "name": "~『♔ Loli ✦ Empress乂 』",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF8E2549B8A60C80B40F15AD7CE733B",
+      "participant": "8156562337953@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF8E2549B8A60C80B40F15AD7CE733B",
+      "participant": "8156562337953@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "8156562337953@lid",
+      "628895775617@s.whatsapp.net"
+    ],
+    "contactHash": "5a369e1ab38b899699181727195bd03eb43516dad9dacdc5ab64a13d346c343c",
+    "arrivedAt": "2026-11-27T12:37:03.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:37:04.367Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:37:08.895Z",
+    "readAt": "2026-11-27T12:37:08.887Z",
+    "emoji": "🗿",
+    "reactedAt": "2026-11-27T12:37:08.887Z"
+  }
+}

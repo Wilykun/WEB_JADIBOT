@@ -1,1 +1,122 @@
-{}
+{
+  "AC2274C4C6234D5DD62AECD6BD489656": {
+    "id": "AC2274C4C6234D5DD62AECD6BD489656",
+    "sender": "6285178427453@s.whatsapp.net",
+    "number": "6285178427453",
+    "storyJid": "6285178427453@s.whatsapp.net",
+    "resolvedPn": "6285178427453@s.whatsapp.net",
+    "name": "(Gvo Geu,Rico Di Buat Dp)",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2274C4C6234D5DD62AECD6BD489656",
+      "participant": "202607146602588@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2274C4C6234D5DD62AECD6BD489656",
+      "participant": "202607146602588@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "202607146602588@lid",
+      "6285178427453@s.whatsapp.net"
+    ],
+    "contactHash": "2febde9c38d83b15d37bafe16ce121c7d22d65755f6521f74c59352812f1d95d",
+    "arrivedAt": "2026-11-27T10:32:44.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:32:47.395Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:33:01.413Z",
+    "readAt": "2026-11-27T10:33:01.412Z",
+    "emoji": "🐔",
+    "reactedAt": "2026-11-27T10:33:01.412Z"
+  },
+  "AC38C595CDBADC78A083D321AF974210": {
+    "id": "AC38C595CDBADC78A083D321AF974210",
+    "sender": "6285178427453@s.whatsapp.net",
+    "number": "6285178427453",
+    "storyJid": "6285178427453@s.whatsapp.net",
+    "resolvedPn": "6285178427453@s.whatsapp.net",
+    "name": "(Gvo Geu,Rico Di Buat Dp)",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC38C595CDBADC78A083D321AF974210",
+      "participant": "202607146602588@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC38C595CDBADC78A083D321AF974210",
+      "participant": "202607146602588@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "202607146602588@lid",
+      "6285178427453@s.whatsapp.net"
+    ],
+    "contactHash": "2febde9c38d83b15d37bafe16ce121c7d22d65755f6521f74c59352812f1d95d",
+    "arrivedAt": "2026-11-27T12:41:58.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:42:02.725Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:42:12.258Z",
+    "readAt": "2026-11-27T12:42:12.251Z",
+    "emoji": "😅",
+    "reactedAt": "2026-11-27T12:42:12.251Z"
+  },
+  "ACEDA16D5CFD6E269D1F88FF4F0DAB5C": {
+    "id": "ACEDA16D5CFD6E269D1F88FF4F0DAB5C",
+    "sender": "6285178427453@s.whatsapp.net",
+    "number": "6285178427453",
+    "storyJid": "6285178427453@s.whatsapp.net",
+    "resolvedPn": "6285178427453@s.whatsapp.net",
+    "name": "(Gvo Geu,Rico Di Buat Dp)",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEDA16D5CFD6E269D1F88FF4F0DAB5C",
+      "participant": "202607146602588@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEDA16D5CFD6E269D1F88FF4F0DAB5C",
+      "participant": "202607146602588@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "202607146602588@lid",
+      "6285178427453@s.whatsapp.net"
+    ],
+    "contactHash": "2febde9c38d83b15d37bafe16ce121c7d22d65755f6521f74c59352812f1d95d",
+    "arrivedAt": "2026-11-27T17:34:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T17:34:54.505Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T17:35:15.140Z",
+    "readAt": "2026-11-27T17:35:15.139Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T17:35:15.139Z"
+  }
+}

@@ -1,1 +1,122 @@
-{}
+{
+  "AC416E6EA365C4ABFBEFF3180E86A4E5": {
+    "id": "AC416E6EA365C4ABFBEFF3180E86A4E5",
+    "sender": "6282113794951@s.whatsapp.net",
+    "number": "6282113794951",
+    "storyJid": "6282113794951@s.whatsapp.net",
+    "resolvedPn": "6282113794951@s.whatsapp.net",
+    "name": "naa",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC416E6EA365C4ABFBEFF3180E86A4E5",
+      "participant": "91860995469566@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC416E6EA365C4ABFBEFF3180E86A4E5",
+      "participant": "91860995469566@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "91860995469566@lid",
+      "6282113794951@s.whatsapp.net"
+    ],
+    "contactHash": "a7b649303ecc03afddc8c94ccca7701dda3b49acbfe5a498fa66c1a5c391abcb",
+    "arrivedAt": "2026-11-27T00:24:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T00:24:28.504Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T00:24:47.311Z",
+    "readAt": "2026-11-27T00:24:47.301Z",
+    "emoji": "🐼",
+    "reactedAt": "2026-11-27T00:24:47.301Z"
+  },
+  "ACBD532B561E49A71ABA0E70C7623A60": {
+    "id": "ACBD532B561E49A71ABA0E70C7623A60",
+    "sender": "6282113794951@s.whatsapp.net",
+    "number": "6282113794951",
+    "storyJid": "6282113794951@s.whatsapp.net",
+    "resolvedPn": "6282113794951@s.whatsapp.net",
+    "name": "naa",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBD532B561E49A71ABA0E70C7623A60",
+      "participant": "91860995469566@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBD532B561E49A71ABA0E70C7623A60",
+      "participant": "91860995469566@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "91860995469566@lid",
+      "6282113794951@s.whatsapp.net"
+    ],
+    "contactHash": "a7b649303ecc03afddc8c94ccca7701dda3b49acbfe5a498fa66c1a5c391abcb",
+    "arrivedAt": "2026-11-27T12:36:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:36:21.745Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:36:40.733Z",
+    "readAt": "2026-11-27T12:36:40.724Z",
+    "emoji": "🦓",
+    "reactedAt": "2026-11-27T12:36:40.724Z"
+  },
+  "AC571278C3B2246370321C23CC9E040D": {
+    "id": "AC571278C3B2246370321C23CC9E040D",
+    "sender": "6282113794951@s.whatsapp.net",
+    "number": "6282113794951",
+    "storyJid": "6282113794951@s.whatsapp.net",
+    "resolvedPn": "6282113794951@s.whatsapp.net",
+    "name": "naa",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC571278C3B2246370321C23CC9E040D",
+      "participant": "91860995469566@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC571278C3B2246370321C23CC9E040D",
+      "participant": "91860995469566@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "91860995469566@lid",
+      "6282113794951@s.whatsapp.net"
+    ],
+    "contactHash": "a7b649303ecc03afddc8c94ccca7701dda3b49acbfe5a498fa66c1a5c391abcb",
+    "arrivedAt": "2026-11-27T13:03:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:03:02.241Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:03:11.697Z",
+    "readAt": "2026-11-27T13:03:11.691Z",
+    "emoji": "🍕",
+    "reactedAt": "2026-11-27T13:03:11.691Z"
+  }
+}

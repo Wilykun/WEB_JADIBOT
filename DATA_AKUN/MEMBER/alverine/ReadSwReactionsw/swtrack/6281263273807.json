@@ -1,0 +1,122 @@
+{
+  "3A065167DB814775ABDA54895468F80D": {
+    "id": "3A065167DB814775ABDA54895468F80D",
+    "sender": "6281263273807@s.whatsapp.net",
+    "number": "6281263273807",
+    "storyJid": "6281263273807@s.whatsapp.net",
+    "resolvedPn": "6281263273807@s.whatsapp.net",
+    "name": "Rita Ginting",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3A065167DB814775ABDA54895468F80D",
+      "participant": "191254994374801@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3A065167DB814775ABDA54895468F80D",
+      "participant": "191254994374801@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191254994374801@lid",
+      "6281263273807@s.whatsapp.net"
+    ],
+    "contactHash": "b8348eecebf3a9e021b5b17753f6720755c38aa48de4c5445317c7ff33d2be5c",
+    "arrivedAt": "2026-11-26T22:04:33.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:04:32.949Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:04:39.918Z",
+    "readAt": "2026-11-26T22:04:39.917Z",
+    "emoji": "🦊",
+    "reactedAt": "2026-11-26T22:04:39.917Z"
+  },
+  "3A3F419B50F847C081967A9329D0B150": {
+    "id": "3A3F419B50F847C081967A9329D0B150",
+    "sender": "6281263273807@s.whatsapp.net",
+    "number": "6281263273807",
+    "storyJid": "6281263273807@s.whatsapp.net",
+    "resolvedPn": "6281263273807@s.whatsapp.net",
+    "name": "Rita Ginting",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3A3F419B50F847C081967A9329D0B150",
+      "participant": "191254994374801@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3A3F419B50F847C081967A9329D0B150",
+      "participant": "191254994374801@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191254994374801@lid",
+      "6281263273807@s.whatsapp.net"
+    ],
+    "contactHash": "b8348eecebf3a9e021b5b17753f6720755c38aa48de4c5445317c7ff33d2be5c",
+    "arrivedAt": "2026-11-26T22:16:57.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T22:16:56.895Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T22:17:06.203Z",
+    "readAt": "2026-11-26T22:17:06.194Z",
+    "emoji": "🦁",
+    "reactedAt": "2026-11-26T22:17:06.194Z"
+  },
+  "3AC8FBA842194562AFFA6A1EB632EC0C": {
+    "id": "3AC8FBA842194562AFFA6A1EB632EC0C",
+    "sender": "6281263273807@s.whatsapp.net",
+    "number": "6281263273807",
+    "storyJid": "6281263273807@s.whatsapp.net",
+    "resolvedPn": "6281263273807@s.whatsapp.net",
+    "name": "Rita Ginting",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "3AC8FBA842194562AFFA6A1EB632EC0C",
+      "participant": "191254994374801@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "3AC8FBA842194562AFFA6A1EB632EC0C",
+      "participant": "191254994374801@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "191254994374801@lid",
+      "6281263273807@s.whatsapp.net"
+    ],
+    "contactHash": "b8348eecebf3a9e021b5b17753f6720755c38aa48de4c5445317c7ff33d2be5c",
+    "arrivedAt": "2026-11-27T20:29:25.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T20:29:24.944Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T20:29:34.593Z",
+    "readAt": "2026-11-27T20:29:34.588Z",
+    "emoji": "🐨",
+    "reactedAt": "2026-11-27T20:29:34.588Z"
+  }
+}

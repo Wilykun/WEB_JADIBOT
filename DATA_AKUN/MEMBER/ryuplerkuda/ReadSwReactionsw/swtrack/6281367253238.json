@@ -1,0 +1,122 @@
+{
+  "A5F744AA50211979991D7077FB008D7F": {
+    "id": "A5F744AA50211979991D7077FB008D7F",
+    "sender": "6281367253238@s.whatsapp.net",
+    "number": "6281367253238",
+    "storyJid": "6281367253238@s.whatsapp.net",
+    "resolvedPn": "6281367253238@s.whatsapp.net",
+    "name": "kinich's,",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5F744AA50211979991D7077FB008D7F",
+      "participant": "200322123362518@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5F744AA50211979991D7077FB008D7F",
+      "participant": "200322123362518@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "200322123362518@lid",
+      "6281367253238@s.whatsapp.net"
+    ],
+    "contactHash": "32e1d3d4d9c80e96b251a02ec9b4912b4093c729428751533f4e2242859564ec",
+    "arrivedAt": "2026-11-27T01:35:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:35:22.313Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:35:27.540Z",
+    "readAt": "2026-11-27T01:35:27.539Z",
+    "emoji": "😋",
+    "reactedAt": "2026-11-27T01:35:27.539Z"
+  },
+  "A534A8A1797AD9C126AE0479ED1A4F81": {
+    "id": "A534A8A1797AD9C126AE0479ED1A4F81",
+    "sender": "6281367253238@s.whatsapp.net",
+    "number": "6281367253238",
+    "storyJid": "6281367253238@s.whatsapp.net",
+    "resolvedPn": "6281367253238@s.whatsapp.net",
+    "name": "kinich's,",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A534A8A1797AD9C126AE0479ED1A4F81",
+      "participant": "200322123362518@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A534A8A1797AD9C126AE0479ED1A4F81",
+      "participant": "200322123362518@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "200322123362518@lid",
+      "6281367253238@s.whatsapp.net"
+    ],
+    "contactHash": "32e1d3d4d9c80e96b251a02ec9b4912b4093c729428751533f4e2242859564ec",
+    "arrivedAt": "2026-11-27T02:41:19.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:41:20.317Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:41:23.896Z",
+    "readAt": "2026-11-27T02:41:23.895Z",
+    "emoji": "🥵",
+    "reactedAt": "2026-11-27T02:41:23.895Z"
+  },
+  "A52E9B62AF44CD2C7BDD5E3D6791E789": {
+    "id": "A52E9B62AF44CD2C7BDD5E3D6791E789",
+    "sender": "6281367253238@s.whatsapp.net",
+    "number": "6281367253238",
+    "storyJid": "6281367253238@s.whatsapp.net",
+    "resolvedPn": "6281367253238@s.whatsapp.net",
+    "name": "kinich's,",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A52E9B62AF44CD2C7BDD5E3D6791E789",
+      "participant": "200322123362518@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A52E9B62AF44CD2C7BDD5E3D6791E789",
+      "participant": "200322123362518@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "200322123362518@lid",
+      "6281367253238@s.whatsapp.net"
+    ],
+    "contactHash": "32e1d3d4d9c80e96b251a02ec9b4912b4093c729428751533f4e2242859564ec",
+    "arrivedAt": "2026-11-27T04:29:33.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:29:33.264Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:29:38.884Z",
+    "readAt": "2026-11-27T04:29:38.884Z",
+    "emoji": "😖",
+    "reactedAt": "2026-11-27T04:29:38.884Z"
+  }
+}

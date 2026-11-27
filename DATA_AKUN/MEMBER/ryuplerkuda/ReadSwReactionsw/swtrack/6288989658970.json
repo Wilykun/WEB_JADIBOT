@@ -1,0 +1,122 @@
+{
+  "A5DDB317C1E649B0CB5DBE0015682C16": {
+    "id": "A5DDB317C1E649B0CB5DBE0015682C16",
+    "sender": "6288989658970@s.whatsapp.net",
+    "number": "6288989658970",
+    "storyJid": "6288989658970@s.whatsapp.net",
+    "resolvedPn": "6288989658970@s.whatsapp.net",
+    "name": "Doel",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5DDB317C1E649B0CB5DBE0015682C16",
+      "participant": "28003757244550@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5DDB317C1E649B0CB5DBE0015682C16",
+      "participant": "28003757244550@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "28003757244550@lid",
+      "6288989658970@s.whatsapp.net"
+    ],
+    "contactHash": "a91468015dada9137ac1f410759e6f1c92e43ce9aa3e588d6ca00205d8c4a18b",
+    "arrivedAt": "2026-11-27T11:21:04.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:21:05.037Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:21:08.866Z",
+    "readAt": "2026-11-27T11:21:08.809Z",
+    "emoji": "🥵",
+    "reactedAt": "2026-11-27T11:21:08.809Z"
+  },
+  "A5ABA75BE3333678768D1B4ABEB42E35": {
+    "id": "A5ABA75BE3333678768D1B4ABEB42E35",
+    "sender": "6288989658970@s.whatsapp.net",
+    "number": "6288989658970",
+    "storyJid": "6288989658970@s.whatsapp.net",
+    "resolvedPn": "6288989658970@s.whatsapp.net",
+    "name": "Doel",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5ABA75BE3333678768D1B4ABEB42E35",
+      "participant": "28003757244550@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5ABA75BE3333678768D1B4ABEB42E35",
+      "participant": "28003757244550@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "28003757244550@lid",
+      "6288989658970@s.whatsapp.net"
+    ],
+    "contactHash": "a91468015dada9137ac1f410759e6f1c92e43ce9aa3e588d6ca00205d8c4a18b",
+    "arrivedAt": "2026-11-27T11:54:23.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:54:23.212Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:54:26.152Z",
+    "readAt": "2026-11-27T11:54:26.150Z",
+    "emoji": "😋",
+    "reactedAt": "2026-11-27T11:54:26.150Z"
+  },
+  "A53B28A20CFFF9099054E3F67DA8962A": {
+    "id": "A53B28A20CFFF9099054E3F67DA8962A",
+    "sender": "6288989658970@s.whatsapp.net",
+    "number": "6288989658970",
+    "storyJid": "6288989658970@s.whatsapp.net",
+    "resolvedPn": "6288989658970@s.whatsapp.net",
+    "name": "Doel",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A53B28A20CFFF9099054E3F67DA8962A",
+      "participant": "28003757244550@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A53B28A20CFFF9099054E3F67DA8962A",
+      "participant": "28003757244550@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "28003757244550@lid",
+      "6288989658970@s.whatsapp.net"
+    ],
+    "contactHash": "a91468015dada9137ac1f410759e6f1c92e43ce9aa3e588d6ca00205d8c4a18b",
+    "arrivedAt": "2026-11-27T12:27:06.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:27:06.748Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:27:11.195Z",
+    "readAt": "2026-11-27T12:27:11.194Z",
+    "emoji": "😋",
+    "reactedAt": "2026-11-27T12:27:11.194Z"
+  }
+}

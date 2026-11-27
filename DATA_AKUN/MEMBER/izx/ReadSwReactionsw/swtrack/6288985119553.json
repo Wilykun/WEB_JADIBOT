@@ -1,0 +1,154 @@
+{
+  "AC85876C59917937D14D5656BD528F9E": {
+    "id": "AC85876C59917937D14D5656BD528F9E",
+    "sender": "6288985119553@s.whatsapp.net",
+    "number": "6288985119553",
+    "storyJid": "6288985119553@s.whatsapp.net",
+    "resolvedPn": "6288985119553@s.whatsapp.net",
+    "name": "Musafir",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC85876C59917937D14D5656BD528F9E",
+      "participant": "186625556533272@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC85876C59917937D14D5656BD528F9E",
+      "participant": "186625556533272@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "186625556533272@lid",
+      "6288985119553@s.whatsapp.net"
+    ],
+    "contactHash": "57ea2b11ece1d4a5fbf28ab40ffb3ab7736e0957443c43fb100e307ecec4f6a4",
+    "arrivedAt": "2026-11-27T08:51:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:51:07.817Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:51:10.819Z",
+    "readAt": "2026-11-27T08:51:10.642Z"
+  },
+  "ACE96A6527B3CCCFB2DD7CB8BB9131E1": {
+    "id": "ACE96A6527B3CCCFB2DD7CB8BB9131E1",
+    "sender": "6288985119553@s.whatsapp.net",
+    "number": "6288985119553",
+    "storyJid": "6288985119553@s.whatsapp.net",
+    "resolvedPn": "6288985119553@s.whatsapp.net",
+    "name": "Musafir",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE96A6527B3CCCFB2DD7CB8BB9131E1",
+      "participant": "186625556533272@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE96A6527B3CCCFB2DD7CB8BB9131E1",
+      "participant": "186625556533272@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "186625556533272@lid",
+      "6288985119553@s.whatsapp.net"
+    ],
+    "contactHash": "57ea2b11ece1d4a5fbf28ab40ffb3ab7736e0957443c43fb100e307ecec4f6a4",
+    "arrivedAt": "2026-11-27T08:52:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:52:10.963Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:52:15.402Z",
+    "readAt": "2026-11-27T08:52:15.401Z"
+  },
+  "AC5932D1A179C49DC1B0ACED7588DDF9": {
+    "id": "AC5932D1A179C49DC1B0ACED7588DDF9",
+    "sender": "6288985119553@s.whatsapp.net",
+    "number": "6288985119553",
+    "storyJid": "6288985119553@s.whatsapp.net",
+    "resolvedPn": "6288985119553@s.whatsapp.net",
+    "name": "Musafir",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5932D1A179C49DC1B0ACED7588DDF9",
+      "participant": "186625556533272@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5932D1A179C49DC1B0ACED7588DDF9",
+      "participant": "186625556533272@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "186625556533272@lid",
+      "6288985119553@s.whatsapp.net"
+    ],
+    "contactHash": "57ea2b11ece1d4a5fbf28ab40ffb3ab7736e0957443c43fb100e307ecec4f6a4",
+    "arrivedAt": "2026-11-27T13:09:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:09:44.997Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:09:48.291Z",
+    "readAt": "2026-11-27T13:09:48.287Z"
+  },
+  "AC388141DF41209C38F697BFF09E757F": {
+    "id": "AC388141DF41209C38F697BFF09E757F",
+    "sender": "6288985119553@s.whatsapp.net",
+    "number": "6288985119553",
+    "storyJid": "6288985119553@s.whatsapp.net",
+    "resolvedPn": "6288985119553@s.whatsapp.net",
+    "name": "Musafir",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC388141DF41209C38F697BFF09E757F",
+      "participant": "186625556533272@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC388141DF41209C38F697BFF09E757F",
+      "participant": "186625556533272@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "186625556533272@lid",
+      "6288985119553@s.whatsapp.net"
+    ],
+    "contactHash": "57ea2b11ece1d4a5fbf28ab40ffb3ab7736e0957443c43fb100e307ecec4f6a4",
+    "arrivedAt": "2026-11-27T17:54:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T17:54:10.776Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T17:54:13.070Z",
+    "readAt": "2026-11-27T17:54:13.062Z"
+  }
+}
