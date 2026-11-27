@@ -335,7 +335,7 @@ test('ikon mata + cek cocok sandi baru realtime di halaman lupa sandi', () => {
   assert.equal(out.matchOk, true, 'sandi yang cocok harus hijau');
   assert.equal(out.matchText, 'Sandi baru cocok.', 'teks cocok harus tepat');
 });
-test('api(): gagal jaringan menampilkan pesan ramah, bukan Failed to fetch', async () => {
+test('api(): gagal jaringan coba lagi 1x, lalu pesan ramah', async () => {
   const pick = (re, msg) => {
     const m = appJs.match(re);
     assert.ok(m, msg);
@@ -343,28 +343,55 @@ test('api(): gagal jaringan menampilkan pesan ramah, bukan Failed to fetch', asy
   };
   const apiFn = pick(/async function api\(url, options = \{\}\) \{[\s\S]*?\n\}/, 'fungsi api harus bisa diekstrak');
   assert.ok(apiFn.includes('Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.'), 'api harus menerjemahkan gagal jaringan ke pesan ramah');
+  assert.ok(apiFn.includes('setTimeout(resolve, 1500)'), 'api harus menunggu 1,5 detik sebelum mencoba lagi');
   const program = `
     let fetch;
+    let calls = 0;
     ${apiFn}
     (async () => {
       const out = {};
-      // fetch melempar (tanpa internet / mode pesawat) -> pesan ramah.
-      fetch = async () => { throw new TypeError('Failed to fetch'); };
-      try { await api('/api/auth/forgot-password', { method: 'POST' }); out.networkMessage = 'TIDAK MELEMPAR'; }
-      catch (e) { out.networkMessage = e.message; out.networkIsTypeError = e instanceof TypeError; }
+      const failOnce = async () => { calls++; if (calls === 1) throw new TypeError('Failed to fetch'); return { ok: true, status: 200, json: async () => ({ ok: true }) }; };
+      // Lupa sandi: gagal sekali lalu berhasil -> percobaan kedua mengembalikan payload.
+      calls = 0;
+      fetch = failOnce;
+      out.forgotRetry = await api('/api/auth/forgot-password', { method: 'POST', body: '{}' });
+      out.forgotRetryCalls = calls;
+      // Lupa sandi: gagal terus -> pesan ramah setelah 2 percobaan.
+      calls = 0;
+      fetch = async () => { calls++; throw new TypeError('Failed to fetch'); };
+      try { await api('/api/auth/forgot-password', { method: 'POST', body: '{}' }); out.forgotFail = 'TIDAK MELEMPAR'; }
+      catch (e) { out.forgotFail = e.message; }
+      out.forgotFailCalls = calls;
+      // GET: gagal sekali lalu berhasil -> diulang juga.
+      calls = 0;
+      fetch = failOnce;
+      out.getRetry = await api('/api/members');
+      out.getRetryCalls = calls;
+      // Reset sandi: gagal sekali -> TIDAK diulang (1 percobaan saja).
+      calls = 0;
+      fetch = async () => { calls++; throw new TypeError('Failed to fetch'); };
+      try { await api('/api/auth/reset-password', { method: 'POST', body: '{}' }); out.resetFail = 'TIDAK MELEMPAR'; }
+      catch (e) { out.resetFail = e.message; }
+      out.resetFailCalls = calls;
       // fetch berhasil + HTTP 404 -> error tetap membawa status.
       fetch = async () => ({ ok: false, status: 404, json: async () => ({ error: 'Email tidak terdaftar.' }) });
-      try { await api('/api/auth/forgot-password', { method: 'POST' }); out.httpMessage = 'TIDAK MELEMPAR'; }
+      try { await api('/api/auth/forgot-password', { method: 'POST', body: '{}' }); out.httpMessage = 'TIDAK MELEMPAR'; }
       catch (e) { out.httpMessage = e.message; out.httpStatus = e.status; }
       // fetch berhasil + HTTP 200 -> payload dikembalikan.
       fetch = async () => ({ ok: true, status: 200, json: async () => ({ ok: true }) });
-      out.okPayload = await api('/api/auth/forgot-password', { method: 'POST' });
+      out.okPayload = await api('/api/auth/forgot-password', { method: 'POST', body: '{}' });
       return out;
     })()
   `;
   const out = await eval(program);
-  assert.equal(out.networkMessage, 'Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.', 'gagal jaringan harus menampilkan pesan ramah');
-  assert.equal(out.networkIsTypeError, false, 'pesan ramah harus Error biasa, bukan TypeError mentah browser');
+  assert.deepEqual(out.forgotRetry, { ok: true }, 'lupa sandi harus berhasil di percobaan kedua');
+  assert.equal(out.forgotRetryCalls, 2, 'lupa sandi harus mencoba 2 kali');
+  assert.equal(out.forgotFail, 'Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.', 'lupa sandi yang gagal terus harus menampilkan pesan ramah');
+  assert.equal(out.forgotFailCalls, 2, 'lupa sandi yang gagal terus harus mencoba 2 kali');
+  assert.deepEqual(out.getRetry, { ok: true }, 'GET harus berhasil di percobaan kedua');
+  assert.equal(out.getRetryCalls, 2, 'GET harus mencoba 2 kali');
+  assert.equal(out.resetFail, 'Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.', 'reset sandi yang gagal harus menampilkan pesan ramah');
+  assert.equal(out.resetFailCalls, 1, 'reset sandi TIDAK boleh diulang');
   assert.equal(out.httpMessage, 'Email tidak terdaftar.', 'kesalahan HTTP harus tetap menampilkan pesan server');
   assert.equal(out.httpStatus, 404, 'kesalahan HTTP harus tetap membawa status');
   assert.deepEqual(out.okPayload, { ok: true }, 'respons sukses harus tetap dikembalikan');

@@ -398,31 +398,46 @@ function parseEmojiBatch(value) {
 applyStorySettings(DEFAULT_STORY_SETTINGS, null);
 
 async function api(url, options = {}) {
-  let response;
-  try {
-    response = await fetch(url, {
-      credentials: 'same-origin',
-      ...options,
-      headers: {
-        ...(options.body ? { 'Content-Type': 'application/json' } : {}),
-        ...(options.headers || {}),
-      },
-    });
-  } catch {
-    // RONDE 37: fetch gagal di level jaringan (HP tanpa internet / mode pesawat)
-    // melempar TypeError 'Failed to fetch' — tampilkan pesan yang dimengerti
-    // pengguna, bukan pesan mentah browser.
-    throw new Error('Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.');
+  // RONDE 38: WiFi yang putus sesaat tidak boleh langsung jadi error.
+  // Kalau fetch gagal di level jaringan, coba lagi SEKALI setelah 1,5 detik.
+  // Hanya untuk GET dan POST lupa-sandi (aman diulang: sandi sementara belum
+  // pernah dilihat pengguna, jadi kalau percobaan pertama ternyata sampai ke
+  // server, yang kedua menimpa dengan sandi sementara baru yang sama-sama
+  // belum dilihat). POST lain (buat sandi baru, ubah sandi, masuk) TIDAK
+  // diulang — percobaan pertama yang sampai ke server sudah mengubah keadaan,
+  // jadi mengulang justru bisa menampilkan error yang menyesatkan.
+  const method = String(options.method || 'GET').toUpperCase();
+  const retryable = method === 'GET' || url === '/api/auth/forgot-password';
+  const attempts = retryable ? 2 : 1;
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    if (attempt > 0) await new Promise((resolve) => setTimeout(resolve, 1500));
+    let response;
+    try {
+      response = await fetch(url, {
+        credentials: 'same-origin',
+        ...options,
+        headers: {
+          ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+          ...(options.headers || {}),
+        },
+      });
+    } catch {
+      if (attempt + 1 < attempts) continue;
+      // RONDE 37: fetch gagal di level jaringan (HP tanpa internet / sinyal
+      // putus) melempar TypeError 'Failed to fetch' — tampilkan pesan yang
+      // dimengerti pengguna, bukan pesan mentah browser.
+      throw new Error('Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.');
+    }
+    let payload = {};
+    try { payload = await response.json(); } catch { /* API errors are rendered generically */ }
+    if (!response.ok) {
+      const error = new Error(payload.error || 'Permintaan belum berhasil.');
+      error.status = response.status;
+      error.payload = payload;
+      throw error;
+    }
+    return payload;
   }
-  let payload = {};
-  try { payload = await response.json(); } catch { /* API errors are rendered generically */ }
-  if (!response.ok) {
-    const error = new Error(payload.error || 'Permintaan belum berhasil.');
-    error.status = response.status;
-    error.payload = payload;
-    throw error;
-  }
-  return payload;
 }
 
 function setAuthMessage(text, success = false) {

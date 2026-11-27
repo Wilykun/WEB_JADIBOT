@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-28T05:17:00+07:00",
+  "updatedAt": "2026-11-28T05:29:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "05.29 WIB",
+      "title": "WiFi putus sesaat tidak lagi langsung jadi error",
+      "tag": "Perbaikan",
+      "description": "Kalau koneksi WiFi putus sesaat tepat saat menekan tombol — misalnya sinyal hilang sepersekian detik — panel kini mencoba lagi sendiri sekali setelah 1,5 detik, jadi tidak langsung muncul error. Ini berlaku untuk semua pengambilan data dan untuk tombol di halaman Lupa sandi. Tombol buat sandi baru, ubah sandi, dan masuk sengaja TIDAK diulang otomatis — percobaan pertama yang ternyata sampai ke server sudah mengubah keadaan, jadi mengulang justru bisa menampilkan pesan yang menyesatkan. Kalau setelah dicoba lagi tetap tidak ada koneksi, pesannya tetap yang ramah: \"Tidak ada koneksi internet. Periksa jaringanmu lalu coba lagi.\""
+    },
     {
       "day": "Sabtu, 28 Nov 2026",
       "time": "05.17 WIB",
