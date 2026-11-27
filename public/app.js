@@ -4674,6 +4674,50 @@ function chatRoleLabel(user) {
 function chatRoleIconName(user) {
   return user?.isMainAdmin ? 'crown' : user?.role === 'admin' ? 'shield' : 'user';
 }
+// Warna nama pengirim ala grup WhatsApp: tiap anggota selalu dapat warna yang
+// sama dari namanya, supaya mudah dikenali tanpa avatar di samping bubble.
+const CHAT_NAME_COLORS = ['#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffc107', '#ff9800', '#ff5722', '#f44336', '#795548', '#607d8b'];
+function chatNameColor(name) {
+  const key = String(name || '');
+  let hash = 0;
+  for (let i = 0; i < key.length; i += 1) hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
+  return CHAT_NAME_COLORS[hash % CHAT_NAME_COLORS.length];
+}
+let chatLastTyping = [];
+function chatWaSubtitleNames() {
+  const names = [];
+  const seen = new Set();
+  const me = currentUser?.displayName || currentUser?.username;
+  if (me) { names.push('Kamu'); seen.add(currentUser.id); }
+  for (const message of chatMessages) {
+    const label = message.displayName || message.username;
+    if (!label || seen.has(message.userId)) continue;
+    seen.add(message.userId);
+    names.push(label);
+  }
+  return names;
+}
+function renderChatWaSubtitle() {
+  const el = document.querySelector('#chat-wa-subtitle');
+  if (!el) return;
+  const entries = (chatLastTyping || []).filter((entry) => entry.displayName || entry.username);
+  if (entries.length) {
+    const names = entries.map((entry) => entry.displayName || entry.username);
+    const label = names.length === 1
+      ? `${names[0]} sedang mengetik`
+      : names.length === 2
+        ? `${names[0]} dan ${names[1]} sedang mengetik`
+        : `${names[0]}, ${names[1]} dan ${names.length - 2} lainnya sedang mengetik`;
+    el.textContent = `${label}…`;
+    el.classList.add('is-typing');
+    return;
+  }
+  el.classList.remove('is-typing');
+  const names = chatWaSubtitleNames();
+  el.textContent = names.length
+    ? names.slice(0, 4).join(', ') + (names.length > 4 ? ` dan ${names.length - 4} lainnya` : '')
+    : 'Semua akun';
+}
 function chatUnreadStorageKey() {
   return `readsw-chat-unread-${currentUser?.id || 'anon'}`;
 }
@@ -4956,11 +5000,13 @@ async function loadChatMessages() {
     chatLoading = false;
   }
 }
-function buildChatMessageRow(message) {
+function buildChatMessageRow(message, isFirstInGroup = true) {
   const isOwn = message.userId === currentUser?.id;
   const row = document.createElement('div');
   row.className = `chat-row${isOwn ? ' is-own' : ''}`;
   row.dataset.messageId = message.id;
+  const bubble = document.createElement('div');
+  bubble.className = `chat-bubble${isFirstInGroup ? ' is-first' : ''}`;
   if (!isOwn) {
     const avatar = document.createElement('img');
     avatar.className = 'chat-avatar';
@@ -4969,15 +5015,12 @@ function buildChatMessageRow(message) {
     avatar.loading = 'lazy';
     avatar.addEventListener('error', () => { avatar.src = '/avatars/avatar-01.webp'; }, { once: true });
     row.append(avatar);
-  }
-  const bubble = document.createElement('div');
-  bubble.className = 'chat-bubble';
-  if (!isOwn) {
     const head = document.createElement('div');
     head.className = 'chat-bubble-head';
     const name = document.createElement('span');
     name.className = 'chat-bubble-name';
     name.textContent = message.displayName || message.username;
+    name.style.color = chatNameColor(message.displayName || message.username);
     const roleChip = document.createElement('span');
     roleChip.className = `chat-role-chip${message.isMainAdmin ? ' is-main-admin' : message.role === 'admin' ? ' is-admin' : ''}`;
     roleChip.append(createMemberIcon(chatRoleIconName(message)), document.createTextNode(chatRoleLabel(message)));
@@ -4992,6 +5035,7 @@ function buildChatMessageRow(message) {
     quote.title = 'Ketuk untuk melihat pesan asli';
     const quoteName = document.createElement('strong');
     quoteName.textContent = message.replyTo.displayName || message.replyTo.username;
+    quoteName.style.color = chatNameColor(message.replyTo.displayName || message.replyTo.username);
     const quoteText = document.createElement('span');
     quoteText.textContent = message.replyTo.text;
     quote.append(quoteName, quoteText);
@@ -5006,9 +5050,6 @@ function buildChatMessageRow(message) {
   bubble.append(text);
   const meta = document.createElement('div');
   meta.className = 'chat-bubble-meta';
-  const time = document.createElement('span');
-  time.className = 'chat-bubble-time';
-  time.textContent = formatChatTime(message.createdAt);
   const actions = document.createElement('div');
   actions.className = 'chat-bubble-actions';
   const replyButton = document.createElement('button');
@@ -5038,8 +5079,27 @@ function buildChatMessageRow(message) {
     });
     actions.append(deleteButton);
   }
-  meta.append(time, actions);
+  const time = document.createElement('span');
+  time.className = 'chat-bubble-time';
+  time.textContent = formatChatTime(message.createdAt);
+  if (isOwn) {
+    const ticks = document.createElement('span');
+    ticks.className = 'chat-ticks';
+    ticks.textContent = '✓✓';
+    ticks.setAttribute('aria-label', 'Terkirim');
+    time.append(ticks);
+  }
+  meta.append(actions, time);
   bubble.append(meta);
+  // Ketuk bubble untuk menampilkan tombol Balas/Hapus (ala menu WA); di desktop
+  // tombol muncul saat hover. Ketuk tombol di dalam bubble tidak ikut
+  // membuka/menutup.
+  bubble.addEventListener('click', (event) => {
+    if (event.target.closest('button')) return;
+    const wasOpen = row.classList.contains('is-actions-open');
+    document.querySelectorAll('.chat-row.is-actions-open').forEach((item) => item.classList.remove('is-actions-open'));
+    if (!wasOpen) row.classList.add('is-actions-open');
+  });
   row.append(bubble);
   return row;
 }
@@ -5059,22 +5119,31 @@ function renderChatMessages() {
     return;
   }
   let lastDay = null;
+  let prevMessage = null;
   for (const message of chatMessages) {
     const day = formatChatDay(message.createdAt);
-    if (day && day !== lastDay) {
+    const dayChanged = day && day !== lastDay;
+    if (dayChanged) {
       lastDay = day;
       const divider = document.createElement('div');
       divider.className = 'chat-date-divider';
       divider.textContent = day;
       list.append(divider);
     }
-    list.append(buildChatMessageRow(message));
+    // Bubble pertama dari satu pengirim berurutan dapat "ekor" (sudut rata)
+    // ala WhatsApp; bubble lanjutannya membulat penuh.
+    const isFirstInGroup = !prevMessage || prevMessage.userId !== message.userId || dayChanged;
+    list.append(buildChatMessageRow(message, isFirstInGroup));
+    prevMessage = message;
   }
+  renderChatWaSubtitle();
   if (wasAtBottom) list.scrollTop = list.scrollHeight;
   else list.scrollTop = previousScrollTop;
 }
 function renderChatTyping(typing) {
   const bar = document.querySelector('#chat-typing');
+  chatLastTyping = Array.isArray(typing) ? typing : [];
+  renderChatWaSubtitle();
   if (!bar) return;
   const entries = (typing || []).filter((entry) => entry.displayName || entry.username);
   if (!entries.length) {
@@ -7053,6 +7122,7 @@ document.querySelector('#chat-emoji-toggle')?.addEventListener('click', () => {
 });
 document.querySelector('#chat-mention-jump')?.addEventListener('click', () => jumpToNextChatMention());
 document.querySelector('#chat-hero-toggle')?.addEventListener('click', () => toggleChatHeroCollapsed());
+document.querySelector('#chat-wa-back')?.addEventListener('click', () => setWorkspacePage('dashboard'));
 // Tab/aplikasi yang kembali terlihat harus langsung poll: kalau tidak,
 // indikator mengetik (yang hidupnya cuma 10 detik) sudah hilang sebelum
 // poll 5 detik berikutnya jalan — persis yang terjadi saat pindah aplikasi

@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-27T13:25:00+07:00",
+  "updatedAt": "2026-11-27T14:46:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 27 Nov 2026",
+      "time": "14.46 WIB",
+      "title": "Obrolan kini tampil seperti grup WhatsApp",
+      "tag": "Tampilan",
+      "description": "Halaman Obrolan dirombak total mengikuti grup WhatsApp: header grup dengan foto dan daftar anggota, bubble hijau untuk pesan sendiri dan abu untuk orang lain, nama tiap anggota berwarna beda, jam dan centang di dalam bubble, pembatas tanggal ala WA, dan kolom ketik berbentuk pil dengan tombol kirim hijau. Di HP obrolan kini selebar layar penuh ke bawah seperti membuka grup di aplikasi WA. Semua fungsi tetap jalan: balas, hapus, indikator mengetik, emoji, dan @ mention."
+    },
     {
       "day": "Jumat, 27 Nov 2026",
       "time": "13.25 WIB",

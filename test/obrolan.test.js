@@ -227,9 +227,15 @@ test('Obrolan: avatar pesan diambil dari data akun saat ini, bukan foto lama saa
   assert.ok(signature.includes('message.displayName'), 'tanda daftar harus menghitung nama tiap pesan');
 });
 
-test('Obrolan: avatar di atas dan jam di pojok kiri bubble, rapih di HP', () => {
-  assert.match(css, /\.chat-row\{[^}]*align-items:\s*flex-start/, 'avatar harus di atas, sejajar dengan bagian atas bubble');
-  assert.match(css, /\.chat-bubble-meta\{[^}]*justify-content:\s*space-between/, 'jam di pojok kiri, tombol Balas di kanan');
+test('Obrolan: bubble ala grup WA — nama warna, jam di dalam bubble kanan bawah', () => {
+  assert.match(css, /\.chat-row\{[^}]*align-items:\s*flex-start/, 'baris pesan sejajar atas');
+  assert.match(css, /\.chat-bubble-meta\{[^}]*justify-content:\s*space-between/, 'jam di pojok kanan, tombol Balas/Hapus di kiri');
+  assert.ok(css.includes('.chat-bubble.is-first'), 'bubble pertama satu pengirim berurutan dapat ekor ala WA');
+  assert.ok(appJs.includes('function chatNameColor('), 'nama pengirim harus diwarnai per anggota ala grup WA');
+  assert.ok(appJs.includes('name.style.color = chatNameColor('), 'warna nama harus dipasang di bubble');
+  assert.ok(appJs.includes("ticks.className = 'chat-ticks'"), 'pesan sendiri harus punya centang terkirim ala WA');
+  assert.ok(css.includes('.chat-wa-subtitle'), 'header grup harus punya subjudul anggota/mengetik');
+  assert.ok(html.includes('id="chat-wa-subtitle"'), 'subjudul header grup harus ada di HTML');
 });
 
 test('Obrolan: panel emoji menutup begitu satu emoji dipilih', () => {

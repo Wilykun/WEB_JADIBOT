@@ -108,13 +108,13 @@ test('peringkat diperbarui realtime dan mengikuti pencarian serta pil kategori',
 test('entri Info Update terbaru dan halaman Rank Bot', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-27T13:25:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 110, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-27T14:46:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 111, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Thumbnail WhatsApp diperbarui agar muncul lagi saat tautan dibagikan', 'entri terbaru harus soal batas 10 detik indikator mengetik');
-  assert.equal(newest.tag, 'Perbaikan', 'entri terbaru harus bertag Perubahan');
-  assert.equal(newest.time, '13.25 WIB', 'waktu entri terbaru harus cocok');
-  const rankbotEntry = data.updates[51];
+  assert.equal(newest.title, 'Obrolan kini tampil seperti grup WhatsApp', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.tag, 'Tampilan', 'entri terbaru harus bertag Perubahan');
+  assert.equal(newest.time, '14.46 WIB', 'waktu entri terbaru harus cocok');
+  const rankbotEntry = data.updates[52];
   assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedua puluh tujuh');
   assert.equal(rankbotEntry.tag, 'Fitur baru', 'entri Rank Bot harus bertag Fitur baru');
   assert.equal(rankbotEntry.time, '17.00 WIB', 'waktu entri Rank Bot harus cocok');
