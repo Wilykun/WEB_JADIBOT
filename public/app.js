@@ -4674,10 +4674,14 @@ function chatRoleLabel(user) {
 function chatRoleIconName(user) {
   return user?.isMainAdmin ? 'crown' : user?.role === 'admin' ? 'shield' : 'user';
 }
-// Warna nama pengirim ala grup WhatsApp: tiap anggota selalu dapat warna yang
-// sama dari namanya, supaya mudah dikenali tanpa avatar di samping bubble.
+// Warna nama pengirim ala grup WhatsApp: member biasa pakai warna hash dari
+// namanya (normal), tapi admin utama dan admin dibedakan — admin utama emas
+// dan admin hijau — supaya warnanya pas sama chip perannya, kuat dan beda.
 const CHAT_NAME_COLORS = ['#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffc107', '#ff9800', '#ff5722', '#f44336', '#795548', '#607d8b'];
-function chatNameColor(name) {
+const CHAT_ROLE_NAME_COLORS = { mainAdmin: '#f5c542', admin: '#3ee69a' };
+function chatNameColor(name, message) {
+  if (message?.isMainAdmin) return CHAT_ROLE_NAME_COLORS.mainAdmin;
+  if (message?.role === 'admin') return CHAT_ROLE_NAME_COLORS.admin;
   const key = String(name || '');
   let hash = 0;
   for (let i = 0; i < key.length; i += 1) hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
@@ -5020,7 +5024,7 @@ function buildChatMessageRow(message, isFirstInGroup = true) {
     const name = document.createElement('span');
     name.className = 'chat-bubble-name';
     name.textContent = message.displayName || message.username;
-    name.style.color = chatNameColor(message.displayName || message.username);
+    name.style.color = chatNameColor(message.displayName || message.username, message);
     const roleChip = document.createElement('span');
     roleChip.className = `chat-role-chip${message.isMainAdmin ? ' is-main-admin' : message.role === 'admin' ? ' is-admin' : ''}`;
     roleChip.append(createMemberIcon(chatRoleIconName(message)), document.createTextNode(chatRoleLabel(message)));
@@ -5035,7 +5039,7 @@ function buildChatMessageRow(message, isFirstInGroup = true) {
     quote.title = 'Ketuk untuk melihat pesan asli';
     const quoteName = document.createElement('strong');
     quoteName.textContent = message.replyTo.displayName || message.replyTo.username;
-    quoteName.style.color = chatNameColor(message.replyTo.displayName || message.replyTo.username);
+    quoteName.style.color = chatNameColor(message.replyTo.displayName || message.replyTo.username, message.replyTo);
     const quoteText = document.createElement('span');
     quoteText.textContent = message.replyTo.text;
     quote.append(quoteName, quoteText);

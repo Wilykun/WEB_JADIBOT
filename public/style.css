@@ -3343,9 +3343,12 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .chat-row.is-own .chat-bubble.is-first{border-radius:8px 0 8px 8px}
 .chat-bubble-head{display:flex;align-items:center;gap:6px;margin-bottom:2px;min-width:0}
 .chat-bubble-name{flex:none;max-width:140px;font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.chat-role-chip{flex:none;display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7db8ff;border:1px solid rgba(125,184,255,.4);border-radius:999px;padding:1px 6px}
-.chat-role-chip.is-admin{color:#3ee69a;border-color:rgba(62,230,154,.4)}
-.chat-role-chip.is-main-admin{color:#f5c542;border-color:rgba(245,197,66,.5)}
+.chat-role-chip{flex:none;display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#8696a0;border:1px solid rgba(134,150,160,.4);border-radius:999px;padding:1px 6px}
+.chat-role-chip.is-admin{color:#3ee69a;border-color:rgba(62,230,154,.4);animation:chat-chip-pulse 2.8s ease-in-out infinite}
+.chat-role-chip.is-main-admin{color:#f5c542;border-color:rgba(245,197,66,.5);background:linear-gradient(100deg,rgba(245,197,66,.10) 0%,rgba(245,197,66,.30) 50%,rgba(245,197,66,.10) 100%);background-size:200% 100%;animation:chat-chip-shimmer 2.4s linear infinite}
+@keyframes chat-chip-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes chat-chip-pulse{0%,100%{box-shadow:0 0 0 0 rgba(62,230,154,0)}50%{box-shadow:0 0 8px 0 rgba(62,230,154,.45)}}
+@media (prefers-reduced-motion:reduce){.chat-role-chip.is-admin,.chat-role-chip.is-main-admin{animation:none}}
 .chat-role-chip svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .chat-reply-quote{display:block;width:100%;margin:0 0 4px;padding:4px 8px;border:0;border-left:4px solid var(--green);border-radius:6px;background:rgba(255,255,255,.06);font:inherit;font-size:12px;line-height:1.4;color:inherit;text-align:left;cursor:pointer}
 .chat-reply-quote:hover{background:rgba(255,255,255,.1)}

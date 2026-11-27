@@ -236,6 +236,16 @@ test('Obrolan: bubble ala grup WA — nama warna, jam di dalam bubble kanan bawa
   assert.ok(appJs.includes("ticks.className = 'chat-ticks'"), 'pesan sendiri harus punya centang terkirim ala WA');
   assert.ok(css.includes('.chat-wa-subtitle'), 'header grup harus punya subjudul anggota/mengetik');
   assert.ok(html.includes('id="chat-wa-subtitle"'), 'subjudul header grup harus ada di HTML');
+  assert.ok(appJs.includes("mainAdmin: '#f5c542'"), 'nama admin utama harus emas');
+  assert.ok(appJs.includes("admin: '#3ee69a'"), 'nama admin biasa harus hijau, beda dari admin utama');
+  assert.ok(appJs.includes('function chatNameColor(name, message)'), 'warna nama harus mempertimbangkan peran pengirim');
+  assert.ok(appJs.includes('message?.isMainAdmin'), 'admin utama dikenali dari isMainAdmin');
+  assert.ok(appJs.includes("message?.role === 'admin'"), 'admin biasa dikenali dari role admin');
+  assert.ok(css.includes('color:#8696a0'), 'chip member biasa harus abu normal');
+  assert.ok(css.includes('@keyframes chat-chip-shimmer'), 'chip admin utama harus punya animasi shimmer emas');
+  assert.ok(css.includes('@keyframes chat-chip-pulse'), 'chip admin biasa harus punya animasi pulse hijau');
+  assert.ok(css.includes('.chat-role-chip.is-main-admin{') && css.includes('animation:chat-chip-shimmer'), 'animasi shimmer harus menempel di chip admin utama');
+  assert.ok(css.includes('.chat-role-chip.is-admin{') && css.includes('animation:chat-chip-pulse'), 'animasi pulse harus menempel di chip admin biasa');
 });
 
 test('Obrolan: panel emoji menutup begitu satu emoji dipilih', () => {
