@@ -1,1 +1,162 @@
-{}
+{
+  "AC5D30A11940607528961CF9E31088A7": {
+    "id": "AC5D30A11940607528961CF9E31088A7",
+    "sender": "6285754553096@s.whatsapp.net",
+    "number": "6285754553096",
+    "storyJid": "6285754553096@s.whatsapp.net",
+    "resolvedPn": "6285754553096@s.whatsapp.net",
+    "name": "Azriel Sani/26705414",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5D30A11940607528961CF9E31088A7",
+      "participant": "169797337784433@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5D30A11940607528961CF9E31088A7",
+      "participant": "169797337784433@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "169797337784433@lid",
+      "6285754553096@s.whatsapp.net"
+    ],
+    "contactHash": "c438f6d0e86eed97e4fe869a5e0b42f87a699e1e58f096ddf0f272cb634cc026",
+    "arrivedAt": "2026-11-27T11:20:18.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:20:18.810Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:20:23.450Z",
+    "readAt": "2026-11-27T11:20:23.449Z",
+    "emoji": "🐸",
+    "reactedAt": "2026-11-27T11:20:23.449Z"
+  },
+  "ACBF7F11573896FF2325F7BBC7C59A82": {
+    "id": "ACBF7F11573896FF2325F7BBC7C59A82",
+    "sender": "6285754553096@s.whatsapp.net",
+    "number": "6285754553096",
+    "storyJid": "6285754553096@s.whatsapp.net",
+    "resolvedPn": "6285754553096@s.whatsapp.net",
+    "name": "Azriel Sani/26705414",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBF7F11573896FF2325F7BBC7C59A82",
+      "participant": "169797337784433@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBF7F11573896FF2325F7BBC7C59A82",
+      "participant": "169797337784433@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "169797337784433@lid",
+      "6285754553096@s.whatsapp.net"
+    ],
+    "contactHash": "c438f6d0e86eed97e4fe869a5e0b42f87a699e1e58f096ddf0f272cb634cc026",
+    "arrivedAt": "2026-11-27T11:20:37.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:20:36.756Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:20:51.553Z",
+    "readAt": "2026-11-27T11:20:51.551Z",
+    "emoji": "🦓",
+    "reactedAt": "2026-11-27T11:20:51.551Z"
+  },
+  "ACB9D542D20F85E1AC5BF387F9F6262B": {
+    "id": "ACB9D542D20F85E1AC5BF387F9F6262B",
+    "sender": "6285754553096@s.whatsapp.net",
+    "number": "6285754553096",
+    "storyJid": "6285754553096@s.whatsapp.net",
+    "resolvedPn": "6285754553096@s.whatsapp.net",
+    "name": "Azriel Sani/26705414",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB9D542D20F85E1AC5BF387F9F6262B",
+      "participant": "169797337784433@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB9D542D20F85E1AC5BF387F9F6262B",
+      "participant": "169797337784433@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "169797337784433@lid",
+      "6285754553096@s.whatsapp.net"
+    ],
+    "contactHash": "c438f6d0e86eed97e4fe869a5e0b42f87a699e1e58f096ddf0f272cb634cc026",
+    "arrivedAt": "2026-11-27T11:20:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:20:44.818Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:21:04.122Z",
+    "readAt": "2026-11-27T11:21:04.114Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T11:21:04.114Z"
+  },
+  "ACC8978B96A8E6FEB886A9BD2A6EDD4C": {
+    "id": "ACC8978B96A8E6FEB886A9BD2A6EDD4C",
+    "sender": "6285754553096@s.whatsapp.net",
+    "number": "6285754553096",
+    "storyJid": "6285754553096@s.whatsapp.net",
+    "resolvedPn": "6285754553096@s.whatsapp.net",
+    "name": "Azriel Sani/26705414",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC8978B96A8E6FEB886A9BD2A6EDD4C",
+      "participant": "169797337784433@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC8978B96A8E6FEB886A9BD2A6EDD4C",
+      "participant": "169797337784433@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "169797337784433@lid",
+      "6285754553096@s.whatsapp.net"
+    ],
+    "contactHash": "c438f6d0e86eed97e4fe869a5e0b42f87a699e1e58f096ddf0f272cb634cc026",
+    "arrivedAt": "2026-11-27T11:20:57.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:20:57.487Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:21:10.687Z",
+    "readAt": "2026-11-27T11:21:10.680Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T11:21:10.680Z"
+  }
+}

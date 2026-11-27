@@ -1,6 +1,6 @@
 {
-  "AC18C3895C5EECDB973FCA7ECDD90403": {
-    "id": "AC18C3895C5EECDB973FCA7ECDD90403",
+  "AC28E1C98DABAD249C93E8894C4C3DA3": {
+    "id": "AC28E1C98DABAD249C93E8894C4C3DA3",
     "sender": "6282252134009@s.whatsapp.net",
     "number": "6282252134009",
     "storyJid": "6282252134009@s.whatsapp.net",
@@ -11,13 +11,13 @@
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "AC18C3895C5EECDB973FCA7ECDD90403",
+      "id": "AC28E1C98DABAD249C93E8894C4C3DA3",
       "participant": "76790290767977@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "AC18C3895C5EECDB973FCA7ECDD90403",
+      "id": "AC28E1C98DABAD249C93E8894C4C3DA3",
       "participant": "76790290767977@lid",
       "fromMe": false
     },
@@ -26,198 +26,38 @@
       "6282252134009@s.whatsapp.net"
     ],
     "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
-    "arrivedAt": "2026-11-16T11:19:48.000Z",
+    "arrivedAt": "2026-11-27T13:41:57.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-16T11:19:48.675Z",
+    "lastAttemptAt": "2026-11-27T13:41:57.910Z",
     "lastError": null,
-    "updatedAt": "2026-11-16T11:20:01.721Z",
-    "readAt": "2026-11-16T11:20:01.721Z",
-    "emoji": "🍟",
-    "reactedAt": "2026-11-16T11:20:01.721Z"
-  },
-  "ACB4FE82B079BBC36D9C90DEBFFC961C": {
-    "id": "ACB4FE82B079BBC36D9C90DEBFFC961C",
-    "sender": "6282252134009@s.whatsapp.net",
-    "number": "6282252134009",
-    "storyJid": "6282252134009@s.whatsapp.net",
-    "resolvedPn": "6282252134009@s.whatsapp.net",
-    "name": "STCZZ",
-    "type": "videoMessage",
-    "contentType": "videoMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACB4FE82B079BBC36D9C90DEBFFC961C",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACB4FE82B079BBC36D9C90DEBFFC961C",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "76790290767977@lid",
-      "6282252134009@s.whatsapp.net"
-    ],
-    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
-    "arrivedAt": "2026-11-16T11:19:49.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T11:19:49.329Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T11:19:58.772Z",
-    "readAt": "2026-11-16T11:19:58.771Z",
-    "emoji": "🍕",
-    "reactedAt": "2026-11-16T11:19:58.771Z"
-  },
-  "ACF14CAFB9A09D36976AC7736AE2B732": {
-    "id": "ACF14CAFB9A09D36976AC7736AE2B732",
-    "sender": "6282252134009@s.whatsapp.net",
-    "number": "6282252134009",
-    "storyJid": "6282252134009@s.whatsapp.net",
-    "resolvedPn": "6282252134009@s.whatsapp.net",
-    "name": "STCZZ",
-    "type": "videoMessage",
-    "contentType": "videoMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACF14CAFB9A09D36976AC7736AE2B732",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACF14CAFB9A09D36976AC7736AE2B732",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "76790290767977@lid",
-      "6282252134009@s.whatsapp.net"
-    ],
-    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
-    "arrivedAt": "2026-11-16T12:00:28.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T12:00:28.765Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T12:00:41.332Z",
-    "readAt": "2026-11-16T12:00:41.326Z",
-    "emoji": "🐼",
-    "reactedAt": "2026-11-16T12:00:41.326Z"
-  },
-  "AC234D6BED6B1ED53DD277AE96D56367": {
-    "id": "AC234D6BED6B1ED53DD277AE96D56367",
-    "sender": "6282252134009@s.whatsapp.net",
-    "number": "6282252134009",
-    "storyJid": "6282252134009@s.whatsapp.net",
-    "resolvedPn": "6282252134009@s.whatsapp.net",
-    "name": "STCZZ",
-    "type": "videoMessage",
-    "contentType": "videoMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC234D6BED6B1ED53DD277AE96D56367",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC234D6BED6B1ED53DD277AE96D56367",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "76790290767977@lid",
-      "6282252134009@s.whatsapp.net"
-    ],
-    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
-    "arrivedAt": "2026-11-16T12:00:31.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T12:00:31.563Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T12:00:46.510Z",
-    "readAt": "2026-11-16T12:00:46.510Z",
-    "emoji": "🐔",
-    "reactedAt": "2026-11-16T12:00:46.510Z"
-  },
-  "AC13BBB6078C0E94ECF1CBE280EE7ED6": {
-    "id": "AC13BBB6078C0E94ECF1CBE280EE7ED6",
-    "sender": "6282252134009@s.whatsapp.net",
-    "number": "6282252134009",
-    "storyJid": "6282252134009@s.whatsapp.net",
-    "resolvedPn": "6282252134009@s.whatsapp.net",
-    "name": "STCZZ",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC13BBB6078C0E94ECF1CBE280EE7ED6",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC13BBB6078C0E94ECF1CBE280EE7ED6",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "76790290767977@lid",
-      "6282252134009@s.whatsapp.net"
-    ],
-    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
-    "arrivedAt": "2026-11-17T03:44:29.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-17T03:44:33.304Z",
-    "lastError": null,
-    "updatedAt": "2026-11-17T03:44:49.877Z",
-    "readAt": "2026-11-17T03:44:49.877Z",
+    "updatedAt": "2026-11-27T13:42:07.762Z",
+    "readAt": "2026-11-27T13:42:07.762Z",
     "emoji": "💚",
-    "reactedAt": "2026-11-17T03:44:49.877Z"
+    "reactedAt": "2026-11-27T13:42:07.762Z"
   },
-  "AC22C26293380E8991FA01324A6DCD60": {
-    "id": "AC22C26293380E8991FA01324A6DCD60",
+  "ACCAF770DD6F42D6594A8E7B5282A03E": {
+    "id": "ACCAF770DD6F42D6594A8E7B5282A03E",
     "sender": "6282252134009@s.whatsapp.net",
     "number": "6282252134009",
     "storyJid": "6282252134009@s.whatsapp.net",
     "resolvedPn": "6282252134009@s.whatsapp.net",
     "name": "STCZZ",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "AC22C26293380E8991FA01324A6DCD60",
+      "id": "ACCAF770DD6F42D6594A8E7B5282A03E",
       "participant": "76790290767977@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "AC22C26293380E8991FA01324A6DCD60",
+      "id": "ACCAF770DD6F42D6594A8E7B5282A03E",
       "participant": "76790290767977@lid",
       "fromMe": false
     },
@@ -226,137 +66,137 @@
       "6282252134009@s.whatsapp.net"
     ],
     "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
-    "arrivedAt": "2026-11-17T03:44:31.000Z",
+    "arrivedAt": "2026-11-27T13:42:10.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-17T03:44:33.479Z",
+    "lastAttemptAt": "2026-11-27T13:42:09.965Z",
     "lastError": null,
-    "updatedAt": "2026-11-17T03:44:43.846Z",
-    "readAt": "2026-11-17T03:44:43.845Z",
-    "emoji": "🐴",
-    "reactedAt": "2026-11-17T03:44:43.845Z"
-  },
-  "AC1555DF9C082FB2CC3B37A88467B09D": {
-    "id": "AC1555DF9C082FB2CC3B37A88467B09D",
-    "sender": "6282252134009@s.whatsapp.net",
-    "number": "6282252134009",
-    "storyJid": "6282252134009@s.whatsapp.net",
-    "resolvedPn": "6282252134009@s.whatsapp.net",
-    "name": "STCZZ",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC1555DF9C082FB2CC3B37A88467B09D",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC1555DF9C082FB2CC3B37A88467B09D",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "76790290767977@lid",
-      "6282252134009@s.whatsapp.net"
-    ],
-    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
-    "arrivedAt": "2026-11-17T04:58:08.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-17T05:01:46.698Z",
-    "lastError": null,
-    "updatedAt": "2026-11-17T05:01:52.971Z",
-    "readAt": "2026-11-17T05:01:52.969Z",
-    "emoji": "🐸",
-    "reactedAt": "2026-11-17T05:01:52.969Z"
-  },
-  "ACB1AE573907A84615EE4DCD9D0FA962": {
-    "id": "ACB1AE573907A84615EE4DCD9D0FA962",
-    "sender": "6282252134009@s.whatsapp.net",
-    "number": "6282252134009",
-    "storyJid": "6282252134009@s.whatsapp.net",
-    "resolvedPn": "6282252134009@s.whatsapp.net",
-    "name": "STCZZ",
-    "type": "imageMessage",
-    "contentType": "imageMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACB1AE573907A84615EE4DCD9D0FA962",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACB1AE573907A84615EE4DCD9D0FA962",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "76790290767977@lid",
-      "6282252134009@s.whatsapp.net"
-    ],
-    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
-    "arrivedAt": "2026-11-17T04:58:11.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-17T05:01:47.474Z",
-    "lastError": null,
-    "updatedAt": "2026-11-17T05:02:03.456Z",
-    "readAt": "2026-11-17T05:02:03.455Z",
-    "emoji": "🍟",
-    "reactedAt": "2026-11-17T05:02:03.455Z"
-  },
-  "ACDE1A7F24CC590469DDD9078E27BCD9": {
-    "id": "ACDE1A7F24CC590469DDD9078E27BCD9",
-    "sender": "6282252134009@s.whatsapp.net",
-    "number": "6282252134009",
-    "storyJid": "6282252134009@s.whatsapp.net",
-    "resolvedPn": "6282252134009@s.whatsapp.net",
-    "name": "STCZZ",
-    "type": "imageMessage",
-    "contentType": "imageMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACDE1A7F24CC590469DDD9078E27BCD9",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACDE1A7F24CC590469DDD9078E27BCD9",
-      "participant": "76790290767977@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "76790290767977@lid",
-      "6282252134009@s.whatsapp.net"
-    ],
-    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
-    "arrivedAt": "2026-11-17T04:58:11.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-17T05:01:47.481Z",
-    "lastError": null,
-    "updatedAt": "2026-11-17T05:02:01.214Z",
-    "readAt": "2026-11-17T05:02:01.213Z",
+    "updatedAt": "2026-11-27T13:42:14.154Z",
+    "readAt": "2026-11-27T13:42:14.091Z",
     "emoji": "🍕",
-    "reactedAt": "2026-11-17T05:02:01.213Z"
+    "reactedAt": "2026-11-27T13:42:14.091Z"
+  },
+  "ACD6477307BE9CA28A77A0B0F872A6F8": {
+    "id": "ACD6477307BE9CA28A77A0B0F872A6F8",
+    "sender": "6282252134009@s.whatsapp.net",
+    "number": "6282252134009",
+    "storyJid": "6282252134009@s.whatsapp.net",
+    "resolvedPn": "6282252134009@s.whatsapp.net",
+    "name": "STCZZ",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD6477307BE9CA28A77A0B0F872A6F8",
+      "participant": "76790290767977@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD6477307BE9CA28A77A0B0F872A6F8",
+      "participant": "76790290767977@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "76790290767977@lid",
+      "6282252134009@s.whatsapp.net"
+    ],
+    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
+    "arrivedAt": "2026-11-27T13:42:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:42:11.214Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:42:22.291Z",
+    "readAt": "2026-11-27T13:42:22.269Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T13:42:22.269Z"
+  },
+  "AC546AC22CD55EE60B6974DBA0A43340": {
+    "id": "AC546AC22CD55EE60B6974DBA0A43340",
+    "sender": "6282252134009@s.whatsapp.net",
+    "number": "6282252134009",
+    "storyJid": "6282252134009@s.whatsapp.net",
+    "resolvedPn": "6282252134009@s.whatsapp.net",
+    "name": "STCZZ",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC546AC22CD55EE60B6974DBA0A43340",
+      "participant": "76790290767977@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC546AC22CD55EE60B6974DBA0A43340",
+      "participant": "76790290767977@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "76790290767977@lid",
+      "6282252134009@s.whatsapp.net"
+    ],
+    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
+    "arrivedAt": "2026-11-27T13:42:28.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:42:28.390Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:42:37.265Z",
+    "readAt": "2026-11-27T13:42:37.264Z",
+    "emoji": "🌭",
+    "reactedAt": "2026-11-27T13:42:37.264Z"
+  },
+  "ACEF1F56A5254E3F1DC634F2E43879D9": {
+    "id": "ACEF1F56A5254E3F1DC634F2E43879D9",
+    "sender": "6282252134009@s.whatsapp.net",
+    "number": "6282252134009",
+    "storyJid": "6282252134009@s.whatsapp.net",
+    "resolvedPn": "6282252134009@s.whatsapp.net",
+    "name": "STCZZ",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEF1F56A5254E3F1DC634F2E43879D9",
+      "participant": "76790290767977@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEF1F56A5254E3F1DC634F2E43879D9",
+      "participant": "76790290767977@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "76790290767977@lid",
+      "6282252134009@s.whatsapp.net"
+    ],
+    "contactHash": "a846a2197e9b145d14baa7ad1dbaa4b365625d5fcb0fdb04263213d15697186f",
+    "arrivedAt": "2026-11-27T13:42:29.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:42:29.172Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:42:33.137Z",
+    "readAt": "2026-11-27T13:42:33.135Z",
+    "emoji": "🦄",
+    "reactedAt": "2026-11-27T13:42:33.135Z"
   }
 }

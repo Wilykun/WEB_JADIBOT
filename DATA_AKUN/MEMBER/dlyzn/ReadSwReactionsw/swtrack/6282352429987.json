@@ -1,23 +1,23 @@
 {
-  "ACA6FB22D17D85A275A3999F14398B54": {
-    "id": "ACA6FB22D17D85A275A3999F14398B54",
+  "ACA3E7A6DD722140ABFD7218A4C9FB3D": {
+    "id": "ACA3E7A6DD722140ABFD7218A4C9FB3D",
     "sender": "6282352429987@s.whatsapp.net",
     "number": "6282352429987",
     "storyJid": "6282352429987@s.whatsapp.net",
     "resolvedPn": "6282352429987@s.whatsapp.net",
-    "name": "cewek brengsek",
+    "name": "cewek brengsek😝",
     "type": "senderKeyDistributionMessage",
     "contentType": "senderKeyDistributionMessage",
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "ACA6FB22D17D85A275A3999F14398B54",
+      "id": "ACA3E7A6DD722140ABFD7218A4C9FB3D",
       "participant": "182128155336747@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "ACA6FB22D17D85A275A3999F14398B54",
+      "id": "ACA3E7A6DD722140ABFD7218A4C9FB3D",
       "participant": "182128155336747@lid",
       "fromMe": false
     },
@@ -26,17 +26,137 @@
       "6282352429987@s.whatsapp.net"
     ],
     "contactHash": "387972d06e0a32dd4b3b855f772a6946213670581256bef37a80db7414149eaa",
-    "arrivedAt": "2026-11-16T12:03:40.000Z",
+    "arrivedAt": "2026-11-27T06:34:19.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-16T12:03:41.243Z",
+    "lastAttemptAt": "2026-11-27T06:34:22.026Z",
     "lastError": null,
-    "updatedAt": "2026-11-16T12:03:50.275Z",
-    "readAt": "2026-11-16T12:03:50.264Z",
-    "emoji": "😹",
-    "reactedAt": "2026-11-16T12:03:50.264Z"
+    "updatedAt": "2026-11-27T06:34:24.885Z",
+    "readAt": "2026-11-27T06:34:24.881Z",
+    "emoji": "❓️",
+    "reactedAt": "2026-11-27T06:34:24.881Z"
+  },
+  "ACA7070F3EC188EEA26FD5845AFC8651": {
+    "id": "ACA7070F3EC188EEA26FD5845AFC8651",
+    "sender": "6282352429987@s.whatsapp.net",
+    "number": "6282352429987",
+    "storyJid": "6282352429987@s.whatsapp.net",
+    "resolvedPn": "6282352429987@s.whatsapp.net",
+    "name": "cewek brengsek😝",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA7070F3EC188EEA26FD5845AFC8651",
+      "participant": "182128155336747@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA7070F3EC188EEA26FD5845AFC8651",
+      "participant": "182128155336747@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "182128155336747@lid",
+      "6282352429987@s.whatsapp.net"
+    ],
+    "contactHash": "387972d06e0a32dd4b3b855f772a6946213670581256bef37a80db7414149eaa",
+    "arrivedAt": "2026-11-27T07:50:14.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:50:15.219Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:50:21.585Z",
+    "readAt": "2026-11-27T07:50:21.584Z",
+    "emoji": "👻",
+    "reactedAt": "2026-11-27T07:50:21.584Z"
+  },
+  "AC66F472BEE420BCA3D957D3FA864C20": {
+    "id": "AC66F472BEE420BCA3D957D3FA864C20",
+    "sender": "6282352429987@s.whatsapp.net",
+    "number": "6282352429987",
+    "storyJid": "6282352429987@s.whatsapp.net",
+    "resolvedPn": "6282352429987@s.whatsapp.net",
+    "name": "cewek brengsek😝",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC66F472BEE420BCA3D957D3FA864C20",
+      "participant": "182128155336747@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC66F472BEE420BCA3D957D3FA864C20",
+      "participant": "182128155336747@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "182128155336747@lid",
+      "6282352429987@s.whatsapp.net"
+    ],
+    "contactHash": "387972d06e0a32dd4b3b855f772a6946213670581256bef37a80db7414149eaa",
+    "arrivedAt": "2026-11-27T09:32:32.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:32:35.433Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:32:38.463Z",
+    "readAt": "2026-11-27T09:32:38.448Z",
+    "emoji": "🙂‍↔️",
+    "reactedAt": "2026-11-27T09:32:38.448Z"
+  },
+  "AC44A5F10B7376870316B4C2108893FB": {
+    "id": "AC44A5F10B7376870316B4C2108893FB",
+    "sender": "6282352429987@s.whatsapp.net",
+    "number": "6282352429987",
+    "storyJid": "6282352429987@s.whatsapp.net",
+    "resolvedPn": "6282352429987@s.whatsapp.net",
+    "name": "cewek brengsek😝",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC44A5F10B7376870316B4C2108893FB",
+      "participant": "182128155336747@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC44A5F10B7376870316B4C2108893FB",
+      "participant": "182128155336747@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "182128155336747@lid",
+      "6282352429987@s.whatsapp.net"
+    ],
+    "contactHash": "387972d06e0a32dd4b3b855f772a6946213670581256bef37a80db7414149eaa",
+    "arrivedAt": "2026-11-27T15:19:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:19:17.992Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:19:23.975Z",
+    "readAt": "2026-11-27T15:19:23.975Z",
+    "emoji": "👀",
+    "reactedAt": "2026-11-27T15:19:23.975Z"
   }
 }

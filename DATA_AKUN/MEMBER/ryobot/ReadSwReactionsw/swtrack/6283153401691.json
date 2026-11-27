@@ -1,1 +1,162 @@
-{}
+{
+  "AC4DA79471ECCD43CF15143AC3A1608E": {
+    "id": "AC4DA79471ECCD43CF15143AC3A1608E",
+    "sender": "6283153401691@s.whatsapp.net",
+    "number": "6283153401691",
+    "storyJid": "6283153401691@s.whatsapp.net",
+    "resolvedPn": "6283153401691@s.whatsapp.net",
+    "name": "yuann nasgor",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4DA79471ECCD43CF15143AC3A1608E",
+      "participant": "31959019446519@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4DA79471ECCD43CF15143AC3A1608E",
+      "participant": "31959019446519@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "31959019446519@lid",
+      "6283153401691@s.whatsapp.net"
+    ],
+    "contactHash": "f8d766e2ef515e601586eb34b6f481e9e5289ec4266260b6fc6a57ccaba117b4",
+    "arrivedAt": "2026-11-27T01:27:15.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:27:18.046Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:27:20.689Z",
+    "readAt": "2026-11-27T01:27:20.687Z",
+    "emoji": "🐔",
+    "reactedAt": "2026-11-27T01:27:20.687Z"
+  },
+  "ACB2816CF9B542533FEA7FEE763B6CE4": {
+    "id": "ACB2816CF9B542533FEA7FEE763B6CE4",
+    "sender": "6283153401691@s.whatsapp.net",
+    "number": "6283153401691",
+    "storyJid": "6283153401691@s.whatsapp.net",
+    "resolvedPn": "6283153401691@s.whatsapp.net",
+    "name": "yuann nasgor",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB2816CF9B542533FEA7FEE763B6CE4",
+      "participant": "31959019446519@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB2816CF9B542533FEA7FEE763B6CE4",
+      "participant": "31959019446519@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "31959019446519@lid",
+      "6283153401691@s.whatsapp.net"
+    ],
+    "contactHash": "f8d766e2ef515e601586eb34b6f481e9e5289ec4266260b6fc6a57ccaba117b4",
+    "arrivedAt": "2026-11-27T01:30:24.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:30:26.971Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:30:39.172Z",
+    "readAt": "2026-11-27T01:30:39.171Z",
+    "emoji": "😅",
+    "reactedAt": "2026-11-27T01:30:39.171Z"
+  },
+  "AC7014887E313ECA037CA9AB75944943": {
+    "id": "AC7014887E313ECA037CA9AB75944943",
+    "sender": "6283153401691@s.whatsapp.net",
+    "number": "6283153401691",
+    "storyJid": "6283153401691@s.whatsapp.net",
+    "resolvedPn": "6283153401691@s.whatsapp.net",
+    "name": "yuann nasgor",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7014887E313ECA037CA9AB75944943",
+      "participant": "31959019446519@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7014887E313ECA037CA9AB75944943",
+      "participant": "31959019446519@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "31959019446519@lid",
+      "6283153401691@s.whatsapp.net"
+    ],
+    "contactHash": "f8d766e2ef515e601586eb34b6f481e9e5289ec4266260b6fc6a57ccaba117b4",
+    "arrivedAt": "2026-11-27T02:11:18.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:11:18.848Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:11:25.562Z",
+    "readAt": "2026-11-27T02:11:25.532Z",
+    "emoji": "😅",
+    "reactedAt": "2026-11-27T02:11:25.532Z"
+  },
+  "ACA2EA5331096F68147F07A4C6AD1886": {
+    "id": "ACA2EA5331096F68147F07A4C6AD1886",
+    "sender": "6283153401691@s.whatsapp.net",
+    "number": "6283153401691",
+    "storyJid": "6283153401691@s.whatsapp.net",
+    "resolvedPn": "6283153401691@s.whatsapp.net",
+    "name": "yuann nasgor",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA2EA5331096F68147F07A4C6AD1886",
+      "participant": "31959019446519@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA2EA5331096F68147F07A4C6AD1886",
+      "participant": "31959019446519@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "31959019446519@lid",
+      "6283153401691@s.whatsapp.net"
+    ],
+    "contactHash": "f8d766e2ef515e601586eb34b6f481e9e5289ec4266260b6fc6a57ccaba117b4",
+    "arrivedAt": "2026-11-27T12:55:15.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:55:19.290Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:55:26.731Z",
+    "readAt": "2026-11-27T12:55:26.729Z",
+    "emoji": "🐔",
+    "reactedAt": "2026-11-27T12:55:26.729Z"
+  }
+}

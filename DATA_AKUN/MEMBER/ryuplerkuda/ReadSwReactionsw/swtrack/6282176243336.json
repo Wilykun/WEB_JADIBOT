@@ -1,0 +1,162 @@
+{
+  "AC5DFB143CDEFC484E238E1340D109B0": {
+    "id": "AC5DFB143CDEFC484E238E1340D109B0",
+    "sender": "6282176243336@s.whatsapp.net",
+    "number": "6282176243336",
+    "storyJid": "6282176243336@s.whatsapp.net",
+    "resolvedPn": "6282176243336@s.whatsapp.net",
+    "name": "𝙆𝙧𝙞 𝙁𝙩 𝙞𝙭𝙞𝙖",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5DFB143CDEFC484E238E1340D109B0",
+      "participant": "47936599797882@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5DFB143CDEFC484E238E1340D109B0",
+      "participant": "47936599797882@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "47936599797882@lid",
+      "6282176243336@s.whatsapp.net"
+    ],
+    "contactHash": "79956a062c882c3c37e426b18ab6273f7427f7c550382536b59f527272b0523f",
+    "arrivedAt": "2026-11-27T08:52:55.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:52:54.915Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:52:59.527Z",
+    "readAt": "2026-11-27T08:52:59.526Z",
+    "emoji": "🥀",
+    "reactedAt": "2026-11-27T08:52:59.526Z"
+  },
+  "AC887312B57971636C70838FFD5176EB": {
+    "id": "AC887312B57971636C70838FFD5176EB",
+    "sender": "6282176243336@s.whatsapp.net",
+    "number": "6282176243336",
+    "storyJid": "6282176243336@s.whatsapp.net",
+    "resolvedPn": "6282176243336@s.whatsapp.net",
+    "name": "𝙆𝙧𝙞 𝙁𝙩 𝙞𝙭𝙞𝙖",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC887312B57971636C70838FFD5176EB",
+      "participant": "47936599797882@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC887312B57971636C70838FFD5176EB",
+      "participant": "47936599797882@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "47936599797882@lid",
+      "6282176243336@s.whatsapp.net"
+    ],
+    "contactHash": "79956a062c882c3c37e426b18ab6273f7427f7c550382536b59f527272b0523f",
+    "arrivedAt": "2026-11-27T09:35:23.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:35:23.025Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:35:28.355Z",
+    "readAt": "2026-11-27T09:35:28.354Z",
+    "emoji": "😋",
+    "reactedAt": "2026-11-27T09:35:28.354Z"
+  },
+  "ACA2580E0A64CA43CE97A7CAF833FF69": {
+    "id": "ACA2580E0A64CA43CE97A7CAF833FF69",
+    "sender": "6282176243336@s.whatsapp.net",
+    "number": "6282176243336",
+    "storyJid": "6282176243336@s.whatsapp.net",
+    "resolvedPn": "6282176243336@s.whatsapp.net",
+    "name": "𝙆𝙧𝙞 𝙁𝙩 𝙞𝙭𝙞𝙖",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA2580E0A64CA43CE97A7CAF833FF69",
+      "participant": "47936599797882@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA2580E0A64CA43CE97A7CAF833FF69",
+      "participant": "47936599797882@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "47936599797882@lid",
+      "6282176243336@s.whatsapp.net"
+    ],
+    "contactHash": "79956a062c882c3c37e426b18ab6273f7427f7c550382536b59f527272b0523f",
+    "arrivedAt": "2026-11-27T10:09:19.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:09:18.762Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:09:22.191Z",
+    "readAt": "2026-11-27T10:09:22.190Z",
+    "emoji": "😏",
+    "reactedAt": "2026-11-27T10:09:22.190Z"
+  },
+  "AC8B85A84D25BAFA779651E5DADF44D2": {
+    "id": "AC8B85A84D25BAFA779651E5DADF44D2",
+    "sender": "6282176243336@s.whatsapp.net",
+    "number": "6282176243336",
+    "storyJid": "6282176243336@s.whatsapp.net",
+    "resolvedPn": "6282176243336@s.whatsapp.net",
+    "name": "𝙆𝙧𝙞 𝙁𝙩 𝙞𝙭𝙞𝙖",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8B85A84D25BAFA779651E5DADF44D2",
+      "participant": "47936599797882@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8B85A84D25BAFA779651E5DADF44D2",
+      "participant": "47936599797882@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "47936599797882@lid",
+      "6282176243336@s.whatsapp.net"
+    ],
+    "contactHash": "79956a062c882c3c37e426b18ab6273f7427f7c550382536b59f527272b0523f",
+    "arrivedAt": "2026-11-27T10:17:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:17:27.738Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:17:34.814Z",
+    "readAt": "2026-11-27T10:17:34.538Z",
+    "emoji": "🥵",
+    "reactedAt": "2026-11-27T10:17:34.538Z"
+  }
+}

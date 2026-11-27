@@ -1,1 +1,162 @@
-{}
+{
+  "AC7B4C772378C83B5A85495524943F69": {
+    "id": "AC7B4C772378C83B5A85495524943F69",
+    "sender": "6285178324325@s.whatsapp.net",
+    "number": "6285178324325",
+    "storyJid": "6285178324325@s.whatsapp.net",
+    "resolvedPn": "6285178324325@s.whatsapp.net",
+    "name": "チャンドラ",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7B4C772378C83B5A85495524943F69",
+      "participant": "168668365381772@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7B4C772378C83B5A85495524943F69",
+      "participant": "168668365381772@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "168668365381772@lid",
+      "6285178324325@s.whatsapp.net"
+    ],
+    "contactHash": "946143f20c98195aa4f8728e711ba7f214b030f5497f686b02c5324fffd83959",
+    "arrivedAt": "2026-11-27T01:31:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T01:31:08.917Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T01:31:19.699Z",
+    "readAt": "2026-11-27T01:31:19.698Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T01:31:19.698Z"
+  },
+  "ACFB6854EF1B3933B6D18F7D8A6DE232": {
+    "id": "ACFB6854EF1B3933B6D18F7D8A6DE232",
+    "sender": "6285178324325@s.whatsapp.net",
+    "number": "6285178324325",
+    "storyJid": "6285178324325@s.whatsapp.net",
+    "resolvedPn": "6285178324325@s.whatsapp.net",
+    "name": "チャンドラ",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFB6854EF1B3933B6D18F7D8A6DE232",
+      "participant": "168668365381772@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACFB6854EF1B3933B6D18F7D8A6DE232",
+      "participant": "168668365381772@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "168668365381772@lid",
+      "6285178324325@s.whatsapp.net"
+    ],
+    "contactHash": "946143f20c98195aa4f8728e711ba7f214b030f5497f686b02c5324fffd83959",
+    "arrivedAt": "2026-11-27T02:02:42.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T02:02:43.353Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T02:03:00.822Z",
+    "readAt": "2026-11-27T02:03:00.821Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T02:03:00.821Z"
+  },
+  "AC3115B544CA61FB038DCD6B4F2578D8": {
+    "id": "AC3115B544CA61FB038DCD6B4F2578D8",
+    "sender": "6285178324325@s.whatsapp.net",
+    "number": "6285178324325",
+    "storyJid": "6285178324325@s.whatsapp.net",
+    "resolvedPn": "6285178324325@s.whatsapp.net",
+    "name": "チャンドラ",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3115B544CA61FB038DCD6B4F2578D8",
+      "participant": "168668365381772@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3115B544CA61FB038DCD6B4F2578D8",
+      "participant": "168668365381772@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "168668365381772@lid",
+      "6285178324325@s.whatsapp.net"
+    ],
+    "contactHash": "946143f20c98195aa4f8728e711ba7f214b030f5497f686b02c5324fffd83959",
+    "arrivedAt": "2026-11-27T16:55:34.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T16:55:35.148Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T16:55:53.487Z",
+    "readAt": "2026-11-27T16:55:53.486Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T16:55:53.486Z"
+  },
+  "AC90EC902E890C794C1BBDDE28D78B3E": {
+    "id": "AC90EC902E890C794C1BBDDE28D78B3E",
+    "sender": "6285178324325@s.whatsapp.net",
+    "number": "6285178324325",
+    "storyJid": "6285178324325@s.whatsapp.net",
+    "resolvedPn": "6285178324325@s.whatsapp.net",
+    "name": "チャンドラ",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC90EC902E890C794C1BBDDE28D78B3E",
+      "participant": "168668365381772@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC90EC902E890C794C1BBDDE28D78B3E",
+      "participant": "168668365381772@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "168668365381772@lid",
+      "6285178324325@s.whatsapp.net"
+    ],
+    "contactHash": "946143f20c98195aa4f8728e711ba7f214b030f5497f686b02c5324fffd83959",
+    "arrivedAt": "2026-11-27T17:03:41.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T17:03:41.745Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T17:03:59.265Z",
+    "readAt": "2026-11-27T17:03:59.262Z",
+    "emoji": "😅",
+    "reactedAt": "2026-11-27T17:03:59.262Z"
+  }
+}

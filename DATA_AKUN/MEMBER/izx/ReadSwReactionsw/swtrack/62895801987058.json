@@ -1,0 +1,154 @@
+{
+  "A5F8D6BD7BF831F8BA66C495A2DFD5EF": {
+    "id": "A5F8D6BD7BF831F8BA66C495A2DFD5EF",
+    "sender": "62895801987058@s.whatsapp.net",
+    "number": "62895801987058",
+    "storyJid": "62895801987058@s.whatsapp.net",
+    "resolvedPn": "62895801987058@s.whatsapp.net",
+    "name": "Titik Hirdayanti",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A5F8D6BD7BF831F8BA66C495A2DFD5EF",
+      "participant": "209955349102803@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A5F8D6BD7BF831F8BA66C495A2DFD5EF",
+      "participant": "209955349102803@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "209955349102803@lid",
+      "62895801987058@s.whatsapp.net"
+    ],
+    "contactHash": "0bb87eb1604800f6b73c302eb0fa1308addea1827de9a23cd319883dbaa3ddc7",
+    "arrivedAt": "2026-11-27T08:32:38.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:32:37.829Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:32:44.129Z",
+    "readAt": "2026-11-27T08:32:44.128Z"
+  },
+  "A56DE2EF153E27147B0D539D4F7D609A": {
+    "id": "A56DE2EF153E27147B0D539D4F7D609A",
+    "sender": "62895801987058@s.whatsapp.net",
+    "number": "62895801987058",
+    "storyJid": "62895801987058@s.whatsapp.net",
+    "resolvedPn": "62895801987058@s.whatsapp.net",
+    "name": "Titik Hirdayanti",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A56DE2EF153E27147B0D539D4F7D609A",
+      "participant": "209955349102803@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A56DE2EF153E27147B0D539D4F7D609A",
+      "participant": "209955349102803@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "209955349102803@lid",
+      "62895801987058@s.whatsapp.net"
+    ],
+    "contactHash": "0bb87eb1604800f6b73c302eb0fa1308addea1827de9a23cd319883dbaa3ddc7",
+    "arrivedAt": "2026-11-27T09:40:14.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:40:13.831Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:40:17.338Z",
+    "readAt": "2026-11-27T09:40:17.338Z"
+  },
+  "A51CB14C767B0C3935FAB20DBEC2160D": {
+    "id": "A51CB14C767B0C3935FAB20DBEC2160D",
+    "sender": "62895801987058@s.whatsapp.net",
+    "number": "62895801987058",
+    "storyJid": "62895801987058@s.whatsapp.net",
+    "resolvedPn": "62895801987058@s.whatsapp.net",
+    "name": "Titik Hirdayanti",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A51CB14C767B0C3935FAB20DBEC2160D",
+      "participant": "209955349102803@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A51CB14C767B0C3935FAB20DBEC2160D",
+      "participant": "209955349102803@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "209955349102803@lid",
+      "62895801987058@s.whatsapp.net"
+    ],
+    "contactHash": "0bb87eb1604800f6b73c302eb0fa1308addea1827de9a23cd319883dbaa3ddc7",
+    "arrivedAt": "2026-11-27T09:45:30.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:45:30.258Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:45:35.163Z",
+    "readAt": "2026-11-27T09:45:35.162Z"
+  },
+  "A51D3AD73BAE96F690CDD505448CDB2B": {
+    "id": "A51D3AD73BAE96F690CDD505448CDB2B",
+    "sender": "62895801987058@s.whatsapp.net",
+    "number": "62895801987058",
+    "storyJid": "62895801987058@s.whatsapp.net",
+    "resolvedPn": "62895801987058@s.whatsapp.net",
+    "name": "Titik Hirdayanti",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "A51D3AD73BAE96F690CDD505448CDB2B",
+      "participant": "209955349102803@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "A51D3AD73BAE96F690CDD505448CDB2B",
+      "participant": "209955349102803@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "209955349102803@lid",
+      "62895801987058@s.whatsapp.net"
+    ],
+    "contactHash": "0bb87eb1604800f6b73c302eb0fa1308addea1827de9a23cd319883dbaa3ddc7",
+    "arrivedAt": "2026-11-27T10:10:18.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:10:17.815Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:10:21.453Z",
+    "readAt": "2026-11-27T10:10:21.452Z"
+  }
+}

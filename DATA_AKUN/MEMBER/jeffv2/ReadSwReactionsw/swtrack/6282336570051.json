@@ -1,0 +1,162 @@
+{
+  "AC3838966C6E06DB9E1269D15CDDFEC2": {
+    "id": "AC3838966C6E06DB9E1269D15CDDFEC2",
+    "sender": "6282336570051@s.whatsapp.net",
+    "number": "6282336570051",
+    "storyJid": "6282336570051@s.whatsapp.net",
+    "resolvedPn": "6282336570051@s.whatsapp.net",
+    "name": "ウバイド",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3838966C6E06DB9E1269D15CDDFEC2",
+      "participant": "164278690693139@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3838966C6E06DB9E1269D15CDDFEC2",
+      "participant": "164278690693139@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "164278690693139@lid",
+      "6282336570051@s.whatsapp.net"
+    ],
+    "contactHash": "20b8567e761b80b78a725f747936ff51cc7b9fe542804d734f9ff99fd98d9496",
+    "arrivedAt": "2026-11-27T05:52:54.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T05:52:55.462Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T05:53:10.803Z",
+    "readAt": "2026-11-27T05:53:10.799Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T05:53:10.799Z"
+  },
+  "AC2A15BB89624E5D36AC91B44328BD5F": {
+    "id": "AC2A15BB89624E5D36AC91B44328BD5F",
+    "sender": "6282336570051@s.whatsapp.net",
+    "number": "6282336570051",
+    "storyJid": "6282336570051@s.whatsapp.net",
+    "resolvedPn": "6282336570051@s.whatsapp.net",
+    "name": "ウバイド",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2A15BB89624E5D36AC91B44328BD5F",
+      "participant": "164278690693139@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2A15BB89624E5D36AC91B44328BD5F",
+      "participant": "164278690693139@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "164278690693139@lid",
+      "6282336570051@s.whatsapp.net"
+    ],
+    "contactHash": "20b8567e761b80b78a725f747936ff51cc7b9fe542804d734f9ff99fd98d9496",
+    "arrivedAt": "2026-11-27T11:16:33.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:16:35.448Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:16:50.903Z",
+    "readAt": "2026-11-27T11:16:50.889Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T11:16:50.889Z"
+  },
+  "ACAFDE0B1999E88B37B705E02C58FF4E": {
+    "id": "ACAFDE0B1999E88B37B705E02C58FF4E",
+    "sender": "6282336570051@s.whatsapp.net",
+    "number": "6282336570051",
+    "storyJid": "6282336570051@s.whatsapp.net",
+    "resolvedPn": "6282336570051@s.whatsapp.net",
+    "name": "ウバイド",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAFDE0B1999E88B37B705E02C58FF4E",
+      "participant": "164278690693139@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACAFDE0B1999E88B37B705E02C58FF4E",
+      "participant": "164278690693139@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "164278690693139@lid",
+      "6282336570051@s.whatsapp.net"
+    ],
+    "contactHash": "20b8567e761b80b78a725f747936ff51cc7b9fe542804d734f9ff99fd98d9496",
+    "arrivedAt": "2026-11-27T11:24:25.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:24:27.347Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:24:32.615Z",
+    "readAt": "2026-11-27T11:24:32.600Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T11:24:32.600Z"
+  },
+  "ACF81DCB1BEB54473B90AAF97A06784C": {
+    "id": "ACF81DCB1BEB54473B90AAF97A06784C",
+    "sender": "6282336570051@s.whatsapp.net",
+    "number": "6282336570051",
+    "storyJid": "6282336570051@s.whatsapp.net",
+    "resolvedPn": "6282336570051@s.whatsapp.net",
+    "name": "ウバイド",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF81DCB1BEB54473B90AAF97A06784C",
+      "participant": "164278690693139@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF81DCB1BEB54473B90AAF97A06784C",
+      "participant": "164278690693139@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "164278690693139@lid",
+      "6282336570051@s.whatsapp.net"
+    ],
+    "contactHash": "20b8567e761b80b78a725f747936ff51cc7b9fe542804d734f9ff99fd98d9496",
+    "arrivedAt": "2026-11-27T15:11:16.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:11:17.455Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:11:34.492Z",
+    "readAt": "2026-11-27T15:11:34.486Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T15:11:34.486Z"
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "AC12D0D9DDF67FF473C1D98B5A45F437": {
+    "id": "AC12D0D9DDF67FF473C1D98B5A45F437",
+    "sender": "6285762069913@s.whatsapp.net",
+    "number": "6285762069913",
+    "storyJid": "6285762069913@s.whatsapp.net",
+    "resolvedPn": "6285762069913@s.whatsapp.net",
+    "name": "魔王Shiro",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC12D0D9DDF67FF473C1D98B5A45F437",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC12D0D9DDF67FF473C1D98B5A45F437",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "175385073467572@lid",
+      "6285762069913@s.whatsapp.net"
+    ],
+    "contactHash": "49bccc718922ec562fb74b6f0340884660754f056744b39b8f4c67500d551f18",
+    "arrivedAt": "2026-11-27T10:22:55.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:22:55.629Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:22:59.572Z",
+    "readAt": "2026-11-27T10:22:59.563Z"
+  },
+  "ACE3D96E2407B826743B5DA4E678FB4E": {
+    "id": "ACE3D96E2407B826743B5DA4E678FB4E",
+    "sender": "6285762069913@s.whatsapp.net",
+    "number": "6285762069913",
+    "storyJid": "6285762069913@s.whatsapp.net",
+    "resolvedPn": "6285762069913@s.whatsapp.net",
+    "name": "魔王Shiro",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE3D96E2407B826743B5DA4E678FB4E",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE3D96E2407B826743B5DA4E678FB4E",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "175385073467572@lid",
+      "6285762069913@s.whatsapp.net"
+    ],
+    "contactHash": "49bccc718922ec562fb74b6f0340884660754f056744b39b8f4c67500d551f18",
+    "arrivedAt": "2026-11-27T10:26:47.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:26:47.688Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:26:54.766Z",
+    "readAt": "2026-11-27T10:26:54.744Z"
+  },
+  "AC9F2F9C30C6A160815F0E0DB793D3C3": {
+    "id": "AC9F2F9C30C6A160815F0E0DB793D3C3",
+    "sender": "6285762069913@s.whatsapp.net",
+    "number": "6285762069913",
+    "storyJid": "6285762069913@s.whatsapp.net",
+    "resolvedPn": "6285762069913@s.whatsapp.net",
+    "name": "魔王Shiro",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9F2F9C30C6A160815F0E0DB793D3C3",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC9F2F9C30C6A160815F0E0DB793D3C3",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "175385073467572@lid",
+      "6285762069913@s.whatsapp.net"
+    ],
+    "contactHash": "49bccc718922ec562fb74b6f0340884660754f056744b39b8f4c67500d551f18",
+    "arrivedAt": "2026-11-27T10:34:02.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:34:02.928Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:34:04.047Z",
+    "readAt": "2026-11-27T10:34:04.047Z"
+  },
+  "ACBD38646681518089117F9491526F50": {
+    "id": "ACBD38646681518089117F9491526F50",
+    "sender": "6285762069913@s.whatsapp.net",
+    "number": "6285762069913",
+    "storyJid": "6285762069913@s.whatsapp.net",
+    "resolvedPn": "6285762069913@s.whatsapp.net",
+    "name": "魔王Shiro",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBD38646681518089117F9491526F50",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBD38646681518089117F9491526F50",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "175385073467572@lid",
+      "6285762069913@s.whatsapp.net"
+    ],
+    "contactHash": "49bccc718922ec562fb74b6f0340884660754f056744b39b8f4c67500d551f18",
+    "arrivedAt": "2026-11-27T10:34:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:34:50.795Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:34:53.702Z",
+    "readAt": "2026-11-27T10:34:53.701Z"
+  },
+  "AC8A6BC0EF3485E8FA26F84DAE5C8061": {
+    "id": "AC8A6BC0EF3485E8FA26F84DAE5C8061",
+    "sender": "6285762069913@s.whatsapp.net",
+    "number": "6285762069913",
+    "storyJid": "6285762069913@s.whatsapp.net",
+    "resolvedPn": "6285762069913@s.whatsapp.net",
+    "name": "魔王Shiro",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8A6BC0EF3485E8FA26F84DAE5C8061",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8A6BC0EF3485E8FA26F84DAE5C8061",
+      "participant": "175385073467572@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "175385073467572@lid",
+      "6285762069913@s.whatsapp.net"
+    ],
+    "contactHash": "49bccc718922ec562fb74b6f0340884660754f056744b39b8f4c67500d551f18",
+    "arrivedAt": "2026-11-27T10:36:04.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:36:04.238Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:36:10.149Z",
+    "readAt": "2026-11-27T10:36:10.142Z"
+  }
+}

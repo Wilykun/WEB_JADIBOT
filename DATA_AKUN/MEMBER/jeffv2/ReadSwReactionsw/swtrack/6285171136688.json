@@ -1,0 +1,162 @@
+{
+  "AC5BBE0BBC4F5085D446A634D93B6AB4": {
+    "id": "AC5BBE0BBC4F5085D446A634D93B6AB4",
+    "sender": "6285171136688@s.whatsapp.net",
+    "number": "6285171136688",
+    "storyJid": "6285171136688@s.whatsapp.net",
+    "resolvedPn": "6285171136688@s.whatsapp.net",
+    "name": "Elfaria",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5BBE0BBC4F5085D446A634D93B6AB4",
+      "participant": "5859090415871@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5BBE0BBC4F5085D446A634D93B6AB4",
+      "participant": "5859090415871@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "5859090415871@lid",
+      "6285171136688@s.whatsapp.net"
+    ],
+    "contactHash": "bebfa7567f7d07dc8c8c701c7118b93d440bd239c3b474b78d064d9d0c0af247",
+    "arrivedAt": "2026-11-27T09:58:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T09:58:52.228Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T09:59:01.870Z",
+    "readAt": "2026-11-27T09:59:01.869Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T09:59:01.869Z"
+  },
+  "ACB3865AB13A9B470796C64FB4C8DE4B": {
+    "id": "ACB3865AB13A9B470796C64FB4C8DE4B",
+    "sender": "6285171136688@s.whatsapp.net",
+    "number": "6285171136688",
+    "storyJid": "6285171136688@s.whatsapp.net",
+    "resolvedPn": "6285171136688@s.whatsapp.net",
+    "name": "Elfaria",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB3865AB13A9B470796C64FB4C8DE4B",
+      "participant": "5859090415871@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACB3865AB13A9B470796C64FB4C8DE4B",
+      "participant": "5859090415871@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "5859090415871@lid",
+      "6285171136688@s.whatsapp.net"
+    ],
+    "contactHash": "bebfa7567f7d07dc8c8c701c7118b93d440bd239c3b474b78d064d9d0c0af247",
+    "arrivedAt": "2026-11-27T10:00:11.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:00:13.586Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:00:34.461Z",
+    "readAt": "2026-11-27T10:00:34.460Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T10:00:34.460Z"
+  },
+  "ACF3D5E5A0D77165CD9BAD2F937F73C5": {
+    "id": "ACF3D5E5A0D77165CD9BAD2F937F73C5",
+    "sender": "6285171136688@s.whatsapp.net",
+    "number": "6285171136688",
+    "storyJid": "6285171136688@s.whatsapp.net",
+    "resolvedPn": "6285171136688@s.whatsapp.net",
+    "name": "Elfaria",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF3D5E5A0D77165CD9BAD2F937F73C5",
+      "participant": "5859090415871@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF3D5E5A0D77165CD9BAD2F937F73C5",
+      "participant": "5859090415871@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "5859090415871@lid",
+      "6285171136688@s.whatsapp.net"
+    ],
+    "contactHash": "bebfa7567f7d07dc8c8c701c7118b93d440bd239c3b474b78d064d9d0c0af247",
+    "arrivedAt": "2026-11-27T12:46:57.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:47:00.625Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:47:17.666Z",
+    "readAt": "2026-11-27T12:47:17.653Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T12:47:17.653Z"
+  },
+  "ACC2FA17DCBD563A814A61C357FA9C84": {
+    "id": "ACC2FA17DCBD563A814A61C357FA9C84",
+    "sender": "6285171136688@s.whatsapp.net",
+    "number": "6285171136688",
+    "storyJid": "6285171136688@s.whatsapp.net",
+    "resolvedPn": "6285171136688@s.whatsapp.net",
+    "name": "Elfaria",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC2FA17DCBD563A814A61C357FA9C84",
+      "participant": "5859090415871@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC2FA17DCBD563A814A61C357FA9C84",
+      "participant": "5859090415871@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "5859090415871@lid",
+      "6285171136688@s.whatsapp.net"
+    ],
+    "contactHash": "bebfa7567f7d07dc8c8c701c7118b93d440bd239c3b474b78d064d9d0c0af247",
+    "arrivedAt": "2026-11-27T13:34:32.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:34:34.015Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:34:55.184Z",
+    "readAt": "2026-11-27T13:34:54.968Z",
+    "emoji": "💚",
+    "reactedAt": "2026-11-27T13:34:54.968Z"
+  }
+}

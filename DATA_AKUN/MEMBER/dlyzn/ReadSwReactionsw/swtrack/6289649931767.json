@@ -1,6 +1,6 @@
 {
-  "AC6F4D6FDC98EF4685EEE3C8870EB172": {
-    "id": "AC6F4D6FDC98EF4685EEE3C8870EB172",
+  "AC0B32D9E2DAA80499D88CE3D1DDE084": {
+    "id": "AC0B32D9E2DAA80499D88CE3D1DDE084",
     "sender": "6289649931767@s.whatsapp.net",
     "number": "6289649931767",
     "storyJid": "6289649931767@s.whatsapp.net",
@@ -11,13 +11,13 @@
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "AC6F4D6FDC98EF4685EEE3C8870EB172",
+      "id": "AC0B32D9E2DAA80499D88CE3D1DDE084",
       "participant": "166971232534706@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "AC6F4D6FDC98EF4685EEE3C8870EB172",
+      "id": "AC0B32D9E2DAA80499D88CE3D1DDE084",
       "participant": "166971232534706@lid",
       "fromMe": false
     },
@@ -26,21 +26,21 @@
       "6289649931767@s.whatsapp.net"
     ],
     "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T05:32:38.000Z",
+    "arrivedAt": "2026-11-27T01:42:37.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-16T05:32:38.701Z",
+    "lastAttemptAt": "2026-11-27T01:42:38.333Z",
     "lastError": null,
-    "updatedAt": "2026-11-16T05:32:44.457Z",
-    "readAt": "2026-11-16T05:32:44.456Z",
-    "emoji": "😹",
-    "reactedAt": "2026-11-16T05:32:44.456Z"
+    "updatedAt": "2026-11-27T01:42:48.718Z",
+    "readAt": "2026-11-27T01:42:48.717Z",
+    "emoji": "🥀",
+    "reactedAt": "2026-11-27T01:42:48.717Z"
   },
-  "ACC4371395361A1FC94ECB6FFBEC9262": {
-    "id": "ACC4371395361A1FC94ECB6FFBEC9262",
+  "AC02ECD6BEE12F0BFACF287A253B78C1": {
+    "id": "AC02ECD6BEE12F0BFACF287A253B78C1",
     "sender": "6289649931767@s.whatsapp.net",
     "number": "6289649931767",
     "storyJid": "6289649931767@s.whatsapp.net",
@@ -51,13 +51,13 @@
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "ACC4371395361A1FC94ECB6FFBEC9262",
+      "id": "AC02ECD6BEE12F0BFACF287A253B78C1",
       "participant": "166971232534706@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "ACC4371395361A1FC94ECB6FFBEC9262",
+      "id": "AC02ECD6BEE12F0BFACF287A253B78C1",
       "participant": "166971232534706@lid",
       "fromMe": false
     },
@@ -66,417 +66,137 @@
       "6289649931767@s.whatsapp.net"
     ],
     "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T07:58:57.000Z",
+    "arrivedAt": "2026-11-27T10:50:05.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-16T07:58:57.852Z",
+    "lastAttemptAt": "2026-11-27T10:50:05.993Z",
     "lastError": null,
-    "updatedAt": "2026-11-16T07:58:59.383Z",
-    "readAt": "2026-11-16T07:58:59.383Z",
+    "updatedAt": "2026-11-27T10:50:12.550Z",
+    "readAt": "2026-11-27T10:50:12.542Z",
+    "emoji": "👀",
+    "reactedAt": "2026-11-27T10:50:12.542Z"
+  },
+  "ACD830E8A909AA643B846E4B0540A6CB": {
+    "id": "ACD830E8A909AA643B846E4B0540A6CB",
+    "sender": "6289649931767@s.whatsapp.net",
+    "number": "6289649931767",
+    "storyJid": "6289649931767@s.whatsapp.net",
+    "resolvedPn": "6289649931767@s.whatsapp.net",
+    "name": "Maz Ali📍 Jatim",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD830E8A909AA643B846E4B0540A6CB",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACD830E8A909AA643B846E4B0540A6CB",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "166971232534706@lid",
+      "6289649931767@s.whatsapp.net"
+    ],
+    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
+    "arrivedAt": "2026-11-27T10:50:24.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T10:50:24.645Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T10:50:33.170Z",
+    "readAt": "2026-11-27T10:50:33.169Z",
+    "emoji": "☕️",
+    "reactedAt": "2026-11-27T10:50:33.169Z"
+  },
+  "ACEA5E22B45E75C911F0552E97CF438D": {
+    "id": "ACEA5E22B45E75C911F0552E97CF438D",
+    "sender": "6289649931767@s.whatsapp.net",
+    "number": "6289649931767",
+    "storyJid": "6289649931767@s.whatsapp.net",
+    "resolvedPn": "6289649931767@s.whatsapp.net",
+    "name": "Maz Ali📍 Jatim",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEA5E22B45E75C911F0552E97CF438D",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACEA5E22B45E75C911F0552E97CF438D",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "166971232534706@lid",
+      "6289649931767@s.whatsapp.net"
+    ],
+    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
+    "arrivedAt": "2026-11-27T14:34:19.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:34:21.450Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:34:29.537Z",
+    "readAt": "2026-11-27T14:34:29.531Z",
+    "emoji": "🛐",
+    "reactedAt": "2026-11-27T14:34:29.531Z"
+  },
+  "ACA21EB6D7312AA2A414F29F3C07D0B4": {
+    "id": "ACA21EB6D7312AA2A414F29F3C07D0B4",
+    "sender": "6289649931767@s.whatsapp.net",
+    "number": "6289649931767",
+    "storyJid": "6289649931767@s.whatsapp.net",
+    "resolvedPn": "6289649931767@s.whatsapp.net",
+    "name": "Maz Ali📍 Jatim",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA21EB6D7312AA2A414F29F3C07D0B4",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA21EB6D7312AA2A414F29F3C07D0B4",
+      "participant": "166971232534706@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "166971232534706@lid",
+      "6289649931767@s.whatsapp.net"
+    ],
+    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
+    "arrivedAt": "2026-11-27T14:34:46.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:34:46.125Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:34:52.834Z",
+    "readAt": "2026-11-27T14:34:52.505Z",
     "emoji": "💠",
-    "reactedAt": "2026-11-16T07:58:59.383Z"
-  },
-  "ACF4FCA48B9C57878FA4366C429D7567": {
-    "id": "ACF4FCA48B9C57878FA4366C429D7567",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACF4FCA48B9C57878FA4366C429D7567",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACF4FCA48B9C57878FA4366C429D7567",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T08:27:17.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T08:27:17.953Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T08:27:21.300Z",
-    "readAt": "2026-11-16T08:27:21.300Z",
-    "emoji": "💠",
-    "reactedAt": "2026-11-16T08:27:21.300Z"
-  },
-  "AC3A8978CE175F857DC02B2416E488E8": {
-    "id": "AC3A8978CE175F857DC02B2416E488E8",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC3A8978CE175F857DC02B2416E488E8",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC3A8978CE175F857DC02B2416E488E8",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T08:38:55.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T08:38:55.725Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T08:39:00.971Z",
-    "readAt": "2026-11-16T08:39:00.970Z",
-    "emoji": "🆖",
-    "reactedAt": "2026-11-16T08:39:00.970Z"
-  },
-  "ACF5CCCE623CF8702916D9D4D5F18126": {
-    "id": "ACF5CCCE623CF8702916D9D4D5F18126",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "extendedTextMessage",
-    "contentType": "extendedTextMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACF5CCCE623CF8702916D9D4D5F18126",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACF5CCCE623CF8702916D9D4D5F18126",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T08:39:28.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T08:39:28.786Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T08:39:37.819Z",
-    "readAt": "2026-11-16T08:39:37.819Z",
-    "emoji": "👻",
-    "reactedAt": "2026-11-16T08:39:37.819Z"
-  },
-  "AC3B46F8222E676B83E5628AD3673D5C": {
-    "id": "AC3B46F8222E676B83E5628AD3673D5C",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC3B46F8222E676B83E5628AD3673D5C",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC3B46F8222E676B83E5628AD3673D5C",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T11:53:33.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T11:53:33.922Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T11:53:38.986Z",
-    "readAt": "2026-11-16T11:53:38.986Z",
-    "emoji": "🔥",
-    "reactedAt": "2026-11-16T11:53:38.986Z"
-  },
-  "AC2A7927DA6ABDDBA16A49DC1AF9A2D0": {
-    "id": "AC2A7927DA6ABDDBA16A49DC1AF9A2D0",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC2A7927DA6ABDDBA16A49DC1AF9A2D0",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC2A7927DA6ABDDBA16A49DC1AF9A2D0",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T15:03:07.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T15:03:07.667Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T15:03:10.525Z",
-    "readAt": "2026-11-16T15:03:10.517Z",
-    "emoji": "❤️‍🔥",
-    "reactedAt": "2026-11-16T15:03:10.517Z"
-  },
-  "ACEEBCD566799FB9897284EA080379C4": {
-    "id": "ACEEBCD566799FB9897284EA080379C4",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "videoMessage",
-    "contentType": "videoMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "ACEEBCD566799FB9897284EA080379C4",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "ACEEBCD566799FB9897284EA080379C4",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T15:03:07.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T15:03:08.107Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T15:03:15.423Z",
-    "readAt": "2026-11-16T15:03:15.422Z",
-    "emoji": "👻",
-    "reactedAt": "2026-11-16T15:03:15.422Z"
-  },
-  "AC30636F3417A74D0DE0607892992E6C": {
-    "id": "AC30636F3417A74D0DE0607892992E6C",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "videoMessage",
-    "contentType": "videoMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC30636F3417A74D0DE0607892992E6C",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC30636F3417A74D0DE0607892992E6C",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T15:03:14.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T15:03:14.465Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T15:03:23.225Z",
-    "readAt": "2026-11-16T15:03:23.224Z",
-    "emoji": "❓️",
-    "reactedAt": "2026-11-16T15:03:23.224Z"
-  },
-  "AC969F3E85C45C28B327BA54B388F27F": {
-    "id": "AC969F3E85C45C28B327BA54B388F27F",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "videoMessage",
-    "contentType": "videoMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC969F3E85C45C28B327BA54B388F27F",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC969F3E85C45C28B327BA54B388F27F",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T15:04:57.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T15:04:57.162Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T15:05:02.826Z",
-    "readAt": "2026-11-16T15:05:02.826Z",
-    "emoji": "❤️‍🔥",
-    "reactedAt": "2026-11-16T15:05:02.826Z"
-  },
-  "AC085A71480D15B44D42D1BEF78D8EB5": {
-    "id": "AC085A71480D15B44D42D1BEF78D8EB5",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "videoMessage",
-    "contentType": "videoMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC085A71480D15B44D42D1BEF78D8EB5",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC085A71480D15B44D42D1BEF78D8EB5",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-16T15:05:17.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-16T15:05:17.469Z",
-    "lastError": null,
-    "updatedAt": "2026-11-16T15:05:24.555Z",
-    "readAt": "2026-11-16T15:05:24.546Z",
-    "emoji": "🆗",
-    "reactedAt": "2026-11-16T15:05:24.546Z"
-  },
-  "AC7BE6410B9078D63F813701AC208845": {
-    "id": "AC7BE6410B9078D63F813701AC208845",
-    "sender": "6289649931767@s.whatsapp.net",
-    "number": "6289649931767",
-    "storyJid": "6289649931767@s.whatsapp.net",
-    "resolvedPn": "6289649931767@s.whatsapp.net",
-    "name": "Maz Ali📍 Jatim",
-    "type": "senderKeyDistributionMessage",
-    "contentType": "senderKeyDistributionMessage",
-    "source": "status",
-    "messageKey": {
-      "remoteJid": "status@broadcast",
-      "id": "AC7BE6410B9078D63F813701AC208845",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "key": {
-      "remoteJid": "status@broadcast",
-      "id": "AC7BE6410B9078D63F813701AC208845",
-      "participant": "166971232534706@lid",
-      "fromMe": false
-    },
-    "participants": [
-      "166971232534706@lid",
-      "6289649931767@s.whatsapp.net"
-    ],
-    "contactHash": "3ff31d7528baa541e51e61b0382ba525172a43f69bf7c4b22d982c6b5c05b52d",
-    "arrivedAt": "2026-11-17T03:23:11.000Z",
-    "modeAtArrival": "readonly_readsw",
-    "reactionExpected": false,
-    "read": true,
-    "reacted": true,
-    "attempts": 1,
-    "lastAttemptAt": "2026-11-17T03:41:04.652Z",
-    "lastError": null,
-    "updatedAt": "2026-11-17T03:41:17.407Z",
-    "readAt": "2026-11-17T03:41:17.406Z",
-    "emoji": "👻",
-    "reactedAt": "2026-11-17T03:41:17.406Z"
+    "reactedAt": "2026-11-27T14:34:52.505Z"
   }
 }
