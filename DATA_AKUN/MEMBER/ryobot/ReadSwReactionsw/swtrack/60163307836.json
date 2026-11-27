@@ -1,23 +1,23 @@
 {
-  "ACFB2021649AC398D16DB285A0045F20": {
-    "id": "ACFB2021649AC398D16DB285A0045F20",
+  "AC000DB2D2CE513DF116490D6D8C21F8": {
+    "id": "AC000DB2D2CE513DF116490D6D8C21F8",
     "sender": "60163307836@s.whatsapp.net",
     "number": "60163307836",
     "storyJid": "60163307836@s.whatsapp.net",
     "resolvedPn": "60163307836@s.whatsapp.net",
-    "name": "Kiyo Cowok Baik",
+    "name": "call me kiyo i'm a guy",
     "type": "senderKeyDistributionMessage",
     "contentType": "senderKeyDistributionMessage",
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "ACFB2021649AC398D16DB285A0045F20",
+      "id": "AC000DB2D2CE513DF116490D6D8C21F8",
       "participant": "215564995825874@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "ACFB2021649AC398D16DB285A0045F20",
+      "id": "AC000DB2D2CE513DF116490D6D8C21F8",
       "participant": "215564995825874@lid",
       "fromMe": false
     },
@@ -26,38 +26,78 @@
       "60163307836@s.whatsapp.net"
     ],
     "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
-    "arrivedAt": "2026-11-17T04:47:26.000Z",
+    "arrivedAt": "2026-11-27T03:15:44.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-17T04:47:29.148Z",
+    "lastAttemptAt": "2026-11-27T03:15:44.493Z",
     "lastError": null,
-    "updatedAt": "2026-11-17T04:47:32.594Z",
-    "readAt": "2026-11-17T04:47:32.594Z",
-    "emoji": "💚",
-    "reactedAt": "2026-11-17T04:47:32.594Z"
+    "updatedAt": "2026-11-27T03:15:52.223Z",
+    "readAt": "2026-11-27T03:15:52.222Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T03:15:52.222Z"
   },
-  "AC032A31B0D7BA07DEEBD988BDAE1D99": {
-    "id": "AC032A31B0D7BA07DEEBD988BDAE1D99",
+  "AC73DD9BE0DD3204595866DAC875A0A4": {
+    "id": "AC73DD9BE0DD3204595866DAC875A0A4",
     "sender": "60163307836@s.whatsapp.net",
     "number": "60163307836",
     "storyJid": "60163307836@s.whatsapp.net",
     "resolvedPn": "60163307836@s.whatsapp.net",
-    "name": "Kiyo Cowok Baik",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC73DD9BE0DD3204595866DAC875A0A4",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC73DD9BE0DD3204595866DAC875A0A4",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T03:18:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T03:18:01.215Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T03:18:18.132Z",
+    "readAt": "2026-11-27T03:18:18.130Z",
+    "emoji": "🤭",
+    "reactedAt": "2026-11-27T03:18:18.130Z"
+  },
+  "ACD9FF3AF5F520482BCCE6D1069C549C": {
+    "id": "ACD9FF3AF5F520482BCCE6D1069C549C",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
     "type": "videoMessage",
     "contentType": "videoMessage",
     "source": "status",
     "messageKey": {
       "remoteJid": "status@broadcast",
-      "id": "AC032A31B0D7BA07DEEBD988BDAE1D99",
+      "id": "ACD9FF3AF5F520482BCCE6D1069C549C",
       "participant": "215564995825874@lid",
       "fromMe": false
     },
     "key": {
       "remoteJid": "status@broadcast",
-      "id": "AC032A31B0D7BA07DEEBD988BDAE1D99",
+      "id": "ACD9FF3AF5F520482BCCE6D1069C549C",
       "participant": "215564995825874@lid",
       "fromMe": false
     },
@@ -66,17 +106,777 @@
       "60163307836@s.whatsapp.net"
     ],
     "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
-    "arrivedAt": "2026-11-17T05:21:55.000Z",
+    "arrivedAt": "2026-11-27T03:20:23.000Z",
     "modeAtArrival": "readonly_readsw",
     "reactionExpected": false,
     "read": true,
     "reacted": true,
     "attempts": 1,
-    "lastAttemptAt": "2026-11-17T05:21:56.079Z",
+    "lastAttemptAt": "2026-11-27T03:20:23.717Z",
     "lastError": null,
-    "updatedAt": "2026-11-17T05:22:15.531Z",
-    "readAt": "2026-11-17T05:22:15.519Z",
-    "emoji": "💚",
-    "reactedAt": "2026-11-17T05:22:15.519Z"
+    "updatedAt": "2026-11-27T03:20:36.150Z",
+    "readAt": "2026-11-27T03:20:36.142Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T03:20:36.142Z"
+  },
+  "AC0104972D7AC42D0EB6DD52F60A4CFB": {
+    "id": "AC0104972D7AC42D0EB6DD52F60A4CFB",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0104972D7AC42D0EB6DD52F60A4CFB",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0104972D7AC42D0EB6DD52F60A4CFB",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T03:29:26.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T03:29:25.998Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T03:29:35.899Z",
+    "readAt": "2026-11-27T03:29:35.898Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T03:29:35.898Z"
+  },
+  "AC72DC50A1032C857BA8545985A52519": {
+    "id": "AC72DC50A1032C857BA8545985A52519",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC72DC50A1032C857BA8545985A52519",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC72DC50A1032C857BA8545985A52519",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T07:44:49.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:44:48.814Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:45:06.739Z",
+    "readAt": "2026-11-27T07:45:06.736Z",
+    "emoji": "🤭",
+    "reactedAt": "2026-11-27T07:45:06.736Z"
+  },
+  "AC3C61F52A0830DF404A6621C2EF5609": {
+    "id": "AC3C61F52A0830DF404A6621C2EF5609",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3C61F52A0830DF404A6621C2EF5609",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC3C61F52A0830DF404A6621C2EF5609",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T08:32:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:32:52.447Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:33:09.343Z",
+    "readAt": "2026-11-27T08:33:09.336Z",
+    "emoji": "🤭",
+    "reactedAt": "2026-11-27T08:33:09.336Z"
+  },
+  "AC53F513D2D42B9AE7CEF16FCC179146": {
+    "id": "AC53F513D2D42B9AE7CEF16FCC179146",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC53F513D2D42B9AE7CEF16FCC179146",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC53F513D2D42B9AE7CEF16FCC179146",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T11:06:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T11:06:25.624Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T11:06:38.951Z",
+    "readAt": "2026-11-27T11:06:38.940Z",
+    "emoji": "😡",
+    "reactedAt": "2026-11-27T11:06:38.940Z"
+  },
+  "ACE7B5334BF7A91A39ADCFCEECCC621B": {
+    "id": "ACE7B5334BF7A91A39ADCFCEECCC621B",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE7B5334BF7A91A39ADCFCEECCC621B",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACE7B5334BF7A91A39ADCFCEECCC621B",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T12:40:09.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:40:09.705Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:40:14.484Z",
+    "readAt": "2026-11-27T12:40:14.471Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T12:40:14.471Z"
+  },
+  "ACDFAF143D3CC2D5F3421C96BCD84446": {
+    "id": "ACDFAF143D3CC2D5F3421C96BCD84446",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDFAF143D3CC2D5F3421C96BCD84446",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACDFAF143D3CC2D5F3421C96BCD84446",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T12:41:10.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:41:11.774Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:41:30.152Z",
+    "readAt": "2026-11-27T12:41:29.281Z",
+    "emoji": "😡",
+    "reactedAt": "2026-11-27T12:41:29.281Z"
+  },
+  "AC7E30710FC36076AB0F35AE010A043D": {
+    "id": "AC7E30710FC36076AB0F35AE010A043D",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7E30710FC36076AB0F35AE010A043D",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7E30710FC36076AB0F35AE010A043D",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T12:42:41.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:42:41.459Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:42:50.519Z",
+    "readAt": "2026-11-27T12:42:50.515Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T12:42:50.515Z"
+  },
+  "AC672D699D3BE7D4BB8ACFAB273898D7": {
+    "id": "AC672D699D3BE7D4BB8ACFAB273898D7",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC672D699D3BE7D4BB8ACFAB273898D7",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC672D699D3BE7D4BB8ACFAB273898D7",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T12:42:52.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T12:42:54.117Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T12:42:56.143Z",
+    "readAt": "2026-11-27T12:42:56.140Z",
+    "emoji": "🐔",
+    "reactedAt": "2026-11-27T12:42:56.140Z"
+  },
+  "AC62E84DE8611CE9B9C4DA4753B2E414": {
+    "id": "AC62E84DE8611CE9B9C4DA4753B2E414",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC62E84DE8611CE9B9C4DA4753B2E414",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC62E84DE8611CE9B9C4DA4753B2E414",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T13:30:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:30:36.973Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:30:56.200Z",
+    "readAt": "2026-11-27T13:30:56.198Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T13:30:56.198Z"
+  },
+  "AC24BCC1E5A6681F837522A12FEDC71F": {
+    "id": "AC24BCC1E5A6681F837522A12FEDC71F",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC24BCC1E5A6681F837522A12FEDC71F",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC24BCC1E5A6681F837522A12FEDC71F",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T13:38:21.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:38:22.542Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:38:43.012Z",
+    "readAt": "2026-11-27T13:38:42.718Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T13:38:42.718Z"
+  },
+  "AC6FDF2BDDF68976FB103BD67893901E": {
+    "id": "AC6FDF2BDDF68976FB103BD67893901E",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6FDF2BDDF68976FB103BD67893901E",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6FDF2BDDF68976FB103BD67893901E",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T13:40:43.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T13:40:43.035Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T13:40:54.807Z",
+    "readAt": "2026-11-27T13:40:54.797Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T13:40:54.797Z"
+  },
+  "AC1916E722FA20BCF0B0FD3B446E0673": {
+    "id": "AC1916E722FA20BCF0B0FD3B446E0673",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1916E722FA20BCF0B0FD3B446E0673",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC1916E722FA20BCF0B0FD3B446E0673",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T14:00:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:00:08.235Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:00:27.122Z",
+    "readAt": "2026-11-27T14:00:27.106Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T14:00:27.106Z"
+  },
+  "AC4FDA07F583A01054D39FB704A949BE": {
+    "id": "AC4FDA07F583A01054D39FB704A949BE",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4FDA07F583A01054D39FB704A949BE",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC4FDA07F583A01054D39FB704A949BE",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T14:04:56.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:04:56.870Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:05:14.847Z",
+    "readAt": "2026-11-27T14:05:14.844Z",
+    "emoji": "🤭",
+    "reactedAt": "2026-11-27T14:05:14.844Z"
+  },
+  "ACED32D3B0950A4D327B34662C336394": {
+    "id": "ACED32D3B0950A4D327B34662C336394",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACED32D3B0950A4D327B34662C336394",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACED32D3B0950A4D327B34662C336394",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T14:08:40.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:08:40.051Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:08:44.263Z",
+    "readAt": "2026-11-27T14:08:44.236Z",
+    "emoji": "🤭",
+    "reactedAt": "2026-11-27T14:08:44.236Z"
+  },
+  "AC119FC41D263D96DF440206FCB32067": {
+    "id": "AC119FC41D263D96DF440206FCB32067",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC119FC41D263D96DF440206FCB32067",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC119FC41D263D96DF440206FCB32067",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T14:20:39.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:20:39.570Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:20:44.216Z",
+    "readAt": "2026-11-27T14:20:44.215Z",
+    "emoji": "😅",
+    "reactedAt": "2026-11-27T14:20:44.215Z"
+  },
+  "AC2B074A0ECE382DDAEF646C2A050064": {
+    "id": "AC2B074A0ECE382DDAEF646C2A050064",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2B074A0ECE382DDAEF646C2A050064",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC2B074A0ECE382DDAEF646C2A050064",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T14:20:54.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:20:54.686Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:21:09.344Z",
+    "readAt": "2026-11-27T14:21:09.337Z",
+    "emoji": "🐔",
+    "reactedAt": "2026-11-27T14:21:09.337Z"
+  },
+  "AC41235782BDF3D9008E031B755763D6": {
+    "id": "AC41235782BDF3D9008E031B755763D6",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC41235782BDF3D9008E031B755763D6",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC41235782BDF3D9008E031B755763D6",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T14:59:34.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T14:59:34.601Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T14:59:38.854Z",
+    "readAt": "2026-11-27T14:59:38.852Z",
+    "emoji": "😂",
+    "reactedAt": "2026-11-27T14:59:38.852Z"
+  },
+  "AC7CE6C897D281E3932C4D56100CD987": {
+    "id": "AC7CE6C897D281E3932C4D56100CD987",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7CE6C897D281E3932C4D56100CD987",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC7CE6C897D281E3932C4D56100CD987",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T15:03:40.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:03:40.126Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:03:52.874Z",
+    "readAt": "2026-11-27T15:03:52.866Z",
+    "emoji": "🤭",
+    "reactedAt": "2026-11-27T15:03:52.866Z"
+  },
+  "AC367E1F857561F7919AF2CF0F2F46F2": {
+    "id": "AC367E1F857561F7919AF2CF0F2F46F2",
+    "sender": "60163307836@s.whatsapp.net",
+    "number": "60163307836",
+    "storyJid": "60163307836@s.whatsapp.net",
+    "resolvedPn": "60163307836@s.whatsapp.net",
+    "name": "call me kiyo i'm a guy",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC367E1F857561F7919AF2CF0F2F46F2",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC367E1F857561F7919AF2CF0F2F46F2",
+      "participant": "215564995825874@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "215564995825874@lid",
+      "60163307836@s.whatsapp.net"
+    ],
+    "contactHash": "707d255f7918f85149561525c6d75d4263675aaa87fb4b70c5dda00d63544846",
+    "arrivedAt": "2026-11-27T15:07:27.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T15:07:26.806Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T15:07:39.467Z",
+    "readAt": "2026-11-27T15:07:39.452Z",
+    "emoji": "🥶",
+    "reactedAt": "2026-11-27T15:07:39.452Z"
   }
 }
