@@ -2408,7 +2408,7 @@ async function handleApi(req, res, url) {
     if (body.replyToId) {
       const original = chatStore.messages.find((item) => item.id === String(body.replyToId));
       if (!original) return sendError(res, 400, 'Pesan yang dibalas tidak ditemukan.');
-      replyTo = { id: original.id, userId: original.userId, username: original.username, displayName: original.displayName, text: String(original.text || '').slice(0, 200) };
+      replyTo = { id: original.id, userId: original.userId, username: original.username, displayName: original.displayName, text: String(original.text || '').slice(0, 200), role: original.role || 'member', isMainAdmin: Boolean(original.isMainAdmin) };
     }
     const message = {
       id: randomUUID(),

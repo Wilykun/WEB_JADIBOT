@@ -584,6 +584,8 @@ test('server Obrolan: kirim + baca + balas + mengetik + batas, hanya untuk yang 
     assert.equal(reply.payload.message.replyTo.id, sent.payload.message.id, 'balasan harus menunjuk pesan asli');
     assert.equal(reply.payload.message.replyTo.displayName, 'fixturemember', 'balasan harus menyimpan nama pengirim asli');
     assert.equal(reply.payload.message.replyTo.text, 'Halo semua 👋', 'balasan harus menyimpan teks asli');
+    assert.equal(reply.payload.message.replyTo.role, 'member', 'kutipan harus menyimpan peran pengirim asli supaya warnanya pas');
+    assert.equal(reply.payload.message.replyTo.isMainAdmin, false, 'kutipan harus menyimpan status admin utama pengirim asli');
 
     const tooFast = await jsonRequest(base, '/api/chat/messages', { method: 'POST', body: { text: 'terlalu cepat' }, cookie: adminCookie });
     assert.equal(tooFast.status, 429, 'kirim dua kali dalam 1 detik harus ditolak supaya tidak spam');
