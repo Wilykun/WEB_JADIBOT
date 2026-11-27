@@ -1,0 +1,534 @@
+{
+  "AC024F8EFB46E07AA3D690951D51D354": {
+    "id": "AC024F8EFB46E07AA3D690951D51D354",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC024F8EFB46E07AA3D690951D51D354",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC024F8EFB46E07AA3D690951D51D354",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-26T23:32:54.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:32:53.881Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:32:56.496Z",
+    "readAt": "2026-11-26T23:32:56.495Z"
+  },
+  "ACBABD8C97590C2F0F17711EC2406198": {
+    "id": "ACBABD8C97590C2F0F17711EC2406198",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBABD8C97590C2F0F17711EC2406198",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACBABD8C97590C2F0F17711EC2406198",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-26T23:33:22.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-26T23:33:22.070Z",
+    "lastError": null,
+    "updatedAt": "2026-11-26T23:33:25.284Z",
+    "readAt": "2026-11-26T23:33:25.275Z"
+  },
+  "ACA93B907256989DB9525F4EEA41E4A0": {
+    "id": "ACA93B907256989DB9525F4EEA41E4A0",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA93B907256989DB9525F4EEA41E4A0",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA93B907256989DB9525F4EEA41E4A0",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T03:10:32.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T03:10:31.895Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T03:10:36.700Z",
+    "readAt": "2026-11-27T03:10:36.700Z"
+  },
+  "ACA34C8FDB4D1BA6438460A4272DEDFE": {
+    "id": "ACA34C8FDB4D1BA6438460A4272DEDFE",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA34C8FDB4D1BA6438460A4272DEDFE",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACA34C8FDB4D1BA6438460A4272DEDFE",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T04:43:01.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:43:01.485Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:43:07.991Z",
+    "readAt": "2026-11-27T04:43:07.990Z"
+  },
+  "AC73B21BECDCC2398369E89132E89A15": {
+    "id": "AC73B21BECDCC2398369E89132E89A15",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC73B21BECDCC2398369E89132E89A15",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC73B21BECDCC2398369E89132E89A15",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T04:43:08.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:43:07.612Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:43:13.425Z",
+    "readAt": "2026-11-27T04:43:13.416Z"
+  },
+  "ACCBEE5772C1B9A270BE9894950F57F4": {
+    "id": "ACCBEE5772C1B9A270BE9894950F57F4",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCBEE5772C1B9A270BE9894950F57F4",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACCBEE5772C1B9A270BE9894950F57F4",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T04:44:42.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:44:42.188Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:44:48.992Z",
+    "readAt": "2026-11-27T04:44:48.992Z"
+  },
+  "AC6FE6FCC9BB4EBCD6A0E05B08A6EA4C": {
+    "id": "AC6FE6FCC9BB4EBCD6A0E05B08A6EA4C",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6FE6FCC9BB4EBCD6A0E05B08A6EA4C",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC6FE6FCC9BB4EBCD6A0E05B08A6EA4C",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T04:44:43.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:44:42.607Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:44:45.216Z",
+    "readAt": "2026-11-27T04:44:45.215Z"
+  },
+  "ACF6D756473DF6B98EBBEB0182CAA1E0": {
+    "id": "ACF6D756473DF6B98EBBEB0182CAA1E0",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF6D756473DF6B98EBBEB0182CAA1E0",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACF6D756473DF6B98EBBEB0182CAA1E0",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T04:46:19.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:46:19.218Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:46:22.323Z",
+    "readAt": "2026-11-27T04:46:22.322Z"
+  },
+  "AC8AECF9BBB453E861E336681C43F87B": {
+    "id": "AC8AECF9BBB453E861E336681C43F87B",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8AECF9BBB453E861E336681C43F87B",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC8AECF9BBB453E861E336681C43F87B",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T04:47:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:47:17.369Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:47:23.293Z",
+    "readAt": "2026-11-27T04:47:23.290Z"
+  },
+  "AC5C9A1A1B974AC0ACD1371F35A90173": {
+    "id": "AC5C9A1A1B974AC0ACD1371F35A90173",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "extendedTextMessage",
+    "contentType": "extendedTextMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5C9A1A1B974AC0ACD1371F35A90173",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC5C9A1A1B974AC0ACD1371F35A90173",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T04:53:51.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T04:53:50.789Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T04:53:55.894Z",
+    "readAt": "2026-11-27T04:53:55.894Z"
+  },
+  "ACC069486AE4F4068448ADB1C80A5D73": {
+    "id": "ACC069486AE4F4068448ADB1C80A5D73",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "videoMessage",
+    "contentType": "videoMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC069486AE4F4068448ADB1C80A5D73",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC069486AE4F4068448ADB1C80A5D73",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T06:10:54.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T06:10:54.121Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T06:11:00.433Z",
+    "readAt": "2026-11-27T06:11:00.425Z"
+  },
+  "ACC80D7DBB2B3F1235FEFA1F6264DD42": {
+    "id": "ACC80D7DBB2B3F1235FEFA1F6264DD42",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC80D7DBB2B3F1235FEFA1F6264DD42",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "ACC80D7DBB2B3F1235FEFA1F6264DD42",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T07:28:36.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:28:36.301Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:28:41.971Z",
+    "readAt": "2026-11-27T07:28:41.963Z"
+  },
+  "AC23323118EE6BA22599048568D66CE2": {
+    "id": "AC23323118EE6BA22599048568D66CE2",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC23323118EE6BA22599048568D66CE2",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC23323118EE6BA22599048568D66CE2",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T07:41:17.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T07:41:16.736Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T07:41:23.313Z",
+    "readAt": "2026-11-27T07:41:23.305Z"
+  },
+  "AC0E929928F1B1638431E85DFB5A14F9": {
+    "id": "AC0E929928F1B1638431E85DFB5A14F9",
+    "sender": "6281556836043@s.whatsapp.net",
+    "number": "6281556836043",
+    "storyJid": "6281556836043@s.whatsapp.net",
+    "resolvedPn": "6281556836043@s.whatsapp.net",
+    "name": "ummu Muflih",
+    "type": "imageMessage",
+    "contentType": "imageMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0E929928F1B1638431E85DFB5A14F9",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC0E929928F1B1638431E85DFB5A14F9",
+      "participant": "82300163371168@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "82300163371168@lid",
+      "6281556836043@s.whatsapp.net"
+    ],
+    "contactHash": "6bb87573a1db5029d86a0c78fa8058e0a75029fa304ecf8cc0075da2a5162f33",
+    "arrivedAt": "2026-11-27T08:22:45.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": false,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T08:22:44.818Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T08:22:46.422Z",
+    "readAt": "2026-11-27T08:22:46.421Z"
+  }
+}
