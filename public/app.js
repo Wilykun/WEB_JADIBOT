@@ -1772,8 +1772,11 @@ async function loadAdminUsers() {
         details.hidden = !isOpen;
         const detailGrid = document.createElement('dl');
         detailGrid.className = 'member-detail-grid';
+        // Email hanya tampil untuk admin dan untuk pemilik akun itu sendiri;
+        // member lain hanya melihat username, email orang lain disembunyikan.
+        const canSeeEmail = currentUser?.role === 'admin' || String(user.id) === String(currentUser?.id);
         const detailsData = [
-          { label: 'Email', value: user.email || '—', icon: 'mail' },
+          ...(canSeeEmail ? [{ label: 'Email', value: user.email || '—', icon: 'mail' }] : []),
           { label: 'Status akun', value: user.isMainAdmin ? 'Admin Utama' : user.role === 'admin' ? 'Administrator' : user.banned ? 'Diblokir oleh admin' : user.verified ? 'Terverifikasi' : 'Belum verifikasi', icon: 'shield' },
           { label: 'Aktivitas panel', value: user.panelActive ? 'Online' : 'Tidak aktif', icon: 'activity', note: formatPanelActivityNote(user) },
           { label: 'WhatsApp', value: pairingStatus, icon: 'whatsapp' },
@@ -5857,7 +5860,7 @@ forgotForm?.addEventListener('submit', async (event) => {
         avatar.alt = account.displayName || account.username || '';
       }
       document.querySelector('#forgot-account-name').textContent = account.displayName || account.username || '';
-      document.querySelector('#forgot-account-username').textContent = `@${account.username || ''} · ${account.email || ''}`;
+      document.querySelector('#forgot-account-username').textContent = `@${account.username || ''}`;
       const roleEl = document.querySelector('#forgot-account-role');
       roleEl.textContent = account.isMainAdmin ? 'ADMIN UTAMA' : account.role === 'admin' ? 'ADMIN' : 'MEMBER';
       roleEl.classList.toggle('is-main-admin', Boolean(account.isMainAdmin));

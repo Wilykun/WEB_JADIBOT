@@ -2092,10 +2092,14 @@ async function handleApi(req, res, url) {
       reason,
       createdAt: new Date().toISOString(),
     });
+    // Kartu status akun di halaman login hanya menampilkan avatar, nama,
+    // @username, dan peran — email TIDAK disertakan (email hanya tampil di
+    // halaman Profil pemilik akun itu sendiri).
+    const { email: _forgotEmail, ...accountForCard } = publicUser(user);
     if (!sendResult.ok) {
-      return sendJson(res, 200, { ok: true, sent: false, account: publicUser(user), message: 'Sandi sementara sudah dibuat, tapi WhatsApp belum tertaut sehingga bot tidak bisa mengirimnya. Hubungi admin untuk meminta sandi sementaramu.' });
+      return sendJson(res, 200, { ok: true, sent: false, account: accountForCard, message: 'Sandi sementara sudah dibuat, tapi WhatsApp belum tertaut sehingga bot tidak bisa mengirimnya. Hubungi admin untuk meminta sandi sementaramu.' });
     }
-    return sendJson(res, 200, { ok: true, sent: true, account: publicUser(user), message: 'Kata sandi sementara sudah dikirim ke WhatsApp kamu. Masuk dengan sandi itu, lalu segera ganti ke sandi baru.' });
+    return sendJson(res, 200, { ok: true, sent: true, account: accountForCard, message: 'Kata sandi sementara sudah dikirim ke WhatsApp kamu. Masuk dengan sandi itu, lalu segera ganti ke sandi baru.' });
   }
 
   const user = await authenticatedUser(req);

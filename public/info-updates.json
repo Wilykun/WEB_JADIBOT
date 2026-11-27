@@ -6,7 +6,7 @@
       "time": "22.32 WIB",
       "title": "Lupa sandi kini pakai email, bot kirim sandi sementara lewat WhatsApp",
       "tag": "Fitur baru",
-      "description": "Lupa sandi kini cukup isi email yang terdaftar di akun — username sengaja tidak dipakai supaya orang lain tidak bisa memicu reset akunmu. Bot mengirim kata sandi sementara ke WhatsApp yang tertaut ke akun itu; masuk dengan sandi itu lalu wajib ganti ke sandi baru minimal 12 karakter. Kalau email cocok, kartu status akun (avatar, nama, peran) langsung muncul di bawah form; kalau email tidak ditemukan, kolom email bergoyang dan muncul animasi pemberitahuan. Email tiap akun kini juga tampil di kepala halaman Profil, di bawah @username. Admin memantau semua permintaan reset lewat Log Reset Sandi realtime di halaman Daftar member, lengkap dengan sandi sementara, status pengiriman WhatsApp, dan info akun."
+      "description": "Lupa sandi kini cukup isi email yang terdaftar di akun — username sengaja tidak dipakai supaya orang lain tidak bisa memicu reset akunmu. Bot mengirim kata sandi sementara ke WhatsApp yang tertaut ke akun itu; masuk dengan sandi itu lalu wajib ganti ke sandi baru minimal 12 karakter. Kalau email cocok, kartu status akun (avatar, nama, peran) langsung muncul di bawah form; kalau email tidak ditemukan, kolom email bergoyang dan muncul animasi pemberitahuan. Email tiap akun kini tampil di kepala halaman Profil, di bawah @username, dan disembunyikan dari semua orang lain — di daftar member dan kartu lupa sandi hanya username yang tampil. Admin memantau semua permintaan reset lewat Log Reset Sandi realtime di halaman Daftar member, lengkap dengan sandi sementara, status pengiriman WhatsApp, dan info akun."
     },
     {
       "day": "Jumat, 27 Nov 2026",

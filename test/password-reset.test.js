@@ -49,6 +49,7 @@ test('Lupa sandi: form hanya minta email, ada tautan Lupa sandi, dan modal ganti
   assert.ok(appJs.includes("api('/api/auth/forgot-password'"), 'form harus memanggil endpoint lupa sandi');
   assert.ok(appJs.includes("forgot-account"), 'form harus menampilkan kartu status akun saat email cocok');
   assert.ok(appJs.includes("forgot-notfound"), 'form harus menampilkan animasi saat email tidak ditemukan');
+  assert.ok(appJs.includes("canSeeEmail"), 'daftar member harus menyembunyikan email orang lain (hanya admin/pemilik yang melihat)');
   assert.ok(appJs.includes('function showChangePasswordModal'), 'harus ada fungsi tampilkan modal ganti sandi');
   assert.ok(appJs.includes("api('/api/auth/change-password'"), 'modal harus memanggil endpoint ganti sandi');
   assert.ok(appJs.includes("api('/api/admin/password-resets'"), 'log admin harus memanggil endpoint log reset');
@@ -147,6 +148,7 @@ test('server Lupa sandi: email saja, sandi sementara, wajib ganti, log admin', {
     assert.equal(reset.payload.account.username, 'fixturemember', 'kartu status harus menampilkan username yang benar');
     assert.equal(reset.payload.account.displayName, 'fixturemember', 'kartu status harus menampilkan nama yang benar');
     assert.equal(reset.payload.account.role, 'member', 'kartu status harus menampilkan peran yang benar');
+    assert.equal(reset.payload.account.email, undefined, 'kartu status TIDAK boleh menyertakan email (email hanya di Profil pemilik akun)');
     const resets = JSON.parse(await readFile(path.join(dataDir, 'password-resets.json'), 'utf8'));
     assert.equal(resets.length, 1, 'satu percobaan reset harus tercatat di log');
     assert.equal(resets[0].username, 'fixturemember');
