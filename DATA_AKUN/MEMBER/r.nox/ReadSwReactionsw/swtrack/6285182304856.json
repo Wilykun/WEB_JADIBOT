@@ -1,0 +1,42 @@
+{
+  "AC73F6D31A454036AD98C97475848FDC__part__47j7m8gl": {
+    "id": "AC73F6D31A454036AD98C97475848FDC__part__47j7m8gl",
+    "sender": "6285182304856@s.whatsapp.net",
+    "number": "6285182304856",
+    "storyJid": "6285182304856@s.whatsapp.net",
+    "resolvedPn": "6285182304856@s.whatsapp.net",
+    "name": "Syahrul Khanafi",
+    "type": "senderKeyDistributionMessage",
+    "contentType": "senderKeyDistributionMessage",
+    "source": "status",
+    "messageKey": {
+      "remoteJid": "status@broadcast",
+      "id": "AC73F6D31A454036AD98C97475848FDC__part__47j7m8gl",
+      "participant": "24958491213860@lid",
+      "fromMe": false
+    },
+    "key": {
+      "remoteJid": "status@broadcast",
+      "id": "AC73F6D31A454036AD98C97475848FDC__part__47j7m8gl",
+      "participant": "24958491213860@lid",
+      "fromMe": false
+    },
+    "participants": [
+      "24958491213860@lid",
+      "6285182304856@s.whatsapp.net"
+    ],
+    "contactHash": "df3d1c8af461ecd4411055c331ad818601cdd0703d07da9a25de0a91e9bf0542",
+    "arrivedAt": "2026-11-27T06:29:23.000Z",
+    "modeAtArrival": "readonly_readsw",
+    "reactionExpected": false,
+    "read": true,
+    "reacted": true,
+    "attempts": 1,
+    "lastAttemptAt": "2026-11-27T06:29:43.016Z",
+    "lastError": null,
+    "updatedAt": "2026-11-27T06:29:45.723Z",
+    "readAt": "2026-11-27T06:29:45.722Z",
+    "emoji": "😱",
+    "reactedAt": "2026-11-27T06:29:45.722Z"
+  }
+}
