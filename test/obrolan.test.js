@@ -229,6 +229,7 @@ test('Obrolan: avatar pesan diambil dari data akun saat ini, bukan foto lama saa
 
 test('Obrolan: bubble ala grup WA — nama warna, jam di dalam bubble kanan bawah', () => {
   assert.match(css, /\.chat-row\{[^}]*align-items:\s*flex-start/, 'baris pesan sejajar atas');
+  assert.match(css, /\.chat-row\{[^}]*width:\s*100%/, 'baris pesan harus selebar wadah supaya max-width bubble 75% terhitung dari lebar baris yang pasti dan chip peran tidak keluar dari bubble');
   assert.match(css, /\.chat-bubble-meta\{[^}]*justify-content:\s*space-between/, 'jam di pojok kanan, tombol Balas/Hapus di kiri');
   assert.ok(css.includes('.chat-bubble.is-first'), 'bubble pertama satu pengirim berurutan dapat ekor ala WA');
   assert.ok(appJs.includes('function chatNameColor('), 'nama pengirim harus diwarnai per anggota ala grup WA');

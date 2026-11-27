@@ -3331,7 +3331,7 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .chat-messages{display:flex;flex-direction:column;gap:2px;height:100%;overflow-y:auto;overscroll-behavior:auto;padding:16px 16px 8px;scrollbar-width:thin}
 .chat-empty{margin:auto;color:var(--muted);text-align:center}
 .chat-date-divider{align-self:center;margin:8px 0 6px;font-size:12.5px;font-weight:500;color:#8696a0;background:#182229;border:0;border-radius:8px;padding:5px 12px;box-shadow:0 1px 0.5px rgba(11,20,26,.13)}
-.chat-row{display:flex;align-items:flex-start;gap:8px;max-width:88%}
+.chat-row{display:flex;align-items:flex-start;gap:8px;width:100%;max-width:88%}
 .chat-row.is-own{align-self:flex-end;flex-direction:row-reverse}
 .chat-row:not(.is-own){align-self:flex-start}
 .chat-row-flash .chat-bubble{animation:chatRowFlash 1.6s ease}

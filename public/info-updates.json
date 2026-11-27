@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-27T15:10:00+07:00",
+  "updatedAt": "2026-11-27T16:05:00+07:00",
   "updates": [
+    {
+      "day": "Jumat, 27 Nov 2026",
+      "time": "16.05 WIB",
+      "title": "Chip Admin Utama di Obrolan tidak lagi keluar dari bubble",
+      "tag": "Perbaikan",
+      "description": "Baris pesan kini selebar wadah sehingga lebar bubble terhitung dengan benar dan chip ADMIN UTAMA tetap di dalam bubble, tidak lagi menonjol keluar."
+    },
     {
       "day": "Jumat, 27 Nov 2026",
       "time": "15.10 WIB",
