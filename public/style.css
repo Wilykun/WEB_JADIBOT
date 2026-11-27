@@ -3364,8 +3364,6 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .chat-reply-btn{flex:none;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:12px;line-height:1;padding:2px 4px;border-radius:6px}
 .chat-reply-btn:hover{color:var(--text);background:rgba(255,255,255,.08)}
 .chat-bubble-actions{display:flex;align-items:center;gap:2px}
-.chat-bubble-actions{opacity:0;transition:opacity .15s ease}
-.chat-row:hover .chat-bubble-actions,.chat-row.is-actions-open .chat-bubble-actions{opacity:1}
 .chat-delete-btn{flex:none;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:12px;line-height:1;padding:2px 4px;border-radius:6px}
 .chat-delete-btn:hover{color:#f87171;background:rgba(248,113,113,.12)}
 .chat-typing{display:flex;align-items:center;gap:6px;min-height:18px;padding:2px 14px;font-size:12px;font-style:italic;color:#00a884}

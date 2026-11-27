@@ -463,6 +463,11 @@ test('Obrolan: hapus pesan — sendiri boleh, orang lain hanya Admin Utama', () 
   assert.ok(row.includes("if (chatReplyTo?.id === message.id) setChatReply(null);"), 'balasan ke pesan yang dihapus harus dibersihkan');
   assert.ok(css.includes('.chat-bubble-actions{display:flex;align-items:center;gap:2px}'), 'tombol Balas dan Hapus harus sebaris di kanan meta');
   assert.ok(css.includes('.chat-delete-btn{'), 'tombol hapus harus punya gaya sendiri');
+  // RONDE 36: tombol Balas/Hapus harus selalu terlihat — tidak boleh sembunyi
+  // lalu muncul hanya saat bubble diketuk (bug laporan Wily 28 Nov 2026).
+  assert.ok(!css.includes('.chat-bubble-actions{opacity:0'), 'tombol Balas dan Hapus tidak boleh disembunyikan dengan opacity 0');
+  assert.ok(!css.includes('is-actions-open'), 'CSS tidak boleh lagi memakai kelas is-actions-open');
+  assert.ok(!appJs.includes('is-actions-open'), 'klik bubble tidak boleh lagi menyembunyikan/menampilkan tombol Balas dan Hapus');
 });
 
 test('Info Update: kategori Bug dan Fitur Error terdaftar dengan warna sendiri', () => {
