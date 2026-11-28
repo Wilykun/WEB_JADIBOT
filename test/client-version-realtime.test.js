@@ -23,16 +23,16 @@ test('menu tetap terbuka setelah notifikasi menu terkunci ditutup', async () => 
 test('entri Info Update terbaru', async () => {
   const data = JSON.parse(await readFile(path.join(sourceRoot, 'public', 'info-updates.json'), 'utf8'));
   const html = await readFile(path.join(sourceRoot, 'public', 'index.html'), 'utf8');
-  assert.equal(data.updates.length, 133, 'jumlah entri harus cocok');
+  assert.equal(data.updates.length, 134, 'jumlah entri harus cocok');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Kartu Log Reset Sandi di halaman Member dihapus', 'judul entri terbaru harus cocok');
-  assert.equal(newest.tag, 'Perubahan', 'tag entri terbaru harus cocok');
+  assert.equal(newest.title, 'Foto profil di pemilih akun tersimpan kini tampil', 'judul entri terbaru harus cocok');
+  assert.equal(newest.tag, 'Bug', 'tag entri terbaru harus cocok');
   assert.equal(newest.day, 'Sabtu, 28 Nov 2026', 'hari entri terbaru harus cocok');
   assert.ok(html.includes(`<h4>${newest.title}</h4>`), 'fallback harus memuat judul entri terbaru');
 
   // Entri notifikasi menu terkunci; deskripsinya menyebut menunya tetap
   // terbuka setelah notifikasi ditutup.
-  const locked = data.updates[71];
+  const locked = data.updates[72];
   assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci harus di posisi yang benar');
   assert.match(locked.description, /Menunya tetap terbuka setelah notifikasi ditutup/, 'deskripsi harus menyebut menu tetap terbuka');
 });

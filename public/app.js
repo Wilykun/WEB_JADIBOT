@@ -5751,8 +5751,13 @@ document.querySelector('[data-mobile-info-menu-back]')?.addEventListener('click'
 // akun browser ini yang tampil, lengkap dengan avatar dan waktu terakhir
 // masuk. Ketuk akun untuk masuk cepat tanpa ketik email/sandi.
 function savedAccountAvatarSrc(account) {
+  // RONDE 48: avatar unggahan pemilih akun HARUS lewat endpoint publik
+  // /api/auth/saved-accounts/avatar — /api/admin/user-avatar butuh login,
+  // padahal pemilih tampil di halaman Masuk setelah logout (sesi dihapus),
+  // jadi PP-nya rusak (401). Endpoint baru hanya melayani akun yang
+  // tersimpan di perangkat ini.
   if (account.avatar === 'uploaded') {
-    return `/api/admin/user-avatar?userId=${encodeURIComponent(account.id)}`;
+    return `/api/auth/saved-accounts/avatar?userId=${encodeURIComponent(account.id)}`;
   }
   const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(account.avatar || '') ? account.avatar : 'avatar-01';
   return `/avatars/${preset}.webp`;

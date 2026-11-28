@@ -233,20 +233,20 @@ test('server: /api/members mengembalikan waktu login terakhir tiap akun', () => 
 });
 
 test('versi aset baru terpasang supaya kedua halaman benar-benar sampai ke HP', () => {
-  assert.ok(html.includes('/app.js?v=hapus-log-reset-sandi-20261128'), 'app.js harus memakai ?v=hapus-log-reset-sandi-20261128');
-  assert.ok(html.includes('/style.css?v=hapus-log-reset-sandi-20261128'), 'style.css harus memakai ?v=hapus-log-reset-sandi-20261128');
+  assert.ok(html.includes('/app.js?v=avatar-pemilih-akun-tampil-20261128'), 'app.js harus memakai ?v=avatar-pemilih-akun-tampil-20261128');
+  assert.ok(html.includes('/style.css?v=avatar-pemilih-akun-tampil-20261128'), 'style.css harus memakai ?v=avatar-pemilih-akun-tampil-20261128');
 });
 
 test('entri Info Update status Rank Bot dan halaman Aktivitas Akun kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
-  assert.equal(data.updatedAt, '2026-11-28T13:30:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 133, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-28T13:44:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 134, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Kartu Log Reset Sandi di halaman Member dihapus', 'entri terbaru harus soal batas 10 detik indikator mengetik');
-  assert.equal(newest.tag, 'Perubahan', 'entri terbaru harus bertag Perubahan');
+  assert.equal(newest.title, 'Foto profil di pemilih akun tersimpan kini tampil', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.tag, 'Bug', 'entri terbaru harus bertag Perubahan');
   assert.equal(newest.day, 'Sabtu, 28 Nov 2026', 'hari entri terbaru harus cocok');
-  assert.equal(newest.time, '13.30 WIB', 'waktu entri terbaru harus cocok');
-  const status = data.updates[66];
+  assert.equal(newest.time, '13.44 WIB', 'waktu entri terbaru harus cocok');
+  const status = data.updates[67];
   assert.equal(status.title, 'Status pemilik & bot di Rank Bot, plus halaman Aktivitas Akun', 'entri status Rank Bot kini di posisi kedua puluh');
   assert.equal(status.tag, 'Fitur baru', 'entri status Rank Bot harus bertag Bug');
   assert.equal(status.time, '19.46 WIB', 'waktu entri status Rank Bot harus cocok');

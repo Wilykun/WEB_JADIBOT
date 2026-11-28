@@ -2205,6 +2205,35 @@ async function handleApi(req, res, url) {
     return sendJson(res, 200, { ok: true, removed });
   }
 
+  // RONDE 48: avatar untuk pemilih akun tersimpan — HARUS bisa diakses tanpa
+  // login, karena pemilih tampil di halaman Masuk setelah logout (sesi sudah
+  // dihapus, jadi /api/admin/user-avatar mengembalikan 401 dan PP-nya rusak).
+  // Aman: hanya melayani akun yang tersimpan di perangkat ini (cookie
+  // readsw_device), bukan sembarang userId.
+  if (route === 'GET /api/auth/saved-accounts/avatar') {
+    const targetId = String(url.searchParams.get('userId') || '');
+    if (!targetId) return sendError(res, 400, 'ID akun tidak valid.');
+    const deviceId = deviceIdFromRequest(req);
+    const saved = await savedAccountsForDevice(deviceId);
+    if (!saved.some((item) => item.id === targetId)) return sendError(res, 404, 'Avatar tidak tersimpan di browser ini.');
+    const target = store.users.find((item) => item.id === targetId);
+    if (!target || target.avatar !== 'uploaded') return sendError(res, 404, 'Avatar unggahan tidak ditemukan.');
+    const dir = accountFolder(target.username);
+    if (!dir) return sendError(res, 404, 'Data akun tidak ditemukan.');
+    try {
+      const mime = ['image/png', 'image/jpeg', 'image/webp'].includes(target.avatarMime) ? target.avatarMime : 'image/webp';
+      const imagePath = target.avatarMime ? path.join(dir, 'avatar.upload') : path.join(dir, 'avatar.webp');
+      const image = await fs.readFile(imagePath);
+      setHeaders(res, true);
+      res.writeHead(200, { 'Content-Type': mime, 'Content-Length': image.length, 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+      res.end(image);
+      return;
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+      return sendError(res, 404, 'Avatar unggahan tidak ditemukan.');
+    }
+  }
+
   if (route === 'POST /api/auth/forgot-password') {
     const body = await readJson(req);
     const email = String(body.email || '').trim().toLowerCase().slice(0, 254);

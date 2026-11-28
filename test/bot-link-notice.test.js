@@ -75,16 +75,16 @@ test('member belum tertaut tidak bisa masuk Fitur Bot, admin tetap bisa', () => 
 test('entri Info Update terbaru kini soal sesi WhatsApp pulih dari cadangan', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-28T13:30:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 133, 'daftar harus bertambah lima entri');
+  assert.equal(data.updatedAt, '2026-11-28T13:44:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 134, 'daftar harus bertambah lima entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Kartu Log Reset Sandi di halaman Member dihapus', 'entri terbaru harus soal batas 10 detik indikator mengetik');
-  assert.equal(newest.tag, 'Perubahan', 'entri terbaru harus bertag Perubahan');
-  assert.equal(newest.time, '13.30 WIB', 'waktu entri terbaru harus cocok');
+  assert.equal(newest.title, 'Foto profil di pemilih akun tersimpan kini tampil', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.tag, 'Bug', 'entri terbaru harus bertag Perubahan');
+  assert.equal(newest.time, '13.44 WIB', 'waktu entri terbaru harus cocok');
   assert.ok(html.includes('<h4>Log privat kini jadi Log Bot dan ada notif story baru</h4>'), 'fallback harus memuat judul entri terbaru');
-  const rankbotEntry = data.updates[74];
+  const rankbotEntry = data.updates[75];
   assert.equal(rankbotEntry.title, 'Halaman Rank Bot untuk melihat bot teraktif', 'entri Rank Bot kini di posisi kedua puluh delapan');
   const linkEntry = data.updates.find((item) => item.title === 'Pemberitahuan tautan WhatsApp kini muncul di layar');
   assert.ok(linkEntry, 'entri notifikasi tautan di layar harus tetap ada');
-  assert.equal(data.updates.indexOf(linkEntry), 76, 'entri notifikasi tautan di layar kini di posisi kedua puluh delapan');
+  assert.equal(data.updates.indexOf(linkEntry), 77, 'entri notifikasi tautan di layar kini di posisi kedua puluh delapan');
 });

@@ -86,7 +86,7 @@ test('savedAccountAvatarSrc: avatar upload, preset, dan preset tidak valid', asy
   const fn = m[0].replace('function savedAccountAvatarSrc', 'function f');
   const out = await eval(`${fn}
 [f({ id: 'abc-123', avatar: 'uploaded' }), f({ id: 'abc-123', avatar: 'avatar-06' }), f({ id: 'abc-123', avatar: 'avatar-99' }), f({ id: 'abc-123', avatar: '' })]`);
-  assert.equal(out[0], '/api/admin/user-avatar?userId=abc-123', 'avatar upload harus pakai endpoint avatar');
+  assert.equal(out[0], '/api/auth/saved-accounts/avatar?userId=abc-123', 'avatar upload harus pakai endpoint publik akun tersimpan (ronde 48)');
   assert.equal(out[1], '/avatars/avatar-06.webp', 'preset harus pakai file webp');
   assert.equal(out[2], '/avatars/avatar-01.webp', 'preset tidak valid harus jatuh ke avatar-01');
   assert.equal(out[3], '/avatars/avatar-01.webp', 'avatar kosong harus jatuh ke avatar-01');
@@ -230,4 +230,77 @@ test('ronde 44: loadSavedAccounts tidak boleh memunculkan formulir Masuk saat di
   assert.ok(fn.includes('accounts.length && !onForgotPage'), 'pemilih akun hanya tampil kalau ada akun DAN bukan di Lupa sandi');
   assert.ok(fn.includes('if (!onForgotPage) loginForm?.classList.remove'), 'formulir Masuk hanya dimunculkan kalau bukan di Lupa sandi');
   assert.ok(fn.includes('RONDE 44'), 'perbaikan harus ditandai ronde 44');
+});
+
+test('ronde 48: avatar PP pemilih akun bisa dimuat tanpa login (hanya akun tersimpan di perangkat ini)', { timeout: 60_000 }, async () => {
+  const temp = await mkdtemp(path.join(os.tmpdir(), 'readsw-saved-avatar-test-'));
+  const root = path.join(temp, 'project');
+  const dataDir = path.join(root, 'runtime-data');
+  const memberPassword = 'FixtureMember-Only-Password!';
+  let child;
+  try {
+    await mkdir(root, { recursive: true });
+    await cp(path.join(sourceRoot, 'server'), path.join(root, 'server'), { recursive: true });
+    await cp(path.join(sourceRoot, 'public'), path.join(root, 'public'), { recursive: true });
+    await cp(path.join(sourceRoot, 'package.json'), path.join(root, 'package.json'));
+    await symlink(path.join(sourceRoot, 'node_modules'), path.join(root, 'node_modules'), 'dir');
+    await mkdir(dataDir, { recursive: true });
+    const member = fixtureUser('fixturemember', 'fixturemember@example.test', 'member', memberPassword);
+    member.avatar = 'uploaded';
+    member.avatarMime = 'image/webp';
+    await writeFile(path.join(dataDir, 'store.json'), JSON.stringify({
+      users: [member], pendingRegistrations: [], bots: [], sessions: [], pairingLogs: [], loginHistory: [],
+    }));
+    // Foto unggahan di folder akun (DATA_AKUN/MEMBER/<username>/avatar.upload).
+    const avatarDir = path.join(root, 'DATA_AKUN', 'MEMBER', 'fixturemember');
+    await mkdir(avatarDir, { recursive: true });
+    const avatarBytes = Buffer.from('RIFFxxxxWEBP', 'utf8');
+    await writeFile(path.join(avatarDir, 'avatar.upload'), avatarBytes);
+    const port = await unusedPort();
+    const base = `http://127.0.0.1:${port}`;
+    child = spawn(process.execPath, [path.join(root, 'server/index.js')], {
+      cwd: root,
+      env: { ...process.env, HOST: '127.0.0.1', PORT: String(port), PANEL_DATA_DIR: 'runtime-data', SESSION_SECRET: randomBytes(48).toString('base64url'), NODE_ENV: 'test', BOOTSTRAP_ADMIN_USERNAME: 'fixtureadmin' },
+      stdio: 'ignore',
+    });
+    let ready = false;
+    for (let attempt = 0; attempt < 100; attempt += 1) {
+      if (child.exitCode !== null) throw new Error(`fixture server exited with code ${child.exitCode}`);
+      try {
+        const response = await fetch(`${base}/api/health`, { signal: AbortSignal.timeout(500) });
+        if (response.ok) { ready = true; break; }
+      } catch { /* Wait briefly for local fixture startup. */ }
+      await wait(100);
+    }
+    assert.equal(ready, true, 'isolated fixture server should start');
+    const rawRequest = async (route, cookie) => {
+      const headers = { Origin: base };
+      if (cookie) headers.Cookie = cookie;
+      const response = await fetch(`${base}${route}`, { headers, signal: AbortSignal.timeout(5000) });
+      return { status: response.status, body: Buffer.from(await response.arrayBuffer()), contentType: response.headers.get('content-type') };
+    };
+    // Login biasa mencatat perangkat; pisahkan cookie perangkat dari cookie sesi.
+    const login = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: memberPassword } });
+    assert.equal(login.status, 200, 'login biasa harus 200');
+    const deviceCookie = login.cookie.split('; ').find((part) => part.startsWith('readsw_device='));
+    assert.ok(deviceCookie, 'cookie perangkat harus bisa dipisahkan');
+    // TANPA cookie sesi (seperti di halaman Masuk setelah logout), HANYA
+    // cookie perangkat: avatar harus 200 — inilah yang rusak di ronde 42.
+    const avatar = await rawRequest(`/api/auth/saved-accounts/avatar?userId=${member.id}`, deviceCookie);
+    assert.equal(avatar.status, 200, 'avatar akun tersimpan harus 200 tanpa login (hanya cookie perangkat)');
+    assert.equal(avatar.contentType, 'image/webp', 'avatar harus bertipe image/webp');
+    assert.ok(avatar.body.equals(avatarBytes), 'avatar harus isi file yang sama');
+    // Akun yang TIDAK tersimpan di perangkat ini: 404 (tidak boleh diintip).
+    const other = await rawRequest(`/api/auth/saved-accounts/avatar?userId=${randomUUID()}`, deviceCookie);
+    assert.equal(other.status, 404, 'avatar akun lain harus 404');
+    // Tanpa cookie perangkat sama sekali: 404.
+    const noCookie = await rawRequest(`/api/auth/saved-accounts/avatar?userId=${member.id}`);
+    assert.equal(noCookie.status, 404, 'avatar tanpa cookie perangkat harus 404');
+    // Endpoint lama tetap butuh login (bukan jalan pintas baru).
+    const oldEndpoint = await rawRequest(`/api/admin/user-avatar?userId=${member.id}`, deviceCookie);
+    assert.equal(oldEndpoint.status, 401, 'endpoint lama tanpa sesi harus tetap 401');
+  } finally {
+    if (child) child.kill();
+    await rm(temp, { recursive: true, force: true });
+  }
 });
