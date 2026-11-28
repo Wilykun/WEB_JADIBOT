@@ -304,3 +304,12 @@ test('ronde 48: avatar PP pemilih akun bisa dimuat tanpa login (hanya akun tersi
     await rm(temp, { recursive: true, force: true });
   }
 });
+
+test('ronde 50: klik Masuk dengan akun lain tidak boleh menyembunyikan pemilih akun', () => {
+  const m = appJs.match(/document\.querySelector\('#saved-accounts-other'\)\?\.addEventListener\('click', \(\) => \{[\s\S]*?\}\);/);
+  assert.ok(m, 'handler tombol Masuk dengan akun lain harus bisa diekstrak');
+  const fn = m[0];
+  assert.ok(!fn.includes("document.querySelector('#saved-accounts')?.classList.add('hidden')"), 'handler TIDAK boleh menyembunyikan pemilih akun');
+  assert.ok(fn.includes("loginForm?.classList.remove('hidden')"), 'handler harus menampilkan formulir Masuk');
+  assert.ok(fn.includes('input[name="identifier"]'), 'handler harus memfokuskan kolom email/username');
+});

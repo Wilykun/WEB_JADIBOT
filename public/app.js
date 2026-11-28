@@ -5896,7 +5896,11 @@ async function loadSavedAccounts() {
 }
 
 document.querySelector('#saved-accounts-other')?.addEventListener('click', () => {
-  document.querySelector('#saved-accounts')?.classList.add('hidden');
+  // RONDE 50: pemilih akun HARUS tetap tampil — jangan sembunyikan. Klik
+  // "Masuk dengan akun lain" hanya memunculkan formulir Masuk di atas
+  // pemilih, supaya pengguna bisa ketik akun lain ATAU tetap ketuk akun
+  // tersimpan di bawahnya (sebelumnya pemilih hilang total dan tidak ada
+  // jalan kembali kecuali refresh — itu yang dilaporkan Wily).
   loginForm?.classList.remove('hidden');
   loginForm?.querySelector('input[name="identifier"]')?.focus();
 });
@@ -5922,7 +5926,12 @@ loginForm.addEventListener('submit', async (event) => {
     const result = await waitForAuthAnimation(api('/api/auth/login', { method: 'POST', body: JSON.stringify(data) }));
     await showDashboard(result.user);
     maybeShowPasswordChangedToast(result.user);
-    if (result.user?.mustChangePassword) showChangePasswordModal();
+    // RONDE 49: modal Ganti sandi HANYA kalau masuk pakai sandi SEMENTARA
+    // (result.usedTempPassword). Masuk pakai sandi UTAMA membuktikan pengguna
+    // ingat sandinya — modal tidak boleh muncul walau penanda wajib ganti
+    // masih true (penanda itu tetap true supaya masuk sementara berikutnya
+    // tetap memunculkan modal, sesuai ronde 39).
+    if (result.user?.mustChangePassword && result.usedTempPassword) showChangePasswordModal();
   } catch (error) {
     if (error.payload?.banned === true) showAccountNotice('banned', error.payload.banReason);
     else if (error.payload?.deleted === true) showAccountNotice('deleted', error.payload.reason);

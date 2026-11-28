@@ -2124,9 +2124,11 @@ async function handleApi(req, res, url) {
     }
     const user = store.users.find((item) => item.email === identifier || item.username === identifier);
     let valid = false;
+    let usedMainPassword = false;
     if (user) {
       const attempt = (await scrypt(String(body.password || '').slice(0, 128), user.salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
       valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(attempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.passwordHash).digest('hex'));
+      usedMainPassword = valid;
       // RONDE 39: masuk bisa pakai sandi baru maupun sandi sementara — sandi
       // sementara adalah cadangan supaya tidak terkunci lagi kalau lupa sandi.
       if (!valid && user.tempPasswordHash && user.tempPasswordSalt) {
@@ -2149,11 +2151,17 @@ async function handleApi(req, res, url) {
     if (!valid) return sendError(res, 401, `Akun ${rawIdentifier} ditemukan, tapi kata sandi salah. Coba lagi.`);
     if (isBannedAccount(user)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true, banReason: user.banReason || null }, { 'Set-Cookie': cookieHeader('', 0, req) });
     if (user.verified === false) return sendError(res, 403, 'Akun belum diverifikasi. Selesaikan CAPTCHA setelah pendaftaran terlebih dahulu.');
+    // RONDE 49: modal Ganti sandi hanya untuk masuk pakai sandi SEMENTARA.
+    // Masuk pakai sandi UTAMA membuktikan pengguna ingat sandinya, jadi
+    // modal tidak boleh muncul walau penanda wajib ganti masih true (penanda
+    // itu SENGAJA tidak dibersihkan di sini — kalau pengguna lalu masuk pakai
+    // sandi sementara, modal tetap harus muncul, sesuai ronde 39). Klien
+    // memutuskan dari usedTempPassword di respons ini.
     const token = await createSession(user.id);
     await recordLogin(user.id, req, token.split('.')[0]);
     const deviceId = ensureDeviceId(req);
     await recordDeviceAccount(deviceId, user.id);
-    return sendJson(res, 200, { user: publicUser(user) }, { 'Set-Cookie': [cookieHeader(token, SESSION_TTL_MS / 1000, req), deviceCookieHeader(deviceId, DEVICE_COOKIE_TTL_SECONDS, req)] });
+    return sendJson(res, 200, { user: publicUser(user), usedTempPassword: !usedMainPassword }, { 'Set-Cookie': [cookieHeader(token, SESSION_TTL_MS / 1000, req), deviceCookieHeader(deviceId, DEVICE_COOKIE_TTL_SECONDS, req)] });
   }
 
   if (route === 'POST /api/auth/logout') {

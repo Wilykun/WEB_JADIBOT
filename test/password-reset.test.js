@@ -630,3 +630,89 @@ test('server ganti sandi ronde 43: tanpa sandi lama lolos saat wajib ganti, teta
     await rm(temp, { recursive: true, force: true });
   }
 });
+
+test('server login ronde 49: masuk pakai sandi UTAMA tidak boleh memaksa ganti sandi (modal hanya untuk sandi sementara)', { timeout: 60_000 }, async () => {
+  const temp = await mkdtemp(path.join(os.tmpdir(), 'readsw-login-r49-test-'));
+  const root = path.join(temp, 'project');
+  const dataDir = path.join(root, 'runtime-data');
+  const mainPassword = 'FixtureMember-Only-Password!';
+  const tempPassword = 'TempPassR49!';
+  const mainPassword2 = 'FixtureMember2-Only-Password!';
+  const tempPassword2 = 'TempPassR49B!';
+  let child;
+  try {
+    await mkdir(root, { recursive: true });
+    await cp(path.join(sourceRoot, 'server'), path.join(root, 'server'), { recursive: true });
+    await cp(path.join(sourceRoot, 'public'), path.join(root, 'public'), { recursive: true });
+    await cp(path.join(sourceRoot, 'package.json'), path.join(root, 'package.json'));
+    await symlink(path.join(sourceRoot, 'node_modules'), path.join(root, 'node_modules'), 'dir');
+    await mkdir(dataDir, { recursive: true });
+    const mkTemp = (password) => {
+      const tempSalt = randomBytes(16).toString('hex');
+      const tempHash = scryptSync(password, tempSalt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 }).toString('hex');
+      return { tempSalt, tempHash };
+    };
+    const member = fixtureUser('fixturemember', 'fixturemember@example.test', 'member', mainPassword);
+    member.mustChangePassword = true;
+    const t1 = mkTemp(tempPassword);
+    member.tempPasswordSalt = t1.tempSalt;
+    member.tempPasswordHash = t1.tempHash;
+    member.tempPasswordAt = new Date().toISOString();
+    const member2 = fixtureUser('fixturemember2', 'fixturemember2@example.test', 'member', mainPassword2);
+    member2.mustChangePassword = true;
+    const t2 = mkTemp(tempPassword2);
+    member2.tempPasswordSalt = t2.tempSalt;
+    member2.tempPasswordHash = t2.tempHash;
+    member2.tempPasswordAt = new Date().toISOString();
+    await writeFile(path.join(dataDir, 'store.json'), JSON.stringify({
+      users: [member, member2], pendingRegistrations: [], bots: [], sessions: [], pairingLogs: [], loginHistory: [],
+    }));
+    const port = await unusedPort();
+    const base = `http://127.0.0.1:${port}`;
+    child = spawn(process.execPath, [path.join(root, 'server/index.js')], {
+      cwd: root,
+      env: { ...process.env, HOST: '127.0.0.1', PORT: String(port), PANEL_DATA_DIR: 'runtime-data', SESSION_SECRET: randomBytes(48).toString('base64url'), NODE_ENV: 'test', BOOTSTRAP_ADMIN_USERNAME: 'fixtureadmin' },
+      stdio: 'ignore',
+    });
+    let ready = false;
+    for (let attempt = 0; attempt < 100; attempt += 1) {
+      if (child.exitCode !== null) throw new Error(`fixture server exited with code ${child.exitCode}`);
+      try {
+        const response = await fetch(`${base}/api/health`, { signal: AbortSignal.timeout(500) });
+        if (response.ok) { ready = true; break; }
+      } catch { /* Wait briefly for local fixture startup. */ }
+      await wait(100);
+    }
+    assert.equal(ready, true, 'isolated fixture server should start');
+
+    // Masuk pakai sandi UTAMA (ingat sandinya) walau penanda wajib ganti masih
+    // true: login 200, usedTempPassword false (modal TIDAK boleh muncul), dan
+    // penanda SENGAJA tetap true supaya masuk sementara berikutnya tetap
+    // memunculkan modal (ronde 39).
+    const mainLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: mainPassword } });
+    assert.equal(mainLogin.status, 200, 'login sandi utama harus 200');
+    assert.equal(mainLogin.payload.usedTempPassword, false, 'login sandi utama harus menandai usedTempPassword false');
+    assert.equal(mainLogin.payload.user.mustChangePassword, true, 'login sandi utama harus MEMBIARKAN penanda wajib ganti (untuk masuk sementara berikutnya)');
+    const storeAfterMain = JSON.parse(await readFile(path.join(dataDir, 'store.json'), 'utf8'));
+    assert.equal(storeAfterMain.users.find((item) => item.username === 'fixturemember').mustChangePassword, true, 'store harus menyimpan penanda wajib ganti setelah login utama');
+
+    // Masuk pakai sandi SEMENTARA: login 200, usedTempPassword true (modal muncul).
+    const tempLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember2', password: tempPassword2 } });
+    assert.equal(tempLogin.status, 200, 'login sandi sementara harus 200');
+    assert.equal(tempLogin.payload.usedTempPassword, true, 'login sandi sementara harus menandai usedTempPassword true');
+    assert.equal(tempLogin.payload.user.mustChangePassword, true, 'login sandi sementara harus tetap menandai wajib ganti');
+    const storeAfterTemp = JSON.parse(await readFile(path.join(dataDir, 'store.json'), 'utf8'));
+    assert.equal(storeAfterTemp.users.find((item) => item.username === 'fixturemember2').mustChangePassword, true, 'store harus menyimpan penanda wajib ganti setelah login sementara');
+  } finally {
+    if (child) child.kill();
+    await rm(temp, { recursive: true, force: true });
+  }
+});
+
+test('ronde 49: modal Ganti sandi hanya muncul kalau login pakai sandi sementara (usedTempPassword)', () => {
+  assert.ok(serverJs.includes('let usedMainPassword = false;'), 'login harus melacak apakah sandi utama yang cocok');
+  assert.ok(serverJs.includes('usedMainPassword = valid;'), 'login harus mencatat kecocokan sandi utama');
+  assert.ok(serverJs.includes('usedTempPassword: !usedMainPassword'), 'login harus mengembalikan usedTempPassword di respons');
+  assert.ok(appJs.includes('if (result.user?.mustChangePassword && result.usedTempPassword) showChangePasswordModal();'), 'modal hanya boleh muncul kalau wajib ganti DAN login pakai sandi sementara');
+  assert.ok(!appJs.includes("if (result.user?.mustChangePassword) showChangePasswordModal();"), 'pola lama (modal tanpa cek usedTempPassword) harus sudah tidak ada');
+});

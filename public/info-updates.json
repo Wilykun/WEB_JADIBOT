@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-11-28T13:44:00+07:00",
+  "updatedAt": "2026-11-28T13:52:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "13.52 WIB",
+      "title": "Pemilih akun tetap tampil saat Masuk dengan akun lain",
+      "tag": "Perubahan",
+      "description": "Tombol Masuk dengan akun lain sempat menyembunyikan pemilih akun (Pilih akun) total — tidak ada jalan kembali kecuali refresh halaman. Kini pemilih tetap tampil di bawah formulir Masuk, jadi pengguna bisa ketik akun lain atau tetap ketuk akun tersimpan. Terbukti lewat simulasi browser: setelah diklik, pemilih dan formulir sama-sama tampil."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "13.47 WIB",
+      "title": "Modal Ganti sandi tidak muncul kalau masuk pakai sandi utama",
+      "tag": "Bug",
+      "description": "Modal Ganti kata sandi sempat muncul walau pengguna masuk dengan sandi utamanya yang benar — penyebabnya: modal muncul setiap kali penanda wajib ganti masih true, tanpa peduli sandi apa yang dipakai untuk masuk. Kini server memberi tahu cara masuknya (usedTempPassword), dan modal hanya muncul kalau masuk pakai sandi sementara. Masuk pakai sandi utama langsung ke dashboard tanpa dipaksa ganti sandi."
+    },
     {
       "day": "Sabtu, 28 Nov 2026",
       "time": "13.44 WIB",
