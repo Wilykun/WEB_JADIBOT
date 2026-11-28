@@ -3422,20 +3422,20 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .change-password-message.is-error{background:rgba(244,67,54,.12);color:#ff9d97}
 .change-password-message.is-ok{background:rgba(49,213,139,.12);color:#7be3ae}
 /* Log Reset Sandi admin (ronde 33): daftar realtime di halaman Daftar member. */
-.password-reset-log-card{margin-top:14px}
-.password-reset-log-list{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto}
-.password-reset-log-empty{font-size:13px;color:var(--muted);padding:10px 2px}
-.password-reset-log-item{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:rgba(231,250,238,.02)}
-.password-reset-log-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
-.password-reset-log-head strong{font-size:13px}
-.password-reset-log-status{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px}
-.password-reset-log-status.is-sent{background:rgba(49,213,139,.14);color:#7be3ae}
-.password-reset-log-status.is-failed{background:rgba(244,67,54,.14);color:#ff9d97}
-.password-reset-log-time{margin-left:auto;font-size:11px;color:var(--muted)}
-.password-reset-log-meta{margin:6px 0 0;font-size:12px;color:var(--soft);line-height:1.6;word-break:break-word}
-.password-reset-log-meta code{background:rgba(231,250,238,.07);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:12px;font-weight:700;color:var(--text);letter-spacing:.4px}
-.password-reset-log-reason{color:#ff9d97}
-@media(max-width:560px){.password-reset-log-list{max-height:360px}.password-reset-log-time{margin-left:0}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:560px){}
 
 /* Kartu status akun setelah email lupa sandi ditemukan (ronde 33b). */
 .forgot-account{margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:rgba(49,213,139,.06);display:flex;flex-wrap:wrap;align-items:center;gap:12px;animation:forgot-account-in .35s ease both}
@@ -3524,3 +3524,25 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .forgot-account-file-download-icon{width:18px;height:18px;flex:none}
 .forgot-account-file-warn{margin:12px 0 0;font-size:12px;text-align:center;color:#f5c542}
 @media(min-width:640px){.forgot-account-file-actions{flex-direction:row}.forgot-account-file-actions .button-wide{flex:1}.forgot-account-file-actions .button-secondary{flex:none}}
+
+/* Ronde 42: pemilih akun tersimpan (per perangkat) di halaman Masuk dan Lupa sandi. */
+.saved-accounts{margin-top:16px}
+.saved-accounts-title{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;font-size:15px;font-weight:700}
+.saved-accounts-title-icon{width:18px;height:18px;flex:none;color:#3ee69a}
+.saved-accounts-hint{margin:8px 0 0;font-size:13px;text-align:center;color:var(--soft)}
+.saved-accounts-list{display:flex;flex-direction:column;gap:10px;max-height:264px;margin-top:14px;padding:2px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(62,230,154,.35) transparent}
+.saved-accounts-list::-webkit-scrollbar{width:6px}
+.saved-accounts-list::-webkit-scrollbar-thumb{background:rgba(62,230,154,.35);border-radius:3px}
+.saved-account-card{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02);color:inherit;font:inherit;text-align:left;cursor:pointer}
+.saved-account-card:hover{border-color:rgba(62,230,154,.5)}
+.saved-account-card:disabled{opacity:.6;cursor:wait}
+.saved-account-avatar{width:44px;height:44px;flex:none;border-radius:50%;object-fit:cover;background:rgba(255,255,255,.06)}
+.saved-account-copy{display:flex;flex-direction:column;flex:1;min-width:0;gap:2px}
+.saved-account-copy strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.saved-account-meta{font-size:12px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.saved-account-chevron{flex:none;font-size:22px;color:var(--soft);line-height:1}
+.saved-account-remove{flex:none;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:18px;line-height:1;color:var(--soft);cursor:pointer}
+.saved-account-remove:hover{background:rgba(255,77,77,.15);color:#ff8a8a}
+.forgot-saved-accounts{margin-top:14px}
+.forgot-saved-accounts-title{margin:0;font-size:13px;text-align:center;color:var(--soft)}
+@media(min-width:640px){.saved-accounts-list{max-height:300px}}

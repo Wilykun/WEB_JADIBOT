@@ -1,6 +1,48 @@
 {
-  "updatedAt": "2026-11-28T11:50:00+07:00",
+  "updatedAt": "2026-11-28T13:30:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "13.30 WIB",
+      "title": "Kartu Log Reset Sandi di halaman Member dihapus",
+      "tag": "Perubahan",
+      "description": "Kartu Log Reset Sandi di halaman Member (bagian ADMIN · LOG CONSOLE) sudah dihapus — tampilannya tidak bagus dan sandi sementara member terpampang di sana. Riwayat permintaan lupa sandi tetap tercatat di server (data/password-resets.json) untuk keperluan admin, hanya kartunya saja yang tidak lagi tampil di halaman."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "13.28 WIB",
+      "title": "Modal Pembaruan baru tidak muncul lagi setelah ditutup",
+      "tag": "Bug",
+      "description": "Modal Pembaruan baru sempat muncul lagi walau sudah ditutup — tombol Tutup hanya mengingatnya di memori halaman, jadi hilang begitu halaman di-refresh. Kini penanda tutup disimpan per akun di server (DATA_AKUN masing-masing), jadi modal tidak muncul lagi untuk entri yang sama sampai ada update yang lebih baru, walau halaman di-refresh. Badge angka belum dibaca tetap tampil sampai Tutup semua ditekan."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "13.26 WIB",
+      "title": "Notifikasi Versi baru tersedia dihapus, cukup notif Pembaruan baru",
+      "tag": "Perubahan",
+      "description": "Kartu notifikasi Versi baru tersedia yang muncul tiap panel diperbarui sudah dihapus beserta mekanisme cek versinya (heartbeat tiap 25 detik dan muat ulang otomatis). Notifikasi Pembaruan baru di menu Info Update sudah lebih bagus — menampilkan isi pembaruannya lengkap dengan tombol Muat ulang — jadi satu notifikasi itu sudah cukup. Tab panel tidak lagi memuat ulang sendiri; versi terbaru tetap terpakai begitu halaman dimuat ulang."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "13.23 WIB",
+      "title": "Lupa sandi tidak lagi tercampur dengan formulir Masuk",
+      "tag": "Bug",
+      "description": "Halaman Lupa sandi sempat menampilkan formulir Masuk menumpuk di atasnya, sehingga judul dan tombolnya tercampur. Penyebabnya: pemilih akun tersimpan (ronde 42) memuat daftar akun dari server, dan saat daftarnya kosong ia memunculkan lagi formulir Masuk — walau pengguna sedang di halaman Lupa sandi. Kini pemilih akun hanya mengatur formulir Masuk saat pengguna memang sedang di tampilan Masuk, jadi halaman Lupa sandi tampil bersih sebagai halaman baru."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "13.20 WIB",
+      "title": "Modal Ganti sandi tidak lagi minta sandi sementara",
+      "tag": "Bug",
+      "description": "Modal Ganti kata sandi yang muncul setelah masuk pakai sandi sementara kini tidak lagi meminta kolom Sandi sementara — cukup isi Sandi baru dan Ulangi sandi baru, lalu Simpan. Sesi login itu sendiri sudah membuktikan pengguna tahu sandi sementaranya, jadi meminta ulang justru mengunci pengguna yang sandi sementaranya sudah berganti (minta sandi sementara baru menimpa yang lama). Ganti sandi sukarela dari dalam panel tetap wajib memasukkan sandi lama seperti biasa."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "13.15 WIB",
+      "title": "Masuk kini bisa pilih akun tersimpan, tanpa ketik sandi",
+      "tag": "Fitur baru",
+      "description": "Akun yang pernah masuk dari browser ini kini tersimpan dan tampil sebagai pemilih akun di halaman Masuk — lengkap dengan foto profil dan waktu terakhir masuk, bisa di-scroll kalau akunnya banyak. Ketuk satu akun untuk langsung masuk tanpa ketik email dan kata sandi. Akun tersimpan per browser (cookie perangkat), jadi browser lain tidak ikut melihatnya, dan bisa dihapus satu per satu dari daftar. Di halaman Lupa sandi, ketuk akun tersimpan untuk mengisi email otomatis. Kalau sandi akun baru diganti, muncul notifikasi toast di bawah saat masuk berikutnya dengan hari dan jam penggantian yang akurat."
+    },
     {
       "day": "Sabtu, 28 Nov 2026",
       "time": "11.50 WIB",

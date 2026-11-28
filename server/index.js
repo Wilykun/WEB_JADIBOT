@@ -56,20 +56,6 @@ function loadConfigJson() {
 loadConfigJson();
 process.umask(0o077);
 
-// Versi kode klien dari tag script di index.html (?v= app.js): berubah tiap
-// kali versinya dinaikkan — wajib tiap deploy yang mengubah app.js — jadi tab
-// yang sudah terbuka bisa mendeteksi versi baru lewat heartbeat dan
-// memperbarui diri tanpa muat ulang manual. Dibaca dari disk tiap kali agar
-// deploy checkout (tanpa restart server) langsung terdeteksi.
-function getClientVersion() {
-  try {
-    const html = fsSync.readFileSync(path.join(PUBLIC_DIR, 'index.html'), 'utf8');
-    const match = html.match(/\/app\.js\?v=([^"'\s&]+)/);
-    return match ? match[1] : null;
-  } catch {
-    return null;
-  }
-}
 const scrypt = promisify(scryptCallback);
 const PUBLIC_DIR = path.join(ROOT, 'public');
 const DATA_DIR = path.resolve(ROOT, process.env.PANEL_DATA_DIR || 'data');
@@ -148,6 +134,7 @@ function publicUser(user) {
     role: user.role,
     isMainAdmin: isMainAdmin(user),
     mustChangePassword: Boolean(user.mustChangePassword),
+    passwordChangedAt: user.passwordChangedAt || null,
     createdAt: user.createdAt,
   };
 }
@@ -393,6 +380,10 @@ function canonicalAccountFolder(user) {
 const INFO_UPDATE_SEEN_FILE = 'info-update-seen.json';
 
 // Badge Info Update: penanda terakhir dibaca disimpan per akun di folder DATA_AKUN masing-masing, jadi akun lain tidak ikut terpengaruh.
+// RONDE 46: file yang sama juga menyimpan penanda "sudah ditutup" (dismissed)
+// untuk modal Pembaruan baru — supaya "Tutup" tidak hanya diingat di memori
+// halaman (hilang saat refresh), tapi tersimpan per akun dan modal tidak
+// muncul lagi untuk entri yang sama sampai ada update yang lebih baru.
 async function readInfoUpdateSeen(user) {
   const dir = canonicalAccountFolder(user);
   if (!dir) return null;
@@ -403,8 +394,18 @@ async function readInfoUpdateSeen(user) {
       day: String(parsed.day || '').trim().slice(0, 60),
       time: String(parsed.time || '').trim().slice(0, 20),
       title: String(parsed.title || '').trim().slice(0, 200),
+      dismissed: null,
     };
-    return seen.day && seen.time && seen.title ? seen : null;
+    const rawDismissed = parsed.dismissed;
+    if (rawDismissed && typeof rawDismissed === 'object') {
+      const dismissed = {
+        day: String(rawDismissed.day || '').trim().slice(0, 60),
+        time: String(rawDismissed.time || '').trim().slice(0, 20),
+        title: String(rawDismissed.title || '').trim().slice(0, 200),
+      };
+      if (dismissed.day && dismissed.time && dismissed.title) seen.dismissed = dismissed;
+    }
+    return seen;
   } catch { return null; }
 }
 
@@ -414,8 +415,29 @@ async function writeInfoUpdateSeen(user, seen) {
   const current = await readInfoUpdateSeen(user);
   if (current && current.day === seen.day && current.time === seen.time && current.title === seen.title) return current;
   await fs.mkdir(dir, { recursive: true });
-  await atomicWriteJson(path.join(dir, INFO_UPDATE_SEEN_FILE), { ...seen, seenAt: new Date().toISOString() });
-  return seen;
+  const record = { ...seen, seenAt: new Date().toISOString() };
+  if (current?.dismissed) record.dismissed = current.dismissed;
+  await atomicWriteJson(path.join(dir, INFO_UPDATE_SEEN_FILE), record);
+  return { ...seen, dismissed: current?.dismissed || null };
+}
+
+// RONDE 46: simpan penanda "modal sudah ditutup" tanpa mengubah penanda
+// dibaca (badge tetap), supaya modal tidak muncul lagi setelah refresh.
+async function writeInfoUpdateDismissed(user, dismissed) {
+  const dir = canonicalAccountFolder(user);
+  if (!dir) throw new Error('Folder akun tidak valid.');
+  const current = await readInfoUpdateSeen(user);
+  if (current?.dismissed && current.dismissed.day === dismissed.day && current.dismissed.time === dismissed.time && current.dismissed.title === dismissed.title) return current;
+  await fs.mkdir(dir, { recursive: true });
+  const record = {
+    day: current?.day || '',
+    time: current?.time || '',
+    title: current?.title || '',
+    seenAt: current?.seenAt || null,
+    dismissed: { ...dismissed, dismissedAt: new Date().toISOString() },
+  };
+  await atomicWriteJson(path.join(dir, INFO_UPDATE_SEEN_FILE), record);
+  return { ...record, dismissed: record.dismissed };
 }
 
 const MEMBER_LIST_SEEN_FILE = 'member-list-seen.json';
@@ -862,6 +884,71 @@ function cookieHeader(value, maxAgeSeconds, req) {
   const forwardedProto = String(req?.headers['x-forwarded-proto'] || '').split(',')[0].trim();
   const secure = forwardedProto === 'https' || process.env.COOKIE_SECURE === 'true';
   return `readsw_session=${encodeURIComponent(value)}; Path=/; HttpOnly; SameSite=${secure ? 'None' : 'Lax'}; Max-Age=${maxAgeSeconds}${secure ? '; Secure' : ''}`;
+}
+
+// RONDE 42: akun tersimpan per perangkat (browser). Cookie perangkat
+// (readsw_device, HttpOnly, 1 tahun) mengenali browser ini; server menyimpan
+// daftar akun yang pernah masuk dari perangkat itu di data/device-accounts.json
+// (bukan di localStorage, supaya avatar + waktu terakhir masuk selalu akurat
+// dan browser lain tidak ikut melihatnya). Cookie sesi tetap HttpOnly dan
+// logout tetap mencabut sesi — yang tersimpan hanya "akun ini pernah masuk
+// dari perangkat ini", bukan sandi atau token sesi.
+const DEVICE_ACCOUNTS_FILE = path.join(DATA_DIR, 'device-accounts.json');
+const DEVICE_COOKIE_TTL_SECONDS = 365 * 24 * 60 * 60;
+const MAX_SAVED_ACCOUNTS = 5;
+
+function deviceCookieHeader(value, maxAgeSeconds, req) {
+  const forwardedProto = String(req?.headers['x-forwarded-proto'] || '').split(',')[0].trim();
+  const secure = forwardedProto === 'https' || process.env.COOKIE_SECURE === 'true';
+  return `readsw_device=${encodeURIComponent(value)}; Path=/; HttpOnly; SameSite=${secure ? 'None' : 'Lax'}; Max-Age=${maxAgeSeconds}${secure ? '; Secure' : ''}`;
+}
+
+function deviceIdFromRequest(req) {
+  const id = parseCookies(req).readsw_device || '';
+  return /^[a-f0-9]{48}$/i.test(id) ? id : null;
+}
+
+function ensureDeviceId(req) {
+  return deviceIdFromRequest(req) || randomBytes(24).toString('hex');
+}
+
+async function readDeviceAccounts() {
+  try {
+    const parsed = JSON.parse(await fs.readFile(DEVICE_ACCOUNTS_FILE, 'utf8'));
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch { return {}; }
+}
+
+async function recordDeviceAccount(deviceId, userId) {
+  if (!deviceId || !userId) return;
+  const all = await readDeviceAccounts();
+  const list = (all[deviceId] || []).filter((item) => item.userId !== userId);
+  list.unshift({ userId, lastLoginAt: new Date().toISOString() });
+  all[deviceId] = list.slice(0, MAX_SAVED_ACCOUNTS);
+  await atomicWriteJson(DEVICE_ACCOUNTS_FILE, all);
+}
+
+async function removeDeviceAccount(deviceId, userId) {
+  if (!deviceId || !userId) return false;
+  const all = await readDeviceAccounts();
+  const before = (all[deviceId] || []).length;
+  const list = (all[deviceId] || []).filter((item) => item.userId !== userId);
+  if (list.length === before) return false;
+  if (list.length) all[deviceId] = list; else delete all[deviceId];
+  await atomicWriteJson(DEVICE_ACCOUNTS_FILE, all);
+  return true;
+}
+
+async function savedAccountsForDevice(deviceId) {
+  if (!deviceId) return [];
+  const all = await readDeviceAccounts();
+  const accounts = [];
+  for (const item of all[deviceId] || []) {
+    const user = store.users.find((entry) => entry.id === item.userId);
+    if (!user || isBannedAccount(user)) continue;
+    accounts.push({ ...publicUser(user), lastLoginAt: item.lastLoginAt || null });
+  }
+  return accounts;
 }
 
 async function createSession(userId) {
@@ -1897,7 +1984,9 @@ async function handleApi(req, res, url) {
     if (isBannedAccount(verifiedUser)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true });
     const token = await createSession(verifiedUser.id);
     await recordLogin(verifiedUser.id, req, token.split('.')[0]);
-    return sendJson(res, 200, { user: publicUser(verifiedUser) }, { 'Set-Cookie': cookieHeader(token, SESSION_TTL_MS / 1000, req) });
+    const deviceId = ensureDeviceId(req);
+    await recordDeviceAccount(deviceId, verifiedUser.id);
+    return sendJson(res, 200, { user: publicUser(verifiedUser) }, { 'Set-Cookie': [cookieHeader(token, SESSION_TTL_MS / 1000, req), deviceCookieHeader(deviceId, DEVICE_COOKIE_TTL_SECONDS, req)] });
   }
 
   // Langkah kedua pendaftaran admin: setelah verifikasi, pendaftar wajib
@@ -1976,7 +2065,9 @@ async function handleApi(req, res, url) {
     if (isBannedAccount(verifiedUser)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true });
     const token = await createSession(verifiedUser.id);
     await recordLogin(verifiedUser.id, req, token.split('.')[0]);
-    return sendJson(res, 200, { user: publicUser(verifiedUser) }, { 'Set-Cookie': cookieHeader(token, SESSION_TTL_MS / 1000, req) });
+    const deviceId = ensureDeviceId(req);
+    await recordDeviceAccount(deviceId, verifiedUser.id);
+    return sendJson(res, 200, { user: publicUser(verifiedUser) }, { 'Set-Cookie': [cookieHeader(token, SESSION_TTL_MS / 1000, req), deviceCookieHeader(deviceId, DEVICE_COOKIE_TTL_SECONDS, req)] });
   }
 
   // Lupa sandi (email saja, bukan username): kata sandi member tersimpan
@@ -2060,7 +2151,9 @@ async function handleApi(req, res, url) {
     if (user.verified === false) return sendError(res, 403, 'Akun belum diverifikasi. Selesaikan CAPTCHA setelah pendaftaran terlebih dahulu.');
     const token = await createSession(user.id);
     await recordLogin(user.id, req, token.split('.')[0]);
-    return sendJson(res, 200, { user: publicUser(user) }, { 'Set-Cookie': cookieHeader(token, SESSION_TTL_MS / 1000, req) });
+    const deviceId = ensureDeviceId(req);
+    await recordDeviceAccount(deviceId, user.id);
+    return sendJson(res, 200, { user: publicUser(user) }, { 'Set-Cookie': [cookieHeader(token, SESSION_TTL_MS / 1000, req), deviceCookieHeader(deviceId, DEVICE_COOKIE_TTL_SECONDS, req)] });
   }
 
   if (route === 'POST /api/auth/logout') {
@@ -2068,6 +2161,48 @@ async function handleApi(req, res, url) {
     const [sid] = cookie.split('.');
     if (sid) await mutate((next) => { next.sessions = next.sessions.filter((session) => session.sid !== sid); });
     return sendJson(res, 200, { ok: true }, { 'Set-Cookie': cookieHeader('', 0, req) });
+  }
+
+  // RONDE 42: akun tersimpan per perangkat — daftar akun yang pernah masuk
+  // dari browser ini (cookie perangkat), untuk pemilih akun di halaman Masuk
+  // dan Lupa sandi. Publik, tapi hanya mengembalikan akun perangkat ini.
+  if (route === 'GET /api/auth/saved-accounts') {
+    const deviceId = deviceIdFromRequest(req);
+    const accounts = await savedAccountsForDevice(deviceId);
+    return sendJson(res, 200, { ok: true, accounts });
+  }
+
+  // RONDE 42: masuk cepat ke akun tersimpan — tanpa ketik email/sandi, cukup
+  // cookie perangkat yang membuktikan akun ini pernah masuk dari browser ini.
+  // Dibatasi 10 percobaan / 15 menit per IP; akun yang diblokir tetap ditolak.
+  if (route === 'POST /api/auth/quick-login') {
+    const ip = clientKey(req);
+    if (!allowRateLimit(`quick-login-ip:${ip}`, 10, 15 * 60 * 1000)) {
+      return sendError(res, 429, 'Terlalu banyak percobaan. Tunggu beberapa menit.');
+    }
+    const body = await readJson(req);
+    const username = String(body.username || '').trim().toLowerCase();
+    const deviceId = deviceIdFromRequest(req);
+    const accounts = await savedAccountsForDevice(deviceId);
+    const saved = accounts.find((item) => item.username === username);
+    if (!saved) return sendError(res, 404, 'Akun itu belum tersimpan di browser ini. Masuk dengan email dan kata sandi dulu.');
+    const user = store.users.find((item) => item.id === saved.id);
+    if (!user) return sendError(res, 404, 'Akun tidak ditemukan.');
+    if (isBannedAccount(user)) return sendJson(res, 403, { error: BANNED_LOGIN_NOTICE, banned: true, banReason: user.banReason || null });
+    const token = await createSession(user.id);
+    await recordLogin(user.id, req, token.split('.')[0]);
+    await recordDeviceAccount(deviceId, user.id);
+    return sendJson(res, 200, { user: publicUser(user) }, { 'Set-Cookie': [cookieHeader(token, SESSION_TTL_MS / 1000, req), deviceCookieHeader(deviceId, DEVICE_COOKIE_TTL_SECONDS, req)] });
+  }
+
+  // RONDE 42: hapus satu akun tersimpan dari perangkat ini.
+  if (route === 'POST /api/auth/saved-accounts/remove') {
+    const body = await readJson(req);
+    const username = String(body.username || '').trim().toLowerCase();
+    const deviceId = deviceIdFromRequest(req);
+    const user = store.users.find((item) => item.username === username);
+    const removed = user ? await removeDeviceAccount(deviceId, user.id) : false;
+    return sendJson(res, 200, { ok: true, removed });
   }
 
   if (route === 'POST /api/auth/forgot-password') {
@@ -2162,6 +2297,7 @@ async function handleApi(req, res, url) {
       target.salt = salt;
       target.passwordHash = passwordHash;
       target.mustChangePassword = false;
+      target.passwordChangedAt = new Date().toISOString();
       delete target.tempPasswordAt;
       // RONDE 39: hash sandi sementara SENGAJA dipertahankan — sandi sementara
       // tetap bisa dipakai masuk sebagai cadangan setelah sandi baru disimpan.
@@ -2193,17 +2329,28 @@ async function handleApi(req, res, url) {
     const body = await readJson(req);
     const currentPassword = String(body.currentPassword || '').slice(0, 128);
     const newPassword = String(body.newPassword || '').slice(0, 128);
-    if (!currentPassword || !newPassword) return sendError(res, 400, 'Isi sandi lama dan sandi baru.');
+    if (!newPassword) return sendError(res, 400, 'Isi sandi baru.');
     if (newPassword.length < 12) return sendError(res, 400, 'Sandi baru minimal 12 karakter.');
-    if (newPassword === currentPassword) return sendError(res, 400, 'Sandi baru harus berbeda dari sandi lama.');
-    const attempt = (await scrypt(currentPassword, user.salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
-    let valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(attempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.passwordHash).digest('hex'));
-    // RONDE 39: sandi sementara juga sah sebagai "sandi lama" saat ganti sandi.
-    if (!valid && user.tempPasswordHash && user.tempPasswordSalt) {
-      const tempAttempt = (await scrypt(currentPassword, user.tempPasswordSalt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
-      valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(tempAttempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.tempPasswordHash).digest('hex'));
+    // RONDE 43: kalau sandi lama dimasukkan, verifikasi seperti biasa (sandi
+    // utama dulu, lalu sandi sementara) — salah tetap 401. Tapi kalau sandi
+    // lama KOSONG dan akun wajib ganti sandi (masuk pakai sandi sementara),
+    // lewati saja: sesi login ini sendiri sudah membuktikan pengguna tahu
+    // sandi sementaranya. Meminta ulang justru mengunci pengguna yang sandi
+    // sementaranya sudah berganti (minta sandi sementara baru menimpa yang
+    // lama). Ganti sandi sukarela (mustChange false) tetap wajib sandi lama.
+    if (currentPassword) {
+      if (newPassword === currentPassword) return sendError(res, 400, 'Sandi baru harus berbeda dari sandi lama.');
+      const attempt = (await scrypt(currentPassword, user.salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+      let valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(attempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.passwordHash).digest('hex'));
+      // RONDE 39: sandi sementara juga sah sebagai "sandi lama" saat ganti sandi.
+      if (!valid && user.tempPasswordHash && user.tempPasswordSalt) {
+        const tempAttempt = (await scrypt(currentPassword, user.tempPasswordSalt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
+        valid = constantTimeHexEqual(createHmac('sha256', sessionSecret).update(tempAttempt).digest('hex'), createHmac('sha256', sessionSecret).update(user.tempPasswordHash).digest('hex'));
+      }
+      if (!valid) return sendError(res, 401, 'Sandi lama salah. Coba lagi.');
+    } else if (!user.mustChangePassword) {
+      return sendError(res, 400, 'Isi sandi lama dan sandi baru.');
     }
-    if (!valid) return sendError(res, 401, 'Sandi lama salah. Coba lagi.');
     const salt = randomBytes(16).toString('hex');
     const passwordHash = (await scrypt(newPassword, salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 })).toString('hex');
     await mutate((next) => {
@@ -2212,6 +2359,7 @@ async function handleApi(req, res, url) {
       target.salt = salt;
       target.passwordHash = passwordHash;
       target.mustChangePassword = false;
+      target.passwordChangedAt = new Date().toISOString();
       delete target.tempPasswordAt;
     });
     return sendJson(res, 200, { ok: true, message: 'Kata sandi berhasil diganti.' });
@@ -2233,6 +2381,19 @@ async function handleApi(req, res, url) {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
     if (!allowRateLimit(`info-updates-seen:${user.id}`, 30, 60 * 1000)) return sendError(res, 429, 'Terlalu sering. Coba lagi sebentar.');
     const body = await readJson(req);
+    // RONDE 46: body {dismissed: {day, time, title}} hanya menyimpan penanda
+    // "modal sudah ditutup" (badge tetap); body {day, time, title} menyimpan
+    // penanda dibaca seperti biasa.
+    if (body?.dismissed && typeof body.dismissed === 'object') {
+      const dismissed = {
+        day: String(body.dismissed.day || '').trim().slice(0, 60),
+        time: String(body.dismissed.time || '').trim().slice(0, 20),
+        title: String(body.dismissed.title || '').trim().slice(0, 200),
+      };
+      if (!dismissed.day || !dismissed.time || !dismissed.title) return sendError(res, 400, 'Penanda tutup tidak lengkap.');
+      const seen = await writeInfoUpdateDismissed(user, dismissed);
+      return sendJson(res, 200, { seen });
+    }
     const seen = {
       day: String(body?.day || '').trim().slice(0, 60),
       time: String(body?.time || '').trim().slice(0, 20),
@@ -2240,7 +2401,7 @@ async function handleApi(req, res, url) {
     };
     if (!seen.day || !seen.time || !seen.title) return sendError(res, 400, 'Penanda update tidak lengkap.');
     await writeInfoUpdateSeen(user, seen);
-    return sendJson(res, 200, { seen });
+    return sendJson(res, 200, { seen: await readInfoUpdateSeen(user) });
   }
   // Badge Member: baca dan simpan penanda akun terbaru yang sudah dilihat.
   if (route === 'GET /api/member-list/seen') {
@@ -2468,7 +2629,7 @@ async function handleApi(req, res, url) {
     const latestLoginAt = (store.loginHistory || [])
       .filter((entry) => entry.userId !== user.id)
       .reduce((max, entry) => (!max || String(entry.createdAt || '') > max ? String(entry.createdAt) : max), null);
-    return sendJson(res, 200, { ok: true, version: getClientVersion(), latestLoginAt });
+    return sendJson(res, 200, { ok: true, latestLoginAt });
   }
   if (route === 'GET /api/pairing/status') {
     if (!user) return sendError(res, 401, 'Silakan masuk kembali.');

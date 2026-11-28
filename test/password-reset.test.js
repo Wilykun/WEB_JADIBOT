@@ -31,8 +31,8 @@ test('Lupa sandi: form hanya minta email, ada tautan Lupa sandi, dan modal ganti
   assert.ok(forgotSection.includes('Tampilkan sandi sementara'), 'form harus punya tombol tampilkan sandi sementara di web');
   assert.ok(html.includes('id="change-password-overlay"'), 'modal wajib ganti sandi harus ada');
   assert.ok(html.includes('id="change-password-form"'), 'form ganti sandi harus ada');
-  assert.ok(html.includes('id="password-reset-log-list"'), 'log reset sandi admin harus ada');
-  assert.ok(html.includes('Log Reset Sandi'), 'log harus berjudul Log Reset Sandi');
+  assert.ok(!html.includes('id="password-reset-log-list"'), 'kartu Log Reset Sandi sudah dihapus dari halaman Member (ronde 47)');
+  assert.ok(!html.includes('id="password-reset-log-title"'), 'judul Log Reset Sandi sudah tidak ada di halaman (ronde 47)');
   assert.ok(html.includes('id="forgot-account"'), 'kartu status akun setelah email cocok harus ada');
   assert.ok(html.includes('id="forgot-account-avatar"'), 'kartu status harus menampilkan avatar');
   assert.ok(html.includes('id="forgot-notfound"'), 'animasi pemberitahuan email tidak ditemukan harus ada');
@@ -77,7 +77,8 @@ test('Lupa sandi: form hanya minta email, ada tautan Lupa sandi, dan modal ganti
   assert.ok(appJs.includes("api('/api/auth/reset-password'"), 'buat sandi baru harus memanggil endpoint reset-password');
   assert.ok(css.includes('.auth-forgot'), 'tautan lupa sandi harus punya gaya');
   assert.ok(css.includes('.change-password-card'), 'modal ganti sandi harus punya gaya');
-  assert.ok(css.includes('.password-reset-log-item'), 'entri log reset harus punya gaya');
+  assert.ok(!css.includes('.password-reset-log-item'), 'gaya entri log reset sudah dihapus (ronde 47)');
+  assert.ok(!css.includes('.password-reset-log-card'), 'gaya kartu log reset sudah dihapus (ronde 47)');
   assert.ok(css.includes('.forgot-account'), 'kartu status akun harus punya gaya');
   assert.ok(css.includes('.forgot-shake'), 'goyang kolom email saat tidak ditemukan harus punya gaya');
   assert.ok(css.includes('@keyframes forgot-account-in'), 'kartu status harus muncul dengan animasi');
@@ -88,7 +89,9 @@ test('Lupa sandi: form hanya minta email, ada tautan Lupa sandi, dan modal ganti
   assert.ok(appJs.includes("canSeeEmail"), 'daftar member harus menyembunyikan email orang lain (hanya admin/pemilik yang melihat)');
   assert.ok(appJs.includes('function showChangePasswordModal'), 'harus ada fungsi tampilkan modal ganti sandi');
   assert.ok(appJs.includes("api('/api/auth/change-password'"), 'modal harus memanggil endpoint ganti sandi');
-  assert.ok(appJs.includes("api('/api/admin/password-resets'"), 'log admin harus memanggil endpoint log reset');
+  assert.ok(!appJs.includes("api('/api/admin/password-resets'"), 'klien TIDAK lagi memanggil endpoint log reset (kartu dihapus, ronde 47)');
+  assert.ok(!appJs.includes('loadPasswordResetLog'), 'fungsi pemuat log reset sudah dihapus (ronde 47)');
+  assert.ok(!appJs.includes('startPasswordResetLogPolling'), 'polling log reset sudah dihapus (ronde 47)');
   assert.ok(appJs.includes('mustChangePassword'), 'login harus memeriksa penanda wajib ganti sandi');
   assert.ok(serverJs.includes("route === 'POST /api/auth/forgot-password'"), 'server harus punya endpoint lupa sandi');
   assert.ok(serverJs.includes("route === 'POST /api/auth/reset-password'"), 'server harus punya endpoint buat sandi baru langsung dari web');
@@ -536,4 +539,94 @@ f({ displayName: 'BangWily', username: 'bangwily', email: 'bangwily@gmail.com', 
   assert.ok(out.includes('Fitur aktif           : ReadSW, ReactionSW'), 'file harus berisi fitur aktif');
   assert.ok(out.includes('Sabtu, 28 Nov 2026'), 'file harus berisi tanggal pembuatan');
   assert.ok(out.includes('jangan dibagikan ke siapa pun'), 'file harus berisi peringatan privasi');
+});
+
+test('ronde 43: modal Ganti sandi tidak lagi minta sandi sementara', () => {
+  const modalStart = html.indexOf('id="change-password-overlay"');
+  const modalEnd = html.indexOf('</form>', modalStart);
+  const modal = html.slice(modalStart, modalEnd);
+  assert.ok(!modal.includes('name="currentPassword"'), 'modal TIDAK boleh lagi punya kolom sandi sementara');
+  assert.ok(!modal.includes('Sandi sementara dari WhatsApp'), 'modal TIDAK boleh lagi menyebut sandi sementara dari WhatsApp');
+  assert.ok(modal.includes('name="newPassword"'), 'modal harus tetap punya kolom sandi baru');
+  assert.ok(modal.includes('name="confirmPassword"'), 'modal harus tetap punya kolom ulangi sandi baru');
+  assert.ok(modal.includes('Tidak perlu memasukkan sandi sementara lagi'), 'modal harus menjelaskan sandi sementara tidak perlu dimasukkan lagi');
+  assert.ok(appJs.includes("JSON.stringify({ newPassword: data.newPassword })"), 'modal harus mengirim hanya sandi baru');
+  assert.ok(serverJs.includes('else if (!user.mustChangePassword)'), 'server harus tetap wajib sandi lama untuk ganti sukarela');
+  assert.ok(serverJs.includes('RONDE 43'), 'server harus menandai logika ronde 43');
+});
+
+test('server ganti sandi ronde 43: tanpa sandi lama lolos saat wajib ganti, tetap wajib saat sukarela', { timeout: 60_000 }, async () => {
+  const temp = await mkdtemp(path.join(os.tmpdir(), 'readsw-change-password-r43-test-'));
+  const root = path.join(temp, 'project');
+  const dataDir = path.join(root, 'runtime-data');
+  const memberPassword = 'FixtureMember-Only-Password!';
+  const tempPassword = 'TempPassR43!';
+  let child;
+  try {
+    await mkdir(root, { recursive: true });
+    await cp(path.join(sourceRoot, 'server'), path.join(root, 'server'), { recursive: true });
+    await cp(path.join(sourceRoot, 'public'), path.join(root, 'public'), { recursive: true });
+    await cp(path.join(sourceRoot, 'package.json'), path.join(root, 'package.json'));
+    await symlink(path.join(sourceRoot, 'node_modules'), path.join(root, 'node_modules'), 'dir');
+    await mkdir(dataDir, { recursive: true });
+    const tempSalt = randomBytes(16).toString('hex');
+    const tempHash = scryptSync(tempPassword, tempSalt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 }).toString('hex');
+    const member = fixtureUser('fixturemember', 'fixturemember@example.test', 'member', memberPassword);
+    member.mustChangePassword = true;
+    member.tempPasswordSalt = tempSalt;
+    member.tempPasswordHash = tempHash;
+    member.tempPasswordAt = new Date().toISOString();
+    await writeFile(path.join(dataDir, 'store.json'), JSON.stringify({
+      users: [member], pendingRegistrations: [], bots: [], sessions: [], pairingLogs: [], loginHistory: [],
+    }));
+    const port = await unusedPort();
+    const base = `http://127.0.0.1:${port}`;
+    child = spawn(process.execPath, [path.join(root, 'server/index.js')], {
+      cwd: root,
+      env: { ...process.env, HOST: '127.0.0.1', PORT: String(port), PANEL_DATA_DIR: 'runtime-data', SESSION_SECRET: randomBytes(48).toString('base64url'), NODE_ENV: 'test', BOOTSTRAP_ADMIN_USERNAME: 'fixtureadmin' },
+      stdio: 'ignore',
+    });
+    let ready = false;
+    for (let attempt = 0; attempt < 100; attempt += 1) {
+      if (child.exitCode !== null) throw new Error(`fixture server exited with code ${child.exitCode}`);
+      try {
+        const response = await fetch(`${base}/api/health`, { signal: AbortSignal.timeout(500) });
+        if (response.ok) { ready = true; break; }
+      } catch { /* Wait briefly for local fixture startup. */ }
+      await wait(100);
+    }
+    assert.equal(ready, true, 'isolated fixture server should start');
+
+    // Masuk pakai sandi sementara: wajib ganti sandi.
+    const tempLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: tempPassword } });
+    assert.equal(tempLogin.status, 200, 'login sandi sementara harus 200');
+    assert.equal(tempLogin.payload.user.mustChangePassword, true, 'login sandi sementara harus menandai wajib ganti');
+    const memberCookie = tempLogin.cookie;
+
+    // Tanpa sandi lama, ganti sandi HARUS lolos saat wajib ganti (ronde 43).
+    const noCurrent = await jsonRequest(base, '/api/auth/change-password', { method: 'POST', body: { newPassword: 'SandiBaruR43Panjang!' }, cookie: memberCookie });
+    assert.equal(noCurrent.status, 200, 'ganti sandi tanpa sandi lama harus 200 saat wajib ganti');
+    const storeAfter = JSON.parse(await readFile(path.join(dataDir, 'store.json'), 'utf8'));
+    const changedUser = storeAfter.users.find((item) => item.username === 'fixturemember');
+    assert.equal(changedUser.mustChangePassword, false, 'setelah ganti sandi penanda wajib ganti harus hilang');
+    assert.ok(changedUser.passwordChangedAt, 'ganti sandi harus mencatat passwordChangedAt');
+
+    // Login dengan sandi baru berhasil, tanpa penanda wajib ganti.
+    const newLogin = await jsonRequest(base, '/api/auth/login', { method: 'POST', body: { identifier: 'fixturemember', password: 'SandiBaruR43Panjang!' } });
+    assert.equal(newLogin.status, 200, 'login sandi baru harus 200');
+    assert.equal(newLogin.payload.user.mustChangePassword, false, 'login sandi baru tidak boleh menandai wajib ganti');
+    const newCookie = newLogin.cookie;
+
+    // Ganti sandi sukarela (tidak wajib): tanpa sandi lama harus 400,
+    // sandi lama salah harus 401, sandi lama benar harus 200.
+    const noCurrentVoluntary = await jsonRequest(base, '/api/auth/change-password', { method: 'POST', body: { newPassword: 'SandiBaruR43Kedua!' }, cookie: newCookie });
+    assert.equal(noCurrentVoluntary.status, 400, 'ganti sukarela tanpa sandi lama harus 400');
+    const wrongCurrent = await jsonRequest(base, '/api/auth/change-password', { method: 'POST', body: { currentPassword: 'salah-salah', newPassword: 'SandiBaruR43Kedua!' }, cookie: newCookie });
+    assert.equal(wrongCurrent.status, 401, 'ganti sukarela sandi lama salah harus 401');
+    const rightCurrent = await jsonRequest(base, '/api/auth/change-password', { method: 'POST', body: { currentPassword: 'SandiBaruR43Panjang!', newPassword: 'SandiBaruR43Kedua!' }, cookie: newCookie });
+    assert.equal(rightCurrent.status, 200, 'ganti sukarela sandi lama benar harus 200');
+  } finally {
+    if (child) child.kill();
+    await rm(temp, { recursive: true, force: true });
+  }
 });

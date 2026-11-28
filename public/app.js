@@ -238,9 +238,6 @@ function readStorySettings() {
 // halaman Pairing).
 let emojiNoticeDismissed = false;
 let noticeContext = null;
-// Versi yang tawaran muat ulangnya sudah ditutup, supaya tawaran yang sama
-// tidak muncul lagi tiap heartbeat sampai ada versi yang lebih baru.
-let newVersionPrompted = null;
 // Akun Kontrol Bot yang notifikasinya sudah ditutup selagi keadaannya masih
 // aktif — ditutup per akun supaya admin tidak diganggu berulang kali.
 const botControlEmojiNoticeDismissed = new Set();
@@ -287,9 +284,6 @@ function dismissNoticeOverlay() {
   } else if (noticeContext?.kind === 'accountactivitylogin') {
     // Tanpa ingatan: tiap login baru tampil lagi, dan menutup kartu ini
     // tidak boleh mematikan pengingat reaksi emoji (cabang else di bawah).
-  } else if (noticeContext?.kind === 'version') {
-    // Ingat versi yang sudah ditawarkan supaya tidak mengganggu tiap heartbeat.
-    newVersionPrompted = noticeContext.version || null;
   } else {
     emojiNoticeDismissed = true;
   }
@@ -609,6 +603,13 @@ function setAuthMode(mode) {
     updatePasswordStrength();
     updatePasswordConfirmation();
   }
+  // RONDE 42: tampilkan pemilih akun tersimpan di mode masuk; sembunyikan
+  // saat daftar (akun baru belum tersimpan di perangkat ini).
+  if (registering) {
+    document.querySelector('#saved-accounts')?.classList.add('hidden');
+  } else {
+    void loadSavedAccounts();
+  }
 }
 
 // Lupa sandi (ronde 33, email saja): tampilkan formulir lupa sandi dan
@@ -639,6 +640,8 @@ function showForgotForm() {
   forgotResetEmail = '';
   forgotAccountFileText = '';
   setAuthMessage('');
+  // RONDE 42: isi pemilih email dari akun tersimpan di browser ini.
+  void loadSavedAccounts();
 }
 
 function showVerificationForm(payload) {
@@ -3566,49 +3569,10 @@ let loginHistoryTimer = null;
 let adminUsersTimer = null;
 let presenceHeartbeatTimer = null;
 
-// Versi kode yang dimuat tab ini (dari ?v= di tag script app.js): dipakai
-// untuk mendeteksi deploy baru supaya tab yang sudah terbuka ikut diperbarui
-// tanpa muat ulang manual.
-const loadedClientVersion = (() => {
-  const src = document.querySelector('script[src*="/app.js"]')?.src || '';
-  try { return new URL(src, location.href).searchParams.get('v'); } catch { return null; }
-})();
-
-// Muat ulang otomatis hanya bila pengguna sedang tidak diganggu: tidak ada
-// overlay terbuka dan tidak sedang mengetik di kolom apa pun.
-function isClientIdleForReload() {
-  if (!document.querySelector('#emoji-notice-overlay')?.classList.contains('hidden')) return false;
-  if (!document.querySelector('#info-update-notice-overlay')?.classList.contains('hidden')) return false;
-  if (document.querySelector('.confirm-overlay')) return false;
-  const active = document.activeElement;
-  if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT' || active.isContentEditable)) return false;
-  return true;
-}
-
-// Versi baru dari server: muat ulang sendiri bila sedang tidak dipakai; bila
-// sedang dipakai, tawarkan sekali lewat notifikasi di tengah layar.
-function checkClientVersion(serverVersion) {
-  if (!serverVersion || !loadedClientVersion || serverVersion === loadedClientVersion) {
-    newVersionPrompted = null;
-    if (noticeContext?.kind === 'version') hideNoticeOverlay();
-    return;
-  }
-  if (serverVersion === newVersionPrompted) return;
-  if (isClientIdleForReload()) { location.reload(); return; }
-  showNoticeOverlay({
-    title: 'Versi baru tersedia',
-    text: 'Panel baru saja diperbarui. Muat ulang halaman untuk memakai versi terbaru.',
-    context: { kind: 'version', version: serverVersion },
-    addLabel: 'Muat ulang',
-    onAdd: () => location.reload(),
-  });
-}
-
 async function sendPresenceHeartbeat() {
   if (!currentUser || document.visibilityState !== 'visible' || appView.classList.contains('hidden')) return;
   try {
     const result = await api('/api/me/heartbeat', { method: 'POST', body: '{}' });
-    checkClientVersion(result?.version);
     syncAccountActivityLoginBadge(result?.latestLoginAt);
     // Daftar member langsung dimuat ulang begitu heartbeat berhasil, jadi
     // status Pemilik milik sendiri mengikuti heartbeat tanpa menunggu
@@ -3757,65 +3721,6 @@ function startAdminUsersPolling() {
   }, 15000);
 }
 
-// Log Reset Sandi (ronde 33, admin saja): tampilkan percobaan lupa sandi
-// realtime — sandi sementara, status pengiriman WA, dan info akun.
-async function loadPasswordResetLog() {
-  const list = document.querySelector('#password-reset-log-list');
-  const updated = document.querySelector('#password-reset-log-updated');
-  if (!list || currentUser?.role !== 'admin') return;
-  try {
-    const result = await api('/api/admin/password-resets');
-    const resets = Array.isArray(result.resets) ? result.resets : [];
-    list.replaceChildren();
-    if (!resets.length) {
-      const empty = document.createElement('li');
-      empty.className = 'password-reset-log-empty';
-      empty.textContent = 'Belum ada permintaan lupa sandi.';
-      list.append(empty);
-    } else {
-      for (const entry of resets) {
-        const item = document.createElement('li');
-        item.className = 'password-reset-log-item';
-        const when = new Date(entry.createdAt);
-        const timeLabel = Number.isNaN(when.getTime()) ? '' : when.toLocaleString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-        const sent = entry.status === 'sent';
-        const shown = entry.status === 'shown';
-        const statusLabel = sent ? 'Terkirim' : shown ? 'Tampil di web' : 'Gagal';
-        const statusClass = sent || shown ? 'is-sent' : 'is-failed';
-        item.innerHTML = `<div class="password-reset-log-head"><strong></strong><span class="password-reset-log-status ${statusClass}">${statusLabel}</span><span class="password-reset-log-time"></span></div><p class="password-reset-log-meta"></p>`;
-        item.querySelector('strong').textContent = entry.displayName || entry.username || '—';
-        item.querySelector('.password-reset-log-time').textContent = timeLabel;
-        const meta = item.querySelector('.password-reset-log-meta');
-        const userLine = document.createElement('span');
-        userLine.textContent = `@${entry.username || '—'} · ${entry.email || '—'} · ${entry.role === 'admin' ? 'Admin' : 'Member'}`;
-        meta.append(userLine);
-        meta.append(document.createElement('br'));
-        const tempLabel = document.createElement('span');
-        tempLabel.textContent = 'Sandi sementara: ';
-        const tempCode = document.createElement('code');
-        tempCode.textContent = entry.tempPassword || '—';
-        meta.append(tempLabel, tempCode);
-        if (!sent && entry.reason) {
-          const reason = document.createElement('span');
-          reason.className = 'password-reset-log-reason';
-          reason.textContent = ` — ${entry.reason}`;
-          meta.append(reason);
-        }
-        list.append(item);
-      }
-    }
-    if (updated) updated.textContent = `Diperbarui ${new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}`;
-  } catch {
-    // Log tidak tersedia; dashboard tetap jalan.
-  }
-}
-let passwordResetLogTimer = null;
-function startPasswordResetLogPolling() {
-  if (passwordResetLogTimer) return;
-  passwordResetLogTimer = setInterval(() => {
-    if (document.visibilityState === 'visible' && currentUser && !appView.classList.contains('hidden')) void loadPasswordResetLog();
-  }, 15000);
-}
 
 function setPairingNotice(text, success = false, info = false) {
   const notice = document.querySelector('#pairing-notice');
@@ -5579,8 +5484,6 @@ async function showDashboard(user) {
   await loadLoginHistory();
   startLoginHistoryPolling();
   startAdminUsersPolling();
-  void loadPasswordResetLog();
-  startPasswordResetLogPolling();
   startBotControlUsersPolling();
   startPresenceHeartbeat();
 }
@@ -5843,6 +5746,167 @@ document.querySelectorAll('[data-mobile-info-menu]').forEach((button) => {
 });
 document.querySelector('[data-mobile-info-menu-back]')?.addEventListener('click', () => setMobileInfoView('menu'));
 
+// RONDE 42: akun tersimpan per perangkat — pemilih akun di halaman Masuk
+// dan Lupa sandi. Daftar datang dari server (cookie perangkat), jadi hanya
+// akun browser ini yang tampil, lengkap dengan avatar dan waktu terakhir
+// masuk. Ketuk akun untuk masuk cepat tanpa ketik email/sandi.
+function savedAccountAvatarSrc(account) {
+  if (account.avatar === 'uploaded') {
+    return `/api/admin/user-avatar?userId=${encodeURIComponent(account.id)}`;
+  }
+  const preset = /^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(account.avatar || '') ? account.avatar : 'avatar-01';
+  return `/avatars/${preset}.webp`;
+}
+
+function formatLastLoginAt(iso) {
+  if (!iso) return '';
+  const then = new Date(iso).getTime();
+  if (Number.isNaN(then)) return '';
+  const diff = Date.now() - then;
+  if (diff < 60_000) return 'baru saja';
+  if (diff < 3_600_000) return `${Math.floor(diff / 60_000)} mnt lalu`;
+  if (diff < 86_400_000) return `${Math.floor(diff / 3_600_000)} jam lalu`;
+  if (diff < 7 * 86_400_000) return `${Math.floor(diff / 86_400_000)} hari lalu`;
+  return new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Jakarta' }).format(new Date(then));
+}
+
+function buildSavedAccountCard(account, mode) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'saved-account-card';
+  card.dataset.username = account.username;
+  const img = document.createElement('img');
+  img.className = 'saved-account-avatar';
+  img.src = savedAccountAvatarSrc(account);
+  img.alt = '';
+  img.width = 44;
+  img.height = 44;
+  const copy = document.createElement('span');
+  copy.className = 'saved-account-copy';
+  const name = document.createElement('strong');
+  name.textContent = account.displayName || account.username;
+  const meta = document.createElement('span');
+  meta.className = 'saved-account-meta';
+  meta.textContent = `@${account.username}${account.lastLoginAt ? ` · terakhir masuk ${formatLastLoginAt(account.lastLoginAt)}` : ''}`;
+  copy.append(name, meta);
+  const chevron = document.createElement('span');
+  chevron.className = 'saved-account-chevron';
+  chevron.setAttribute('aria-hidden', 'true');
+  chevron.textContent = '›';
+  const remove = document.createElement('span');
+  remove.className = 'saved-account-remove';
+  remove.setAttribute('role', 'button');
+  remove.setAttribute('tabindex', '0');
+  remove.setAttribute('aria-label', `Hapus ${account.username} dari browser ini`);
+  remove.textContent = '×';
+  remove.addEventListener('click', async (event) => {
+    event.stopPropagation();
+    await removeSavedAccount(account.username, card);
+  });
+  card.append(img, copy, chevron, remove);
+  card.addEventListener('click', () => {
+    if (mode === 'forgot') fillForgotEmail(account);
+    else void quickLoginSavedAccount(account, card);
+  });
+  return card;
+}
+
+async function removeSavedAccount(username, card) {
+  try {
+    await api('/api/auth/saved-accounts/remove', { method: 'POST', body: JSON.stringify({ username }) });
+  } catch { /* Hapus dari tampilan saja kalau server gagal. */ }
+  card.remove();
+  if (!document.querySelector('#saved-accounts-list')?.children.length) {
+    document.querySelector('#saved-accounts')?.classList.add('hidden');
+    loginForm?.classList.remove('hidden');
+  }
+  if (!document.querySelector('#forgot-saved-accounts-list')?.children.length) {
+    document.querySelector('#forgot-saved-accounts')?.classList.add('hidden');
+  }
+}
+
+function fillForgotEmail(account) {
+  const emailInput = forgotForm?.querySelector('input[name="email"]');
+  if (emailInput) {
+    emailInput.value = account.email || '';
+    emailInput.focus();
+    showToast(`Email @${account.username} terisi. Tekan Tampilkan sandi sementara.`);
+  }
+}
+
+async function quickLoginSavedAccount(account, card) {
+  card.disabled = true;
+  try {
+    const result = await api('/api/auth/quick-login', { method: 'POST', body: JSON.stringify({ username: account.username }) });
+    await showDashboard(result.user);
+    maybeShowPasswordChangedToast(result.user);
+  } catch (error) {
+    if (error.status === 404 || error.status === 401) {
+      await removeSavedAccount(account.username, card);
+      showToast('Akun itu sudah tidak tersimpan di browser ini. Masuk dengan email dan kata sandi.');
+    } else {
+      showToast(error.message || 'Masuk cepat gagal. Coba masuk biasa.');
+    }
+  } finally {
+    card.disabled = false;
+  }
+}
+
+async function loadSavedAccounts() {
+  let accounts = [];
+  try {
+    const result = await api('/api/auth/saved-accounts');
+    accounts = Array.isArray(result.accounts) ? result.accounts : [];
+  } catch { accounts = []; }
+  // RONDE 44: pemilih akun hanya berlaku di tampilan Masuk. Kalau pengguna
+  // sedang di Lupa sandi (atau tampilan auth lain), JANGAN sentuh formulir
+  // Masuk — kalau tidak, formulir Masuk muncul lagi menumpuk di atas Lupa
+  // sandi (bug yang dilaporkan Wily: dua formulir tampil bersamaan).
+  const onForgotPage = !forgotForm?.classList.contains('hidden');
+  const loginList = document.querySelector('#saved-accounts-list');
+  const loginBox = document.querySelector('#saved-accounts');
+  if (loginList && loginBox) {
+    loginList.replaceChildren();
+    if (accounts.length && !onForgotPage) {
+      for (const account of accounts) loginList.append(buildSavedAccountCard(account, 'login'));
+      loginBox.classList.remove('hidden');
+      loginForm?.classList.add('hidden');
+    } else {
+      loginBox.classList.add('hidden');
+      if (!onForgotPage) loginForm?.classList.remove('hidden');
+    }
+  }
+  const forgotList = document.querySelector('#forgot-saved-accounts-list');
+  const forgotBox = document.querySelector('#forgot-saved-accounts');
+  if (forgotList && forgotBox) {
+    forgotList.replaceChildren();
+    if (accounts.length) {
+      for (const account of accounts) forgotList.append(buildSavedAccountCard(account, 'forgot'));
+      forgotBox.classList.remove('hidden');
+    } else {
+      forgotBox.classList.add('hidden');
+    }
+  }
+  return accounts;
+}
+
+document.querySelector('#saved-accounts-other')?.addEventListener('click', () => {
+  document.querySelector('#saved-accounts')?.classList.add('hidden');
+  loginForm?.classList.remove('hidden');
+  loginForm?.querySelector('input[name="identifier"]')?.focus();
+});
+
+// RONDE 42: notif toast di bawah (bukan layar penuh) kalau sandi akun ini
+// baru diganti — waktunya realtime dan akurat, dalam WIB.
+function maybeShowPasswordChangedToast(user) {
+  if (!user?.passwordChangedAt) return;
+  const changedAt = new Date(user.passwordChangedAt).getTime();
+  if (Number.isNaN(changedAt)) return;
+  if (Date.now() - changedAt > 24 * 60 * 60 * 1000) return;
+  const when = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date(changedAt));
+  showToast(`Sandi @${user.username} baru diganti ${when} WIB.`);
+}
+
 loginForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   setAuthMessage('');
@@ -5852,6 +5916,7 @@ loginForm.addEventListener('submit', async (event) => {
     const data = Object.fromEntries(new FormData(loginForm));
     const result = await waitForAuthAnimation(api('/api/auth/login', { method: 'POST', body: JSON.stringify(data) }));
     await showDashboard(result.user);
+    maybeShowPasswordChangedToast(result.user);
     if (result.user?.mustChangePassword) showChangePasswordModal();
   } catch (error) {
     if (error.payload?.banned === true) showAccountNotice('banned', error.payload.banReason);
@@ -6189,7 +6254,7 @@ document.querySelector('#change-password-form')?.addEventListener('submit', asyn
   const button = form.querySelector('button[type="submit"]');
   button.disabled = true;
   try {
-    await api('/api/auth/change-password', { method: 'POST', body: JSON.stringify({ currentPassword: data.currentPassword, newPassword: data.newPassword }) });
+    await api('/api/auth/change-password', { method: 'POST', body: JSON.stringify({ newPassword: data.newPassword }) });
     message.textContent = 'Kata sandi berhasil diganti. Akunmu aman sekarang.';
     message.classList.remove('hidden', 'is-error');
     message.classList.add('is-ok');
@@ -7301,6 +7366,23 @@ function hideInfoUpdateNoticeModal() {
   infoUpdateNoticeDismissedMarker = infoUpdateNoticeShownMarker;
   infoUpdateNoticeShownMarker = null;
   overlay.classList.add('hidden');
+  void markInfoUpdateNoticeDismissed();
+}
+
+// RONDE 46: "Tutup" juga menyimpan penanda tutup ke server (per akun, di
+// DATA_AKUN) — bukan hanya di memori halaman — supaya modal tidak muncul
+// lagi untuk entri yang sama walau halaman di-refresh. Badge tetap (penanda
+// dibaca tidak diubah); "Tutup semua" tetap yang menandai dibaca.
+async function markInfoUpdateNoticeDismissed() {
+  const newest = Array.isArray(infoUpdateNoticeUnseen) && infoUpdateNoticeUnseen.length ? infoUpdateNoticeUnseen[0] : null;
+  if (!newest?.day || !newest?.time || !newest?.title) return;
+  try {
+    await fetch('/api/info-updates/seen', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ dismissed: { day: newest.day, time: newest.time, title: newest.title } }),
+    });
+  } catch { /* Penanda tutup gagal disimpan: modal tetap tertutup di sesi ini. */ }
 }
 async function dismissAllInfoUpdateNotice() {
   const unseen = infoUpdateNoticeUnseen;
@@ -7321,8 +7403,10 @@ function notifyNewInfoUpdate(updates, seen) {
   const unseen = unseenInfoUpdates(updates, seen);
   if (!unseen.length) return;
   // Modal hanya muncul sekali per entri terbaru: yang sudah ditutup dengan
-  // "Tutup" tidak muncul lagi sampai ada update yang lebih baru.
+  // "Tutup" tidak muncul lagi sampai ada update yang lebih baru — penanda
+  // tutup tersimpan per akun di server (RONDE 46), jadi tahan refresh.
   if (marker === infoUpdateNoticeDismissedMarker) return;
+  if (seen?.dismissed && marker === infoUpdateMarker(seen.dismissed)) return;
   showInfoUpdateNoticeModal(unseen);
 }
 async function checkInfoUpdateNotice() {

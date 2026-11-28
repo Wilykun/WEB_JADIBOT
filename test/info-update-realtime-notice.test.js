@@ -37,6 +37,7 @@ test('satu entri Info Update baru hanya memunculkan modal sekali, dengan semua u
   const unseenFn = pick(/function unseenInfoUpdates\(updates, seen\) \{[\s\S]*?\n\}/, 'fungsi unseenInfoUpdates harus bisa diekstrak');
   const showFn = pick(/function showInfoUpdateNoticeModal\(unseen\) \{[\s\S]*?\n\}/, 'fungsi showInfoUpdateNoticeModal harus bisa diekstrak');
   const hideFn = pick(/function hideInfoUpdateNoticeModal\(\) \{[\s\S]*?\n\}/, 'fungsi hideInfoUpdateNoticeModal harus bisa diekstrak');
+  const dismissFn = pick(/async function markInfoUpdateNoticeDismissed\(\) \{[\s\S]*?\n\}/, 'fungsi markInfoUpdateNoticeDismissed harus bisa diekstrak');
   const notifyFn = pick(/function notifyNewInfoUpdate\(updates, seen\) \{[\s\S]*?\n\}/, 'fungsi notifyNewInfoUpdate harus bisa diekstrak');
   const program = `
     ${markerDecl}
@@ -64,11 +65,14 @@ test('satu entri Info Update baru hanya memunculkan modal sekali, dengan semua u
     } };
     let renders = 0;
     function createInfoUpdateItem(update) { renders += 1; return { title: update.title }; }
+    // RONDE 46: hide memanggil markInfoUpdateNoticeDismissed (fetch ke server).
+    async function fetch() { return { ok: true }; }
     ${markerFn}
     ${countFn}
     ${unseenFn}
     ${showFn}
     ${hideFn}
+    ${dismissFn}
     ${notifyFn}
     const entryA = [{ day: 'Jumat, 20 Nov 2026', time: '06.24 WIB', title: 'Info Update kini memberi notifikasi realtime' }];
     const entryB = [{ day: 'Jumat, 20 Nov 2026', time: '06.30 WIB', title: 'Entri berikutnya' }, entryA[0]];
@@ -123,4 +127,91 @@ test('modal notifikasi Info Update ada di HTML dan memakai ikon kategori', async
   assert.ok(js.includes('function dismissAllInfoUpdateNotice()'), 'Tutup semua harus menandai semua update sebagai dibaca');
   assert.ok(css.includes('.info-update-notice-list'), 'daftar modal harus bisa digulir');
   assert.ok(css.includes('.info-update-notice-card'), 'kartu modal harus punya lebar sendiri');
+});
+
+test('ronde 46: Tutup menyimpan penanda tutup ke server supaya modal tidak muncul lagi setelah refresh', async () => {
+  const js = await read('public/app.js');
+  const server = await read('server/index.js');
+  assert.ok(js.includes('function markInfoUpdateNoticeDismissed()'), 'harus ada fungsi simpan penanda tutup');
+  assert.ok(js.includes("body: JSON.stringify({ dismissed: { day: newest.day, time: newest.time, title: newest.title } })"), 'penanda tutup harus dikirim sebagai dismissed');
+  assert.ok(js.includes('void markInfoUpdateNoticeDismissed();'), 'Tutup harus menyimpan penanda tutup ke server');
+  assert.ok(js.includes("if (seen?.dismissed && marker === infoUpdateMarker(seen.dismissed)) return;"), 'pemeriksa harus menghormati penanda tutup dari server');
+  assert.ok(server.includes('function writeInfoUpdateDismissed('), 'server harus bisa menyimpan penanda tutup');
+  assert.ok(server.includes('dismissed: { ...dismissed, dismissedAt:'), 'penanda tutup harus disimpan dengan waktunya');
+  assert.ok(server.includes("if (body?.dismissed && typeof body.dismissed === 'object')"), 'endpoint seen harus menerima penanda tutup');
+  assert.ok(!js.includes("marker === infoUpdateNoticeDismissedMarker) return;\n  showInfoUpdateNoticeModal(unseen);"), 'pemeriksa lama tanpa cek server tidak boleh tersisa');
+});
+
+test('ronde 46: penanda tutup dari server mencegah modal muncul lagi, entri baru tetap muncul', async () => {
+  const js = await read('public/app.js');
+  const pick = (re, label) => {
+    const m = js.match(re);
+    assert.ok(m, label);
+    return m[0];
+  };
+  const dismissedDecl = pick(/let infoUpdateNoticeDismissedMarker = null;/, 'penanda yang sudah ditutup harus ada');
+  const shownDecl = pick(/let infoUpdateNoticeShownMarker = null;/, 'penanda yang sedang tampil harus ada');
+  const unseenDecl = pick(/let infoUpdateNoticeUnseen = \[\];/, 'daftar update belum dibaca di modal harus ada');
+  const markerFn = pick(/function infoUpdateMarker\(update\) \{[\s\S]*?\n\}/, 'fungsi infoUpdateMarker harus bisa diekstrak');
+  const countFn = pick(/function countUnreadInfoUpdates\(updates, seen\) \{[\s\S]*?\n\}/, 'fungsi countUnreadInfoUpdates harus bisa diekstrak');
+  const unseenFn = pick(/function unseenInfoUpdates\(updates, seen\) \{[\s\S]*?\n\}/, 'fungsi unseenInfoUpdates harus bisa diekstrak');
+  const showFn = pick(/function showInfoUpdateNoticeModal\(unseen\) \{[\s\S]*?\n\}/, 'fungsi showInfoUpdateNoticeModal harus bisa diekstrak');
+  const notifyFn = pick(/function notifyNewInfoUpdate\(updates, seen\) \{[\s\S]*?\n\}/, 'fungsi notifyNewInfoUpdate harus bisa diekstrak');
+  const program = `
+    ${dismissedDecl}
+    ${shownDecl}
+    ${unseenDecl}
+    let lastNotifiedInfoUpdateMarker = null;
+    function makeEl() {
+      const el = {
+        classList: { _s: new Set(['hidden']), contains(c) { return this._s.has(c); }, add(c) { this._s.add(c); }, remove(c) { this._s.delete(c); } },
+        textContent: '', children: [],
+        replaceChildren() { this.children = []; },
+        append(child) { this.children.push(child); },
+        querySelector() { return { focus() {} }; },
+      };
+      return el;
+    }
+    const overlay = makeEl();
+    const list = makeEl();
+    const countEl = makeEl();
+    const document = { querySelector(sel) {
+      if (sel === '#info-update-notice-overlay') return overlay;
+      if (sel === '#info-update-notice-list') return list;
+      if (sel === '#info-update-notice-count') return countEl;
+      return null;
+    } };
+    let renders = 0;
+    function createInfoUpdateItem(update) { renders += 1; return { title: update.title }; }
+    ${markerFn}
+    ${countFn}
+    ${unseenFn}
+    ${showFn}
+    ${notifyFn}
+    const entryA = [{ day: 'Sabtu, 28 Nov 2026', time: '13.15 WIB', title: 'Masuk kini bisa pilih akun tersimpan, tanpa ketik sandi' }];
+    const entryB = [{ day: 'Sabtu, 28 Nov 2026', time: '13.20 WIB', title: 'Modal Ganti sandi tidak lagi minta sandi sementara' }, entryA[0]];
+    const seenDismissedA = { dismissed: { day: entryA[0].day, time: entryA[0].time, title: entryA[0].title } };
+    const out = {};
+    // Tanpa penanda tutup: modal muncul.
+    notifyNewInfoUpdate(entryA, null);
+    out.shownWithoutDismiss = !overlay.classList.contains('hidden');
+    out.rendersAfterFirst = renders;
+    // Dengan penanda tutup dari server untuk entri yang sama: modal TIDAK muncul lagi.
+    overlay.classList.add('hidden');
+    infoUpdateNoticeShownMarker = null;
+    notifyNewInfoUpdate(entryA, seenDismissedA);
+    out.hiddenWithServerDismiss = overlay.classList.contains('hidden');
+    out.rendersAfterDismiss = renders;
+    // Entri baru (lebih baru dari penanda tutup): modal muncul lagi.
+    notifyNewInfoUpdate(entryB, seenDismissedA);
+    out.shownForNewer = !overlay.classList.contains('hidden');
+    out.itemsForNewer = list.children.length;
+    out;
+  `;
+  const out = eval(program);
+  assert.equal(out.shownWithoutDismiss, true, 'modal harus muncul tanpa penanda tutup');
+  assert.equal(out.hiddenWithServerDismiss, true, 'modal TIDAK boleh muncul lagi untuk entri yang sudah ditutup (penanda server)');
+  assert.equal(out.rendersAfterDismiss, out.rendersAfterFirst, 'entri yang sudah ditutup tidak boleh me-render ulang modal');
+  assert.equal(out.shownForNewer, true, 'entri baru harus tetap memunculkan modal walau entri lama sudah ditutup');
+  assert.equal(out.itemsForNewer, 2, 'entri baru harus menampilkan semua update yang belum dibaca');
 });
