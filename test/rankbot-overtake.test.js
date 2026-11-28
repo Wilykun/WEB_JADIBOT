@@ -240,9 +240,9 @@ test('layar detail salip menampilkan skor total aktivitas tiap akun, realtime', 
 test('entri Info Update notifikasi salip Rank Bot kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-28T13:52:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 136, 'daftar harus bertambah lima entri');
-  const newest = data.updates[70];
+  assert.equal(data.updatedAt, '2026-11-28T14:06:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 137, 'daftar harus bertambah lima entri');
+  const newest = data.updates[71];
   assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');

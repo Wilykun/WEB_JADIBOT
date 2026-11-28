@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-28T13:52:00+07:00",
+  "updatedAt": "2026-11-28T14:06:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "14.06 WIB",
+      "title": "Formulir Masuk tidak lagi hilang saat mengetik",
+      "tag": "Bug",
+      "description": "Formulir Masuk sempat hilang sendiri beberapa detik setelah pengguna mengetik (halaman terpental ke tampilan awal) — penyebabnya: proses awal halaman selesai belakangan lalu memuat ulang pemilih akun dan menyembunyikan formulir yang sedang dipakai. Kini pilihan pengguna untuk menampilkan formulir diingat, jadi pemuatan ulang tidak lagi menyembunyikan formulir yang sedang diketik, dan halaman tidak lagi lompat ke atas saat mengetik."
+    },
     {
       "day": "Sabtu, 28 Nov 2026",
       "time": "13.52 WIB",

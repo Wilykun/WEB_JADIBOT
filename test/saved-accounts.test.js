@@ -313,3 +313,18 @@ test('ronde 50: klik Masuk dengan akun lain tidak boleh menyembunyikan pemilih a
   assert.ok(fn.includes("loginForm?.classList.remove('hidden')"), 'handler harus menampilkan formulir Masuk');
   assert.ok(fn.includes('input[name="identifier"]'), 'handler harus memfokuskan kolom email/username');
 });
+
+test('formulir Masuk tidak boleh hilang saat mengetik (pemuatan ulang pemilih tidak boleh me-reset tampilan)', () => {
+  assert.ok(appJs.includes('let loginFormRevealedByUser = false;'), 'harus ada penanda formulir ditampilkan pengguna');
+  const other = appJs.match(/document\.querySelector\('#saved-accounts-other'\)\?\.addEventListener\('click', \(\) => \{[\s\S]*?\}\);/);
+  assert.ok(other, 'handler tombol Masuk dengan akun lain harus bisa diekstrak');
+  assert.ok(other[0].includes('loginFormRevealedByUser = true;'), 'handler harus menandai formulir ditampilkan pengguna');
+  const loader = appJs.match(/async function loadSavedAccounts\(\) \{[\s\S]*?\n\}/);
+  assert.ok(loader, 'fungsi loadSavedAccounts harus bisa diekstrak');
+  assert.ok(loader[0].includes("if (!loginFormRevealedByUser) loginForm?.classList.add('hidden');"), 'pemuatan ulang pemilih tidak boleh menyembunyikan formulir kalau pengguna sudah menampilkannya');
+  const mode = appJs.match(/function setAuthMode\(mode\) \{[\s\S]*?\n\}/);
+  assert.ok(mode, 'fungsi setAuthMode harus bisa diekstrak');
+  assert.ok(mode[0].includes('authInputFocused'), 'setAuthMode harus memeriksa apakah kolom auth sedang difokuskan');
+  assert.ok(mode[0].includes('if (!authInputFocused) {'), 'setAuthMode tidak boleh lompat ke atas saat pengguna sedang mengetik');
+  assert.ok(mode[0].includes('loginFormRevealedByUser = false;'), 'setAuthMode harus mereset penanda saat pindah ke daftar');
+});

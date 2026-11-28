@@ -579,8 +579,15 @@ function setAuthMode(mode) {
   hideAccountNotice();
   clearVerificationCooldown();
   try { window.sessionStorage.setItem(AUTH_MODE_STORAGE_KEY, registering ? 'register' : 'login'); } catch { /* Mode tetap berjalan tanpa storage. */ }
-  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  document.querySelector('.auth-panel')?.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  // Jangan lompat ke atas kalau pengguna sedang mengetik di kolom auth —
+  // setAuthMode() bisa jalan belakangan (boot() selesai lambat) dan
+  // scrollTo(0) saat mengetik membuat halaman terpental.
+  const authInputFocused = document.activeElement && authView.contains(document.activeElement)
+    && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
+  if (!authInputFocused) {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.querySelector('.auth-panel')?.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }
   authView.classList.toggle('is-registering', registering);
   loginForm.classList.toggle('hidden', registering);
   registerForm.classList.toggle('hidden', !registering);
@@ -606,6 +613,7 @@ function setAuthMode(mode) {
   // RONDE 42: tampilkan pemilih akun tersimpan di mode masuk; sembunyikan
   // saat daftar (akun baru belum tersimpan di perangkat ini).
   if (registering) {
+    loginFormRevealedByUser = false;
     document.querySelector('#saved-accounts')?.classList.add('hidden');
   } else {
     void loadSavedAccounts();
@@ -616,6 +624,7 @@ function setAuthMode(mode) {
 // sembunyikan formulir login/daftar; kembali lewat setAuthMode('login').
 function showForgotForm() {
   hideAccountNotice();
+  loginFormRevealedByUser = false;
   loginForm.classList.add('hidden');
   registerForm.classList.add('hidden');
   verificationForm.classList.add('hidden');
@@ -5857,6 +5866,13 @@ async function quickLoginSavedAccount(account, card) {
   }
 }
 
+// Pilihan pengguna untuk menampilkan formulir Masuk lewat "Masuk dengan akun
+// lain" — kalau sudah dipilih, pemuatan ulang pemilih akun TIDAK boleh lagi
+// menyembunyikan formulir (itu yang membuat halaman terpental ke tampilan
+// awal saat pengguna sedang mengetik: boot()/setAuthMode() selesai belakangan
+// lalu loadSavedAccounts() menyembunyikan formulir yang sedang dipakai).
+let loginFormRevealedByUser = false;
+
 async function loadSavedAccounts() {
   let accounts = [];
   try {
@@ -5875,7 +5891,9 @@ async function loadSavedAccounts() {
     if (accounts.length && !onForgotPage) {
       for (const account of accounts) loginList.append(buildSavedAccountCard(account, 'login'));
       loginBox.classList.remove('hidden');
-      loginForm?.classList.add('hidden');
+      // Pengguna sudah memilih tampilkan formulir (ketuk "Masuk dengan akun
+      // lain") — jangan sembunyikan lagi walau pemilih dimuat ulang.
+      if (!loginFormRevealedByUser) loginForm?.classList.add('hidden');
     } else {
       loginBox.classList.add('hidden');
       if (!onForgotPage) loginForm?.classList.remove('hidden');
@@ -5901,6 +5919,9 @@ document.querySelector('#saved-accounts-other')?.addEventListener('click', () =>
   // pemilih, supaya pengguna bisa ketik akun lain ATAU tetap ketuk akun
   // tersimpan di bawahnya (sebelumnya pemilih hilang total dan tidak ada
   // jalan kembali kecuali refresh — itu yang dilaporkan Wily).
+  // Tandai pilihan ini supaya pemuatan ulang pemilih (mis. boot() selesai
+  // belakangan) tidak menyembunyikan formulir yang sedang dipakai.
+  loginFormRevealedByUser = true;
   loginForm?.classList.remove('hidden');
   loginForm?.querySelector('input[name="identifier"]')?.focus();
 });
@@ -6896,6 +6917,8 @@ document.addEventListener('click', async (event) => {
       clearTimeout(timeout);
       setLogoutLoading(logoutButton, false);
       setMenu(false);
+      // Kembali ke tampilan awal (pemilih akun saja, formulir tersembunyi).
+      loginFormRevealedByUser = false;
       showAuth();
     }
     return;
