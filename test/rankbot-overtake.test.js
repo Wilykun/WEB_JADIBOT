@@ -163,6 +163,21 @@ test('salip dipantau realtime sejak login, bukan hanya saat halaman Rank Bot dib
   assert.ok(init.includes('void refreshRankBotData();'), 'peringkat harus langsung diambil sekali saat login');
 });
 
+test('pantau salip berhenti saat keluar, Lupa sandi tidak terpental ke Pilih akun', () => {
+  const js = read('public/app.js');
+  // Timer pantau salip jalan tiap 15 detik tanpa syarat halaman; kalau ia
+  // tetap hidup setelah keluar, /api/members menjawab 401 dan showAuth()
+  // melempar halaman Masuk / Lupa sandi yang sedang dibuka kembali ke
+  // Pilih akun, berulang-ulang. showAuth() harus mematikannya.
+  const auth = js.slice(js.indexOf('function showAuth('), js.indexOf('const mobileInfoToggle'));
+  assert.ok(auth.includes('clearInterval(rankBotTimer);'), 'showAuth harus menghentikan interval pantau salip');
+  assert.ok(auth.includes('rankBotTimer = null;'), 'showAuth harus mengosongkan penanda timer pantau salip');
+  // Pengaman kedua: refresh tidak boleh jalan tanpa akun yang masuk, supaya
+  // sisa timer dari sesi sebelumnya tidak bisa memanggil showAuth().
+  const refresh = js.slice(js.indexOf('async function refreshRankBotData()'), js.indexOf('async function loadRankBot()'));
+  assert.ok(refresh.includes('if (!currentUser) return;'), 'refreshRankBotData harus berhenti bila tidak ada akun yang masuk');
+});
+
 test('layar detail salip menampilkan avatar, nama, dan peringkat lama ke baru keduanya', () => {
   const js = read('public/app.js');
   const html = read('public/index.html');
@@ -240,9 +255,9 @@ test('layar detail salip menampilkan skor total aktivitas tiap akun, realtime', 
 test('entri Info Update notifikasi salip Rank Bot kini di posisi kedua puluh', () => {
   const data = JSON.parse(read('public/info-updates.json'));
   const html = read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-28T15:00:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 141, 'daftar harus bertambah lima entri');
-  const newest = data.updates[75];
+  assert.equal(data.updatedAt, '2026-11-28T15:52:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 142, 'daftar harus bertambah lima entri');
+  const newest = data.updates[76];
   assert.equal(newest.title, 'Rank Bot kini memberi tahu saat ada yang menyalip', 'entri salip harus menjelaskan notifikasi salip Rank Bot');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Fitur baru');
   assert.equal(newest.day, 'Rabu, 18 Nov 2026', 'hari entri terbaru harus cocok');

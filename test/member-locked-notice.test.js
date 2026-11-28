@@ -35,7 +35,7 @@ test('menu Backup dan Kontrol Bot yang terkunci menampilkan notifikasi di tengah
   // di-cache immutable setahun, jadi tanpa bump ini HP yang pernah buka panel
   // tetap menjalankan kode lama (toast) walau server sudah menyajikan kode baru.
   const html = await read('public/index.html');
-  assert.ok(html.includes('/app.js?v=notif-data-akun-terkunci-20261128'), 'index.html harus memuat app.js dengan versi realtime-20261118');
+  assert.ok(html.includes('/app.js?v=masuk-tidak-terpental-20261128'), 'index.html harus memuat app.js dengan versi realtime-20261118');
   assert.ok(!html.includes('/app.js?v=lockednotice-20261118'), 'versi app.js lama tidak boleh lagi dipakai');
 });
 
@@ -59,9 +59,9 @@ test('overlay mendukung notifikasi tanpa tombol aksi dan tidak menelan ingatan n
 test('entri Info Update notifikasi menu terkunci kini di posisi kedua puluh empat', async () => {
   const data = JSON.parse(await read('public/info-updates.json'));
   const html = await read('public/index.html');
-  assert.equal(data.updatedAt, '2026-11-28T15:00:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
-  assert.equal(data.updates.length, 141, 'daftar harus 74 entri');
-  const locked = data.updates[79];
+  assert.equal(data.updatedAt, '2026-11-28T15:52:00+07:00', 'updatedAt harus sama dengan waktu entri terbaru');
+  assert.equal(data.updates.length, 142, 'daftar harus 74 entri');
+  const locked = data.updates[80];
   assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi kedua puluh empat');
   assert.equal(locked.tag, 'Tampilan', 'entri notifikasi menu terkunci harus bertag Tampilan');
   assert.equal(locked.day, 'Rabu, 18 Nov 2026', 'hari entri notifikasi menu terkunci harus cocok');
@@ -72,7 +72,7 @@ test('entri Info Update notifikasi menu terkunci kini di posisi kedua puluh empa
   assert.ok(html.includes('Rabu, 18 Nov 2026 · 07.25 WIB'), 'fallback meta harus cocok dengan hari dan waktu entri notifikasi menu terkunci');
 
   // Entri kartu Member ringkas sebelumnya kini di posisi kedua puluh lima beserta fallback-nya.
-  const compact = data.updates[80];
+  const compact = data.updates[81];
   assert.equal(compact.title, 'Tampilan Member kini lebih ringkas di HP', 'entri kartu Member ringkas kini di posisi kedua puluh lima');
   assert.equal(compact.tag, 'Tampilan', 'entri kartu Member ringkas harus bertag Tampilan');
   assert.equal(compact.time, '05.50 WIB', 'waktu entri kartu Member ringkas harus cocok');

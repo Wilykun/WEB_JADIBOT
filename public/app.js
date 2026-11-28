@@ -2663,6 +2663,10 @@ function renderRankBot() {
   });
 }
 async function refreshRankBotData() {
+  // Jangan ambil data Rank Bot kalau sedang tidak masuk: timer pantau salip
+  // yang bocor dari sesi sebelumnya akan memanggil showAuth() lewat 401 dan
+  // melempar halaman Masuk / Lupa sandi kembali ke Pilih akun.
+  if (!currentUser) return;
   try {
     const result = await api('/api/members');
     rankBotUsers = Array.isArray(result.users) ? result.users : [];
@@ -5862,9 +5866,16 @@ function showAuth(mode = 'login') {
   clearInterval(logPollTimer);
   clearInterval(adminUsersTimer);
   clearInterval(presenceHeartbeatTimer);
+  // Timer pantau salip Rank Bot TIDAK pernah berhenti sendiri: kalau tidak
+  // dimatikan di sini, ia tetap jalan tiap 15 detik setelah logout, lalu
+  // /api/members menjawab 401 dan refreshRankBotData() memanggil showAuth()
+  // — halaman Masuk / Lupa sandi yang sedang dibuka tiba-tiba terpental
+  // kembali ke Pilih akun, berulang-ulang.
+  clearInterval(rankBotTimer);
   stopChatPolling();
   adminUsersTimer = null;
   presenceHeartbeatTimer = null;
+  rankBotTimer = null;
   setControlFeedback('session-feedback', '', '', '');
   setControlFeedback('bot-feedback', '', '', '');
   document.querySelector('#pairing-code')?.replaceChildren();

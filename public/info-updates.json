@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-28T15:00:00+07:00",
+  "updatedAt": "2026-11-28T15:52:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "15.52 WIB",
+      "title": "Masuk dan Lupa sandi tidak lagi terpental ke Pilih akun",
+      "tag": "Bug",
+      "description": "Halaman Masuk dan Lupa sandi tiba-tiba berubah sendiri kembali ke Pilih akun beberapa detik setelah dibuka. Penyebabnya: timer pantau salip Rank Bot yang jalan tiap 15 detik tidak pernah berhenti setelah keluar, lalu data peringkat menjawab tidak ada sesi dan halaman auth ditampilkan ulang dari awal. Kini timer itu dimatikan saat keluar, dan pengambilan data peringkat tidak jalan kalau tidak ada akun yang masuk."
+    },
     {
       "day": "Sabtu, 28 Nov 2026",
       "time": "15.00 WIB",
