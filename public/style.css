@@ -3562,10 +3562,10 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .data-akun-card{border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:16px;margin-bottom:12px}
 .data-akun-card-head{display:flex;align-items:center;gap:12px;text-align:left}
 .data-akun-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--line)}
-.data-akun-identity{display:flex;flex-direction:column;gap:2px;min-width:0}
+.data-akun-identity{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
 .data-akun-identity strong{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .data-akun-identity span{font-size:12px;color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.data-akun-role{margin-left:auto;flex:none;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(233,237,239,.12);color:var(--soft)}
+.data-akun-role{flex:none;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(233,237,239,.12);color:var(--soft)}
 .data-akun-role.is-main{background:rgba(245,197,66,.18);color:#f5c542}
 .data-akun-role.is-admin{background:rgba(62,230,154,.15);color:#3ee69a}
 .data-akun-rows{margin:14px 0 0}
@@ -3580,4 +3580,10 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .data-akun-copy svg{width:13px;height:13px}
 .data-akun-copy:hover{border-color:#3ee69a;color:#3ee69a}
 .data-akun-empty{text-align:center;color:var(--soft);padding:24px 0}
-@media(max-width:560px){.data-akun-card-head{flex-wrap:wrap}.data-akun-role{margin-left:0}.data-akun-row{flex-direction:column;align-items:flex-start;gap:6px}.data-akun-row dd{justify-content:flex-start;text-align:left}}
+@media(max-width:560px){.data-akun-row{flex-direction:column;align-items:flex-start;gap:6px}.data-akun-row dd{justify-content:flex-start;text-align:left}}
+.data-akun-card summary{list-style:none;cursor:pointer}
+.data-akun-card summary::-webkit-details-marker{display:none}
+.data-akun-chevron{flex:none;color:var(--soft);font-size:16px;line-height:1;transition:transform .2s ease}
+.data-akun-card[open] .data-akun-chevron{transform:rotate(180deg)}
+.data-akun-card[open] .data-akun-rows{margin-top:14px}
+@media(max-width:560px){.data-akun-chevron{margin-left:0}}

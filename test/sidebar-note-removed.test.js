@@ -32,7 +32,7 @@ test('style.css memakai versi baru agar kartu Member ringkas sampai ke HP', asyn
   // Kartu ringkas (avatar 34px) sudah ada di style.css sejak lama, tapi HP yang
   // pernah membuka panel tetap memakai style.css lama yang di-cache immutable
   // setahun — tanpa bump versi, perbaikan tidak pernah sampai ke HP.
-  assert.ok(html.includes('/style.css?v=halaman-data-akun-admin-20261128'), 'index.html harus memuat style.css dengan versi membercompact-20261118');
+  assert.ok(html.includes('/style.css?v=notif-data-akun-terkunci-20261128'), 'index.html harus memuat style.css dengan versi membercompact-20261118');
   assert.ok(!html.includes('/style.css?v=fiturbot-v2-20261117'), 'versi style.css lama tidak boleh lagi dipakai');
 });
 

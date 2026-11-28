@@ -1,6 +1,27 @@
 {
-  "updatedAt": "2026-11-28T14:27:00+07:00",
+  "updatedAt": "2026-11-28T15:00:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "15.00 WIB",
+      "title": "Menu Data Akun terkunci kini menampilkan notifikasi untuk member",
+      "tag": "Bug",
+      "description": "Member yang mengetuk menu Data Akun yang terkunci tidak melihat apa-apa - handler klik menu hanya punya cabang Backup dan Kontrol Bot, sedangkan Data Akun jatuh ke cabang biasa yang diam karena halamannya tersembunyi. Kini ada cabang khusus Data Akun: notifikasi Data Akun hanya untuk admin muncul di tengah layar, sama seperti Backup dan Kontrol Bot."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "14.48 WIB",
+      "title": "Kartu Data Akun kini lebih rapi di desktop dan HP",
+      "tag": "Tampilan",
+      "description": "Lencana peran di kepala kartu sempat melayang di tengah kartu karena dua elemen sama-sama memakai margin otomatis - kini nama mengisi ruang kosong sehingga lencana dan panah menempel jadi satu grup di kanan, di desktop maupun HP. Di HP nama panjang terpotong rapi dengan titik-titik dan kartu tidak lagi membungkus ke baris baru, jadi tampilannya sejajar dan tidak meluber."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "14.43 WIB",
+      "title": "Kartu Data Akun kini spoiler dengan filter kategori",
+      "tag": "Perubahan",
+      "description": "Tiap kartu akun kini jadi spoiler: klik untuk membuka, dan membuka akun lain menutup akun sebelumnya. Baris sandi (sandi sementara, tanggal diminta, terakhir diganti, reset selesai, sandi utama) ada di dalam spoiler dengan tombol salin di sandi sementara. Pencarian kini punya tombol kategori (Semua, Email, Nama pengguna, Sandi sementara, Sandi sementara diminta, Sandi terakhir diganti, Reset selesai, Sandi utama) dengan jumlah akun di tiap kategori - Semua menampilkan jumlah total akun. Foto profil unggahan yang gagal dimuat kini diganti avatar bawaan, bukan ikon rusak. Nama menu dan judul halaman diubah dari DATA_AKUN menjadi Data Akun."
+    },
     {
       "day": "Sabtu, 28 Nov 2026",
       "time": "14.27 WIB",

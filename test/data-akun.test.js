@@ -24,9 +24,11 @@ test('DATA_AKUN: menu di bawah Backup + halaman dengan kartu akun dan pencarian'
   const dataAkunIdx = html.indexOf('id="data-akun-nav"');
   const botcontrolIdx = html.indexOf('id="botcontrol-nav"');
   assert.ok(backupIdx > 0 && dataAkunIdx > 0 && botcontrolIdx > 0, 'ketiga menu admin harus ada');
-  assert.ok(backupIdx < dataAkunIdx && dataAkunIdx < botcontrolIdx, 'menu DATA_AKUN harus di bawah Backup dan di atas Kontrol Bot');
+  assert.ok(backupIdx < dataAkunIdx && dataAkunIdx < botcontrolIdx, 'menu Data Akun harus di bawah Backup dan di atas Kontrol Bot');
   assert.ok(html.includes('href="#data-akun"'), 'menu DATA_AKUN harus menaut ke #data-akun');
-  assert.ok(html.includes('>DATA_AKUN<'), 'menu harus bernama DATA_AKUN');
+  assert.ok(html.includes('>Data Akun<'), 'menu harus bernama Data Akun');
+  assert.ok(html.includes('<h2 id="data-akun-title">Data Akun</h2>'), 'judul halaman harus Data Akun');
+  assert.ok(appJs.includes("'data-akun': 'Data Akun'"), 'breadcrumb harus Data Akun');
   assert.ok(html.includes('id="data-akun"'), 'seksi DATA_AKUN harus ada');
   assert.ok(html.includes('data-page-view="data-akun"'), 'seksi harus punya data-page-view data-akun');
   assert.ok(html.includes('id="data-akun-title"'), 'seksi harus punya judul DATA_AKUN');
@@ -38,13 +40,41 @@ test('DATA_AKUN: menu di bawah Backup + halaman dengan kartu akun dan pencarian'
   assert.ok(css.includes('.data-akun-avatar'), 'avatar akun harus punya gaya');
   assert.ok(css.includes('.data-akun-copy'), 'tombol salin harus punya gaya');
   assert.ok(css.includes('.data-akun-row'), 'baris data harus punya gaya');
-  assert.ok(css.includes('@media(max-width:560px){.data-akun-card-head'), 'kartu harus rapi di HP');
+  assert.ok(css.includes('.data-akun-identity{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}'), 'identitas harus mengisi ruang supaya lencana menempel ke kanan');
+  assert.ok(!css.includes('.data-akun-role{margin-left:auto'), 'lencana tidak boleh pakai margin-left:auto (melayang di tengah)');
+  assert.ok(!css.includes('.data-akun-chevron{margin-left:auto'), 'panah tidak boleh pakai margin-left:auto');
+  assert.ok(!css.includes('.data-akun-card-head{flex-wrap:wrap}'), 'kepala kartu tidak boleh membungkus di HP');
+  // Kategori di pencarian: 8 tombol (Semua + 7 kolom) + jumlah tiap kategori.
+  for (const key of ['all', 'email', 'username', 'temp', 'temp-at', 'changed', 'reset', 'main']) {
+    assert.ok(html.includes(`data-data-akun-filter="${key}"`), `kategori ${key} harus ada di pencarian`);
+    assert.ok(html.includes(`data-filter-count="${key}"`), `jumlah kategori ${key} harus ada`);
+  }
+  assert.ok(html.includes('Sandi sementara diminta'), 'kategori sandi sementara diminta harus ada');
+  assert.ok(html.includes('Sandi terakhir diganti'), 'kategori sandi terakhir diganti harus ada');
+  assert.ok(html.includes('Reset selesai'), 'kategori reset selesai harus ada');
+  assert.ok(html.includes('Sandi utama'), 'kategori sandi utama harus ada');
+  assert.ok(html.includes('id="data-akun-filter-empty"'), 'pesan kosong saat filter tidak cocok harus ada');
+});
+
+test('DATA_AKUN filter kategori: hitung jumlah + saring akun per kolom', () => {
+  assert.ok(appJs.includes("let dataAkunFilter = 'all'"), 'filter kategori harus mulai dari Semua');
+  assert.ok(appJs.includes('function dataAkunFilterCounts('), 'fungsi hitung jumlah kategori harus ada');
+  assert.ok(appJs.includes('function updateDataAkunFilterCounts()'), 'fungsi perbarui jumlah kategori harus ada');
+  assert.ok(appJs.includes('function dataAkunCardMatches('), 'fungsi cocokkan kartu dengan kategori harus ada');
+  assert.ok(appJs.includes("card.dataset.hasTemp = account.tempPassword ? '1' : '0'"), 'kartu harus menandai akun yang punya sandi sementara');
+  assert.ok(appJs.includes("card.dataset.hasReset = account.resetAt ? '1' : '0'"), 'kartu harus menandai akun yang resetnya selesai');
+  assert.ok(appJs.includes("if (dataAkunFilter === 'temp' && card.dataset.hasTemp !== '1') return false;"), 'kategori sandi sementara harus menyaring akun tanpa sandi sementara');
+  assert.ok(appJs.includes("if (dataAkunFilter === 'reset' && card.dataset.hasReset !== '1') return false;"), 'kategori reset selesai harus menyaring akun tanpa reset');
+  assert.ok(appJs.includes("document.querySelector('[data-data-akun-filters]')?.addEventListener('click'"), 'klik tombol kategori harus mengganti filter');
+  assert.ok(appJs.includes('updateDataAkunFilterCounts();'), 'jumlah kategori harus diperbarui saat data dimuat');
+  // PP rusak: foto unggahan yang gagal dimuat jatuh ke avatar bawaan.
+  assert.ok(appJs.includes("avatar.addEventListener('error', () => { avatar.src = '/avatars/avatar-01.webp'; }, { once: true })"), 'PP yang gagal dimuat harus jatuh ke avatar bawaan (tidak pernah ikon rusak)');
 });
 
 test('DATA_AKUN klien: judul halaman + kunci member + muat realtime + salin', () => {
-  assert.ok(appJs.includes("'data-akun': 'DATA_AKUN'"), 'judul halaman DATA_AKUN harus ada di daftar judul');
+  assert.ok(appJs.includes("'data-akun': 'Data Akun'"), 'judul halaman Data Akun harus ada di daftar judul');
   assert.ok(appJs.includes("(page === 'data-akun' && currentUser?.role !== 'admin')"), 'halaman DATA_AKUN harus dijaga lewat peran');
-  assert.ok(appJs.includes("showLockedNotice(page === 'backup' ? 'Backup' : page === 'data-akun' ? 'DATA_AKUN' : 'Kontrol Bot')"), 'member yang membuka DATA_AKUN harus melihat notifikasi terkunci');
+  assert.ok(appJs.includes("showLockedNotice(page === 'backup' ? 'Backup' : page === 'data-akun' ? 'Data Akun' : 'Kontrol Bot')"), 'member yang membuka Data Akun harus melihat notifikasi terkunci');
   assert.ok(appJs.includes("document.querySelector('#data-akun-nav')"), 'menu DATA_AKUN harus diatur saat login');
   assert.ok(appJs.includes("document.querySelector('#data-akun')?.classList.toggle('hidden', !isAdmin)"), 'seksi DATA_AKUN harus disembunyikan total untuk member');
   assert.ok(appJs.includes('function loadDataAkun()'), 'fungsi muat DATA_AKUN harus ada');
@@ -59,6 +89,17 @@ test('DATA_AKUN klien: judul halaman + kunci member + muat realtime + salin', ()
   assert.ok(appJs.includes("'Sandi terakhir diganti'"), 'kartu harus menampilkan tanggal sandi diganti');
   assert.ok(appJs.includes("'Sandi utama'"), 'kartu harus menampilkan baris sandi utama');
   assert.ok(appJs.includes('Tidak dapat ditampilkan (tersimpan sebagai hash keamanan)'), 'sandi utama harus dijelaskan hanya hash');
+  // Spoiler per akun (akordeon): kartu adalah details/summary, buka satu
+  // menutup yang lain; sandi sementara ada tombol Salin di dalamnya.
+  assert.ok(appJs.includes("document.createElement('details')"), 'kartu akun harus berupa spoiler (details)');
+  assert.ok(appJs.includes("document.createElement('summary')"), 'kepala kartu harus berupa summary spoiler');
+  assert.ok(appJs.includes('data-akun-chevron'), 'spoiler harus punya panah penanda buka/tutup');
+  assert.ok(appJs.includes("addEventListener('toggle'"), 'harus ada pendengar akordeon (buka satu menutup yang lain)');
+  assert.ok(appJs.includes('card.open = false'), 'membuka satu akun harus menutup akun lain');
+  assert.ok(appJs.includes("dataAkunRow('key', 'Sandi sementara', account.tempPassword || 'Belum ada', 'sandi sementara')"), 'sandi sementara harus punya tombol Salin');
+  assert.ok(css.includes('.data-akun-card summary'), 'spoiler harus punya gaya summary');
+  assert.ok(css.includes('.data-akun-chevron'), 'panah spoiler harus punya gaya');
+  assert.ok(css.includes('.data-akun-card[open] .data-akun-chevron'), 'panah harus berputar saat spoiler dibuka');
 });
 
 test('DATA_AKUN server: endpoint admin saja + sandi sementara + tanggal, tanpa sandi utama', () => {

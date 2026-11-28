@@ -3467,16 +3467,33 @@ function dataAkunRow(icon, label, valueText, copyLabel) {
   return row;
 }
 function buildDataAkunCard(account) {
-  const card = document.createElement('article');
+  // Tiap akun adalah spoiler (details/summary): yang tampil hanya foto,
+  // nama, dan lencana peran; baris data (termasuk sandi sementara) baru
+  // terlihat saat akun dibuka. Membuka satu akun menutup akun lain
+  // (akordeon) supaya halaman tetap rapi dan sandi sementara tidak
+  // terpampang semua sekaligus.
+  const card = document.createElement('details');
   card.className = 'data-akun-card';
   card.dataset.search = `${account.displayName || ''} ${account.username || ''} ${account.email || ''}`.toLowerCase();
-  const head = document.createElement('div');
+  // Penanda isi tiap kolom — dipakai filter kategori (Email, Nama pengguna,
+  // Sandi sementara, dst.): '1' kalau kolom itu ada isinya, '0' kalau kosong.
+  card.dataset.hasEmail = account.email ? '1' : '0';
+  card.dataset.hasUsername = account.username ? '1' : '0';
+  card.dataset.hasTemp = account.tempPassword ? '1' : '0';
+  card.dataset.hasTempAt = account.tempPasswordAt ? '1' : '0';
+  card.dataset.hasChanged = account.passwordChangedAt ? '1' : '0';
+  card.dataset.hasReset = account.resetAt ? '1' : '0';
+  card.dataset.hasMain = account.mustChangePassword === true ? '0' : '1';
+  const head = document.createElement('summary');
   head.className = 'data-akun-card-head';
   const avatar = document.createElement('img');
   avatar.className = 'data-akun-avatar';
   avatar.src = dataAkunAvatarSrc(account);
   avatar.alt = '';
   avatar.loading = 'lazy';
+  // Foto unggahan yang gagal dimuat (mis. file rusak) jatuh ke avatar bawaan
+  // supaya PP tidak pernah jadi ikon gambar rusak — sama seperti Daftar Member.
+  avatar.addEventListener('error', () => { avatar.src = '/avatars/avatar-01.webp'; }, { once: true });
   const identity = document.createElement('div');
   identity.className = 'data-akun-identity';
   const name = document.createElement('strong');
@@ -3487,7 +3504,11 @@ function buildDataAkunCard(account) {
   const role = document.createElement('span');
   role.className = `data-akun-role${account.isMainAdmin ? ' is-main' : account.role === 'admin' ? ' is-admin' : ''}`;
   role.textContent = chatRoleLabel(account);
-  head.append(avatar, identity, role);
+  const chevron = document.createElement('span');
+  chevron.className = 'data-akun-chevron';
+  chevron.setAttribute('aria-hidden', 'true');
+  chevron.textContent = '⌄';
+  head.append(avatar, identity, role, chevron);
   const rows = document.createElement('dl');
   rows.className = 'data-akun-rows';
   rows.append(
@@ -3545,6 +3566,7 @@ async function loadDataAkun() {
       empty.textContent = 'Belum ada akun terdaftar.';
       list.append(empty);
     }
+    updateDataAkunFilterCounts();
     applyDataAkunFilter();
     document.querySelector('#data-akun-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
   } catch (error) {
@@ -3557,13 +3579,91 @@ function startDataAkunPolling() {
     if (activeWorkspacePage === 'data-akun' && document.visibilityState === 'visible') void loadDataAkun();
   }, 15000);
 }
-function applyDataAkunFilter() {
-  const query = (document.querySelector('#data-akun-search')?.value || '').trim().toLowerCase();
-  document.querySelectorAll('#data-akun-list .data-akun-card').forEach((card) => {
-    card.classList.toggle('hidden', Boolean(query) && !(card.dataset.search || '').includes(query));
+// Filter kategori DATA_AKUN: tiap tombol menyaring akun yang punya isi di
+// kolom itu (mis. "Sandi sementara" = akun yang punya sandi sementara).
+// "Sandi utama" = akun yang memakai sandi utamanya (tidak wajib ganti sandi).
+// Jumlah di tiap tombol = jumlah akun yang cocok (Semua = jumlah akun total).
+let dataAkunFilter = 'all';
+let dataAkunQuery = '';
+function dataAkunFilterCounts(accounts) {
+  return {
+    all: accounts.length,
+    email: accounts.filter((account) => account.email).length,
+    username: accounts.filter((account) => account.username).length,
+    temp: accounts.filter((account) => account.tempPassword).length,
+    'temp-at': accounts.filter((account) => account.tempPasswordAt).length,
+    changed: accounts.filter((account) => account.passwordChangedAt).length,
+    reset: accounts.filter((account) => account.resetAt).length,
+    main: accounts.filter((account) => account.mustChangePassword !== true).length,
+  };
+}
+function updateDataAkunFilterCounts() {
+  const cards = [...document.querySelectorAll('#data-akun-list .data-akun-card')];
+  const accounts = cards.map((card) => ({
+    email: card.dataset.hasEmail === '1',
+    username: card.dataset.hasUsername === '1',
+    tempPassword: card.dataset.hasTemp === '1',
+    tempPasswordAt: card.dataset.hasTempAt === '1',
+    passwordChangedAt: card.dataset.hasChanged === '1',
+    resetAt: card.dataset.hasReset === '1',
+    mustChangePassword: card.dataset.hasMain !== '1',
+  }));
+  const counts = dataAkunFilterCounts(accounts);
+  document.querySelectorAll('[data-data-akun-filters] [data-filter-count]').forEach((countEl) => {
+    const key = countEl.dataset.filterCount;
+    if (Object.hasOwn(counts, key)) countEl.textContent = String(counts[key]);
   });
 }
-document.querySelector('#data-akun-search')?.addEventListener('input', applyDataAkunFilter);
+function dataAkunCardMatches(card) {
+  if (dataAkunFilter === 'email' && card.dataset.hasEmail !== '1') return false;
+  if (dataAkunFilter === 'username' && card.dataset.hasUsername !== '1') return false;
+  if (dataAkunFilter === 'temp' && card.dataset.hasTemp !== '1') return false;
+  if (dataAkunFilter === 'temp-at' && card.dataset.hasTempAt !== '1') return false;
+  if (dataAkunFilter === 'changed' && card.dataset.hasChanged !== '1') return false;
+  if (dataAkunFilter === 'reset' && card.dataset.hasReset !== '1') return false;
+  if (dataAkunFilter === 'main' && card.dataset.hasMain !== '1') return false;
+  if (!dataAkunQuery) return true;
+  return (card.dataset.search || '').includes(dataAkunQuery);
+}
+function applyDataAkunFilter() {
+  const cards = [...document.querySelectorAll('#data-akun-list .data-akun-card')];
+  let visible = 0;
+  cards.forEach((card) => {
+    const match = dataAkunCardMatches(card);
+    card.classList.toggle('hidden', !match);
+    if (match) visible += 1;
+  });
+  // Pemisah kelompok ikut hilang bila semua kartunya terfilter.
+  for (const groupSection of document.querySelectorAll('#data-akun-list .data-akun-group')) {
+    const groupVisible = [...groupSection.querySelectorAll('.data-akun-card')].some((card) => !card.classList.contains('hidden'));
+    groupSection.toggleAttribute('hidden', !groupVisible);
+  }
+  document.querySelector('#data-akun-filter-empty')?.toggleAttribute('hidden', !(cards.length > 0 && visible === 0));
+}
+document.querySelector('#data-akun-search')?.addEventListener('input', (event) => {
+  dataAkunQuery = String(event.target.value || '').trim().toLowerCase();
+  applyDataAkunFilter();
+});
+document.querySelector('[data-data-akun-filters]')?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-data-akun-filter]');
+  if (!button) return;
+  dataAkunFilter = button.dataset.dataAkunFilter;
+  document.querySelectorAll('[data-data-akun-filters] .filter-pill').forEach((pill) => {
+    const active = pill === button;
+    pill.classList.toggle('is-active', active);
+    pill.setAttribute('aria-pressed', String(active));
+  });
+  applyDataAkunFilter();
+});
+document.querySelector('#data-akun-list')?.addEventListener('toggle', (event) => {
+  // Akordeon: membuka satu akun menutup akun lain yang sedang terbuka.
+  const opened = event.target;
+  if (opened.tagName === 'DETAILS' && opened.open) {
+    document.querySelectorAll('#data-akun-list .data-akun-card[open]').forEach((card) => {
+      if (card !== opened) card.open = false;
+    });
+  }
+}, true);
 document.querySelector('#data-akun-list')?.addEventListener('click', async (event) => {
   const button = event.target.closest('.data-akun-copy');
   if (!button) return;
@@ -4032,7 +4132,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   if (running) logPollTimer = setInterval(() => { void loadPairingLogs(); }, 4000);
 }
 
-const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log Bot', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', 'data-akun': 'DATA_AKUN', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot', accountactivity: 'Aktivitas Akun', chat: 'Obrolan' };
+const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log Bot', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', 'data-akun': 'Data Akun', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot', accountactivity: 'Aktivitas Akun', chat: 'Obrolan' };
 let activeWorkspacePage = null;
 let privateLogAutoRefreshTimer = null;
 let privateLogScrollOnNextRender = false;
@@ -4113,7 +4213,7 @@ function setWorkspacePage(page, smoothScroll = true, options = {}) {
   if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || (page === 'backup' && currentUser?.role !== 'admin') || (page === 'data-akun' && currentUser?.role !== 'admin') || (page === 'botcontrol' && currentUser?.role !== 'admin') || navItem?.classList.contains('hidden')) {
     // Upaya masuk langsung (misalnya lewat tautan #backup) juga menampilkan notifikasi yang sama.
     if ((page === 'backup' || page === 'data-akun' || page === 'botcontrol') && currentUser?.role !== 'admin') {
-      showLockedNotice(page === 'backup' ? 'Backup' : page === 'data-akun' ? 'DATA_AKUN' : 'Kontrol Bot');
+      showLockedNotice(page === 'backup' ? 'Backup' : page === 'data-akun' ? 'Data Akun' : 'Kontrol Bot');
     }
     page = document.body.dataset.whatsappLinked === 'true' ? 'dashboard' : 'pairing';
   }
@@ -7324,6 +7424,12 @@ document.querySelectorAll('.nav-item[href^="#"]').forEach((item) => {
     if (item.id === 'botcontrol-nav' && item.classList.contains('nav-item-locked')) {
       event.preventDefault();
       showLockedNotice('Kontrol Bot');
+      return;
+    }
+    // Menu Data Akun yang terkunci (member) tidak bisa dibuka: tampilkan notifikasi di tengah layar.
+    if (item.id === 'data-akun-nav' && item.classList.contains('nav-item-locked')) {
+      event.preventDefault();
+      showLockedNotice('Data Akun');
       return;
     }
     const target = document.querySelector(item.getAttribute('href'));
