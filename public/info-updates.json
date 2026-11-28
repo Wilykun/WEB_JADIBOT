@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-11-28T14:06:00+07:00",
+  "updatedAt": "2026-11-28T14:27:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "14.27 WIB",
+      "title": "Halaman DATA_AKUN baru di bawah Backup (admin saja)",
+      "tag": "Fitur baru",
+      "description": "Menu DATA_AKUN baru di bawah Backup: daftar data akun (foto profil, nama, email, sandi sementara, dan tanggal perubahannya) yang diperbarui realtime tiap 15 detik, dengan tombol salin di bagian penting dan ikon di tiap baris, rapi di HP. Hanya Admin Utama dan admin biasa yang bisa membuka — member melihat menu terkunci dan mendapat notifikasi di layar. Sandi utama tidak pernah ditampilkan (hanya hash)."
+    },
     {
       "day": "Sabtu, 28 Nov 2026",
       "time": "14.06 WIB",

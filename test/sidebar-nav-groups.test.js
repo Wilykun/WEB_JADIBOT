@@ -38,7 +38,7 @@ test('menu sidebar dikelompokkan jadi 4 kategori dengan label dan garis pemisah'
     ['rankbot', 'accountactivity', 'dashboard', 'profile', 'chat'],
     ['mode', 'pairing', 'activity'],
     ['developer', 'infoupdate', 'server', 'bots', 'admin'],
-    ['backup', 'botcontrol'],
+    ['backup', 'data-akun', 'botcontrol'],
   ], `isi tiap kategori harus sesuai — dapat: ${JSON.stringify(groups)}`);
 });
 

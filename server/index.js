@@ -2114,6 +2114,18 @@ async function handleApi(req, res, url) {
     await atomicWriteJson(file, { ...current, ...patch });
   }
 
+  // DATA_AKUN: baca catatan sandi sementara per akun (password-reset.json) —
+  // dipakai halaman DATA_AKUN (admin saja) untuk menampilkan sandi sementara
+  // terakhir + tanggal-tanggalnya. Kosong ({}) kalau belum pernah ada.
+  async function readAccountPasswordReset(user) {
+    const dir = canonicalAccountFolder(user);
+    if (!dir) return {};
+    try {
+      const raw = JSON.parse(await fs.readFile(path.join(dir, PASSWORD_RESET_ACCOUNT_FILE), 'utf8'));
+      return raw && typeof raw === 'object' ? raw : {};
+    } catch { return {}; }
+  }
+
   if (route === 'POST /api/auth/login') {
     const body = await readJson(req);
     const rawIdentifier = String(body.identifier || '').trim().slice(0, 254);
@@ -3345,6 +3357,32 @@ async function handleApi(req, res, url) {
       };
     }));
     return sendJson(res, 200, { users });
+  }
+
+  // DATA_AKUN: data akun untuk halaman admin DATA_AKUN — email utuh, sandi
+  // sementara terakhir + tanggal-tanggalnya, akurat realtime. HANYA admin
+  // (Admin Utama dan admin biasa) yang boleh memanggil endpoint ini; member
+  // mendapat 403. Sandi utama TIDAK PERNAH bisa ditampilkan (hanya hash).
+  if (route === 'GET /api/admin/data-akun') {
+    if (!user) return sendError(res, 401, 'Silakan masuk kembali.');
+    if (user.role !== 'admin') return sendError(res, 403, 'Akses admin diperlukan.');
+    const accounts = await Promise.all(store.users.map(async (item) => {
+      const reset = await readAccountPasswordReset(item);
+      return {
+        id: item.id, username: item.username, displayName: item.displayName,
+        email: item.email, role: item.role, createdAt: item.createdAt,
+        avatar: item.avatar === 'uploaded' ? 'uploaded' : AVATAR_PRESETS.has(item.avatar) ? item.avatar : 'avatar-01',
+        avatarUpdatedAt: item.avatarUpdatedAt || null,
+        isMainAdmin: isMainAdmin(item),
+        mustChangePassword: item.mustChangePassword === true,
+        passwordChangedAt: item.passwordChangedAt || null,
+        tempPasswordAt: item.tempPasswordAt || reset.tempPasswordAt || null,
+        tempPassword: typeof reset.tempPassword === 'string' && reset.tempPassword ? reset.tempPassword : null,
+        resetStatus: reset.status || null,
+        resetAt: reset.resetAt || null,
+      };
+    }));
+    return sendJson(res, 200, { accounts });
   }
 
   if (route === 'GET /api/members') {

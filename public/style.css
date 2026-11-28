@@ -3546,3 +3546,38 @@ html[data-theme="light"] .member-page .member-account-item.is-main-admin{border-
 .forgot-saved-accounts{margin-top:14px}
 .forgot-saved-accounts-title{margin:0;font-size:13px;text-align:center;color:var(--soft)}
 @media(min-width:640px){.saved-accounts-list{max-height:300px}}
+/* DATA_AKUN (halaman admin: data akun + sandi sementara + tanggal) */
+.data-akun-spoiler{margin:14px 0;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.data-akun-spoiler summary{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;list-style:none}
+.data-akun-spoiler summary::-webkit-details-marker{display:none}
+.data-akun-spoiler-icon{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(62,230,154,.15);color:#3ee69a;font-size:13px;font-weight:700;flex:none}
+.data-akun-spoiler summary strong{display:block;font-size:14px}
+.data-akun-spoiler summary small{display:block;color:var(--soft);font-size:12px}
+.data-akun-spoiler-chevron{margin-left:auto;color:var(--soft)}
+.data-akun-warning{margin:0;padding:0 14px 14px;font-size:13px;line-height:1.6;color:var(--soft)}
+.data-akun-list{display:flex;flex-direction:column;gap:18px;margin-top:16px}
+.data-akun-group-heading{display:flex;align-items:baseline;gap:10px;margin:0 0 10px}
+.data-akun-group-heading h3{margin:0;font-size:15px}
+.data-akun-group-heading span{font-size:12px;color:var(--soft)}
+.data-akun-card{border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:16px;margin-bottom:12px}
+.data-akun-card-head{display:flex;align-items:center;gap:12px;text-align:left}
+.data-akun-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--line)}
+.data-akun-identity{display:flex;flex-direction:column;gap:2px;min-width:0}
+.data-akun-identity strong{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.data-akun-identity span{font-size:12px;color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.data-akun-role{margin-left:auto;flex:none;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(233,237,239,.12);color:var(--soft)}
+.data-akun-role.is-main{background:rgba(245,197,66,.18);color:#f5c542}
+.data-akun-role.is-admin{background:rgba(62,230,154,.15);color:#3ee69a}
+.data-akun-rows{margin:14px 0 0}
+.data-akun-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.data-akun-row dt{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--soft);flex:none}
+.data-akun-row dt svg{width:16px;height:16px;flex:none}
+.data-akun-row dd{margin:0;display:flex;align-items:center;gap:8px;justify-content:flex-end;min-width:0;text-align:right}
+.data-akun-value{font-size:13px;font-weight:600;word-break:break-all}
+.data-akun-row:nth-child(3) .data-akun-value{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.02em}
+.data-akun-hash-note{font-weight:400;color:var(--soft);font-size:12px}
+.data-akun-copy{display:inline-flex;align-items:center;gap:5px;flex:none;padding:5px 10px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--soft);font-size:12px;cursor:pointer}
+.data-akun-copy svg{width:13px;height:13px}
+.data-akun-copy:hover{border-color:#3ee69a;color:#3ee69a}
+.data-akun-empty{text-align:center;color:var(--soft);padding:24px 0}
+@media(max-width:560px){.data-akun-card-head{flex-wrap:wrap}.data-akun-role{margin-left:0}.data-akun-row{flex-direction:column;align-items:flex-start;gap:6px}.data-akun-row dd{justify-content:flex-start;text-align:left}}

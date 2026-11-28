@@ -21,8 +21,8 @@ test('info update filter pills match the JSON taxonomy and count the real entrie
   const counts = { all: updates.length };
   for (const update of updates) counts[slug(update.tag)] = (counts[slug(update.tag)] || 0) + 1;
   // Hitungan pil harus akurat: Semua = total entri, tiap kategori = jumlah entri dengan tag itu.
-  assert.equal(counts.all, 137, 'Semua must equal the total number of entries');
-  assert.equal(counts['fitur-baru'], 39, 'Fitur baru count must match the JSON data');
+  assert.equal(counts.all, 138, 'Semua must equal the total number of entries');
+  assert.equal(counts['fitur-baru'], 40, 'Fitur baru count must match the JSON data');
   assert.equal(counts.perubahan, 19, 'Perubahan count must match the JSON data');
   assert.equal(counts.perbaikan, 42, 'Perbaikan count must match the JSON data');
   assert.equal(counts.bug, 12, 'Bug count must match the JSON data');

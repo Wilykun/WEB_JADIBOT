@@ -2046,6 +2046,12 @@ async function loadAdminUsers() {
     backupNav?.classList.toggle('nav-item-locked', !isAdmin);
     backupNav?.setAttribute('aria-disabled', String(!isAdmin));
     document.querySelector('#backup')?.classList.toggle('hidden', !isAdmin);
+    // Halaman DATA_AKUN diperlakukan sama seperti Backup: menunya tetap terlihat tapi terkunci untuk member, isi halamannya disembunyikan total.
+    const dataAkunNav = document.querySelector('#data-akun-nav');
+    dataAkunNav?.classList.remove('hidden');
+    dataAkunNav?.classList.toggle('nav-item-locked', !isAdmin);
+    dataAkunNav?.setAttribute('aria-disabled', String(!isAdmin));
+    document.querySelector('#data-akun')?.classList.toggle('hidden', !isAdmin);
     // Halaman Kontrol Bot diperlakukan sama seperti Backup: menunya tetap terlihat tapi terkunci untuk member, isi halamannya disembunyikan total.
     const botControlNav = document.querySelector('#botcontrol-nav');
     botControlNav?.classList.remove('hidden');
@@ -3406,6 +3412,169 @@ function startBotControlUsersPolling() {
   }, 15000);
 }
 
+// DATA_AKUN: daftar data akun (admin saja) — email, nama pengguna, sandi
+// sementara + tanggal-tanggalnya, akurat realtime. Sandi utama TIDAK PERNAH
+// ditampilkan (hanya hash). Member tidak bisa membuka halaman ini (terkunci).
+let dataAkunTimer = null;
+const DATA_AKUN_ICONS = {
+  mail: '<path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/>',
+  user: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  key: '<circle cx="8" cy="15" r="4"/><path d="m11 12 9-9"/><path d="m17 4 3 3"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  lock: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  copy: '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+};
+function dataAkunIcon(name) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.innerHTML = DATA_AKUN_ICONS[name] || '';
+  return svg;
+}
+function dataAkunAvatarSrc(account) {
+  if (account.avatar === 'uploaded') return `/api/admin/user-avatar?userId=${encodeURIComponent(account.id)}&v=${encodeURIComponent(account.avatarUpdatedAt || '')}`;
+  return `/avatars/${/^avatar-(0[1-9]|[123][0-9]|4[0-8])$/.test(account.avatar || '') ? account.avatar : 'avatar-01'}.webp`;
+}
+function dataAkunCopyButton(text, label) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'data-akun-copy';
+  button.dataset.copyText = text;
+  button.title = `Salin ${label}`;
+  button.setAttribute('aria-label', `Salin ${label}`);
+  button.append(dataAkunIcon('copy'), document.createTextNode('Salin'));
+  return button;
+}
+function dataAkunRow(icon, label, valueText, copyLabel) {
+  const row = document.createElement('div');
+  row.className = 'data-akun-row';
+  const term = document.createElement('dt');
+  term.append(dataAkunIcon(icon), document.createTextNode(label));
+  const value = document.createElement('dd');
+  const text = document.createElement('span');
+  text.className = 'data-akun-value';
+  text.textContent = valueText;
+  value.append(text);
+  if (copyLabel && valueText && valueText !== '—' && valueText !== 'Belum ada') value.append(dataAkunCopyButton(valueText, copyLabel));
+  row.append(term, value);
+  return row;
+}
+function buildDataAkunCard(account) {
+  const card = document.createElement('article');
+  card.className = 'data-akun-card';
+  card.dataset.search = `${account.displayName || ''} ${account.username || ''} ${account.email || ''}`.toLowerCase();
+  const head = document.createElement('div');
+  head.className = 'data-akun-card-head';
+  const avatar = document.createElement('img');
+  avatar.className = 'data-akun-avatar';
+  avatar.src = dataAkunAvatarSrc(account);
+  avatar.alt = '';
+  avatar.loading = 'lazy';
+  const identity = document.createElement('div');
+  identity.className = 'data-akun-identity';
+  const name = document.createElement('strong');
+  name.textContent = account.displayName || account.username;
+  const handle = document.createElement('span');
+  handle.textContent = `@${account.username}`;
+  identity.append(name, handle);
+  const role = document.createElement('span');
+  role.className = `data-akun-role${account.isMainAdmin ? ' is-main' : account.role === 'admin' ? ' is-admin' : ''}`;
+  role.textContent = chatRoleLabel(account);
+  head.append(avatar, identity, role);
+  const rows = document.createElement('dl');
+  rows.className = 'data-akun-rows';
+  rows.append(
+    dataAkunRow('mail', 'Email', account.email || '—', 'email'),
+    dataAkunRow('user', 'Nama pengguna', `@${account.username}`, 'nama pengguna'),
+    dataAkunRow('key', 'Sandi sementara', account.tempPassword || 'Belum ada', 'sandi sementara'),
+    dataAkunRow('clock', 'Sandi sementara diminta', account.tempPasswordAt ? formatServerDateTime(account.tempPasswordAt) : '—'),
+    dataAkunRow('calendar', 'Sandi terakhir diganti', account.passwordChangedAt ? formatServerDateTime(account.passwordChangedAt) : '—'),
+    dataAkunRow('check', 'Reset selesai', account.resetAt ? formatServerDateTime(account.resetAt) : '—'),
+  );
+  const hashRow = document.createElement('div');
+  hashRow.className = 'data-akun-row';
+  const hashTerm = document.createElement('dt');
+  hashTerm.append(dataAkunIcon('lock'), document.createTextNode('Sandi utama'));
+  const hashValue = document.createElement('dd');
+  const hashNote = document.createElement('span');
+  hashNote.className = 'data-akun-value data-akun-hash-note';
+  hashNote.textContent = 'Tidak dapat ditampilkan (tersimpan sebagai hash keamanan)';
+  hashValue.append(hashNote);
+  hashRow.append(hashTerm, hashValue);
+  rows.append(hashRow);
+  card.append(head, rows);
+  return card;
+}
+async function loadDataAkun() {
+  const list = document.querySelector('#data-akun-list');
+  if (!list || currentUser?.role !== 'admin') return;
+  try {
+    const data = await api('/api/admin/data-akun');
+    const accounts = Array.isArray(data.accounts) ? data.accounts : [];
+    const groups = [
+      { key: 'admin', title: 'Admin', accounts: accounts.filter((account) => account.role === 'admin') },
+      { key: 'member', title: 'Member', accounts: accounts.filter((account) => account.role !== 'admin') },
+    ];
+    list.replaceChildren();
+    for (const group of groups) {
+      if (!group.accounts.length) continue;
+      const groupSection = document.createElement('section');
+      groupSection.className = 'data-akun-group';
+      groupSection.setAttribute('aria-label', `${group.title}, ${group.accounts.length} akun`);
+      const groupHeading = document.createElement('div');
+      groupHeading.className = 'data-akun-group-heading';
+      const groupTitle = document.createElement('h3');
+      groupTitle.textContent = group.title;
+      const groupCount = document.createElement('span');
+      groupCount.textContent = `${group.accounts.length} akun`;
+      groupHeading.append(groupTitle, groupCount);
+      groupSection.append(groupHeading);
+      for (const account of group.accounts) groupSection.append(buildDataAkunCard(account));
+      list.append(groupSection);
+    }
+    if (!accounts.length) {
+      const empty = document.createElement('p');
+      empty.className = 'data-akun-empty';
+      empty.textContent = 'Belum ada akun terdaftar.';
+      list.append(empty);
+    }
+    applyDataAkunFilter();
+    document.querySelector('#data-akun-updated').textContent = `Diperbarui ${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`;
+  } catch (error) {
+    if (error.status === 401) showAuth();
+  }
+}
+function startDataAkunPolling() {
+  if (dataAkunTimer) return;
+  dataAkunTimer = window.setInterval(() => {
+    if (activeWorkspacePage === 'data-akun' && document.visibilityState === 'visible') void loadDataAkun();
+  }, 15000);
+}
+function applyDataAkunFilter() {
+  const query = (document.querySelector('#data-akun-search')?.value || '').trim().toLowerCase();
+  document.querySelectorAll('#data-akun-list .data-akun-card').forEach((card) => {
+    card.classList.toggle('hidden', Boolean(query) && !(card.dataset.search || '').includes(query));
+  });
+}
+document.querySelector('#data-akun-search')?.addEventListener('input', applyDataAkunFilter);
+document.querySelector('#data-akun-list')?.addEventListener('click', async (event) => {
+  const button = event.target.closest('.data-akun-copy');
+  if (!button) return;
+  try {
+    await navigator.clipboard.writeText(button.dataset.copyText || '');
+    showToast('Disalin.');
+  } catch {
+    showToast('Tidak bisa menyalin otomatis — salin manual.');
+  }
+});
+
 botControlUsersList?.addEventListener('click', async (event) => {
   const actionButton = event.target.closest('[data-botcontrol-action]');
   if (actionButton && botControlUsersList.contains(actionButton)) {
@@ -3863,7 +4032,7 @@ function renderBotWorkerUi(workerStatus, connectionStatus, workerStartedAt = nul
   if (running) logPollTimer = setInterval(() => { void loadPairingLogs(); }, 4000);
 }
 
-const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log Bot', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot', accountactivity: 'Aktivitas Akun', chat: 'Obrolan' };
+const workspacePageTitles = { dashboard: 'Panel', mode: 'Fitur Bot', activity: 'Log Bot', profile: 'Profil akun', pairing: 'Pairing WhatsApp', developer: 'Developer', infoupdate: 'Info Update', server: 'Server', bots: 'List Bot', admin: 'Member', backup: 'Backup & pemulihan', 'data-akun': 'DATA_AKUN', botcontrol: 'Kontrol Bot', rankbot: 'Rank Bot', accountactivity: 'Aktivitas Akun', chat: 'Obrolan' };
 let activeWorkspacePage = null;
 let privateLogAutoRefreshTimer = null;
 let privateLogScrollOnNextRender = false;
@@ -3940,11 +4109,11 @@ function setWorkspacePage(page, smoothScroll = true, options = {}) {
     page = 'pairing';
   }
   const navItem = document.querySelector(`.side-nav .nav-item[href="#${page}"]`);
-  // Halaman Backup dijaga juga lewat peran (bukan hanya lewat menu yang tersembunyi), karena menunya kini terlihat tapi terkunci untuk member. Halaman Kontrol Bot dijaga dengan cara yang sama.
-  if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || (page === 'backup' && currentUser?.role !== 'admin') || (page === 'botcontrol' && currentUser?.role !== 'admin') || navItem?.classList.contains('hidden')) {
+  // Halaman Backup dijaga juga lewat peran (bukan hanya lewat menu yang tersembunyi), karena menunya kini terlihat tapi terkunci untuk member. Halaman Kontrol Bot dan DATA_AKUN dijaga dengan cara yang sama.
+  if (!workspacePageTitles[page] || (page === 'admin' && !currentUser) || (page === 'backup' && currentUser?.role !== 'admin') || (page === 'data-akun' && currentUser?.role !== 'admin') || (page === 'botcontrol' && currentUser?.role !== 'admin') || navItem?.classList.contains('hidden')) {
     // Upaya masuk langsung (misalnya lewat tautan #backup) juga menampilkan notifikasi yang sama.
-    if ((page === 'backup' || page === 'botcontrol') && currentUser?.role !== 'admin') {
-      showLockedNotice(page === 'backup' ? 'Backup' : 'Kontrol Bot');
+    if ((page === 'backup' || page === 'data-akun' || page === 'botcontrol') && currentUser?.role !== 'admin') {
+      showLockedNotice(page === 'backup' ? 'Backup' : page === 'data-akun' ? 'DATA_AKUN' : 'Kontrol Bot');
     }
     page = document.body.dataset.whatsappLinked === 'true' ? 'dashboard' : 'pairing';
   }
@@ -4028,6 +4197,11 @@ function setWorkspacePage(page, smoothScroll = true, options = {}) {
   if (page === 'botcontrol') {
     void loadBotControlUsers();
     startBotControlUsersPolling();
+  }
+  // Halaman DATA_AKUN memuat ulang data akun setiap kali dibuka agar angkanya selalu dari data live, bukan sisa login.
+  if (page === 'data-akun') {
+    void loadDataAkun();
+    startDataAkunPolling();
   }
   // Halaman Rank Bot memuat ulang peringkat setiap kali dibuka agar angkanya selalu dari data live, bukan sisa login.
   if (page === 'rankbot') {
@@ -5439,6 +5613,12 @@ async function showDashboard(user) {
   backupNav?.classList.toggle('nav-item-locked', !isAdmin);
   backupNav?.setAttribute('aria-disabled', String(!isAdmin));
   document.querySelector('#backup')?.classList.toggle('hidden', !isAdmin);
+  // Halaman DATA_AKUN hanya untuk admin (Admin Utama dan admin biasa): menunya terlihat untuk semua akun yang login, tapi terkunci untuk member (lencana Terkunci, tidak bisa diklik); isi halamannya tetap disembunyikan total untuk member.
+  const dataAkunNav = document.querySelector('#data-akun-nav');
+  dataAkunNav?.classList.remove('hidden');
+  dataAkunNav?.classList.toggle('nav-item-locked', !isAdmin);
+  dataAkunNav?.setAttribute('aria-disabled', String(!isAdmin));
+  document.querySelector('#data-akun')?.classList.toggle('hidden', !isAdmin);
   // Halaman Kontrol Bot hanya untuk admin (Admin Utama dan admin biasa): menunya terlihat untuk semua akun yang login, tapi terkunci untuk member (lencana Terkunci, tidak bisa diklik); isi halamannya tetap disembunyikan total untuk member.
   const botControlNav = document.querySelector('#botcontrol-nav');
   botControlNav?.classList.remove('hidden');
