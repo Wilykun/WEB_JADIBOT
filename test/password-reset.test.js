@@ -451,3 +451,89 @@ test('forgotConfirmCodeMatches: cocok persis, salah, kosong', async () => {
 [f('7cFWLM6G5z', '7cFWLM6G5z'), f(' 7cFWLM6G5z ', '7cFWLM6G5z'), f('7cfwlm6g5z', '7cFWLM6G5z'), f('7cFWLM6G5y', '7cFWLM6G5z'), f('', '7cFWLM6G5z'), f('7cFWLM6G5z', ''), f('', '')]`);
   assert.deepEqual(out, [true, true, false, false, false, false, false], 'kode harus cocok persis (huruf besar-kecil berpengaruh), spasi di ujung dimaafkan, kosong selalu salah');
 });
+
+// Ronde 40: boot() selesai belakangan (mis. /api/me lambat karena WiFi putus
+// + retry 1500ms) tidak boleh melempar pengguna yang sudah membuka Lupa
+// sandi kembali ke Masuk. Dulu: klik "Lupa sandi?" lalu beberapa detik
+// kemudian form hilang dan judul kembali "Masuk ke akunmu".
+test('ronde 40: boot() tidak melempar pengguna keluar dari Lupa sandi', async () => {
+  assert.ok(appJs.includes('function isAuthSubViewOpen()'), 'helper isAuthSubViewOpen harus ada');
+  const boot = appJs.match(/\(async function boot\(\) \{[\s\S]*?\n\}\)\(\);/);
+  assert.ok(boot, 'boot IIFE harus bisa diekstrak');
+  const bootSrc = boot[0];
+  assert.ok(bootSrc.includes('if (isAuthSubViewOpen()) return;'), 'boot harus memeriksa tampilan auth');
+  assert.ok(bootSrc.indexOf('isAuthSubViewOpen()') < bootSrc.indexOf('showDashboard(result.user)'), 'cek harus sebelum showDashboard');
+  assert.ok(bootSrc.indexOf('isAuthSubViewOpen()') < bootSrc.indexOf('showAuth(savedAuthMode())'), 'cek harus sebelum showAuth');
+  const m = appJs.match(/function isAuthSubViewOpen\(\) \{[\s\S]*?\n\}/);
+  assert.ok(m, 'fungsi isAuthSubViewOpen harus bisa diekstrak');
+  const fn = m[0].replace('function isAuthSubViewOpen', 'function f');
+  const out = await eval(`
+    const mk = (hidden) => ({ classList: { contains: (c) => c === 'hidden' ? hidden : false } });
+    let forgotForm = mk(true), verificationForm = mk(true), adminAccessForm = mk(true);
+    ${fn}
+    const a = f();
+    forgotForm = mk(false);
+    const b = f();
+    forgotForm = mk(true); verificationForm = mk(false);
+    const c = f();
+    verificationForm = mk(true); adminAccessForm = mk(false);
+    const d = f();
+    forgotForm = null; verificationForm = null; adminAccessForm = null;
+    const e = f();
+    [a, b, c, d, e]`);
+  assert.deepEqual(out, [false, true, true, true, true], 'semua tersembunyi -> false; satu tampil (atau form tak ditemukan) -> true');
+});
+
+// Ronde 41: unduh AkunJadiBotMu.txt setelah reset sandi — data akun + sandi +
+// statistik realtime, UI kartu rapi di HP dan desktop dengan spoiler SVG.
+test('ronde 41: unduh AkunJadiBotMu.txt setelah reset sandi (data + statistik realtime)', async () => {
+  assert.ok(serverJs.includes('const featureStats = await readAccountFeatureStats(user);'), 'reset sandi harus membaca statistik akun');
+  assert.ok(serverJs.includes('storyReadCount: featureStats.storyReadCount'), 'respons reset harus membawa jumlah ReadSW');
+  assert.ok(serverJs.includes('reactionCount: featureStats.reactionCount'), 'respons reset harus membawa jumlah ReactionSW');
+  assert.ok(serverJs.includes('modeLabel: featureStats.modeLabel'), 'respons reset harus membawa label mode bot');
+  assert.ok(html.includes('id="forgot-account-file"'), 'blok unduh data akun harus ada');
+  assert.ok(html.includes('id="forgot-account-file-download"'), 'tombol unduh AkunJadiBotMu.txt harus ada');
+  assert.ok(html.includes('Unduh AkunJadiBotMu.txt'), 'tombol unduh harus bernama AkunJadiBotMu.txt');
+  assert.ok(html.includes('id="forgot-account-file-copy"'), 'tombol salin isi file harus ada');
+  assert.ok(html.includes('id="forgot-file-username"'), 'preview harus menampilkan username');
+  assert.ok(html.includes('id="forgot-file-email"'), 'preview harus menampilkan email');
+  assert.ok(html.includes('id="forgot-file-new-password"'), 'preview harus menampilkan sandi baru');
+  assert.ok(html.includes('id="forgot-file-temp-password"'), 'preview harus menampilkan sandi sementara');
+  assert.ok(html.includes('id="forgot-file-reads"'), 'preview harus menampilkan jumlah ReadSW');
+  assert.ok(html.includes('id="forgot-file-total"'), 'preview harus menampilkan total ReadSW + ReactionSW');
+  assert.ok(html.includes('Tidak dapat ditampilkan (tersimpan sebagai hash keamanan)'), 'sandi lama harus dijelaskan tidak bisa ditampilkan');
+  const spoilerCount = (html.match(/class="forgot-account-file-spoiler"/g) || []).length;
+  assert.equal(spoilerCount, 3, 'harus ada 3 spoiler: Data akun, Sandi, Statistik');
+  assert.ok(html.includes('forgot-account-file-spoiler-icon'), 'spoiler harus punya ikon SVG sesuai konteks');
+  // Perbaikan laten: pesan selesai TIDAK boleh lagi di dalam div reset yang
+  // disembunyikan saat sukses — kalau tidak, pengguna tidak melihat apa-apa.
+  const resetDivStart = html.indexOf('id="forgot-reset"');
+  const resetDivEnd = html.indexOf('</div>', resetDivStart);
+  assert.ok(resetDivStart > -1 && resetDivEnd > resetDivStart, 'div reset harus ditemukan');
+  assert.ok(!html.slice(resetDivStart, resetDivEnd).includes('forgot-reset-done'), 'pesan selesai harus di luar div reset');
+  assert.ok(html.indexOf('id="forgot-reset-done"') > resetDivEnd, 'pesan selesai harus setelah penutup div reset');
+  assert.ok(appJs.includes('showForgotAccountFile(result.account || {}, newPassword, forgotTempPassword);'), 'reset sukses harus membangun file data akun');
+  assert.ok(appJs.includes("document.querySelector('#forgot-account-file')?.classList.remove('hidden')"), 'reset sukses harus menampilkan blok unduh');
+  assert.ok(appJs.includes("a.download = 'AkunJadiBotMu.txt';"), 'unduhan harus bernama AkunJadiBotMu.txt');
+  assert.ok(appJs.includes('navigator.clipboard.writeText(text)'), 'harus ada cadangan salin isi file');
+  assert.ok(css.includes('.forgot-account-file{'), 'CSS kartu file harus ada');
+  assert.ok(css.includes('.forgot-account-file-spoiler'), 'CSS spoiler harus ada');
+  assert.ok(css.includes('.forgot-account-file-list'), 'CSS daftar data harus ada');
+  assert.ok(css.includes('@media(min-width:640px)'), 'tombol harus berdampingan di desktop');
+  const m = appJs.match(/function buildAccountDataFile\(data\) \{[\s\S]*?\n\}/);
+  assert.ok(m, 'fungsi buildAccountDataFile harus bisa diekstrak');
+  const fn = m[0].replace('function buildAccountDataFile', 'function f');
+  const out = await eval(`${fn}
+f({ displayName: 'BangWily', username: 'bangwily', email: 'bangwily@gmail.com', role: 'user', newPassword: 'SandiBaru12345', tempPassword: 'bJAchm4dfJ', modeLabel: 'ReadSW + ReactionSW', storyReadCount: 120, reactionCount: 45, features: { readSW: true, reactionSW: true, online24: false }, generatedAt: '2026-11-28T11:45:00+07:00' })`);
+  assert.ok(out.includes('Username      : bangwily'), 'file harus berisi username');
+  assert.ok(out.includes('Email         : bangwily@gmail.com'), 'file harus berisi email');
+  assert.ok(out.includes('Sandi baru      : SandiBaru12345'), 'file harus berisi sandi baru');
+  assert.ok(out.includes('Sandi sementara : bJAchm4dfJ'), 'file harus berisi sandi sementara');
+  assert.ok(out.includes('tidak dapat ditampilkan (tersimpan sebagai hash keamanan)'), 'file harus menjelaskan sandi lama');
+  assert.ok(out.includes('ReadSW dibaca         : 120'), 'file harus berisi jumlah ReadSW');
+  assert.ok(out.includes('ReactionSW            : 45'), 'file harus berisi jumlah ReactionSW');
+  assert.ok(out.includes('Total (ReadSW + ReactionSW) : 165'), 'file harus berisi total ReadSW + ReactionSW');
+  assert.ok(out.includes('Fitur aktif           : ReadSW, ReactionSW'), 'file harus berisi fitur aktif');
+  assert.ok(out.includes('Sabtu, 28 Nov 2026'), 'file harus berisi tanggal pembuatan');
+  assert.ok(out.includes('jangan dibagikan ke siapa pun'), 'file harus berisi peringatan privasi');
+});

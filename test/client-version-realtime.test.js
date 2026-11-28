@@ -127,9 +127,9 @@ test('menu tetap terbuka setelah notifikasi menu terkunci ditutup', async () => 
 test('entri Info Update terbaru kini soal sesi WhatsApp pulih dari cadangan', async () => {
   const data = JSON.parse(await readFile(path.join(sourceRoot, 'public', 'info-updates.json'), 'utf8'));
   const html = await readFile(path.join(sourceRoot, 'public', 'index.html'), 'utf8');
-  assert.equal(data.updates.length, 125, 'daftar harus 78 entri');
+  assert.equal(data.updates.length, 127, 'daftar harus 78 entri');
   const newest = data.updates[0];
-  assert.equal(newest.title, 'Lupa sandi kini ada konfirmasi kode sebelum buat sandi baru', 'entri terbaru harus soal batas 10 detik indikator mengetik');
+  assert.equal(newest.title, 'Reset sandi kini bisa unduh data akun (AkunJadiBotMu.txt)', 'entri terbaru harus soal batas 10 detik indikator mengetik');
   assert.equal(newest.tag, 'Fitur baru', 'entri terbaru harus bertag Perubahan');
   assert.equal(newest.day, 'Sabtu, 28 Nov 2026', 'hari entri terbaru harus cocok');
   assert.ok(html.includes('<li class="info-update-item" data-tag="fitur-baru">'), 'fallback harus memakai slug fitur-baru untuk entri terbaru');
@@ -137,7 +137,7 @@ test('entri Info Update terbaru kini soal sesi WhatsApp pulih dari cadangan', as
 
   // Entri notifikasi menu terkunci sebelumnya kini di posisi kedua puluh dua; deskripsinya
   // menyebut menunya tetap terbuka setelah notifikasi ditutup.
-  const locked = data.updates[63];
+  const locked = data.updates[65];
   assert.equal(locked.title, 'Member yang mengetuk menu terkunci kini melihat notifikasi di layar', 'entri notifikasi menu terkunci kini di posisi kedua puluh empat');
   assert.match(locked.description, /Menunya tetap terbuka setelah notifikasi ditutup/, 'deskripsi harus menyebut menu tetap terbuka');
 });

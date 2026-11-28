@@ -2167,7 +2167,23 @@ async function handleApi(req, res, url) {
       // tetap bisa dipakai masuk sebagai cadangan setelah sandi baru disimpan.
     });
     await writeAccountPasswordReset(user, { status: 'done', resetAt: new Date().toISOString() });
-    return sendJson(res, 200, { ok: true, message: 'Sandi baru sudah disimpan. Kamu bisa masuk dengan sandi baru maupun sandi sementara.' });
+    // RONDE 41: kembalikan data akun + statistik realtime untuk file
+    // AkunJadiBotMu.txt (diunduh dari halaman setelah sandi baru disimpan).
+    const featureStats = await readAccountFeatureStats(user);
+    return sendJson(res, 200, {
+      ok: true,
+      message: 'Sandi baru sudah disimpan. Kamu bisa masuk dengan sandi baru maupun sandi sementara.',
+      account: {
+        username: user.username,
+        displayName: user.displayName || user.username,
+        email: user.email,
+        role: user.role,
+        modeLabel: featureStats.modeLabel,
+        storyReadCount: featureStats.storyReadCount,
+        reactionCount: featureStats.reactionCount,
+        features: featureStats.features,
+      },
+    });
   }
 
   const user = await authenticatedUser(req);

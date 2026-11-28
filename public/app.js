@@ -632,10 +632,12 @@ function showForgotForm() {
   document.querySelector('#forgot-confirm-loading')?.classList.add('hidden');
   document.querySelector('#forgot-reset')?.classList.add('hidden');
   document.querySelector('#forgot-reset-done')?.classList.add('hidden');
+  document.querySelector('#forgot-account-file')?.classList.add('hidden');
   document.querySelector('#forgot-reset-match')?.classList.add('hidden');
   document.querySelector('#forgot-reset-message')?.classList.add('hidden');
   forgotTempPassword = '';
   forgotResetEmail = '';
+  forgotAccountFileText = '';
   setAuthMessage('');
 }
 
@@ -5910,6 +5912,8 @@ forgotForm?.addEventListener('submit', async (event) => {
       document.querySelector('#forgot-reset')?.classList.add('hidden');
       document.querySelector('#forgot-reset-message')?.classList.add('hidden');
       document.querySelector('#forgot-reset-done')?.classList.add('hidden');
+      document.querySelector('#forgot-account-file')?.classList.add('hidden');
+      forgotAccountFileText = '';
       const confirmInput = document.querySelector('#forgot-confirm-code');
       if (confirmInput) confirmInput.value = '';
       document.querySelector('#forgot-confirm-error')?.classList.add('hidden');
@@ -6038,6 +6042,103 @@ document.querySelector('#forgot-confirm-submit')?.addEventListener('click', asyn
   document.querySelector('#forgot-reset')?.classList.remove('hidden');
   document.querySelector('#forgot-new-password')?.focus();
 });
+// RONDE 41: isi file AkunJadiBotMu.txt — data akun + sandi + statistik realtime.
+// Fungsi murni supaya gampang dites. Sandi lama TIDAK bisa ditampilkan: yang
+// tersimpan di server hanya hash scrypt-nya, bukan teks aslinya.
+function buildAccountDataFile(data) {
+  const d = data || {};
+  const reads = Math.max(0, Number(d.storyReadCount) || 0);
+  const reactions = Math.max(0, Number(d.reactionCount) || 0);
+  const total = reads + reactions;
+  const activeFeatures = [];
+  if (d.features?.readSW) activeFeatures.push('ReadSW');
+  if (d.features?.reactionSW) activeFeatures.push('ReactionSW');
+  if (d.features?.online24) activeFeatures.push('Online 24 Jam');
+  const roleLabel = d.role === 'admin' ? 'Admin' : d.role === 'user' ? 'Member' : (d.role || '—');
+  const when = d.generatedAt ? new Date(d.generatedAt) : new Date();
+  const whenText = Number.isNaN(when.getTime()) ? '—' : `${new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Jakarta' }).format(when)} WIB`;
+  const lines = [
+    '========================================',
+    '  DATA AKUN — ReadSW Console',
+    '========================================',
+    '',
+    '[ DATA AKUN ]',
+    `Nama tampilan : ${d.displayName || d.username || '—'}`,
+    `Username      : ${d.username || '—'}`,
+    `Email         : ${d.email || '—'}`,
+    `Peran         : ${roleLabel}`,
+    '',
+    '[ SANDI ]',
+    `Sandi baru      : ${d.newPassword || '—'}`,
+    `Sandi sementara : ${d.tempPassword || '—'}`,
+    'Sandi lama      : tidak dapat ditampilkan (tersimpan sebagai hash keamanan)',
+    '',
+    '[ STATISTIK AKUN — realtime ]',
+    `Mode bot              : ${d.modeLabel || '—'}`,
+    `ReadSW dibaca         : ${reads.toLocaleString('id-ID')}`,
+    `ReactionSW            : ${reactions.toLocaleString('id-ID')}`,
+    `Total (ReadSW + ReactionSW) : ${total.toLocaleString('id-ID')}`,
+    `Fitur aktif           : ${activeFeatures.length ? activeFeatures.join(', ') : '—'}`,
+    '',
+    `Dibuat: ${whenText}`,
+    '----------------------------------------',
+    'PERINGATAN: File ini berisi sandi dalam teks biasa.',
+    'Simpan di tempat aman dan jangan dibagikan ke siapa pun.',
+  ];
+  return `${lines.join('\n')}\n`;
+}
+
+let forgotAccountFileText = '';
+
+function showForgotAccountFile(account, newPassword, tempPassword) {
+  const a = account || {};
+  const reads = Math.max(0, Number(a.storyReadCount) || 0);
+  const reactions = Math.max(0, Number(a.reactionCount) || 0);
+  const set = (id, value) => { const el = document.querySelector(id); if (el) el.textContent = value; };
+  set('#forgot-file-display-name', a.displayName || a.username || '—');
+  set('#forgot-file-username', a.username || '—');
+  set('#forgot-file-email', a.email || '—');
+  set('#forgot-file-role', a.role === 'admin' ? 'Admin' : a.role === 'user' ? 'Member' : (a.role || '—'));
+  set('#forgot-file-new-password', newPassword || '—');
+  set('#forgot-file-temp-password', tempPassword || '—');
+  set('#forgot-file-mode', a.modeLabel || '—');
+  set('#forgot-file-reads', reads.toLocaleString('id-ID'));
+  set('#forgot-file-reactions', reactions.toLocaleString('id-ID'));
+  set('#forgot-file-total', (reads + reactions).toLocaleString('id-ID'));
+  set('#forgot-file-updated', `${new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }).format(new Date())} WIB`);
+  forgotAccountFileText = buildAccountDataFile({ ...a, newPassword, tempPassword });
+  document.querySelector('#forgot-account-file')?.classList.remove('hidden');
+}
+
+document.querySelector('#forgot-account-file-download')?.addEventListener('click', () => {
+  const text = forgotAccountFileText || '';
+  if (!text) { showToast('File belum siap. Simpan sandi baru dulu.'); return; }
+  try {
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'AkunJadiBotMu.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    showToast('AkunJadiBotMu.txt diunduh. Cek folder Unduhan.');
+  } catch {
+    showToast('Unduhan gagal. Pakai tombol Salin isi file.');
+  }
+});
+document.querySelector('#forgot-account-file-copy')?.addEventListener('click', async () => {
+  const text = forgotAccountFileText || '';
+  if (!text) { showToast('File belum siap. Simpan sandi baru dulu.'); return; }
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('Isi file disalin. Tempel di catatanmu.');
+  } catch {
+    showToast('Salin otomatis gagal. Coba lagi.');
+  }
+});
+
 document.querySelector('#forgot-reset-submit')?.addEventListener('click', async () => {
   const message = document.querySelector('#forgot-reset-message');
   const newPassword = document.querySelector('#forgot-new-password')?.value || '';
@@ -6054,6 +6155,8 @@ document.querySelector('#forgot-reset-submit')?.addEventListener('click', async 
   try {
     const result = await api('/api/auth/reset-password', { method: 'POST', body: JSON.stringify({ email: forgotResetEmail, tempPassword: forgotTempPassword, newPassword }) });
     showMsg(result.message || 'Sandi baru sudah disimpan.', true);
+    // RONDE 41: bangun file data akun SEBELUM sandi sementara dibersihkan.
+    showForgotAccountFile(result.account || {}, newPassword, forgotTempPassword);
     document.querySelector('#forgot-reset-done')?.classList.remove('hidden');
     document.querySelector('#forgot-temp')?.classList.add('hidden');
     document.querySelector('#forgot-reset')?.classList.add('hidden');
@@ -7571,11 +7674,24 @@ document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && activeWorkspacePage === 'activity') void loadPairingLogs();
 });
 
+// RONDE 40: pengguna bisa membuka Lupa sandi / Verifikasi / Akses admin
+// sebelum boot() selesai (mis. /api/me lambat karena WiFi putus sesaat +
+// retry 1500ms). Kalau boot tetap memanggil showAuth/showDashboard saat itu,
+// pengguna dilempar kembali ke Masuk — persis bug "terpental" di halaman
+// Reset kata sandi. Jadi boot tidak menimpa tampilan auth yang sudah dipilih.
+function isAuthSubViewOpen() {
+  return !forgotForm?.classList.contains('hidden')
+    || !verificationForm?.classList.contains('hidden')
+    || !adminAccessForm?.classList.contains('hidden');
+}
+
 (async function boot() {
   try {
     const result = await api('/api/me');
+    if (isAuthSubViewOpen()) return;
     await showDashboard(result.user);
   } catch {
+    if (isAuthSubViewOpen()) return;
     showAuth(savedAuthMode());
   }
 })();

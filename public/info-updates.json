@@ -1,6 +1,20 @@
 {
-  "updatedAt": "2026-11-28T05:45:00+07:00",
+  "updatedAt": "2026-11-28T11:50:00+07:00",
   "updates": [
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "11.50 WIB",
+      "title": "Reset sandi kini bisa unduh data akun (AkunJadiBotMu.txt)",
+      "tag": "Fitur baru",
+      "description": "Setelah sandi baru disimpan, muncul kartu Simpan data akunmu dengan tombol wajib Unduh AkunJadiBotMu.txt — isinya username, email, sandi baru, sandi sementara, dan statistik akun realtime (ReadSW dibaca, ReactionSW, dan total keduanya). Kartu memakai spoiler rapi berikon SVG (Data akun, Sandi, Statistik) yang tampil bagus di HP maupun desktop, plus tombol Salin isi file sebagai cadangan kalau unduhan tidak masuk. Sandi lama tidak bisa ditampilkan karena yang tersimpan hanya hash keamanannya. Bonus: pesan selesai yang tadinya tersembunyi karena berada di dalam form yang disembunyikan kini benar-benar tampil."
+    },
+    {
+      "day": "Sabtu, 28 Nov 2026",
+      "time": "11.44 WIB",
+      "title": "Lupa sandi tidak lagi terpental kembali ke Masuk",
+      "tag": "Bug",
+      "description": "Masuk ke halaman Lupa sandi lalu beberapa detik kemudian tiba-tiba kembali ke Masuk — penyebabnya boot halaman yang selesai belakangan saat /api/me lambat karena WiFi putus sesaat, lalu menimpa tampilan yang sudah dipilih. Kini boot tidak lagi mengganti tampilan kalau pengguna sudah membuka Lupa sandi, Verifikasi, atau Akses admin."
+    },
     {
       "day": "Sabtu, 28 Nov 2026",
       "time": "05.45 WIB",
